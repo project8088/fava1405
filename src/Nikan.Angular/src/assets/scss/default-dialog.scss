@@ -1,0 +1,80 @@
+.custom-dialog {
+  /* min-width: 480px; */
+}
+
+.custom-dialog .mat-dialog-container {
+  padding: 0;
+}
+
+.custom-dialog .mat-dialog-title {
+  background: #3c8dbc;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  font-family: inherit;
+  height: 40px;
+  display: flex;
+}
+
+.custom-dialog .mat-dialog-title .title {
+  flex: auto;
+  height: inherit;
+  margin: 0;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: move;
+  color:#fff;
+}
+
+.custom-dialog .mat-dialog-content {
+  margin: 0px;
+  padding: 20px 20px 50px;
+  font: inherit;
+}
+
+.custom-dialog .mat-dialog-actions {
+  margin: 0px;
+  padding: 0px 15px;
+  background: #f1efef;
+  justify-content: flex-end;
+  box-shadow: 0 0 10px 0 #0c0c0c7a;
+}
+
+
+/*.mat-raised-button {
+    &[disabled] {
+      background-color: #d7d7d7;
+      color: #000000;
+      cursor: no-drop;
+    }
+  }*/
+
+.custom-dialog .close-btn {
+  float: left;
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.orange-dialog .mat-dialog-container {
+  background: #f68124;
+  color: #fff;
+}
+
+
+
+
+
+
+/*+++++++++++++++theme+++++++++++++++*/
+
+body.sunset {
+  .custom-dialog .mat-dialog-title {
+    background: var(--sunset);
+  }
+}
+
+body.purple-love {
+  .custom-dialog .mat-dialog-title {
+    background: var(--purple-love);
+  }
+}

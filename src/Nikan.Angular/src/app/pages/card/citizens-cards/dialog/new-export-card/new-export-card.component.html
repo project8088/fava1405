@@ -1,0 +1,132 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title" *ngIf="!isUpdate">تعریف دوره   جدید</h5>
+    <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش دوره  </h5>
+
+
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loadingData">
+    <mat-spinner diameter="50" color="default"></mat-spinner> 
+  </div>
+
+  <form [formGroup]="frm" *ngIf="!loadingData">
+
+
+
+
+    <div class="row">
+
+      <mat-form-field class="col-md-3">
+        <mat-label>تابعیت</mat-label>
+        <mat-select formControlName="nationality">
+          <mat-option [value]="null"> همه </mat-option>
+          <mat-option [value]="0"> ایرانی </mat-option>
+          <mat-option [value]="1">غیرایرانی </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-3">
+        <mat-label>نوع کارت</mat-label>
+        <mat-select formControlName="cardTypeId">
+          <mat-option [value]="8"> شهروندی </mat-option>
+          <mat-option [value]="9">منزلت </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-3">
+        <mat-label>نوع تحویل</mat-label>
+        <mat-select formControlName="deliverType">
+          <mat-option [value]="null"> همه </mat-option>
+          <mat-option [value]="1"> پستی </mat-option>
+          <mat-option [value]="2">تحویل در مرکز </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="col-md-3">
+        <mat-label>شهر   </mat-label>
+        <mat-select formControlName="deliverType">
+          <mat-option [value]="null"> همه </mat-option>
+          <mat-option [value]="true"> داخل شهر اصفهان </mat-option>
+          <mat-option [value]="false"> خارج از شهر اصفهان </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>تاریخ درخواست کارت از</mat-label>
+        <input matInput [matDatepicker]="sdpicker" formControlName="startDate" />
+        <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
+        <mat-datepicker #sdpicker></mat-datepicker>
+        <mat-error *ngIf="frm.get('startDate').errors?.required">
+          تاریخ درخواست کارت را انتخاب کنید.
+        </mat-error>
+        <mat-error *ngIf="frm.get('startDate').errors?.matDatepickerParse">
+          فرمت تاریخ صحیح نیست
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-6">
+        <mat-label>تاریخ پایان درخواست</mat-label>
+        <input matInput [matDatepicker]="edpicker" formControlName="endDate" />
+        <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
+        <mat-datepicker #edpicker></mat-datepicker>
+        <mat-error *ngIf="frm.get('endDate').errors?.required">
+          تاریخ پایان درخواست را انتخاب کنید.
+        </mat-error>
+        <mat-error *ngIf="frm.get('endDate').errors?.matDatepickerParse">
+          فرمت تاریخ صحیح نیست
+        </mat-error>
+      </mat-form-field>
+
+
+
+    </div>
+
+
+
+    
+ 
+
+   
+
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label> گروههای شهروندی</mat-label>
+        <mat-chip-list #skillChipList>
+          <mat-chip *ngFor="let item of selectedGroups" [selectable]="true" [removable]="true" (removed)="removeAutoChip(selectedGroups,item)">
+            {{item.text}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input matInput formControlName="groupIds" [matAutocomplete]="autoSkills" [matChipInputFor]="skillChipList" #skillInput #skillTrigger="matAutocompleteTrigger">
+        </mat-chip-list>
+        <mat-autocomplete #autoSkills="matAutocomplete" [displayWith]="displayFn" (optionSelected)="selectedAutoChip(selectedGroups,'services',skillInput,$event,skillTrigger)">
+          <mat-option *ngFor="let option of filteredServices | async" [value]="option">
+
+            {{option.text}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="frm.get('groupIds').errors?.incorrect || frm.get('groupIds').errors?.required">
+          خدمات دوره   را از لیست انتخاب کنید
+        </mat-error>
+        <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>
+      </mat-form-field>
+    </div>
+
+
+
+
+
+
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  mat-dialog-close>انصراف</button>
+
+    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()" *ngIf="!loadingData">
+    <span>ذخیره </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+
+</mat-dialog-actions>

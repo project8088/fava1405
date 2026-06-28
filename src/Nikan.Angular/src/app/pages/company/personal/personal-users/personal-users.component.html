@@ -1,0 +1,229 @@
+<div class="content-header">
+  <span>پرسنل شرکت</span>
+
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+    <button mat-stroked-button color="default" (click)="back()" *ngIf="user?.isAdmin" class="mr-2">
+      باز گشت به لیست شرکت ها
+    </button>
+
+    <button mat-raised-button color="default" routerLink="/company/addupdate-personal/0/0" *ngIf="user?.isCompany">
+      <i class="fa fa-plus mr-2"></i>
+      <span>ثبت پرسنل جدید</span>
+    </button>
+    <button mat-raised-button color="default" routerLink="/admin/addupdate-personal/{{companyId}}/0" *ngIf="user?.isAdmin">
+      <i class="fa fa-plus mr-2"></i>
+      <span>ثبت پرسنل جدید</span>
+    </button>
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>جستجو</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>از تاریخ</mat-label>
+          <input matInput [matDatepicker]="dpS" formControlName="fromDate" [max]="searchForm.get('toDate').value">
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
+            تاریخ شروع را مشخص کنید.
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerMin || searchForm.get('fromDate').errors?.matDatepickerMax">
+            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>تا تاریخ</mat-label>
+          <input matInput [matDatepicker]="dpE" formControlName="toDate" [min]="searchForm.get('fromDate').value">
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
+            تاریخ پایان را مشخص کنید.
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerMin || searchForm.get('toDate').errors?.matDatepickerMax">
+            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
+
+
+
+
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button mat-raised-button color="default" (click)="exporter.exportTable('xlsx',{fileName:'excel'})">
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+
+    </div>
+
+    <div class="datatable-container mat-elevation-z8">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
+      </div>
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults==false && listCount==0">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+
+      <div class="datatable-table-container">
+
+        <table mat-table [dataSource]="data" class="datatable-table" #exporter="matTableExporter" matTableExporter [hiddenColumns]="[displayedColumns.length-1]">
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row;let i=index;">
+              {{paginator.pageIndex*paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="imageUrl">
+            <th mat-header-cell *matHeaderCellDef>تصویر</th>
+            <td mat-cell *matCellDef="let row">
+              <img [src]="baseUrl+row.imageUrl" class="img-thumbnail thumb-64" *ngIf="row.imageUrl" />
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="personelCode">
+            <th mat-header-cell *matHeaderCellDef>کد پرسنلی</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.personelCode}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="displayName">
+            <th mat-header-cell *matHeaderCellDef>نام و نام خانوادگی</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.namePrefix|enumString:'namePrefix'}}
+              &nbsp;
+              {{row.firstName + ' ' + row.lastName}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fatherName">
+            <th mat-header-cell *matHeaderCellDef>نام پدر</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.fatherName}}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.nationCode}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="userCompany">
+            <th mat-header-cell *matHeaderCellDef>شرکت</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.userCompany}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="organizationalPosition">
+            <th mat-header-cell *matHeaderCellDef>سمت</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.organizationalPosition}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="mobileNumber">
+            <th mat-header-cell *matHeaderCellDef>شماره موبایل</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.mobileNumber}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="cellNumber">
+            <th mat-header-cell *matHeaderCellDef>شماره تلفن</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.cellNumber}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>ایمیل</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.email}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="city">
+            <th mat-header-cell *matHeaderCellDef>شهر</th>
+            <td mat-cell *matCellDef="let row">
+              {{row.city?.text}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="isManagementMembers">
+            <th mat-header-cell *matHeaderCellDef>عضو هیئت مدیره</th>
+            <td mat-cell *matCellDef="let row">
+              <span *ngIf="!row.isManagementMembers">خیر</span>
+              <span *ngIf="row.isManagementMembers">بله</span>
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="operation">
+            <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/company/addupdate-personal/0/{{row.id}}" *ngIf="user?.isCompany">
+                  <i class="fa fa-edit mr-2"></i>
+                  <span>ویرایش اطلاعات</span>
+                </button>
+                <button mat-menu-item routerLink="/admin/addupdate-personal/{{companyId}}/{{row.id}}" *ngIf="user?.isAdmin">
+                  <i class="fa fa-edit mr-2"></i>
+                  <span>ویرایش اطلاعات</span>
+                </button>
+
+
+                <button mat-menu-item (click)="removePersonal(row)">
+                  <i class="fa fa-trash mr-2"></i>
+                  <span>حذف</span>
+                </button>
+
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+      <mat-paginator [length]="listCount" [pageSize]="10" [pageSizeOptions]="[5,10,50,100,250,500,1000,2000]" showFirstLastButtons (page)="pageEvent($event)"></mat-paginator>
+
+
+
+    </div>
+
+
+
+
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

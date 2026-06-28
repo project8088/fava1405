@@ -1,0 +1,400 @@
+@import "assets/scss/public.scss";
+@import "assets/fonts/fontawesome.5.12.0-pro.css";
+@import "assets/scss/default-dialog.scss";
+@import "assets/scss/data-table.scss";
+@import "assets/scss/list.scss";
+
+//theme
+@import "assets/theme/Style.css";
+@import "assets/theme/animate.css";
+@import "assets/theme/sina-nav.min.css";
+@import "assets/theme/owl.carousel.min.css";
+
+@import "assets//scss/kartable.scss";
+
+@import "assets/scss/print.scss";
+
+@font-face {
+  font-family: "iranSans";
+  src: url("assets/fonts/farsiNum/eot/IRANSansWeb(FaNum).eot")
+      format("embedded-opentype"),
+    url("assets/fonts/farsiNum/ttf/IRANSansWeb(FaNum).ttf") format("truetype"),
+    url("assets/fonts/farsiNum/woff/IRANSansWeb(FaNum).woff") format("woff"),
+    url("assets/fonts/farsiNum/woff2/IRANSansWeb(FaNum).woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "iranSansDN";
+  src: url("assets/fonts/iransans-dn/eot/iransansdn.eot")
+      format("embedded-opentype"),
+    url("assets/fonts/iransans-dn/ttf/iransansdn.ttf") format("truetype"),
+    url("assets/fonts/iransans-dn/woff/iransansdn.woff") format("woff"),
+    url("assets/fonts/iransans-dn/woff2/iransansdn.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "barcode";
+  src: url("assets/fonts/barcode/fre3of9x.eot"); /* IE9 Compat Modes */
+  src: url("assets/fonts/barcode/fre3of9x.eot?#iefix")
+      format("embedded-opentype"),
+    /* IE6-IE8 */ url("assets/fonts/barcode/fre3of9x.otf") format("opentype"),
+    /* Open Type Font */ url("assets/fonts/barcode/fre3of9x.svg") format("svg"),
+    /* Legacy iOS */ url("assets/fonts/barcode/fre3of9x.ttf") format("truetype"),
+    /* Safari, Android, iOS */ url("assets/fonts/barcode/fre3of9x.woff")
+      format("woff"),
+    /* Modern Browsers */ url("assets/fonts/barcode/fre3of9x.woff2")
+      format("woff2"); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "iranSans", "Arial";
+  font-size: 12px;
+  background-color: #f7f7f7;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.loading-full {
+  position: fixed;
+  z-index: 5000;
+  background: rgb(255 255 255 / 90%);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.barcode {
+  font-family: "barcode" !important;
+  font-size: 60px;
+  line-height: 1;
+
+  .code {
+    font-family: arial;
+    font-size: 14px;
+    text-align: center;
+  }
+}
+
+.dast_nevis {
+  font-family: "iranSansDN";
+}
+
+* {
+  outline: none !important;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+a {
+  cursor: pointer;
+}
+.fa {
+  font-weight: 100;
+}
+
+@import "~@angular/material/theming";
+$custom-typography: mat-typography-config(
+  $font-family: "iranSans,Arial",
+  $headline: mat-typography-level(32px, 48px, 700),
+  $body-1: mat-typography-level(14px, 24px, 500),
+);
+// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
+@include mat-base-typography($custom-typography);
+// Override typography for a specific Angular Material components.
+@include mat-checkbox-typography($custom-typography);
+// Override typography for all Angular Material, including mat-base-typography and all components.
+@include angular-material-typography($custom-typography);
+// Override the typography in the core CSS.
+@include mat-core($custom-typography);
+
+.mat-form-field {
+  margin-bottom: 20px;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}
+
+.image-preview {
+  width: 66px;
+  height: 66px;
+  border-radius: 100%;
+}
+
+/*++++++++++++++++++theme++++++++++++++++++++++++++*/
+/*kartable.scss,public.scss,custom-dialog.scss*/
+:root {
+  --sunset: #e79652;
+  --purple-love: #7859be;
+}
+
+.image-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 30px 0px;
+  align-items: center;
+  justify-content: center;
+
+  .img-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #ffff;
+    width: 140px;
+    height: 140px;
+    margin: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px 0 rgb(0 0 0 / 20%);
+    color: #01348d;
+    transition: all 500ms;
+    text-align: center;
+    i {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    img {
+      width: 60px;
+      max-width: 60px;
+      max-height: 60px;
+    }
+
+    span {
+    }
+
+    &:hover {
+      cursor: pointer;
+      background: #ffcc01;
+      transform: scale(1.18);
+    }
+  }
+}
+
+.span-status {
+  padding: 3px 15px;
+  border-radius: 25px;
+
+  &.blue {
+    background: #026aea;
+    color: #fff;
+  }
+
+  &.red {
+    background: #ff0000;
+    color: #fff;
+  }
+
+  &.green {
+    background: #34e900;
+    color: #000;
+  }
+
+  &.teal {
+    background: #02a967;
+    color: #fff;
+  }
+
+  &.yellow {
+    background: #e5b600;
+    color: #000;
+  }
+}
+
+button {
+  text-transform: uppercase;
+}
+
+button:focus {
+  outline: none !important;
+}
+
+.btn {
+  border-radius: 2px;
+  border: 0;
+  transition: 0.2s ease-out;
+  color: #fff;
+  margin: 6px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+}
+
+.btn:hover {
+  color: #fff;
+  box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn:active,
+.btn:focus,
+.btn.active {
+  outline: 0;
+  color: #fff;
+}
+
+/*Primary*/
+.btn-primary {
+  background: #4285f4;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: #5a95f5 !important;
+}
+
+.btn-primary.active {
+  background-color: #0b51c5 !important;
+}
+/*Secondary*/
+.btn-secondary {
+  background-color: #aa66cc !important;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background-color: #b579d2 !important;
+  color: #fff;
+}
+
+.btn-secondary.active {
+  background-color: #773399 !important;
+}
+
+.btn-secondary.active:hover {
+  color: #fff;
+}
+
+.btn-secondary.active:focus {
+  color: #fff;
+}
+
+/*Default*/
+.btn-default {
+  background: #2bbbad;
+}
+
+.btn-default:hover,
+.btn-default:focus {
+  background-color: #30cfc0 !important;
+}
+
+.btn-default.active {
+  background-color: #186860 !important;
+}
+
+/*Success*/
+.btn-success {
+  background: #00c851 !important;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #00d255 !important;
+}
+
+.btn-success.active {
+  background-color: #006228 !important;
+}
+
+/*Info*/
+.btn-info {
+  background: #33b5e5 !important;
+}
+
+.btn-info:hover,
+.btn-info:focus {
+  background-color: #4abde8 !important;
+}
+
+.btn-info.active {
+  background-color: #14799e !important;
+}
+
+/*Warning*/
+.btn-warning {
+  background: #ff8800 !important;
+}
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: #ff961f !important;
+}
+
+.btn-warning.active {
+  background-color: #cc8800 !important;
+}
+
+/*Danger*/
+.btn-danger {
+  background: #cc0000 !important;
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #db0000 !important;
+}
+
+.btn-danger.active {
+  background-color: maroon !important;
+}
+
+/*Link*/
+.btn-link {
+  background-color: transparent;
+  color: #000;
+}
+
+.btn-link:hover,
+.btn-link:focus {
+  background-color: transparent;
+  color: #000;
+}
+.btn-teal {
+  min-width: 100px;
+  padding: 10px !important;
+}
+/*--------------------------------------------------------*/
+.news-card {
+  height: 270px;
+}
+.card-content {
+  height: 100px;
+  overflow: auto;
+}
+
+.object-fit-cover {
+  object-fit: cover;
+}
+.object-cover {
+  object-fit: cover;
+}
+
+.mat-horizontal-stepper-header-container {
+  border: 1px solid #dbdbdb !important;
+  box-shadow: 1px 3px 5px #9c9c9c69;
+}
+body {
+  text-align: right;
+}
+
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+    opacity: 1;
+}

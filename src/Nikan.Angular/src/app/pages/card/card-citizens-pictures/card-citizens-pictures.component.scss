@@ -1,0 +1,26 @@
+.citizen-image {
+    width: 11rem;
+    height: 14.33rem;
+}
+
+.action-button {
+  height: 1.7rem;
+  width: 2rem;
+  flex: 0 0 2rem;
+  min-width: 1.4rem;
+  text-align: center;
+  padding: 0;
+  align-items: center;
+  line-height: 2rem;
+}
+
+@media (max-width: 1200px) {
+  .citizen-image-box {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    .citizen-image {
+      width: 11rem;
+      height: 14.33rem;
+    }
+  }
+}

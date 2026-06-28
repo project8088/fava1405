@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="1">
+      <PrintCardForPost Ref="2" type="Stimulsoft.Report.Dictionary.StiBusinessObject" isKey="true">
+        <Alias>PrintCardForPost</Alias>
+        <BusinessObjects isList="true" count="0" />
+        <Category />
+        <Columns isList="true" count="10">
+          <value>NationalCode,System.String</value>
+          <value>City,System.String</value>
+          <value>Location,System.String</value>
+          <value>Address,System.String</value>
+          <value>Name,System.String</value>
+          <value>ZipCode,System.String</value>
+          <value>CellNumber,System.String</value>
+          <value>Mobile,System.String</value>
+          <value>RowId,System.String</value>
+          <value>BarCode,System.String</value>
+        </Columns>
+        <Dictionary isRef="1" />
+        <Guid>23f26d726df44cd18b72dbbd93b5d5b4</Guid>
+        <Name>PrintCardForPost</Name>
+      </PrintCardForPost>
+    </BusinessObjects>
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="0" />
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="3" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="2">
+        <Data Ref="4" type="DataBand" isKey="true">
+          <Brush>Transparent</Brush>
+          <BusinessObjectGuid>23f26d726df44cd18b72dbbd93b5d5b4</BusinessObjectGuid>
+          <CanGrow>False</CanGrow>
+          <ClientRectangle>0,0.4,19,12.09</ClientRectangle>
+          <Components isList="true" count="9">
+            <DataPrintCardForPost_NationalCode Ref="5" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>11.16,7.32,2.71,0.73</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,10,Bold</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPrintCardForPost_NationalCode</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PrintCardForPost.NationalCode}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </DataPrintCardForPost_NationalCode>
+            <DataPrintCardForPost_Address Ref="6" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>10.89,8.04,7.49,1.55</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Nazanin,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPrintCardForPost_Address</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PrintCardForPost.City}-{PrintCardForPost.Address}
+  ک-پ{PrintCardForPost.ZipCode}  ش-م {PrintCardForPost.Mobile}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <Type>Expression</Type>
+            </DataPrintCardForPost_Address>
+            <Text1 Ref="7" type="Text" isKey="true">
+              <Border>None;Black;1;Solid;False;4;Brown</Border>
+              <Brush>White</Brush>
+              <ClientRectangle>1.67,6.9,7.52,3.53</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>B Titr,11</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>الصاق کارت</Text>
+              <TextBrush>Black</TextBrush>
+              <Type>Expression</Type>
+              <VertAlignment>Center</VertAlignment>
+            </Text1>
+            <DataPrintCardForPost_Name Ref="8" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <CanBreak>True</CanBreak>
+              <CanGrow>True</CanGrow>
+              <ClientRectangle>13.9,7.31,4.5,0.7</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>2  Nazanin,10</Font>
+              <HorAlignment>Right</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>DataPrintCardForPost_Name</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PrintCardForPost.Name}</Text>
+              <TextBrush>Black</TextBrush>
+              <TextOptions>HotkeyPrefix=None, LineLimit=False, RightToLeft=False, Trimming=None, WordWrap=True, Angle=0, FirstTabOffset=40, DistanceBetweenTabs=20,</TextOptions>
+              <VertAlignment>Center</VertAlignment>
+            </DataPrintCardForPost_Name>
+            <Text2 Ref="9" type="Text" isKey="true">
+              <Brush>Transparent</Brush>
+              <ClientRectangle>14.48,6.78,0.65,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>2  Nazanin,10,Bold| Underline</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text2</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PrintCardForPost.RowId}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text2>
+            <BarCode3 Ref="10" type="Stimulsoft.Report.BarCodes.StiBarCode" isKey="true">
+              <BackColor>Gainsboro</BackColor>
+              <BarCodeType Ref="11" type="Stimulsoft.Report.BarCodes.StiCode128AutoBarCodeType" isKey="true">
+                <Module>9.84</Module>
+              </BarCodeType>
+              <Border>None;Black;1;Solid;False;4;Transparent</Border>
+              <ClientRectangle>11.33,9.71,6.84,0.92</ClientRectangle>
+              <Code>{PrintCardForPost.BarCode}</Code>
+              <Conditions isList="true" count="0" />
+              <Font>Arial,8,Bold,Pixel</Font>
+              <ForeColor>Black</ForeColor>
+              <Guid>25a2ea09fb304580a0f766449edf222e</Guid>
+              <HorAlignment>Center</HorAlignment>
+              <Name>BarCode3</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <VertAlignment>Center</VertAlignment>
+            </BarCode3>
+            <Text3 Ref="12" type="Text" isKey="true">
+              <Border>All;Black;1;Dot;False;4;Black</Border>
+              <Brush>Transparent</Brush>
+              <ClientRectangle>11.55,10.64,6.44,0.51</ClientRectangle>
+              <Conditions isList="true" count="0" />
+              <Font>Tahoma,12,Bold| Italic| Underline</Font>
+              <HorAlignment>Center</HorAlignment>
+              <Margins>0,0,0,0</Margins>
+              <Name>Text3</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <Text>{PrintCardForPost.BarCode}</Text>
+              <TextBrush>Black</TextBrush>
+            </Text3>
+            <StartPointPrimitive1 Ref="13" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+              <ClientRectangle>1.11,5.81,0,0</ClientRectangle>
+              <Name>StartPointPrimitive1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <ReferenceToGuid>fb89d1eda411430a83df60818612aba3</ReferenceToGuid>
+            </StartPointPrimitive1>
+            <EndPointPrimitive1 Ref="14" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+              <ClientRectangle>9.41,11.11,0,0</ClientRectangle>
+              <Name>EndPointPrimitive1</Name>
+              <Page isRef="3" />
+              <Parent isRef="4" />
+              <ReferenceToGuid>fb89d1eda411430a83df60818612aba3</ReferenceToGuid>
+            </EndPointPrimitive1>
+          </Components>
+          <Conditions isList="true" count="0" />
+          <DataSourceName isNull="true" />
+          <Filters isList="true" count="0" />
+          <Name>Data</Name>
+          <NewColumnBefore>True</NewColumnBefore>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <RightToLeft>True</RightToLeft>
+          <Sort isList="true" count="0" />
+        </Data>
+        <RoundedRectanglePrimitive1 Ref="15" type="Stimulsoft.Report.Components.StiRoundedRectanglePrimitive" isKey="true">
+          <ClientRectangle>1.11,6.21,8.3,5.3</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>fb89d1eda411430a83df60818612aba3</Guid>
+          <Name>RoundedRectanglePrimitive1</Name>
+          <Page isRef="3" />
+          <Parent isRef="3" />
+          <Round>0.2</Round>
+          <Style>Dot</Style>
+        </RoundedRectanglePrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>eb291c9887124fb5960b7d33e9f4aff0</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>14.8</PageHeight>
+      <PageWidth>21</PageWidth>
+      <PaperSize>A5</PaperSize>
+      <Report isRef="0" />
+      <Watermark Ref="16" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="17" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>8/7/2019 11:55:29 AM</ReportChanged>
+  <ReportCreated>11/11/2018 8:09:14 AM</ReportCreated>
+  <ReportFile>E:\Projects\EsfCard_13970622\App\EsfahanCard\Upload\Report\PrintQueueCard.mrt</ReportFile>
+  <ReportGuid>2a1e1f4553e9438e819564bdff19ab3e</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2012.2.1304</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+		#endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

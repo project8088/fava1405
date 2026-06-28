@@ -1,0 +1,66 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title">
+        مشاهده پیام
+    </h5>
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <div class="row">
+
+    <div class="col-sm-6">
+      <span>نام و نام خانوادگی : </span>
+      <label>
+        {{row.name}}
+      </label>
+    </div>
+
+    <div class="col-sm-6">
+      <span> ایمیل: </span>
+      <label>
+        {{row.email}}
+      </label>
+    </div>
+    <div class="col-sm-6">
+      <span>شماره موبایل : </span>
+      <label>
+        {{row.mobileNumber}}
+      </label>
+    </div>
+
+    <div class="col-sm-6">
+      <span>نام کاربری : </span>
+      <label>
+        {{row.userName}}
+      </label>
+    </div>
+
+    <div class="col-sm-6">
+      <span>نام شرکت: </span>
+      <label>
+        {{row.companyName}}
+      </label>
+    </div>
+ 
+    <div class="col-sm-12">
+      <span>عنوان پیام : </span>
+      <label>
+        {{row.subject}}
+      </label>
+    </div>
+    <div class="col-sm-12">
+      <span>متن پیام : </span>
+      <label>
+        {{row.message}}
+      </label>
+    </div>
+
+
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  mat-dialog-close>بستن</button>
+</mat-dialog-actions>

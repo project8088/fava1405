@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<StiSerializer version="1.02" type="Net" application="StiReport">
+  <Dictionary Ref="1" type="Dictionary" isKey="true">
+    <BusinessObjects isList="true" count="0" />
+    <Databases isList="true" count="0" />
+    <DataSources isList="true" count="0" />
+    <Relations isList="true" count="0" />
+    <Report isRef="0" />
+    <Variables isList="true" count="0" />
+  </Dictionary>
+  <EngineVersion>EngineV2</EngineVersion>
+  <GlobalizationStrings isList="true" count="0" />
+  <MetaTags isList="true" count="0" />
+  <Pages isList="true" count="1">
+    <Page1 Ref="2" type="Page" isKey="true">
+      <Border>None;Black;2;Solid;False;4;Black</Border>
+      <Brush>Transparent</Brush>
+      <Components isList="true" count="10">
+        <RectanglePrimitive1 Ref="3" type="RectanglePrimitive" isKey="true">
+          <ClientRectangle>3.53,4.96,7.27,6.4</ClientRectangle>
+          <Color>Black</Color>
+          <Guid>2e754e3f1fcf4f3798eb9bd862c1fd8d</Guid>
+          <Name>RectanglePrimitive1</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+        </RectanglePrimitive1>
+        <StartPointPrimitive1 Ref="4" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>3.53,4.96,0,0</ClientRectangle>
+          <Name>StartPointPrimitive1</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>2e754e3f1fcf4f3798eb9bd862c1fd8d</ReferenceToGuid>
+        </StartPointPrimitive1>
+        <EndPointPrimitive1 Ref="5" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>10.8,11.36,0,0</ClientRectangle>
+          <Name>EndPointPrimitive1</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>2e754e3f1fcf4f3798eb9bd862c1fd8d</ReferenceToGuid>
+        </EndPointPrimitive1>
+        <VerticalLinePrimitive1 Ref="6" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>1.59,4.17,0.0254,10.64</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="7" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>6466ddbbfb484f1a9e2b5ef86948a8ba</Guid>
+          <Name>VerticalLinePrimitive1</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <StartCap Ref="8" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive1>
+        <StartPointPrimitive2 Ref="9" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>1.59,4.17,0,0</ClientRectangle>
+          <Name>StartPointPrimitive2</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>6466ddbbfb484f1a9e2b5ef86948a8ba</ReferenceToGuid>
+        </StartPointPrimitive2>
+        <EndPointPrimitive2 Ref="10" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>1.59,14.81,0,0</ClientRectangle>
+          <Name>EndPointPrimitive2</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>6466ddbbfb484f1a9e2b5ef86948a8ba</ReferenceToGuid>
+        </EndPointPrimitive2>
+        <VerticalLinePrimitive2 Ref="11" type="VerticalLinePrimitive" isKey="true">
+          <ClientRectangle>4.06,12.32,0.0254,0.16</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="12" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Guid>e41646a943af415086b7677467138b8d</Guid>
+          <Name>VerticalLinePrimitive2</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <StartCap Ref="13" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </VerticalLinePrimitive2>
+        <StartPointPrimitive3 Ref="14" type="Stimulsoft.Report.Components.StiStartPointPrimitive" isKey="true">
+          <ClientRectangle>4.06,12.32,0,0</ClientRectangle>
+          <Name>StartPointPrimitive3</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>e41646a943af415086b7677467138b8d</ReferenceToGuid>
+        </StartPointPrimitive3>
+        <EndPointPrimitive3 Ref="15" type="Stimulsoft.Report.Components.StiEndPointPrimitive" isKey="true">
+          <ClientRectangle>4.06,12.48,0,0</ClientRectangle>
+          <Name>EndPointPrimitive3</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <ReferenceToGuid>e41646a943af415086b7677467138b8d</ReferenceToGuid>
+        </EndPointPrimitive3>
+        <HorizontalLinePrimitive1 Ref="16" type="HorizontalLinePrimitive" isKey="true">
+          <ClientRectangle>3.71,8.61,8.84,0.0254</ClientRectangle>
+          <Color>Black</Color>
+          <EndCap Ref="17" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </EndCap>
+          <Name>HorizontalLinePrimitive1</Name>
+          <Page isRef="2" />
+          <Parent isRef="2" />
+          <StartCap Ref="18" type="Cap" isKey="true">
+            <Color>Black</Color>
+          </StartCap>
+        </HorizontalLinePrimitive1>
+      </Components>
+      <Conditions isList="true" count="0" />
+      <Guid>c2ad1dc7205b421c890a05bb0d3c924d</Guid>
+      <Margins>1,1,1,1</Margins>
+      <Name>Page1</Name>
+      <PageHeight>29.7</PageHeight>
+      <PageWidth>21</PageWidth>
+      <Report isRef="0" />
+      <Watermark Ref="19" type="Stimulsoft.Report.Components.StiWatermark" isKey="true">
+        <Font>Arial,100</Font>
+        <ShowImageBehind>False</ShowImageBehind>
+        <Text>fghfgh</Text>
+        <TextBrush>[50:0:0:0]</TextBrush>
+      </Watermark>
+    </Page1>
+  </Pages>
+  <PrinterSettings Ref="20" type="Stimulsoft.Report.Print.StiPrinterSettings" isKey="true" />
+  <ReferencedAssemblies isList="true" count="8">
+    <value>System.Dll</value>
+    <value>System.Drawing.Dll</value>
+    <value>System.Windows.Forms.Dll</value>
+    <value>System.Data.Dll</value>
+    <value>System.Xml.Dll</value>
+    <value>Stimulsoft.Controls.Dll</value>
+    <value>Stimulsoft.Base.Dll</value>
+    <value>Stimulsoft.Report.Dll</value>
+  </ReferencedAssemblies>
+  <ReportAlias>Report</ReportAlias>
+  <ReportChanged>1/7/2019 11:00:56 AM</ReportChanged>
+  <ReportCreated>1/7/2019 10:59:07 AM</ReportCreated>
+  <ReportFile>E:\EsfCard_13970622\App\EsfahanCard\Upload\Report\newreport.mrt</ReportFile>
+  <ReportGuid>0f81720407a847c08335ca701558512c</ReportGuid>
+  <ReportName>Report</ReportName>
+  <ReportUnit>Centimeters</ReportUnit>
+  <ReportVersion>2012.1.1213</ReportVersion>
+  <Script>using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Data;
+using Stimulsoft.Controls;
+using Stimulsoft.Base.Drawing;
+using Stimulsoft.Report;
+using Stimulsoft.Report.Dialogs;
+using Stimulsoft.Report.Components;
+
+namespace Reports
+{
+    public class Report : Stimulsoft.Report.StiReport
+    {
+        public Report()        {
+            this.InitializeComponent();
+        }
+
+        #region StiReport Designer generated code - do not modify
+        #endregion StiReport Designer generated code - do not modify
+    }
+}
+</Script>
+  <ScriptLanguage>CSharp</ScriptLanguage>
+  <Styles isList="true" count="0" />
+</StiSerializer>

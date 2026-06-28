@@ -1,0 +1,57 @@
+<mat-card class="m-3">
+  <mat-card-header class="card-header">
+    <div class="d-flex col align-items-center justify-content-between">
+        تحصیلات
+    <button mat-raised-button color="default" (click)="openEducationDialog('')">
+      <i class="fa fa-plus mr-2"></i>
+      ثبت تحصیلات جدید
+    </button>
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="p-4 list-container">
+      <div class="list-item" *ngFor="let item of educationList">
+        <div class="list-content" (click)="openEducationDialog(item)">
+          <div class="row">
+            <div class="col-sm-6">
+              <strong>مقطع تحصیلی: </strong><span> {{item.grade}}</span>
+            </div>
+            <div class="col-sm-6" *ngIf="item.major">
+              <strong>رشته تحصیلی: </strong><span> {{item.major}}</span>
+            </div>
+            <div class="col-sm-6" *ngIf="item.dateOfStart">
+              <strong>تاریخ شروع تحصیل: </strong><span> {{item.dateOfStart|jalali}}</span>
+            </div>
+            <div class="col-sm-6" *ngIf="item.dateOfEnd">
+              <strong>تاریخ پایان تحصیل: </strong><span> {{item.dateOfEnd|jalali}}</span>
+            </div>
+            <div class="col-sm-6" *ngIf="item.university">
+              <strong>دانشگاه: </strong><span> {{item.university}}</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="menu">
+          <button mat-icon-button (click)="openEducationDialog(item)" *ngIf="!item.loading" matTooltip="ویرایش">
+            <i class="fa fa-edit"></i>
+          </button>
+          <button mat-icon-button (click)="deleteEducation(item)" *ngIf="!item.loading" matTooltip="حذف">
+            <i class="fa fa-trash"></i>
+          </button>
+          <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
+        </div>
+      </div>
+    </div>
+
+    <div class="no-any-items" *ngIf="educationList.length==0 && !loading">
+      <i class="fa fa-info-circle"></i>
+      اطلاعاتی ثبت نشده است
+    </div>
+    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

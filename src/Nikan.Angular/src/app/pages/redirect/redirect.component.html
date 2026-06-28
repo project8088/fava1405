@@ -1,0 +1,28 @@
+<div class="page">
+  <div class="container d-flex justify-content-center">
+    <div class="col-12 xol-md-8 col-lg-8 pt-4">
+      <mat-card class="login-card">
+        <mat-card-content class="p-5 text-center">
+          <h4>در حال انتقال به صفحه ی مورد نظر ...</h4>
+          <p class="my-3" *ngIf="url">
+            در صورت عدم انتقال،
+            <a [href]="url"> اینجا </a> را کلیک کنید
+          </p>
+          <p class="my-3">
+            <a class="btn btn-info" href="/">
+              <i class="text-dark fa fa-home"></i>
+              بازگشت به صفحه نخست
+            </a>
+          </p>
+
+          <p class="my-3">
+            <a class="btn btn-info" href="/home/ticket">
+              <i class="text-dark fa fa-question"></i>
+              ارسال سوال به پشتیبان سامانه
+            </a>
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

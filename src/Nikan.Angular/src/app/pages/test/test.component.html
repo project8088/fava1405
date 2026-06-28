@@ -1,0 +1,33 @@
+<div class="container">
+  <form [formGroup]="form">
+    <div class="row">
+      <input-auto-complete formControlName="province" [required]="true" class="col-sm-6 col-md-3"
+                           [list]="provinceList"></input-auto-complete>
+
+      <input-auto-complete formControlName="state" [label]="'شهرستان'"
+                           [getByParent]="true" [parentId]="form.get('province').value?.key"
+                           [required]="true" class="col-sm-6 col-md-3"></input-auto-complete>
+
+
+      <input-auto-complete formControlName="area" [label]="'منطقه'"
+                           [getByParent]="true" [parentId]="form.get('state').value?.key"
+                           [required]="true" class="col-sm-6 col-md-3"></input-auto-complete>
+
+
+
+
+
+
+
+      <car-license-plate formControlName="plate" class="col-sm-6 col-md-3"></car-license-plate>
+
+    </div>
+
+  </form>
+  <pre>province={{form.get('province').value|json}}</pre>
+  <pre>state={{form.get('state').value|json}}</pre>
+  <pre>area={{form.get('area').value|json}}</pre>
+  <pre>plate={{form.get('plate').value|json}}</pre>
+</div>
+
+

@@ -1,0 +1,97 @@
+<!-- Breadcrumb Area -->
+<div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1" data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
+  <div class="container">
+    <div class="tm-breadcrumb">
+      <h2 class="tm-breadcrumb-title">{{page?.title}}</h2>
+      <ul>
+        <li><a routerLink="/home">صفحه اصلی</a></li> 
+        <li>{{page?.slug}} </li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--// Breadcrumb Area -->
+<!-- Main Content -->
+
+<main class="main-content">
+
+  <!-- Blogs Area -->
+  <div class="tm-section blogs-area bg-white">
+    <div class="container p-md-5 box p-4 mt-4">
+      <div class="row">
+        <div class="col-lg-12 col-12">
+          <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingData">
+            <mat-spinner color="default"></mat-spinner>
+          </div>
+          <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingData==false && !page">
+            <strong>اطلاعاتی وجود ندارد!</strong>
+          </div>
+
+          <div class="tm-blog tm-blog-details sticky-sidebar">
+            <div *ngIf="!loadingData && page">
+              <!--<div class="tm-blog-image">
+      <a href="blog-details.html">
+        <img [src]="page?.imageUrl" alt="{{page?.title}}" *ngIf="page?.imageUrl">
+        <img src="assets/images/page-default.jpg" alt="{{page?.title}}" *ngIf="!page?.imageUrl">
+      </a>
+    </div>-->
+              <div class="tm-blog-content">
+                <div class="tm-blog-meta">
+                  <!--<span><i class="fa fa-user-o"></i>By <a href="blog.html">Anderson</a></span>-->
+                  <span><i class="fa fa-calendar-o"></i>{{page?.createdOnDate|jalali:'dddd DD MMMM YYYY'}}</span>
+                  <!--<span><i class="fa fa-folder-o"></i><a href="blog.html">Business</a></span>-->
+                </div>
+                <h3>{{page?.title}}</h3>
+
+                <blockquote>
+                  <p>
+                    {{page?.description}}
+                  </p>
+                </blockquote>
+
+                <div [innerHtml]="page?.body|safeHtml">
+
+                </div>
+
+
+
+                <app-attachments [guid]="page?.attachmentFileGroup"></app-attachments>
+
+
+              </div>
+              <div class="tm-blog-tags">
+                <span class="tm-blog-tags-title">
+                  <i class="fa fa-tags"></i>
+                </span>
+                <ul>
+                  <li *ngFor="let item of tags"><a>{{item}}</a></li>
+                </ul>
+              </div>
+
+            </div> 
+
+            <!--<div class="tm-blog-pagination tm-pagination">
+    <ul>
+      <li>
+        <a href="blog-details.html">Previous Post</a>
+      </li>
+      <li>
+        <a href="blog-details.html">Next Post</a>
+      </li>
+    </ul>
+  </div>-->
+
+
+          </div>
+        </div>
+         
+      </div>
+    </div>
+  </div>
+  <!--// Blogs Area -->
+
+
+</main>
+
+
+<!--// Main Content -->

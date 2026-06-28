@@ -1,0 +1,49 @@
+<section class="container mt-2">
+  <div class="row">
+    <div class="col-lg-3 pt-1 order-lg-1 order-2 text-center">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-12 col-6 mb-3">
+            <a href="/home/contact-us"><img src="/assets/images/menu2.jpg" class="img-fluid rad12"></a>
+          </div>
+          <div class="col-lg-12 col-6 mb-3">
+            <a href="/home/contact-us"><img src="/assets/images/menu2.jpg" class="img-fluid rad12"></a>
+          </div>
+          <div class="col-lg-12 col-6 mb-3">
+            <a href="/home/contact-us"><img src="/assets/images/menu2.jpg" class="img-fluid rad12"></a>
+          </div>
+          <div class="col-lg-12 col-6 mb-3">
+            <a href="/home/news-list"><img src="/assets/images/menu3.jpg" class="img-fluid rad12"></a>
+          </div>
+          <div class="col-lg-12 col-6 mb-2">
+            <a href="/home/contact-us"><img src="/assets/images/banner1-min-4.png" class="img-fluid rad12"></a>
+          </div>
+          <img src="/assets/images/foot.png" class="mx-auto text-center" />
+
+        </div>
+      </div>
+
+    </div>
+    <div class="col-lg-9 mb-lg-0 mb-3 order-lg-2  order-1">
+      <div id="owl-slider" class="owl-carousel">
+        <div class="item" *ngFor="let item of slideShow;let i=index">
+          <a href="{{item.url}}" target="_blank">
+            <img [src]="baseUrl + item.imageUrl" [alt]="item.caption"  class="img-fluid">
+           
+             <div class="caption">
+              <!-- <p>
+                        {{item.caption}}
+                      </p> -->
+              <p>
+                {{item.description}}
+              </p>
+            </div>
+          </a>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+
+</section>

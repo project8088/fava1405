@@ -1,0 +1,64 @@
+/* Structure */
+.datatable-container {
+  position: relative;
+  min-height: 200px;
+}
+
+.datatable-table-container {
+  position: relative;
+  min-height: 70vh;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+.datatable-container table tbody tr:nth-child(odd) {
+  background-color: #f7f6f6;
+}
+.datatable-container table th, .datatable-container table td {
+  border-left: 1px #d8d2d2 solid;
+  padding: 0px 8px !important;
+}
+.datatable-container table thead{
+  background: #e6e6e6;
+  th{
+    font-weight: bold;
+  }
+}
+
+.datatable-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.datatable-rate-limit-reached {
+  color: #980000;
+  max-width: 360px;
+  text-align: center;
+}
+
+/* Column Widths */
+.mat-column-number,
+.mat-column-state {
+  max-width: 64px;
+}
+
+.mat-column-created {
+  max-width: 124px;
+}
+
+
+.datatable-container a{
+    color: #0559e4 !important;
+    cursor: pointer;
+    text-decoration: underline !important;
+}

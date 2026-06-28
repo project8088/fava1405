@@ -1,0 +1,288 @@
+
+
+<div *ngIf="userStatus === 1">
+  <app-my-Identity-Info></app-my-Identity-Info>
+</div>
+<div *ngIf="userStatus != 1">
+  <app-update-Identity-Info></app-update-Identity-Info>
+</div>
+
+
+<mat-card class="m-3"> 
+
+
+  <mat-card-header class="card-header mt-n3 mx-n3">سایر اطلاعات</mat-card-header>
+  <mat-card-content>
+    <div class="p-5 d-flex align-items-center justify-content-center"
+         *ngIf="loading">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+
+    <form [formGroup]="personalForm" *ngIf="!loading" class="p-4">
+
+
+
+      <div class="row">
+
+
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>وضعیت تاهل </mat-label>
+          <mat-select formControlName="marital">
+            <mat-option *ngFor="let item of baseEnums.maritalStatus"
+                        [value]="item.key">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="personalForm.get('marital').errors?.required">
+            وضعیت تاهل را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label> تلفن ثابت</mat-label>
+
+          <input formControlName="phoneNumber" maxlength="8" numbersOnly matInput />
+
+
+          <mat-error *ngIf="personalForm.get('phoneNumber').errors?.required">
+            شماره تلفن را وارد کنید.
+          </mat-error>
+          <mat-error *ngIf="personalForm.get('phoneNumber').errors?.pattern">
+            شماره تلفن صحیح نیست.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>شهر محل سکونت</mat-label>
+          <mat-select formControlName="cityId">
+            <mat-option *ngFor="let item of isfahanCities" [value]="item.key">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['cityId'].errors && personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['cityId'].errors['required']">
+              شهر محل سکونت خود را انتخاب کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>منطقه</mat-label>
+          <input numbersOnly maxlength="2" formControlName="region" matInput />
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['region'].errors && personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['region'].errors['required']">
+              منطقه محل سکونت خود را انتخاب کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>خیابان</mat-label>
+          <input maxlength="20" formControlName="street" matInput />
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['street'].errors && personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['street'].errors['required']">
+              خیابان محل سکونت خود را انتخاب کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>کوچه</mat-label>
+          <input maxlength="20" formControlName="alley" matInput />
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['alley'].errors && personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['alley'].errors['required']">
+              کوچه محل سکونت خود را انتخاب کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+      
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>پلاک</mat-label>
+          <input maxlength="20" formControlName="plaque" matInput />
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['plaque'].errors && personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['plaque'].errors['required']">
+              پلاک محل سکونت خود را انتخاب کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>کد پستی </mat-label>
+          <input formControlName="postalCode"
+                 matInput
+                 maxlength="12"
+                 numbersOnly
+                 placeholder="کد پستی  خود را وارد کنید" />
+          <mat-hint class="text-danger"
+                    *ngIf="
+                personalForm.controls['postalCode'].errors &&
+                personalForm.submitted
+              ">
+            <span *ngIf="personalForm.controls['postalCode'].errors['required']">
+              کد پستی خود را وارد کنید
+            </span>
+          </mat-hint>
+        </mat-form-field>
+
+
+
+
+      </div>
+
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="outline" class="w-100 mt-3">
+            <mat-label>وضعیت تحصیل</mat-label>
+            <mat-select formControlName="educationStatues">
+              <mat-option *ngFor="let item of baseEnums.educationStatues"
+                          [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['educationStatues'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="
+                  personalForm.controls['educationStatues'].errors['required']
+                ">
+                وضعیت تحصیل خود را انتخاب کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="col-12 col-md-12 col-lg-4"
+             *ngIf="+personalForm.controls['educationStatues'].value !== 3">
+          <mat-form-field appearance="outline" class="w-100 mt-3">
+            <mat-label>گروه تحصیلی</mat-label>
+            <mat-select formControlName="educationGroup">
+              <mat-option [value]="null"> ------- </mat-option>
+              <mat-option *ngFor="let item of baseEnums.educationGroups"
+                          [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['educationStatues'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="
+                  personalForm.controls['educationStatues'].errors['required']
+                ">
+                گروه تحصیلی خود را انتخاب کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-4"
+             *ngIf="+personalForm.controls['educationStatues'].value !== 3">
+          <mat-form-field appearance="outline" class="w-100 mt-3">
+            <mat-label>سطح تحصیلات</mat-label>
+            <mat-select formControlName="educationLevel">
+              <mat-option *ngFor="let item of baseEnums.educationLevel"
+                          [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['educationLevel'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="
+                  personalForm.controls['educationLevel'].errors['required']
+                ">
+                سطح تحصیلات خود را انتخاب کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-4"
+             *ngIf="+personalForm.controls['educationStatues'].value !== 3">
+          <mat-form-field class="w-100 mt-3" appearance="outline">
+            <mat-label>رشته تحصیلی</mat-label>
+            <input formControlName="educationTitle"
+                   matInput
+                   placeholder="رشته تحصیلی (اختیاری)" />
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['educationTitle'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="
+                  personalForm.controls['educationTitle'].errors['required']
+                ">
+                رشته تحصیلی خود را وارد کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-4">
+          <mat-form-field appearance="outline" class="w-100 mt-3">
+            <mat-label>وضعیت شغل</mat-label>
+            <mat-select formControlName="jobGroup">
+              <mat-option *ngFor="let item of baseEnums.jobGroup"
+                          [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            </mat-select>
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['jobGroup'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="personalForm.controls['jobGroup'].errors['required']">
+                وضعیت شغل خود را انتخاب کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+
+        <div class="col-12 col-md-12 col-lg-4">
+          <mat-form-field class="w-100 mt-3" appearance="outline">
+            <mat-label>عنوان شغل</mat-label>
+            <input formControlName="jobTitle"
+                   matInput
+                   placeholder="عنوان شغل (اختیاری)" />
+            <mat-hint class="text-danger"
+                      *ngIf="
+                personalForm.controls['jobTitle'].errors &&
+                personalForm.submitted
+              ">
+              <span *ngIf="personalForm.controls['jobTitle'].errors['required']">
+                عنوان شغل خود را وارد کنید
+              </span>
+            </mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-footer *ngIf="userStatus !== 2"
+                   class="p-3 d-flex justify-content-end">
+    <button mat-raised-button
+            color="primary"
+            *ngIf="!loading"
+            [disabled]="isSaving"
+            (click)="savePersonalInfo()">
+      <span>ثبت اطلاعات </span>
+      <mat-spinner diameter="20"
+                   color="default"
+                   [hidden]="!isSaving"></mat-spinner>
+    </button>
+  </mat-card-footer>
+</mat-card>

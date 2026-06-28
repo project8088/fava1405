@@ -1,0 +1,139 @@
+<div class="content-header">
+  <span>مشاهده جزئیات کنتورهای آب شرکت ثبت شده به صورت  دسته ایی</span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div> 
+    <div class="bread-crumb-item" routerLink="/admin/waterMeter-excel-files">ثبت کنتور آب دسته ایی</div> 
+    <div class="bread-crumb-item active">جزئیات</div>
+  </div>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+ 
+  </mat-card-header>
+  <mat-card-content>
+     
+
+
+
+    <form [formGroup]="searchForm">
+
+      <div class="row my-4">
+
+
+
+
+
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>جستجو</mat-label>
+          <input matInput formControlName="title" maxlength="100">
+        </mat-form-field> 
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button class="btn btn-lg btn-default" mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button class="btn btn-lg btn-danger" mat-raised-button color="default" (click)="delete()">
+        <i class="fa fa-bolt mr-2"></i>
+        <span>حذف فایل</span>
+      </button>
+      <button class="btn btn-lg btn-success" mat-raised-button color="default" (click)="confirm()">
+        <i class="fa fa-bolt mr-2"></i>
+        <span>تائید فایل</span>
+      </button>
+      
+      <button class="btn btn-lg btn-secondary" mat-raised-button color="default" (click)="exporter.exportTable('xlsx',{fileName:'excel'})">
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="d-flex align-items-center justify-content-end p-3">
+      <button mat-icon-button color="default" (click)="getList()" matTooltip="بروز رسانی">
+        <i class="fa fa-sync"></i>
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner color="default"></mat-spinner>
+      </div>
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults==false && listCount==0">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+
+      <div class="datatable-table-container">
+        <table mat-table [dataSource]="data" class="datatable-table" #exporter="matTableExporter" matTableExporter>
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row;let i=index;">
+              {{paginator.pageIndex*paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="importId">
+            <th mat-header-cell *matHeaderCellDef>شناسه فایل</th>
+            <td mat-cell *matCellDef="let row">{{row.importId}}</td>
+          </ng-container>
+          <ng-container matColumnDef="companyName">
+            <th mat-header-cell *matHeaderCellDef>شرکت </th>
+            <td mat-cell *matCellDef="let row">
+              <a routerLink="/admin/company-profile/{{row.userCompanyId}}" target="_blank">
+                {{row.companyName}}
+              </a>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="subscriptionNumber">
+            <th mat-header-cell *matHeaderCellDef>شماره اشتراک</th>
+            <td mat-cell *matCellDef="let row">{{row.subscriptionNumber}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="waterMeterBranchDiameter">
+            <th mat-header-cell *matHeaderCellDef>قطر انشعاب</th>
+            <td mat-cell *matCellDef="let row">{{row.waterMeterBranchDiameter}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="shorYaSanati">
+            <th mat-header-cell *matHeaderCellDef>نوع کنتور</th>
+            <td mat-cell *matCellDef="let row">{{row.shorYaSanati}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="waterConsumptionLimit">
+            <th mat-header-cell *matHeaderCellDef>حد مجاز</th>
+            <td mat-cell *matCellDef="let row">{{row.waterConsumptionLimit}}</td>
+          </ng-container>
+
+
+
+
+          <ng-container matColumnDef="contractCode">
+            <th mat-header-cell *matHeaderCellDef>کد قرارداد</th>
+            <td mat-cell *matCellDef="let row">{{row.contractCode}}</td>
+          </ng-container>
+
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+
+      <mat-paginator [length]="listCount" [pageSize]="10" [pageSizeOptions]="[5, 10,50,100, 250,500, 1000]" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+
+
+
+
+  </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>

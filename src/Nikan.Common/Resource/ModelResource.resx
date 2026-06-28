@@ -1,0 +1,388 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Actions" xml:space="preserve">
+    <value>عملیات</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>فعال</value>
+  </data>
+  <data name="Addresss" xml:space="preserve">
+    <value>آدرس</value>
+  </data>
+  <data name="BusinessHours" xml:space="preserve">
+    <value>ساعت فعالبت</value>
+  </data>
+  <data name="CellNumber" xml:space="preserve">
+    <value>شماره تلفن دفتر</value>
+  </data>
+  <data name="CityActive" xml:space="preserve">
+    <value>وضعیت نمایش شهر</value>
+  </data>
+  <data name="CityCode" xml:space="preserve">
+    <value>کدشهرستان</value>
+  </data>
+  <data name="CityTitle" xml:space="preserve">
+    <value>عنوان شهرستان</value>
+  </data>
+  <data name="CommentsDescription" xml:space="preserve">
+    <value>نظر</value>
+  </data>
+  <data name="CommentsIsPrivate" xml:space="preserve">
+    <value>نظر خصوصی</value>
+  </data>
+  <data name="CreatedDateTime" xml:space="preserve">
+    <value>تاریخ عضویت</value>
+  </data>
+  <data name="CreateOnDate" xml:space="preserve">
+    <value>تاریخ ایجاد</value>
+  </data>
+  <data name="DeActive" xml:space="preserve">
+    <value>غیرفعال</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>توضیحات</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>ایمیل آدرس</value>
+  </data>
+  <data name="FaxNumber" xml:space="preserve">
+    <value>شماره فکس</value>
+  </data>
+  <data name="FooterText" xml:space="preserve">
+    <value>عنوان پایین صفحه</value>
+  </data>
+  <data name="FromDate" xml:space="preserve">
+    <value>از تاریخ</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>نام و نام خانوادگی(اختیاری) </value>
+  </data>
+  <data name="FullSiteName" xml:space="preserve">
+    <value>نام کامل سایت</value>
+  </data>
+  <data name="Icon" xml:space="preserve">
+    <value>آیکن</value>
+  </data>
+  <data name="IndexOrder" xml:space="preserve">
+    <value>ترتیب نمایش</value>
+  </data>
+  <data name="IsActive" xml:space="preserve">
+    <value>فعال/غیرفعال</value>
+  </data>
+  <data name="IsDeleted" xml:space="preserve">
+    <value>حذف شده ؟</value>
+  </data>
+  <data name="IsMainFaq" xml:space="preserve">
+    <value>سوال ویژه ؟</value>
+  </data>
+  <data name="IsSubtractFromContract" xml:space="preserve">
+    <value>خارج از قرارداد و وظایف</value>
+  </data>
+  <data name="IsSystem" xml:space="preserve">
+    <value>سیستمی</value>
+  </data>
+  <data name="JobIsActive" xml:space="preserve">
+    <value>نمایش عنوان شغلی</value>
+  </data>
+  <data name="JobTags" xml:space="preserve">
+    <value>تگ های مشابه عنوان شغلی</value>
+  </data>
+  <data name="JobTitle" xml:space="preserve">
+    <value>عنوان شغل</value>
+    <comment>عنوان شغل برای دسته مشاغل</comment>
+  </data>
+  <data name="LastVisitDateTime" xml:space="preserve">
+    <value>آخرین مراجعه</value>
+  </data>
+  <data name="MailServerPassword" xml:space="preserve">
+    <value>کلمه عبور</value>
+  </data>
+  <data name="MailServerPort" xml:space="preserve">
+    <value>درگاه</value>
+  </data>
+  <data name="MailServerUrl" xml:space="preserve">
+    <value>سرویس دهنده ایمیل</value>
+  </data>
+  <data name="MailServerUserName" xml:space="preserve">
+    <value>شناسه ورود </value>
+  </data>
+  <data name="MajorIsActive" xml:space="preserve">
+    <value>رشته تحصیلی فعال است</value>
+  </data>
+  <data name="MajorTitle" xml:space="preserve">
+    <value>عنوان رشته تحصیلی</value>
+  </data>
+  <data name="MaxRange" xml:space="preserve">
+    <value>حداکثر بازه حقوقی</value>
+  </data>
+  <data name="MinRange" xml:space="preserve">
+    <value>حداقل بازه حقوقی</value>
+  </data>
+  <data name="MobileNumber" xml:space="preserve">
+    <value>شماره موبایل</value>
+  </data>
+  <data name="ModelStateError" xml:space="preserve">
+    <value>خطای اعتبارسنجی</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>نام</value>
+  </data>
+  <data name="OrganizationalUnitId" xml:space="preserve">
+    <value>واحد</value>
+  </data>
+  <data name="OrganizationalUnitName" xml:space="preserve">
+    <value>عنوان واحد</value>
+  </data>
+  <data name="OrganizationId" xml:space="preserve">
+    <value>سازمان</value>
+  </data>
+  <data name="OrganizationName" xml:space="preserve">
+    <value>سازمان</value>
+  </data>
+  <data name="ParentId" xml:space="preserve">
+    <value>دسته اصلی</value>
+  </data>
+  <data name="ParentJobTitle" xml:space="preserve">
+    <value>عنوان دسته شغلی</value>
+  </data>
+  <data name="QuestionDescription" xml:space="preserve">
+    <value>پاسخ سوال</value>
+  </data>
+  <data name="QuestionGroupTypeId" xml:space="preserve">
+    <value>گروه سوال</value>
+  </data>
+  <data name="QuestionStatus" xml:space="preserve">
+    <value>وضعیت سوال</value>
+  </data>
+  <data name="QuestionTitle" xml:space="preserve">
+    <value>عنوان سوال</value>
+  </data>
+  <data name="RangeTitle" xml:space="preserve">
+    <value>عنوان رنج حقوقی</value>
+  </data>
+  <data name="Required" xml:space="preserve">
+    <value>فیلد {0} الزامی می باشد</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>کلید واحد جستجو</value>
+  </data>
+  <data name="ShJobCode" xml:space="preserve">
+    <value>کد مشترک عنوان شغلی</value>
+  </data>
+  <data name="SiteDescription" xml:space="preserve">
+    <value>توضیحات سئو</value>
+  </data>
+  <data name="SiteKeywords" xml:space="preserve">
+    <value>کلمات کلیدی</value>
+  </data>
+  <data name="SiteName" xml:space="preserve">
+    <value>نام سایت</value>
+  </data>
+  <data name="SiteUrl" xml:space="preserve">
+    <value>آدرس سایت</value>
+  </data>
+  <data name="SkillIsActive" xml:space="preserve">
+    <value>وضعیت نمایش مهارت</value>
+  </data>
+  <data name="SkillTitle" xml:space="preserve">
+    <value>عنوان مهارت</value>
+  </data>
+  <data name="Slug" xml:space="preserve">
+    <value>کلمه جستجو</value>
+  </data>
+  <data name="SMSNumber" xml:space="preserve">
+    <value>شماره پیامک</value>
+  </data>
+  <data name="TagNames" xml:space="preserve">
+    <value>کلمات کلیدی</value>
+  </data>
+  <data name="TelegramChannelId" xml:space="preserve">
+    <value>آدرس کانال تلگرام</value>
+  </data>
+  <data name="ThumbUrl" xml:space="preserve">
+    <value>مسیر تصویر</value>
+  </data>
+  <data name="TicketActivityDescription" xml:space="preserve">
+    <value>شرح فعالیت</value>
+  </data>
+  <data name="TicketEmail" xml:space="preserve">
+    <value>آدرس ایمیل (اختیاری)</value>
+  </data>
+  <data name="TicketMessage" xml:space="preserve">
+    <value>متن پیام (اجباری)</value>
+  </data>
+  <data name="TicketPhone" xml:space="preserve">
+    <value>شماره تلفن(اختیاری)</value>
+  </data>
+  <data name="TicketPriority" xml:space="preserve">
+    <value>اولویت درخواست</value>
+  </data>
+  <data name="TicketSection" xml:space="preserve">
+    <value>بخش تیکت</value>
+  </data>
+  <data name="TicketStatusEnum_All" xml:space="preserve">
+    <value>همه درخواست ها</value>
+  </data>
+  <data name="TicketStatusEnum_Answered" xml:space="preserve">
+    <value>پاسخ داده شده</value>
+  </data>
+  <data name="TicketStatusEnum_Closed" xml:space="preserve">
+    <value>بسته شده</value>
+  </data>
+  <data name="TicketStatusEnum_IsArchive" xml:space="preserve">
+    <value>بایگانی شده</value>
+  </data>
+  <data name="TicketStatusEnum_New" xml:space="preserve">
+    <value>جدید</value>
+  </data>
+  <data name="TicketStatusEnum_Solved" xml:space="preserve">
+    <value>حل شد</value>
+  </data>
+  <data name="TicketStatusEnum_UnderReview" xml:space="preserve">
+    <value>در دست بررسی</value>
+  </data>
+  <data name="TicketTitle" xml:space="preserve">
+    <value>عنوان درخواست</value>
+  </data>
+  <data name="TicketType" xml:space="preserve">
+    <value>نوع درخواست</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>عنوان</value>
+  </data>
+  <data name="ToDate" xml:space="preserve">
+    <value>تا</value>
+  </data>
+  <data name="UserName" xml:space="preserve">
+    <value>نام کاربری</value>
+  </data>
+  <data name="UserOwnerId" xml:space="preserve">
+    <value>ارسال کننده</value>
+  </data>
+  <data name="UserRoles" xml:space="preserve">
+    <value>نقش های کاربر</value>
+  </data>
+  <data name="UserStatues" xml:space="preserve">
+    <value>وضعیت کاربری</value>
+  </data>
+  <data name="ViewCount" xml:space="preserve">
+    <value>تعداد مشاهده</value>
+  </data>
+</root>

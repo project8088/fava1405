@@ -1,0 +1,79 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title" > برگشت کارت</h5>
+    
+
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <div class="box-info-dash">
+    <div class="row">
+      <div class="col-sm-6">
+        <span> کارت   :  </span><strong>{{info.cardTitle}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>شهروند:  </span><strong>{{info.citizen}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>شماره کارت:  </span><strong>{{info.cardNumber}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>  تاریخ درخواست کارت :  </span><strong>{{info.requestDate|jalali:'HH:mm YYYY/MM/DD'}}</strong>
+      </div>
+
+    </div>
+  </div>
+
+
+  <form [formGroup]="frm">
+    <div class="row">
+      <mat-form-field class="col-md-6">
+        <mat-label>مرکز تحویل کارت</mat-label>
+        <mat-select formControlName="centerId" >
+          <mat-option [value]="item.key" *ngFor="let item of centerList">{{item.text}}</mat-option>
+        </mat-select>
+        <mat-error *ngIf="frm.get('centerId').errors?.required">مرکز تحویل کارت را انتخاب کنید.</mat-error>
+
+      </mat-form-field>
+       
+      <mat-form-field class="col-md-6">
+        <mat-label>تاریخ برگشت کارت</mat-label>
+        <input matInput [matDatepicker]="dpS" formControlName="backCardOnDate" [max]="frm.get('backCardOnDate').value" />
+        <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+        <mat-datepicker #dpS></mat-datepicker>
+        <mat-error *ngIf="frm.get('backCardOnDate').errors?.required">
+          تاریخ برگشت کارت را انتخاب کنید.
+        </mat-error>
+        
+        <mat-error *ngIf="frm.get('backCardOnDate').errors?.matDatepickerParse">
+          فرمت تاریخ صحیح نیست
+        </mat-error>
+      </mat-form-field>
+      
+
+
+      <mat-form-field class="col-md-12">
+        <mat-label>دلیل برگشت کارت</mat-label>
+        <input matInput formControlName="reason" maxlength="200" />
+      </mat-form-field>
+    </div>
+    <div class="d-flex align-items-center justify-content-between">
+
+      <p>
+        <mat-checkbox color="default" formControlName="SendSms">پیامک برگشت به شهروند ارسال شود ؟</mat-checkbox>
+      </p>
+      
+
+     
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>انصراف</button>
+    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <span>تایید برگشت کارت </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+</mat-dialog-actions>

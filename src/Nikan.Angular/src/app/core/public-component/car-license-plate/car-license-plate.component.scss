@@ -1,0 +1,56 @@
+.license-plate {
+  background: url(../../../../assets/images/plate.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 1% 0 10%;
+
+  .input {
+    text-align: center;
+    font-weight: bold;
+    font-size: 32px;
+    margin: 18px 5px 10px;
+    background: none;
+    height: 38px;
+    border: none;
+    border-bottom: 1px #8f8f8f solid;
+
+    input {
+      font-size: inherit;
+      border: none;
+      padding: 0 !important;
+      text-align: center;
+    }
+  }
+
+  .input:nth-child(1), .input:nth-child(3), .input:nth-child(4) {
+    width: 20%;
+  }
+
+  .input:nth-child(3) {
+    font-size: 14px;
+    margin-top: 6px;
+    height: 48px;
+  }
+
+  .input:nth-child(2) {
+    width: 24%;
+  }
+}
+/*::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+*/
+::ng-deep .input.sss .mat-select-arrow-wrapper {
+  display: none !important;
+}
+::ng-deep .input.sss .mat-select-value {
+  display: table !important;
+  font-size: 32px;
+  max-width: unset !important;
+  line-height: 1.5;
+}
+::ng-deep .input.sss .mat-select-trigger {
+  width: 100% !important;
+}

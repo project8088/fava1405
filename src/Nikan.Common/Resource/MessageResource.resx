@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AllowAccess" xml:space="preserve">
+    <value>اجازه دسترسی</value>
+  </data>
+  <data name="AllowOnlyNumbers" xml:space="preserve">
+    <value>فقط مجاز به وار کردن اعداد می باشید</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>انصراف</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>تغییر کلمه عبور</value>
+  </data>
+  <data name="ConfirmRecordDeletion" xml:space="preserve">
+    <value>تایید حذف </value>
+  </data>
+  <data name="ContactInformation" xml:space="preserve">
+    <value>اطلاعات تماس</value>
+  </data>
+  <data name="ContactRequiredMessage" xml:space="preserve">
+    <value>وارد کردن یکی از موارد تماس برای آگهی الزمی می باشد.</value>
+  </data>
+  <data name="CreditBodyIsRequired" xml:space="preserve">
+    <value>وارد نمودن توضیحات برای عدم تایید الزامی می باشد</value>
+  </data>
+  <data name="CurrentPasswordIsIncorrect" xml:space="preserve">
+    <value>کلمه عبور فعلی صحیح نمی باشد.</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="Deleted" xml:space="preserve">
+    <value>عملیات حذف با موفقیت انجام گردید.</value>
+  </data>
+  <data name="DeletedAction" xml:space="preserve">
+    <value>عملیات حذف</value>
+  </data>
+  <data name="DeleteRecord" xml:space="preserve">
+    <value>آیا میخواهید رکورد {0}را حذف کنید</value>
+  </data>
+  <data name="DuplicateCode" xml:space="preserve">
+    <value>کد وارد شده تکراری می باشد</value>
+  </data>
+  <data name="DuplicateCompanyNumber" xml:space="preserve">
+    <value>شماره کارگاه وارد شده قبلا ثبت شده است</value>
+  </data>
+  <data name="DuplicateEmail" xml:space="preserve">
+    <value>آدرس ایمیل وارد شده قبلا استفاده شده است</value>
+  </data>
+  <data name="DuplicateFormIntroducingToWork" xml:space="preserve">
+    <value>برای این کارجو قبلا فرم معرفی نامه  صادر شده است</value>
+  </data>
+  <data name="DuplicateFormIntroducingToWorkCode" xml:space="preserve">
+    <value>شماره نامه وارد شده تکراری می باشد</value>
+  </data>
+  <data name="DuplicateMobile" xml:space="preserve">
+    <value>شماره همراه وارد شده قبلا استفاده شده است</value>
+  </data>
+  <data name="DuplicateNationalCode" xml:space="preserve">
+    <value>کد ملی وارد شده تکراری می باشد.</value>
+  </data>
+  <data name="DuplicatePath" xml:space="preserve">
+    <value>مسیر وارد شده تکراری می باشد</value>
+  </data>
+  <data name="DuplicateTitle" xml:space="preserve">
+    <value>عنوان وارد شده تکراری می باشد</value>
+  </data>
+  <data name="EditAction" xml:space="preserve">
+    <value>عملیات ویرایش</value>
+  </data>
+  <data name="EmailOrMobileRequiredForRegisteration" xml:space="preserve">
+    <value>برای ثبت نام شماره همراه یا آدرس ایمیل الزامی می باشد</value>
+  </data>
+  <data name="EmploymentInfo" xml:space="preserve">
+    <value>آگهی استخدام</value>
+  </data>
+  <data name="EnterInformationRequired" xml:space="preserve">
+    <value>اطلاعات را به صورت کامل وارد نمائید</value>
+  </data>
+  <data name="ErrorinAction" xml:space="preserve">
+    <value>خطایی در اجرای عملیات رخ داده است</value>
+  </data>
+  <data name="ErrorSystem" xml:space="preserve">
+    <value>خطا</value>
+  </data>
+  <data name="FailSendEmailForMailSettings" xml:space="preserve">
+    <value>خطا در آزمایش پیکربندی ایمیل</value>
+  </data>
+  <data name="InvalidEmail" xml:space="preserve">
+    <value>آدرس ایمیل وارد شده نامعتبر می باشد</value>
+  </data>
+  <data name="InvalidMobile" xml:space="preserve">
+    <value>شماره همراه وارد شده نامعتبر می باشد</value>
+  </data>
+  <data name="IsDeleteItem" xml:space="preserve">
+    <value>آیا مایل به حذف این آیتم هستدید؟</value>
+  </data>
+  <data name="IsDeleteRow" xml:space="preserve">
+    <value>آیا مایل به حذف سطر جاری هستدید؟</value>
+  </data>
+  <data name="LoginError" xml:space="preserve">
+    <value>خطا در ورود</value>
+  </data>
+  <data name="LoginOnFailureMessage" xml:space="preserve">
+    <value>اطلاعات وارد شده معتبر نیستند. لطفا مجددا سعی کنید.</value>
+  </data>
+  <data name="MangerNameRequiredMessage" xml:space="preserve">
+    <value>نام مدیر عامل یا مسئول استخدام ضرروی می باشد.جهت صدور فرم معرفی نامه برای کاربر</value>
+  </data>
+  <data name="ModelStateError" xml:space="preserve">
+    <value>خطای اعتبارسنجی</value>
+  </data>
+  <data name="ModelValidError" xml:space="preserve">
+    <value>خطای اعتبارسنجی</value>
+  </data>
+  <data name="NationalCodeInValid" xml:space="preserve">
+    <value>کد ملی وارد شده نامعتبر می باشد.</value>
+  </data>
+  <data name="NationalCodeRequired" xml:space="preserve">
+    <value>کد ملی الزامی می باشد </value>
+  </data>
+  <data name="NationalCodeRequiredForRegisteration" xml:space="preserve">
+    <value>برای ثبت نام کدملی الزامی می باشد</value>
+  </data>
+  <data name="NewPasswordIsInvalid" xml:space="preserve">
+    <value>کلمه عبور وارد شده نامعتبر می باشد</value>
+  </data>
+  <data name="NotAllowAccess" xml:space="preserve">
+    <value>شما دسترسی به این قسمت ندارید </value>
+  </data>
+  <data name="NotAllowChange" xml:space="preserve">
+    <value>امکان تغییر داده های سیستمی وجود ندارد</value>
+  </data>
+  <data name="NotFound" xml:space="preserve">
+    <value>اطلاعاتی یافت نشد</value>
+  </data>
+  <data name="PasswordMinLength" xml:space="preserve">
+    <value>حداقل طول کلمه عبور شش کاراکتر می باشد</value>
+  </data>
+  <data name="Pleaseenteravalidemailaddress" xml:space="preserve">
+    <value>آدرس ایمیل معتبر وارد نمائید</value>
+  </data>
+  <data name="ResumeToBookmarkSuccessfully" xml:space="preserve">
+    <value>رزومه با موفقیت به لیست علاقه مندیها اضافه گردید</value>
+  </data>
+  <data name="RrequiredEmploymentInfoFirst" xml:space="preserve">
+    <value>ابتدا اطلاعات مربوط با آگهی استخدام را ثبت کنید </value>
+  </data>
+  <data name="SendEmailSuccessfully" xml:space="preserve">
+    <value>ارسال ایمیل با موفقیت انجام گردید</value>
+  </data>
+  <data name="SendSMSForForgotPasswordSuccessfully" xml:space="preserve">
+    <value>کلمه عبور با موفقیت به شماره همراه شما پیامک گردید</value>
+  </data>
+  <data name="SendVerifyCodeFailure" xml:space="preserve">
+    <value>خطا در ارسال کد اعتبارسنجی آدرس ایمیل </value>
+  </data>
+  <data name="SendVerifyCodeSuccessed" xml:space="preserve">
+    <value>ارسال کد اعتبارسنجی آدرس ایمیل  با موفقیت انجام گردید.</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>تایید</value>
+  </data>
+  <data name="Successd" xml:space="preserve">
+    <value>عملیات  با موفقیت انجام گردید.</value>
+  </data>
+  <data name="SuccessedSendEmailForMailSettings" xml:space="preserve">
+    <value>آزمایش پیکربندی ارسال ایمیل با موفقیت انجام گردید</value>
+  </data>
+  <data name="SystemData" xml:space="preserve">
+    <value>داده سیستمی</value>
+  </data>
+  <data name="TabsController_GetPageList_" xml:space="preserve">
+    <value>»»</value>
+  </data>
+  <data name="ThereAreAlreadyResumeToBookmark" xml:space="preserve">
+    <value>شما قبلا این رزومه را به لیست علاقه مندیهای خود اضافه نموده اید</value>
+  </data>
+  <data name="TicketClosedSuccessfully" xml:space="preserve">
+    <value>درخواست شما با موفقیت بسته گردید</value>
+  </data>
+  <data name="TicketOpenedSuccessfully" xml:space="preserve">
+    <value>درخواست شما با موفقیت باز شد</value>
+  </data>
+  <data name="UpdatedProfile" xml:space="preserve">
+    <value>اطلاعات پروفایل شما با موفقیت برروزرسانی گردید</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>مشخصات کاربری</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>منتظر بمانید</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>هشدار</value>
+  </data>
+  <data name="YouMustApproveTermsCondition" xml:space="preserve">
+    <value>شما باید قوانین را قبول کنید</value>
+  </data>
+  <data name="YourMessageReceived" xml:space="preserve">
+    <value>پیام شما با موفقیت بازیابی گردید.</value>
+  </data>
+</root>

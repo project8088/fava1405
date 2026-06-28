@@ -1,0 +1,21 @@
+﻿@using Stimulsoft.Report.Mvc;
+@using Stimulsoft.Report.Web;
+@using Stimulsoft.System.Web.UI.WebControls;
+@{
+    ViewData["Title"] = "برگ خروج";
+    Layout = null;
+}
+ 
+
+@Html.StiNetCoreViewer(new StiNetCoreViewerOptions()
+{
+   Actions =
+   {
+       GetReport = "GetQueueForPostReport",
+       ViewerEvent = "ViewerEvent" 
+       
+   }, 
+})
+
+
+ 

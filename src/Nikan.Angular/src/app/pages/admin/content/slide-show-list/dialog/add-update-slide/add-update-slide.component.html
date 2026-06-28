@@ -1,0 +1,81 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title" *ngIf="!isUpdate">ثبت اسلاید شو </h5>
+  <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش اسلاید شو </h5>
+
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <form [formGroup]="form">
+
+
+
+    <div class="row">
+ 
+ 
+ 
+
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label> عنوان </mat-label>
+        <input matInput formControlName="caption" autocomplete="doNotAutoComplete" maxlength="50">
+        <mat-error *ngIf="form.get('caption').errors?.required">
+          عنوان را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label>آدرس </mat-label>
+        <input matInput formControlName="url" autocomplete="doNotAutoComplete" maxlength="50">
+        <mat-error *ngIf="form.get('url').errors?.required">
+          آدرس را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label>ترتیب نمایش </mat-label>
+        <input matInput formControlName="indexOrder" autocomplete="doNotAutoComplete" maxlength="50">
+        <mat-error *ngIf="form.get('indexOrder').errors?.required">
+          ترتیب نمایش را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+ 
+ 
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label> توضیحات</mat-label>
+        <input matInput formControlName="description" autocomplete="doNotAutoComplete">
+        <mat-error *ngIf="form.get('description').errors?.required">
+          توضیحات را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+  
+
+
+    </div>
+    <p>
+      <mat-checkbox color="default" formControlName="isActive">فعال / غیر فعال</mat-checkbox>
+    </p>
+
+    <app-uploader (attachmentId)="getAttachmentId($event)" [autoUpload]="true" [btnTitle]="'انتخاب تصویر'">
+    </app-uploader>
+
+
+    <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" *ngIf="imageUrl" />
+
+
+  </form>
+
+
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <span>ذخیره </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+</mat-dialog-actions>

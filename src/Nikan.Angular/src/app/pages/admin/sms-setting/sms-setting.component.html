@@ -1,0 +1,111 @@
+<div class="content-header">
+  <span>
+    تنظیمات پیامک
+  </span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">پنل مدیریت</div>
+    <div class="bread-crumb-item"> مدیریت </div>
+    <div class="bread-crumb-item active">تنظیمات پیامک </div>
+  </div>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="d-flex align-items-center justify-content-center p-5 my-5" *ngIf="loading">
+      <mat-spinner color="default"></mat-spinner>
+    </div>
+    <form [formGroup]="settingForm" class="p-4" *ngIf="!loading">
+
+
+
+      <div class="alert alert-info">
+        <strong>
+          تنظیمات کاربری پیامک
+        </strong>
+      </div>
+
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label> نام کاربری </mat-label>
+        <input type="text" matInput formControlName="smsUserName" />
+        <mat-error *ngIf="settingForm.get('smsUserName').errors?.required">
+          نام کاربری را وارد کنید
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label> کلمه عبور </mat-label>
+        <input type="text" matInput formControlName="smsPassword" />
+        <mat-error *ngIf="settingForm.get('smsPassword').errors?.required">
+          کلمه عبور را وارد کنید
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label> نام دامنه </mat-label>
+        <input type="text" matInput formControlName="domainName" />
+        <mat-error *ngIf="settingForm.get('domainName').errors?.required">
+          نام دامنه را وارد کنید
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-label> شماره ارسال کننده </mat-label>
+        <input type="text" matInput formControlName="senderNumber" numbersOnly />
+        <mat-error *ngIf="settingForm.get('senderNumber').errors?.required">
+          شماره ارسال کننده را وارد کنید
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field appearance="outline" class="col-sm-6 col-md-6">
+        <mat-label> توکن </mat-label>
+        <input type="text" matInput formControlName="smsToken" />
+        <mat-error *ngIf="settingForm.get('smsToken').errors?.required">
+          توکن را وارد کنید
+        </mat-error>
+      </mat-form-field>
+
+
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label> تعداد  پیامک مجاز برای ارسال به یک شماره موبایل</mat-label>
+        <input type="text" matInput formControlName="countValidMobileNumber" numbersOnly maxlength="20" />
+        <mat-error *ngIf="settingForm.get('countValidMobileNumber').errors?.required">
+          تعداد  پیامک مجاز برای ارسال به یک شماره موبایل
+        </mat-error>
+      </mat-form-field>
+
+      <p>
+        <mat-checkbox color="default" formControlName="sendSmsAfterRejectCitizenInformationInUpdateForm">
+        در صورت عدم تایید اطلاعات توسط سامانه احرازآنلاین برای شهروند پیامک عدم تایید ارسال شود؟
+        </mat-checkbox>
+      </p>
+
+      <p>
+        <mat-checkbox color="default" formControlName="sendSmsAfterAdminLogin">
+          بعد از ورود کاربر به پنل مدیریت پیامک اطلاع رسانی به کاربر ارسال شود؟
+        </mat-checkbox>
+      </p>
+
+    </form>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-4">
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveSetting()">
+        <span> ذخیره اطلاعات</span>
+        <mat-spinner diameter="20" *ngIf="isSaving"></mat-spinner>
+      </button>
+    </div>
+
+  </mat-card-footer>
+</mat-card>

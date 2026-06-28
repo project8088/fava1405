@@ -1,0 +1,115 @@
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
+import { DataService } from '../../../../../core/services/data-service.service';
+import { ServerApis } from '../../../../../core/server-apis';
+
+@Component({
+  selector: 'company-add-user-dialog',
+  templateUrl: './add-user.component.html',
+  styleUrls: ['./add-user.component.scss']
+})
+export class CompanyAddUserDialogComponent implements OnInit {
+  isSaving: boolean;
+  userForm: FormGroup;
+  loading: boolean = true;
+  companyId: string;
+  constructor(
+    private matDialog: MatDialog,
+    private matDialogRef: MatDialogRef<CompanyAddUserDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) private _data: any,
+    private toastrService: ToastrService,
+    private fb: FormBuilder,
+    private customValidator: CustomFormValidators,
+    private dataService: DataService) {
+
+    this.companyId = _data.companyId;
+
+    this.userForm = this.fb.group({
+      id: [null],
+      firstName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
+      lastName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
+      username: [null, [Validators.required, this.customValidator.checkEnglishAndNumberCharacters]],
+      password: [null, [Validators.required]],
+      confirmPassword: [null, [Validators.required]],
+
+      mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
+      email: [null, [Validators.required, this.customValidator.checkEmail]],
+
+
+
+
+
+    }, { validator: this.checkPasswords });
+  }
+
+  /**
+   * بررسی یکی بودن کلمه عبور و تائید آن
+   */
+  checkPasswords(group: FormGroup) {
+    let pass = group.controls.password.value;
+    let confirmPassword = group.controls.confirmPassword.value;
+
+    return pass === confirmPassword ? null : { notSame: true }
+  }
+
+
+
+  ngOnInit() {
+  }
+
+
+
+
+
+
+
+
+
+
+
+  saveInfo() {
+    if (this.userForm.invalid) {
+      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.userForm.markAllAsTouched();
+      return false;
+    }
+    var formValue = this.userForm.value;
+
+    this.isSaving = true;
+
+
+    this.dataService.post(
+      ServerApis.addCompanyUser,
+      {
+        CompanyId: this.companyId && this.companyId != '0' ? +this.companyId : null,
+        DisplayName: formValue.firstName + ' ' + formValue.lastName,
+        Email: formValue.email,
+        MobileNumber: formValue.mobile,
+        UserName: formValue.username,
+        Password: formValue.password,
+
+      }
+    ).subscribe(response => {
+      this.isSaving = false;
+      if (response && response.isSuccess) {
+        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        this.matDialogRef.close(true);
+      } else {
+        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+        this.toastrService.error(msg);
+      }
+    }, error => {
+      this.isSaving = false;
+    });
+  }
+
+
+
+
+
+
+
+}

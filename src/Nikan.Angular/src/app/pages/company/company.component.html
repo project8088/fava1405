@@ -1,0 +1,48 @@
+<mat-sidenav-container class="sidenav-container dashboard  {{theme}}" [class.mini-side-bar]="miniSideBar">
+  <mat-sidenav #drawer class="sidenav"
+               [fixedInViewport]="true"
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+    <div class="side-nav">
+      <mat-toolbar color="purple">
+        <button mat-icon-button (click)="miniSideBar=!miniSideBar">
+          <i class="fa fa-arrow-left" *ngIf="miniSideBar"></i>
+          <i class="fa fa-arrow-right" *ngIf="!miniSideBar"></i>
+        </button>
+        <span>پنل
+
+        موسسات حقوقی
+
+        </span>
+      </mat-toolbar>
+      <side-nav-menu [menu]="menuItems"></side-nav-menu>
+
+    </div>
+  </mat-sidenav>
+
+
+
+  <mat-sidenav-content class="dashboard-content">
+    <mat-toolbar color="purple" class="fixed-toolbar">
+      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <!--<span>ادمین</span>-->
+      <span class="spacer"></span>
+
+      <button mat-button (click)="logout()" matTooltip="خروج از حساب کاربری">
+        <i class="fa fa-power-off mr-2"></i>
+        <span>خروج</span>
+      </button>
+
+
+      <button mat-icon-button routerLink="/home" matTooltip="باز گشت به صفحه اصلی">
+        <i class="fa fa-home"></i>
+      </button>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <router-outlet></router-outlet>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

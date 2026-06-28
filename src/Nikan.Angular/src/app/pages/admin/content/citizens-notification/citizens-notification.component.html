@@ -1,0 +1,110 @@
+<div class="content-header">
+  <span>دریافت کنندگان اطلاعیه</span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
+    <div class="bread-crumb-item" routerLink="/admin/notifications">لیست اطلاعیه ها</div>
+    <div class="bread-crumb-item active">دریافت کنندگان اطلاعیه</div>
+  </div>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+
+    <div class="alert alert-info mb-2">گروه شهروندی  که می توانند این اطلاعیه را مشاهده کنند، مشخص کنید.</div>
+    <div class="row">
+      <div class="col-sm-12">
+        <strong>عنوان اطلاعیه:</strong>
+        <span>{{notification.title}}</span>
+      </div>
+      <div class="col-sm-12">
+        <strong>توضیحات:</strong>
+        <span>{{notification.description}}</span>
+      </div>
+
+      <div class="col-sm-4">
+        <strong>شماره اطلاعیه:</strong>
+        <span>{{notification.notificationNumber}}</span>
+      </div>
+
+      <div class="col-sm-4">
+        <strong>تاریخ انتشار:</strong>
+        <span>{{notification.publishDate|jalali}}</span>
+      </div>
+
+    </div>
+
+    <div class="alert alert-info mb-2">یکی از موارد زیر را وارد نمایید.</div>
+    <form [formGroup]="notyForm" *ngIf="!loading" class="mt-5">
+      <div class="row d-flex align-items-center">
+        <mat-form-field class="col-md-4">
+          <mat-label>کد ملی شهروند</mat-label>
+          <input matInput formControlName="nationalCode" numbersOnly maxlength="10" />
+          <mat-error *ngIf="notyForm.get('nationalCode').errors?.required">
+            کد ملی شهروند را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-4">
+          <mat-label> گروه شهروندی</mat-label>
+          <mat-select formControlName="groupId">
+            <mat-option *ngFor="let item of baseEnums.citizenGroups"
+                        [value]="item.key">
+              {{ item.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving" *ngIf="!loading" class="mx-3">
+          <span *ngIf="isSaving">منتظر بمانید...</span>
+          <span *ngIf="!isSaving">افزودن</span>
+          <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+        </button>
+      </div>
+
+    </form>
+
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover table-striped">
+        <thead>
+          <tr>
+            <td>شهروند</td>
+            <td>گروه شهروندی</td>
+            <td>تاریخ اطلاع  </td>
+            <td width="50">حذف</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of companyList">
+            <td>{{item.citizen}}   </td>
+            <td>{{item.group}} </td>
+            <td>{{item.onDate|jalali}}</td>
+            <td>
+              <mat-spinner diameter="25" color="default" *ngIf="item.loading"></mat-spinner>
+              <button mat-icon-button (click)="delete(item)" *ngIf="!item.loading">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="companyList.length==0 && !loading">
+            <td colspan="4" align="center">
+              شهروند و گروه شهروندی اضاف نشده است!
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-3">
+
+    </div>
+  </mat-card-footer>
+</mat-card>

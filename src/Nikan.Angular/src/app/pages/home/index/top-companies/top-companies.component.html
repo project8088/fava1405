@@ -1,0 +1,18 @@
+<section class="container text-center pt-4 mt-5">
+  <h5 class="bt-color">شرکت های برتر</h5>
+  <p>
+    برخی از برترین برندها
+
+  </p>
+  <div id="owl-province" class="owl-carousel">
+    <div class="card mx-2" *ngFor="let item of data">
+      <a routerLink="/home/co/{{item.id}}">
+        <img [src]="baseUrl+item.imageUrl" />
+        <p class="pt-2">{{item.companyName}}</p>
+      </a>
+    </div>
+
+
+  </div>
+
+</section>

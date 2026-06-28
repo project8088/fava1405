@@ -1,0 +1,126 @@
+<!-- Breadcrumb Area -->
+<div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1" data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
+  <div class="container">
+    <div class="tm-breadcrumb">
+      <h2 class="tm-breadcrumb-title">پرسش های متداول</h2>
+      <ul>
+        <li><a routerLink="/home">صفحه اصلی</a></li>
+        <li>پرسش های متداول</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<!--// Breadcrumb Area -->
+<!-- Main Content -->
+<main class="main-content">
+  <div class="tm-section blogs-area bg-white">
+    <div class="container p-md-5 box p-4 mt-4">
+      <div class="row">
+        <div class="col-lg-12 col-12">
+          <div class="groups">
+            <div class="bordered-title">
+              گروه های پرسش و پاسخ
+            </div>
+            <div class="no-any-items" *ngIf="faqGroups.length==0 && !loadingGroup">
+              <i class="fa fa-info-circle"></i> اطلاعاتی ثبت نشده است
+            </div>
+            <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loadingGroup">
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            </div>
+            <ul class="list">
+              <li *ngFor="let item of faqGroups;let $i=index" (click)="getFaqList(item)" [class.active]="item.key==selectedFaq?.key">
+                <span class="num">{{$i+1}}</span> {{item.text}}
+              </li>
+            </ul>
+          </div> 
+          <div class="content">
+            <div class="bordered-title">
+              پرسش و پاسخ
+              <strong *ngIf="selectedFaq">
+                &nbsp;:{{selectedFaq.text}}
+              </strong>
+            </div>
+
+
+
+            <div class="no-any-items" *ngIf="faqList.length==0 && !loadingList && selectedFaqGroupId">
+              <i class="fa fa-info-circle"></i> اطلاعاتی ثبت نشده است
+            </div>
+            <div class="py-5 my-5 h5 text-center" *ngIf="!selectedFaqGroupId">
+              گروه مورد نظر را انتخاب کنید.
+            </div>
+
+            <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loadingList">
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            </div>
+
+
+            <!-- Faq Area -->
+            <div class="tm-section faq-area mt-4">
+              <div id="tm-accordion2" class="tm-accordion">
+
+                <div class="card" *ngFor="let item of faqList">
+                  <div class="card-header" id="tm-accordion2-heading1">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#tm-accordion2-collapse1"
+                              aria-expanded="false" aria-controls="tm-accordion2-collapse1">
+                        {{item.title}}
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="tm-accordion2-collapse1" class="collapse" aria-labelledby="tm-accordion2-heading1"
+                       data-parent="#tm-accordion2">
+                    <div class="card-body">
+                      <div [innerHtml]="item.description|safeHtml">
+
+                      </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                      <div class="d-flex align-items-center justify-content-between">
+                        <div class="title">
+                          <i class="fa fa-question-circle mr-2"></i>
+                          <span>{{item.tagNames}}</span>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <span>
+                            {{item.createOnDate|jalali}} <i class="fa fa-calendar mr-2"></i>
+                          </span>
+                          <div class="view">
+                            <span class="mx-2">{{item.viewCount}}</span>
+                            <i class="fa fa-eye mr-2"></i>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
+            <!--// Faq Area -->
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</main>

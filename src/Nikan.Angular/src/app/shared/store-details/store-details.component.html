@@ -1,0 +1,60 @@
+<div class="content-header">
+  <span>{{info?.title}}</span>
+
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+ 
+     
+  </mat-card-header>
+  <mat-card-content>
+    <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
+      <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
+    </div>
+
+    <div *ngIf="!loading" class="line-height-3">
+      <div class="row">
+        <div class="col-sm-12">
+          <span>عنوان کالا/خدمات: </span>
+          <strong>{{info.title}}</strong>
+        </div>
+        <div class="col-sm-12">
+          <span>شرح: </span>
+          <strong>{{info.description}}</strong>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <span>شناسه کالا: </span>
+          <strong>{{info.code}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>مالیات: </span>
+          <strong>{{info.tax}}%</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>مبلغ: </span>
+          <strong>{{info.price|number}}</strong>
+        </div>
+         
+      </div>
+
+ <div [innerHtml]="info.content|safeHtml"></div>
+
+       
+    </div>
+
+
+    <div class="d-flex align-items-center justify-content-end">
+      <button mat-stroked-button color="default" (click)="buy()">
+        <i class="fa fa-cart-plus mr-2"></i>
+        <span>خرید</span>
+      </button>
+    </div>
+
+
+
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

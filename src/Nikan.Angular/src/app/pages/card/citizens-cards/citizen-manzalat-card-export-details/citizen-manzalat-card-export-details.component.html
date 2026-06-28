@@ -1,0 +1,211 @@
+<div class="content-header">
+  <span>
+   دریافت خروجی صدور کارت
+  </span>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+
+        <mat-form-field class="col-md-3">
+          <mat-label>نام شهروند</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label>کد ملی</mat-label>
+          <input matInput formControlName="nationCode" />
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>شماره کارت</mat-label>
+          <input matInput formControlName="cardNumber" />
+        </mat-form-field>
+
+
+
+      
+ 
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
+      </div>
+      <div
+        class="datatable-loading-shade"
+        *ngIf="isLoadingResults == false && listCount == 0"
+      >
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+
+      <div class="datatable-table-container">
+        <table mat-table
+               [dataSource]="data"
+               class="datatable-table"
+               #exporter="matTableExporter"
+               matTableExporter
+               [hiddenColumns]="[displayedColumns.length - 1]">
+
+
+
+
+
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>NationCode</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.nationCode }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="citizenFirstName">
+            <th mat-header-cell *matHeaderCellDef>FirstName</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.citizenFirstName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="citizenLastName">
+            <th mat-header-cell *matHeaderCellDef>LastName</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.citizenLastName }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="citizenFullName">
+            <th mat-header-cell *matHeaderCellDef>FullName</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.citizenFullName }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="lenCitizenFullName">
+            <th mat-header-cell *matHeaderCellDef>FullNameLen</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.citizenFullName.length }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lenNationCode">
+            <th mat-header-cell *matHeaderCellDef>NationCodeLen</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.nationCode.length }}
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="expaireDate">
+            <th mat-header-cell *matHeaderCellDef>ExpaireDate</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.ExpaireDate }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="manzelatStatus">
+            <th mat-header-cell *matHeaderCellDef>manzelatStatus</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.manzelatStatus }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="isSalmand">
+            <th mat-header-cell *matHeaderCellDef>IsSalmand</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isSalmand }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="isMaloul">
+            <th mat-header-cell *matHeaderCellDef>IsMaloul</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isMaloul }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="isBimar">
+            <th mat-header-cell *matHeaderCellDef>isBimar</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isBimar }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="isMadar">
+            <th mat-header-cell *matHeaderCellDef>isMadar</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isMadar }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="isZanSarperst">
+            <th mat-header-cell *matHeaderCellDef>IsZanSarperst</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isZanSarperst }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="isJanbaz">
+            <th mat-header-cell *matHeaderCellDef>IsJanbaz</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isJanbaz }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="isBazneshasteh">
+            <th mat-header-cell *matHeaderCellDef>IsBazneshasteh</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.isBazneshasteh }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="totalResult">
+            <th mat-header-cell *matHeaderCellDef>TotalResult</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.totalResult }}
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="operation">
+            <th mat-header-cell *matHeaderCellDef width="40">.. </th>
+            <td mat-cell *matCellDef="let row">
+            </td>
+          </ng-container>
+
+          <tr mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="2000"
+        [pageSizeOptions]="[ 2000,5000,10000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

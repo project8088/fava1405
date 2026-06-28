@@ -1,0 +1,41 @@
+.manzelat-plan {
+  &.janbazan {
+    background-color: #d5ffa2;
+  }
+  &.maloulin {
+    background-color: #ffeda2;
+  }
+  &.zanan-sarparast {
+    background-color: #a2dfff;
+  }
+  &.bazneshaste {
+    background-color: #d9d9f0;
+  }
+  &.salmandan {
+    background-color: #ceffe3;
+  }
+
+  .manzelat-plan__content > * {
+    font-size: 15px;
+  }
+  .manzelat-plan__content {
+    max-height: 200px;
+    overflow: auto;
+  }
+}
+::ng-deep {
+  h1 {
+    font-size: 15px !important;
+  }
+  .mat-card-header-text {
+    margin: 0;
+  }
+
+  .mat-card-header-text{
+    margin:0!important
+  }
+}
+
+h1 {
+  font-size: 15px !important;
+}

@@ -1,0 +1,100 @@
+<div class="content-header">
+  <span>   آدرس ای پی های مجاز </span>
+
+</div>
+
+<div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
+  <mat-spinner diameter="50" color="default"></mat-spinner>
+</div>
+
+<mat-card class="custom-card">
+
+  <form [formGroup]="form" *ngIf="!loading">
+    <div class="row my-4">
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>
+          ای پی
+
+          (شروع)
+        </mat-label>
+        <input matInput placeholder="xxx.xxx.xx.xx" formControlName="start" autocomplete="doNotAutoComplete" maxlength="20">
+        <mat-error *ngIf="form.get('start').errors?.required">
+          ای پی را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>
+          ای پی پایان
+          (اختیاری)
+        </mat-label>
+        <input matInput  placeholder="xxx.xxx.xx.xx" formControlName="end" autocomplete="doNotAutoComplete" maxlength="20">
+        <mat-error *ngIf="form.get('end').errors?.required">
+          ای پی پایان را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+
+      <div class="col d-flex align-items-center justify-content-start">
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          <span>اضافه کردن</span>
+          <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </form> 
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="py-4 list-container">
+          <div class="list-item" *ngFor="let item of userAppAccessList">
+            <div class="list-content">
+              <div class="row"> 
+                <div class="col-sm-12">
+                  <span class="text-info" >
+                    {{item.start}}
+                  </span>
+                  <strong>
+                    :
+                  </strong>
+
+                  <span  class="text-success" >
+                    {{item.end}}
+                  </span>
+
+                 
+                </div>
+              </div>
+            </div>
+
+            <div class="menu">
+
+              <button mat-icon-button (click)="delete(item)" *ngIf="!item.loading" matTooltip="حذف">
+                <i class="fa fa-trash"></i>
+              </button>
+              <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
+            </div>
+          </div>
+        </div>
+
+        <div class="no-any-items" *ngIf="userAppAccessList.length==0 && !loading">
+          <i class="fa fa-info-circle"></i>
+          اطلاعاتی ثبت نشده است
+        </div>
+        <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
+          <mat-spinner diameter="50" color="default"></mat-spinner>
+        </div>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+  </div>
+
+  <mat-card-footer></mat-card-footer>
+</mat-card>
+
+
+

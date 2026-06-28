@@ -1,0 +1,88 @@
+
+ 
+
+
+
+<form class="custom-form" [formGroup]="loginForm">
+  <!-- Input Field Starts -->
+
+
+  <div class="form-group">
+    <input class="form-control" matInput formControlName="username" autocomplete="username"
+           placeholder="نام کاربری(کد ملی)" required>
+  </div>
+  <span *ngIf="loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched" class="text-danger">
+    نام کاربری خود را وارد کنید
+  </span>
+
+  <div class="form-group">
+    <input class="form-control" formControlName="password" type="password" autocomplete="current-password"
+           placeholder="کلمه عبور"   required>
+  </div>
+  <span *ngIf="loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched" class="text-danger">
+    کلمه عبور خود را وارد کنید
+  </span>
+
+
+  <div class="bot-detect-container">
+    <input class="form-control" placeholder="کد امنیتی تصویر را در این قسمت وارد نمائید" id="mainCaptchaUserInput" name="mainCaptchaUserInput"
+           formControlName="userEnteredCaptchaCode" type="text">
+
+    <botdetect-captcha captchaStyleName="mainCaptcha"></botdetect-captcha>
+
+  </div>
+
+
+
+
+ 
+
+  <!-- Input Field Ends -->
+  <!-- Submit Form Button Starts -->
+  <div class="form-group">
+
+    <button class="custom-button login" type="submit" (click)="login()" [disabled]="loading">
+      <span>ورود</span>
+      <mat-spinner diameter="20" [hidden]="!loading" color="default"></mat-spinner>
+    </button>
+     
+
+  </div>
+  <!-- Submit Form Button Ends -->
+  <div style="text-align: justify;">
+    
+    <ul>
+      <li>
+        در صورتیکه برای بار اول وارد سامانه می شوید
+        با تکمیل این فرم نسبت به تکمیل اطلاعات و دریافت نام کاربری و رمز عبور اقدام کنید.
+        <span>
+          <a class="btn-register" href="/userregister/preregister?serviceId={{serviceId}}">
+            ثبت نام در سامانه
+          </a>
+        </span>
+        <hr />
+      </li>
+
+      <li>
+        در صورت فراموش کردن رمز عبور با انتخاب گزینه « فراموشی رمز عبور» برای بازیابی آن اقدام کنید.
+        <span>
+          <a class="btn-register" href="/account/forgot-password?serviceId={{serviceId}}">
+            فراموشی رمز عبور
+          </a>
+        </span>
+        <hr />
+      </li>
+
+      <li>
+        
+        <span>
+          <a class="btn-register" href="/home/page/تماس_با_کارشناسان">
+            تماس با کارشناسان
+          </a>
+        </span>
+      </li>
+
+
+    </ul>
+  </div>
+</form>
