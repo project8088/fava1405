@@ -22,7 +22,7 @@ namespace Nikan.WebApp.Controllers
             var exception = context?.Error; // Your exception
             var code = 500; // Internal Server Error by default
 
-            
+             
             Response.StatusCode = code; // You can use HttpStatusCode enum instead
 
             return new ApiResult(false,ApiResultStatusCode.ServerError,   exception.Message); // Your error model
