@@ -33,6 +33,7 @@ using Nikan.Services.UserDocuments;
 using Nikan.Services.ExportCitizen;
 using Nikan.Services.Events;
 using Nikan.Services.Refund;
+using Nikan.Services.RateLimiter;
 
 namespace Nikan.IoCConfig
 {
@@ -216,9 +217,10 @@ namespace Nikan.IoCConfig
             services.AddScoped<IDistributeCardService, DistributeCardService>();
             services.AddScoped<IDiscountCardService, DiscountCardService>();
             services.AddScoped<IRequestFreeCardService,  RequestFreeCardService>();
-
-
+            services.AddScoped<IMemoryRateLimiterService, MemoryRateLimiterService>();
             
+
+
 
 
         }

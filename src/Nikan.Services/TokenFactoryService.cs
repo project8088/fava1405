@@ -123,7 +123,8 @@ namespace Nikan.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, $"Failed to validate refreshTokenValue: `{refreshTokenValue}`.");
+                //بیشتر خطاهای این قسمت بابت منقضی شده توکن می باشد
+                // _logger.LogError(ex, $"Failed to validate refreshTokenValue: `{refreshTokenValue}`.");
             }
 
             return decodedRefreshTokenPrincipal?.Claims?.FirstOrDefault(c => c.Type == ClaimTypes.SerialNumber)?.Value;

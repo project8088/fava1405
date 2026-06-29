@@ -20,6 +20,7 @@ using Nikan.Services.Events;
 using Nikan.Services.Citizens;
 using Nikan.ViewModel.Citizens;
 using Hangfire;
+using Nikan.Services.RateLimiter;
 
 
 
@@ -30,49 +31,7 @@ namespace Nikan.WebApp.Controllers
     [ApiController]
     public class AccountController : Controller
     {
-        private const string _captchaHashKey = "CaptchaHash";
-        private CaptchaBLL captchaBLL = new CaptchaBLL();
-        private string CaptchaHash
-        {
-            get
-            {
-                return HttpContext.Session.GetString(_captchaHashKey) as string;
-            }
-            set
-            {
-                HttpContext.Session.SetString(_captchaHashKey, value);
-            }
-        }
-
-        /// <summary>
-        /// تولید کد کپچا
-        /// </summary>
-        /// <returns></returns>
-        [Route("captcha")]
-        [HttpGet]
-        [AllowAnonymous]
-        [ApiExplorerSettings(IgnoreApi = true)]
-        public ActionResult GetCaptcha()
-        {
-            var randomText = captchaBLL.GenerateRandomText(4);
-            CaptchaHash = captchaBLL.ComputeMd5Hash(randomText);
-            return File(captchaBLL.GenerateCaptchaImage(randomText), "image/gif");
-        }
-
-
-
-
-
-       
-
-
-
-
-
-
-
-
-
+        
         #region Ctor
         private readonly IAppService _app;
         private readonly IUsersService _usersService;
@@ -87,13 +46,14 @@ namespace Nikan.WebApp.Controllers
         private readonly IEventService _event;
         private readonly IBackgroundJobClient _backgroundJobClient;
 
-
+        private readonly IMemoryRateLimiterService _rateLimitService;
 
         public AccountController(
             IUsersService usersService,
             ISmsInfoService  smsInfoService,
               IPermissionService permission,
                IEventService siteevent,
+               IMemoryRateLimiterService rateLimitService,
             ICitizenService citizen,
             ITokenStoreService tokenStoreService,
             ITokenFactoryService tokenFactoryService
@@ -119,6 +79,7 @@ namespace Nikan.WebApp.Controllers
             _tokenFactoryService = tokenFactoryService;
             _backgroundJobClient = backgroundJobClient;
             _tokenFactoryService.CheckArgumentIsNull(nameof(tokenFactoryService));
+            _rateLimitService = rateLimitService;
         }
         #endregion
 
@@ -145,14 +106,7 @@ namespace Nikan.WebApp.Controllers
                 res.IsSuccess = false;
                 return res;
             }
-            var enteredCaptchaCode = model.UserEnteredCaptchaCode;
-            if (string.IsNullOrWhiteSpace(enteredCaptchaCode))
-            {
-                res.Messages = " کد امنیتی را به صورت صحیح وارد نمائید";
-                res.IsSuccess = false;
-                return res;
-            }
-            enteredCaptchaCode = enteredCaptchaCode.Fa2En();
+           
 
            
 
