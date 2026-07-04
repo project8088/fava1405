@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'https://localhost:44381', //'https://karjoyar.ir', //
-  mainApi: 'https://localhost:44381/api/', //'https://karjoyar.ir/api/'
+  baseUrl: 'https://profile.isfahan.ir', //'https://karjoyar.ir', //
+  mainApi: 'https://profile.isfahan.ir/api/', //'https://karjoyar.ir/api/'
   hmr: false
 };
 
