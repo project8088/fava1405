@@ -47,7 +47,7 @@
           <mat-form-field class="col-md-4">
             <mat-label>کد ملی شهروند</mat-label>
             <input matInput formControlName="nationalCode" numbersOnly maxlength="10" />
-            @if (notyForm.get('nationalCode').errors?.required) {
+            @if (notyForm.get('nationalCode')?.hasError('required')) {
               <mat-error> کد ملی شهروند را وارد کنید. </mat-error>
             }
           </mat-form-field>

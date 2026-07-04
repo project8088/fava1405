@@ -17,7 +17,7 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
   activityList: any[] = [];
   companyId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

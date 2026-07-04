@@ -30,17 +30,17 @@
                 </mat-option>
               }
             </mat-select>
-            @if (personalForm.get('marital').errors?.required) {
+            @if (personalForm.get('marital')?.hasError('required')) {
               <mat-error> وضعیت تاهل را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> تلفن ثابت</mat-label>
             <input formControlName="phoneNumber" maxlength="8" numbersOnly matInput />
-            @if (personalForm.get('phoneNumber').errors?.required) {
+            @if (personalForm.get('phoneNumber')?.hasError('required')) {
               <mat-error> شماره تلفن را وارد کنید. </mat-error>
             }
-            @if (personalForm.get('phoneNumber').errors?.pattern) {
+            @if (personalForm.get('phoneNumber')?.hasError('pattern')) {
               <mat-error> شماره تلفن صحیح نیست. </mat-error>
             }
           </mat-form-field>

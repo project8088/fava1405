@@ -12,16 +12,16 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          @if (reportForm.get('startDate').errors?.required) {
+          @if (reportForm.get('startDate')?.hasError('required')) {
             <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
           }
           @if (
-            reportForm.get('startDate').errors?.matDatepickerMin ||
-            reportForm.get('startDate').errors?.matDatepickerMax
+            reportForm.get('startDate')?.hasError('matDatepickerMin') ||
+            reportForm.get('startDate')?.hasError('matDatepickerMax')
           ) {
             <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
           }
-          @if (reportForm.get('startDate').errors?.matDatepickerParse) {
+          @if (reportForm.get('startDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
@@ -35,16 +35,16 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          @if (reportForm.get('endDate').errors?.required) {
+          @if (reportForm.get('endDate')?.hasError('required')) {
             <mat-error> تاریخ پایان قرار داد را مشخص کنید. </mat-error>
           }
           @if (
-            reportForm.get('endDate').errors?.matDatepickerMin ||
-            reportForm.get('endDate').errors?.matDatepickerMax
+            reportForm.get('endDate')?.hasError('matDatepickerMin') ||
+            reportForm.get('endDate')?.hasError('matDatepickerMax')
           ) {
             <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
           }
-          @if (reportForm.get('endDate').errors?.matDatepickerParse) {
+          @if (reportForm.get('endDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>

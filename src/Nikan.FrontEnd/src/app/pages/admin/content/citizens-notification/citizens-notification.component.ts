@@ -19,7 +19,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
   notification: any = {};
   companyList: any[] = [];
   baseEnums: any = {};
-  isSaving: boolean;
+  isSaving=false;
   loading: boolean;
 
   constructor() {

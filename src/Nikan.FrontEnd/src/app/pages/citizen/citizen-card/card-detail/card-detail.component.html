@@ -54,7 +54,7 @@
                 <mat-form-field class="col-md-4">
                   <mat-label> شماره تلفن ثابت</mat-label>
                   <input type="text" matInput maxlength="8" numbersOnly formControlName="phone" />
-                  @if (addressForm.get('phone').errors?.required) {
+                  @if (addressForm.get('phone')?.hasError('required')) {
                     <mat-error> شماره تلفن ثابت را وارد کنید. </mat-error>
                   }
                 </mat-form-field>
@@ -63,7 +63,7 @@
                   <mat-select disabled value="400" formControlName="stateId">
                     <mat-option value="400"> اصفهان </mat-option>
                   </mat-select>
-                  @if (addressForm.get('stateId').errors?.required) {
+                  @if (addressForm.get('stateId')?.hasError('required')) {
                     <mat-error> استان را انتخاب نمایید </mat-error>
                   }
                 </mat-form-field>
@@ -72,35 +72,35 @@
                   <mat-select disabled value="403" formControlName="stateId">
                     <mat-option value="400"> اصفهان </mat-option>
                   </mat-select>
-                  @if (addressForm.get('stateId').errors?.required) {
+                  @if (addressForm.get('stateId')?.hasError('required')) {
                     <mat-error> شهر را انتخاب نمایید </mat-error>
                   }
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> منطقه</mat-label>
                   <input type="text" matInput numbersOnly maxlength="2" formControlName="region" />
-                  @if (addressForm.get('region').errors?.required) {
+                  @if (addressForm.get('region')?.hasError('required')) {
                     <mat-error> منطقه را وارد کنید. </mat-error>
                   }
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> خیابان</mat-label>
                   <input type="text" maxlength="30" matInput formControlName="street" />
-                  @if (addressForm.get('street').errors?.required) {
+                  @if (addressForm.get('street')?.hasError('required')) {
                     <mat-error> خیابان محل سکونت خود را وارد کنید. </mat-error>
                   }
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> کوچه</mat-label>
                   <input type="text" maxlength="30" matInput formControlName="alley" />
-                  @if (addressForm.get('alley').errors?.required) {
+                  @if (addressForm.get('alley')?.hasError('required')) {
                     <mat-error> کوچه محل سکونت خود را وارد کنید. </mat-error>
                   }
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> پلاک</mat-label>
                   <input type="text" maxlength="4" numbersOnly matInput formControlName="plaque" />
-                  @if (addressForm.get('plaque').errors?.required) {
+                  @if (addressForm.get('plaque')?.hasError('required')) {
                     <mat-error> پلاک محل سکونت خود را وارد کنید. </mat-error>
                   }
                 </mat-form-field>
@@ -113,7 +113,7 @@
                     matInput
                     formControlName="postalCode"
                   />
-                  @if (addressForm.get('postalCode').errors?.required) {
+                  @if (addressForm.get('postalCode')?.hasError('required')) {
                     <mat-error> کد پستی خود را وارد کنید. </mat-error>
                   }
                 </mat-form-field>

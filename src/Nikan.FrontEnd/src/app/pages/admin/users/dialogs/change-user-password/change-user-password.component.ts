@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminChangePasswordDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   changePasswordForm: FormGroup;
   userId: string;
 

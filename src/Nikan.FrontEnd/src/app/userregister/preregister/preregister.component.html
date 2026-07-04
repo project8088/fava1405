@@ -95,7 +95,7 @@
                 }
               </mat-hint>
             }
-            @if (form.get('nationCode').errors?.invalid) {
+            @if (form.get('nationCode')?.hasError('invalid')) {
               <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
             }
           </mat-form-field>

@@ -22,7 +22,7 @@
           <mat-form-field class="col-sm-6">
             <mat-label>عنوان گروه</mat-label>
             <input matInput formControlName="groupName" type="text" maxlength="500" />
-            @if (groupForm.get('groupName').errors?.required) {
+            @if (groupForm.get('groupName')?.hasError('required')) {
               <mat-error>عنوان گروه را وارد کنید.</mat-error>
             }
             @if (groupForm.get('groupName').errors?.maxlength) {
@@ -41,28 +41,28 @@
           <mat-form-field class="col-md-2">
             <mat-label>حداکثر اعضا</mat-label>
             <input matInput formControlName="maxMembers" type="text" numbersOnly />
-            @if (groupForm.get('maxMembers').errors?.required) {
+            @if (groupForm.get('maxMembers')?.hasError('required')) {
               <mat-error>حداکثر اعضا را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-2">
             <mat-label>کد گروه</mat-label>
             <input matInput formControlName="code" type="text" maxlength="500" />
-            @if (groupForm.get('code').errors?.required) {
+            @if (groupForm.get('code')?.hasError('required')) {
               <mat-error>کد گروه را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-2">
             <mat-label>سن شهروند از </mat-label>
             <input matInput formControlName="law_AgeFrom" type="text" numbersOnly />
-            @if (groupForm.get('law_AgeFrom').errors?.required) {
+            @if (groupForm.get('law_AgeFrom')?.hasError('required')) {
               <mat-error>سن شهروند را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-2">
             <mat-label>تا </mat-label>
             <input matInput formControlName="law_AgeTo" type="text" numbersOnly />
-            @if (groupForm.get('law_AgeTo').errors?.required) {
+            @if (groupForm.get('law_AgeTo')?.hasError('required')) {
               <mat-error>سن شهروند را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -71,10 +71,10 @@
             <input matInput [matDatepicker]="dpS" formControlName="expireDate" />
             <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
             <mat-datepicker #dpS></mat-datepicker>
-            @if (groupForm.get('expireDate').errors?.required) {
+            @if (groupForm.get('expireDate')?.hasError('required')) {
               <mat-error> تاریخ انقضاء را مشخص کنید. </mat-error>
             }
-            @if (groupForm.get('expireDate').errors?.matDatepickerParse) {
+            @if (groupForm.get('expireDate')?.hasError('matDatepickerParse')) {
               <mat-error> فرمت تاریخ صحیح نیست </mat-error>
             }
           </mat-form-field>

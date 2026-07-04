@@ -16,7 +16,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   isUpdate: boolean;
   id: string;
   companyId: string;
-  isSaving: boolean;
+  isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
   imageUrl: string = '';

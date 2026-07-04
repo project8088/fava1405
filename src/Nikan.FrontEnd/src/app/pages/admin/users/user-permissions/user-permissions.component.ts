@@ -13,7 +13,7 @@ export class AdminUserPermissionsComponent extends AppBase implements OnInit {
   groupId: string;
   data: any[] = [];
   isLoadingResults: boolean = true;
-  isSaving: boolean;
+  isSaving=false;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {

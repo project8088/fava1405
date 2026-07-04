@@ -21,7 +21,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (form.get('roleId').errors?.required) {
+          @if (form.get('roleId')?.hasError('required')) {
             <mat-error> نقش را مشخص کنید</mat-error>
           }
         </mat-form-field>

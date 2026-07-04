@@ -14,7 +14,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
   loading: boolean;
   companyId: string = '';
   mainForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
 
   constructor(private customValidators: CustomFormValidators) {

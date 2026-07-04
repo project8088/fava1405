@@ -17,7 +17,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان طرح</mat-label>
             <input matInput formControlName="title" type="text" maxlength="500" />
-            @if (form.get('title').errors?.required) {
+            @if (form.get('title')?.hasError('required')) {
               <mat-error>عنوان طرح را وارد کنید.</mat-error>
             }
             @if (form.get('title').errors?.maxlength) {
@@ -31,17 +31,17 @@
               <mat-option [value]="true"> فقط آقایان </mat-option>
               <mat-option [value]="false">فقط خانم ها </mat-option>
             </mat-select>
-            @if (form.get('gender').errors?.required) {
+            @if (form.get('gender')?.hasError('required')) {
               <mat-error> ویژه افراد را مشخص کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-3">
             <mat-label>حداقل سن</mat-label>
             <input matInput formControlName="minAge" numbersOnly maxlength="2" />
-            @if (form.get('minAge').errors?.required) {
+            @if (form.get('minAge')?.hasError('required')) {
               <mat-error> حداقل سن را وارد کنید. </mat-error>
             }
-            @if (form.get('minAge').errors?.pattern) {
+            @if (form.get('minAge')?.hasError('pattern')) {
               <mat-error> فقط عدد وارد کنید </mat-error>
             }
             @if (form.get('minAge').errors?.min || form.get('minAge').errors?.max) {
@@ -51,10 +51,10 @@
           <mat-form-field class="col-md-3">
             <mat-label>حداکثر سن</mat-label>
             <input matInput formControlName="maxAge" numbersOnly maxlength="2" />
-            @if (form.get('maxAge').errors?.required) {
+            @if (form.get('maxAge')?.hasError('required')) {
               <mat-error> حداکثر سن را وارد کنید. </mat-error>
             }
-            @if (form.get('maxAge').errors?.pattern) {
+            @if (form.get('maxAge')?.hasError('pattern')) {
               <mat-error> فقط عدد وارد کنید </mat-error>
             }
             @if (form.get('maxAge').errors?.min || form.get('maxAge').errors?.max) {

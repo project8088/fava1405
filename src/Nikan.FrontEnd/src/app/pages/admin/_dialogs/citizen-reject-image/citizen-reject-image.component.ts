@@ -17,7 +17,7 @@ export class AdminCitizenRejectImageDialogComponent extends AppBase implements O
     sendSms: new FormControl(false),
   });
 
-  isSaving: boolean;
+  isSaving=false;
   citizen: any;
 
   rejectCitizenPictureList: [];

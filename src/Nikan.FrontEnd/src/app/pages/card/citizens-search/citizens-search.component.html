@@ -16,10 +16,10 @@
         <input matInput [matDatepicker]="dpS" formControlName="birthDate">
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="searchForm.get('birthDate').errors?.required">
+        <mat-error *ngIf="searchForm.get('birthDate')?.hasError('required')">
           تاریخ تولد را مشخص کنید.
         </mat-error>
-        <mat-error *ngIf="searchForm.get('birthDate').errors?.matDatepickerParse">
+        <mat-error *ngIf="searchForm.get('birthDate')?.hasError('matDatepickerParse')">
           فرمت تاریخ صحیح نیست
         </mat-error>
       </mat-form-field>-->

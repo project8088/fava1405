@@ -21,7 +21,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (form.get('groupId').errors?.required) {
+          @if (form.get('groupId')?.hasError('required')) {
             <mat-error> نقش را مشخص کنید</mat-error>
           }
         </mat-form-field>
@@ -30,10 +30,10 @@
           <input matInput [matDatepicker]="dpS" formControlName="expireDate" />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          @if (form.get('expireDate').errors?.required) {
+          @if (form.get('expireDate')?.hasError('required')) {
             <mat-error> تاریخ انقضاء را مشخص کنید. </mat-error>
           }
-          @if (form.get('expireDate').errors?.matDatepickerParse) {
+          @if (form.get('expireDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>

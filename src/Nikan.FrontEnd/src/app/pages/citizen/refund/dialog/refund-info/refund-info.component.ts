@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   frm: FormGroup;
   showSaveCardNumberPanel: boolean;
   loading: boolean = true;

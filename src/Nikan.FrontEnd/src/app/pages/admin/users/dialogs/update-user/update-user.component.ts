@@ -18,7 +18,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   userForm: FormGroup;
   userId: string;
   loading: boolean = true;

@@ -18,7 +18,7 @@
             <mat-form-field class="col-sm-6 col-md-6">
               <mat-label>عنوان</mat-label>
               <input matInput formControlName="title" maxlength="50" />
-              @if (frm.get('title').errors?.required) {
+              @if (frm.get('title')?.hasError('required')) {
                 <mat-error> عنوان را وارد کنید. </mat-error>
               }
             </mat-form-field>
@@ -31,7 +31,7 @@
             <mat-form-field class="col-sm-6 col-md-6">
               <mat-label>ترتیب نمایش</mat-label>
               <input matInput formControlName="indexOrder" maxlength="3" numbersOnly />
-              @if (frm.get('indexOrder').errors?.required) {
+              @if (frm.get('indexOrder')?.hasError('required')) {
                 <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
               }
             </mat-form-field>

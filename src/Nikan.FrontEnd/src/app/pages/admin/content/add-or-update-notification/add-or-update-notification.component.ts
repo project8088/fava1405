@@ -17,7 +17,7 @@ export class AdminAddOrUpdateNotificationComponent
   notificationId: string;
   notyForm: FormGroup;
 
-  isSaving: boolean;
+  isSaving=false;
   imageUrl: string = '';
   loading: boolean;
   baseUrl = ServerApis.baseUrl;

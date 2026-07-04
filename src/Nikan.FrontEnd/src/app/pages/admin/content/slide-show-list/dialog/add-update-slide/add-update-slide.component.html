@@ -16,7 +16,7 @@
       <mat-form-field  class="col-sm-6 col-md-4">
         <mat-label> عنوان </mat-label>
         <input matInput formControlName="caption" autocomplete="doNotAutoComplete" maxlength="50" />
-        @if (form.get('caption').errors?.required) {
+        @if (form.get('caption')?.hasError('required')) {
           <mat-error> عنوان را وارد کنید. </mat-error>
         }
       </mat-form-field>
@@ -24,7 +24,7 @@
       <mat-form-field  class="col-sm-6 col-md-4">
         <mat-label>آدرس </mat-label>
         <input matInput formControlName="url" autocomplete="doNotAutoComplete" maxlength="50" />
-        @if (form.get('url').errors?.required) {
+        @if (form.get('url')?.hasError('required')) {
           <mat-error> آدرس را وارد کنید. </mat-error>
         }
       </mat-form-field>
@@ -37,7 +37,7 @@
           autocomplete="doNotAutoComplete"
           maxlength="50"
         />
-        @if (form.get('indexOrder').errors?.required) {
+        @if (form.get('indexOrder')?.hasError('required')) {
           <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
         }
       </mat-form-field>
@@ -45,7 +45,7 @@
       <mat-form-field  class="col-sm-12">
         <mat-label> توضیحات</mat-label>
         <input matInput formControlName="description" autocomplete="doNotAutoComplete" />
-        @if (form.get('description').errors?.required) {
+        @if (form.get('description')?.hasError('required')) {
           <mat-error> توضیحات را وارد کنید. </mat-error>
         }
       </mat-form-field>

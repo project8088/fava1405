@@ -27,10 +27,10 @@
           <input matInput [matDatepicker]="sdpicker" formControlName="fromDate" />
           <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
           <mat-datepicker #sdpicker></mat-datepicker>
-          @if (frm.get('fromDate').errors?.required) {
+          @if (frm.get('fromDate')?.hasError('required')) {
             <mat-error> تاریخ شروع را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('fromDate').errors?.matDatepickerParse) {
+          @if (frm.get('fromDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
@@ -39,10 +39,10 @@
           <input matInput [matDatepicker]="edpicker" formControlName="toDate" />
           <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
           <mat-datepicker #edpicker></mat-datepicker>
-          @if (frm.get('toDate').errors?.required) {
+          @if (frm.get('toDate')?.hasError('required')) {
             <mat-error> تاریخ پایان را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('toDate').errors?.matDatepickerParse) {
+          @if (frm.get('toDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>

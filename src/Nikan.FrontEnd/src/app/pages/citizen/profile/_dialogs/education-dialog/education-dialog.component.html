@@ -26,7 +26,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (educationForm.get('grade').errors?.required) {
+        @if (educationForm.get('grade')?.hasError('required')) {
           <mat-error> مقطع تحصیلی را انتخاب کنید. </mat-error>
         }
       </mat-form-field>
@@ -50,7 +50,7 @@
           </mat-autocomplete>
           @if (
             educationForm.get('major').errors?.incorrect ||
-            educationForm.get('major').errors?.required
+            educationForm.get('major')?.hasError('required')
           ) {
             <mat-error> رشته تحصیلی را از لیست انتخاب کنید </mat-error>
           }
@@ -67,7 +67,7 @@
             autocomplete="doNotAutoComplete"
             maxlength="50"
           />
-          @if (educationForm.get('university').errors?.required) {
+          @if (educationForm.get('university')?.hasError('required')) {
             <mat-error> نام دانشگاه را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -83,16 +83,16 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        @if (educationForm.get('dateOfStart').errors?.required) {
+        @if (educationForm.get('dateOfStart')?.hasError('required')) {
           <mat-error> تاریخ شروع تحصیل را انتخاب کنید. </mat-error>
         }
         @if (
-          educationForm.get('dateOfStart').errors?.matDatepickerMin ||
-          educationForm.get('dateOfStart').errors?.matDatepickerMax
+          educationForm.get('dateOfStart')?.hasError('matDatepickerMin') ||
+          educationForm.get('dateOfStart')?.hasError('matDatepickerMax')
         ) {
           <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
         }
-        @if (educationForm.get('dateOfStart').errors?.matDatepickerParse) {
+        @if (educationForm.get('dateOfStart')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>
@@ -107,16 +107,16 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
         <mat-datepicker #dpE></mat-datepicker>
-        @if (educationForm.get('dateOfEnd').errors?.required) {
+        @if (educationForm.get('dateOfEnd')?.hasError('required')) {
           <mat-error> تاریخ پایان تحصیل را انتخاب کنید. </mat-error>
         }
         @if (
-          educationForm.get('dateOfEnd').errors?.matDatepickerMin ||
-          educationForm.get('dateOfEnd').errors?.matDatepickerMax
+          educationForm.get('dateOfEnd')?.hasError('matDatepickerMin') ||
+          educationForm.get('dateOfEnd')?.hasError('matDatepickerMax')
         ) {
           <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
         }
-        @if (educationForm.get('dateOfEnd').errors?.matDatepickerParse) {
+        @if (educationForm.get('dateOfEnd')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>

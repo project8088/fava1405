@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
-  isSaving: boolean;
+  isSaving=false;
   form: FormGroup;
   id: number;
   loading = true;

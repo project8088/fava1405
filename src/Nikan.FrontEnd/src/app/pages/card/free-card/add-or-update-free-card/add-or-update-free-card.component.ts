@@ -16,7 +16,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
   baseUrl = ServerApis.baseUrl;
   baseEnums: any = {};
 
-  isSaving: boolean;
+  isSaving=false;
 
   loading: boolean;
 

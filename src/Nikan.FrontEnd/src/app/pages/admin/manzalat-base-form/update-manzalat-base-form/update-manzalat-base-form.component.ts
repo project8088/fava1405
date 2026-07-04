@@ -19,7 +19,7 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  isSaving: boolean;
+  isSaving=false;
   loading: boolean;
   siteName: string;
   constructor(private customValidator: CustomFormValidators) {

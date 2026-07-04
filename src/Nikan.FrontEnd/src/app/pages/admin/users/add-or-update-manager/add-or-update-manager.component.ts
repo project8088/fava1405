@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
-  isSaving: boolean;
+  isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
   imageUrl: string = '';

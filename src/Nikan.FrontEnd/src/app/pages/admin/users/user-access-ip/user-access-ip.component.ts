@@ -17,7 +17,7 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
   appList: any[] = [];
   userId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

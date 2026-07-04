@@ -233,7 +233,7 @@
             <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>نام و نام خانوادگی</mat-label>
               <input matInput type="text" formControlName="name" />
-              @if (contactForm.get('name').errors?.required) {
+              @if (contactForm.get('name')?.hasError('required')) {
                 <mat-error> نام خود را وارد کنید </mat-error>
               }
             </mat-form-field>
@@ -246,14 +246,14 @@
                 maxlength="11"
                 numbersOnly
               />
-              @if (contactForm.get('mobileNumber').errors?.invalid) {
+              @if (contactForm.get('mobileNumber')?.hasError('invalid')) {
                 <mat-error> شماره موبایل صحیح نیست! </mat-error>
               }
             </mat-form-field>
             <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>آدرس ایمیل</mat-label>
               <input matInput type="text" formControlName="email" />
-              @if (contactForm.get('email').errors?.email) {
+              @if (contactForm.get('email')?.hasError('email')) {
                 <mat-error> آدرس ایمیل صحیح نیست! </mat-error>
               }
             </mat-form-field>
@@ -267,7 +267,7 @@
                   <mat-option [value]="item.key">{{ item.text }} </mat-option>
                 }
               </mat-select>
-              @if (contactForm.get('organizationId').errors?.required) {
+              @if (contactForm.get('organizationId')?.hasError('required')) {
                 <mat-error> سازمان را مشخص کنید. </mat-error>
               }
             </mat-form-field>
@@ -278,7 +278,7 @@
                   <mat-option [value]="item.key">{{ item.text }} </mat-option>
                 }
               </mat-select>
-              @if (contactForm.get('organizationalUnitId').errors?.required) {
+              @if (contactForm.get('organizationalUnitId')?.hasError('required')) {
                 <mat-error> واحد را مشخص کنید. </mat-error>
               }
               <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
@@ -286,7 +286,7 @@
             <mat-form-field  class="col-sm-12">
               <mat-label>عنوان پیام</mat-label>
               <input matInput formControlName="subject" />
-              @if (contactForm.get('subject').errors?.required) {
+              @if (contactForm.get('subject')?.hasError('required')) {
                 <mat-error> عنوان پیام را وارد کنید </mat-error>
               }
               @if (contactForm.get('subject').errors?.maxlength) {
@@ -296,7 +296,7 @@
             <mat-form-field  class="col-sm-12">
               <mat-label>متن پیام</mat-label>
               <textarea matInput formControlName="message" rows="5"></textarea>
-              @if (contactForm.get('message').errors?.required) {
+              @if (contactForm.get('message')?.hasError('required')) {
                 <mat-error> متن پیام را وارد کنید </mat-error>
               }
               @if (contactForm.get('message').errors?.maxlength) {

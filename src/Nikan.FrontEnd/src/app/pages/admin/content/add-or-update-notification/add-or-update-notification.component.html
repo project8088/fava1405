@@ -22,7 +22,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان اطلاعیه</mat-label>
             <input matInput formControlName="title" type="text" maxlength="500" />
-            @if (notyForm.get('title').errors?.required) {
+            @if (notyForm.get('title')?.hasError('required')) {
               <mat-error>عنوان اطلاعیه را وارد کنید.</mat-error>
             }
             @if (notyForm.get('title').errors?.maxlength) {
@@ -32,7 +32,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>توضیحات</mat-label>
             <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-            @if (notyForm.get('description').errors?.required) {
+            @if (notyForm.get('description')?.hasError('required')) {
               <mat-error>توضیحات را وارد کنید.</mat-error>
             }
             @if (notyForm.get('description').errors?.maxlength) {
@@ -48,7 +48,7 @@
               numbersOnly
               maxlength="10"
             />
-            @if (notyForm.get('notificationNumber').errors?.required) {
+            @if (notyForm.get('notificationNumber')?.hasError('required')) {
               <mat-error>شماره اطلاعیه را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -57,10 +57,10 @@
             <input matInput [matDatepicker]="dpS" formControlName="publishDate" />
             <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
             <mat-datepicker #dpS></mat-datepicker>
-            @if (notyForm.get('publishDate').errors?.required) {
+            @if (notyForm.get('publishDate')?.hasError('required')) {
               <mat-error> تاریخ انتشار را مشخص کنید. </mat-error>
             }
-            @if (notyForm.get('publishDate').errors?.matDatepickerParse) {
+            @if (notyForm.get('publishDate')?.hasError('matDatepickerParse')) {
               <mat-error> فرمت تاریخ صحیح نیست </mat-error>
             }
           </mat-form-field>
@@ -69,10 +69,10 @@
             <input matInput [matDatepicker]="dpE" formControlName="endDate" />
             <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
             <mat-datepicker #dpE></mat-datepicker>
-            @if (notyForm.get('endDate').errors?.required) {
+            @if (notyForm.get('endDate')?.hasError('required')) {
               <mat-error> تاریخ پایان اطلاعیه را مشخص کنید. </mat-error>
             }
-            @if (notyForm.get('endDate').errors?.matDatepickerParse) {
+            @if (notyForm.get('endDate')?.hasError('matDatepickerParse')) {
               <mat-error> فرمت تاریخ صحیح نیست </mat-error>
             }
           </mat-form-field>

@@ -17,7 +17,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   displayedColumns: string[] = [
     'row',

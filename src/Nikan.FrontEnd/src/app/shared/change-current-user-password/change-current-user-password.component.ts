@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class ChangeCurrentUserPasswordComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   changePasswordForm: FormGroup;
 
   constructor(private customValidator: CustomFormValidators) {

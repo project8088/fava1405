@@ -27,7 +27,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
 
   frm: FormGroup;
   showAddOrUpdatePanel: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor() {
     super();

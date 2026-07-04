@@ -27,7 +27,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (ticketForm.get('organizationId').errors?.required) {
+            @if (ticketForm.get('organizationId')?.hasError('required')) {
               <mat-error> سازمان را مشخص کنید. </mat-error>
             }
           </mat-form-field>
@@ -41,7 +41,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (ticketForm.get('organizationalUnitId').errors?.required) {
+            @if (ticketForm.get('organizationalUnitId')?.hasError('required')) {
               <mat-error> واحد را مشخص کنید. </mat-error>
             }
             <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
@@ -49,7 +49,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان پیام</mat-label>
             <input matInput formControlName="subject" />
-            @if (ticketForm.get('subject').errors?.required) {
+            @if (ticketForm.get('subject')?.hasError('required')) {
               <mat-error> عنوان پیام را وارد کنید </mat-error>
             }
             @if (ticketForm.get('subject').errors?.maxlength) {
@@ -59,7 +59,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>متن پیام</mat-label>
             <textarea matInput formControlName="ticketMessage" rows="5"></textarea>
-            @if (ticketForm.get('ticketMessage').errors?.required) {
+            @if (ticketForm.get('ticketMessage')?.hasError('required')) {
               <mat-error> متن پیام را وارد کنید </mat-error>
             }
             @if (ticketForm.get('ticketMessage').errors?.maxlength) {
@@ -73,7 +73,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (ticketForm.get('priority').errors?.required) {
+            @if (ticketForm.get('priority')?.hasError('required')) {
               <mat-error> اولویت پیام را مشخص کنید. </mat-error>
             }
           </mat-form-field>

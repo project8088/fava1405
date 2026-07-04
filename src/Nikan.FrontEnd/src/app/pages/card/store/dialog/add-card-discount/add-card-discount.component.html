@@ -23,7 +23,7 @@
         <mat-form-field  class="col-md-3">
           <mat-label> عنوان تخفیف </mat-label>
           <input type="text" matInput formControlName="discountTitle" maxlength="40" />
-          @if (frm.get('discountTitle').errors?.required) {
+          @if (frm.get('discountTitle')?.hasError('required')) {
             <mat-error> عنوان تخفیف را وارد نمایید </mat-error>
           }
         </mat-form-field>
@@ -32,10 +32,10 @@
           <input matInput [matDatepicker]="sdpicker" formControlName="startDate" />
           <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
           <mat-datepicker #sdpicker></mat-datepicker>
-          @if (frm.get('startDate').errors?.required) {
+          @if (frm.get('startDate')?.hasError('required')) {
             <mat-error> تاریخ شروع تخفیف را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('startDate').errors?.matDatepickerParse) {
+          @if (frm.get('startDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
@@ -44,17 +44,17 @@
           <input matInput [matDatepicker]="edpicker" formControlName="endDate" />
           <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
           <mat-datepicker #edpicker></mat-datepicker>
-          @if (frm.get('endDate').errors?.required) {
+          @if (frm.get('endDate')?.hasError('required')) {
             <mat-error> تاریخ پایان تخفیف را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('endDate').errors?.matDatepickerParse) {
+          @if (frm.get('endDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
         <mat-form-field  class="col-md-3">
           <mat-label> توضیحات تخفیف </mat-label>
           <input type="text" matInput formControlName="description" maxlength="200" />
-          @if (frm.get('description').errors?.required) {
+          @if (frm.get('description')?.hasError('required')) {
             <mat-error> توضیحات تخفیف را وارد نمایید </mat-error>
           }
         </mat-form-field>
@@ -69,7 +69,7 @@
             decimalOnly
             maxlength="3"
           />
-          @if (frm.get('discountPercent').errors?.required) {
+          @if (frm.get('discountPercent')?.hasError('required')) {
             <mat-error> درصد تخفیف را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -82,7 +82,7 @@
             decimalOnly
             maxlength="3"
           />
-          @if (frm.get('postalPercentInCity').errors?.required) {
+          @if (frm.get('postalPercentInCity')?.hasError('required')) {
             <mat-error> درصد تخفیف ارسال پستی را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -134,7 +134,7 @@
               </mat-option>
             }
           </mat-autocomplete>
-          @if (frm.get('groups').errors?.incorrect || frm.get('groups').errors?.required) {
+          @if (frm.get('groups').errors?.incorrect || frm.get('groups')?.hasError('required')) {
             <mat-error> گروههای تخفیف را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingGroups"></mat-spinner>

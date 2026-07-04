@@ -9,10 +9,10 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>کد پرسنلی</mat-label>
                 <input matInput formControlName="personnelCode" maxlength="10" numbersOnly />
-                @if (form.get('personnelCode').errors?.required) {
+                @if (form.get('personnelCode')?.hasError('required')) {
                   <mat-error> کد پرسنلی خود را وارد کنید. </mat-error>
                 }
-                @if (form.get('personnelCode').errors?.invalid) {
+                @if (form.get('personnelCode')?.hasError('invalid')) {
                   <mat-error> کد پرسنلی وارد شده صحیح نیست </mat-error>
                 }
               </mat-form-field>
@@ -26,14 +26,14 @@
                   autocomplete="doNotAutoComplete"
                   numbersOnly
                 />
-                @if (form.get('shCode').errors?.required) {
+                @if (form.get('shCode')?.hasError('required')) {
                   <mat-error> شماره شناسنامه را وارد کنید. </mat-error>
                 }
               </mat-form-field>
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label> سریال شناسنامه</mat-label>
                 <input matInput formControlName="shSerial" autocomplete="doNotAutoComplete" />
-                @if (form.get('shSerial').errors?.required) {
+                @if (form.get('shSerial')?.hasError('required')) {
                   <mat-error> سریال شناسنامه خود را وارد کنید. </mat-error>
                 }
               </mat-form-field>
@@ -42,10 +42,10 @@
                 <input matInput [matDatepicker]="dpicker_shDate" formControlName="shDate" />
                 <mat-datepicker-toggle matSuffix [for]="dpicker_shDate"></mat-datepicker-toggle>
                 <mat-datepicker #dpicker_shDate></mat-datepicker>
-                @if (form.get('shDate').errors?.required) {
+                @if (form.get('shDate')?.hasError('required')) {
                   <mat-error> تاریخ صدور شناسنامه خود را انتخاب کنید. </mat-error>
                 }
-                @if (form.get('shDate').errors?.matDatepickerParse) {
+                @if (form.get('shDate')?.hasError('matDatepickerParse')) {
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
@@ -140,10 +140,10 @@
                   [for]="dpicker_dateOfMarriage"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #dpicker_dateOfMarriage></mat-datepicker>
-                @if (form.get('dateOfMarriage').errors?.required) {
+                @if (form.get('dateOfMarriage')?.hasError('required')) {
                   <mat-error> تاریخ ازدواج خود را انتخاب کنید. </mat-error>
                 }
-                @if (form.get('dateOfMarriage').errors?.matDatepickerParse) {
+                @if (form.get('dateOfMarriage')?.hasError('matDatepickerParse')) {
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
@@ -158,7 +158,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.get('soldierState').errors?.required) {
+                @if (form.get('soldierState')?.hasError('required')) {
                   <mat-error> وضعیت خدمت سربازی خود را مشخص کنید. </mat-error>
                 }
               </mat-form-field>
@@ -174,10 +174,10 @@
                   [for]="dpicker_endOfMilitary"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #dpicker_endOfMilitary></mat-datepicker>
-                @if (form.get('endOfMilitary').errors?.required) {
+                @if (form.get('endOfMilitary')?.hasError('required')) {
                   <mat-error> تاریخ پایان خدمت خود را انتخاب کنید. </mat-error>
                 }
-                @if (form.get('endOfMilitary').errors?.matDatepickerParse) {
+                @if (form.get('endOfMilitary')?.hasError('matDatepickerParse')) {
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
@@ -230,10 +230,10 @@
                   [for]="dpicker_endOfEducation"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #dpicker_endOfEducation></mat-datepicker>
-                @if (form.get('endOfEducation').errors?.required) {
+                @if (form.get('endOfEducation')?.hasError('required')) {
                   <mat-error> تاریخ پایان تحصیل خود را انتخاب کنید. </mat-error>
                 }
-                @if (form.get('endOfEducation').errors?.matDatepickerParse) {
+                @if (form.get('endOfEducation')?.hasError('matDatepickerParse')) {
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
@@ -257,10 +257,10 @@
                   [for]="dpicker_dateOfEmployeement"
                 ></mat-datepicker-toggle>
                 <mat-datepicker #dpicker_dateOfEmployeement></mat-datepicker>
-                @if (form.get('dateOfEmployeement').errors?.required) {
+                @if (form.get('dateOfEmployeement')?.hasError('required')) {
                   <mat-error> تاریخ استخدام خود را انتخاب کنید. </mat-error>
                 }
-                @if (form.get('dateOfEmployeement').errors?.matDatepickerParse) {
+                @if (form.get('dateOfEmployeement')?.hasError('matDatepickerParse')) {
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>

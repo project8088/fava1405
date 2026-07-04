@@ -15,7 +15,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
   provinceList: any[] = [];
   userCode: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   baseInfo: any = {};
   loadingEnums: boolean = true;
   baseEnums: any = {};

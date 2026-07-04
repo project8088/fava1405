@@ -21,7 +21,7 @@
             autocomplete="doNotAutoComplete"
             maxlength="20"
           />
-          @if (form.get('start').errors?.required) {
+          @if (form.get('start')?.hasError('required')) {
             <mat-error> ای پی را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -34,7 +34,7 @@
             autocomplete="doNotAutoComplete"
             maxlength="20"
           />
-          @if (form.get('end').errors?.required) {
+          @if (form.get('end')?.hasError('required')) {
             <mat-error> ای پی پایان را وارد کنید. </mat-error>
           }
         </mat-form-field>

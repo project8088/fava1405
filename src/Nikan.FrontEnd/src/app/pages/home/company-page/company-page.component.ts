@@ -23,7 +23,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   periorityList: any[] = [];
   unitList: any = ([] = []);
   loadingUnit: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   user: AuthUser;
 

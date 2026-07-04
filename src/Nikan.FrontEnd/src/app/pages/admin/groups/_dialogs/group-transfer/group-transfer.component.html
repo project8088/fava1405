@@ -15,7 +15,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (form.get('destinationGroupId').errors?.required) {
+        @if (form.get('destinationGroupId')?.hasError('required')) {
           <mat-error>گروه مقصد را انتخاب کنید.</mat-error>
         }
       </mat-form-field>

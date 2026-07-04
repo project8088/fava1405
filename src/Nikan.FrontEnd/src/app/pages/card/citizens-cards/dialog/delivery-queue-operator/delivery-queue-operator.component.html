@@ -28,7 +28,7 @@
       <mat-form-field class="col-md-12">
         <mat-label>کد ملی تحویل دهنده </mat-label>
         <input matInput formControlName="nationalCode" maxlength="12" />
-        @if (frm.get('nationalCode').errors?.required) {
+        @if (frm.get('nationalCode')?.hasError('required')) {
           <mat-error> کد ملی تحویل دهنده را وارد کنید. </mat-error>
         }
       </mat-form-field>

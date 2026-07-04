@@ -9,14 +9,14 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره پرونده</mat-label>
         <input matInput formControlName="fileCode" numbersOnly maxlength="20" />
-        @if (form.get('fileCode').errors?.required) {
+        @if (form.get('fileCode')?.hasError('required')) {
           <mat-error>شماره پرونده را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد قرارداد</mat-label>
         <input matInput formControlName="contractCode" numbersOnly maxlength="20" />
-        @if (form.get('contractCode').errors?.required) {
+        @if (form.get('contractCode')?.hasError('required')) {
           <mat-error>کد قرارداد را وارد کنید</mat-error>
         }
       </mat-form-field>
@@ -25,10 +25,10 @@
         <input matInput [matDatepicker]="cpicker" formControlName="contractOnDate" />
         <mat-datepicker-toggle matSuffix [for]="cpicker"></mat-datepicker-toggle>
         <mat-datepicker #cpicker></mat-datepicker>
-        @if (form.get('contractOnDate').errors?.required) {
+        @if (form.get('contractOnDate')?.hasError('required')) {
           <mat-error> تاریخ قراداد را انتخاب کنید. </mat-error>
         }
-        @if (form.get('contractOnDate').errors?.matDatepickerParse) {
+        @if (form.get('contractOnDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>
@@ -37,52 +37,52 @@
         <input matInput [matDatepicker]="wpicker" formControlName="waterContractOnDate" />
         <mat-datepicker-toggle matSuffix [for]="wpicker"></mat-datepicker-toggle>
         <mat-datepicker #wpicker></mat-datepicker>
-        @if (form.get('waterContractOnDate').errors?.required) {
+        @if (form.get('waterContractOnDate')?.hasError('required')) {
           <mat-error> تاریخ قراداد آب را انتخاب کنید. </mat-error>
         }
-        @if (form.get('waterContractOnDate').errors?.matDatepickerParse) {
+        @if (form.get('waterContractOnDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شناسه واریز قبض آب</mat-label>
         <input matInput formControlName="waterDepositId" maxlength="30" />
-        @if (form.get('waterDepositId').errors?.required) {
+        @if (form.get('waterDepositId')?.hasError('required')) {
           <mat-error>شناسه واریز قبض آب را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد تفصیلی آب</mat-label>
         <input matInput formControlName="waterCode" maxlength="30" />
-        @if (form.get('waterCode').errors?.required) {
+        @if (form.get('waterCode')?.hasError('required')) {
           <mat-error>کد تفصیلی آب را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شناسه واریزی قبض شارژ</mat-label>
         <input matInput formControlName="chargeDepositId" maxlength="30" />
-        @if (form.get('chargeDepositId').errors?.required) {
+        @if (form.get('chargeDepositId')?.hasError('required')) {
           <mat-error>شناسه واریزی قبض شارژ را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد تفصیلی شارژ</mat-label>
         <input matInput formControlName="chargeCode" maxlength="30" />
-        @if (form.get('chargeCode').errors?.required) {
+        @if (form.get('chargeCode')?.hasError('required')) {
           <mat-error>کد تفصیلی شارژ را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شارژ معین کد</mat-label>
         <input matInput formControlName="chargeMoeinCode" maxlength="30" />
-        @if (form.get('chargeMoeinCode').errors?.required) {
+        @if (form.get('chargeMoeinCode')?.hasError('required')) {
           <mat-error>شارژ معین کد را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>حجم مخازن آب هوایی</mat-label>
         <input matInput formControlName="volumeAirTanks" numbersOnly maxlength="20" />
-        @if (form.get('volumeAirTanks').errors?.required) {
+        @if (form.get('volumeAirTanks')?.hasError('required')) {
           <mat-error>حجم مخازن آب هوایی را وارد کنید</mat-error>
         }
       </mat-form-field>

@@ -15,7 +15,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
   groupForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving: boolean;
+  isSaving=false;
   imageUrl: string = '';
   loading: boolean;
   parentGroups: any[] = [];

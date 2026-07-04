@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   isUpdate: boolean;
   userGroupsForm: FormGroup;
   id: string;

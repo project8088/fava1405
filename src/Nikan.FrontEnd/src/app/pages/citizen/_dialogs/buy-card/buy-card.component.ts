@@ -57,7 +57,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
   loading: boolean = true;
   card: ICard;
 
-  isSaving: boolean;
+  isSaving=false;
   groupList: any[] = [];
   form: FormGroup;
   cardDetails: ICardDetails;

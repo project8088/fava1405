@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   frm: FormGroup;
   baseEnums: any = {};
   isUpdate: boolean;

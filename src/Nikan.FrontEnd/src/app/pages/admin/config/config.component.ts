@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 export class AdminConfigComponent extends AppBase implements OnInit {
   id: string;
 
-  isSaving: boolean;
+  isSaving=false;
   loading: boolean;
 
   configList: any[] = [];

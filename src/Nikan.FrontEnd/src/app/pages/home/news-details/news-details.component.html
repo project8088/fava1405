@@ -140,7 +140,7 @@
                       formControlName="fullName"
                       class="form-control"
                     />
-                    @if (frm.get('fullName').errors?.required && frm.get('fullName').touched) {
+                    @if (frm.get('fullName')?.hasError('required') && frm.get('fullName')?.touched) {
                       <span class="text-danger">نام خود را وارد کنید.</span>
                     }
                   </div>
@@ -153,11 +153,11 @@
                       class="form-control"
                     />
                     @if (
-                      frm.get('emailAddress').errors?.required && frm.get('emailAddress').touched
+                      frm.get('emailAddress')?.hasError('required') && frm.get('emailAddress')?.touched
                     ) {
                       <span class="text-danger">ایمیل خود را وارد کنید.</span>
                     }
-                    @if (frm.get('emailAddress').errors?.email && frm.get('emailAddress').touched) {
+                    @if (frm.get('emailAddress')?.hasError('email') && frm.get('emailAddress')?.touched) {
                       <span class="text-danger">ایمیل وارد شده صحیح نیست.</span>
                     }
                   </div>
@@ -176,8 +176,8 @@
                       rows="7"
                     ></textarea>
                     @if (
-                      frm.get('commentMessage').errors?.required &&
-                      frm.get('commentMessage').touched
+                      frm.get('commentMessage')?.hasError('required') &&
+                      frm.get('commentMessage')?.touched
                     ) {
                       <span class="text-danger">پیام خود را وارد کنید.</span>
                     }

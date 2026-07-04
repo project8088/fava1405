@@ -32,7 +32,7 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('bankCustomerId').errors?.required) {
+            @if (settingForm.get('bankCustomerId')?.hasError('required')) {
               <mat-error> شناسه مشتری (شناسه واریز بانکی)را وارد نمایید </mat-error>
             }
           </mat-form-field>
@@ -45,7 +45,7 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('bankTerminalId').errors?.required) {
+            @if (settingForm.get('bankTerminalId')?.hasError('required')) {
               <mat-error> شماره ترمینال را وارد نمایید </mat-error>
             }
           </mat-form-field>
@@ -58,28 +58,28 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('bankPaymentMethod').errors?.required) {
+            @if (settingForm.get('bankPaymentMethod')?.hasError('required')) {
               <mat-error> روش پرداخت بانکی را وارد نمایید </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> نام کاربری درگاه </mat-label>
             <input type="text" matInput formControlName="bankUserName" maxlength="20" />
-            @if (settingForm.get('bankUserName').errors?.required) {
+            @if (settingForm.get('bankUserName')?.hasError('required')) {
               <mat-error> نام کاربری درگاه را وارد نمایید </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> کلمه عبور درگاه </mat-label>
             <input type="text" matInput formControlName="bankPassword" maxlength="20" />
-            @if (settingForm.get('bankPassword').errors?.required) {
+            @if (settingForm.get('bankPassword')?.hasError('required')) {
               <mat-error> کلمه عبور درگاه را وارد نمایید </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> مسیر برگشت درگاه </mat-label>
             <input type="text" matInput formControlName="callBackUrl" maxlength="2000" />
-            @if (settingForm.get('callBackUrl').errors?.required) {
+            @if (settingForm.get('callBackUrl')?.hasError('required')) {
               <mat-error> مسیر برگشت درگاه را وارد نمایید </mat-error>
             }
           </mat-form-field>
@@ -95,21 +95,21 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('refundTerminalId').errors?.required) {
+            @if (settingForm.get('refundTerminalId')?.hasError('required')) {
               <mat-error> شماره ترمینال را وارد نمایید </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> نام کاربری سرویس برگشت </mat-label>
             <input type="text" matInput formControlName="refundUserName" maxlength="20" />
-            @if (settingForm.get('refundUserName').errors?.required) {
+            @if (settingForm.get('refundUserName')?.hasError('required')) {
               <mat-error> نام کاربری سرویس برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> کلمه عبور سرویس برگشت </mat-label>
             <input type="text" matInput formControlName="refundPassword" maxlength="20" />
-            @if (settingForm.get('refundPassword').errors?.required) {
+            @if (settingForm.get('refundPassword')?.hasError('required')) {
               <mat-error> کلمه عبور سرویس برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
@@ -122,7 +122,7 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('refundAmountDeficit').errors?.required) {
+            @if (settingForm.get('refundAmountDeficit')?.hasError('required')) {
               <mat-error> مبلغ کسر برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
@@ -134,7 +134,7 @@
               formControlName="refundDeActiveDescription"
               maxlength="2000"
             />
-            @if (settingForm.get('refundDeActiveDescription').errors?.required) {
+            @if (settingForm.get('refundDeActiveDescription')?.hasError('required')) {
               <mat-error> توضیحات را وارد نمایید </mat-error>
             }
           </mat-form-field>

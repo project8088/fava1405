@@ -15,7 +15,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   productForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving: boolean;
+  isSaving=false;
   imageUrl: string = '';
   loading: boolean;
 

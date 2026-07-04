@@ -17,7 +17,7 @@ export class AdminUserAppAccessServiceComponent extends AppBase implements OnIni
   appList: any[] = [];
   userId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

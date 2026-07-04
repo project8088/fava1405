@@ -18,7 +18,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   frm: FormGroup;
   isUpdate: boolean;
 

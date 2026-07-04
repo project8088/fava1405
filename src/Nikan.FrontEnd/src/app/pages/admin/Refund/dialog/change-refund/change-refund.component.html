@@ -28,28 +28,28 @@
       <mat-form-field class="col-md-4">
         <mat-label>شناسه سفارش</mat-label>
         <input matInput formControlName="orderId" numbersOnly maxlength="20" />
-        @if (frm.get('orderId').errors?.required) {
+        @if (frm.get('orderId')?.hasError('required')) {
           <mat-error> شناسه سفارش را وارد کنید. </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>شناسه پرداخت</mat-label>
         <input matInput formControlName="transactionCode" numbersOnly maxlength="20" />
-        @if (frm.get('transactionCode').errors?.required) {
+        @if (frm.get('transactionCode')?.hasError('required')) {
           <mat-error> شناسه پرداخت را وارد کنید. </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label> مبلغ تراکنش</mat-label>
         <input matInput formControlName="refundAmount" numbersOnly maxlength="10" />
-        @if (frm.get('refundAmount').errors?.required) {
+        @if (frm.get('refundAmount')?.hasError('required')) {
           <mat-error> مبلغ تراکنش را وارد کنید. </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>مبلغ استرداد </mat-label>
         <input matInput formControlName="totalRefundAmount" numbersOnly maxlength="10" />
-        @if (frm.get('totalRefundAmount').errors?.required) {
+        @if (frm.get('totalRefundAmount')?.hasError('required')) {
           <mat-error> مبلغ استرداد را وارد کنید. </mat-error>
         }
       </mat-form-field>
@@ -57,7 +57,7 @@
       <mat-form-field class="col-md-4">
         <mat-label>شماره کارت استرداد</mat-label>
         <input matInput formControlName="refundCardNumber" maxlength="50" />
-        @if (frm.get('refundCardNumber').errors?.required) {
+        @if (frm.get('refundCardNumber')?.hasError('required')) {
           <mat-error> شماره کارت استرداد را وارد کنید. </mat-error>
         }
       </mat-form-field>

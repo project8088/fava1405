@@ -10,101 +10,101 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل</mat-label>
         <input matInput formControlName="mobileNumber" numbersOnly maxlength="11" />
-        @if (addressForm.get('mobileNumber').errors?.required) {
+        @if (addressForm.get('mobileNumber')?.hasError('required')) {
           <mat-error>شماره موبایل را وارد کنید</mat-error>
         }
-        @if (addressForm.get('mobileNumber').errors?.invalid) {
+        @if (addressForm.get('mobileNumber')?.hasError('invalid')) {
           <mat-error>شماره موبایل صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل دوم</mat-label>
         <input matInput formControlName="mobileNumber2" numbersOnly maxlength="11" />
-        @if (addressForm.get('mobileNumber2').errors?.required) {
+        @if (addressForm.get('mobileNumber2')?.hasError('required')) {
           <mat-error>شماره موبایل را وارد کنید</mat-error>
         }
-        @if (addressForm.get('mobileNumber2').errors?.invalid) {
+        @if (addressForm.get('mobileNumber2')?.hasError('invalid')) {
           <mat-error>شماره موبایل صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل سوم</mat-label>
         <input matInput formControlName="mobileNumber3" numbersOnly maxlength="11" />
-        @if (addressForm.get('mobileNumber3').errors?.required) {
+        @if (addressForm.get('mobileNumber3')?.hasError('required')) {
           <mat-error>شماره موبایل را وارد کنید</mat-error>
         }
-        @if (addressForm.get('mobileNumber3').errors?.invalid) {
+        @if (addressForm.get('mobileNumber3')?.hasError('invalid')) {
           <mat-error>شماره موبایل صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره تلفن دفتر</mat-label>
         <input matInput formControlName="cellNumber" numbersOnly maxlength="11" />
-        @if (addressForm.get('cellNumber').errors?.required) {
+        @if (addressForm.get('cellNumber')?.hasError('required')) {
           <mat-error>شماره تلفن را وارد کنید</mat-error>
         }
-        @if (addressForm.get('cellNumber').errors?.pattern) {
+        @if (addressForm.get('cellNumber')?.hasError('pattern')) {
           <mat-error>شماره تلفن صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره دوم تلفن دفتر</mat-label>
         <input matInput formControlName="cellNumber2" numbersOnly maxlength="11" />
-        @if (addressForm.get('cellNumber2').errors?.required) {
+        @if (addressForm.get('cellNumber2')?.hasError('required')) {
           <mat-error>شماره تلفن را وارد کنید</mat-error>
         }
-        @if (addressForm.get('cellNumber2').errors?.pattern) {
+        @if (addressForm.get('cellNumber2')?.hasError('pattern')) {
           <mat-error>شماره تلفن صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره سوم تلفن دفتر</mat-label>
         <input matInput formControlName="cellNumber3" numbersOnly maxlength="11" />
-        @if (addressForm.get('cellNumber3').errors?.required) {
+        @if (addressForm.get('cellNumber3')?.hasError('required')) {
           <mat-error>شماره تلفن را وارد کنید</mat-error>
         }
-        @if (addressForm.get('cellNumber3').errors?.pattern) {
+        @if (addressForm.get('cellNumber3')?.hasError('pattern')) {
           <mat-error>شماره تلفن صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره پیامک</mat-label>
         <input matInput formControlName="smsNumber" numbersOnly maxlength="20" />
-        @if (addressForm.get('smsNumber').errors?.required) {
+        @if (addressForm.get('smsNumber')?.hasError('required')) {
           <mat-error>شماره پیامک را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره فکس</mat-label>
         <input matInput formControlName="fax" numbersOnly maxlength="20" />
-        @if (addressForm.get('fax').errors?.required) {
+        @if (addressForm.get('fax')?.hasError('required')) {
           <mat-error>شماره فکس را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آدرس وب سایت</mat-label>
         <input matInput formControlName="website" />
-        @if (addressForm.get('website').errors?.required) {
+        @if (addressForm.get('website')?.hasError('required')) {
           <mat-error>آدرس وب سایت را وارد کنید</mat-error>
         }
-        @if (addressForm.get('website').errors?.pattern) {
+        @if (addressForm.get('website')?.hasError('pattern')) {
           <mat-error>فقط کاراکتر های لاتین مجاز است</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>ایمیل</mat-label>
         <input matInput formControlName="email" />
-        @if (addressForm.get('email').errors?.required) {
+        @if (addressForm.get('email')?.hasError('required')) {
           <mat-error>ایمیل را وارد کنید</mat-error>
         }
-        @if (addressForm.get('email').errors?.email) {
+        @if (addressForm.get('email')?.hasError('email')) {
           <mat-error>ایمیل صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آیدی تلگرام</mat-label>
         <input matInput formControlName="telegram" />
-        @if (addressForm.get('telegram').errors?.required) {
+        @if (addressForm.get('telegram')?.hasError('required')) {
           <mat-error>آیدی تلگرام را وارد کنید</mat-error>
         }
       </mat-form-field>
@@ -125,7 +125,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد پستی</mat-label>
         <input matInput formControlName="zipCode" numbersOnly maxlength="10" />
-        @if (addressForm.get('zipCode').errors?.required) {
+        @if (addressForm.get('zipCode')?.hasError('required')) {
           <mat-error>کدپستی را وارد کنید</mat-error>
         }
         @if (
@@ -138,21 +138,21 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>خیابان</mat-label>
         <input matInput formControlName="street" maxlength="100" />
-        @if (addressForm.get('street').errors?.required) {
+        @if (addressForm.get('street')?.hasError('required')) {
           <mat-error>خیابان را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>پلاک</mat-label>
         <input matInput formControlName="pelak" numbersOnly maxlength="5" />
-        @if (addressForm.get('pelak').errors?.required) {
+        @if (addressForm.get('pelak')?.hasError('required')) {
           <mat-error>پلاک را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-12">
         <mat-label>آدرس کامل</mat-label>
         <input matInput formControlName="fullAddress" maxlength="500" />
-        @if (addressForm.get('fullAddress').errors?.required) {
+        @if (addressForm.get('fullAddress')?.hasError('required')) {
           <mat-error>آدرس کامل را وارد کنید</mat-error>
         }
       </mat-form-field>

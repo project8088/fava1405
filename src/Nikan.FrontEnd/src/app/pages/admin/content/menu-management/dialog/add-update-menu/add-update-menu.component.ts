@@ -15,7 +15,7 @@ declare var $: any;
 })
 export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   loadingData: boolean;
 

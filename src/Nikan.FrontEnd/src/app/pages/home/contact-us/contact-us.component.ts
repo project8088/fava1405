@@ -19,7 +19,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   loadingUnit: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   user: AuthUser;
   setting: SiteSettingViewModel;

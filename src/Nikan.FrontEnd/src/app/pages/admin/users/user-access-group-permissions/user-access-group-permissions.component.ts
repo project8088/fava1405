@@ -17,7 +17,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
   groupList: any[] = [];
   userId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

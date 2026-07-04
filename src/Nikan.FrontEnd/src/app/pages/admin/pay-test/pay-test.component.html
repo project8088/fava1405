@@ -10,7 +10,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شناسه پرداخت</mat-label>
           <input matInput formControlName="orderId" maxlength="100" numbersOnly />
-          @if (form.get('orderId').errors?.required) {
+          @if (form.get('orderId')?.hasError('required')) {
             <mat-error>شناسه پرداخت را وارد کنید.</mat-error>
           }
         </mat-form-field>
@@ -19,7 +19,7 @@
           <mat-label>مبلغ</mat-label>
           <input matInput formControlName="amount" maxlength="100" numbersOnly />
           <span matSuffix>ریال</span>
-          @if (form.get('amount').errors?.required) {
+          @if (form.get('amount')?.hasError('required')) {
             <mat-error>مبلغ را وارد کنید.</mat-error>
           }
         </mat-form-field>

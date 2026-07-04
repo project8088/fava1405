@@ -56,10 +56,10 @@
           <input matInput [matDatepicker]="sdpicker" formControlName="startDate" />
           <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
           <mat-datepicker #sdpicker></mat-datepicker>
-          @if (frm.get('startDate').errors?.required) {
+          @if (frm.get('startDate')?.hasError('required')) {
             <mat-error> تاریخ درخواست کارت را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('startDate').errors?.matDatepickerParse) {
+          @if (frm.get('startDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
@@ -68,10 +68,10 @@
           <input matInput [matDatepicker]="edpicker" formControlName="endDate" />
           <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
           <mat-datepicker #edpicker></mat-datepicker>
-          @if (frm.get('endDate').errors?.required) {
+          @if (frm.get('endDate')?.hasError('required')) {
             <mat-error> تاریخ پایان درخواست را انتخاب کنید. </mat-error>
           }
-          @if (frm.get('endDate').errors?.matDatepickerParse) {
+          @if (frm.get('endDate')?.hasError('matDatepickerParse')) {
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
@@ -112,7 +112,7 @@
               </mat-option>
             }
           </mat-autocomplete>
-          @if (frm.get('groupIds').errors?.incorrect || frm.get('groupIds').errors?.required) {
+          @if (frm.get('groupIds').errors?.incorrect || frm.get('groupIds')?.hasError('required')) {
             <mat-error> خدمات دوره را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>

@@ -29,10 +29,10 @@
               maxlength="10"
               numbersOnly
             />
-            @if (personalForm.get('nationalCode').errors?.required) {
+            @if (personalForm.get('nationalCode')?.hasError('required')) {
               <mat-error> کد ملی خود را وارد کنید. </mat-error>
             }
-            @if (personalForm.get('nationalCode').errors?.invalid) {
+            @if (personalForm.get('nationalCode')?.hasError('invalid')) {
               <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
             }
           </mat-form-field>
@@ -42,37 +42,37 @@
               <mat-option [value]="true">آقا هستم</mat-option>
               <mat-option [value]="false">خانم هستم</mat-option>
             </mat-select>
-            @if (personalForm.get('gender').errors?.required) {
+            @if (personalForm.get('gender')?.hasError('required')) {
               <mat-error> جنسیت را مشخص کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label>نام</mat-label>
             <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
-            @if (personalForm.get('firstName').errors?.required) {
+            @if (personalForm.get('firstName')?.hasError('required')) {
               <mat-error> نام را وارد کنید. </mat-error>
             }
-            @if (personalForm.get('firstName').errors?.pattern) {
+            @if (personalForm.get('firstName')?.hasError('pattern')) {
               <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> نام خانوادگی</mat-label>
             <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
-            @if (personalForm.get('lastName').errors?.required) {
+            @if (personalForm.get('lastName')?.hasError('required')) {
               <mat-error> نام خانوادگی را وارد کنید. </mat-error>
             }
-            @if (personalForm.get('lastName').errors?.pattern) {
+            @if (personalForm.get('lastName')?.hasError('pattern')) {
               <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label>نام پدر </mat-label>
             <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete" />
-            @if (personalForm.get('fatherName').errors?.required) {
+            @if (personalForm.get('fatherName')?.hasError('required')) {
               <mat-error> نام پدر را وارد کنید. </mat-error>
             }
-            @if (personalForm.get('fatherName').errors?.pattern) {
+            @if (personalForm.get('fatherName')?.hasError('pattern')) {
               <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
             }
           </mat-form-field>

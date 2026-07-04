@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   registerForm: FormGroup;
   id: string;
   loading: boolean = true;

@@ -12,7 +12,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (feedbackfrm.get('feedbackId').errors?.required) {
+            @if (feedbackfrm.get('feedbackId')?.hasError('required')) {
               <mat-error>موضوع بازخورد را انتخاب کنید.</mat-error>
             }
           </mat-form-field>
@@ -24,7 +24,7 @@
               formControlName="feedbackDescription"
               maxlength="1000"
             ></textarea>
-            @if (feedbackfrm.get('feedbackDescription').errors?.required) {
+            @if (feedbackfrm.get('feedbackDescription')?.hasError('required')) {
               <mat-error> متن بازخورد را وارد کنید </mat-error>
             }
           </mat-form-field>

@@ -15,7 +15,7 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
   provinceList: any[] = [];
   companyId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   baseInfo: any = {};
 
   constructor(private customValidators: CustomFormValidators) {

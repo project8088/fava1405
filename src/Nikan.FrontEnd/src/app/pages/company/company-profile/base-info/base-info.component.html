@@ -10,41 +10,41 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کدملی مدیر شرکت</mat-label>
         <input matInput formControlName="managerNationCode" numbersOnly maxlength="10" />
-        @if (form.get('managerNationCode').errors?.required) {
+        @if (form.get('managerNationCode')?.hasError('required')) {
           <mat-error>کدملی مدیر شرکت را وارد کنید</mat-error>
         }
-        @if (form.get('managerNationCode').errors?.invalid) {
+        @if (form.get('managerNationCode')?.hasError('invalid')) {
           <mat-error>کدملی صحیح نیست</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام مدیر شرکت</mat-label>
         <input matInput formControlName="managerName" maxlength="100" />
-        @if (form.get('managerName').errors?.required) {
+        @if (form.get('managerName')?.hasError('required')) {
           <mat-error>نام مدیر شرکت را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام شرکت</mat-label>
         <input matInput formControlName="companyName" maxlength="500" />
-        @if (form.get('companyName').errors?.required) {
+        @if (form.get('companyName')?.hasError('required')) {
           <mat-error>نام شرکت را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام لاتین شرکت</mat-label>
         <input matInput formControlName="englishName" maxlength="20" />
-        @if (form.get('englishName').errors?.required) {
+        @if (form.get('englishName')?.hasError('required')) {
           <mat-error>نام لاتین شرکت را وارد کنید</mat-error>
         }
-        @if (form.get('englishName').errors?.pattern) {
+        @if (form.get('englishName')?.hasError('pattern')) {
           <mat-error>فقط کاراکترهای لاتین مجاز است</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>سال تاسیس</mat-label>
         <input matInput formControlName="establishedYear" numbersOnly maxlength="4" />
-        @if (form.get('establishedYear').errors?.required) {
+        @if (form.get('establishedYear')?.hasError('required')) {
           <mat-error>سال تاسیس را وارد کنید</mat-error>
         }
         @if (
@@ -57,14 +57,14 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره اقتصادی شرکت</mat-label>
         <input matInput formControlName="txtTinNo" numbersOnly maxlength="20" />
-        @if (form.get('txtTinNo').errors?.required) {
+        @if (form.get('txtTinNo')?.hasError('required')) {
           <mat-error>شماره اقتصادی شرکت را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره ثبت</mat-label>
         <input matInput formControlName="txtRegNO" numbersOnly maxlength="20" />
-        @if (form.get('txtRegNO').errors?.required) {
+        @if (form.get('txtRegNO')?.hasError('required')) {
           <mat-error>شماره ثبت را وارد کنید</mat-error>
         }
       </mat-form-field>
@@ -77,7 +77,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('companyOwnerType').errors?.required) {
+        @if (form.get('companyOwnerType')?.hasError('required')) {
           <mat-error>نوع/اتحادیه صنفی را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -90,7 +90,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('activityLicenseType').errors?.required) {
+        @if (form.get('activityLicenseType')?.hasError('required')) {
           <mat-error>نوع پروانه فعالیت را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -103,7 +103,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('activityLicense').errors?.required) {
+        @if (form.get('activityLicense')?.hasError('required')) {
           <mat-error>نوع مجوز را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -116,7 +116,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('fieldOfActivity').errors?.required) {
+        @if (form.get('fieldOfActivity')?.hasError('required')) {
           <mat-error>نوع فعالیت شرکت را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -129,7 +129,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('earthCondition').errors?.required) {
+        @if (form.get('earthCondition')?.hasError('required')) {
           <mat-error> نوع زمین کارگاه را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -138,38 +138,38 @@
         <input matInput [matDatepicker]="dpicker" formControlName="activityLicenseDate" />
         <mat-datepicker-toggle matSuffix [for]="dpicker"></mat-datepicker-toggle>
         <mat-datepicker #dpicker></mat-datepicker>
-        @if (form.get('activityLicenseDate').errors?.required) {
+        @if (form.get('activityLicenseDate')?.hasError('required')) {
           <mat-error> تاریخ ثبت/پروانه کسب/تاسیس را انتخاب کنید. </mat-error>
         }
-        @if (form.get('activityLicenseDate').errors?.matDatepickerParse) {
+        @if (form.get('activityLicenseDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>مساحت زمین شرکت</mat-label>
         <input matInput formControlName="unitArea" maxlength="20" decimalOnly />
-        @if (form.get('unitArea').errors?.required) {
+        @if (form.get('unitArea')?.hasError('required')) {
           <mat-error>مساحت زمین شرکت را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> مساحت فضای سبز</mat-label>
         <input matInput formControlName="areaOfGreenSpace" maxlength="20" numbersOnly />
-        @if (form.get('areaOfGreenSpace').errors?.required) {
+        @if (form.get('areaOfGreenSpace')?.hasError('required')) {
           <mat-error> مساحت فضای سبز را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>مساحت احداث شده</mat-label>
         <input matInput formControlName="buildingArea" maxlength="20" numbersOnly />
-        @if (form.get('buildingArea').errors?.required) {
+        @if (form.get('buildingArea')?.hasError('required')) {
           <mat-error>مساحت احداث شده را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>مثراژ مجوز احداث</mat-label>
         <input matInput formControlName="buildingLicenseArea" maxlength="20" numbersOnly />
-        @if (form.get('buildingLicenseArea').errors?.required) {
+        @if (form.get('buildingLicenseArea')?.hasError('required')) {
           <mat-error>مثراژ مجوز احداث را وارد کنید</mat-error>
         }
       </mat-form-field>

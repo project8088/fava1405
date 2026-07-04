@@ -15,7 +15,7 @@
             autocomplete="doNotAutoComplete"
             maxlength="500"
           />
-          @if (registerForm.get('companyName').errors?.required) {
+          @if (registerForm.get('companyName')?.hasError('required')) {
             <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
           }
           @if (registerForm.get('companyName').errors?.maxlength) {
@@ -26,13 +26,13 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>عنوان شرکت (لاتین)</mat-label>
           <input matInput formControlName="englishName" autocomplete="doNotAutoComplete" />
-          @if (registerForm.get('englishName').errors?.required) {
+          @if (registerForm.get('englishName')?.hasError('required')) {
             <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
           }
           @if (registerForm.get('englishName').errors?.maxlength) {
             <mat-error> حداکثر 500 کاراکتر </mat-error>
           }
-          @if (registerForm.get('englishName').errors?.pattern) {
+          @if (registerForm.get('englishName')?.hasError('pattern')) {
             <mat-error> فقط کاراکتر های لاتین مجاز است. </mat-error>
           }
         </mat-form-field>
@@ -45,10 +45,10 @@
             autocomplete="doNotAutoComplete"
             maxlength="100"
           />
-          @if (registerForm.get('companyRepresentative').errors?.required) {
+          @if (registerForm.get('companyRepresentative')?.hasError('required')) {
             <mat-error> نام نماینده شرکت را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('companyRepresentative').errors?.pattern) {
+          @if (registerForm.get('companyRepresentative')?.hasError('pattern')) {
             <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
           }
           @if (registerForm.get('companyRepresentative').errors?.maxlength) {
@@ -66,7 +66,7 @@
             maxlength="4"
             minlength="4"
           />
-          @if (registerForm.get('establishedYear').errors?.required) {
+          @if (registerForm.get('establishedYear')?.hasError('required')) {
             <mat-error> سال تاسیس را وارد کنید. </mat-error>
           }
           @if (
@@ -80,10 +80,10 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شماره موبایل</mat-label>
           <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
-          @if (registerForm.get('mobileNumber').errors?.required) {
+          @if (registerForm.get('mobileNumber')?.hasError('required')) {
             <mat-error> شماره موبایل را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('mobileNumber').errors?.invalid) {
+          @if (registerForm.get('mobileNumber')?.hasError('invalid')) {
             <mat-error> شماره موبایل صحیح نیست. </mat-error>
           }
         </mat-form-field>
@@ -91,10 +91,10 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>ایمیل</mat-label>
           <input matInput formControlName="email" maxlength="50" />
-          @if (registerForm.get('email').errors?.required) {
+          @if (registerForm.get('email')?.hasError('required')) {
             <mat-error> ایمیل را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('email').errors?.email) {
+          @if (registerForm.get('email')?.hasError('email')) {
             <mat-error> ایمیل صحیح نیست. </mat-error>
           }
         </mat-form-field>
@@ -102,14 +102,14 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>کد اقتصادی شرکت</mat-label>
           <input matInput formControlName="txtTinNo" maxlength="20" numbersOnly />
-          @if (registerForm.get('txtTinNo').errors?.required) {
+          @if (registerForm.get('txtTinNo')?.hasError('required')) {
             <mat-error> کد اقتصادی شرکت را وارد کنید. </mat-error>
           }
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شماره ثبت شرکت</mat-label>
           <input matInput formControlName="txtRegNO" maxlength="20" numbersOnly />
-          @if (registerForm.get('txtRegNO').errors?.required) {
+          @if (registerForm.get('txtRegNO')?.hasError('required')) {
             <mat-error> شماره ثبت شرکت را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -118,10 +118,10 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام کاربری</mat-label>
           <input matInput type="text" formControlName="userName" autocomplete="doNotAutoComplete" />
-          @if (registerForm.get('userName').errors?.required) {
+          @if (registerForm.get('userName')?.hasError('required')) {
             <mat-error> نام کاربری را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('userName').errors?.pattern) {
+          @if (registerForm.get('userName')?.hasError('pattern')) {
             <mat-error> فقط از کاراکترهای لاتین استفاده کنید </mat-error>
           }
         </mat-form-field>
@@ -129,7 +129,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>کلمه عبور</mat-label>
           <input matInput type="password" formControlName="password" autocomplete="new-password" />
-          @if (registerForm.get('password').errors?.required) {
+          @if (registerForm.get('password')?.hasError('required')) {
             <mat-error> کلمه عبور را وارد کنید. </mat-error>
           }
           @if (registerForm.get('password').errors?.weakPassword) {
@@ -142,7 +142,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>تکرار کلمه عبور</mat-label>
           <input matInput type="password" formControlName="confirmPassword" autocomplete="off" />
-          @if (registerForm.get('confirmPassword').errors?.required) {
+          @if (registerForm.get('confirmPassword')?.hasError('required')) {
             <mat-error> تکرار کلمه عبور را وارد کنید. </mat-error>
           }
           @if (registerForm.get('confirmPassword').errors?.weakPassword) {

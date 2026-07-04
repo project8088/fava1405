@@ -16,7 +16,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (form.get('activityId').errors?.required) {
+        @if (form.get('activityId')?.hasError('required')) {
           <mat-error> فعالیت شرکت را مشخص کنید</mat-error>
         }
       </mat-form-field>

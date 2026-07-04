@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   frm: FormGroup;
   showSaveCardNumberPanel: boolean;
   loadingData: boolean;

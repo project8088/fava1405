@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 })
 export class SendTicketDialogComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   loadingData: boolean = true;
   loadingSubject: boolean = false;
   organizationList: any = ([] = []);

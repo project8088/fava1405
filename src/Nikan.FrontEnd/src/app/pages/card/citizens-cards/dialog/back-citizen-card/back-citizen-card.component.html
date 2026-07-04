@@ -33,7 +33,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (frm.get('centerId').errors?.required) {
+        @if (frm.get('centerId')?.hasError('required')) {
           <mat-error>مرکز تحویل کارت را انتخاب کنید.</mat-error>
         }
       </mat-form-field>
@@ -48,11 +48,11 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        @if (frm.get('backCardOnDate').errors?.required) {
+        @if (frm.get('backCardOnDate')?.hasError('required')) {
           <mat-error> تاریخ برگشت کارت را انتخاب کنید. </mat-error>
         }
 
-        @if (frm.get('backCardOnDate').errors?.matDatepickerParse) {
+        @if (frm.get('backCardOnDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>

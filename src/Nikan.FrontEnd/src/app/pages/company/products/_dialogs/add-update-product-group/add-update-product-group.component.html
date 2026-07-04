@@ -20,7 +20,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (form.get('parentId').errors?.required) {
+        @if (form.get('parentId')?.hasError('required')) {
           <mat-error> گروه محصول را مشخص کنید. </mat-error>
         }
       </mat-form-field>
@@ -28,7 +28,7 @@
       <mat-form-field class="col-sm-6 col-md-6">
         <mat-label>عنوان گوه محصول</mat-label>
         <input matInput formControlName="name" autocomplete="doNotAutoComplete" />
-        @if (form.get('name').errors?.required) {
+        @if (form.get('name')?.hasError('required')) {
           <mat-error> عنوان گروه محصول را وارد کنید. </mat-error>
         }
       </mat-form-field>

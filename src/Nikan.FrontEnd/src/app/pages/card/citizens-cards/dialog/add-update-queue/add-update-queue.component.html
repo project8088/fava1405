@@ -23,7 +23,7 @@
         <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label> عنوان صف </mat-label>
           <input type="text" matInput formControlName="name" maxlength="40" />
-          @if (frm.get('name').errors?.required) {
+          @if (frm.get('name')?.hasError('required')) {
             <mat-error> عنوان صف را وارد نمایید </mat-error>
           }
         </mat-form-field>
@@ -35,7 +35,7 @@
             autocomplete="doNotAutoComplete"
             numbersOnly
           />
-          @if (frm.get('indexOrder').errors?.required) {
+          @if (frm.get('indexOrder')?.hasError('required')) {
             <mat-error> اولویت صف را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -50,14 +50,14 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>رنگ دسته بندی</mat-label>
           <input matInput type="color" formControlName="defaultColor" maxlength="40" />
-          @if (frm.get('defaultColor').errors?.required) {
+          @if (frm.get('defaultColor')?.hasError('required')) {
             <mat-error> رنگ پیش فرض را وارد نمایید </mat-error>
           }
         </mat-form-field>
         <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label> توضیحات </mat-label>
           <input type="text" matInput formControlName="description" maxlength="400" />
-          @if (frm.get('description').errors?.required) {
+          @if (frm.get('description')?.hasError('required')) {
             <mat-error> توضیحات را وارد نمایید </mat-error>
           }
         </mat-form-field>
@@ -101,7 +101,7 @@
               </mat-option>
             }
           </mat-autocomplete>
-          @if (frm.get('groups').errors?.incorrect || frm.get('groups').errors?.required) {
+          @if (frm.get('groups').errors?.incorrect || frm.get('groups')?.hasError('required')) {
             <mat-error> گروههای شهروندی را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>

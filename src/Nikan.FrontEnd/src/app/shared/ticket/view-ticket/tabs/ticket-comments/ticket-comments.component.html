@@ -5,7 +5,7 @@
       <mat-form-field class="col-sm-12">
         <mat-label>متن یادداشت</mat-label>
         <textarea rows="5" matInput formControlName="commentText" maxlength="1000"></textarea>
-        @if (frm.get('commentText').errors?.required) {
+        @if (frm.get('commentText')?.hasError('required')) {
           <mat-error> متن یادداشت را وارد کنید </mat-error>
         }
       </mat-form-field>

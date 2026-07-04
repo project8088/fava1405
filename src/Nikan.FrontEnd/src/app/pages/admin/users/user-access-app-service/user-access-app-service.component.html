@@ -21,7 +21,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (form.get('serviceId').errors?.required) {
+          @if (form.get('serviceId')?.hasError('required')) {
             <mat-error> خدمات را مشخص کنید</mat-error>
           }
         </mat-form-field>

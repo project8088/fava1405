@@ -36,10 +36,10 @@
             <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label> ایمیل </mat-label>
               <input matInput formControlName="email" class="text-left" minlength="10" />
-              @if (cardForm.get('email').errors?.required) {
+              @if (cardForm.get('email')?.hasError('required')) {
                 <mat-error> ایمیل خود را وارد کنید. </mat-error>
               }
-              @if (cardForm.get('email').errors?.invalid) {
+              @if (cardForm.get('email')?.hasError('invalid')) {
                 <mat-error> ایمیل وارد شده صحیح نیست </mat-error>
               }
             </mat-form-field>
@@ -69,10 +69,10 @@
             minlength="10"
             numbersOnly
           />
-          @if (confirmForm.get('smsActiveCode').errors?.required) {
+          @if (confirmForm.get('smsActiveCode')?.hasError('required')) {
             <mat-error> کد تایید دریافتی را وارد کنید. </mat-error>
           }
-          @if (confirmForm.get('smsActiveCode').errors?.invalid) {
+          @if (confirmForm.get('smsActiveCode')?.hasError('invalid')) {
             <mat-error> کد تایید وارد شده صحیح نیست </mat-error>
           }
         </mat-form-field>

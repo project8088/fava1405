@@ -9,38 +9,38 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام و نام خانوادگی نماینده</mat-label>
         <input matInput formControlName="companyRepresentative" maxlength="100" />
-        @if (mainForm.get('companyRepresentative').errors?.required) {
+        @if (mainForm.get('companyRepresentative')?.hasError('required')) {
           <mat-error>نام و نام خانوادگی نماینده را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد کارگاه بیمه </mat-label>
         <input matInput formControlName="insuranceNumber" numbersOnly maxlength="20" />
-        @if (mainForm.get('insuranceNumber').errors?.required) {
+        @if (mainForm.get('insuranceNumber')?.hasError('required')) {
           <mat-error>کد کارگاه بیمه را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>تعداد پرسنل </mat-label>
         <input matInput formControlName="numberOfEmployees" numbersOnly maxlength="5" />
-        @if (mainForm.get('numberOfEmployees').errors?.required) {
+        @if (mainForm.get('numberOfEmployees')?.hasError('required')) {
           <mat-error>تعداد پرسنل را وارد کنید</mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آدرس صفحه اختصاصی</mat-label>
         <input matInput formControlName="slagUrl" maxlength="40" />
-        @if (mainForm.get('slagUrl').errors?.required) {
+        @if (mainForm.get('slagUrl')?.hasError('required')) {
           <mat-error>آدرس صفحه اختصاصی را وارد کنید</mat-error>
         }
-        @if (mainForm.get('slagUrl').errors?.pattern) {
+        @if (mainForm.get('slagUrl')?.hasError('pattern')) {
           <mat-error>فقط کاراکتر های انگلیسی بدون فاصله</mat-error>
         }
       </mat-form-field>
       <!--<mat-form-field class="col-sm-12">
                 <mat-label>محتوای صفحه اختصاصی</mat-label>
                 <input matInput formControlName="content" maxlength="500">
-                <mat-error *ngIf="mainForm.get('content').errors?.required">محتوای صفحه اختصاصی را وارد کنید</mat-error>
+                <mat-error *ngIf="mainForm.get('content')?.hasError('required')">محتوای صفحه اختصاصی را وارد کنید</mat-error>
               </mat-form-field>-->
       <html-editor formControlName="content"></html-editor>
       <div class="col d-flex align-items-center justify-content-end">

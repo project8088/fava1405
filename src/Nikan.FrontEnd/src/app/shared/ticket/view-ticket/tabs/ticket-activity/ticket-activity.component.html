@@ -7,10 +7,10 @@
         <input matInput [matDatepicker]="dpicker" formControlName="onDate" />
         <mat-datepicker-toggle matSuffix [for]="dpicker"></mat-datepicker-toggle>
         <mat-datepicker #dpicker></mat-datepicker>
-        @if (frm.get('onDate').errors?.required) {
+        @if (frm.get('onDate')?.hasError('required')) {
           <mat-error> تاریخ را انتخاب کنید. </mat-error>
         }
-        @if (frm.get('onDate').errors?.matDatepickerParse) {
+        @if (frm.get('onDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>
@@ -18,14 +18,14 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>چند دقیقه</mat-label>
         <input numbersOnly matInput formControlName="minute" maxlength="3" />
-        @if (frm.get('minute').errors?.required) {
+        @if (frm.get('minute')?.hasError('required')) {
           <mat-error> دقیقه را وارد کنید </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-12">
         <mat-label>توضیحات</mat-label>
         <textarea rows="5" matInput formControlName="description" maxlength="1000"></textarea>
-        @if (frm.get('description').errors?.required) {
+        @if (frm.get('description')?.hasError('required')) {
           <mat-error> توضیحات را وارد کنید </mat-error>
         }
       </mat-form-field>

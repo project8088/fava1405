@@ -21,7 +21,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  isSaving: boolean;
+  isSaving=false;
   imageUrl: string = '';
   loading: boolean;
 

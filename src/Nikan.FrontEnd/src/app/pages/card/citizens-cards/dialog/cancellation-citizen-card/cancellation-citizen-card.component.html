@@ -35,7 +35,7 @@
             </mat-option>
           }
         </mat-select>
-        @if (frm.get('cardCancellationItemId').errors?.required) {
+        @if (frm.get('cardCancellationItemId')?.hasError('required')) {
           <mat-error>دلیل ابطال کارت را مشخص کنید</mat-error>
         }
       </mat-form-field>
@@ -50,11 +50,11 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        @if (frm.get('cardCancellationOnDate').errors?.required) {
+        @if (frm.get('cardCancellationOnDate')?.hasError('required')) {
           <mat-error> تاریخ ابطال کارت را انتخاب کنید. </mat-error>
         }
 
-        @if (frm.get('cardCancellationOnDate').errors?.matDatepickerParse) {
+        @if (frm.get('cardCancellationOnDate')?.hasError('matDatepickerParse')) {
           <mat-error> فرمت تاریخ صحیح نیست </mat-error>
         }
       </mat-form-field>

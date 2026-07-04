@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   loading: boolean;
 
   baseUrl: string = ServerApis.baseUrl;

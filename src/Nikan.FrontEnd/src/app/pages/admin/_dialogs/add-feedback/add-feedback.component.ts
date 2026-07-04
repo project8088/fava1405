@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
   userCode: string = '';
 
-  isSaving: boolean;
+  isSaving=false;
   groupList: any[] = [];
   form: FormGroup;
 

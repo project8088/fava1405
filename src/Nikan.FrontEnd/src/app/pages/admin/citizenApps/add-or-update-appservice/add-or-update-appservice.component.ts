@@ -15,7 +15,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving: boolean;
+  isSaving=false;
   imageUrl: string = '';
   loading: boolean;
 

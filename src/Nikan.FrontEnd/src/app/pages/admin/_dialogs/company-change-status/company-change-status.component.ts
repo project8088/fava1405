@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminCompanyChangeStatusDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};
-  isSaving: boolean;
+  isSaving=false;
 
   form: FormGroup;
   userCompanyAccountStatus: any[] = [];

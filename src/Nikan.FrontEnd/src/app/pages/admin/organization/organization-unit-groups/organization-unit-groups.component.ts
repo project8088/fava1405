@@ -17,7 +17,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
   groupList: any[] = [];
   unitId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

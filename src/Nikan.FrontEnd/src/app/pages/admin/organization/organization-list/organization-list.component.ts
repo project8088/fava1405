@@ -36,7 +36,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
 
   frm: FormGroup;
   showAddOrUpdatePanel: boolean;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidator: CustomFormValidators) {
     super();

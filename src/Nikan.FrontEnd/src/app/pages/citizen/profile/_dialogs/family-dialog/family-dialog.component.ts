@@ -17,7 +17,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
 
   id: string;
   userId: string;

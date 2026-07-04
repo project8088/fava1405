@@ -18,7 +18,7 @@
           autocomplete="doNotAutoComplete"
           maxlength="20"
         />
-        @if (userForm.get('personelCode').errors?.required) {
+        @if (userForm.get('personelCode')?.hasError('required')) {
           <mat-error> کد پرسنلی را وارد کنید. </mat-error>
         }
       </mat-form-field>
@@ -30,7 +30,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (userForm.get('namePrefix').errors?.required) {
+        @if (userForm.get('namePrefix')?.hasError('required')) {
           <mat-error> پیشوند را مشخص کنید. </mat-error>
         }
       </mat-form-field>
@@ -38,10 +38,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام</mat-label>
         <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
-        @if (userForm.get('firstName').errors?.required) {
+        @if (userForm.get('firstName')?.hasError('required')) {
           <mat-error> نام را وارد کنید. </mat-error>
         }
-        @if (userForm.get('firstName').errors?.pattern) {
+        @if (userForm.get('firstName')?.hasError('pattern')) {
           <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
         }
       </mat-form-field>
@@ -49,20 +49,20 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام خانوادگی</mat-label>
         <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
-        @if (userForm.get('lastName').errors?.required) {
+        @if (userForm.get('lastName')?.hasError('required')) {
           <mat-error> نام خانوادگی را وارد کنید. </mat-error>
         }
-        @if (userForm.get('lastName').errors?.pattern) {
+        @if (userForm.get('lastName')?.hasError('pattern')) {
           <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
         }
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام پدر</mat-label>
         <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete" />
-        @if (userForm.get('fatherName').errors?.required) {
+        @if (userForm.get('fatherName')?.hasError('required')) {
           <mat-error> نام پدر را وارد کنید. </mat-error>
         }
-        @if (userForm.get('fatherName').errors?.pattern) {
+        @if (userForm.get('fatherName')?.hasError('pattern')) {
           <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
         }
       </mat-form-field>
@@ -70,10 +70,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد ملی</mat-label>
         <input matInput formControlName="nationCode" autocomplete="doNotAutoComplete" />
-        @if (userForm.get('nationCode').errors?.required) {
+        @if (userForm.get('nationCode')?.hasError('required')) {
           <mat-error> کد ملی را وارد کنید. </mat-error>
         }
-        @if (userForm.get('nationCode').errors?.invalid) {
+        @if (userForm.get('nationCode')?.hasError('invalid')) {
           <mat-error> کد ملی صحیح نیست </mat-error>
         }
       </mat-form-field>
@@ -81,10 +81,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل</mat-label>
         <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
-        @if (userForm.get('mobileNumber').errors?.required) {
+        @if (userForm.get('mobileNumber')?.hasError('required')) {
           <mat-error> شماره موبایل را وارد کنید. </mat-error>
         }
-        @if (userForm.get('mobileNumber').errors?.invalid) {
+        @if (userForm.get('mobileNumber')?.hasError('invalid')) {
           <mat-error> شماره موبایل صحیح نیست. </mat-error>
         }
       </mat-form-field>
@@ -92,10 +92,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره تلفن ثابت</mat-label>
         <input matInput formControlName="cellNumber" maxlength="11" numbersOnly />
-        @if (userForm.get('cellNumber').errors?.required) {
+        @if (userForm.get('cellNumber')?.hasError('required')) {
           <mat-error> شماره تلفن ثابت را وارد کنید. </mat-error>
         }
-        @if (userForm.get('cellNumber').errors?.pattern) {
+        @if (userForm.get('cellNumber')?.hasError('pattern')) {
           <mat-error> شماره تلفن ثابت صحیح نیست. </mat-error>
         }
       </mat-form-field>
@@ -103,10 +103,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آدرس ایمیل</mat-label>
         <input matInput formControlName="email" />
-        @if (userForm.get('email').errors?.required) {
+        @if (userForm.get('email')?.hasError('required')) {
           <mat-error> آدرس ایمیل را وارد کنید. </mat-error>
         }
-        @if (userForm.get('email').errors?.email) {
+        @if (userForm.get('email')?.hasError('email')) {
           <mat-error> ایمیل وارد شده صحیح نیست! </mat-error>
         }
       </mat-form-field>
@@ -131,7 +131,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد پستی</mat-label>
         <input matInput formControlName="zipCode" maxlength="10" />
-        @if (userForm.get('zipCode').errors?.required) {
+        @if (userForm.get('zipCode')?.hasError('required')) {
           <mat-error> کد پستی را وارد کنید. </mat-error>
         }
         @if (
@@ -144,7 +144,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>خیابان </mat-label>
         <input matInput formControlName="street" maxlength="100" />
-        @if (userForm.get('street').errors?.required) {
+        @if (userForm.get('street')?.hasError('required')) {
           <mat-error> خیابان را وارد کنید. </mat-error>
         }
         @if (userForm.get('street').errors?.maxlength) {
@@ -154,7 +154,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> شماره پلاک</mat-label>
         <input matInput formControlName="pelak" maxlength="100" />
-        @if (userForm.get('pelak').errors?.required) {
+        @if (userForm.get('pelak')?.hasError('required')) {
           <mat-error> شماره پلاک را وارد کنید. </mat-error>
         }
         @if (userForm.get('pelak').errors?.maxlength) {
@@ -164,7 +164,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> ادامه آدرس </mat-label>
         <input matInput formControlName="fullAddress" maxlength="1000" />
-        @if (userForm.get('fullAddress').errors?.required) {
+        @if (userForm.get('fullAddress')?.hasError('required')) {
           <mat-error> ادامه آدرس را وارد کنید. </mat-error>
         }
         @if (userForm.get('fullAddress').errors?.maxlength) {
@@ -175,7 +175,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> دفتر</mat-label>
         <input matInput formControlName="office" maxlength="100" />
-        @if (userForm.get('office').errors?.required) {
+        @if (userForm.get('office')?.hasError('required')) {
           <mat-error> دفتر را وارد کنید. </mat-error>
         }
         @if (userForm.get('office').errors?.maxlength) {
@@ -186,10 +186,10 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره تلفن دفتر</mat-label>
         <input matInput formControlName="officePhoneNumber" maxlength="11" numbersOnly />
-        @if (userForm.get('officePhoneNumber').errors?.required) {
+        @if (userForm.get('officePhoneNumber')?.hasError('required')) {
           <mat-error> شماره تلفن دفتر را وارد کنید. </mat-error>
         }
-        @if (userForm.get('officePhoneNumber').errors?.pattern) {
+        @if (userForm.get('officePhoneNumber')?.hasError('pattern')) {
           <mat-error> شماره تلفن دفتر صحیح نیست. </mat-error>
         }
       </mat-form-field>
@@ -204,7 +204,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (userForm.get('organizationalPositionId').errors?.required) {
+        @if (userForm.get('organizationalPositionId')?.hasError('required')) {
           <mat-error> سمت را مشخص کنید. </mat-error>
         }
       </mat-form-field>
@@ -239,7 +239,7 @@
       <mat-form-field class="col-sm-12">
         <mat-label> شرح بیماری </mat-label>
         <input matInput formControlName="descriptionDisease" maxlength="1000" />
-        @if (userForm.get('descriptionDisease').errors?.required) {
+        @if (userForm.get('descriptionDisease')?.hasError('required')) {
           <mat-error> شرح بیماری را وارد کنید. </mat-error>
         }
         @if (userForm.get('descriptionDisease').errors?.maxlength) {

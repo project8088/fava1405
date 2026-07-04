@@ -53,7 +53,7 @@
                           }
                         </mat-hint>
                       }
-                      @if (firstFormGroup.get('firstName').errors?.pattern) {
+                      @if (firstFormGroup.get('firstName')?.hasError('pattern')) {
                         <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
                       }
                     </mat-form-field>
@@ -69,7 +69,7 @@
                           }
                         </mat-hint>
                       }
-                      @if (firstFormGroup.get('lastName').errors?.pattern) {
+                      @if (firstFormGroup.get('lastName')?.hasError('pattern')) {
                         <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
                       }
                     </mat-form-field>
@@ -88,7 +88,7 @@
                           }
                         </mat-hint>
                       }
-                      @if (firstFormGroup.get('fatherName').errors?.pattern) {
+                      @if (firstFormGroup.get('fatherName')?.hasError('pattern')) {
                         <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
                       }
                     </mat-form-field>
@@ -258,7 +258,7 @@
                         }
                       </mat-hint>
                     }
-                    @if (forthFormGroup.get('password').errors?.invalid) {
+                    @if (forthFormGroup.get('password')?.hasError('invalid')) {
                       <mat-error> کلمه عبور وارد شده صحیح نیست </mat-error>
                     }
                     @if (forthFormGroup.get('password').errors?.minlength) {
@@ -282,7 +282,7 @@
                         }
                       </mat-hint>
                     }
-                    @if (forthFormGroup.get('confirmPassword').errors?.invalid) {
+                    @if (forthFormGroup.get('confirmPassword')?.hasError('invalid')) {
                       <mat-error> تکرار کلمه عبور وارد شده صحیح نیست </mat-error>
                     }
                   </mat-form-field>

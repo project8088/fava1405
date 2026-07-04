@@ -18,21 +18,21 @@
             <mat-form-field class="col-md-4">
               <mat-label>شماره نامه</mat-label>
               <input matInput formControlName="letterNumber" numbersOnly maxlength="10" />
-              @if (frm.get('letterNumber').errors?.required) {
+              @if (frm.get('letterNumber')?.hasError('required')) {
                 <mat-error> شماره نامه را وارد کنید. </mat-error>
               }
             </mat-form-field>
             <mat-form-field class="col-md-4">
               <mat-label>نام واحد</mat-label>
               <input matInput formControlName="unitName" maxlength="50" />
-              @if (frm.get('unitName').errors?.required) {
+              @if (frm.get('unitName')?.hasError('required')) {
                 <mat-error> نام واحد را وارد کنید. </mat-error>
               }
             </mat-form-field>
             <mat-form-field class="col-md-4">
               <mat-label>نام کلاس</mat-label>
               <input matInput formControlName="className" maxlength="50" />
-              @if (frm.get('className').errors?.required) {
+              @if (frm.get('className')?.hasError('required')) {
                 <mat-error> نام کلاس را وارد کنید. </mat-error>
               }
             </mat-form-field>

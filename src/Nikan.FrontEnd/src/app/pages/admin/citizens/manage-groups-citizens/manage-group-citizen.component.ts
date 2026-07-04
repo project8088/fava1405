@@ -17,7 +17,7 @@ export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit
   groupList: any[] = [];
   userCode: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

@@ -13,7 +13,7 @@ export class AdminWebApiUserPermissionsComponent extends AppBase implements OnIn
   userId: string;
   data: any[] = [];
   isLoadingResults: boolean = true;
-  isSaving: boolean;
+  isSaving=false;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {

@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminGroupTransferDialogComponent extends AppBase implements OnInit {
   sourceGroupId: number;
-  isSaving: boolean;
+  isSaving=false;
   groupList: any[] = [];
   form: FormGroup;
 

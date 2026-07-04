@@ -20,21 +20,21 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label> آدرس سایت</mat-label>
             <input type="text" matInput formControlName="siteUrl" />
-            @if (settingForm.get('siteUrl').errors?.required) {
+            @if (settingForm.get('siteUrl')?.hasError('required')) {
               <mat-error> آدرس سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label> عنوان سایت </mat-label>
             <input type="text" matInput formControlName="siteName" />
-            @if (settingForm.get('siteName').errors?.required) {
+            @if (settingForm.get('siteName')?.hasError('required')) {
               <mat-error> عنوان سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>نام کامل سایت </mat-label>
             <input type="text" matInput formControlName="fullSiteName" />
-            @if (settingForm.get('fullSiteName').errors?.required) {
+            @if (settingForm.get('fullSiteName')?.hasError('required')) {
               <mat-error> نام کامل سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -46,7 +46,7 @@
               formControlName="siteKeywords"
               placeholder="با کاما از یکدیگر جدا کنید"
             />
-            @if (settingForm.get('siteKeywords').errors?.required) {
+            @if (settingForm.get('siteKeywords')?.hasError('required')) {
               <mat-error> کلمات کلیدی سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -58,7 +58,7 @@
               matInput
               formControlName="siteDescription"
             ></textarea>
-            @if (settingForm.get('siteDescription').errors?.required) {
+            @if (settingForm.get('siteDescription')?.hasError('required')) {
               <mat-error> توضیحات سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -71,28 +71,28 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>سرور ایمیل</mat-label>
             <input type="text" matInput formControlName="mailServerUrl" />
-            @if (settingForm.get('mailServerUrl').errors?.required) {
+            @if (settingForm.get('mailServerUrl')?.hasError('required')) {
               <mat-error> سرور ایمیل را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>شماره پورت</mat-label>
             <input type="text" matInput formControlName="mailServerPort" numbersOnly />
-            @if (settingForm.get('mailServerPort').errors?.required) {
+            @if (settingForm.get('mailServerPort')?.hasError('required')) {
               <mat-error> شماره پورت را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>نام کاربری </mat-label>
             <input type="text" matInput formControlName="mailServerUserName" />
-            @if (settingForm.get('mailServerUserName').errors?.required) {
+            @if (settingForm.get('mailServerUserName')?.hasError('required')) {
               <mat-error> نام کاربری را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>کلمه عبور</mat-label>
             <input type="text" matInput formControlName="mailServerPassword" />
-            @if (settingForm.get('mailServerPassword').errors?.required) {
+            @if (settingForm.get('mailServerPassword')?.hasError('required')) {
               <mat-error> کلمه عبور را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -110,7 +110,7 @@
               formControlName="cellNumber"
               placeholder="با کاما از یکدیگر جدا کنید"
             />
-            @if (settingForm.get('cellNumber').errors?.required) {
+            @if (settingForm.get('cellNumber')?.hasError('required')) {
               <mat-error> شماره تلفن ثابت را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -122,56 +122,56 @@
               formControlName="mobileNumber"
               placeholder="با کاما از یکدیگر جدا کنید"
             />
-            @if (settingForm.get('mobileNumber').errors?.required) {
+            @if (settingForm.get('mobileNumber')?.hasError('required')) {
               <mat-error> شماره تلفن همراه را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
             <mat-label>آدرس </mat-label>
             <textarea matInput formControlName="addresss" rows="3"></textarea>
-            @if (settingForm.get('addresss').errors?.required) {
+            @if (settingForm.get('addresss')?.hasError('required')) {
               <mat-error> آدرس را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>آیدی تلگرام </mat-label>
             <input type="text" matInput formControlName="telegramChannelId" />
-            @if (settingForm.get('telegramChannelId').errors?.required) {
+            @if (settingForm.get('telegramChannelId')?.hasError('required')) {
               <mat-error> آیدی تلگرام را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label> شماره ارسال پیامک</mat-label>
             <input type="text" matInput formControlName="smsNumber" />
-            @if (settingForm.get('smsNumber').errors?.required) {
+            @if (settingForm.get('smsNumber')?.hasError('required')) {
               <mat-error> شماره ارسال پیامک را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>شماره فکس </mat-label>
             <input type="text" matInput formControlName="faxNumber" />
-            @if (settingForm.get('faxNumber').errors?.required) {
+            @if (settingForm.get('faxNumber')?.hasError('required')) {
               <mat-error> شماره فکس را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>آدرس ایمیل </mat-label>
             <input type="text" matInput formControlName="emailAddress" />
-            @if (settingForm.get('emailAddress').errors?.required) {
+            @if (settingForm.get('emailAddress')?.hasError('required')) {
               <mat-error> آدرس ایمیل را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
             <mat-label>متن فوتر سایت </mat-label>
             <textarea rows="3" maxlength="1000" matInput formControlName="footerText"></textarea>
-            @if (settingForm.get('footerText').errors?.required) {
+            @if (settingForm.get('footerText')?.hasError('required')) {
               <mat-error> متن فوتر سایت را وارد کنید. </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
             <mat-label>ساعات فعالیت </mat-label>
             <input type="text" matInput formControlName="businessHours" />
-            @if (settingForm.get('businessHours').errors?.required) {
+            @if (settingForm.get('businessHours')?.hasError('required')) {
               <mat-error> ساعات فعالیت را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -189,7 +189,7 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('isfahanProvinceId').errors?.required) {
+            @if (settingForm.get('isfahanProvinceId')?.hasError('required')) {
               <mat-error> شناسه استان اصفهان </mat-error>
             }
           </mat-form-field>
@@ -202,14 +202,14 @@
               numbersOnly
               maxlength="20"
             />
-            @if (settingForm.get('isfahanCityId').errors?.required) {
+            @if (settingForm.get('isfahanCityId')?.hasError('required')) {
               <mat-error> شناسه شهر اصفهان </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-3">
             <mat-label> تعداد مناطق شهر اصفهان</mat-label>
             <input type="text" matInput formControlName="regionCount" numbersOnly maxlength="20" />
-            @if (settingForm.get('regionCount').errors?.required) {
+            @if (settingForm.get('regionCount')?.hasError('required')) {
               <mat-error> تعداد مناطق شهر اصفهان </mat-error>
             }
           </mat-form-field>
@@ -222,7 +222,7 @@
               numbersOnly
               maxlength="4"
             />
-            @if (settingForm.get('manzalatGroupId').errors?.required) {
+            @if (settingForm.get('manzalatGroupId')?.hasError('required')) {
               <mat-error> شناسه گروه منزلت </mat-error>
             }
           </mat-form-field>

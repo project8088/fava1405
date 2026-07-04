@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
   companyId: string;

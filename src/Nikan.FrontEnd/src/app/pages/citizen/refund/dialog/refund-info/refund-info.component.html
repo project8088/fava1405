@@ -105,7 +105,7 @@
                   minlength="16"
                   maxlength="16"
                 />
-                @if (frm.get('ownerBankCardNumber').errors?.required) {
+                @if (frm.get('ownerBankCardNumber')?.hasError('required')) {
                   <mat-error> شماره کارت شهروند را وارد کنید. </mat-error>
                 }
               </mat-form-field>
@@ -117,7 +117,7 @@
                   rows="5"
                   autocomplete="doNotAutoComplete"
                 ></textarea>
-                @if (frm.get('adminDescription').errors?.required) {
+                @if (frm.get('adminDescription')?.hasError('required')) {
                   <mat-error> توضیحات را وارد کنید. </mat-error>
                 }
               </mat-form-field>

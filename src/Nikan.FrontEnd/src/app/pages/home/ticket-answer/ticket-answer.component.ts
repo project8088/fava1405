@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketAnswerComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   loadingData: boolean = true;
 
   loadingUnit: boolean;

@@ -15,7 +15,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (form.get('userCompanyAccountStatus').errors?.required) {
+        @if (form.get('userCompanyAccountStatus')?.hasError('required')) {
           <mat-error> وضعیت را مشخص کنید. </mat-error>
         }
       </mat-form-field>
@@ -24,7 +24,7 @@
         <mat-form-field class="col-sm-12">
           <mat-label>دلیل رد</mat-label>
           <input matInput formControlName="rejectDesription" autocomplete="doNotAutoComplete" />
-          @if (form.get('rejectDesription').errors?.required) {
+          @if (form.get('rejectDesription')?.hasError('required')) {
             <mat-error> دلیل رد را وارد کنید. </mat-error>
           }
         </mat-form-field>

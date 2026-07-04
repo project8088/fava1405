@@ -22,21 +22,21 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>هزینه کارت</mat-label>
             <input matInput formControlName="cardCost" type="text" numbersOnly />
-            @if (storeForm.get('cardCost').errors?.required) {
+            @if (storeForm.get('cardCost')?.hasError('required')) {
               <mat-error>هزینه کارت را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>هزینه کارت المثنی</mat-label>
             <input matInput formControlName="doubleCardCost" type="text" numbersOnly />
-            @if (storeForm.get('doubleCardCost').errors?.required) {
+            @if (storeForm.get('doubleCardCost')?.hasError('required')) {
               <mat-error>هزینه کارت را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>هزینه پستی</mat-label>
             <input matInput formControlName="postalCostInCity" type="text" numbersOnly />
-            @if (storeForm.get('postalCostInCity').errors?.required) {
+            @if (storeForm.get('postalCostInCity')?.hasError('required')) {
               <mat-error>هزینه پستی را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -49,7 +49,7 @@
               maxlength="3"
               numbersOnly
             />
-            @if (storeForm.get('vatForCardCost').errors?.required) {
+            @if (storeForm.get('vatForCardCost')?.hasError('required')) {
               <mat-error>درصد مالیات را وارد کنید.</mat-error>
             }
             @if (
@@ -62,7 +62,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>درصد مالیات هزینه پستی</mat-label>
             <input matInput formControlName="vatForPost" type="text" maxlength="3" numbersOnly />
-            @if (storeForm.get('vatForPost').errors?.required) {
+            @if (storeForm.get('vatForPost')?.hasError('required')) {
               <mat-error>درصد مالیات هزینه پستی را وارد کنید.</mat-error>
             }
             @if (

@@ -18,20 +18,20 @@
         <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>شماره کارت</mat-label>
           <input matInput formControlName="cardNumber" maxlength="16" numbersOnly />
-          @if (cardForm.get('cardNumber').errors?.required) {
+          @if (cardForm.get('cardNumber')?.hasError('required')) {
             <mat-error> شماره کارت خود را وارد کنید. </mat-error>
           }
-          @if (cardForm.get('cardNumber').errors?.invalid) {
+          @if (cardForm.get('cardNumber')?.hasError('invalid')) {
             <mat-error> شماره کارت وارد شده صحیح نیست </mat-error>
           }
         </mat-form-field>
         <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>شماره شبا </mat-label>
           <input matInput formControlName="shabaNumber" maxlength="24" numbersOnly />
-          @if (cardForm.get('shabaNumber').errors?.required) {
+          @if (cardForm.get('shabaNumber')?.hasError('required')) {
             <mat-error> شماره کارت خود را وارد کنید. </mat-error>
           }
-          @if (cardForm.get('shabaNumber').errors?.invalid) {
+          @if (cardForm.get('shabaNumber')?.hasError('invalid')) {
             <mat-error> شماره کارت وارد شده صحیح نیست </mat-error>
           }
         </mat-form-field>

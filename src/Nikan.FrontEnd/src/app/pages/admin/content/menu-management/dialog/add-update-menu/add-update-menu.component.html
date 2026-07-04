@@ -36,7 +36,7 @@
             <mat-option [value]="true">لینک به صفحات داخلی سایت</mat-option>
             <mat-option [value]="false">لینک به آدرسی خارج از سایت</mat-option>
           </mat-select>
-          @if (menuForm.get('isSystem').errors?.required) {
+          @if (menuForm.get('isSystem')?.hasError('required')) {
             <mat-error> نوع منو را مشخص کنید. </mat-error>
           }
         </mat-form-field>
@@ -48,7 +48,7 @@
                 <mat-option [value]="item">{{ item.menuName }}</mat-option>
               }
             </mat-select>
-            @if (menuForm.get('innerMenu').errors?.required) {
+            @if (menuForm.get('innerMenu')?.hasError('required')) {
               <mat-error> نوع منو را مشخص کنید. </mat-error>
             }
           </mat-form-field>
@@ -56,7 +56,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>عنوان منو</mat-label>
           <input matInput type="text" formControlName="menuName" autocomplete="doNotAutoComplete" />
-          @if (menuForm.get('menuName').errors?.required) {
+          @if (menuForm.get('menuName')?.hasError('required')) {
             <mat-error> عنوان منو را وارد کنید. </mat-error>
           }
           @if (menuForm.get('menuName').errors?.maxlength) {
@@ -72,7 +72,7 @@
             autocomplete="doNotAutoComplete"
             placeholder="مثلا: fa fa-home"
           />
-          @if (menuForm.get('iconFile').errors?.required) {
+          @if (menuForm.get('iconFile')?.hasError('required')) {
             <mat-error> آدرس صفحه را وارد کنید. </mat-error>
           }
           <i class="{{ menuForm.get('iconFile').value }}" matSuffix></i>
@@ -86,7 +86,7 @@
               formControlName="menuPath"
               autocomplete="doNotAutoComplete"
             />
-            @if (menuForm.get('menuPath').errors?.required) {
+            @if (menuForm.get('menuPath')?.hasError('required')) {
               <mat-error> آدرس صفحه را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -100,7 +100,7 @@
             numbersOnly
             autocomplete="doNotAutoComplete"
           />
-          @if (menuForm.get('tabOrder').errors?.required) {
+          @if (menuForm.get('tabOrder')?.hasError('required')) {
             <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
           }
         </mat-form-field>

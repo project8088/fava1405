@@ -22,7 +22,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان راهنما</mat-label>
             <input matInput formControlName="title" type="text" maxlength="500" />
-            @if (newsForm.get('title').errors?.required) {
+            @if (newsForm.get('title')?.hasError('required')) {
               <mat-error>عنوان خبر را وارد کنید.</mat-error>
             }
             @if (newsForm.get('title').errors?.maxlength) {
@@ -32,7 +32,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>توضیحات</mat-label>
             <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-            @if (newsForm.get('description').errors?.required) {
+            @if (newsForm.get('description')?.hasError('required')) {
               <mat-error>توضیحات را وارد کنید.</mat-error>
             }
             @if (newsForm.get('description').errors?.maxlength) {
@@ -47,7 +47,7 @@
               rows="3"
               maxlength="2000"
             ></textarea>
-            @if (newsForm.get('seoDescription').errors?.required) {
+            @if (newsForm.get('seoDescription')?.hasError('required')) {
               <mat-error>توضیحات سئو را وارد کنید.</mat-error>
             }
             @if (newsForm.get('seoDescription').errors?.maxlength) {
@@ -78,7 +78,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (newsForm.get('newsGroupId').errors?.required) {
+            @if (newsForm.get('newsGroupId')?.hasError('required')) {
               <mat-error>گروه خبری را انتخاب کنید.</mat-error>
             }
           </mat-form-field>
@@ -87,17 +87,17 @@
             <input matInput [matDatepicker]="dpS" formControlName="publishDate" />
             <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
             <mat-datepicker #dpS></mat-datepicker>
-            @if (newsForm.get('publishDate').errors?.required) {
+            @if (newsForm.get('publishDate')?.hasError('required')) {
               <mat-error> تاریخ انتشار را مشخص کنید. </mat-error>
             }
-            @if (newsForm.get('publishDate').errors?.matDatepickerParse) {
+            @if (newsForm.get('publishDate')?.hasError('matDatepickerParse')) {
               <mat-error> فرمت تاریخ صحیح نیست </mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>ترتیب نمایش</mat-label>
             <input matInput formControlName="indexOrder" maxlength="3" numbersOnly />
-            @if (newsForm.get('indexOrder').errors?.required) {
+            @if (newsForm.get('indexOrder')?.hasError('required')) {
               <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
             }
           </mat-form-field>

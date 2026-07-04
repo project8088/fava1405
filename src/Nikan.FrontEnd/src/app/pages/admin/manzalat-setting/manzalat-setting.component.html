@@ -23,7 +23,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> حداقل سن مجاز برای فرم سالمندی</mat-label>
           <input type="text" matInput formControlName="minAgeSalmand" numbersOnly maxlength="100" />
-          @if (settingForm.get('minAgeSalmand').errors?.required) {
+          @if (settingForm.get('minAgeSalmand')?.hasError('required')) {
             <mat-error> حداقل سن مجاز برای فرم سالمندی </mat-error>
           }
         </mat-form-field>
@@ -36,7 +36,7 @@
             numbersOnly
             maxlength="100"
           />
-          @if (settingForm.get('minAgeBazneshasteh').errors?.required) {
+          @if (settingForm.get('minAgeBazneshasteh')?.hasError('required')) {
             <mat-error> حداقل سن مجاز برای فرم بازنشتگی </mat-error>
           }
         </mat-form-field>
@@ -48,7 +48,7 @@
             matInput
             formControlName="janbazanDescription"
           ></textarea>
-          @if (settingForm.get('janbazanDescription').errors?.required) {
+          @if (settingForm.get('janbazanDescription')?.hasError('required')) {
             <mat-error> توضیحات ثبت نام فرم جانبازی را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -60,7 +60,7 @@
             matInput
             formControlName="bazneshastehDescription"
           ></textarea>
-          @if (settingForm.get('bazneshastehDescription').errors?.required) {
+          @if (settingForm.get('bazneshastehDescription')?.hasError('required')) {
             <mat-error> توضیحات بازنشستگی را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -72,7 +72,7 @@
             matInput
             formControlName="zanSarparastDescription"
           ></textarea>
-          @if (settingForm.get('zanSarparastDescription').errors?.required) {
+          @if (settingForm.get('zanSarparastDescription')?.hasError('required')) {
             <mat-error> توضیحات زنان سرپرست خانواده را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -84,7 +84,7 @@
             matInput
             formControlName="salmandDescription"
           ></textarea>
-          @if (settingForm.get('salmandDescription').errors?.required) {
+          @if (settingForm.get('salmandDescription')?.hasError('required')) {
             <mat-error> توضیحات سالمندی را وارد کنید. </mat-error>
           }
         </mat-form-field>
@@ -96,7 +96,7 @@
             matInput
             formControlName="maloulinDescription"
           ></textarea>
-          @if (settingForm.get('maloulinDescription').errors?.required) {
+          @if (settingForm.get('maloulinDescription')?.hasError('required')) {
             <mat-error> توضیحات معلولین را وارد کنید. </mat-error>
           }
         </mat-form-field>

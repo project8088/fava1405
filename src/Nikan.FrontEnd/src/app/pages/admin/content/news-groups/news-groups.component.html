@@ -23,7 +23,7 @@
             <mat-form-field class="col-sm-6 col-md-6">
               <mat-label>عنوان</mat-label>
               <input matInput formControlName="title" maxlength="100" />
-              @if (frm.get('title').errors?.required) {
+              @if (frm.get('title')?.hasError('required')) {
                 <mat-error> عنوان را وارد کنید. </mat-error>
               }
             </mat-form-field>

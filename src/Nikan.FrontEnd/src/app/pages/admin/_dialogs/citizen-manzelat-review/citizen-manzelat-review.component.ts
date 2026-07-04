@@ -17,7 +17,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
     sendSms: new FormControl(false),
   });
 
-  isSaving: boolean;
+  isSaving=false;
   data: any;
 
   rejectCitizenPictureList: [];

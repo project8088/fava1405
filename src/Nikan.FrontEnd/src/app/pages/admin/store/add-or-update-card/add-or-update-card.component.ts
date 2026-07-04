@@ -15,7 +15,7 @@ export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving: boolean;
+  isSaving=false;
 
   loading: boolean;
   cardTypeId: string;

@@ -17,7 +17,7 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
     sendSms: new FormControl(false),
   });
 
-  isSaving: boolean;
+  isSaving=false;
   citizen: any;
 
   rejectCitizenPictureList: [];

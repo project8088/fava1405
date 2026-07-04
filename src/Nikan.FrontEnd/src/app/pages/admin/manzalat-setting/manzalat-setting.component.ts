@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class ManzalatSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   loading: boolean;
 
   constructor() {

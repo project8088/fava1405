@@ -15,7 +15,7 @@
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
-        @if (form.get('feedbackId').errors?.required) {
+        @if (form.get('feedbackId')?.hasError('required')) {
           <mat-error>موضوع بازخورد را انتخاب کنید.</mat-error>
         }
       </mat-form-field>
@@ -28,7 +28,7 @@
           rows="5"
           autocomplete="doNotAutoComplete"
         ></textarea>
-        @if (form.get('feedbackDescription').errors?.required) {
+        @if (form.get('feedbackDescription')?.hasError('required')) {
           <mat-error> بازخورد خود را وارد کنید. </mat-error>
         }
       </mat-form-field>

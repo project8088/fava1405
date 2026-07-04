@@ -17,37 +17,37 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام کاربری</mat-label>
           <input matInput formControlName="username" disabled readonly />
-          @if (userForm.get('username').errors?.required) {
+          @if (userForm.get('username')?.hasError('required')) {
             <mat-error> نام کاربری را وارد کنید. </mat-error>
           }
-          @if (userForm.get('username').errors?.pattern) {
+          @if (userForm.get('username')?.hasError('pattern')) {
             <mat-error> فقط از حروف لاتین استفاده کنید. </mat-error>
           }
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام و نام خانوادگی</mat-label>
           <input matInput formControlName="displayName" autocomplete="doNotAutoComplete" />
-          @if (userForm.get('displayName').errors?.required) {
+          @if (userForm.get('displayName')?.hasError('required')) {
             <mat-error> نام و نام خانوادگی را وارد کنید. </mat-error>
           }
-          @if (userForm.get('displayName').errors?.pattern) {
+          @if (userForm.get('displayName')?.hasError('pattern')) {
             <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
           }
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شماره موبایل</mat-label>
           <input matInput formControlName="mobile" maxlength="11" numbersOnly />
-          @if (userForm.get('mobile').errors?.required) {
+          @if (userForm.get('mobile')?.hasError('required')) {
             <mat-error> شماره موبایل را وارد کنید. </mat-error>
           }
-          @if (userForm.get('mobile').errors?.invalid) {
+          @if (userForm.get('mobile')?.hasError('invalid')) {
             <mat-error> شماره موبایل صحیح نیست. </mat-error>
           }
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>آدرس ایمیل</mat-label>
           <input matInput formControlName="email" />
-          @if (userForm.get('email').errors?.email) {
+          @if (userForm.get('email')?.hasError('email')) {
             <mat-error> ایمیل وارد شده صحیح نیست! </mat-error>
           }
         </mat-form-field>
@@ -62,7 +62,7 @@
               <mat-option [value]="item">{{ item.text }}</mat-option>
             }
           </mat-select>
-          @if (userForm.get('organization').errors?.required) {
+          @if (userForm.get('organization')?.hasError('required')) {
             <mat-error> سازمان را مشخص کنید. </mat-error>
           }
         </mat-form-field>
@@ -73,7 +73,7 @@
               <mat-option [value]="item">{{ item.text }}</mat-option>
             }
           </mat-select>
-          @if (userForm.get('organizationalUnit').errors?.required) {
+          @if (userForm.get('organizationalUnit')?.hasError('required')) {
             <mat-error> واحد را مشخص کنید. </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
@@ -85,7 +85,7 @@
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>
-          @if (userForm.get('userState').errors?.required) {
+          @if (userForm.get('userState')?.hasError('required')) {
             <mat-error> وضعیت کاربر را مشخص کنید. </mat-error>
           }
         </mat-form-field>
@@ -110,7 +110,7 @@
               rows="3"
               maxlength="1000"
             ></textarea>
-            @if (userForm.get('userStateDescriptionForUser').errors?.required) {
+            @if (userForm.get('userStateDescriptionForUser')?.hasError('required')) {
               <mat-error> توضحیات را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -122,7 +122,7 @@
               rows="3"
               maxlength="1000"
             ></textarea>
-            @if (userForm.get('userStateDescriptionForAdmin').errors?.required) {
+            @if (userForm.get('userStateDescriptionForAdmin')?.hasError('required')) {
               <mat-error> توضحیات را وارد کنید. </mat-error>
             }
           </mat-form-field>
@@ -131,10 +131,10 @@
             <input matInput [matDatepicker]="dpS" formControlName="deactivationDate" />
             <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
             <mat-datepicker #dpS></mat-datepicker>
-            @if (userForm.get('deactivationDate').errors?.required) {
+            @if (userForm.get('deactivationDate')?.hasError('required')) {
               <mat-error> تاریخ غیرفعال را مشخص کنید. </mat-error>
             }
-            @if (userForm.get('deactivationDate').errors?.matDatepickerParse) {
+            @if (userForm.get('deactivationDate')?.hasError('matDatepickerParse')) {
               <mat-error> فرمت تاریخ صحیح نیست </mat-error>
             }
           </mat-form-field>

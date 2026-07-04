@@ -22,7 +22,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان صفحه</mat-label>
             <input matInput formControlName="title" type="text" maxlength="500" />
-            @if (form.get('title').errors?.required) {
+            @if (form.get('title')?.hasError('required')) {
               <mat-error>عنوان صفحه را وارد کنید.</mat-error>
             }
             @if (form.get('title').errors?.maxlength) {
@@ -32,7 +32,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>توضیحات</mat-label>
             <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-            @if (form.get('description').errors?.required) {
+            @if (form.get('description')?.hasError('required')) {
               <mat-error>عنوان صفحه را وارد کنید.</mat-error>
             }
             @if (form.get('description').errors?.maxlength) {
@@ -47,7 +47,7 @@
               rows="3"
               maxlength="2000"
             ></textarea>
-            @if (form.get('seoDescription').errors?.required) {
+            @if (form.get('seoDescription')?.hasError('required')) {
               <mat-error>عنوان صفحه را وارد کنید.</mat-error>
             }
             @if (form.get('seoDescription').errors?.maxlength) {
@@ -79,10 +79,10 @@
               <mat-label>آدرس صفحه</mat-label>
               <input matInput formControlName="slug" maxlength="30" dir="ltr" />
               <strong matPrefix class="pr-3">{{ siteName }}/home/page/</strong>
-              @if (form.get('slug').errors?.required) {
+              @if (form.get('slug')?.hasError('required')) {
                 <mat-error>آدرس صفحه را وارد کنید.</mat-error>
               }
-              @if (form.get('slug').errors?.pattern) {
+              @if (form.get('slug')?.hasError('pattern')) {
                 <mat-error>فقط کاراکتر های لاتین بدون فاصله.</mat-error>
               }
             </mat-form-field>

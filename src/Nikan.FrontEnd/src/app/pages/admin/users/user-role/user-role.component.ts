@@ -17,7 +17,7 @@ export class UserRoleListComponent extends AppBase implements OnInit {
   roleList: any[] = [];
   userId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

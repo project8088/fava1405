@@ -35,7 +35,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
 
   frm: FormGroup;
   showAddOrUpdatePanel: boolean;
-  isSaving: boolean;
+  isSaving=false;
   loadingUnit: boolean;
   loadingData: boolean;
   organizationList: any[] = [];

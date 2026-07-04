@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenEducationDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   educationForm: FormGroup;
   id: string;
   userId: string;

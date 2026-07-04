@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   loadingData: boolean = true;
   periorityList: any[] = [];
 

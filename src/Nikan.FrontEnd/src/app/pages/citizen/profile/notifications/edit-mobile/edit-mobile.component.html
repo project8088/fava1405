@@ -35,10 +35,10 @@
                 maxlength="11"
                 numbersOnly
               />
-              @if (editForm.get('newmobileNumber').errors?.required) {
+              @if (editForm.get('newmobileNumber')?.hasError('required')) {
                 <mat-error> شماره موبایل خود را وارد کنید. </mat-error>
               }
-              @if (editForm.get('newmobileNumber').errors?.invalid) {
+              @if (editForm.get('newmobileNumber')?.hasError('invalid')) {
                 <mat-error> شماره موبایل وارد شده صحیح نیست </mat-error>
               }
             </mat-form-field>
@@ -63,7 +63,7 @@
         <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>کد تایید دریافتی </mat-label>
           <input matInput formControlName="smsActiveCode" class="text-left" numbersOnly />
-          @if (confirmForm.get('smsActiveCode').errors?.required) {
+          @if (confirmForm.get('smsActiveCode')?.hasError('required')) {
             <mat-error> کد تایید دریافتی را وارد کنید. </mat-error>
           }
         </mat-form-field>

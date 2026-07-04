@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
-  isSaving: boolean;
+  isSaving=false;
   isUpdate: boolean;
   form: FormGroup;
   parentProductList: any[] = [];

@@ -31,7 +31,7 @@
                 [hidden]="!loadingData"
                 matSuffix
               ></mat-spinner>
-              @if (frm.get('organizationId').errors?.required) {
+              @if (frm.get('organizationId')?.hasError('required')) {
                 <mat-error> سازمان را مشخص کنید. </mat-error>
               }
             </mat-form-field>
@@ -42,7 +42,7 @@
                   <mat-option [value]="item.key">{{ item.text }}</mat-option>
                 }
               </mat-select>
-              @if (frm.get('organizationalUnitId').errors?.required) {
+              @if (frm.get('organizationalUnitId')?.hasError('required')) {
                 <mat-error> واحد را مشخص کنید. </mat-error>
               }
               <mat-spinner
@@ -55,7 +55,7 @@
             <mat-form-field class="col-sm-6 col-md-4">
               <mat-label>عنوان</mat-label>
               <input matInput formControlName="title" maxlength="50" />
-              @if (frm.get('title').errors?.required) {
+              @if (frm.get('title')?.hasError('required')) {
                 <mat-error> عنوان را وارد کنید. </mat-error>
               }
             </mat-form-field>

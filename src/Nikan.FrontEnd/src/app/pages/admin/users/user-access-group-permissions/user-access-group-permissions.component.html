@@ -26,7 +26,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (form.get('groupId').errors?.required) {
+          @if (form.get('groupId')?.hasError('required')) {
             <mat-error> گروه را مشخص کنید</mat-error>
           }
         </mat-form-field>

@@ -18,21 +18,21 @@
           <mat-form-field class="col-md-3">
             <mat-label> عنوان درخواست</mat-label>
             <input matInput formControlName="discountTitle" type="text" />
-            @if (storeForm.get('discountTitle').errors?.required) {
+            @if (storeForm.get('discountTitle')?.hasError('required')) {
               <mat-error> عنوان درخواست را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-3">
             <mat-label> سازمان درخواست کننده</mat-label>
             <input matInput formControlName="freeCardApplicantOrganization" type="text" />
-            @if (storeForm.get('freeCardApplicantOrganization').errors?.required) {
+            @if (storeForm.get('freeCardApplicantOrganization')?.hasError('required')) {
               <mat-error> سازمان درخواست کننده را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-md-3">
             <mat-label> شماره نامه </mat-label>
             <input matInput formControlName="letterNumber" type="text" />
-            @if (storeForm.get('letterNumber').errors?.required) {
+            @if (storeForm.get('letterNumber')?.hasError('required')) {
               <mat-error> شماره نامه را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -45,7 +45,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (storeForm.get('cardTypeId').errors?.required) {
+            @if (storeForm.get('cardTypeId')?.hasError('required')) {
               <mat-error> نوع کارت را مشخص کنید.</mat-error>
             }
           </mat-form-field>
@@ -58,7 +58,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (storeForm.get('deliverType').errors?.required) {
+            @if (storeForm.get('deliverType')?.hasError('required')) {
               <mat-error> نوع تحویل را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -72,7 +72,7 @@
                   </mat-option>
                 }
               </mat-select>
-              @if (storeForm.get('centerID').errors?.required) {
+              @if (storeForm.get('centerID')?.hasError('required')) {
                 <mat-error> مرکز تحویل را وارد کنید.</mat-error>
               }
             </mat-form-field>
@@ -86,7 +86,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (storeForm.get('imagerReviewStatusFormFreeCard').errors?.required) {
+            @if (storeForm.get('imagerReviewStatusFormFreeCard')?.hasError('required')) {
               <mat-error> وضعیت تصویر پرسنلی را وارد کنید.</mat-error>
             }
           </mat-form-field>
@@ -99,14 +99,14 @@
                 </mat-option>
               }
             </mat-select>
-            @if (storeForm.get('groupId').errors?.required) {
+            @if (storeForm.get('groupId')?.hasError('required')) {
               <mat-error> گروه شهروندی را وارد کنید.</mat-error>
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
             <mat-label> توضیحات </mat-label>
             <textarea matInput formControlName="description" rows="3"></textarea>
-            @if (storeForm.get('description').errors?.required) {
+            @if (storeForm.get('description')?.hasError('required')) {
               <mat-error> توضیحات را وارد کنید. </mat-error>
             }
           </mat-form-field>

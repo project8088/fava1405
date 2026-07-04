@@ -22,7 +22,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>عنوان محصول</mat-label>
             <input matInput formControlName="title" type="text" maxlength="500" />
-            @if (productForm.get('title').errors?.required) {
+            @if (productForm.get('title')?.hasError('required')) {
               <mat-error>عنوان محصول را وارد کنید.</mat-error>
             }
             @if (productForm.get('title').errors?.maxlength) {
@@ -32,7 +32,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>توضیحات</mat-label>
             <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-            @if (productForm.get('description').errors?.required) {
+            @if (productForm.get('description')?.hasError('required')) {
               <mat-error>توضیحات را وارد کنید.</mat-error>
             }
             @if (productForm.get('description').errors?.maxlength) {
@@ -42,7 +42,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>شناسه محصول</mat-label>
             <input matInput formControlName="code" type="text" maxlength="20" />
-            @if (productForm.get('code').errors?.required) {
+            @if (productForm.get('code')?.hasError('required')) {
               <mat-error>شناسه محصول را وارد کنید.</mat-error>
             }
             @if (productForm.get('code').errors?.maxlength) {
@@ -56,7 +56,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (productForm.get('productParentId').errors?.required) {
+            @if (productForm.get('productParentId')?.hasError('required')) {
               <mat-error>گروه محصول را انتخاب کنید.</mat-error>
             }
           </mat-form-field>
@@ -67,7 +67,7 @@
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
-            @if (productForm.get('productGroupId').errors?.required) {
+            @if (productForm.get('productGroupId')?.hasError('required')) {
               <mat-error>گروه محصول را انتخاب کنید.</mat-error>
             }
             @if (loadingProductGroup) {
@@ -77,7 +77,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>مبلغ</mat-label>
             <input matInput formControlName="price" type="text" numbersOnly />
-            @if (productForm.get('price').errors?.required) {
+            @if (productForm.get('price')?.hasError('required')) {
               <mat-error>مبلغ را وارد کنید.</mat-error>
             }
           </mat-form-field>

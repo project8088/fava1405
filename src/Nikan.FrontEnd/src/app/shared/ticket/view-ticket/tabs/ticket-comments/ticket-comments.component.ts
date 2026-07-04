@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketCommentsComponent extends AppBase implements OnInit {
   frm: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
   id: string = '';
   loading: boolean;
   list: any[] = [];

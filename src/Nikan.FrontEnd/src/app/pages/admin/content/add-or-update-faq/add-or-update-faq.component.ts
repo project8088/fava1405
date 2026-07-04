@@ -16,7 +16,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
   faqId: string;
   faqForm: FormGroup;
 
-  isSaving: boolean;
+  isSaving=false;
   attachmentId: string = '';
   loading: boolean;
 

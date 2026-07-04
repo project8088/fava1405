@@ -14,7 +14,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
   loading: boolean;
   companyId: string = '';
   form: FormGroup;
-  isSaving: boolean;
+  isSaving=false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();

@@ -28,10 +28,10 @@
             <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>کد ملی عضو خانواده</mat-label>
               <input matInput formControlName="nationCode" minlength="10" numbersOnly />
-              @if (firstFormGroup.get('nationCode').errors?.required) {
+              @if (firstFormGroup.get('nationCode')?.hasError('required')) {
                 <mat-error> کد ملی عضو خانواده را وارد کنید </mat-error>
               }
-              @if (firstFormGroup.get('nationCode').errors?.invalid) {
+              @if (firstFormGroup.get('nationCode')?.hasError('invalid')) {
                 <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
               }
             </mat-form-field>
@@ -75,10 +75,10 @@
                   <input matInput [matDatepicker]="dpS" formControlName="birthDate" />
                   <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
                   <mat-datepicker #dpS></mat-datepicker>
-                  @if (familyForm.get('birthDate').errors?.required) {
+                  @if (familyForm.get('birthDate')?.hasError('required')) {
                     <mat-error> تاریخ تولد عضو خانواده را انتخاب کنید. </mat-error>
                   }
-                  @if (familyForm.get('birthDate').errors?.matDatepickerParse) {
+                  @if (familyForm.get('birthDate')?.hasError('matDatepickerParse')) {
                     <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                   }
                 </mat-form-field>
@@ -397,10 +397,10 @@
         <mat-form-field class="w-100" >
           <mat-label>شماره موبایل</mat-label>
           <input matInput formControlName="mobile" maxlength="11" numbersOnly />
-          @if (registerForm.get('mobile').errors?.required) {
+          @if (registerForm.get('mobile')?.hasError('required')) {
             <mat-error> شماره موبایل را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('mobile').errors?.invalid) {
+          @if (registerForm.get('mobile')?.hasError('invalid')) {
             <mat-error> شماره موبایل صحیح نیست. </mat-error>
           }
         </mat-form-field>

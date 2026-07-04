@@ -16,7 +16,7 @@
       <mat-form-field class="col-md-12">
         <mat-label>کد ملی</mat-label>
         <input matInput numbersOnly formControlName="nationCode" />
-        @if (userForm.get('nationCode').errors?.required) {
+        @if (userForm.get('nationCode')?.hasError('required')) {
           <mat-error> کد ملی را وارد کنید. </mat-error>
         }
       </mat-form-field>
