@@ -1,0 +1,197 @@
+<div class="content-header">
+  <span>نمایش اطلاعات شهروند</span>
+  <div class="bread-crumbs"> 
+    <div class="bread-crumb-item active">نمایش اطلاعات شهروند</div>
+  </div>
+</div>
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+    <button (click)="back()" mat-stroked-button color="default">
+      بازگشت
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
+      <mat-spinner diameter="35" color="default"></mat-spinner>
+    </div>
+    <div class="p-3" *ngIf="!loading">
+      <div class="row">
+
+        <div class="col-sm-6 col-md-4">
+          <span>کدملی  : </span>
+          <strong>{{info.nationCode}}</strong>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+          <span>نام  : </span>
+          <strong>{{info.firstName}}</strong>
+          &nbsp;
+          <strong>{{info.lastName}}</strong>
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>نام پدر: </span>
+          <strong>{{info.fatherName}}</strong>
+
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>
+            ثبت نام از طریق خدمت
+
+            :
+          </span>
+          <strong>{{info.registerByService}}</strong>
+
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>وضعیت تاهل: </span>
+          <strong>{{info.mariageStatus|enumString:'mariageStatus'}}</strong>
+
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>تاریخ تولد: </span>
+          <strong>{{info.birthDate|jalali}}</strong>
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>شماره موبایل: </span>
+          <strong>{{info.mobileNumber}}</strong>
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>سطح تحصیلات: </span>
+          <strong>{{info.educationLevel|enumString:'educationLevel'}}</strong>
+
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>گروه تحصیلی: </span>
+          <strong>{{info.educationGroup}}</strong>
+
+        </div>
+
+
+        <div class="col-sm-6 col-md-4">
+          <span>وضعیت تحصیلی: </span>
+          <strong>
+            {{info.educationStatues|enumString:'educationStatues'}}
+          </strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>رشته تحصیلی: </span>
+          <strong>{{info.educationField}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>گروه شغلی: </span>
+          <strong>{{info.jobGroup}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>عنوان شغل: </span>
+          <strong>{{info.jobTitle}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>آدرس ایمیل: </span>
+          <strong>{{info.eMail}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>تاریخ ثبت نام: </span>
+          <strong>{{info.creationDate|jalali}}</strong>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>وضعیت ثبت احوال: </span>
+          <strong>{{info.sabtStatus|enumString:'sabtStatus'}}</strong>
+          <strong class="text-info" >
+            <a (click)="sendcitizenForAuthentication(info.citizenId)">
+              (احراز هویت شهروند)
+            </a>
+
+          </strong>
+         
+
+
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>وضعیت تصویر پرسنلی: </span> 
+          <strong>{{info.personalPicture_Confirmed|enumString:'personalPicture'}}</strong> 
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <span>آخرین برورسانی اطلاعات: </span>
+          <strong>{{info.lastUpdateOnDate|jalali}}</strong>
+        </div>
+
+      </div>
+
+    </div>
+    <mat-tab-group>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          بازخورد های شهروند
+        </ng-template>
+        <ng-template matTabContent>
+          <app-citizen-feed-back-list></app-citizen-feed-back-list>
+
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          گروههای عضو
+        </ng-template>
+        <ng-template matTabContent>
+          <app-groupCitizens-list></app-groupCitizens-list>
+
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          پیامک های ارسال شده
+        </ng-template>
+        <ng-template matTabContent>
+          <app-citizen-sms-list></app-citizen-sms-list>
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          تراکنش های مالی
+        </ng-template>
+        <ng-template matTabContent>
+          <adm-citizen-transaction-list></adm-citizen-transaction-list>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          طرح منزلت
+        </ng-template>
+        <ng-template matTabContent>
+
+          <app-citizen-manzalat-registration></app-citizen-manzalat-registration>
+
+        </ng-template>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+         رویدادها
+        </ng-template>
+        <ng-template matTabContent> 
+          <app-citizen-event-list></app-citizen-event-list>
+
+        </ng-template>
+      </mat-tab>
+
+
+    </mat-tab-group>
+
+
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

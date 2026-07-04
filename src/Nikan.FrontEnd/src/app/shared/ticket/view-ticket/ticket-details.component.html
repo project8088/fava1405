@@ -1,0 +1,69 @@
+<div class="content-header">
+  <span>مشاهده تیکت</span>
+
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+
+
+  </mat-card-header>
+  <mat-card-content>
+
+
+
+    <mat-tab-group >
+      <mat-tab>
+        <ng-template mat-tab-label>
+          جزئیات تیکت
+        </ng-template>
+        <ng-template matTabContent>
+          <div class="p-3">
+            <app-ticket-response></app-ticket-response>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab *ngIf="isAdmin">
+        <ng-template mat-tab-label>
+          فعالیت روی تیکت
+        </ng-template>
+        <ng-template matTabContent>
+          <div class="p-3">
+            <app-ticket-activity></app-ticket-activity>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+      <mat-tab>
+        <ng-template mat-tab-label>
+          یادداشت های تیکت
+        </ng-template>
+        <ng-template matTabContent>
+          <div class="p-3">
+            <app-ticket-comments></app-ticket-comments>
+          </div>
+        </ng-template>
+      </mat-tab>
+
+    </mat-tab-group>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </mat-card-content>
+</mat-card>

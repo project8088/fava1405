@@ -1,0 +1,190 @@
+<div class="content-header">
+  <span>لیست دوره های توزیع کارت</span>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-content>
+    <div class="d-flex align-items-center justify-content-end pb-4">
+
+      <button mat-raised-button color="default" (click)="openAddCardCoursesDialog()">
+        <span> دوره جدید</span>
+      </button>
+    </div>
+
+
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+
+        <mat-form-field class="col-md-3">
+          <mat-label>از تاریخ شروع توزیع کارت</mat-label>
+          <input matInput
+                 [matDatepicker]="dpS"
+                 formControlName="fromDate"
+                 [max]="searchForm.get('toDate').value" />
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
+            تاریخ شروع توزیع کارت را مشخص کنید.
+          </mat-error>
+          <mat-error *ngIf="
+              searchForm.get('fromDate').errors?.matDatepickerMin ||
+              searchForm.get('fromDate').errors?.matDatepickerMax
+            ">
+            تاریخ شروع توزیع کارت نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label>تا تاریخ </mat-label>
+          <input matInput
+                 [matDatepicker]="dpE"
+                 formControlName="toDate"
+                 [min]="searchForm.get('fromDate').value" />
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
+            تاریخ   را مشخص کنید.
+          </mat-error>
+          <mat-error *ngIf="
+              searchForm.get('toDate').errors?.matDatepickerMin ||
+              searchForm.get('toDate').errors?.matDatepickerMax
+            ">
+            تاریخ شروع توزیع نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
+
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button mat-raised-button
+              color="default"
+              (click)="exporter.exportTable('xlsx', { fileName: 'excel' })">
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
+      </div>
+      <div class="datatable-loading-shade"
+           *ngIf="isLoadingResults == false && listCount == 0">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+
+      <div class="datatable-table-container">
+        <table mat-table
+               [dataSource]="data"
+               class="datatable-table"
+               #exporter="matTableExporter"
+               matTableExporter
+               [hiddenColumns]="[displayedColumns.length - 1]">
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="courseNumber">
+            <th mat-header-cell *matHeaderCellDef>دوره</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.courseNumber }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="cardQueueCount">
+            <th mat-header-cell *matHeaderCellDef>تعداد صف</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.cardQueueCount }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="user">
+            <th mat-header-cell *matHeaderCellDef>توزیع توسط</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.user }}
+            </td>
+          </ng-container>
+           
+          <ng-container matColumnDef="startDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ   توریع </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.startDate | jalali }}
+            </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ   پایان</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.endDate | jalali }}
+            </td>
+          </ng-container>
+
+         
+          <ng-container matColumnDef="operation">
+            <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
+            <td mat-cell *matCellDef="let row">
+              <mat-spinner *ngIf="row.loading" diameter="25" color="default"></mat-spinner>
+              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!row.loading">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+
+                <button *ngIf="!row.isColsed"  mat-menu-item (click)="closeCourses(row)">
+                  <i class="fa fa-podcast mr-2"></i>
+                  بستن دوره
+                </button>
+
+                <button *ngIf="!row.isColsed"    mat-menu-item (click)="delete(row)">
+                  <i class="text-danger fa fa-trash mr-2"></i>
+                  <span class="text-danger">حذف دوره</span>
+                </button>
+
+
+                <button mat-menu-item  routerLink="/card/card-course-queue-list/{{ row.id }}">
+                  <i class="fa fa-money-bill mr-2"></i>
+                  <span>  لیست صف</span>
+                </button>
+                <button  *ngIf="!row.isColsed"   mat-menu-item routerLink="/card/card-distribution/{{ row.id }}">
+                  <i class="text-success fa fa-braille mr-2"></i>
+                  <span>  توزیع کارت</span>
+                </button>
+
+              </mat-menu>
+            </td>
+          </ng-container>
+
+
+
+
+          <tr mat-header-row
+              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator [length]="listCount"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
+                     showFirstLastButtons
+                     (page)="pageEvent($event)"></mat-paginator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

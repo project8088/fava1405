@@ -1,0 +1,248 @@
+
+<div class="content-header">
+  <span>
+    تنظیمات سامانه
+  </span>
+</div>
+ 
+  
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="d-flex align-items-center justify-content-center p-5 my-5" *ngIf="loading">
+      <mat-spinner color="default"></mat-spinner>
+    </div>
+    <form [formGroup]="settingForm" class="p-4" *ngIf="!loading">
+      <!--**************************************************************************************-->
+      <p class="section-title">
+        <strong>تنظیمات اصلی</strong>
+      </p>
+
+
+      <div class="row">
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label> آدرس سایت</mat-label>
+          <input type="text" matInput formControlName="siteUrl" />
+          <mat-error *ngIf="settingForm.get('siteUrl').errors?.required">
+            آدرس سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label> عنوان سایت </mat-label>
+          <input type="text" matInput formControlName="siteName" />
+          <mat-error *ngIf="settingForm.get('siteName').errors?.required">
+            عنوان سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>نام کامل سایت </mat-label>
+          <input type="text" matInput formControlName="fullSiteName" />
+          <mat-error *ngIf="settingForm.get('fullSiteName').errors?.required">
+            نام کامل سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-12">
+          <mat-label> کلمات کلیدی سایت </mat-label>
+          <input type="text" matInput formControlName="siteKeywords" placeholder="با کاما از یکدیگر جدا کنید" />
+          <mat-error *ngIf="settingForm.get('siteKeywords').errors?.required">
+            کلمات کلیدی سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-12">
+          <mat-label> توضیحات سایت </mat-label>
+          <textarea rows="3" maxlength="1000" matInput formControlName="siteDescription"></textarea>
+          <mat-error *ngIf="settingForm.get('siteDescription').errors?.required">
+            توضیحات سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+
+      <!--**************************************************************************************-->
+
+      <p class="section-title">
+        <strong>تنظیمات ایمیل</strong>
+      </p>
+
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>سرور ایمیل</mat-label>
+          <input type="text" matInput formControlName="mailServerUrl" />
+          <mat-error *ngIf="settingForm.get('mailServerUrl').errors?.required">
+            سرور ایمیل را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>شماره پورت</mat-label>
+          <input type="text" matInput formControlName="mailServerPort" numbersOnly />
+          <mat-error *ngIf="settingForm.get('mailServerPort').errors?.required">
+            شماره پورت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>نام کاربری </mat-label>
+          <input type="text" matInput formControlName="mailServerUserName" />
+          <mat-error *ngIf="settingForm.get('mailServerUserName').errors?.required">
+            نام کاربری را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>کلمه عبور</mat-label>
+          <input type="text" matInput formControlName="mailServerPassword" />
+          <mat-error *ngIf="settingForm.get('mailServerPassword').errors?.required">
+            کلمه عبور را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+
+
+      </div>
+      <!--**************************************************************************************-->
+      <p class="section-title">
+        <strong>تنظیمات تماس با ما</strong>
+      </p>
+
+
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-6">
+          <mat-label>شماره تلفن ثابت </mat-label>
+          <input type="text" matInput formControlName="cellNumber" placeholder="با کاما از یکدیگر جدا کنید" />
+          <mat-error *ngIf="settingForm.get('cellNumber').errors?.required">
+            شماره تلفن ثابت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-6">
+          <mat-label>شماره تلفن همراه </mat-label>
+          <input type="text" matInput formControlName="mobileNumber" placeholder="با کاما از یکدیگر جدا کنید" />
+          <mat-error *ngIf="settingForm.get('mobileNumber').errors?.required">
+            شماره تلفن همراه را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-12">
+          <mat-label>آدرس </mat-label>
+          <textarea matInput formControlName="addresss" rows="3"></textarea>
+          <mat-error *ngIf="settingForm.get('addresss').errors?.required">
+            آدرس را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>آیدی تلگرام </mat-label>
+          <input type="text" matInput formControlName="telegramChannelId" />
+          <mat-error *ngIf="settingForm.get('telegramChannelId').errors?.required">
+            آیدی تلگرام را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label> شماره ارسال پیامک</mat-label>
+          <input type="text" matInput formControlName="smsNumber" />
+          <mat-error *ngIf="settingForm.get('smsNumber').errors?.required">
+            شماره ارسال پیامک را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>شماره فکس </mat-label>
+          <input type="text" matInput formControlName="faxNumber" />
+          <mat-error *ngIf="settingForm.get('faxNumber').errors?.required">
+            شماره فکس را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>آدرس ایمیل </mat-label>
+          <input type="text" matInput formControlName="emailAddress" />
+          <mat-error *ngIf="settingForm.get('emailAddress').errors?.required">
+            آدرس ایمیل را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-12">
+          <mat-label>متن فوتر سایت </mat-label>
+          <textarea rows="3" maxlength="1000" matInput formControlName="footerText"></textarea>
+          <mat-error *ngIf="settingForm.get('footerText').errors?.required">
+            متن فوتر سایت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-12">
+          <mat-label>ساعات فعالیت </mat-label>
+          <input type="text" matInput formControlName="businessHours" />
+          <mat-error *ngIf="settingForm.get('businessHours').errors?.required">
+            ساعات فعالیت را وارد کنید.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <p class="section-title">
+        <strong>سایر تنظیمات</strong>
+      </p>
+      <div class="row">
+
+
+        <mat-form-field class="col-md-3">
+          <mat-label> شناسه استان اصفهان</mat-label>
+          <input type="text" matInput formControlName="isfahanProvinceId" numbersOnly maxlength="20" />
+          <mat-error *ngIf="settingForm.get('isfahanProvinceId').errors?.required">
+            شناسه استان اصفهان
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label> شناسه شهر اصفهان</mat-label>
+          <input type="text" matInput formControlName="isfahanCityId" numbersOnly maxlength="20" />
+          <mat-error *ngIf="settingForm.get('isfahanCityId').errors?.required">
+            شناسه شهر اصفهان
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label> تعداد مناطق شهر اصفهان</mat-label>
+          <input type="text" matInput formControlName="regionCount" numbersOnly maxlength="20" />
+          <mat-error *ngIf="settingForm.get('regionCount').errors?.required">
+            تعداد مناطق شهر اصفهان
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label> شناسه گروه منزلت</mat-label>
+          <input type="text" matInput formControlName="manzalatGroupId" numbersOnly maxlength="4" />
+          <mat-error *ngIf="settingForm.get('manzalatGroupId').errors?.required">
+            شناسه گروه منزلت
+          </mat-error>
+        </mat-form-field>
+        <p>
+          <mat-checkbox color="default" formControlName="onlineAuthenticationAfterUpdateCitizenInfo">
+          
+            آیا احراز هویت آنلاین بعد از ویرایش اطلاعات شهروند انجام شود
+            ؟
+
+          </mat-checkbox>
+        </p>
+        <br />
+        <p>
+          <mat-checkbox color="default" formControlName="onlineAuthentication">
+            سرویس احراز هویت فعال باشد؟
+          </mat-checkbox>
+        </p>
+      </div>
+
+       
+       
+
+    </form>
+    
+   
+   
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-4">
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveSetting()">
+        <span> ذخیره اطلاعات</span>
+        <mat-spinner diameter="20" *ngIf="isSaving"></mat-spinner>
+      </button>
+    </div>
+
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,257 @@
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  map,
+  startWith,
+  switchMap,
+} from 'rxjs/operators';
+
+import { DataService } from 'src/app/core/services/data-service.service';
+import { HelperService } from 'src/app/core/services/helper.service';
+import { Observable } from 'rxjs';
+import { ServerApis } from 'src/app/core/server-apis';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'citizen-address-info',
+  templateUrl: './address-info.component.html',
+  styleUrls: ['./address-info.component.scss'],
+})
+export class AdminCitizenAddressInfoComponent implements OnInit {
+  editMode: boolean = false;
+  editModeWork: boolean = false;
+  loading: boolean;
+
+  isfahanCities: any[];
+  userCode: string = '';
+  homeForm: FormGroup;
+  isSavingHome: boolean = false;
+  loadingHome: boolean = false;
+
+  workForm: FormGroup;
+  isSavingWork: boolean = false;
+  loadingWork: boolean = false;
+  states: any[] = [];
+  cities: Observable<[]>;
+
+  constructor(
+    private toastrService: ToastrService,
+    private fb: FormBuilder,
+    private dataService: DataService,
+    private route: ActivatedRoute,
+    private helperService: HelperService
+  ) {
+    this.homeForm = this.fb.group({
+      phone: ['', [Validators.required]],
+      region: [null],
+      id: [null],
+      street: [null, [Validators.required]],
+      alley: [null],
+      plaque: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
+      postalCode: [null, [Validators.required]],
+    });
+    this.workForm = this.fb.group({
+      phone: ['', [Validators.required]],
+      region: [null],
+      id: [null],
+      street: [null, [Validators.required]],
+      alley: [null],
+      plaque: [null],
+      stateId: [null, [Validators.required]],
+      cityId: [null, [Validators.required]],
+      postalCode: [null, [Validators.required]],
+    });
+
+
+
+    this.route.params.subscribe(p => {
+      if (p.id != '0' && p.id)
+        this.route.params.subscribe(p => {
+          if (p.id != '0' && p.id)
+            this.userCode = p.id;
+
+          this.helperService.getIsfahanCities().subscribe((data) => {
+            this.isfahanCities = data;
+          });
+
+          this.loadHomeData();
+          this.loadWorkData();
+
+
+        });
+       
+    });
+
+
+  }
+  ngOnInit(): void {
+   
+
+   
+  }
+
+  toggleHomeEditMode() {
+    this.editMode = !this.editMode;
+  }
+  toggleWorkEditMode() {
+    this.editModeWork = !this.editModeWork;
+  }
+
+  haveHomeAddress() {
+    let form = this.homeForm.value;
+    const values = Object.values(form).filter((el) => el);
+
+    return !!values.length;
+  }
+
+  haveWorkAddress() {
+    let form = this.workForm.value;
+    const values = Object.values(form).filter((el) => el);
+
+    return !!values.length;
+  }
+
+  loadHomeData() {
+ 
+    this.loadingHome = true;
+    this.dataService.get(ServerApis.getCitizenHomeAddressByAdmin, {
+      userCode: this.userCode
+    }).subscribe((data) => {
+      this.loadingHome = false;
+      if (data.data) {
+        this.homeForm.patchValue({
+          id: data.data.id,
+          region: data.data.region,
+          phone: data.data.phone,
+          street: data.data.street,
+          alley: data.data.alley,
+          plaque: data.data.plaque,
+          cityId: String(data.data.cityId),
+          postalCode: data.data.postalCode,
+        });
+      }
+    });
+  }
+
+  loadWorkData() {
+    this.helperService.getProvinces().subscribe((data) => {
+      this.states = data as [];
+    });
+
+   
+    this.cities = this.workForm.get('stateId').valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((value) => {
+        return this.helperService
+          .getCitesByParent(value)
+          .pipe(map((data) => data));
+      })
+    );
+
+    this.loadingWork = true;
+    this.dataService
+      .get(ServerApis.getCitizenOfficeAddressByAdmin, {
+        userCode: this.userCode
+      })
+      .subscribe((data) => {
+        this.loadingWork = false;
+        if (data.data) {
+          this.workForm.patchValue({
+            id: data.data.id,
+            region: data.data.region,
+            phone: data.data.phone,
+            street: data.data.street,
+            alley: data.data.alley,
+            plaque: data.data.plaque,
+            cityId: String(data.data.cityId),
+            postalCode: data.data.postalCode,
+            stateId: data.data.city.parentValue,
+          });
+        }
+
+        this.cities = this.workForm.get('stateId').valueChanges.pipe(
+          startWith(data.data.city.parentValue),
+          debounceTime(400),
+          distinctUntilChanged(),
+          switchMap((value) => {
+            return this.helperService.getCitesByParent(value);
+          })
+        );
+
+        this.cities.subscribe((data: any[]) => {
+          if (data.length) {
+            this.workCityText = data.find(
+              (el: any) => el.key === this.workForm.controls['cityId'].value
+            ).text;
+          }
+        });
+      });
+  }
+
+  saveHomeAddress() {
+    const form = this.homeForm.getRawValue();
+    this.saveAddress(form, 2);
+  }
+  saveOfficeAddress() {
+    const form = this.workForm.getRawValue();
+    this.saveAddress(form, 1);
+  }
+
+  saveAddress(form, addressType) {
+    if (addressType === 1) this.isSavingHome = true;
+    else this.isSavingWork = true;
+    form.userCode = this.userCode;
+    return this.dataService
+      .post(ServerApis.addOrUpdteCitizenAddress, {
+        ...form,
+        addressType,
+      })
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.editMode = false;
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            let msg = response.messages
+              ? response.messages
+              : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+          this.isSavingHome = false;
+          this.isSavingWork = false;
+        },
+        (error) => {
+          this.isSavingHome = false;
+          this.isSavingWork = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        }
+      );
+  }
+
+  getHomeCityText() {
+    if (this.isfahanCities && this.isfahanCities.length) {
+      return this.isfahanCities.find(
+        (el: any) => +el.key === this.homeForm.controls['cityId'].value
+      ).text;
+    } else return [];
+  }
+
+  getWorkState() {
+    if (this.states?.length) {
+      return this.states.find(
+        (el: any) => el.key === this.workForm.controls['stateId'].value
+      ).text;
+    }
+  }
+
+  workCityText: string;
+  getWorkCity() {
+    return this.workCityText;
+  }
+}

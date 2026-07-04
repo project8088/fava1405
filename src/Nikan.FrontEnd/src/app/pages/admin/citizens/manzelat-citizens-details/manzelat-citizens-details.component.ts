@@ -1,0 +1,190 @@
+import { ActivatedRoute, Router } from '@angular/router';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+
+import { AdminCitizenManzelatReviewComponent } from '../../_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
+import { DataService } from '../../../../core/services/data-service.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ServerApis } from '../../../../core/server-apis';
+import { ShowImageDialogComponent } from 'src/app/shared/_dialog/show-image/show-image.component';
+import { ToastrService } from 'ngx-toastr';
+import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
+import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
+
+@Component({
+  selector: 'app-manzelat-citizens-details',
+  templateUrl: './manzelat-citizens-details.component.html',
+  styleUrls: ['./manzelat-citizens-details.component.scss'],
+})
+export class AdminManzelatCitizensDetailsComponent implements OnInit {
+  userCode: string;
+  data: []; 
+  citizen: any = {};
+  loading: boolean = true;
+  imageUrl: string;
+  baseUrl: string = ServerApis.baseUrl;
+
+
+
+  constructor(
+    private toastrService: ToastrService,
+    private matDialog: MatDialog,
+    private router: Router,
+    private dataService: DataService,
+    private route: ActivatedRoute
+  ) {
+    this.route.params.subscribe((p) => {
+      this.userCode = p.id;
+    });
+  }
+
+  ngOnInit(): void {}
+
+  ngAfterViewInit() {
+    this.getInfo();
+  }
+
+  getInfo() {
+    this.loading = true;
+    this.dataService
+      .get(ServerApis.getCitizenInfoAndManzaltForm, {
+        userCode: this.userCode,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess) {
+            this.data = response.data ? response.data.manzaltForms : {};
+            this.citizen = response.data ? response.data.citizen : {};
+          } else {
+            let msg = response.messages
+              ? response.messages
+              : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        }
+      );
+  }
+
+  openReviewDialog(manzelatForm, command) {
+
+
+    this.matDialog
+      .open(AdminCitizenManzelatReviewComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          manzelatForm,
+          command,
+          citizenName: this.citizen.firstName + " " + this.citizen.lastName,
+          userCode: this.userCode,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getInfo();
+      });
+  }
+
+  toggleConfirmFamily(family, isAccept: boolean) {
+    this.dataService
+      .post(ServerApis.confirmFamilyByAdmin, {
+        userCode:  this.userCode,
+        familyId: family.familyCitizenId,
+        isAccept: isAccept,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess) {
+            this.toastrService.success(response.message);
+          } else {
+            let msg = response.messages
+              ? response.messages
+              : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        }
+      );
+  }
+
+  back() {
+    window.history.back();
+  }
+
+  showImageDialog(data) {
+    this.matDialog
+      .open(ShowImageDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          image: data.fileUrl,
+          title: 'تصویر مدرک',
+        },
+        width: '800px',
+      })
+      .afterClosed()
+      .subscribe((result) => {});
+  }
+  sendcitizenForAuthentication(citizenId) {
+    this.dataService.get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId }).subscribe(response => {
+      if (response.isSuccess && response.data) {
+        this.toastrService.success(response.messages);
+      } else {
+        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+        this.toastrService.error(msg);
+      }
+    }, error => {
+
+    });
+  }
+
+  openCitizenProfile(userCode) {
+    this.matDialog.open(CitizenProfileDialogComponent, {
+      panelClass: 'custom-dialog',
+      data: {
+        userCode: userCode
+      },
+      width: '85%',
+      maxWidth: '1800px'
+    });
+  }
+
+
+  openCitizenEditMobileNumber(userCode) {
+    this.matDialog.open(AdminUpdateCitizenMobileNumberDialogComponent, {
+      panelClass: 'custom-dialog',
+      minWidth: '600px',
+      data: {
+        userCode: userCode
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getInfo();
+      }
+    });
+  }
+
+  openUpdateCitizenSabtStateDialog() {
+    this.matDialog.open(AdminUpdateCitizenSabtStateDialogComponent, {
+      panelClass: 'custom-dialog',
+      data: {
+        userCode: this.userCode
+      }
+    }).afterClosed().subscribe(result => {
+      if (result) {
+        this.getInfo();
+      }
+    });
+  }
+
+
+
+
+
+}

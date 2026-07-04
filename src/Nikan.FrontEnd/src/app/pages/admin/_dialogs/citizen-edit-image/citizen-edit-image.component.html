@@ -1,0 +1,53 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title py-0">
+    ویرایش تصویر شهروند {{ citizen.firstName }} {{ citizen.lastName }}
+    {{ citizen.nationCode }}
+  </h5>
+
+  <button
+    type="button"
+    class="close-btn"
+    aria-label="Close"
+    mat-dialog-close
+    mat-icon-button
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content class="text-center">
+  <app-cropper
+    #cropper
+    [imageUrl]="baseUrl + citizen.personalPictureUrl"
+    [uploadUrl]="uploadUrl"
+    [data]="{ citizenId: citizen.citizenId }"
+    [showSaveButton]="false"
+  ></app-cropper>
+
+  <!-- <img class="" d-inline-block [src]="baseUrl + citizen.personalPictureUrl" /> -->
+  <!-- 
+  <app-uploader
+    (attachmentId)="getImage($event)"
+    [url]="uploadUrl"
+    [autoUpload]="true"
+    [btnTitle]="' انتخاب تصویر جدید برای شهروند'"
+    [data]="{ citizenId: citizen.citizenId }"
+  ></app-uploader> -->
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button
+    mat-raised-button
+    color="default"
+    [disabled]="isSaving"
+    (click)="saveInfo()"
+  >
+    <span>ذخیره </span>
+    <mat-spinner
+      diameter="20"
+      color="default"
+      [hidden]="!isSaving"
+    ></mat-spinner>
+  </button>
+
+  <button mat-raised-button mat-dialog-close>بستن</button>
+</mat-dialog-actions>

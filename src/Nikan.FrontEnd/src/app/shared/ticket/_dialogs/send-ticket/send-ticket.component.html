@@ -1,0 +1,94 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title">
+        ارسال تیکت
+    </h5>
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+    <div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+    <div class="ticket-details" *ngIf="!loadingData">
+        <form [formGroup]="ticketForm">
+          <div class="row">
+            <div class="col-sm-12">
+              <p class="text-info">لطفا موضوع پیام خود را مشخص کنید.</p>
+               
+            </div>
+            <mat-form-field class="col-sm-6 col-md-4">
+              <mat-label>سازمان</mat-label>
+              <mat-select formControlName="organizationId" (selectionChange)="getUnitsOfOrganization()">
+                <mat-option [value]="item.key" *ngFor="let item of organizationList">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="ticketForm.get('organizationId').errors?.required">
+                سازمان را مشخص کنید.
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-6 col-md-4">
+              <mat-label>واحد</mat-label>
+              <mat-select formControlName="organizationalUnitId" (selectionChange)="getTicketSubjects()">
+                <mat-option [value]="item.key" *ngFor="let item of unitList">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="ticketForm.get('organizationalUnitId').errors?.required">
+                واحد را مشخص کنید.
+              </mat-error>
+              <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
+            </mat-form-field>
+
+            
+
+           
+            <mat-form-field class="col-sm-12" >
+              <mat-label>عنوان پیام</mat-label>
+              <input matInput formControlName="subject" />
+              <mat-error *ngIf="ticketForm.get('subject').errors?.required">
+                عنوان پیام را وارد کنید
+              </mat-error>
+              <mat-error *ngIf="ticketForm.get('subject').errors?.maxlength">
+                حداکثر 1000 کاراکتر
+              </mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-sm-12">
+              <mat-label>متن پیام</mat-label>
+              <textarea matInput formControlName="ticketMessage" rows="5"></textarea>
+              <mat-error *ngIf="ticketForm.get('ticketMessage').errors?.required">
+                متن پیام را وارد کنید
+              </mat-error>
+              <mat-error *ngIf="ticketForm.get('ticketMessage').errors?.maxlength">
+                حداکثر 10،000 کاراکتر
+              </mat-error>
+            </mat-form-field>
+
+
+
+
+            <mat-form-field class="col-sm-6 col-md-4">
+              <mat-label>اولویت پیام</mat-label>
+              <mat-select formControlName="priority">
+                <mat-option [value]="item.key" *ngFor="let item of periorityList">{{item.text}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="ticketForm.get('priority').errors?.required">
+                اولویت پیام را مشخص کنید.
+              </mat-error>
+            </mat-form-field>
+
+          </div>
+
+        </form>
+
+
+
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>بستن</button>
+    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <mat-spinner color="default" diameter="20" *ngIf="isSaving"></mat-spinner>
+    <span>ذخیره</span>
+  </button>
+</mat-dialog-actions>

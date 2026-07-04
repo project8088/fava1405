@@ -1,0 +1,183 @@
+<div class="content-header">
+  <span> اطلاعات من </span>
+</div>
+
+<div class="container">
+  <div class="image-buttons">
+    <div
+      *ngFor="let item of registerTypes"
+      class="img-btn"
+      routerLink="/redirect"
+      [queryParams]="{ serviceId: item.serviceId }"
+    >
+      <i class="fa fa-building"></i>
+      <span>{{ item.serviceName }}</span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-7">
+      <mat-card class="custom-card">
+        <mat-card-header> اطلاعات من </mat-card-header>
+        <mat-card-content>
+          <div class="citizen-details" *ngIf=!loadingData>
+
+
+
+            <div class="row d-flex align-items-center box-dash">
+              <div>
+                <img class="avatar" [src]="baseUrl + citizen.personalPictureUrl" *ngIf="citizen.personalPictureUrl" />
+                <img class="avatar" src="assets/images/avatar.png" *ngIf="!citizen.personalPictureUrl" />
+              </div>
+              <div class="col row">
+                <div class="col-md-6">
+                  <strong> کد ملی: </strong>
+                  <span>{{citizen.nationCode}}</span>
+                </div>
+
+                <div class="col-md-6">
+                  <strong> نام: </strong>
+                  <span>{{citizen.firstName}}</span>
+                </div>
+                <div class="col-md-6">
+                  <strong> نام خانوادگی: </strong>
+                  <span>{{citizen.lastName}}</span>
+                </div>
+                <div class="col-md-6">
+                  <strong> تاریخ ثبت نام: </strong>
+                  <span>{{citizen.creationDate|jalali}}</span>
+                </div>
+
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <strong> جنسیت: </strong>
+                <span *ngIf="!citizen.gender"> خانم </span>
+                <span *ngIf="citizen.gender"> آقا </span>
+              </div>
+
+              <div class="col-md-6">
+                <strong> نام پدر: </strong>
+                <span>{{citizen.fatherName}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> تاریخ تولد: </strong>
+                <span>{{citizen.birthDate|jalali}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> وضعیت پایان خدمت: </strong>
+                <span>{{citizen.soldierState|enumString:'soldierState'}}</span>
+              </div>
+              
+              <div class="col-md-6">
+                <strong> وضعیت تاهل: </strong>
+                <span>{{citizen.mariageStatus|enumString:'maritalStatus'}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> تعداد فرزند: </strong>
+                <span>{{citizen.numberOfChildren}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong>سطح تحصیلات: </strong>
+                <span>{{citizen.educationLevel|enumString:'educationLevel'}}</span>
+
+              </div>
+              <div class="col-md-6">
+                <strong>گروه تحصیلی: </strong>
+                <span>{{citizen.educationGroup}}</span>
+
+              </div>
+              <div class="col-md-6">
+                <strong>وضعیت تحصیلی: </strong>
+                <span>
+                  {{citizen.educationStatues|enumString:'educationStatues'}}
+                </span>
+              </div>
+              <div class="col-md-6">
+                <strong>رشته تحصیلی: </strong>
+                <span>{{citizen.educationField}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong>گروه شغلی: </strong>
+                <span>{{citizen.jobGroup}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong>عنوان شغل: </strong>
+                <span>{{citizen.jobTitle}}</span>
+              </div>
+
+              <div class="col-md-6">
+                <strong>وضعیت ثبت احوال: </strong>
+                <span>{{citizen.sabtStatus|enumString:'sabtStatus'}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong>وضعیت تصویر پرسنلی: </strong>
+                <strong>{{citizen.personalPicture_Confirmed}}</strong>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <strong>آخرین برورسانی اطلاعات: </strong>
+                <span>{{citizen.lastUpdateOnDate|jalali}}</span>
+              </div>
+
+            </div>
+
+            <!--------------------------------------------------------------------------------------------------->
+            <div class="box-header">
+              <h3 class="box-title">اطلاعات تماس و آدرس</h3>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <strong> شماره موبایل: </strong>
+                <span>{{citizen.mobileNumber}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> شماره تلفن ثابت: </strong>
+                <span>{{citizen.address?.phone}}</span>
+              </div>
+
+              
+
+              
+              <div class="col-md-6">
+                <strong> شهر: </strong>
+                <span>{{citizen.address?.city?.parentText}}   {{citizen.address?.city?.text}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> منطقه: </strong>
+                <span>{{citizen.address?.region}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> خیابان: </strong>
+                <span>{{citizen.address?.street}}</span>
+              </div>
+
+              <div class="col-md-6">
+                <strong> کوچه: </strong>
+                <span>{{citizen.address?.alley}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> پلاک: </strong>
+                <span>{{citizen.address?.plaque}}</span>
+              </div>
+              <div class="col-md-6">
+                <strong> کد پستی: </strong>
+                <span>{{citizen.address?.postalCode}}</span>
+              </div>
+
+            </div>
+
+ 
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div class="col-md-5">
+      <mat-card class="custom-card">
+        <mat-card-header> اطلاعیه ها </mat-card-header>
+        <mat-card-content> </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

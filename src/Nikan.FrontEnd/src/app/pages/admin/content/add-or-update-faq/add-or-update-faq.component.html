@@ -1,0 +1,83 @@
+ 
+<div class="content-header">
+  <span *ngIf="!isUpdate">ثبت پرسش و پاسخ جدید</span>
+  <span *ngIf="isUpdate">ویرایش پرسش و پاسخ</span>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+
+
+    <form [formGroup]="faqForm" *ngIf="!loading">
+      <div class="row">
+        <mat-form-field class="col-sm-12">
+          <mat-label>عنوان پرسش </mat-label>
+          <input matInput formControlName="title" type="text" maxlength="500" />
+          <mat-error *ngIf="faqForm.get('title').errors?.required">عنوان پرسش را وارد کنید.</mat-error>
+          <mat-error *ngIf="faqForm.get('title').errors?.maxlength">حداکثر 500 کاراکتر</mat-error>
+        </mat-form-field>
+
+
+
+        <mat-form-field class="col-sm-12">
+          <mat-chip-list #chipList aria-label="tagNames" formControlName="tagNames">
+            <mat-chip *ngFor="let item of tagNames" [selectable]="true" [removable]="true" (removed)="remove(item)">
+              {{item}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+            <input placeholder="تگ های سئو" [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="add($event)">
+          </mat-chip-list>
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>گروه پرسش و پاسخی</mat-label>
+          <mat-select formControlName="questionGroupTypeId" [compareWith]="compareFn">
+            <mat-option [value]="item.key" *ngFor="let item of groupList">{{item.text}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="faqForm.get('questionGroupTypeId').errors?.required">گروه پرسش و پاسخ را انتخاب کنید.</mat-error>
+
+        </mat-form-field>
+    
+ 
+
+         
+
+      </div>
+
+      <p>
+        <mat-checkbox color="default" formControlName="isActive">فعال</mat-checkbox>
+      </p>
+
+
+
+      <br>
+      <div class="html-editor">
+
+      </div>
+
+
+
+    </form>
+
+
+
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-3">
+      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving || loading">
+        <span *ngIf="isSaving">منتظر بمانید...</span>
+        <span *ngIf="!isSaving">ذخیره</span>
+        <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

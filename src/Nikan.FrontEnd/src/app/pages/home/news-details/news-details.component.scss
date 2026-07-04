@@ -1,0 +1,23 @@
+.tm-blog-image {
+  max-height: 400px;
+
+  a {
+    height: 100%;
+    max-height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      max-width: 100%;
+      max-height: inherit;
+      width: auto;
+    }
+  }
+}
+
+
+#tm-comment-textbox{
+  height: auto;
+  min-height: 120px;
+}

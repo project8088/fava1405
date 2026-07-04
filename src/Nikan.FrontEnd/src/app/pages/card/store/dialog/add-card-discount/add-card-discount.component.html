@@ -1,0 +1,141 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title" *ngIf="!isUpdate">تعریف تخفیف   جدید</h5>
+    <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش تخفیف  </h5>
+
+
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loadingData">
+    <mat-spinner diameter="50" color="default"></mat-spinner> 
+  </div>
+
+  <form [formGroup]="frm" *ngIf="!loadingData">
+
+
+
+
+    <div class="row"> 
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>   عنوان تخفیف  </mat-label>
+        <input type="text" matInput formControlName="discountTitle" maxlength="40" />
+        <mat-error *ngIf="frm.get('discountTitle').errors?.required">
+          عنوان تخفیف را وارد نمایید
+        </mat-error>
+      </mat-form-field> 
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>تاریخ شروع تخفیف</mat-label>
+        <input matInput [matDatepicker]="sdpicker" formControlName="startDate" />
+        <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
+        <mat-datepicker #sdpicker></mat-datepicker>
+        <mat-error *ngIf="frm.get('startDate').errors?.required">
+          تاریخ شروع تخفیف را انتخاب کنید.
+        </mat-error>
+        <mat-error *ngIf="frm.get('startDate').errors?.matDatepickerParse">
+          فرمت تاریخ صحیح نیست
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>تاریخ پایان تخفیف</mat-label>
+        <input matInput [matDatepicker]="edpicker" formControlName="endDate" />
+        <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
+        <mat-datepicker #edpicker></mat-datepicker>
+        <mat-error *ngIf="frm.get('endDate').errors?.required">
+          تاریخ پایان تخفیف را انتخاب کنید.
+        </mat-error>
+        <mat-error *ngIf="frm.get('endDate').errors?.matDatepickerParse">
+          فرمت تاریخ صحیح نیست
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>   توضیحات تخفیف  </mat-label>
+        <input type="text" matInput formControlName="description" maxlength="200" />
+        <mat-error *ngIf="frm.get('description').errors?.required">
+          توضیحات تخفیف را وارد نمایید
+        </mat-error>
+      </mat-form-field>
+
+    </div>
+    <div class="row" >
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>درصد تخفیف</mat-label>
+        <input matInput formControlName="discountPercent" autocomplete="doNotAutoComplete" decimalOnly maxlength="3">
+        <mat-error *ngIf="frm.get('discountPercent').errors?.required">
+          درصد تخفیف را وارد کنید.
+        </mat-error>
+      </mat-form-field> 
+      <mat-form-field appearance="outline" class="col-md-3">
+        <mat-label>درصد تخفیف ارسال پستی</mat-label>
+        <input matInput formControlName="postalPercentInCity" autocomplete="doNotAutoComplete" decimalOnly maxlength="3">
+        <mat-error *ngIf="frm.get('postalPercentInCity').errors?.required">
+          درصد تخفیف ارسال پستی را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <p>
+      <mat-checkbox formControlName="discountIsActive">
+        تخفیف فعال است ؟
+      </mat-checkbox>
+    </p>
+
+    <p>
+      <mat-checkbox formControlName="postDeliveryPossibility">
+        امکان ارسال پستی ؟
+      </mat-checkbox>
+    </p>
+    <p>
+      <mat-checkbox formControlName="centerDeliveryPossibility">
+        امکان ارسال به مرکز تحویل ؟
+      </mat-checkbox>
+    </p>
+
+
+
+
+
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-sm-12">
+        <mat-label>گروههای تخفیف</mat-label>
+        <mat-chip-list #skillChipList>
+          <mat-chip *ngFor="let item of selectedGroups" [selectable]="true" [removable]="true" (removed)="removeAutoChip(selectedGroups,item)">
+            {{item.text}}
+            <mat-icon matChipRemove>cancel</mat-icon>
+          </mat-chip>
+          <input matInput formControlName="groups" [matAutocomplete]="autoSkills" [matChipInputFor]="skillChipList" #skillInput #skillTrigger="matAutocompleteTrigger">
+        </mat-chip-list>
+        <mat-autocomplete #autoSkills="matAutocomplete" [displayWith]="displayFn" (optionSelected)="selectedAutoChip(selectedGroups,'groups',skillInput,$event,skillTrigger)">
+          <mat-option *ngFor="let option of filteredGroups | async" [value]="option">
+
+            {{option.text}}
+          </mat-option>
+        </mat-autocomplete>
+        <mat-error *ngIf="frm.get('groups').errors?.incorrect || frm.get('groups').errors?.required">
+          گروههای تخفیف را از لیست انتخاب کنید
+        </mat-error>
+        <mat-spinner matSuffix diameter="20" [hidden]="!loadingGroups"></mat-spinner>
+      </mat-form-field>
+    </div>
+
+
+
+
+
+
+
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  mat-dialog-close>انصراف</button>
+
+    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()" *ngIf="!loadingData">
+    <span>ذخیره </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+
+</mat-dialog-actions>

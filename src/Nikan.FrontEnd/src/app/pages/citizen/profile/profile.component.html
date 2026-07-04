@@ -1,0 +1,75 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
+    <div class="userInfo" *ngIf="loading">
+      <mat-spinner diameter="100" color="default"></mat-spinner>
+    </div>
+    <div class="userInfo text-center" *ngIf="!loading && personInfo">
+      <mat-progress-spinner
+        strokeWidth="4"
+        diameter="100"
+        [mode]="'determinate'"
+        [value]="personInfo.percentageResume"
+      >
+      </mat-progress-spinner>
+      <img class="object-fit-cover mb-2" src="../../../../assets/images/avatar.png" *ngIf="!personInfo.personalPictureUrl" />
+      <img class="object-fit-cover mb-2" [src]="baseUrl + personInfo.personalPictureUrl" *ngIf="personInfo.personalPictureUrl" />
+
+      <span class="d-block my-2">تکمیل اطلاعات: {{ personInfo.percentageResume }}%</span>
+      <div class="namefamily">
+        <div class="text-center">{{ personInfo.nationCode }}</div>
+         
+
+        <strong class="mb-2">
+          {{ personInfo.gender == true ? "آقای" : "خانم" }}
+          {{ personInfo.firstName }} {{ personInfo.lastName }}</strong
+        >
+      </div>
+    </div>
+    <!-- <mat-slider class="example-margin" [(ngModel)]="personInfo.percentageResume"></mat-slider> -->
+
+    <mat-nav-list class="nav-menu">
+      <a mat-list-item routerLink="personal-info" routerLinkActive="active">
+        اطلاعات من
+      </a>
+
+      <a mat-list-item routerLink="notifications" routerLinkActive="active">   اطلاعات تماس</a>
+      <a mat-list-item routerLink="contact" routerLinkActive="active"> اطلاعات آدرس </a>
+
+      <a mat-list-item routerLink="my-family" routerLinkActive="active">خانواده من</a>
+      <a mat-list-item routerLink="personnel-image" routerLinkActive="active">
+        تصویر پرسنلی
+      </a>
+      <!--<a mat-list-item routerLink="documents" routerLinkActive="active">بار‌گذاری مدارک</a>-->
+      <a mat-list-item routerLink="additional-information" routerLinkActive="active">اطلاعات تکمیلی</a>
+      <a mat-list-item routerLink="creditcard" routerLinkActive="active"> اطلاعات مالی</a>
+
+      <a mat-list-item routerLink="educations" routerLinkActive="active"> سوابق تحصیلی</a>
+
+      <!-- <a mat-list-item routerLink="educations" routerLinkActive="active">سوابق تحصیلی</a> -->
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="purple">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <span>پروفایل شهروند</span>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

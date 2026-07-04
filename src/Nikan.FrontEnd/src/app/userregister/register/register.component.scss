@@ -1,0 +1,54 @@
+.page {
+  background-color: #e4edf2;
+  background: url("../../../assets/images/bg.jpg") !important;
+  width: 100vw;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .register {
+    flex-grow: 1;
+
+    .right {
+      background-color: #03254a;
+      width: 50%;
+    }
+
+    .left {
+      width: 50%;
+    }
+  }
+}
+
+@media only screen and (max-width: 1110px) {
+  .col-8 {
+    flex-direction: column-reverse;
+    display: flex !important;
+
+    .right,
+    .left {
+      width: 100% !important;
+    }
+  }
+}
+@media only screen and (max-width: 580px) {
+  ::ng-deep {
+    .mat-horizontal-content-container {
+      padding: 0 !important;
+    }
+
+    .mat-horizontal-stepper-header-container {
+      display: none !important;
+    }
+  }
+}
+
+::ng-deep {
+  .mat-form-field {
+    margin-bottom: 5px;
+  }
+}
+input {
+  color: black !important;
+}

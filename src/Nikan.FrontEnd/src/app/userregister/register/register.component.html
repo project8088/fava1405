@@ -1,0 +1,492 @@
+<div class="page align-items-start">
+  <mat-horizontal-stepper
+    #stepper
+    linear="true"
+    class="container bg-transparent mt-3 align-items-start"
+  >
+    <mat-step [stepControl]="firstFormGroup" label="اطلاعات اولیه">
+      <div class="container">
+        <div class="row m-auto">
+          <div
+            class="col-12 col-mg-11 col-lg-10 mx-auto my-3 bg-white h-100 p-0"
+          >
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6 right flex-grow-1 p-lg-5 p-md-5 p-4">
+                <h2 class="text-white">تکمیل اطلاعات هویتی</h2>
+                <h4 class="text-white text-justify">
+
+                  جهت صدور کارت و تایید ثبت نام اطلاعات هویتی خود را به صورت
+                  صحیح و کامل وارد نمایید
+                  .
+                </h4>
+                <h4 class="text-white text-justify">
+                  در صورتی که نام و نام خانوادگی شما
+                  دارای پیشوند یا پسوند می باشد، به صورت کامل همراه با پیشوند و
+                  پسوند وارد نمایید
+                  .
+                </h4>
+
+                <br />
+                <h4 class="text-white text-justify">
+                  فرایند تایید هویت شما در 4 الی 6 روز کاری
+                  صورت می گیرد. وارد نمودن تاریخ دقیق تولد الزامی می باشد
+
+                </h4>
+                <br />
+                <h4 class="text-white text-justify">
+                  فعالیت
+                  مراجعین در این سامانه ثبت شده و قابل پیگیری می باشد.
+
+                </h4>
+
+
+
+              </div>
+
+              <form
+                class="col-12 col-md-6 col-lg-6 flex-grow-1 bg-white px-5 pb-5 pt-3"
+                #ngForm="ngForm"
+                [formGroup]="firstFormGroup"
+              >
+                <h4 class="text-primary">
+                  لطفا قبل از ثبت نام نکات مربوط به ثبت نام را مطالعه کنید.
+                </h4>
+                <hr />
+
+                <div class="row">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100 mt-3" appearance="outline">
+                      <mat-label>نام</mat-label>
+                      <input formControlName="firstName" matInput />
+                      <mat-hint
+                        class="text-danger"
+                        *ngIf="
+                          firstFormGroup.controls['firstName'].errors &&
+                          ngForm.submitted
+                        "
+                      >
+                        <span
+                          *ngIf="
+                            firstFormGroup.controls['firstName'].errors[
+                              'required'
+                            ]
+                          "
+                        >
+                          نام خود را وارد کنید
+                        </span>
+                      </mat-hint>
+                      <mat-error
+                        *ngIf="firstFormGroup.get('firstName').errors?.pattern"
+                      >
+                        فقط از کاراکترهای فارسی استفاده کنید.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100 mt-3" appearance="outline">
+                      <mat-label>نام خانوادگی با پسوند</mat-label>
+                      <input formControlName="lastName" matInput />
+                      <mat-hint
+                        class="text-danger"
+                        *ngIf="
+                          firstFormGroup.controls['lastName'].errors &&
+                          ngForm.submitted
+                        "
+                      >
+                        <span
+                          *ngIf="
+                            firstFormGroup.controls['lastName'].errors[
+                              'required'
+                            ]
+                          "
+                        >
+                          نام خانوادگی خود را وارد کنید
+                        </span>
+                      </mat-hint>
+                      <mat-error
+                        *ngIf="firstFormGroup.get('lastName').errors?.pattern"
+                      >
+                        فقط از کاراکترهای فارسی استفاده کنید.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <mat-form-field class="w-100" appearance="outline">
+                      <mat-label>نام پدر</mat-label>
+                      <input formControlName="fatherName" matInput />
+                      <mat-hint class="text-danger"
+                                *ngIf="
+                          firstFormGroup.controls['fatherName'].errors &&
+                          ngForm.submitted
+                        ">
+                        <span *ngIf="
+                            firstFormGroup.controls['fatherName'].errors[
+                              'required'
+                            ]
+                          ">
+                          نام پدر خود را وارد کنید
+                        </span>
+                      </mat-hint>
+                      <mat-error *ngIf="firstFormGroup.get('fatherName').errors?.pattern">
+                        فقط از کاراکترهای فارسی استفاده کنید.
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100">
+                      <mat-label>وضعیت تاهل</mat-label>
+                      <mat-select formControlName="mariageStatus">
+                        <mat-option *ngFor="let item of maritalStatus"
+                                    [value]="item.value">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint class="text-danger"
+                                *ngIf="
+                          firstFormGroup.controls['mariageStatus'].errors &&
+                          ngForm.submitted
+                        ">
+                        <span *ngIf="
+                            firstFormGroup.controls['mariageStatus'].errors[
+                              'required'
+                            ]
+                          ">
+                          وضعیت تاهل خود را انتخاب کنید
+                        </span>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>
+
+
+
+
+                </div>
+
+                <div class="row">
+                  <simple-jalali-datepicker class="col-12 col-md-12 col-lg-12"
+                                            formControlName="birthDate">
+                  </simple-jalali-datepicker>
+                </div>
+
+
+                <div class="row align-items-center">
+                  <div class="col-12 col-md-6 col-lg-6">
+                    <mat-radio-group formControlName="gender">
+                      <mat-radio-button color="primary"
+                                        [value]="true"
+                                        class="mr-3">آقا هستم</mat-radio-button>
+                      <mat-radio-button color="primary" [value]="false">خانم هستم</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="
+                        firstFormGroup.controls['gender'].errors &&
+                        ngForm.submitted
+                      ">
+                      جنسیت خود را انتخاب کنید
+                    </mat-error>
+                  </div>
+                  <!--<div class="col-12 col-md-6 col-lg-6">
+                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                      <mat-label>شهر محل سکونت</mat-label>
+                      <mat-select formControlName="cityId">
+                        <mat-option *ngFor="let item of isfahanCities"
+                                    [value]="item.key">
+                          {{ item.text }}
+                        </mat-option>
+                      </mat-select>
+                      <mat-hint class="text-danger"        *ngIf="firstFormGroup.controls['cityId'].errors && ngForm.submitted  ">
+                        <span *ngIf="firstFormGroup.controls['cityId'].errors['required']">
+                          شهر محل سکونت خود را انتخاب کنید
+                        </span>
+                      </mat-hint>
+                    </mat-form-field>
+                  </div>-->
+
+
+
+                </div>
+
+                <div class="text-right mt-5">
+                  <button mat-raised-button color="primary" matStepperNext>
+                    ادامه
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+     
+
+   
+
+    <mat-step [stepControl]="forthFormGroup">
+      <ng-template matStepLabel>کلمه عبور</ng-template>
+      <div class="row register m-auto">
+        <div class="col-12 d-flex mx-auto my-3 bg-white h-100 p-0">
+          <div class="row">
+            <div
+              class="col-12 col-md-6 col-lg-6 right flex-grow-1 p-lg-5 p-md-5"
+            >
+              <h1 class="text-white">شرایط کلمه عبور</h1>
+              <h3 class="text-white text-justify">
+                کلمه عبور حداقل شش حرف داشته باشد (هرچه تعداد حروف بيشتر باشد
+                بهتر است). حروف فارسي مجاز نيستند . از حروف، اعداد و نشانه های
+                انگلیسی تشکیل شده باشد. داراي حروف تکراري مانند 1111 يا aaaa و
+                يا متوالي مانند 1234 يا abcd و حتي توالي کليد‌هاي صفحه کليد
+                مانند qwerty يا asdfgh نباشد حداقل 1 حرف کوچک داشته باشد. حداقل
+                1 حرف بزرگ داشته باشد. حداقل 1 عدد داشته باشد. حداقل 1 نشانه
+                (مانند #،$،%،&،*،؟...) داشته باشد. فعالیت مراجعین در این سامانه
+                ثبت شده و قابل پیگیری می باشد
+              </h3>
+            </div>
+
+            <form
+              class="col-12 col-md-6 col-lg-6 flex-grow-1 bg-white px-5 pb-5 pt-3"
+              #ngForm4="ngForm"
+              [formGroup]="forthFormGroup"
+            >
+              <h4 class="text-primary">
+                در انتخاب کلمه عبور به نکات انتخاب کلمه عبور مناسب توجه نمایید
+              </h4>
+              <hr />
+
+              <!--<div class="row">
+                <div class="col-12 col-md-7 col-lg-7">
+                  <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-label>پرسش امنیتی</mat-label>
+                    <mat-select formControlName="passwordQuestion">
+                      <mat-option
+                        *ngFor="let item of passwordQuestion"
+                        [value]="item.value"
+                      >
+                        {{ item.text }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-hint
+                      class="text-danger"
+                      *ngIf="
+                        forthFormGroup.controls['passwordQuestion'].errors &&
+                        ngForm4.submitted
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          forthFormGroup.controls['passwordQuestion'].errors[
+                            'required'
+                          ]
+                        "
+                      >
+                        پرسش امنیتی مورد نظر خود را انتخاب کنید
+                      </span>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+
+                <div class="col-12 col-md-5 col-lg-5">
+                  <mat-form-field class="w-100 mt-3" appearance="outline">
+                    <mat-label>پاسخ پرسش امنیتی</mat-label>
+                    <input formControlName="passwordAnswer" matInput />
+                    <mat-hint
+                      class="text-danger"
+                      *ngIf="
+                        forthFormGroup.controls['passwordAnswer'].errors &&
+                        ngForm4.submitted
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          forthFormGroup.controls['passwordAnswer'].errors[
+                            'required'
+                          ]
+                        "
+                      >
+                        پاسخ خود را وارد کنید
+                      </span>
+                    </mat-hint>
+                  </mat-form-field>
+                </div>
+              </div>-->
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-6">
+                  <mat-form-field class="w-100 mt-3" appearance="outline">
+                    <mat-label>کلمه عبور</mat-label>
+                    <input
+                      formControlName="password"
+                      type="password"
+                      matInput
+                      minlength="6"
+                    />
+                    <mat-hint
+                      class="text-danger"
+                      *ngIf="
+                        forthFormGroup.controls['password'].errors &&
+                        ngForm4.submitted
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          forthFormGroup.controls['password'].errors['required']
+                        "
+                      >
+                        کلمه عبور مورد نظر را وارد کنید
+                      </span>
+                    </mat-hint>
+                    <mat-error
+                      *ngIf="forthFormGroup.get('password').errors?.invalid"
+                    >
+                      کلمه عبور وارد شده صحیح نیست
+                    </mat-error>
+                    <mat-error
+                      *ngIf="forthFormGroup.get('password').errors?.minlength"
+                    >
+                      کلمه عبور حداقل باید 6 کارکتر باشد
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-12 col-md-6 col-lg-6">
+                  <mat-form-field class="w-100 mt-3" appearance="outline">
+                    <mat-label>تکرار کلمه عبور</mat-label>
+                    <input
+                      formControlName="confirmPassword"
+                      type="password"
+                      matInput
+                      minlength="6"
+                    />
+                    <mat-hint
+                      class="text-danger"
+                      *ngIf="
+                        forthFormGroup.controls['confirmPassword'].errors &&
+                        ngForm4.submitted
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          forthFormGroup.controls['confirmPassword'].errors[
+                            'required'
+                          ]
+                        "
+                      >
+                        تکرار کلمه عبور را وارد کنید
+                      </span>
+                    </mat-hint>
+                    <mat-error
+                      *ngIf="
+                        forthFormGroup.get('confirmPassword').errors?.invalid
+                      "
+                    >
+                      تکرار کلمه عبور وارد شده صحیح نیست
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="text-right mt-2 d-flex justify-content-between">
+                <button mat-button matStepperPrevious>بازگشت</button>
+                <button mat-raised-button color="primary" matStepperNext>
+                  ادامه
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+
+    <!-- --------------------------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------------------------- -->
+    <!-- --------------------------------------------------------------------------------- -->
+
+    <mat-step [stepControl]="fifthFormGroup">
+      <ng-template matStepLabel>تایید شماره موبایل</ng-template>
+      <div class="row register m-auto">
+        <div class="col-12 d-flex mx-auto my-3 bg-white h-100 p-0">
+          <div class="row">
+            <div
+              class="col-12 col-md-6 col-lg-6 right flex-grow-1 p-lg-5 p-md-5"
+            >
+              <h1 class="text-white">تایید شماره موبایل</h1>
+              <h3 class="text-white text-justify">
+                کد اعتبارسنجی به شماره همراه شما ارسال می شود چناچه بعد از 120
+                ثانیه کد را دریافت نکردید برروی ارسال مجدد کد اعتبارنسجی کلیک
+                کنید. ارایه شماره همراه معتبر، جهت تائيد ثبت نام و دريافت رمز
+                عبور الزامی می باشد
+              </h3>
+            </div>
+
+            <form
+              class="col-12 col-md-6 col-lg-6 flex-grow-1 bg-white px-5 pb-5 pt-3"
+              #ngForm5="ngForm"
+              (ngSubmit)="finalSubmit()"
+              [formGroup]="fifthFormGroup"
+            >
+              <h4 class="text-primary">
+                شماره موبایل وارد شده
+                {{ mobileNumber }}
+              </h4>
+              <hr />
+
+              <div class="row">
+                در صورتی که کد فعال سازی را تا یک دقیقه دیگر دریافت نکردید روی
+                ارسال مجدد کد فعال سازی کلیک کنید
+
+                <div class="col-12 col-md-12 col-lg-12">
+                  <mat-form-field class="mt-3" appearance="outline">
+                    <mat-label> کد تایید</mat-label>
+                    <input
+                      formControlName="verifyCode"
+                      matInput
+                      placeholder="کد تایید دریافتی را وارد کنید"
+                    />
+                    <mat-hint
+                      class="text-danger"
+                      *ngIf="
+                        fifthFormGroup.controls['verifyCode'].errors &&
+                        ngForm5.submitted
+                      "
+                    >
+                      <span
+                        *ngIf="
+                          fifthFormGroup.controls['verifyCode'].errors[
+                            'required'
+                          ]
+                        "
+                      >
+                        کد تایید را وارد کنید
+                      </span>
+                    </mat-hint>
+                  </mat-form-field>
+                  <button
+                    [hidden]="codeSent"
+                    class="mx-2"
+                    (click)="sendVerificationCode($event)"
+                    mat-raised-button
+                    color="default"
+                  >
+                    دریافت کد تایید
+                  </button>
+
+                  <span [hidden]="!codeSent">
+                    ارسال مجدد کد در
+                    <app-timer #codeTimer></app-timer>
+                  </span>
+                </div>
+              </div>
+
+              <div class="text-right mt-3 d-flex justify-content-between">
+                <button mat-button matStepperPrevious>بازگشت</button>
+                <button mat-raised-button color="primary" matStepperNext>
+                  ادامه
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</div>

@@ -1,0 +1,169 @@
+<div class="content-header">
+  <span>مشاهده جزئیات ثبت نام دسته ایی</span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div> 
+    <div class="bread-crumb-item" routerLink="/admin/citizen-register-file-list">لیست فایل ثبت نام دسته ایی</div> 
+    <div class="bread-crumb-item active">جزئیات</div>
+  </div>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+ 
+  </mat-card-header>
+  <mat-card-content>
+
+   
+    <form [formGroup]="searchForm">
+
+      <div class="row my-4">
+
+
+
+
+
+        <mat-form-field class="col-md-6 col-md-4">
+          <mat-label>وضعیت  </mat-label>
+          <mat-select formControlName="isValidRow">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="false">عدم تایید</mat-option>
+            <mat-option [value]="true">تایید شده</mat-option>
+             
+          </mat-select>
+        </mat-form-field>
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button class="btn btn-lg btn-default" mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="d-flex align-items-center justify-content-end mb-3">
+    
+
+      <button class="btn btn-lg btn-secondary" mat-raised-button color="default" (click)="exporter.exportTable('xlsx',{fileName:'excel'})">
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="d-flex align-items-center justify-content-end p-3">
+      <button mat-icon-button color="default" (click)="getList()" matTooltip="بروز رسانی">
+        <i class="fa fa-sync"></i>
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
+        <mat-spinner color="default"></mat-spinner>
+      </div>
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults==false && listCount==0">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+
+      <div class="datatable-table-container">
+        <table mat-table [dataSource]="data" class="datatable-table" #exporter="matTableExporter" matTableExporter>
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row;let i=index;">
+              {{paginator.pageIndex*paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="gender">
+            <th mat-header-cell *matHeaderCellDef> جنسیت </th>
+            <td mat-cell *matCellDef="let row">
+
+              <span *ngIf="row.gender==1">
+                آقا
+              </span>
+              <span *ngIf="row.gender==0">
+                خانم
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>نام </th>
+            <td mat-cell *matCellDef="let row">
+              {{row.firstName}}
+
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>نام خانوادگی </th>
+            <td mat-cell *matCellDef="let row">
+              {{row.lastName}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
+            <td mat-cell *matCellDef="let row">{{row.nationCode}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="birthDate">
+            <th mat-header-cell *matHeaderCellDef> تاریخ تولد </th>
+            <td mat-cell *matCellDef="let row">{{row.birthDate| jalali}}</td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef> شماره موبایل</th>
+            <td mat-cell *matCellDef="let row">{{row.mobile}}</td>
+          </ng-container>
+
+
+
+
+          <ng-container matColumnDef="serviceId">
+            <th mat-header-cell *matHeaderCellDef>شناسه سرویس  </th>
+            <td mat-cell *matCellDef="let row">{{row.serviceId}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="groupId">
+            <th mat-header-cell *matHeaderCellDef>شناسه گروه  </th>
+            <td mat-cell *matCellDef="let row">{{row.groupId}}</td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef> توضیحات  </th>
+            <td mat-cell *matCellDef="let row">{{row.description}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="isValidRow">
+            <th mat-header-cell *matHeaderCellDef> وضعیت  </th>
+            <td mat-cell *matCellDef="let row">
+              <strong *ngIf="!row.isValidRow" class="text-danger">
+                عدم تایید
+              </strong>
+
+              <strong *ngIf="row.isValidRow" class="text-success">
+                  تایید
+              </strong>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+
+
+      <mat-paginator [length]="listCount"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000,10000,100000]"
+                     showFirstLastButtons
+                     (page)="pageEvent($event)"></mat-paginator>
+
+    </div>
+
+
+
+
+  </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>

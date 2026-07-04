@@ -1,0 +1,76 @@
+<div class="content-header">
+  <span>نقش های کاربر  </span>
+
+</div>
+
+<div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
+  <mat-spinner diameter="50" color="default"></mat-spinner>
+</div>
+
+<mat-card class="custom-card">
+
+  <form [formGroup]="form" *ngIf="!loading">
+    <div class="row my-4">
+
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label> نقش </mat-label>
+        <mat-select formControlName="roleId">
+          <mat-option [value]="item.key" *ngFor="let item of roleList">
+            {{item.text}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="form.get('roleId').errors?.required"> نقش را مشخص کنید</mat-error>
+      </mat-form-field>
+
+
+      <div class="col d-flex align-items-center justify-content-start">
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          <span>اضافه کردن</span>
+          <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </form> 
+
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+
+        <div class="py-4 list-container">
+          <div class="list-item" *ngFor="let item of userRoleList">
+            <div class="list-content">
+              <div class="row"> 
+                <div class="col-sm-3">
+                  <span> {{item.role}}</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="menu">
+
+              <button mat-icon-button (click)="delete(item)" *ngIf="!item.loading" matTooltip="حذف">
+                <i class="fa fa-trash"></i>
+              </button>
+              <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
+            </div>
+          </div>
+        </div>
+
+        <div class="no-any-items" *ngIf="userRoleList.length==0 && !loading">
+          <i class="fa fa-info-circle"></i>
+          اطلاعاتی ثبت نشده است
+        </div>
+        <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
+          <mat-spinner diameter="50" color="default"></mat-spinner>
+        </div>
+      </div>
+      <div class="col-md-6"></div>
+    </div>
+  </div>
+
+  <mat-card-footer></mat-card-footer>
+</mat-card>
+
+
+

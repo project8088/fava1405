@@ -1,0 +1,31 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title">آپلود فایل اکسل</h5> 
+
+
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <div class="alert alert-info">
+    <p class="text-justify">
+      فایل اکسل شما باید دارای ستون های زیر باشد
+   <br />
+       جنسیت ، کد ملی ،نام ، نام خانوادگی ، نام پدر ، تاریخ تولد ، عنوان شغل
+      ،آدرس
+      <br />
+      ترتیب ستون ها باید به صورت فوق باشد.
+
+    </p>
+  </div>
+  
+
+  <app-uploader [btnTitle]="'آپلود فایل اکسل'" [removeAfterUpload]="true" (attachmentId)="attachmentId($event)"
+                [url]="uploadUrl" [autoUpload]="true" [accept]="['application/vnd.openxmlformats-officedocument.spreadsheetml.sheet','application/vnd.ms-excel']"></app-uploader>
+
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button  mat-dialog-close>بستن</button>
+   
+</mat-dialog-actions>

@@ -1,0 +1,236 @@
+<div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
+</div>
+
+<div class="job-details" *ngIf="!loadingData">
+
+
+    <div class="box-header">
+        <div class="d-flex align-items-center justify-content-between">
+            <h3 class="box-title">اطلاعات شرکت</h3>
+
+            <div>
+               
+             
+                <div>
+                    <strong class="text-black">تاریخ اعتبار: </strong>
+                    <span class="text-info">{{jobOpportunity.expireDate}}</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <strong> شرکت: </strong>
+            <span>{{jobOpportunity.userCompanyTitle}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>مدیر عامل: </strong>
+            <span>{{jobOpportunity.companyMangerName}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>سفارش دهنده: </strong>
+            <span>{{jobOpportunity.applicant}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.applicantPost">
+            <strong>سمت سفارش دهنده: </strong>
+            <span>{{jobOpportunity.applicantPost}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>شماره تلفن: </strong>
+            <span>{{jobOpportunity.applicantPhoneNumber}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>شماره موبایل: </strong>
+            <span>{{jobOpportunity.companyMobileNumber}}</span>
+        </div>
+        <div class="col-sm-12">
+            <strong>توضیحات (زمان، آدرس و شرح مصاحبه): </strong>
+            <span>{{jobOpportunity.employerDescription}}</span>
+        </div>
+        <div class="col-sm-12">
+            <strong>آدرس شرکت: </strong>
+            <span>{{jobOpportunity.companyAddress}}</span>
+        </div>
+    </div>
+    <div class="box-header">
+        <h3 class="box-title">اطلاعات فرصت شغلی</h3>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <strong>کد ردیف شغلی: </strong>
+            <span>{{jobOpportunity.jobRowCode}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>عنوان شغل: </strong>
+            <span>{{jobOpportunity.jobTitleStr}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.workNature">
+            <strong>ماهیت شغل: </strong>
+            <span>{{jobOpportunity.workNature}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>تاریخ اعتبار: </strong>
+            <span>{{jobOpportunity.expireDate}}</span>
+        </div>
+
+    </div>
+
+
+    <div class="box-header with-border">
+        <h3 class="box-title">موقعیت مکانی شغل</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity?.location?.text">
+            <strong>شهر محل کار: </strong>
+            <span>{{jobOpportunity.location.text}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity?.jobArea">
+            <strong>منطقه: </strong>
+            <span>{{jobOpportunity.jobArea}}</span>
+        </div>
+        <div class="col-sm-12" *ngIf="jobOpportunity?.fullAddress">
+            <strong>آدرس محل کار: </strong>
+            <span>{{jobOpportunity.fullAddress}}</span>
+        </div>
+
+    </div>
+    <strong *ngIf="jobOpportunity.cites?.length>0">شهر ها: </strong>
+    <mat-chip-list aria-label="selectedCities">
+        <mat-chip *ngFor="let item of jobOpportunity.cites">{{item}}</mat-chip>
+    </mat-chip-list>
+
+
+
+    <strong *ngIf="similarJabs?.length>0">عناوین شغلی مشابه: </strong>
+    <mat-chip-list aria-label="similar jobs">
+        <mat-chip *ngFor="let item of similarJabs">{{item}}</mat-chip>
+    </mat-chip-list>
+
+
+
+    <div class="box-header">
+        <h3 class="box-title">شرایط کارجو</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <strong>جنسیت: </strong>
+            <span *ngIf="jobOpportunity.sex==true">آقا</span>
+            <span *ngIf="jobOpportunity.sex==false">خانم</span>
+            <span *ngIf="jobOpportunity.sex==null">فرقی نمی کند</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.maritalStatus">
+            <strong>وضعیت تاهل: </strong>
+            <span>{{jobOpportunity.maritalStatus}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.workExperienceMin || jobOpportunity.workExperienceMax">
+            <strong>سابقه کار: </strong>
+            <span>بین {{jobOpportunity.workExperienceMin}} تا {{jobOpportunity.workExperienceMax}} ماه</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>تعداد نیروی درخواستی: </strong>
+            <span>{{jobOpportunity.number}} نفر</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.militaryTrainingStatus">
+            <strong>وضعیت پایان خدمت: </strong>
+            <span>{{jobOpportunity.militaryTrainingStatus}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.jobGradeTitle">
+            <strong>مقطع تحصیلی: </strong>
+            <span>{{jobOpportunity.jobGradeTitle}}</span>
+        </div>
+    </div>
+
+    <strong *ngIf="jobOpportunity.majors?.length>0">رشته های تحصیلی: </strong>
+    <mat-chip-list aria-label="selectedFieldStudies">
+        <mat-chip *ngFor="let item of jobOpportunity.majors">{{item}}</mat-chip>
+    </mat-chip-list>
+
+    <strong *ngIf="jobOpportunity.skills?.length>0">مهارت ها: </strong>
+    <mat-chip-list aria-label="selectedSkills">
+        <mat-chip *ngFor="let item of jobOpportunity.skills">{{item}}</mat-chip>
+    </mat-chip-list>
+
+
+    <div class="box-header">
+        <h3 class="box-title">مزایای شغل</h3>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <strong>زمان کاری: </strong>
+            <span>{{jobOpportunity.workTimeType}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>اوقات کاری: </strong>
+            <span>{{jobOpportunity.jobWorkTime}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>ساعت کاری در 24 ساعت: </strong>
+            <span>{{jobOpportunity.workTime}} ساعت</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>نوع حقوق: </strong>
+            <span>{{jobOpportunity.salaryRange}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.salaryRangeFrom">
+            <strong>حقوق از: </strong>
+            <span>{{jobOpportunity.salaryRangeFrom}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.salaryRangeTo">
+            <strong>حقوق تا: </strong>
+            <span>{{jobOpportunity.salaryRangeTo}}</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.jobAgeStart">
+            <strong>حداقل سن: </strong>
+            <span>{{jobOpportunity.jobAgeStart}} سال</span>
+        </div>
+        <div class="col-sm-6 col-md-4" *ngIf="jobOpportunity.jobAgeEnd">
+            <strong>حداکثر سن: </strong>
+            <span>{{jobOpportunity.jobAgeEnd}} سال</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-md-4">
+            <strong>باز نشسته: </strong>
+            <span *ngIf="jobOpportunity.isRetired" class="text-success">باشد</span>
+            <span *ngIf="!jobOpportunity.isRetired" class="text-danger">نباشد</span>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <strong>بیمه: </strong>
+            <span *ngIf="jobOpportunity.workInsurance" class="text-success">دارد</span>
+            <span *ngIf="!jobOpportunity.workInsurance" class="text-danger">ندارد</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>وعده غذایی: </strong>
+            <span *ngIf="jobOpportunity.meal" class="text-success">دارد</span>
+            <span *ngIf="!jobOpportunity.meal" class="text-danger">ندارد</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+            <strong>سرویس: </strong>
+            <span *ngIf="jobOpportunity.workService" class="text-success">دارد</span>
+            <span *ngIf="!jobOpportunity.workService" class="text-danger">ندارد</span>
+        </div>
+    </div>
+    <div class="row" *ngIf="jobOpportunity.workServicePath">
+        <div class="col-sm-6 col-md-4">
+            <strong>مسیر سرویس: </strong>
+            <span>{{jobOpportunity.workServicePath}}</span>
+        </div>
+    </div>
+
+
+    <div class="box-header">
+        <h3 class="box-title">سایر اطلاعات</h3>
+    </div>
+     
+    <div class="">
+        <strong>سایر توضیحات: </strong>
+        <span>{{jobOpportunity.note}}</span>
+    </div>
+
+
+
+</div>

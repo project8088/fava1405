@@ -1,0 +1,130 @@
+
+<div *ngIf="ticket">
+  <div class="d-flex align-items-center justify-content-between pb-3">
+    <strong>کد رهگیری: {{ticket?.code}}</strong>
+
+    <strong>{{ticket?.createdOn|jalali:'HH:mm YYYY/MM/DD'}}</strong>
+  </div>
+
+
+  <h4 class="py-2">{{ticket.subject}}</h4>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>اولویت</th>
+        <th>وضعیت</th>
+        <th>واحد</th>
+        <th>شماره موبایل</th>
+        <th>حل شده</th>
+        <th *ngIf="currentUser.isAdmin">ارسال کننده</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ticket?.priority}}</td>
+        <td>{{ticket?.ticketStatus}}</td>
+        <td>{{ticket?.organizationalUnit?.text}}</td>
+        <td>{{ticket?.mobileNumber}}</td>
+        <td>
+          <span *ngIf="ticket.isSolved">بله</span>
+          <span *ngIf="!ticket.isSolved">خیر</span>
+        </td>
+        <td *ngIf="currentUser.isAdmin">
+
+          <a (click)="openCitizenProfile(ticket?.ownerId)">
+            {{ticket?.ownerUserName}}
+          </a>
+
+
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- ----------------------------------------------------------------------------------- -->
+
+  <div class="d-flex flex-row justify-content-end">
+
+    <button mat-raised-button color="accent" (click)="closeTicket(true)" class="mr-1" *ngIf="ticket.colsedById===null">
+      <i class="fa fa-times mr-2"></i>
+      <span>بستن تیکت</span>
+    </button>
+
+    <button mat-raised-button color="default" (click)="getTicketInfo()" class="mr-1">
+      <i class="fa fa-sync mr-2"></i>
+      <span>بروزرسانی</span>
+    </button>
+    <button mat-raised-button color="default" (click)="back()">
+      <i class="fa fa-arrow-left mr-2"></i>
+      <span>بازگشت</span>
+    </button>
+  </div>
+
+  <!-- ----------------------------------------------------------------------------------- -->
+
+
+  <div class="field-set">
+    <label class="field-set-title">ارسال پاسخ</label>
+    <div *ngIf="ticket?.colsedById!==null">
+      <h5 class="text-danger text-bold p-4"> تیکت بسته شده است! </h5>
+
+      <button mat-raised-button (click)="closeTicket(false)" color="default" *ngIf="ticket.colsedById===currentUser.userId">
+        باز کردن مجدد تیکت
+      </button>
+    </div>
+    <form [formGroup]="answerForm" class="" *ngIf="ticket?.colsedById===null">
+      <label>متن پیام:</label>
+      <textarea class="form-control mr-2" formControlName="responseText"></textarea>
+
+
+      <div class="d-flex justify-content-between mt-2">
+        <div>
+          <mat-checkbox *ngIf="currentUser.isAdmin" color="default" formControlName="sendSms">
+            ارسال پیامک
+          </mat-checkbox>
+          <mat-checkbox *ngIf="currentUser.isAdmin" color="default" formControlName="review">
+            در حال بررسی
+          </mat-checkbox>
+          <mat-checkbox *ngIf="!currentUser.isAdmin" color="default" formControlName="resolved">
+            مشکل حل شد
+          </mat-checkbox>
+
+        </div>
+        <div>
+
+
+          <button mat-raised-button color="default" [disabled]="isSending" (click)="sendAnswer()">
+            <mat-spinner color="default" diameter="25" [hidden]="!isSending"></mat-spinner>
+            <span>ارسال</span>
+          </button>
+        </div>
+
+      </div>
+
+      <app-uploader (attachmentId)="getAttachmentId($event)" [autoUpload]="true"
+                    [btnTitle]="'انتخاب پیوست'" [url]="uploadUrl" [data]="uploadData"></app-uploader>
+    </form>
+  </div>
+
+
+  <!-- ----------------------------------------------------------------------------------- -->
+
+</div>
+<div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
+  <mat-spinner *ngIf="loading" color="default"></mat-spinner>
+</div>
+<div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading==false && resultsLength==0">
+  <strong>اطلاعاتی وجود ندارد!</strong>
+</div>
+
+<mat-card *ngFor="let item of ticket?.responseTickets" class="mt-3">
+  <div class="card-title d-flex align-items-center justify-content-between" [class.light]="item.ownerId == user?.ownerId">
+    <strong>{{item.ownerDisplayName}}</strong>
+    <small> {{item.responseTextOnDate|jalali:'HH:mm YYYY/MM/DD'}}</small>
+  </div>
+  <mat-card-content>
+    <pre class="text-justify">{{item.responseText}}</pre>
+    <app-attachments [guid]="item?.attachmentGuid"></app-attachments>
+
+  </mat-card-content>
+</mat-card>

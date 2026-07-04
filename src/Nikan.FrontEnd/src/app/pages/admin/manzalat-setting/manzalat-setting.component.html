@@ -1,0 +1,100 @@
+<div class="content-header">
+  <span>
+    تنظیمات منزلت
+  </span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">پنل منزلت</div>
+    <div class="bread-crumb-item"> مدیریت </div>
+    <div class="bread-crumb-item active">تنظیمات منزلت </div>
+  </div>
+</div>
+
+
+<mat-card class="custom-card">
+  <mat-card-header>
+
+  </mat-card-header>
+  <mat-card-content>
+
+    <div class="d-flex align-items-center justify-content-center p-5 my-5" *ngIf="loading">
+      <mat-spinner color="default"></mat-spinner>
+    </div>
+    <form [formGroup]="settingForm" class="p-4" *ngIf="!loading">
+
+
+
+      <div class="alert alert-info">
+        <strong>
+          تنظیمات منزلت
+        </strong>
+      </div>
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label> حداقل سن  مجاز برای فرم سالمندی</mat-label>
+        <input type="text" matInput formControlName="minAgeSalmand" numbersOnly maxlength="100" />
+        <mat-error *ngIf="settingForm.get('minAgeSalmand').errors?.required">
+          حداقل سن  مجاز برای فرم سالمندی
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label> حداقل سن  مجاز برای فرم بازنشتگی</mat-label>
+        <input type="text" matInput formControlName="minAgeBazneshasteh" numbersOnly maxlength="100" />
+        <mat-error *ngIf="settingForm.get('minAgeBazneshasteh').errors?.required">
+          حداقل سن  مجاز برای فرم بازنشتگی
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="col-sm-12">
+        <mat-label> توضیحات ثبت نام فرم جانبازی </mat-label>
+        <textarea rows="3" maxlength="1000" matInput formControlName="janbazanDescription"></textarea>
+        <mat-error *ngIf="settingForm.get('janbazanDescription').errors?.required">
+          توضیحات ثبت نام فرم جانبازی   را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-sm-12">
+        <mat-label> توضیحات ثبت نام فرم بازنشستگی </mat-label>
+        <textarea rows="3" maxlength="1000" matInput formControlName="bazneshastehDescription"></textarea>
+        <mat-error *ngIf="settingForm.get('bazneshastehDescription').errors?.required">
+          توضیحات بازنشستگی را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+
+      <mat-form-field class="col-sm-12">
+        <mat-label> توضیحات ثبت نام فرم زنان سرپرست خانواده </mat-label>
+        <textarea rows="3" maxlength="1000" matInput formControlName="zanSarparastDescription"></textarea>
+        <mat-error *ngIf="settingForm.get('zanSarparastDescription').errors?.required">
+          توضیحات زنان سرپرست خانواده را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-sm-12">
+        <mat-label> توضیحات ثبت نام فرم سالمندی </mat-label>
+        <textarea rows="3" maxlength="1000" matInput formControlName="salmandDescription"></textarea>
+        <mat-error *ngIf="settingForm.get('salmandDescription').errors?.required">
+          توضیحات سالمندی را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="col-sm-12">
+        <mat-label> توضیحات ثبت نام فرم معلولین </mat-label>
+        <textarea rows="3" maxlength="1000" matInput formControlName="maloulinDescription"></textarea>
+        <mat-error *ngIf="settingForm.get('maloulinDescription').errors?.required">
+          توضیحات معلولین را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-4">
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveSetting()">
+        <span> ذخیره اطلاعات</span>
+        <mat-spinner diameter="20" *ngIf="isSaving"></mat-spinner>
+      </button>
+    </div>
+
+  </mat-card-footer>
+</mat-card>

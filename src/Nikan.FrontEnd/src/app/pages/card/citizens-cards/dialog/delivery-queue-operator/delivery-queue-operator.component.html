@@ -1,0 +1,56 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+    <h5 cdkDragHandle class="title" > ویرایش استرداد  </h5>
+    
+
+    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+
+  <div class="box-info-dash">
+    <div class="row">
+      <div class="col-sm-6">
+        <span>  صف :  </span><strong>{{info.name}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>  اولویت:  </span><strong>{{info.indexOrder}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>تعداد کارتهای موجود  :  </span><strong>{{info.cardCount}}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>  تاریخ ایجاد:  </span><strong>{{info.onDate| jalali}}</strong>
+      </div>
+
+    </div>
+  </div>
+
+
+  <form [formGroup]="frm">
+    <div class="row"> 
+
+      <mat-form-field class="col-md-12">
+        <mat-label>کد ملی  تحویل دهنده  </mat-label>
+        <input matInput formControlName="nationalCode" maxlength="12" />
+        <mat-error *ngIf="frm.get('nationalCode').errors?.required">
+          کد ملی  تحویل دهنده را وارد کنید.
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field class="col-sm-12 col-md-12">
+        <mat-label>توضیحات مربوط به تحویل صف</mat-label>
+        <input matInput formControlName="description" maxlength="200" />
+      </mat-form-field> 
+
+    </div>
+    
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button mat-dialog-close>انصراف</button>
+    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <span>تایید تحویل کارت </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+</mat-dialog-actions>
