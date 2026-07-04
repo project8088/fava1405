@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ActivatedRoute } from '@angular/router';
-import { BaseDataModel } from 'src/app/core/models/base-data-model';
+import { BaseDataModel } from '@core/models/base-data-model';
 import { CitizenProfileComponent } from '../profile.component';
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
-import { HelperService } from 'src/app/core/services/helper.service';
+import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';

@@ -2,11 +2,11 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 
-import { DataService } from 'src/app/core/services/data-service.service';
+import { DataService } from '@core/services/data-service.service';
 import { Observable } from 'rxjs';
-import { RegisterServiceModel } from 'src/app/core/models/models';
+import { RegisterServiceModel } from '@core/models/models';
 import { Router } from '@angular/router';
-import { ServerApis } from 'src/app/core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

@@ -4,7 +4,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
-import { userGroupsDto } from 'src/app/core/models/users/userGroups';
+import { userGroupsDto } from '@core/models/users/userGroups';
 import Swal from 'sweetalert2';
 import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-usergroups.component';
 import { DataService } from '../../../../core/services/data-service.service';

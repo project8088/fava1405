@@ -5,8 +5,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 import { isNgTemplate } from '@angular/compiler';
 import { AdminCitizenSmsListDialogComponent } from '../../admin/_dialogs/citizen-sms-list/citizen-sms-list.component';

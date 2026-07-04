@@ -1,8 +1,8 @@
 import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
 import { ToastrService } from 'ngx-toastr';
 import { TransitionCheckState } from '@angular/material/checkbox';

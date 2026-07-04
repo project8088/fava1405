@@ -1,9 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { ApiResult } from 'src/app/core/models/response';
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { ApiResult } from '@core/models/response';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 
 import { MatCardModule } from '@angular/material/card';

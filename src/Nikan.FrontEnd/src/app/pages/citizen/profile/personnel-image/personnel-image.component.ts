@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CitizenProfileComponent } from '../profile.component';
-import { DataService } from 'src/app/core/services/data-service.service';
+import { DataService } from '@core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ServerApis } from 'src/app/core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { SideNavMenuComponent } from 'src/app/shared/side-nav-menu/side-nav-menu.component';
 import { ToastrService } from 'ngx-toastr';
 import { UploadUserAvatarDialogComponent } from 'src/app/shared/_dialog/upload-avatar/upload-avatar.component';

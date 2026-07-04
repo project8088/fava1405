@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 
-import { DataService } from 'src/app/core/services/data-service.service';
-import { HelperService } from 'src/app/core/services/helper.service';
+import { DataService } from '@core/services/data-service.service';
+import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
-import { ServerApis } from 'src/app/core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 

@@ -2,8 +2,8 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 
 @Component({
   selector: 'adm-add-update-slide-dialog',

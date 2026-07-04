@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServerApis } from 'src/app/core/server-apis';
-import { DataService } from 'src/app/core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
+import { DataService } from '@core/services/data-service.service';
 
 @Component({
   selector: 'app-citizen-sms-list',

@@ -9,8 +9,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
-import { citizenFamilyModel } from 'src/app/core/models/citizen/family.model';
-import { karjoEducationDto } from 'src/app/core/models/citizen/education';
+import { citizenFamilyModel } from '@core/models/citizen/family.model';
+import { karjoEducationDto } from '@core/models/citizen/education';
 
 @Component({
   selector: 'app-citizen-my-family',

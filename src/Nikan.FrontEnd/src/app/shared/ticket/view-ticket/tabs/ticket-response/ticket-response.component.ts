@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../../../core/authentication/user.model';
 import { DataService } from '../../../../../core/services/data-service.service';

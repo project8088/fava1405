@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { DataService } from 'src/app/core/services/data-service.service';
+import { DataService } from '@core/services/data-service.service';
 
 @Component({
   selector: 'app-captcha',

@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy, AfterViewInit, Injector } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Chart } from 'angular-highcharts';
-import { ServerApis } from 'src/app/core/server-apis';
-import { DataService } from 'src/app/core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
+import { DataService } from '@core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 

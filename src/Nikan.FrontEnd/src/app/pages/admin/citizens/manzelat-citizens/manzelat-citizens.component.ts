@@ -4,7 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';

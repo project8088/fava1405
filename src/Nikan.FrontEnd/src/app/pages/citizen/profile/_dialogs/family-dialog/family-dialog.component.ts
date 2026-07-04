@@ -4,12 +4,12 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { MatStepper } from '@angular/material/stepper';
-import { HelperService } from 'src/app/core/services/helper.service';
-import { citizenFamilyModel } from 'src/app/core/models/citizen/family.model';
+import { HelperService } from '@core/services/helper.service';
+import { citizenFamilyModel } from '@core/models/citizen/family.model';
 
 @Component({
   selector: 'app-citizen-family-dialog',

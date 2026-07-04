@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from 'src/app/core/server-apis';
-import { DataService } from 'src/app/core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
+import { DataService } from '@core/services/data-service.service';
 declare var $: any;
 
 @Component({

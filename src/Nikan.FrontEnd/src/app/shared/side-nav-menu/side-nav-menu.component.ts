@@ -2,7 +2,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { AuthUser } from '../../core/authentication/user.model';
 import { DataService } from '../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';

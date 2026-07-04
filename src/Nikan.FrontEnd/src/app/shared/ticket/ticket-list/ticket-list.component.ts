@@ -7,7 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'jalali-moment';
 import { SendTicketDialogComponent } from '../_dialogs/send-ticket/send-ticket.component';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';

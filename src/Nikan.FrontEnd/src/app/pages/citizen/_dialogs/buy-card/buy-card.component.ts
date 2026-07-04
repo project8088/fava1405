@@ -5,7 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { ServerApis } from '../../../../core/server-apis';
 import { DataService } from '../../../../core/services/data-service.service';
 import { Router } from '@angular/router';
-import { HelperService } from 'src/app/core/services/helper.service';
+import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
 
 interface ICard {

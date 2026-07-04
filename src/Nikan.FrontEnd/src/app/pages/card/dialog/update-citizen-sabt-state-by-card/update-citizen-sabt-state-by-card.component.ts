@@ -6,7 +6,7 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { BaseDataModel } from 'src/app/core/models/base-data-model';
+import { BaseDataModel } from '@core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';

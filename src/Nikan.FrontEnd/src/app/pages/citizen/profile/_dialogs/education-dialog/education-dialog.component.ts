@@ -4,8 +4,8 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
-import { karjoEducationDto } from 'src/app/core/models/citizen/education';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { karjoEducationDto } from '@core/models/citizen/education';
 import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 

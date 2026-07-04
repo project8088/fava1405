@@ -1,6 +1,6 @@
 import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ServerApis } from 'src/app/core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { CropperComponent } from 'src/app/shared/cropper/cropper.component';
 
 @Component({

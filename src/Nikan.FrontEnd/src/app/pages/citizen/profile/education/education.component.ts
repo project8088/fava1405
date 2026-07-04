@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { karjoEducationDto } from 'src/app/core/models/citizen/education';
+import { karjoEducationDto } from '@core/models/citizen/education';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';

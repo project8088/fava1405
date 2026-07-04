@@ -1,10 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 
-import { AuthService } from 'src/app/core/authentication/auth.service';
-import { AuthUser } from 'src/app/core/authentication/user.model';
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { AuthService } from '@core/authentication/auth.service';
+import { AuthUser } from '@core/authentication/user.model';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

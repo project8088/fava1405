@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { DataService } from '../../../core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { AdminViewEventDetailsDialogComponent } from '../_dialogs/event-details/event-details.component';
 

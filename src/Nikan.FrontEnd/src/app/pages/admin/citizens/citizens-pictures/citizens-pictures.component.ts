@@ -9,8 +9,8 @@ import { AdminCitizenEditImageDialogComponent } from '../../_dialogs/citizen-edi
 import { AdminCitizenImageDialogComponent } from '../../_dialogs/citizen-image/citizen-image.component';
 import { AdminCitizenRejectImageDialogComponent } from '../../_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { AdminCitizenSmsListDialogComponent } from '../../_dialogs/citizen-sms-list/citizen-sms-list.component';
-import { DataService } from 'src/app/core/services/data-service.service';
-import { ServerApis } from 'src/app/core/server-apis';
+import { DataService } from '@core/services/data-service.service';
+import { ServerApis } from '@core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 import { isNgTemplate } from '@angular/compiler';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';

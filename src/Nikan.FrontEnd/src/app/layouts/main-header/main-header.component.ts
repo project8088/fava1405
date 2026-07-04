@@ -5,7 +5,7 @@ import { Meta, Title } from '@angular/platform-browser';
 import { AuthService } from '../../core/authentication/auth.service';
 import { AuthUser } from '../../core/authentication/user.model';
 import { DataService } from '../../core/services/data-service.service';
-import { RegisterServiceModel } from 'src/app/core/models/register-service.model';
+import { RegisterServiceModel } from '@core/models/register-service.model';
 import { ServerApis } from '../../core/server-apis';
 import { SiteSettingViewModel } from '../../core/models/setting';
 import { ToastrService } from 'ngx-toastr';

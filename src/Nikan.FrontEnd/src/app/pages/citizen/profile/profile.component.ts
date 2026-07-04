@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../core/services/data-service.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../core/server-apis';
-import { ShortKarjoProfile } from 'src/app/core/models/citizen/global-information';
+import { ShortKarjoProfile } from '@core/models/citizen/global-information';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

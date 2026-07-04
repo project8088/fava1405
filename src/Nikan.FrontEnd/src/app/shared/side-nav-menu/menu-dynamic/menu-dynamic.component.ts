@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { SideNavMenuItem } from '../../../core/models/menuItems';
 
 @Component({

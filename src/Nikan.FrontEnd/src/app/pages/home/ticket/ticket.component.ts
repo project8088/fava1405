@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { DataService } from '../../../core/services/data-service.service';

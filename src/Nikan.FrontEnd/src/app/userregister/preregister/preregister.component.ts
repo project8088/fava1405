@@ -3,8 +3,8 @@ import { ApiResult, RegisterServiceModel } from '../../core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
-import { DataService } from 'src/app/core/services/data-service.service';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '../../core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 import { UserRegisterService } from '../userregister.service';

@@ -8,8 +8,8 @@ import {
 } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { RequireMatch } from 'src/app/core/custom-validator/requireMatch';
-import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
+import { RequireMatch } from '@core/custom-validator/requireMatch';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { BaseDataModel } from '../../core/models/base-data-model';

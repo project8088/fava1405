@@ -6,14 +6,14 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 import { AdminCompanyChangeStatusDialogComponent } from '../../_dialogs/company-change-status/company-change-status.component';
 import { AdminCompanyContractDialogComponent } from '../../_dialogs/company-contract/company-contract.component';
-import { AuthService } from 'src/app/core/authentication/auth.service';
+import { AuthService } from '@core/authentication/auth.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
-import { HelperService } from 'src/app/core/services/helper.service';
+import { HelperService } from '@core/services/helper.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { RegisterServiceModel } from 'src/app/core/models/register-service.model';
+import { RegisterServiceModel } from '@core/models/register-service.model';
 import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';

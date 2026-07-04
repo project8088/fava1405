@@ -6,8 +6,8 @@ import { CitizenCardComponent } from './citizen-card.component';
 import { CitizenCardListComponent } from './card-list/card-list.component';
 import { CitizenCardRoutingModule } from './citizen-card-routing.module';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from 'src/app/core/core.module';
-import { MaterialModule } from 'src/app/core/material/material.module';
+import { CoreModule } from '@core/core.module';
+import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 
