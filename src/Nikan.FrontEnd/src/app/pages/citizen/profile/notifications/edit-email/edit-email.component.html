@@ -33,7 +33,7 @@
         </div>
         @if (editMode) {
           <div>
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label> ایمیل </mat-label>
               <input matInput formControlName="email" class="text-left" minlength="10" />
               @if (cardForm.get('email').errors?.required) {
@@ -60,7 +60,7 @@
     }
     @if (codeSent) {
       <form [formGroup]="confirmForm" class="mx-4">
-        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>کد تایید دریافتی </mat-label>
           <input
             matInput

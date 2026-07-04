@@ -15,7 +15,7 @@
             می باشد .
           </strong>
         </div>
-        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>شماره کارت</mat-label>
           <input matInput formControlName="cardNumber" maxlength="16" numbersOnly />
           @if (cardForm.get('cardNumber').errors?.required) {
@@ -25,7 +25,7 @@
             <mat-error> شماره کارت وارد شده صحیح نیست </mat-error>
           }
         </mat-form-field>
-        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+        <mat-form-field  class="col-sm-6 col-md-4">
           <mat-label>شماره شبا </mat-label>
           <input matInput formControlName="shabaNumber" maxlength="24" numbersOnly />
           @if (cardForm.get('shabaNumber').errors?.required) {

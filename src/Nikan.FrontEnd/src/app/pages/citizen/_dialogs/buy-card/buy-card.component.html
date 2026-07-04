@@ -25,7 +25,7 @@
       <mat-step [stepControl]="addressForm" label="ادرس تحویل کارت">
         <form #ngForm="ngForm" [formGroup]="addressForm">
           <div class="row">
-            <mat-form-field class="col-12 col-md-6 m-0" appearance="outline">
+            <mat-form-field class="col-12 col-md-6 m-0" >
               <mat-label>نوع آدرس</mat-label>
               <mat-select value="2" formControlName="addressType">
                 <mat-option [value]="2"> آدرس منزل </mat-option>
@@ -40,7 +40,7 @@
               }
             </mat-form-field>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field class="w-100" appearance="outline">
+              <mat-form-field class="w-100" >
                 <mat-label>شماره تلفن ثابت</mat-label>
                 <input formControlName="phoneNumber" numbersOnly matInput />
                 @if (addressForm.controls['phoneNumber'].errors && ngForm.submitted) {
@@ -55,7 +55,7 @@
           </div>
           <div class="row">
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field appearance="outline" class="w-100">
+              <mat-form-field  class="w-100">
                 <mat-label>استان</mat-label>
                 <mat-select disabled value="400" formControlName="stateId">
                   <mat-option value="400"> اصفهان </mat-option>
@@ -70,7 +70,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field value="400" appearance="outline" class="w-100">
+              <mat-form-field value="400"  class="w-100">
                 <mat-label>شهر </mat-label>
                 <mat-select disabled formControlName="cityId">
                   <mat-option value="403"> اصفهان </mat-option>
@@ -85,7 +85,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field appearance="outline" class="w-100">
+              <mat-form-field  class="w-100">
                 <mat-label>منطقه</mat-label>
                 <input formControlName="region" numbersOnly matInput />
                 @if (addressForm.controls['region'].errors && ngForm.submitted) {
@@ -98,7 +98,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field appearance="outline" class="w-100">
+              <mat-form-field  class="w-100">
                 <mat-label>خیابان</mat-label>
                 <input formControlName="street" matInput />
                 @if (addressForm.controls['street'].errors && ngForm.submitted) {
@@ -111,7 +111,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field appearance="outline" class="w-100">
+              <mat-form-field  class="w-100">
                 <mat-label>کوچه</mat-label>
                 <input formControlName="alley" matInput />
                 @if (addressForm.controls['alley'].errors && ngForm.submitted) {
@@ -124,7 +124,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field appearance="outline" class="w-100">
+              <mat-form-field  class="w-100">
                 <mat-label>پلاک</mat-label>
                 <input formControlName="plaque" matInput />
                 @if (addressForm.controls['plaque'].errors && ngForm.submitted) {
@@ -137,7 +137,7 @@
               </mat-form-field>
             </div>
             <div class="col-12 col-md-12 col-lg-6">
-              <mat-form-field class="w-100" appearance="outline">
+              <mat-form-field class="w-100" >
                 <mat-label>کد پستی </mat-label>
                 <input
                   formControlName="postalCode"

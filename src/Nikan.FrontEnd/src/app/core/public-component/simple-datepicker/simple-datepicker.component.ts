@@ -117,7 +117,6 @@ export class SimpleJalaliDatepickerComponent
 {
   @Input() required = false;
   @Input() disabled = false;
-  @Input() appearance = 'outline';
   @Input() label = '';
   @Output() date = new EventEmitter<{ date: string; jDate: string }|null>();
 

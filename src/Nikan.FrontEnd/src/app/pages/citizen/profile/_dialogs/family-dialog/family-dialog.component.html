@@ -25,7 +25,7 @@
       >
         <mat-step [stepControl]="firstFormGroup" label=" کد ملی">
           <form [formGroup]="firstFormGroup">
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>کد ملی عضو خانواده</mat-label>
               <input matInput formControlName="nationCode" minlength="10" numbersOnly />
               @if (firstFormGroup.get('nationCode').errors?.required) {
@@ -65,12 +65,12 @@
                 <mat-form-field
                   disabled
                   class="col-12 col-sm-6 col-md-4 col-lg-4"
-                  appearance="outline"
+                  
                 >
                   <mat-label>کد ملی</mat-label>
                   <input disabled formControlName="nationCode" matInput />
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <mat-form-field  class="col-12 col-sm-6 col-md-4 col-lg-4">
                   <mat-label>تاریخ تولد </mat-label>
                   <input matInput [matDatepicker]="dpS" formControlName="birthDate" />
                   <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
@@ -82,7 +82,7 @@
                     <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                   }
                 </mat-form-field>
-                <mat-form-field appearance="outline" class="col-12 col-sm-6 col-md-4 col-lg-4">
+                <mat-form-field  class="col-12 col-sm-6 col-md-4 col-lg-4">
                   <mat-label>چه نسبتی با شما دارد</mat-label>
                   <mat-select formControlName="familyRelation">
                     @for (item of baseEnums.familyRelationships; track item) {
@@ -156,7 +156,7 @@
     }
 
     <div class="row">
-      <mat-form-field appearance="outline" class="col-6">
+      <mat-form-field  class="col-6">
         <mat-label>چه نسبتی با شما دارد</mat-label>
         <mat-select formControlName="familyRelation">
           @for (item of baseEnums.familyRelationships; track item) {
@@ -174,14 +174,14 @@
         }
       </mat-form-field>
 
-      <mat-form-field disabled class="col-6" appearance="outline">
+      <mat-form-field disabled class="col-6" >
         <mat-label>کد ملی</mat-label>
         <input disabled formControlName="nationCode" matInput />
       </mat-form-field>
     </div>
     <div class="row">
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>نام</mat-label>
           <input formControlName="firstName" matInput />
           @if (registerForm.controls['firstName'].errors && ngForm1.submitted) {
@@ -194,7 +194,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>نام خانوادگی</mat-label>
           <input formControlName="lastName" matInput />
           @if (registerForm.controls['lastName'].errors && ngForm1.submitted) {
@@ -210,7 +210,7 @@
 
     <div class="row">
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>نام پدر</mat-label>
           <input formControlName="fatherName" matInput />
           @if (registerForm.controls['fatherName'].errors && ngForm1.submitted) {
@@ -223,7 +223,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label> تاریخ تولد</mat-label>
           <input matInput [matDatepicker]="dpS" formControlName="birthDate" />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
@@ -242,7 +242,7 @@
     <div class="row align-items-center">
       @if (!registerForm.controls['gender'].disabled) {
         <div class="col-6">
-          <mat-form-field appearance="outline" class="w-100" class="w-100">
+          <mat-form-field  class="w-100" class="w-100">
             <mat-label>جنسیت</mat-label>
             <mat-select formControlName="gender">
               <mat-option [value]="true"> آقا </mat-option>
@@ -256,7 +256,7 @@
       }
       @if (!registerForm.controls['mariageStatus'].disabled) {
         <div class="col-6">
-          <mat-form-field appearance="outline" class="w-100" class="w-100">
+          <mat-form-field  class="w-100" class="w-100">
             <mat-label>وضعیت تاهل</mat-label>
             <mat-select formControlName="mariageStatus">
               @for (item of baseEnums.maritalStatus; track item) {
@@ -279,7 +279,7 @@
 
     <div class="row">
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>شهر محل سکونت</mat-label>
           <mat-select formControlName="cityId">
             @for (item of isfahanCities; track item) {
@@ -299,7 +299,7 @@
       </div>
 
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>منطقه</mat-label>
           <input numbersOnly formControlName="region" matInput />
           @if (registerForm.controls['region'].errors && registerForm.submitted) {
@@ -313,7 +313,7 @@
       </div>
 
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>خیابان</mat-label>
           <input formControlName="street" matInput />
           @if (registerForm.controls['street'].errors && registerForm.submitted) {
@@ -327,7 +327,7 @@
       </div>
 
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>کوچه</mat-label>
           <input formControlName="alley" matInput />
           @if (registerForm.controls['alley'].errors && registerForm.submitted) {
@@ -341,7 +341,7 @@
       </div>
 
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>پلاک</mat-label>
           <input numbersOnly formControlName="plaque" matInput />
           @if (registerForm.controls['plaque'].errors && registerForm.submitted) {
@@ -355,7 +355,7 @@
       </div>
 
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field class="w-100 mt-3" appearance="outline">
+        <mat-form-field class="w-100 mt-3" >
           <mat-label>کد پستی </mat-label>
           <input
             formControlName="postalCode"
@@ -376,7 +376,7 @@
 
     <div class="row">
       <div class="col-4">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>آدرس ایمیل</mat-label>
           <input
             formControlName="eMail"
@@ -394,7 +394,7 @@
         </mat-form-field>
       </div>
       <div class="col-4">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>شماره موبایل</mat-label>
           <input matInput formControlName="mobile" maxlength="11" numbersOnly />
           @if (registerForm.get('mobile').errors?.required) {
@@ -406,7 +406,7 @@
         </mat-form-field>
       </div>
       <div class="col-4">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>شماره تلفن ثابت</mat-label>
           <input numbersOnly formControlName="phone" matInput />
           @if (registerForm.controls['phone'].errors && ngForm1.submitted) {
@@ -422,7 +422,7 @@
 
     <div class="row">
       <div class="col-12 col-md-12 col-lg-4">
-        <mat-form-field appearance="outline" class="w-100 mt-3">
+        <mat-form-field  class="w-100 mt-3">
           <mat-label>وضعیت تحصیل</mat-label>
           <mat-select formControlName="educationStatues">
             @for (item of baseEnums.educationStatues; track item) {
@@ -443,7 +443,7 @@
 
       @if (+registerForm.controls['educationStatues'].value !== 3) {
         <div class="col-12 col-md-12 col-lg-4">
-          <mat-form-field appearance="outline" class="w-100 mt-3">
+          <mat-form-field  class="w-100 mt-3">
             <mat-label>گروه تحصیلی</mat-label>
             <mat-select formControlName="educationGroup">
               @for (item of baseEnums.educationGroups; track item) {
@@ -465,7 +465,7 @@
 
       @if (+registerForm.controls['educationStatues'].value !== 3) {
         <div class="col-12 col-md-12 col-lg-4">
-          <mat-form-field appearance="outline" class="w-100 mt-3">
+          <mat-form-field  class="w-100 mt-3">
             <mat-label>سطح تحصیلات</mat-label>
             <mat-select formControlName="educationLevel">
               @for (item of baseEnums.educationLevel; track item) {
@@ -487,7 +487,7 @@
 
       @if (+registerForm.controls['educationStatues'].value !== 3) {
         <div class="col-12 col-md-12 col-lg-4">
-          <mat-form-field class="w-100 mt-3" appearance="outline">
+          <mat-form-field class="w-100 mt-3" >
             <mat-label>رشته تحصیلی</mat-label>
             <input formControlName="educationTitle" matInput placeholder="رشته تحصیلی (اختیاری)" />
             @if (registerForm.controls['educationTitle'].errors && registerForm.submitted) {
@@ -503,7 +503,7 @@
     </div>
     <div class="row">
       <div class="col-6">
-        <mat-form-field appearance="outline" class="w-100">
+        <mat-form-field  class="w-100">
           <mat-label>وضعیت شغل</mat-label>
           <mat-select formControlName="jobGroup">
             @for (item of baseEnums.jobGroup; track item) {
@@ -522,7 +522,7 @@
         </mat-form-field>
       </div>
       <div class="col-6">
-        <mat-form-field class="w-100" appearance="outline">
+        <mat-form-field class="w-100" >
           <mat-label>عنوان شغل</mat-label>
           <input formControlName="jobTitle" matInput placeholder="عنوان شغل (اختیاری)" />
           @if (registerForm.controls['jobTitle'].errors && registerForm.submitted) {

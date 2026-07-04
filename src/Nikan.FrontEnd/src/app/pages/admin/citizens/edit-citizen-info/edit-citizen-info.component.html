@@ -11,7 +11,7 @@
             @if (!loading) {
               <form [formGroup]="personalForm" class="p-4">
                 <div class="row">
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>کد ملی (نام کاربری)</mat-label>
                     <input matInput formControlName="nationalCode" maxlength="10" numbersOnly />
                     @if (personalForm.get('nationalCode').errors?.required) {
@@ -21,7 +21,7 @@
                       <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>نام</mat-label>
                     <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
                     @if (personalForm.get('firstName').errors?.required) {
@@ -31,7 +31,7 @@
                       <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label> نام خانوادگی</mat-label>
                     <input
                       [readonly]="noEditStatus()"
@@ -46,7 +46,7 @@
                       <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>نام پدر </mat-label>
                     <input
                       matInput
@@ -61,7 +61,7 @@
                       <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>جنسیت</mat-label>
                     <mat-select [disabled]="noEditStatus()" formControlName="gender">
                       <mat-option [value]="true">آقا هستم</mat-option>
@@ -71,7 +71,7 @@
                       <mat-error> جنسیت را مشخص کنید. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>وضعیت تاهل </mat-label>
                     <mat-select formControlName="marital">
                       @for (item of baseEnums.maritalStatus; track item) {
@@ -82,7 +82,7 @@
                       <mat-error> وضعیت تاهل را وارد کنید. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>تاریخ تولد</mat-label>
                     <input
                       matInput
@@ -99,7 +99,7 @@
                       <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>شماره موبایل</mat-label>
                     <input matInput formControlName="mobile" maxlength="11" numbersOnly />
                     @if (personalForm.get('mobile').errors?.required) {
@@ -109,7 +109,7 @@
                       <mat-error> شماره موبایل صحیح نیست. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label> تلفن ثابت</mat-label>
                     <input matInput numbersOnly formControlName="phoneNumber" />
                     @if (personalForm.get('phoneNumber').errors?.required) {
@@ -119,7 +119,7 @@
                       <mat-error> شماره تلفن صحیح نیست. </mat-error>
                     }
                   </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                  <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>آدرس ایمیل</mat-label>
                     <input matInput formControlName="email" />
                     @if (personalForm.get('email').errors?.email) {
@@ -129,7 +129,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>شهر محل سکونت</mat-label>
                       <mat-select formControlName="cityId">
                         @for (item of isfahanCities; track item) {
@@ -148,7 +148,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>منطقه</mat-label>
                       <input numbersOnly formControlName="region" matInput />
                       @if (personalForm.controls['region'].errors && personalForm.submitted) {
@@ -161,7 +161,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>خیابان</mat-label>
                       <input formControlName="street" matInput />
                       @if (personalForm.controls['street'].errors && personalForm.submitted) {
@@ -174,7 +174,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>کوچه</mat-label>
                       <input formControlName="alley" matInput />
                       @if (personalForm.controls['alley'].errors && personalForm.submitted) {
@@ -187,7 +187,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>پلاک</mat-label>
                       <input numbersOnly formControlName="plaque" matInput />
                       @if (personalForm.controls['plaque'].errors && personalForm.submitted) {
@@ -200,7 +200,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field class="w-100 mt-3" appearance="outline">
+                    <mat-form-field class="w-100 mt-3" >
                       <mat-label>کد پستی </mat-label>
                       <input
                         formControlName="postalCode"
@@ -220,7 +220,7 @@
                 </div>
                 <div class="row">
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>وضعیت تحصیل</mat-label>
                       <mat-select formControlName="educationStatues">
                         @for (item of baseEnums.educationStatues; track item) {
@@ -242,7 +242,7 @@
                   </div>
                   @if (+personalForm.controls['educationStatues'].value !== 3) {
                     <div class="col-12 col-md-12 col-lg-4">
-                      <mat-form-field appearance="outline" class="w-100 mt-3">
+                      <mat-form-field  class="w-100 mt-3">
                         <mat-label>گروه تحصیلی</mat-label>
                         <mat-select formControlName="educationGroup">
                           @for (item of baseEnums.educationGroups; track item) {
@@ -265,7 +265,7 @@
                   }
                   @if (+personalForm.controls['educationStatues'].value !== 3) {
                     <div class="col-12 col-md-12 col-lg-4">
-                      <mat-form-field appearance="outline" class="w-100 mt-3">
+                      <mat-form-field  class="w-100 mt-3">
                         <mat-label>سطح تحصیلات</mat-label>
                         <mat-select formControlName="educationLevel">
                           @for (item of baseEnums.educationLevel; track item) {
@@ -288,7 +288,7 @@
                   }
                   @if (+personalForm.controls['educationStatues'].value !== 3) {
                     <div class="col-12 col-md-12 col-lg-4">
-                      <mat-form-field class="w-100 mt-3" appearance="outline">
+                      <mat-form-field class="w-100 mt-3" >
                         <mat-label>رشته تحصیلی</mat-label>
                         <input
                           formControlName="educationTitle"
@@ -308,7 +308,7 @@
                     </div>
                   }
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field appearance="outline" class="w-100 mt-3">
+                    <mat-form-field  class="w-100 mt-3">
                       <mat-label>وضعیت شغل</mat-label>
                       <mat-select formControlName="jobGroup">
                         @for (item of baseEnums.jobGroup; track item) {
@@ -327,7 +327,7 @@
                     </mat-form-field>
                   </div>
                   <div class="col-12 col-md-12 col-lg-4">
-                    <mat-form-field class="w-100 mt-3" appearance="outline">
+                    <mat-form-field class="w-100 mt-3" >
                       <mat-label>عنوان شغل</mat-label>
                       <input
                         formControlName="jobTitle"
@@ -352,7 +352,7 @@
           <!----------------------------------------------------------------->
           <mat-tab label="اطلاعات تکمیلی">
             <div class="mt-3">
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>کد پرسنلی</mat-label>
                 <input matInput formControlName="personnelCode" maxlength="10" numbersOnly />
                 @if (form.get('personnelCode').errors?.required) {
@@ -364,7 +364,7 @@
               </mat-form-field>
               <!-------------------------------identity--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>شماره شناسنامه</mat-label>
                 <input
                   matInput
@@ -376,14 +376,14 @@
                   <mat-error> شماره شناسنامه را وارد کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label> سریال شناسنامه</mat-label>
                 <input matInput formControlName="shSerial" autocomplete="doNotAutoComplete" />
                 @if (form.get('shSerial').errors?.required) {
                   <mat-error> سریال شناسنامه شهروند را وارد کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>تاریخ صدور شناسنامه</mat-label>
                 <input matInput [matDatepicker]="dpicker_shDate" formControlName="shDate" />
                 <mat-datepicker-toggle matSuffix [for]="dpicker_shDate"></mat-datepicker-toggle>
@@ -395,7 +395,7 @@
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>استان محل صدور شناسنامه</mat-label>
                 <mat-select formControlName="shStateId">
                   @for (item of states; track item) {
@@ -412,7 +412,7 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>شهر محل صدور شناسنامه </mat-label>
                 <mat-select formControlName="shCityId">
                   @for (item of shCities | async; track item) {
@@ -429,17 +429,17 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>بخش</mat-label>
                 <input matInput formControlName="shCitySection" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-12">
+              <mat-form-field  class="col-12">
                 <mat-label>ملاحظات شناسنامه، در صورتی وجود ملاحظات وارد نمایید</mat-label>
                 <input matInput formControlName="shNote" />
               </mat-form-field>
               <!--------------------------------birth--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>استان محل تولد</mat-label>
                 <mat-select formControlName="birthStateId">
                   @for (item of states; track item) {
@@ -456,7 +456,7 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>شهر محل تولد</mat-label>
                 <mat-select formControlName="cityOfBirthId">
                   @for (item of birthCities | async; track item) {
@@ -473,15 +473,15 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>بخش /روستا/دهستان محل تولد</mat-label>
                 <input matInput formControlName="villageOfBirth" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>بخش محل تولد</mat-label>
                 <input matInput formControlName="birthCitySection" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>دین</mat-label>
                 <mat-select formControlName="religion">
                   @for (item of baseEnums.religion; track item) {
@@ -493,7 +493,7 @@
               </mat-form-field>
               <!-------------------------------mariage--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>تاریخ ازدواج</mat-label>
                 <input
                   matInput
@@ -514,7 +514,7 @@
               </mat-form-field>
               <!-------------------------------Soldier--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>وضعیت خدمت سربازی</mat-label>
                 <mat-select formControlName="soldierState">
                   @for (item of baseEnums.soldierState; track item) {
@@ -527,7 +527,7 @@
                   <mat-error> وضعیت خدمت سربازی شهروند را مشخص کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>تاریخ پایان خدمت</mat-label>
                 <input
                   matInput
@@ -554,7 +554,7 @@
           <!----------------------------------------------------------------->
           <mat-tab label="اطلاعات شغلی و تحصیلی">
             <div class="mt-3">
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>وضعیت تحصیل</mat-label>
                 <mat-select formControlName="educationStatues">
                   @for (item of baseEnums.educationStatues; track item) {
@@ -571,19 +571,19 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>پایه تحصیلی</mat-label>
                 <input matInput formControlName="baseEducation" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>معدل </mat-label>
                 <input matInput formControlName="academicGrade" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label> نام دانشگاه محل تحصیل /دریافت مدرک</mat-label>
                 <input matInput formControlName="universityName" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>تاریخ پایان تحصیل</mat-label>
                 <input
                   matInput
@@ -602,15 +602,15 @@
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-12">
+              <mat-form-field  class="col-12">
                 <mat-label> توضیحات اضافه</mat-label>
                 <input matInput formControlName="academicNote" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-12">
+              <mat-form-field  class="col-12">
                 <mat-label> شماره بیمه</mat-label>
                 <input matInput formControlName="insuranceNumber" />
               </mat-form-field>
-              <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>تاریخ استخدام</mat-label>
                 <input
                   matInput

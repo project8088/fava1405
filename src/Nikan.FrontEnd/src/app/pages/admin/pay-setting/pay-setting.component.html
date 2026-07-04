@@ -23,7 +23,7 @@
               <strong> تنظیمات درگاه پرداخت اینترنتی بانک ملت </strong>
             </div>
           </div>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label>شناسه مشتری (شناسه واریز بانکی) </mat-label>
             <input
               type="text"
@@ -36,7 +36,7 @@
               <mat-error> شناسه مشتری (شناسه واریز بانکی)را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> شماره ترمینال </mat-label>
             <input
               type="text"
@@ -49,7 +49,7 @@
               <mat-error> شماره ترمینال را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> روش پرداخت بانکی </mat-label>
             <input
               type="text"
@@ -62,21 +62,21 @@
               <mat-error> روش پرداخت بانکی را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> نام کاربری درگاه </mat-label>
             <input type="text" matInput formControlName="bankUserName" maxlength="20" />
             @if (settingForm.get('bankUserName').errors?.required) {
               <mat-error> نام کاربری درگاه را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> کلمه عبور درگاه </mat-label>
             <input type="text" matInput formControlName="bankPassword" maxlength="20" />
             @if (settingForm.get('bankPassword').errors?.required) {
               <mat-error> کلمه عبور درگاه را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> مسیر برگشت درگاه </mat-label>
             <input type="text" matInput formControlName="callBackUrl" maxlength="2000" />
             @if (settingForm.get('callBackUrl').errors?.required) {
@@ -86,7 +86,7 @@
           <div class="col-md-12">
             <div class="alert alert-info">تنظیمات سرویس برگشت هزینه</div>
           </div>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> شماره ترمینال سرویس برگشت </mat-label>
             <input
               type="text"
@@ -99,21 +99,21 @@
               <mat-error> شماره ترمینال را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> نام کاربری سرویس برگشت </mat-label>
             <input type="text" matInput formControlName="refundUserName" maxlength="20" />
             @if (settingForm.get('refundUserName').errors?.required) {
               <mat-error> نام کاربری سرویس برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> کلمه عبور سرویس برگشت </mat-label>
             <input type="text" matInput formControlName="refundPassword" maxlength="20" />
             @if (settingForm.get('refundPassword').errors?.required) {
               <mat-error> کلمه عبور سرویس برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> مبلغ کسر برگشت </mat-label>
             <input
               type="text"
@@ -126,7 +126,7 @@
               <mat-error> مبلغ کسر برگشت را وارد نمایید </mat-error>
             }
           </mat-form-field>
-          <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-form-field  class="col-sm-6 col-md-4">
             <mat-label> توضیحات غیرفعال بودن سرویس برگشت هزینه </mat-label>
             <input
               type="text"

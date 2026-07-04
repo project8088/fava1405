@@ -230,14 +230,14 @@
       <div class="p-5">
         <form [formGroup]="contactForm">
           <div class="row">
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>نام و نام خانوادگی</mat-label>
               <input matInput type="text" formControlName="name" />
               @if (contactForm.get('name').errors?.required) {
                 <mat-error> نام خود را وارد کنید </mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>شماره موبایل</mat-label>
               <input
                 matInput
@@ -250,14 +250,14 @@
                 <mat-error> شماره موبایل صحیح نیست! </mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>آدرس ایمیل</mat-label>
               <input matInput type="text" formControlName="email" />
               @if (contactForm.get('email').errors?.email) {
                 <mat-error> آدرس ایمیل صحیح نیست! </mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>سازمان</mat-label>
               <mat-select
                 formControlName="organizationId"
@@ -271,7 +271,7 @@
                 <mat-error> سازمان را مشخص کنید. </mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+            <mat-form-field  class="col-sm-6 col-md-4">
               <mat-label>واحد</mat-label>
               <mat-select formControlName="organizationalUnitId">
                 @for (item of unitList; track item) {
@@ -283,7 +283,7 @@
               }
               <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-12">
+            <mat-form-field  class="col-sm-12">
               <mat-label>عنوان پیام</mat-label>
               <input matInput formControlName="subject" />
               @if (contactForm.get('subject').errors?.required) {
@@ -293,7 +293,7 @@
                 <mat-error> حداکثر 1000 کاراکتر </mat-error>
               }
             </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-12">
+            <mat-form-field  class="col-sm-12">
               <mat-label>متن پیام</mat-label>
               <textarea matInput formControlName="message" rows="5"></textarea>
               @if (contactForm.get('message').errors?.required) {

@@ -51,7 +51,7 @@
           <h4 class="text-primary">لطفا قبل از ثبت نام نکات مربوط به ثبت نام را مطالعه کنید.</h4>
           <hr />
 
-          <mat-form-field appearance="outline" class="w-100">
+          <mat-form-field  class="w-100">
             <mat-label>ملیت</mat-label>
             <mat-select formControlName="nationality">
               @for (item of nationalityList; track item) {
@@ -69,7 +69,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="w-100 pb-0 mb-1" appearance="outline">
+          <mat-form-field class="w-100 pb-0 mb-1" >
             @if (isIranian()) {
               <mat-label>کدملی</mat-label>
             }
@@ -100,7 +100,7 @@
             }
           </mat-form-field>
 
-          <mat-form-field class="w-100" appearance="outline">
+          <mat-form-field class="w-100" >
             <mat-label>شماره موبایل</mat-label>
             <input
               formControlName="mobileNumber"
