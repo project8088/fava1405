@@ -47,7 +47,7 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.form.value;

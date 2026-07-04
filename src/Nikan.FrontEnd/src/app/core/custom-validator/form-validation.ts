@@ -273,8 +273,8 @@ export class CustomFormValidators {
    * use range
    * */
   checkAgeRangeValidator: ValidatorFn = (fg: FormGroup) => {
-    const start = fg.get('ageRangeFrom').value;
-    const end = fg.get('ageRangeTo').value;
+    const start = fg.get('ageRangeFrom')?.value;
+    const end = fg.get('ageRangeTo')?.value;
     if (!start && !end) return null;
     return start !== null && end !== null && start <= end ? null : { ageRange: true };
   };

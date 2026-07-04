@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardDiscountListComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'discountTitle',
@@ -45,7 +45,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.cardTypeId = p.id;
+      this.cardTypeId = p['id'];
     });
 
     this.searchForm = this.fb.group({});

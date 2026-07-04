@@ -15,8 +15,8 @@ export class ViewCitizenProfileComponent extends AppBase implements OnInit {
   feedbackfrm: FormGroup;
   citizen: any = {};
   manzalatdata: [];
-  loading: boolean;
-  loadingData: boolean;
+    loading?: boolean;
+  loadingData?: boolean;
   maritalStatus: boolean;
 
   baseUrl: string = ServerApis.baseUrl;

@@ -24,7 +24,7 @@ export class AdminTreePermissionComponent extends AppBase implements OnInit {
 
   someComplete(item): boolean {
     if (!item.value) {
-      return false;
+        return ;
     }
     return item.value.filter((t) => t.selected).length > 0 && !item.allComplete;
   }

@@ -1,7 +1,5 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AgmCoreModule } from '@agm/core';
 import { AttachmentListComponent } from './attachments/attachments.component';
 import { CaptchaComponent } from './captcha/captcha.component';
 import { ChangeCurrentUserPasswordComponent } from './change-current-user-password/change-current-user-password.component';
@@ -10,11 +8,10 @@ import { CommonModule } from '@angular/common';
 import { CompanyInfoComponent } from './company-info/company-info.component';
 import { CoreModule } from '../core/core.module';
 import { CropperComponent } from './cropper/cropper.component';
-import { ImageCropperModule } from 'ngx-image-cropper';
-import { JalaliDatePickerModule } from '../core/jalali/mat-core.module';
+import { ImageCropperComponent } from 'ngx-image-cropper';
 import { JobseekerProfileDialogComponent } from './_dialog/jobseeker-profile/jobseeker-profile.component';
 import { MatIconModule } from '@angular/material/icon';
-import { MatTableExporterModule } from 'mat-table-exporter';
+// import { MatTableExporterModule } from 'mat-table-exporter';
 import { MaterialModule } from '../core/material/material.module';
 import { MenuDynamicComponent } from './side-nav-menu/menu-dynamic/menu-dynamic.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
@@ -48,9 +45,6 @@ import { AppGroupCitizensListComponent } from './citizens/groupCitizens-list/gro
 import { AppCitizenSmsListComponent } from './citizens/citizen-sms-list/citizen-sms-list.component';
 import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citizen-event-list.component';
 
-const maskConfig: Partial<IConfig> = {
-  validation: false,
-};
 
 @NgModule({
   declarations: [
@@ -98,21 +92,15 @@ const maskConfig: Partial<IConfig> = {
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
-    JalaliDatePickerModule,
     NgxUploaderModule,
-    ImageCropperModule,
-    NgxMaskModule.forRoot(maskConfig),
+    ImageCropperComponent,
     NgxMaterialTimepickerModule,
-    MatTableExporterModule,
+    //MatTableExporterModule,
     MatIconModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAY0d8n6qpPqcRD8PiOZZeXdsApm0YRd3s',
-    }),
+    
   ],
   exports: [
-    AgmCoreModule,
-    NgxMaskModule,
-    ImageCropperModule,
+    ImageCropperComponent,
     SideNavMenuComponent,
     UploaderComponent,
     SendTicketDialogComponent,
@@ -137,7 +125,7 @@ const maskConfig: Partial<IConfig> = {
     UploadUserAvatarDialogComponent,
     StoreDetailsComponent,
     TransactionDetailsComponent,
-    MatTableExporterModule,
+   // MatTableExporterModule,
     AttachmentListComponent,
     CaptchaComponent,
     TimerComponent,

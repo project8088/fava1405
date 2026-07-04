@@ -40,7 +40,7 @@
             <mat-error> نوع منو را مشخص کنید. </mat-error>
           }
         </mat-form-field>
-        @if (menuForm.get('isSystem').value == true) {
+        @if (menuForm.get('isSystem')?.value == true) {
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>صفحات داخلی سایت</mat-label>
             <mat-select formControlName="innerMenu" (selectionChange)="setInnerSite()">
@@ -59,7 +59,7 @@
           @if (menuForm.get('menuName')?.hasError('required')) {
             <mat-error> عنوان منو را وارد کنید. </mat-error>
           }
-          @if (menuForm.get('menuName').errors?.maxlength) {
+          @if (menuForm.get('menuName')?.hasError('maxlength')) {
             <mat-error> حداکثر 50 کاراکتر </mat-error>
           }
         </mat-form-field>
@@ -75,9 +75,9 @@
           @if (menuForm.get('iconFile')?.hasError('required')) {
             <mat-error> آدرس صفحه را وارد کنید. </mat-error>
           }
-          <i class="{{ menuForm.get('iconFile').value }}" matSuffix></i>
+          <i class="{{ menuForm.get('iconFile')?.value }}" matSuffix></i>
         </mat-form-field>
-        @if (menuForm.get('isSystem').value == false) {
+        @if (menuForm.get('isSystem')?.value == false) {
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>آدرس صفحه</mat-label>
             <input

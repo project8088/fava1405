@@ -25,7 +25,7 @@
             @if (productForm.get('title')?.hasError('required')) {
               <mat-error>عنوان محصول را وارد کنید.</mat-error>
             }
-            @if (productForm.get('title').errors?.maxlength) {
+            @if (productForm.get('title')?.hasError('maxlength')) {
               <mat-error>حداکثر 500 کاراکتر</mat-error>
             }
           </mat-form-field>
@@ -35,7 +35,7 @@
             @if (productForm.get('description')?.hasError('required')) {
               <mat-error>توضیحات را وارد کنید.</mat-error>
             }
-            @if (productForm.get('description').errors?.maxlength) {
+            @if (productForm.get('description')?.hasError('maxlength')) {
               <mat-error>حداکثر 2000 کاراکتر</mat-error>
             }
           </mat-form-field>
@@ -45,7 +45,7 @@
             @if (productForm.get('code')?.hasError('required')) {
               <mat-error>شناسه محصول را وارد کنید.</mat-error>
             }
-            @if (productForm.get('code').errors?.maxlength) {
+            @if (productForm.get('code')?.hasError('maxlength')) {
               <mat-error>حداکثر 20 کاراکتر</mat-error>
             }
           </mat-form-field>

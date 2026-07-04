@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanySignatureInfoComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   companyId: string = '';
 
   baseUrl: string = ServerApis.baseUrl;
@@ -23,7 +23,7 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
   constructor(private customValidators: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.data = {
         CompanyId: this.companyId,
         CompanyName: '',

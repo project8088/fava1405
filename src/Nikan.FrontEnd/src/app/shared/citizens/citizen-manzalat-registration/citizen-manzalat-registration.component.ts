@@ -15,7 +15,7 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
   userCode: string;
   baseUrl: string = ServerApis.baseUrl;
 
-  loading: boolean;
+    loading?: boolean;
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -26,7 +26,7 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id ? p.id : null;
+      this.userCode = p['id'] ? p['id'] : null;
     });
   }
 

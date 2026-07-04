@@ -75,7 +75,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   delete(row) {
@@ -125,7 +125,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateNewsGroup, this.frm.value).subscribe(
@@ -135,7 +135,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive').setValue(true);
+          this.frm.get('isActive')?.setvalue(true);
 
           this.getList();
         } else {

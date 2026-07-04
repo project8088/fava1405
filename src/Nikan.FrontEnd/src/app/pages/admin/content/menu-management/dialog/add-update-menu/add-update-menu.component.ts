@@ -14,10 +14,10 @@ declare var $: any;
   standalone: false,
 })
 export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
-  isUpdate: boolean;
+  isUpdate=false;
   isSaving=false;
 
-  loadingData: boolean;
+  loadingData?: boolean;
 
   menuForm: FormGroup;
   parentMenus: any[] = [];
@@ -99,21 +99,21 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
   }
 
   setInnerSite() {
-    if (this.menuForm.get('innerMenu').value) {
-      this.menuForm.get('menuName').setValue(this.menuForm.get('innerMenu').value.menuName);
-      this.menuForm.get('menuPath').setValue(this.menuForm.get('innerMenu').value.menuPath);
+    if (this.menuForm.get('innerMenu')?.value) {
+      this.menuForm.get('menuName')?.setvalue(this.menuForm.get('innerMenu')?.value.menuName);
+      this.menuForm.get('menuPath')?.setvalue(this.menuForm.get('innerMenu')?.value.menuPath);
     } else {
-      this.menuForm.get('menuName').setValue(null);
-      this.menuForm.get('menuPath').setValue(null);
+      this.menuForm.get('menuName')?.setvalue(null);
+      this.menuForm.get('menuPath')?.setvalue(null);
     }
   }
 
   changeMenuType() {
-    if (this.menuForm.get('isSystem').value == true) {
-      this.menuForm.get('innerMenu').setValidators([Validators.required]);
+    if (this.menuForm.get('isSystem')?.value == true) {
+      this.menuForm.get('innerMenu')?.setValidators([Validators.required]);
       this.menuForm.get('innerMenu').updateValueAndValidity();
     } else {
-      this.menuForm.get('innerMenu').setValue(null);
+      this.menuForm.get('innerMenu')?.setvalue(null);
       this.menuForm.get('innerMenu').clearValidators();
       this.menuForm.get('innerMenu').updateValueAndValidity();
     }
@@ -123,7 +123,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
     if (this.menuForm.invalid) {
       this.toastrService.error('اطلاعات فرم را تکمیل کنید.');
       this.menuForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateMenuItem, this.menuForm.value).subscribe(

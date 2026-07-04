@@ -10,14 +10,14 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   productForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   isSaving=false;
   imageUrl: string = '';
-  loading: boolean;
+    loading?: boolean;
 
   parentProductList: any[] = [];
 
@@ -26,9 +26,9 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.id = p.id;
+        this.id = p['id'];
         this.getInfo();
       } else {
         this.id = '';
@@ -63,7 +63,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
     this.loadingProductGroup = true;
     this.dataService
       .get(ServerApis.getProductGroupsByParentId, {
-        parentId: this.productForm.get('productParentId').value,
+        parentId: this.productForm.get('productParentId')?.value,
       })
       .subscribe(
         (response) => {
@@ -122,7 +122,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
 
 
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -130,7 +130,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
     if (this.productForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.productForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     let form = this.productForm.value;

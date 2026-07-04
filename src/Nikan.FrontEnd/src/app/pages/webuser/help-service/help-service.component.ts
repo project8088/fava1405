@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
 export class WebUserHelpServiceDetailsComponent extends AppBase implements OnInit {
   newsId: string;
   user: AuthUser;
-  loadingData: boolean;
+  loadingData?: boolean;
   news: NewsDto;
   tags: string[] = [];
 
@@ -40,7 +40,7 @@ export class WebUserHelpServiceDetailsComponent extends AppBase implements OnIni
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.newsId = p.id;
+      this.newsId = p['id'];
       this.getDetailsInfo();
     });
     this.user = this.authService.currentUserValue;

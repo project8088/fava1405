@@ -40,7 +40,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
     });
     this.searchForm = this.fb.group({
       title: [null],
@@ -81,7 +81,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   sendcitizenForAuthentication(citizenId) {

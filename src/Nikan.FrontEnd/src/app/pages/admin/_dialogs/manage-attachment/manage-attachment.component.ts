@@ -15,7 +15,7 @@ declare var $: any;
 export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
   attachments: any[] = [];
 
-  loadingData: boolean;
+  loadingData?: boolean;
   uploadUrl: string = ServerApis.uploadAttachment;
   baseUrl: string = ServerApis.baseUrl;
 

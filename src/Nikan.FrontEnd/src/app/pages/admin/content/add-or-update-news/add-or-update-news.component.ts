@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   newsId: string;
   newsForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
@@ -23,15 +23,15 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
 
   isSaving=false;
   imageUrl: string = '';
-  loading: boolean;
+    loading?: boolean;
 
   groupList: any[] = [];
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.newsId = p.id;
+        this.newsId = p['id'];
         this.getNewsInfo();
       } else {
         this.newsId = '';
@@ -134,7 +134,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
 
   
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 

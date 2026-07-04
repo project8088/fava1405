@@ -25,7 +25,7 @@
             @if (faqForm.get('title')?.hasError('required')) {
               <mat-error>عنوان پرسش را وارد کنید.</mat-error>
             }
-            @if (faqForm.get('title').errors?.maxlength) {
+            @if (faqForm.get('title')?.hasError('maxlength')) {
               <mat-error>حداکثر 500 کاراکتر</mat-error>
             }
           </mat-form-field>

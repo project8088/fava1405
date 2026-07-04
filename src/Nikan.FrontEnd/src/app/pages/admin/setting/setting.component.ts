@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving=false;
-  loading: boolean;
+    loading?: boolean;
 
   baseUrl: string = ServerApis.baseUrl;
   logoUrl: string;
@@ -74,7 +74,7 @@ export class AdminSettingComponent extends AppBase implements OnInit {
     if (this.settingForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.settingForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

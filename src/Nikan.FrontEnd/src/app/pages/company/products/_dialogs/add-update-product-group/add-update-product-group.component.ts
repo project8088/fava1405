@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
   isSaving=false;
-  isUpdate: boolean;
+  isUpdate=false;
   form: FormGroup;
   parentProductList: any[] = [];
 
@@ -50,7 +50,7 @@ export class CompanyAddUpdateProductGroupDialogComponent extends AppBase impleme
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.form.value;

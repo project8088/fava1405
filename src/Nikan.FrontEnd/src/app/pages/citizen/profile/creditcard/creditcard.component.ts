@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 export class CreditcardComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   cardForm: FormGroup;
   loadingState: boolean;
 

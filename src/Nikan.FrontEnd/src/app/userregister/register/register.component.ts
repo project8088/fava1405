@@ -19,25 +19,25 @@ export class RegisterComponent extends AppBase implements OnInit {
   serviceId: number = 0;
   //form 1
   firstFormGroup: FormGroup;
-  maritalStatus: [] = [];
+  maritalStatus: any[] = [];
 
-  educationStatues: [] = [];
+  educationStatues: any[] = [];
   educationGroups;
-  educationLevel: [] = [];
-  jobGroup: [] = [];
+  educationLevel: any[] = [];
+  jobGroup: any[] = [];
 
-  states: [] = [];
-  cities: Observable<any>;
+  states: any[] = [];
+  cities = new Observable<any>();
   isfahanCities: Object[];
 
   // form4
   forthFormGroup: FormGroup;
-  passwordQuestion: [] = [];
+  passwordQuestion: any[] = [];
 
   // form 5
   fifthFormGroup: FormGroup;
 
-  loading: boolean;
+    loading?: boolean;
 
   today = new Date();
   codeSent: boolean = false;
@@ -88,15 +88,15 @@ export class RegisterComponent extends AppBase implements OnInit {
       confirmPassword: [null],
     });
 
-    // this.forthFormGroup.get('password').setValidators([Validators.required, Validators.minLength(6),()=>{
+    // this.forthFormGroup.get('password')?.setValidators([Validators.required, Validators.minLength(6),()=>{
     //   if(this.forthFormGroup)
     // }]);
-    this.forthFormGroup.get('confirmPassword').setValidators([
+    this.forthFormGroup.get('confirmPassword')?.setValidators([
       Validators.required,
       () => {
         if (
-          this.forthFormGroup.get('password').value !==
-          this.forthFormGroup.get('confirmPassword').value
+          this.forthFormGroup.get('password')?.value !==
+          this.forthFormGroup.get('confirmPassword')?.value
         )
           return {
             invalid: true,
@@ -196,8 +196,8 @@ export class RegisterComponent extends AppBase implements OnInit {
     );
   }
 
-  getListOptions(options) {
-    return options.map((el) => {
+  getListOptions(options:{key:number,text:string}[]){
+    return options.map((el:{key:number,text:string}) => {
       return { value: String(el.key), text: el.text };
     });
   }

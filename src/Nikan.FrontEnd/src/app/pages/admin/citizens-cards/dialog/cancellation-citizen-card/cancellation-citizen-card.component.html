@@ -46,7 +46,7 @@
           matInput
           [matDatepicker]="dpS"
           formControlName="cardCancellationOnDate"
-          [max]="frm.get('cardCancellationOnDate').value"
+          [max]="frm.get('cardCancellationOnDate')?.value"
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>

@@ -15,7 +15,7 @@ export class AdminDashboardCitizenRegisterReportChartComponent
   extends AppBase
   implements OnInit, OnDestroy
 {
-  loading: boolean;
+    loading?: boolean;
   report: any = {};
   subscribeReport: Subscription;
 

@@ -34,7 +34,7 @@ export class CardAddCardCoursesDialogComponent extends AppBase implements OnInit
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

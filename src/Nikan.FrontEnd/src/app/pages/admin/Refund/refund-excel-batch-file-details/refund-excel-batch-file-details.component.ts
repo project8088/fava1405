@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   isSaving=false;
 
   displayedColumns: string[] = [
@@ -97,7 +97,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   getCardNumber() {
@@ -136,10 +136,10 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
-    this.frm.get('importId').setValue(+this.importId);
+    this.frm.get('importId')?.setvalue(+this.importId);
     let form = this.frm.value;
 
     form.citizenId = +form.citizenId.key;

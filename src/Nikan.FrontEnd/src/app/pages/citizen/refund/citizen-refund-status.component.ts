@@ -11,8 +11,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenRefundStatusComponent extends AppBase implements OnInit {
-  userId: string;
-  loading: boolean;
+  userId?: string;
+    loading?: boolean;
   personInfo: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
 

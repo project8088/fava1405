@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
 export class MainProductDetailsComponent extends AppBase implements OnInit {
   id: string;
   user: AuthUser;
-  loadingData: boolean;
+  loadingData?: boolean;
   product: any;
 
   baseUrl: string = ServerApis.baseUrl;
@@ -30,7 +30,7 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getDetailsInfo();
     });
     this.user = this.authService.currentUserValue;

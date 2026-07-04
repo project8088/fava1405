@@ -261,7 +261,7 @@
                     @if (forthFormGroup.get('password')?.hasError('invalid')) {
                       <mat-error> کلمه عبور وارد شده صحیح نیست </mat-error>
                     }
-                    @if (forthFormGroup.get('password').errors?.minlength) {
+                    @if (forthFormGroup.get('password')?.hasError('minlength')) {
                       <mat-error> کلمه عبور حداقل باید 6 کارکتر باشد </mat-error>
                     }
                   </mat-form-field>

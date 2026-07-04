@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyPageComponent extends AppBase implements OnInit {
   companyInfo: CompanyInfoDto;
-  loading: boolean;
+    loading?: boolean;
   companyId: string = '';
 
   messageIsSended: boolean;
@@ -44,7 +44,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getInfo();
     });
   }
@@ -52,7 +52,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.contactForm.get('name').setValue(this.user.displayName);
+      this.contactForm.get('name')?.setvalue(this.user.displayName);
     }
 
     this.dataService.getEnums().subscribe(
@@ -99,7 +99,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
     if (this.contactForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.contactForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     let formData = this.contactForm.value;

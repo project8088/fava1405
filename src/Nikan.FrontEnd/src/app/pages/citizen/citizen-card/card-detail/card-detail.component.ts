@@ -101,7 +101,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
     this.getCardDetails();
     this.getAddresses();
 
-    this.addressForm.get('addressType').valueChanges.subscribe((value) => {
+    this.addressForm.get('addressType')?.valueChanges.subscribe((value) => {
       if (value === 2) this.loadHomeAddress();
       else this.loadWorkAddress();
     });

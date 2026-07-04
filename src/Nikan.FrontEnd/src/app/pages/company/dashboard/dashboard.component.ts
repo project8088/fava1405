@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompnayDashboardComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   notifications: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
   loadingStore: boolean;

@@ -35,7 +35,7 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
     this.getBaseListFeedbacke();
 
     this.route.params.subscribe((p) => {
-      this.userCode = p.id ? p.id : null;
+      this.userCode = p['id'] ? p['id'] : null;
     });
   }
 
@@ -67,7 +67,7 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
     if (this.feedbackfrm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.feedbackfrm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.feedbackfrm.value;

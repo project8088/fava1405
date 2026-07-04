@@ -34,19 +34,16 @@ export class UploaderComponent extends AppBase implements OnInit {
   @Output('attachmentId') attachmentId = new EventEmitter<string>();
 
   files: UploadFile[] = [];
-  uploaderInput: EventEmitter<UploadInput>;
+  uploaderInput = new EventEmitter<UploadInput>();
 
-  humanizeBytes: Function;
-  dragOver: boolean;
+  humanizeBytes?: Function;
+  dragOver: boolean=false;
   options: UploaderOptions;
   acceptedInputFile: string;
 
   errorInUpload: boolean = false;
   constructor() {
     super();
-  }
-
-  ngOnInit(): void {
     this.options = {
       concurrency: 1,
       maxUploads: 1,
@@ -55,8 +52,10 @@ export class UploaderComponent extends AppBase implements OnInit {
     };
     this.uploaderInput = new EventEmitter<UploadInput>(); // input events, we use this to emit data to ngx-uploader
     this.humanizeBytes = humanizeBytes;
-    this.acceptedInputFile = this.options.allowedContentTypes.join(',');
+    this.acceptedInputFile = (this.options.allowedContentTypes ?? []).join(',');
+  }
 
+  ngOnInit(): void {
     console.log(this.accept);
     console.log(this.acceptedInputFile);
   }
@@ -94,18 +93,18 @@ export class UploaderComponent extends AppBase implements OnInit {
         this.dragOver = true;
         break;
       case 'dragOut':
-
       case 'rejected':
-        if (this.options.allowedContentTypes.indexOf(output.file.type) < 0) {
+        if ((this.options.allowedContentTypes??[]).indexOf(output.file?.type??'') < 0) {
           this.toastrService.error('نوع فایل مجاز نیست!');
-        } else if (output.file.size > this.options.maxFileSize) {
+        } else if ((output.file?.size??0) > (this.options.maxFileSize??0)) {
           this.toastrService.error('حداکثر 5 مگابایت', 'حجم فایل بیش از حد مجاز است.');
         }
+        break
       case 'drop':
         this.dragOver = false;
         break;
       case 'done':
-        if (output.file.responseStatus == 200 && output.file.response.isSuccess) {
+        if (output.file?.responseStatus == 200 && output.file.response.isSuccess) {
           this.toastrService.success('آپلود فایل با موفقیت انجام شد!');
           Swal.fire({
             icon: 'success',
@@ -116,7 +115,7 @@ export class UploaderComponent extends AppBase implements OnInit {
             showCancelButton: false,
           });
           this.attachmentId.emit(output.file.response.data);
-        } else if (output.file.responseStatus == 200 && output.file.response.isSuccess == false) {
+        } else if (output.file?.responseStatus == 200 && output.file.response.isSuccess == false) {
           let msg = output.file.response.messages
             ? output.file.response.messages
             : 'متاسفانه سرور با خطا مواجه شده است.';

@@ -38,7 +38,7 @@ export class AppCitizenSmsListComponent extends AppBase implements OnInit {
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id ? p.id : null;
+      this.userCode = p['id'] ? p['id'] : null;
     });
 
     this.searchForm = this.fb.group({

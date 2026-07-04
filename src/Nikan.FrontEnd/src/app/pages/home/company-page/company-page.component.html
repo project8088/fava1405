@@ -251,7 +251,7 @@
                 @if (contactForm.get('subject')?.hasError('required')) {
                   <mat-error> عنوان پیام را وارد کنید </mat-error>
                 }
-                @if (contactForm.get('subject').errors?.maxlength) {
+                @if (contactForm.get('subject')?.hasError('maxlength')) {
                   <mat-error> حداکثر 1000 کاراکتر </mat-error>
                 }
               </mat-form-field>
@@ -261,7 +261,7 @@
                 @if (contactForm.get('message')?.hasError('required')) {
                   <mat-error> متن پیام را وارد کنید </mat-error>
                 }
-                @if (contactForm.get('message').errors?.maxlength) {
+                @if (contactForm.get('message')?.hasError('maxlength')) {
                   <mat-error> حداکثر 10،000 کاراکتر </mat-error>
                 }
               </mat-form-field>

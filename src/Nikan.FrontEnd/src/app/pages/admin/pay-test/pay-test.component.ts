@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminPayTestComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   form: FormGroup;
   RefId: string;
   waitForRedirectToBank: boolean;
@@ -28,7 +28,7 @@ export class AdminPayTestComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.loading = true;

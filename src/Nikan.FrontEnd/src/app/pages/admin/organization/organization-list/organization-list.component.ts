@@ -87,14 +87,14 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   save() {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateOrganization, this.frm.value).subscribe(
@@ -104,9 +104,9 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive').setValue(false);
-          this.frm.get('cardDistributionCenters').setValue(false);
-          this.frm.get('supportCenters').setValue(false);
+          this.frm.get('isActive')?.setvalue(false);
+          this.frm.get('cardDistributionCenters')?.setvalue(false);
+          this.frm.get('supportCenters')?.setvalue(false);
           this.getList();
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

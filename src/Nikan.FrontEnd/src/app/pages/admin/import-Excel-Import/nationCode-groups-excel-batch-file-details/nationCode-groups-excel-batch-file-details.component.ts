@@ -17,7 +17,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
   extends AppBase
   implements AfterViewInit
 {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'importId',
@@ -84,7 +84,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   confirm() {

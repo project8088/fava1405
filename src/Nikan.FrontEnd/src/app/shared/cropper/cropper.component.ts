@@ -13,8 +13,8 @@ export class CropperComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
-  loading: boolean;
-  saving: boolean;
+    loading?: boolean;
+  saving = false;
   canvasRotation = 0;
   rotation = 0;
   transform: ImageTransform = {};

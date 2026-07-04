@@ -16,16 +16,16 @@ import { AppBase } from '@app/app.base';
 export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
   info: any;
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
 
-  userStatus: number;
+  userStatus?: number;
 
   constructor(
     private helperService: HelperService,
@@ -94,7 +94,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.personalForm.value;
 
@@ -131,7 +131,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -142,8 +142,8 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options) {
-    return options.map((el) => {
+  getListOptions(options:{key:number,text:string}[]){
+    return options.map((el:{key:number,text:string}) => {
       return { value: String(el.key), text: el.text };
     });
   }

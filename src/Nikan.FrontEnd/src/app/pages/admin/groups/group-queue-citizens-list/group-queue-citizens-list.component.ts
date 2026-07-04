@@ -38,7 +38,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.groupId = p.id ? p.id : null;
+      this.groupId = p['id'] ? p['id'] : null;
     });
 
     this.searchForm = this.fb.group({

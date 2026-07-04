@@ -20,7 +20,7 @@ import { AppBase } from '@app/app.base';
 export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   userForm: FormGroup;
-  userId: string;
+  userId?: string;
   loading: boolean = true;
   bankEnums: any[] = [];
   loadingEnums: boolean = true;
@@ -117,7 +117,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
     );
   }
 
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -125,7 +125,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.userForm.value;
@@ -161,9 +161,9 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   }
 
   changeUserState() {
-    if (this.userForm.get('userState').value == 0 || this.userForm.get('userState').value == 3) {
-      this.userForm.get('userStateDescriptionForUser').setValidators([Validators.required]);
-      this.userForm.get('userStateDescriptionForAdmin').setValidators([Validators.required]);
+    if (this.userForm.get('userState')?.value == 0 || this.userForm.get('userState')?.value == 3) {
+      this.userForm.get('userStateDescriptionForUser')?.setValidators([Validators.required]);
+      this.userForm.get('userStateDescriptionForAdmin')?.setValidators([Validators.required]);
       this.userForm.get('userStateDescriptionForUser').updateValueAndValidity();
       this.userForm.get('userStateDescriptionForAdmin').updateValueAndValidity();
     } else {
@@ -239,7 +239,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
     this.loadingUnit = true;
     this.dataService
       .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.userForm.get('organization').value.key,
+        organId: this.userForm.get('organization')?.value.key,
       })
       .subscribe(
         (response) => {

@@ -7,10 +7,10 @@
   <mat-card-content>
     @if (showAddOrUpdatePanel) {
       <div class="field-set">
-        @if (!frm.get('id').value) {
+        @if (!frm.get('id')?.value) {
           <label class="field-set-title">ایجاد موضوع تیکت جدید</label>
         }
-        @if (frm.get('id').value) {
+        @if (frm.get('id')?.value) {
           <label class="field-set-title">ویرایش موضوع تیکت</label>
         }
         <form [formGroup]="frm">

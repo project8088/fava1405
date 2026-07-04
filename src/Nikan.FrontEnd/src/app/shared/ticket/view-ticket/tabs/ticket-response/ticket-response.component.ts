@@ -51,7 +51,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
 
   ngAfterViewInit() {
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getTicketInfo();
     });
   }
@@ -73,7 +73,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           //   ownerId:this.ticket.ownerId
           // });
 
-          this.answerForm.get('resolved').setValue(this.ticket.isSolved);
+          this.answerForm.get('resolved')?.setvalue(this.ticket.isSolved);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
@@ -153,18 +153,18 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
     if (this.answerForm.invalid) {
       this.toastrService.warning('متن پیام را وارد کنید.');
       this.answerForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSending = true;
     this.dataService
       .post(ServerApis.sendAnswerTicket, {
         TicketId: this.id,
-        ResponseText: this.answerForm.get('responseText').value,
+        ResponseText: this.answerForm.get('responseText')?.value,
         mobileNumber: this.ticket.mobileNumber,
         Description: '',
-        SendSms: this.answerForm.get('sendSms').value,
-        Review: this.answerForm.get('review').value,
-        Solved: this.answerForm.get('resolved').value,
+        SendSms: this.answerForm.get('sendSms')?.value,
+        Review: this.answerForm.get('review')?.value,
+        Solved: this.answerForm.get('resolved')?.value,
         AttachmentGuid: this.attachmentGuid ? this.attachmentGuid : '',
       })
       .subscribe(
@@ -173,7 +173,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           if (response.isSuccess) {
             this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-            this.answerForm.get('responseText').setValue('');
+            this.answerForm.get('responseText')?.setvalue('');
             this.getTicketInfo();
             if (this.attachmentGuid) {
               this.uploader.removeAllFiles(this.uploader.uploaderInput);
@@ -199,7 +199,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
       return v.toString(16);
     });
   }
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.attachmentGuid = ev.attachmentGroup;
   }
 }

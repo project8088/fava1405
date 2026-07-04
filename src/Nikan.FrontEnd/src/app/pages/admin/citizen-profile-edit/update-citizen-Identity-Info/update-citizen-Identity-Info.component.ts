@@ -15,19 +15,18 @@ import { AppBase } from '@app/app.base';
 export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
   info: any;
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
 
   userCode: string = '';
-  userStatus: number;
+  userStatus?: number;
 
   constructor(
-    private helperService: HelperService,
     private customValidator: CustomFormValidators,
   ) {
     super();
@@ -51,7 +50,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.userCode = p.id;
+      if (p['id'] != '0' && p['id']) this.userCode = p['id'];
       this.getIdentityInfo();
     });
   }
@@ -96,7 +95,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.personalForm.value;
 
@@ -134,7 +133,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -145,8 +144,8 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options) {
-    return options.map((el) => {
+  getListOptions(options:{key:number,text:string}[]){
+    return options.map((el:{key:number,text:string}) => {
       return { value: String(el.key), text: el.text };
     });
   }

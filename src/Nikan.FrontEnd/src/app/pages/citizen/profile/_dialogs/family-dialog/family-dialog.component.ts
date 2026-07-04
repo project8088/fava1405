@@ -20,7 +20,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   isSaving=false;
 
   id: string;
-  userId: string;
+  userId?: string;
   loading: boolean = true;
 
   loadingEnums: boolean = true;
@@ -39,7 +39,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
 
   familyIsRegister: boolean = true;
 
-  states: [] = [];
+  states: any[] = [];
   isfahanCities;
 
   constructor(
@@ -107,42 +107,42 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       jobTitle: [null],
     });
 
-    this.registerForm.get('familyRelation').valueChanges.subscribe((value) => {
+    this.registerForm.get('familyRelation')?.valueChanges.subscribe((value) => {
       this.registerForm.get('gender').enable();
       this.registerForm.get('mariageStatus').enable();
 
       switch (value) {
         case 0: // father
-          this.registerForm.get('gender').setValue(true);
+          this.registerForm.get('gender')?.setvalue(true);
           this.registerForm.get('gender').disable();
           break;
 
         case 1: // mother
-          this.registerForm.get('gender').setValue(false);
+          this.registerForm.get('gender')?.setvalue(false);
           this.registerForm.get('gender').disable();
           break;
 
         case 2: // wife/husband
-          this.registerForm.get('mariageStatus').setValue(1);
+          this.registerForm.get('mariageStatus')?.setvalue(1);
           this.registerForm.get('mariageStatus').disable();
           break;
 
         case 4: // brother
-          this.registerForm.get('gender').setValue(true);
+          this.registerForm.get('gender')?.setvalue(true);
           this.registerForm.get('gender').disable();
           break;
 
         case 5: // sister
-          this.registerForm.get('gender').setValue(false);
+          this.registerForm.get('gender')?.setvalue(false);
           this.registerForm.get('gender').disable();
           break;
       }
     });
 
-    this.registerForm.get('educationStatues').valueChanges.subscribe((value) => {
+    this.registerForm.get('educationStatues')?.valueChanges.subscribe((value) => {
       if (+value !== 3) {
-        this.registerForm.get('educationLevel').setValidators(Validators.required);
-        this.registerForm.get('educationGroup').setValidators(Validators.required);
+        this.registerForm.get('educationLevel')?.setValidators(Validators.required);
+        this.registerForm.get('educationGroup')?.setValidators(Validators.required);
       } else {
         this.registerForm.get('educationLevel').clearValidators();
         this.registerForm.get('educationGroup').clearValidators();
@@ -152,7 +152,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       this.registerForm.get('educationGroup').updateValueAndValidity();
     });
 
-    this.registerForm.get('familyRelation').valueChanges.pipe(
+    this.registerForm.get('familyRelation')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -214,7 +214,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.firstFormGroup.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.firstFormGroup.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.firstFormGroup.value;
@@ -252,7 +252,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.registerForm.value;
@@ -310,7 +310,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.familyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.familyForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.familyForm.value;
@@ -350,7 +350,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.registerForm.getRawValue();
@@ -402,7 +402,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-      return false;
+        return ;
     }
   }
 
@@ -456,7 +456,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     );
   }
 
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 

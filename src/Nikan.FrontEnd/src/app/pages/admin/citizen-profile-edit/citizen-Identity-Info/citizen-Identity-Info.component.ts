@@ -11,14 +11,14 @@ import { AppBase } from '@app/app.base';
 export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   info: any;
-  userStatus: number;
+  userStatus?: number;
   userCode: string = '';
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.userCode = p.id;
+      if (p['id'] != '0' && p['id']) this.userCode = p['id'];
       this.getPersonalInfo();
     });
   }

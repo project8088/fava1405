@@ -62,7 +62,7 @@
               <mat-error> نوع تحویل را وارد کنید.</mat-error>
             }
           </mat-form-field>
-          @if (storeForm.get('deliverType').value == 2) {
+          @if (storeForm.get('deliverType')?.value == 2) {
             <mat-form-field class="col-md-3">
               <mat-label>مرکز تحویل</mat-label>
               <mat-select formControlName="centerID">

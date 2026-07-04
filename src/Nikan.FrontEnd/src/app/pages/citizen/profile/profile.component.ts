@@ -13,8 +13,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenProfileComponent extends AppBase implements OnInit {
-  userId: string;
-  loading: boolean;
+  userId?: string;
+    loading?: boolean;
   personInfo: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
 
@@ -26,7 +26,7 @@ export class CitizenProfileComponent extends AppBase implements OnInit {
   constructor(private breakpointObserver: BreakpointObserver) {
     super();
     this.route.params.subscribe((p) => {
-      this.userId = p.id && p.id != '0' ? p.id : '';
+      this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getPersonalInfo();
     });
   }

@@ -10,9 +10,9 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenDashboardComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   registerTypes;
-  loadingData: boolean;
+  loadingData?: boolean;
   citizen: any = {};
   baseUrl: string = ServerApis.baseUrl;
 

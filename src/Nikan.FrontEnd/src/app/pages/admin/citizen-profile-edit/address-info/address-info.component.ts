@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
 export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit {
   editMode: boolean = false;
   editModeWork: boolean = false;
-  loading: boolean;
+    loading?: boolean;
 
   isfahanCities: any[];
   userCode: string = '';
@@ -54,9 +54,9 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id)
+      if (p['id'] != '0' && p['id'])
         this.route.params.subscribe((p) => {
-          if (p.id != '0' && p.id) this.userCode = p.id;
+          if (p['id'] != '0' && p['id']) this.userCode = p['id'];
 
           this.helperService.getIsfahanCities().subscribe((data) => {
             this.isfahanCities = data;
@@ -118,7 +118,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
       this.states = data as [];
     });
 
-    this.cities = this.workForm.get('stateId').valueChanges.pipe(
+    this.cities = this.workForm.get('stateId')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -148,7 +148,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
           });
         }
 
-        this.cities = this.workForm.get('stateId').valueChanges.pipe(
+        this.cities = this.workForm.get('stateId')?.valueChanges.pipe(
           startWith(data.data.city.parentValue),
           debounceTime(400),
           distinctUntilChanged(),

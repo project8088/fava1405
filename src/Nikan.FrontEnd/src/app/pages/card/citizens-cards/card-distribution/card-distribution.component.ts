@@ -40,7 +40,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.courseId = p.id;
+      this.courseId = p['id'];
     });
 
     this.frm = this.fb.group({
@@ -79,7 +79,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
           if (response.isSuccess && response.data) {
             this.card = response.data ? response.data : {};
             this.searchForm.get('value').enable();
-            this.searchForm.get('value').setValue('');
+            this.searchForm.get('value')?.setvalue('');
             this.searchElement.nativeElement.focus();
             this.loading = false;
             if (param.autopost == true) {
@@ -97,7 +97,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
             this.searchForm.get('value').enable();
-            this.searchForm.get('value').setValue('');
+            this.searchForm.get('value')?.setvalue('');
             this.searchElement.nativeElement.focus();
             this.loading = false;
           }
@@ -105,7 +105,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
         catchError((err) => {
           this.loading = false;
           this.searchForm.get('value').enable();
-          this.searchForm.get('value').setValue('');
+          this.searchForm.get('value')?.setvalue('');
           this.searchElement.nativeElement.focus();
           return observableOf([]);
         }),

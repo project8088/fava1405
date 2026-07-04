@@ -20,7 +20,7 @@
     @if (formIsShowing && !loading) {
       <form [formGroup]="cardForm" class="mx-4 mt-4">
         <div>
-          <span class="px-3">{{ cardForm.get('email').value }}</span>
+          <span class="px-3">{{ cardForm.get('email')?.value }}</span>
           @if (!isConfirm) {
             <span class="text-danger mx-2">(تایید نشده)</span>
           }

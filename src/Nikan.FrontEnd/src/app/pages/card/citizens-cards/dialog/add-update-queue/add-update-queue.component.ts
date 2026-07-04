@@ -20,14 +20,14 @@ import { AppBase } from '@app/app.base';
 export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  isUpdate: boolean;
+  isUpdate=false;
 
   courseId: string;
   loadingServices: boolean;
   filteredServices: Observable<any[]>;
   selectedServices: any[] = [];
 
-  loadingData: boolean;
+  loadingData?: boolean;
   id: string;
   constructor(
     private matDialogRef: MatDialogRef<CardAddOrUpadateQueueDialogComponent>,
@@ -60,7 +60,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
   }
 
   ngOnInit() {
-    this.filteredServices = this.frm.get('groups').valueChanges.pipe(
+    this.filteredServices = this.frm.get('groups')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -94,7 +94,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

@@ -118,7 +118,7 @@
         formControlName="city"
         [label]="'شهر'"
         [getByParent]="true"
-        [parentId]="addressForm.get('province').value?.key"
+        [parentId]="addressForm.get('province')?.value?.key"
         [required]="true"
         class="col-sm-6 col-md-4"
       ></input-auto-complete>
@@ -129,8 +129,8 @@
           <mat-error>کدپستی را وارد کنید</mat-error>
         }
         @if (
-          addressForm.get('zipCode').errors?.maxlength ||
-          addressForm.get('zipCode').errors?.minlength
+          addressForm.get('zipCode')?.hasError('maxlength') ||
+          addressForm.get('zipCode')?.hasError('minlength')
         ) {
           <mat-error>کدپستی 10 رقم می باشد</mat-error>
         }

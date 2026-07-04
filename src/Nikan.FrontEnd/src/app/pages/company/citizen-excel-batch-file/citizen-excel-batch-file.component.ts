@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyCitizenExcelBatchFileListComponent extends AppBase implements AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'exportFileName',
@@ -75,7 +75,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   delete(row) {

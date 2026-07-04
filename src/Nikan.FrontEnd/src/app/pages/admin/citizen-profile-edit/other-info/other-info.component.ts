@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   provinceList: any[] = [];
   userCode: string = '';
   form: FormGroup;
@@ -24,9 +24,9 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
-  states: [] = [];
-  birthCities: Observable<any>;
-  shCities: Observable<any>;
+  states: any[] = [];
+  birthC: ities = new Observable<any>();
+  shC: ities = new Observable<any>();
   loadingState: boolean;
 
   constructor(
@@ -70,7 +70,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.userCode = p.id;
+      if (p['id'] != '0' && p['id']) this.userCode = p['id'];
       this.getPersonalInfo();
     });
   }
@@ -167,7 +167,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.form.value;
     this.isSaving = true;

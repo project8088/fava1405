@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   form: FormGroup;
 
@@ -20,12 +20,12 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
   seoTags: any[] = [];
 
   isSaving=false;
-  loading: boolean;
+    loading?: boolean;
   siteName: string;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getItem();
     });
 

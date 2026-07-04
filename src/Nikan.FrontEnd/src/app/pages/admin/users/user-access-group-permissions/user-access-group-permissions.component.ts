@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUserAccessGroupPermissionsComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   userGroupAccessList: any[] = [];
   groupList: any[] = [];
   userId: string = '';
@@ -26,7 +26,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.userId = p.id;
+      if (p['id'] != '0' && p['id']) this.userId = p['id'];
       this.getuserRoleList();
     });
   }
@@ -63,7 +63,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.form.value;
     this.isSaving = true;

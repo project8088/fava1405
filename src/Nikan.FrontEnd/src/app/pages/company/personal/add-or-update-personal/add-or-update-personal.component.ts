@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   companyId: string;
   isSaving=false;
@@ -32,9 +32,9 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
 
     this.route.params.subscribe((p) => {
       this.companyId = p.companyId;
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.id = p.id;
+        this.id = p['id'];
         this.getUserInfo();
       } else {
         this.id = '';
@@ -135,7 +135,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
     );
   }
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -143,7 +143,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.userForm.value;
 
@@ -199,13 +199,13 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   }
 
   changeHasSpecificDisease() {
-    if (this.userForm.get('hasSpecificDisease').value == true) {
-      this.userForm.get('descriptionDisease').setValidators([Validators.required]);
+    if (this.userForm.get('hasSpecificDisease')?.value == true) {
+      this.userForm.get('descriptionDisease')?.setValidators([Validators.required]);
       this.userForm.get('descriptionDisease').updateValueAndValidity();
     } else {
       this.userForm.get('descriptionDisease').clearValidators();
       this.userForm.get('descriptionDisease').updateValueAndValidity();
-      this.userForm.get('descriptionDisease').setValue('');
+      this.userForm.get('descriptionDisease')?.setvalue('');
     }
   }
 

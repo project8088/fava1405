@@ -32,7 +32,7 @@
             matInput
             [matDatepicker]="dpS"
             formControlName="fromDate"
-            [max]="searchForm.get('toDate').value"
+            [max]="searchForm.get('toDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
@@ -55,7 +55,7 @@
             matInput
             [matDatepicker]="dpE"
             formControlName="toDate"
-            [min]="searchForm.get('fromDate').value"
+            [min]="searchForm.get('fromDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
@@ -79,7 +79,7 @@
             matInput
             [matDatepicker]="bdS"
             formControlName="birthDateFromDate"
-            [max]="searchForm.get('birthDateToDate').value"
+            [max]="searchForm.get('birthDateToDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="bdS"></mat-datepicker-toggle>
           <mat-datepicker #bdS></mat-datepicker>
@@ -102,7 +102,7 @@
             matInput
             [matDatepicker]="bdE"
             formControlName="birthDateToDate"
-            [min]="searchForm.get('birthDateFromDate').value"
+            [min]="searchForm.get('birthDateFromDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="bdE"></mat-datepicker-toggle>
           <mat-datepicker #bdE></mat-datepicker>

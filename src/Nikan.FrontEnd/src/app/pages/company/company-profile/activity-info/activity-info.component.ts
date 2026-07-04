@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyActivityInfoComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   companyActivityList: any[] = [];
   activityList: any[] = [];
   companyId: string = '';
@@ -26,7 +26,7 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getActivityInfo();
     });
   }
@@ -63,7 +63,7 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.form.value;
     this.isSaving = true;

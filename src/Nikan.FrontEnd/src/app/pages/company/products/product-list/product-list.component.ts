@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyProductListComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'imageUrl',
@@ -77,7 +77,7 @@ export class CompanyProductListComponent extends AppBase implements OnInit, Afte
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   delete(row) {

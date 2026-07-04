@@ -44,7 +44,7 @@
           matInput
           [matDatepicker]="dpS"
           formControlName="backCardOnDate"
-          [max]="frm.get('backCardOnDate').value"
+          [max]="frm.get('backCardOnDate')?.value"
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>

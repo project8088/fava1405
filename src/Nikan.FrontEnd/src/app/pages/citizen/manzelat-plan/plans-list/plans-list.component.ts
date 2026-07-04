@@ -14,7 +14,7 @@ export class PlansListComponent extends AppBase implements OnInit {
   hasRegister: boolean = false;
   formStatuse: number = 0;
 
-  manzelatForms: [];
+  manzelatForms: any[] = [];
   displayedColumns: string[] = ['title', 'registerForm', 'uploadFile', 'status', 'help'];
 
   routes = ['janbazan', 'maloulin', 'zanan-sarparast', 'bazneshaste', 'salmandan'];

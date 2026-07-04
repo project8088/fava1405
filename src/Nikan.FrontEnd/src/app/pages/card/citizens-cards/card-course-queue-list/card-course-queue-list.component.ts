@@ -53,7 +53,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.courseId = p.id;
+      this.courseId = p['id'];
     });
 
     this.searchForm = this.fb.group({

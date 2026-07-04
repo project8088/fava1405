@@ -14,7 +14,7 @@ export class AttachmentListComponent extends AppBase implements OnInit {
   @Input('guid') guid: string;
   attachments: any[] = [];
 
-  loadingData: boolean;
+  loadingData?: boolean;
   uploadUrl: string = ServerApis.uploadAttachment;
   baseUrl: string = ServerApis.baseUrl;
 

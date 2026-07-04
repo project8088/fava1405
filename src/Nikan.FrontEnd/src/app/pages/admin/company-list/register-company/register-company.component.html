@@ -18,7 +18,7 @@
           @if (registerForm.get('companyName')?.hasError('required')) {
             <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('companyName').errors?.maxlength) {
+          @if (registerForm.get('companyName')?.hasError('maxlength')) {
             <mat-error> حداکثر 500 کاراکتر </mat-error>
           }
         </mat-form-field>
@@ -29,7 +29,7 @@
           @if (registerForm.get('englishName')?.hasError('required')) {
             <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
           }
-          @if (registerForm.get('englishName').errors?.maxlength) {
+          @if (registerForm.get('englishName')?.hasError('maxlength')) {
             <mat-error> حداکثر 500 کاراکتر </mat-error>
           }
           @if (registerForm.get('englishName')?.hasError('pattern')) {
@@ -51,7 +51,7 @@
           @if (registerForm.get('companyRepresentative')?.hasError('pattern')) {
             <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
           }
-          @if (registerForm.get('companyRepresentative').errors?.maxlength) {
+          @if (registerForm.get('companyRepresentative')?.hasError('maxlength')) {
             <mat-error> حداکثر 100 کاراکتر </mat-error>
           }
         </mat-form-field>
@@ -70,8 +70,8 @@
             <mat-error> سال تاسیس را وارد کنید. </mat-error>
           }
           @if (
-            registerForm.get('establishedYear').errors?.maxlength ||
-            registerForm.get('establishedYear').errors?.minlength
+            registerForm.get('establishedYear')?.hasError('maxlength') ||
+            registerForm.get('establishedYear')?.hasError('minlength')
           ) {
             <mat-error> سال تاسیس را 4 رقمی وارد کنید </mat-error>
           }
@@ -153,7 +153,7 @@
         </mat-form-field>
       </div>
 
-      @if (registerForm.hasError('notSame') && registerForm.get('confirmPassword').value) {
+      @if (registerForm.hasError('notSame') && registerForm.get('confirmPassword')?.value) {
         <div>
           <span class="text-danger"> تکرار کلمه عبور صحیح نیست! </span>
         </div>

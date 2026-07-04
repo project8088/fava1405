@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardFreeCardCitizensComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = ['row', 'imageUrl', 'citizen', 'nationCode', 'sabtStatus'];
 
   baseUrl: string = ServerApis.baseUrl;
@@ -33,7 +33,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.requestId = p.id;
+      this.requestId = p['id'];
     });
 
     this.searchForm = this.fb.group({

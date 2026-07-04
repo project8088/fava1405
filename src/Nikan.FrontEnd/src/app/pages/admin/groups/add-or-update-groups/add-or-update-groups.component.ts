@@ -10,22 +10,22 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   groupForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   isSaving=false;
   imageUrl: string = '';
-  loading: boolean;
+    loading?: boolean;
   parentGroups: any[] = [];
 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.id = p.id;
+        this.id = p['id'];
         this.getStoreInfo();
       } else {
         this.id = '';
@@ -100,7 +100,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -108,7 +108,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
     if (this.groupForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.groupForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     let form = this.groupForm.value;

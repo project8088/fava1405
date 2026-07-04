@@ -24,13 +24,13 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
   sendingSMS: boolean = false;
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
-  timerCounterString: string;
+  timerCounterString = '';
   resendTimerInterval: any;
 
   checkingCode: boolean = false;
   isSaving: boolean = false;
 
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
+  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -62,8 +62,8 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
    * بررسی یکی بودن کلمه عبور و تائید آن
    */
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPassword = group.controls.confirmPassword.value;
+    let pass = group.controls['password']?.value;
+    let confirmPassword = group.controls['confirmPassword']?.value;
 
     return pass === confirmPassword ? null : { notSame: true };
   }
@@ -73,29 +73,29 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
    *
    */
   sendConfirmCode() {
-    if (this.forgotForm.get('userName').invalid) {
+    if (this.forgotForm.get('userName')?.invalid) {
       this.toastrService.warning('نام کاربری خود را وارد کنید.');
-      this.forgotForm.get('userName').markAsTouched();
-      return false;
+      this.forgotForm.get('userName')?.markAsTouched();
+      return;
     }
 
     //if (!this.forgotForm.get('userEnteredCaptchaCode')?.value) {
     //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-    //  return false;
-    //}
+    //    return ;
+   // }
 
-    if (this.forgotForm.get('mobile').invalid) {
+    if (this.forgotForm.get('mobile')?.invalid) {
       this.toastrService.warning('شماره موبایل خود را وارد کنید.');
-      this.forgotForm.get('mobile').markAsTouched();
-      return false;
+      this.forgotForm.get('mobile')?.markAsTouched();
+      return;
     }
 
     this.sendingSMS = true;
 
     this.dataService
       .post(ServerApis.sendSmsForgotPassword, {
-        UserName: this.forgotForm.get('userName').value,
-        MobileNumber: this.forgotForm.get('mobile').value,
+        UserName: this.forgotForm.get('userName')?.value,
+        MobileNumber: this.forgotForm.get('mobile')?.value,
         //CaptchaId : this.captchaComponent.captchaId
       })
       .subscribe(
@@ -139,7 +139,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
    * convert 300s to 5:00
    * @param {any} given_seconds
    */
-  convertSecondstoTime(given_seconds) {
+  convertSecondstoTime(given_seconds: number) {
     var dateObj = new Date(given_seconds * 1000);
     var hours = dateObj.getUTCHours();
     var minutes = dateObj.getUTCMinutes();
@@ -160,17 +160,17 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
    *
    */
   checkVerificationCode() {
-    if (this.forgotForm.get('verificationCode').invalid) {
+    if (this.forgotForm.get('verificationCode')?.invalid) {
       this.toastrService.warning('کد تائیدی که برای شما پیامک شده است را وارد کنید.');
-      this.forgotForm.get('verificationCode').markAsTouched();
-      return false;
+      this.forgotForm.get('verificationCode')?.markAsTouched();
+      return;
     }
 
     this.checkingCode = true;
     this.dataService
       .post(ServerApis.checkForgotVerifyCode, {
-        VerifyCode: this.forgotForm.get('verificationCode').value,
-        MobileNumber: this.forgotForm.get('mobile').value,
+        VerifyCode: this.forgotForm.get('verificationCode')?.value,
+        MobileNumber: this.forgotForm.get('mobile')?.value,
         UserId: this.userId,
       })
       .subscribe(
@@ -201,17 +201,20 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
    *
    */
   saveNewPassword() {
-    if (this.forgotForm.get('password').invalid || this.forgotForm.get('confirmPassword').invalid) {
+    if (
+      this.forgotForm.get('password')?.invalid ||
+      this.forgotForm.get('confirmPassword')?.invalid
+    ) {
       this.toastrService.warning('کلمه عبور و تکرار کلمه عبور خود را وارد کنید .');
       this.forgotForm.markAllAsTouched();
-      return false;
+      return;
     }
     this.isSaving = true;
     this.dataService
       .post(ServerApis.setNewPassword, {
-        VerifyCode: this.forgotForm.get('verificationCode').value,
-        MobileNumber: this.forgotForm.get('mobile').value,
-        Password: this.forgotForm.get('password').value,
+        VerifyCode: this.forgotForm.get('verificationCode')?.value,
+        MobileNumber: this.forgotForm.get('mobile')?.value,
+        Password: this.forgotForm.get('password')?.value,
         userId: this.userId,
       })
       .subscribe(

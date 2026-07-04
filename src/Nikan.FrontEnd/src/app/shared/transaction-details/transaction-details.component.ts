@@ -24,7 +24,7 @@ export class TransactionDetailsComponent extends AppBase implements OnInit, Afte
 
   ngAfterViewInit() {
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getInfo();
     });
   }

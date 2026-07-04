@@ -37,7 +37,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   showAddOrUpdatePanel: boolean;
   isSaving=false;
   loadingUnit: boolean;
-  loadingData: boolean;
+  loadingData?: boolean;
   organizationList: any[] = [];
   unitList: any[] = [];
   constructor() {
@@ -119,7 +119,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
 
     this.dataService
       .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.frm.get('organizationId').value,
+        organId: this.frm.get('organizationId')?.value,
       })
       .subscribe(
         (response) => {
@@ -142,7 +142,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   addnewSubject() {
@@ -211,7 +211,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive').setValue(true);
+          this.frm.get('isActive')?.setvalue(true);
           this.getList();
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

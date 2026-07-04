@@ -18,7 +18,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   educationForm: FormGroup;
   id: string;
-  userId: string;
+  userId?: string;
   loading: boolean = true;
 
   loadingEnums: boolean = true;
@@ -69,7 +69,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
       });
     }
     //رشته های تحصیلی
-    this.filteredFieldStudies = this.educationForm.get('major').valueChanges.pipe(
+    this.filteredFieldStudies = this.educationForm.get('major')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -146,20 +146,20 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
       );
   }
 
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 
   changeGrade() {
-    if (this.educationForm.get('grade').value.key > 0) {
-      this.educationForm.get('major').setValidators([Validators.required]);
+    if (this.educationForm.get('grade')?.value.key > 0) {
+      this.educationForm.get('major')?.setValidators([Validators.required]);
       this.educationForm.get('major').updateValueAndValidity();
     } else {
       this.educationForm.get('major').clearValidators();
-      this.educationForm.get('major').setValue(null);
+      this.educationForm.get('major')?.setvalue(null);
       this.educationForm.get('major').updateValueAndValidity();
 
-      this.educationForm.get('university').setValue(null);
+      this.educationForm.get('university')?.setvalue(null);
     }
   }
 
@@ -167,7 +167,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
     if (this.educationForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.educationForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.educationForm.value;

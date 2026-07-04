@@ -123,7 +123,7 @@
         formControlName="city"
         [label]="'شهر'"
         [getByParent]="true"
-        [parentId]="userForm.get('province').value?.key"
+        [parentId]="userForm.get('province')?.value?.key"
         [required]="true"
         class="col-sm-6 col-md-4"
       ></input-auto-complete>
@@ -135,7 +135,7 @@
           <mat-error> کد پستی را وارد کنید. </mat-error>
         }
         @if (
-          userForm.get('zipCode').errors?.maxlength || userForm.get('zipCode').errors?.minlength
+          userForm.get('zipCode')?.hasError('maxlength') || userForm.get('zipCode')?.hasError('minlength')
         ) {
           <mat-error> کد پستی ده رقم می باشد </mat-error>
         }
@@ -147,7 +147,7 @@
         @if (userForm.get('street')?.hasError('required')) {
           <mat-error> خیابان را وارد کنید. </mat-error>
         }
-        @if (userForm.get('street').errors?.maxlength) {
+        @if (userForm.get('street')?.hasError('maxlength')) {
           <mat-error> حداکثر 100 کاراکتر </mat-error>
         }
       </mat-form-field>
@@ -157,7 +157,7 @@
         @if (userForm.get('pelak')?.hasError('required')) {
           <mat-error> شماره پلاک را وارد کنید. </mat-error>
         }
-        @if (userForm.get('pelak').errors?.maxlength) {
+        @if (userForm.get('pelak')?.hasError('maxlength')) {
           <mat-error> حداکثر 100 کاراکتر </mat-error>
         }
       </mat-form-field>
@@ -167,7 +167,7 @@
         @if (userForm.get('fullAddress')?.hasError('required')) {
           <mat-error> ادامه آدرس را وارد کنید. </mat-error>
         }
-        @if (userForm.get('fullAddress').errors?.maxlength) {
+        @if (userForm.get('fullAddress')?.hasError('maxlength')) {
           <mat-error> حداکثر 1000 کاراکتر </mat-error>
         }
       </mat-form-field>
@@ -178,7 +178,7 @@
         @if (userForm.get('office')?.hasError('required')) {
           <mat-error> دفتر را وارد کنید. </mat-error>
         }
-        @if (userForm.get('office').errors?.maxlength) {
+        @if (userForm.get('office')?.hasError('maxlength')) {
           <mat-error> حداکثر 100 کاراکتر </mat-error>
         }
       </mat-form-field>
@@ -236,14 +236,14 @@
       </mat-checkbox>
     </p>
 
-    @if (userForm.get('hasSpecificDisease').value == true) {
+    @if (userForm.get('hasSpecificDisease')?.value == true) {
       <mat-form-field class="col-sm-12">
         <mat-label> شرح بیماری </mat-label>
         <input matInput formControlName="descriptionDisease" maxlength="1000" />
         @if (userForm.get('descriptionDisease')?.hasError('required')) {
           <mat-error> شرح بیماری را وارد کنید. </mat-error>
         }
-        @if (userForm.get('descriptionDisease').errors?.maxlength) {
+        @if (userForm.get('descriptionDisease')?.hasError('maxlength')) {
           <mat-error> حداکثر 1000 کاراکتر </mat-error>
         }
       </mat-form-field>

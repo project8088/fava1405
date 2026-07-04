@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CardDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
-  loading: boolean;
+    loading?: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
   matDialog: any;

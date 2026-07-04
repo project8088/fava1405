@@ -26,11 +26,11 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   loadingState: boolean;
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
-  states: [] = [];
-  birthCities: Observable<any>;
-  shCities: Observable<any>;
+  states: any[] = [];
+  birthC: ities = new Observable<any>();
+  shC: ities = new Observable<any>();
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
@@ -116,10 +116,10 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
       cityId: [null, []],
     });
 
-    this.personalForm.get('educationStatues').valueChanges.subscribe((value) => {
+    this.personalForm.get('educationStatues')?.valueChanges.subscribe((value) => {
       if (+value !== 3) {
-        this.personalForm.get('educationLevel').setValidators(Validators.required);
-        this.personalForm.get('educationGroup').setValidators(Validators.required);
+        this.personalForm.get('educationLevel')?.setValidators(Validators.required);
+        this.personalForm.get('educationGroup')?.setValidators(Validators.required);
       } else {
         this.personalForm.get('educationLevel').clearValidators();
         this.personalForm.get('educationGroup').clearValidators();
@@ -143,7 +143,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     this.getEducationGroups();
     this.getPersonalInfo();
 
-    this.filteredState = this.form.get('state').valueChanges.pipe(
+    this.filteredState = this.form.get('state')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -154,7 +154,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.getBaseEnums();
     this.getEducationGroups();
-    this.cities = this.personalForm.get('stateId').valueChanges.pipe(
+    this.cities = this.personalForm.get('stateId')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -165,7 +165,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
       }),
     );
 
-    this.filteredState = this.personalForm.get('state').valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -179,7 +179,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.form.value;
 
@@ -209,7 +209,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -220,17 +220,17 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options) {
-    return options.map((el) => {
+  getListOptions(options:{key:number,text:string}[]){
+    return options.map((el:{key:number,text:string}) => {
       return { value: +el.key, text: el.text };
     });
   }
 
   personalForm: FormGroup;
-  cities: Observable<any>;
+  c: ities = new Observable<any>();
   isfahanCities: Object[];
 
-  userStatus: number;
+  userStatus?: number;
 
   private _getStates(value: string) {
     if (!value || typeof value !== 'string') return this.filteredState;
@@ -368,7 +368,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.personalForm.value;
 

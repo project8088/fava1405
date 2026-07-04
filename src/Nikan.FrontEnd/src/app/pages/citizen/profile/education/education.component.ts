@@ -17,7 +17,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
 
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
 
   baseEnums: any = {};
   loadingEnums: boolean = true;
@@ -25,7 +25,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
   constructor(private profileComponent: CitizenProfileComponent) {
     super();
     this.route.parent.params.subscribe((p) => {
-      this.userId = p.id && p.id != '0' ? p.id : '';
+      this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getEducationList();
     });
   }

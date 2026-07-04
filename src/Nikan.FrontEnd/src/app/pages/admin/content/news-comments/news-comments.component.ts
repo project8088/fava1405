@@ -45,8 +45,8 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
-        this.newsId = p.id;
+      if (p['id'] && p['id'] != '0') {
+        this.newsId = p['id'];
         this.getCommentList();
       } else {
         toastrService.error('خبر یافت نشد.');
@@ -85,7 +85,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   newJob(row) {

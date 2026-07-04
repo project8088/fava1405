@@ -90,14 +90,14 @@
           }
         </mat-form-field>
       </div>
-      @if (userForm.get('userState').value == 0 || userForm.get('userState').value == 3) {
+      @if (userForm.get('userState')?.value == 0 || userForm.get('userState')?.value == 3) {
         <div class="row">
           <div class="col-sm-12 alert alert-info">
             در صورتی که می خواهید دلیل
-            @if (userForm.get('userState').value == 1) {
+            @if (userForm.get('userState')?.value == 1) {
               <strong> تعلیق </strong>
             }
-            @if (userForm.get('userState').value == 3) {
+            @if (userForm.get('userState')?.value == 3) {
               <strong> غیرفعال کردن </strong>
             }
             را به کاربر نشان دهید فیلد زیر را تکمیل کنید

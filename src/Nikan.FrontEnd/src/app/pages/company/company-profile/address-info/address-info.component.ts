@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddressInfoComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   provinceList: any[] = [];
   companyId: string = '';
   addressForm: FormGroup;
@@ -46,7 +46,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getAddressInfo();
     });
   }
@@ -115,7 +115,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
     if (this.addressForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.addressForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.addressForm.value;
     this.isSaving = true;

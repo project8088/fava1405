@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   companyId: string = '';
   form: FormGroup;
   isSaving=false;
@@ -37,7 +37,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getAdditionalInfo();
     });
   }
@@ -74,7 +74,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.form.value;
     if (form.contractOnDate) form.contractOnDate = this.dataService.formatDate(form.contractOnDate);

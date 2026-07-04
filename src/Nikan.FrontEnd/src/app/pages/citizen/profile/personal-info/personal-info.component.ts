@@ -19,7 +19,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
@@ -27,14 +27,14 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   loadingState: boolean;
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
-  states: [] = [];
-  cities: Observable<any>;
+  states: any[] = [];
+  c: ities = new Observable<any>();
   isfahanCities: Object[];
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
 
-  userStatus: number;
+  userStatus?: number;
 
   constructor(
     private helperService: HelperService,
@@ -43,7 +43,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   ) {
     super();
     this.route.parent.params.subscribe((p) => {
-      this.userId = p.id && p.id != '0' ? p.id : '';
+      this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getPersonalInfo();
     });
 
@@ -68,10 +68,10 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
       cityId: [null, []],
     });
 
-    this.personalForm.get('educationStatues').valueChanges.subscribe((value) => {
+    this.personalForm.get('educationStatues')?.valueChanges.subscribe((value) => {
       if (+value !== 3) {
-        this.personalForm.get('educationLevel').setValidators(Validators.required);
-        this.personalForm.get('educationGroup').setValidators(Validators.required);
+        this.personalForm.get('educationLevel')?.setValidators(Validators.required);
+        this.personalForm.get('educationGroup')?.setValidators(Validators.required);
       } else {
         this.personalForm.get('educationLevel').clearValidators();
         this.personalForm.get('educationGroup').clearValidators();
@@ -93,7 +93,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   ngOnInit() {
     this.getBaseEnums();
     this.getEducationGroups();
-    this.cities = this.personalForm.get('stateId').valueChanges.pipe(
+    this.cities = this.personalForm.get('stateId')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -104,7 +104,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
       }),
     );
 
-    this.filteredState = this.personalForm.get('state').valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -242,7 +242,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.personalForm.value;
 
@@ -288,7 +288,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -299,8 +299,8 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options) {
-    return options.map((el) => {
+  getListOptions(options:{key:number,text:string}[]){
+    return options.map((el:{key:number,text:string}) => {
       return { value: String(el.key), text: el.text };
     });
   }

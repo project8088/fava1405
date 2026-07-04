@@ -10,22 +10,22 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
-  serviceId: string;
+  isUpdate=false;
+  serviceId?: string;
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   isSaving=false;
   imageUrl: string = '';
-  loading: boolean;
+    loading?: boolean;
 
 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.serviceId = p.id;
+        this.serviceId = p['id'];
         this.getStoreInfo();
       } else {
         this.serviceId = '';
@@ -95,7 +95,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 

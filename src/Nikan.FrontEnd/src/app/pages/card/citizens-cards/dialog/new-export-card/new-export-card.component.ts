@@ -20,13 +20,13 @@ import { AppBase } from '@app/app.base';
 export class CardNewExportCardDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  isUpdate: boolean;
+  isUpdate=false;
 
   loadingServices: boolean;
   filteredServices: Observable<any[]>;
   selectedGroups: any[] = [];
 
-  loadingData: boolean;
+  loadingData?: boolean;
   id: string;
   constructor(
     private matDialogRef: MatDialogRef<CardNewExportCardDialogComponent>,
@@ -46,7 +46,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
   }
 
   ngOnInit() {
-    this.filteredServices = this.frm.get('groupIds').valueChanges.pipe(
+    this.filteredServices = this.frm.get('groupIds')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -60,7 +60,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

@@ -39,7 +39,7 @@ export class KarjoGlobalInformationDto {
 
   public familiarCode: string;
 
-  public lastModifiedOnDate: string;
+  public lastModifiedOnDate?: string;
 }
 
 export class ShortKarjoProfile {

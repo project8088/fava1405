@@ -37,11 +37,11 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
   }
 
   changeStatus() {
-    if (this.form.get('userCompanyAccountStatus').value == 2) {
-      this.form.get('rejectDesription').setValidators([Validators.required]);
+    if (this.form.get('userCompanyAccountStatus')?.value == 2) {
+      this.form.get('rejectDesription')?.setValidators([Validators.required]);
       this.form.get('rejectDesription').updateValueAndValidity();
     } else {
-      this.form.get('rejectDesription').setValue('');
+      this.form.get('rejectDesription')?.setvalue('');
       this.form.get('rejectDesription').clearValidators();
       this.form.get('rejectDesription').updateValueAndValidity();
     }
@@ -51,7 +51,7 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.form.value;

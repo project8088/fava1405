@@ -27,7 +27,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
     private customValidator: CustomFormValidators,
@@ -35,7 +35,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   ) {
     super();
     this.route.parent.params.subscribe((p) => {
-      this.userCode = p.id && p.id != '0' ? p.id : '';
+      this.userCode = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getPersonalInfo();
     });
 
@@ -61,7 +61,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   ngOnInit() {
     this.getBaseEnums();
 
-    this.filteredState = this.personalForm.get('state').valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -181,7 +181,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.personalForm.value;
 
@@ -231,7 +231,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -243,12 +243,12 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   }
 
   changeGender() {
-    if (this.personalForm.get('gender').value == false) {
-      this.personalForm.get('soldierState').setValue(null);
+    if (this.personalForm.get('gender')?.value == false) {
+      this.personalForm.get('soldierState')?.setvalue(null);
       this.personalForm.get('soldierState').clearValidators();
       this.personalForm.get('soldierState').updateValueAndValidity();
     } else {
-      this.personalForm.get('soldierState').setValidators([Validators.required]);
+      this.personalForm.get('soldierState')?.setValidators([Validators.required]);
       this.personalForm.get('soldierState').updateValueAndValidity();
     }
   }

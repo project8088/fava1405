@@ -17,7 +17,7 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id;
+      this.userCode = p['id'];
     });
   }
 

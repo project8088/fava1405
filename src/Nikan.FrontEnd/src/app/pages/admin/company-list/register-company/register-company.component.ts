@@ -66,8 +66,8 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
    * بررسی یکی بودن کلمه عبور و تائید آن
    */
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPassword = group.controls.confirmPassword.value;
+    let pass = group.controls['password']?.value;
+    let confirmPassword = group.controls['confirmPassword']?.value;
 
     return pass === confirmPassword ? null : { notSame: true };
   }
@@ -95,7 +95,7 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
     );
   }
 
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -103,7 +103,7 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.registerForm.value;

@@ -73,7 +73,7 @@ export class FaqListComponent extends AppBase implements OnInit {
   getDetails(item: any) {
     if (item.showDetails === true) {
       item.showDetails = false;
-      return false;
+        return ;
     } else if (item.showDetails === false) {
       item.showDetails = true;
       return true;

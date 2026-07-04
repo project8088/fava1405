@@ -49,7 +49,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
     super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
-      this.companyId = p.id;
+      this.companyId = p['id'];
     });
     this.searchForm = this.fb.group({
       query: [null, []],
@@ -92,7 +92,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   openAddUserDialog() {

@@ -11,14 +11,13 @@ import { AppBase } from '@app/app.base';
 export class TermsComponent extends AppBase implements OnInit {
   regLink: string = '';
   service = { serviceName: null };
-  serviceId;
-  loadingData: boolean;
-  toastrService: any;
-
+  serviceId?: string;
+  loadingData?: boolean;
+  
   constructor() {
     super();
     this.route.queryParams.subscribe((params) => {
-      this.serviceId = params.serviceId;
+      this.serviceId = params['serviceId'];
     });
   }
 

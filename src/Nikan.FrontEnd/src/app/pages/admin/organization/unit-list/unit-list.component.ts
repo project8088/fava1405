@@ -42,8 +42,8 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
       indexOrder: [null, [Validators.required]],
     });
     this.route.params.subscribe((p) => {
-      if (p.id) {
-        this.organizationId = p.id;
+      if (p['id']) {
+        this.organizationId = p['id'];
         this.getList();
       }
     });
@@ -83,17 +83,17 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('query').value;
+    this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
   save() {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
-    this.frm.get('organizationId').setValue(this.organizationId);
+    this.frm.get('organizationId')?.setvalue(this.organizationId);
 
     this.dataService.post(ServerApis.addOrUpdateUnit, this.frm.value).subscribe(
       (response) => {
@@ -102,7 +102,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive').setValue(false);
+          this.frm.get('isActive')?.setvalue(false);
 
           this.getList();
         } else {

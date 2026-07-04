@@ -8,7 +8,7 @@
             matInput
             [matDatepicker]="dpS"
             formControlName="startDate"
-            [max]="reportForm.get('endDate').value"
+            [max]="reportForm.get('endDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
@@ -31,7 +31,7 @@
             matInput
             [matDatepicker]="dpE"
             formControlName="endDate"
-            [min]="reportForm.get('startDate').value"
+            [min]="reportForm.get('startDate')?.value"
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>

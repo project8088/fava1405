@@ -47,7 +47,7 @@ export class AdminCancellationCitizenCardDialogComponent extends AppBase impleme
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

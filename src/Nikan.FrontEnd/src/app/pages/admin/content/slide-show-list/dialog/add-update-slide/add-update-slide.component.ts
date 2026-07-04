@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements OnInit {
-  isUpdate: boolean;
+  isUpdate=false;
   isSaving=false;
   form: FormGroup;
   id: number;
@@ -62,7 +62,7 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
     );
   }
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -70,7 +70,7 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.form.value;

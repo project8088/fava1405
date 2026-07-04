@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyProductGroupsListComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = ['row', 'name', 'parent', 'createdBy', 'isActive', 'operation'];
 
   data: any[] = [];
@@ -67,7 +67,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   delete(row) {

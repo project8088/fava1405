@@ -12,7 +12,7 @@ export class AdminConfigComponent extends AppBase implements OnInit {
   id: string;
 
   isSaving=false;
-  loading: boolean;
+    loading?: boolean;
 
   configList: any[] = [];
 

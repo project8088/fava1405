@@ -12,13 +12,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   faqId: string;
   faqForm: FormGroup;
 
   isSaving=false;
   attachmentId: string = '';
-  loading: boolean;
+    loading?: boolean;
 
   groupList: any[] = [];
 
@@ -43,9 +43,9 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
   ngOnInit(): void {
     this.getGroups();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.faqId = p.id;
+        this.faqId = p['id'];
         this.getFaqInfo();
       } else {
         this.faqId = '';
@@ -123,7 +123,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
   }
 
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.attachmentId = ev;
   }
 

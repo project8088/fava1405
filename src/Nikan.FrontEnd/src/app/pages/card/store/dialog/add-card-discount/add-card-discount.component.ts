@@ -20,13 +20,13 @@ import { AppBase } from '@app/app.base';
 export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  isUpdate: boolean;
+  isUpdate=false;
 
   loadingGroups: boolean;
   filteredGroups: Observable<any[]>;
   selectedGroups: any[] = [];
 
-  loadingData: boolean;
+  loadingData?: boolean;
   id: string;
   cardTypeId: string;
   constructor(
@@ -63,7 +63,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   }
 
   ngOnInit() {
-    this.filteredGroups = this.frm.get('groups').valueChanges.pipe(
+    this.filteredGroups = this.frm.get('groups')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -97,7 +97,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;
@@ -146,12 +146,12 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   }
 
   changePenaltyForPeriodDebt() {
-    if (this.frm.get('penaltyForPeriodDebt').value) {
-      this.frm.get('penaltyPercentage').setValidators([Validators.required]);
+    if (this.frm.get('penaltyForPeriodDebt')?.value) {
+      this.frm.get('penaltyPercentage')?.setValidators([Validators.required]);
       this.frm.get('penaltyPercentage').updateValueAndValidity();
     } else {
-      this.frm.get('penaltyForPeriodDebt').setValue(false);
-      this.frm.get('penaltyPercentage').setValue(0);
+      this.frm.get('penaltyForPeriodDebt')?.setvalue(false);
+      this.frm.get('penaltyPercentage')?.setvalue(0);
       this.frm.get('penaltyPercentage').clearValidators();
       this.frm.get('penaltyPercentage').updateValueAndValidity();
     }

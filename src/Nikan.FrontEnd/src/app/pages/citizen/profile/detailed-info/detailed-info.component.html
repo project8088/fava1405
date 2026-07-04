@@ -61,7 +61,7 @@
                 [label]="'شهرستان محل صدور شناسنامه'"
                 class="col-md-6"
                 [getByParent]="true"
-                [parentId]="form.get('shStateId').value?.key"
+                [parentId]="form.get('shStateId')?.value?.key"
                 [required]="true"
               ></input-auto-complete>
               <mat-form-field  class="col-sm-6 col-md-4">

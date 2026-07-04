@@ -51,7 +51,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.exportId = p.id;
+      this.exportId = p['id'];
     });
 
     this.searchForm = this.fb.group({

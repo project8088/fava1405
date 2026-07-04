@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'title',
@@ -73,7 +73,7 @@ export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewI
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   delete(row) {

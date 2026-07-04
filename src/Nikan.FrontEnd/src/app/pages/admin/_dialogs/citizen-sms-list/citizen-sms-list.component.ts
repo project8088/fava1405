@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminCitizenSmsListDialogComponent extends AppBase implements OnInit {
   citizen: any;
-  data: [];
+  data: any[] = [];
 
   constructor(@Inject(MAT_DIALOG_DATA) private _data: any) {
     super();

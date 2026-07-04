@@ -20,13 +20,13 @@ export class AdminAddOrUpdateCitizensNotificationComponent
   companyList: any[] = [];
   baseEnums: any = {};
   isSaving=false;
-  loading: boolean;
+    loading?: boolean;
 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
-        this.notificationId = p.id;
+      if (p['id'] && p['id'] != '0') {
+        this.notificationId = p['id'];
         this.getNotificationInfo();
         this.getCitizenNotifications();
       } else {
@@ -112,7 +112,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
     if (this.notyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.notyForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     let form = this.notyForm.value;

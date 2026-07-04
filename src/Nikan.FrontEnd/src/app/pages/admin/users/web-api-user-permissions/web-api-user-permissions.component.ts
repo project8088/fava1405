@@ -10,14 +10,14 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminWebApiUserPermissionsComponent extends AppBase implements OnInit {
-  userId: string;
+  userId?: string;
   data: any[] = [];
   isLoadingResults: boolean = true;
   isSaving=false;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.userId = p.id;
+      this.userId = p['id'];
     });
   }
 

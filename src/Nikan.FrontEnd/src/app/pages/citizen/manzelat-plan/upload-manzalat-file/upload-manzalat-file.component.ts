@@ -14,7 +14,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   loading: boolean = true;
   isSaving: boolean = false;
   hasFiles: boolean = false;
-  userId: string;
+  userId?: string;
   cardForm: FormGroup;
   loadingState: boolean;
   baseUrl: string = ServerApis.baseUrl;
@@ -28,7 +28,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.baseFormInfo();
       this.getCitizenRegisterManzalatForm();
     });

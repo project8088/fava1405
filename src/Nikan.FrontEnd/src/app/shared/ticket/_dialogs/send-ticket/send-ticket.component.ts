@@ -79,7 +79,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
 
     this.dataService
       .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.ticketForm.get('organizationId').value,
+        organId: this.ticketForm.get('organizationId')?.value,
       })
       .subscribe(
         (response) => {
@@ -101,7 +101,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
     if (this.ticketForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.ticketForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     let formData = this.ticketForm.value;

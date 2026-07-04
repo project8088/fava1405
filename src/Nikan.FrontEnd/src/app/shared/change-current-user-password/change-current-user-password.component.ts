@@ -26,14 +26,14 @@ export class ChangeCurrentUserPasswordComponent extends AppBase implements OnIni
       { validator: this.checkPasswords },
     );
 
-    this.changePasswordForm.get('username').setValue(authService.getAuthUser().userName);
+    this.changePasswordForm.get('username')?.setvalue(authService.getAuthUser().userName);
   }
   /**
    * بررسی یکی بودن کلمه عبور و تائید آن
    */
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPassword = group.controls.confirmPassword.value;
+    let pass = group.controls['password']?.value;
+    let confirmPassword = group.controls['confirmPassword']?.value;
 
     return pass === confirmPassword ? null : { notSame: true };
   }
@@ -44,7 +44,7 @@ export class ChangeCurrentUserPasswordComponent extends AppBase implements OnIni
     if (this.changePasswordForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.changePasswordForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.changePasswordForm.value;

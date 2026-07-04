@@ -11,9 +11,9 @@ import { AppBase } from '@app/app.base';
 export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   info: any;
-  userStatus: number;
+  userStatus?: number;
 
   constructor() {
     super();

@@ -46,7 +46,7 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
       groupId: [null],
     });
     this.route.params.subscribe((p) => {
-      this.groupId = p.id ? p.id : null;
+      this.groupId = p['id'] ? p['id'] : null;
     });
   }
 

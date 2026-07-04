@@ -31,7 +31,7 @@
         }
       </mat-form-field>
 
-      @if (educationForm.get('grade').value.key >= 0) {
+      @if (educationForm.get('grade')?.value.key >= 0) {
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>رشته تحصیلی</mat-label>
           <input
@@ -58,7 +58,7 @@
         </mat-form-field>
       }
 
-      @if (educationForm.get('grade').value.key >= 0) {
+      @if (educationForm.get('grade')?.value.key >= 0) {
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام دانشگاه</mat-label>
           <input
@@ -79,7 +79,7 @@
           matInput
           [matDatepicker]="dpS"
           formControlName="dateOfStart"
-          [max]="educationForm.get('dateOfEnd').value"
+          [max]="educationForm.get('dateOfEnd')?.value"
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
@@ -103,7 +103,7 @@
           matInput
           [matDatepicker]="dpE"
           formControlName="dateOfEnd"
-          [min]="educationForm.get('dateOfStart').value"
+          [min]="educationForm.get('dateOfStart')?.value"
         />
         <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
         <mat-datepicker #dpE></mat-datepicker>

@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   userForm: FormGroup;
-  userId: string;
+  userId?: string;
   loading: boolean = true;
   companyId: string;
 
@@ -68,7 +68,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
     );
   }
 
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -76,7 +76,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.userForm.value;

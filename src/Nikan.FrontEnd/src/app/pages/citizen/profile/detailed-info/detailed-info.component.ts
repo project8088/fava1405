@@ -19,7 +19,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   form: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
@@ -27,13 +27,13 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   loadingState: boolean;
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
-  states: [] = [];
+  states: any[] = [];
   provinceList: any[] = [];
 
-  birthCities: Observable<any>;
-  shCities: Observable<any>;
+  birthC: ities = new Observable<any>();
+  shC: ities = new Observable<any>();
 
-  lastModifiedOnDate: string;
+  lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
@@ -88,7 +88,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
 
     this.getPersonalInfo();
 
-    this.birthCities = this.form.get('birthStateId').valueChanges.pipe(
+    this.birthCities = this.form.get('birthStateId')?.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -185,7 +185,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             endOfEducation: response.data.endOfEducation,
           });
 
-          this.shCities = this.form.get('shStateId').valueChanges.pipe(
+          this.shCities = this.form.get('shStateId')?.valueChanges.pipe(
             startWith(response.data.shCity?.parentValue),
             debounceTime(400),
             distinctUntilChanged(),
@@ -194,7 +194,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             }),
           );
 
-          this.birthCities = this.form.get('birthStateId').valueChanges.pipe(
+          this.birthCities = this.form.get('birthStateId')?.valueChanges.pipe(
             startWith(response.data.cityOfBirth?.parentValue),
             debounceTime(400),
             distinctUntilChanged(),
@@ -218,7 +218,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.form.value;
 
@@ -249,7 +249,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -260,9 +260,9 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options) {
+  getListOptions(options:{key:number,text:string}[]){
     debugger;
-    return options.map((el) => {
+    return options.map((el:{key:number,text:string}) => {
       return { value: +el.key, text: el.text };
     });
   }

@@ -25,7 +25,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id;
+      this.userCode = p['id'];
     });
   }
 

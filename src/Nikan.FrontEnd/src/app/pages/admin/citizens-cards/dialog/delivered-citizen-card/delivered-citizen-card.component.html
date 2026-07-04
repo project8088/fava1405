@@ -32,7 +32,7 @@
           matInput
           [matDatepicker]="dpS"
           formControlName="deliveredOnDate"
-          [max]="frm.get('deliveredOnDate').value"
+          [max]="frm.get('deliveredOnDate')?.value"
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>

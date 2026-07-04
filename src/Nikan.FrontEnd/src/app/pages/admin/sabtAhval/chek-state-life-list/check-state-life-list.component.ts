@@ -38,7 +38,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
     });
     this.searchForm = this.fb.group({
       title: [null],
@@ -79,7 +79,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   checkIsDead(item) {

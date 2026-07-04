@@ -18,7 +18,7 @@ export class LoginComponent extends AppBase implements OnInit {
   returnUrl: string = '';
   serviceId: number = 0;
 
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
+  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor() {
     super();
@@ -55,15 +55,15 @@ export class LoginComponent extends AppBase implements OnInit {
   }
 
   login() {
-    if (!this.loginForm.get('username').value || !this.loginForm.get('password').value) {
+    if (!this.loginForm.get('username')?.value || !this.loginForm.get('password')?.value) {
       this.loginForm.markAllAsTouched();
       this.toastrService.warning('نام کاربری و کلمه عبور خود را وارد کنید.');
-      return false;
+        return ;
     }
 
     if (!this.loginForm.get('userEnteredCaptchaCode')?.value) {
       this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-      return false;
+        return ;
     }
 
     var param: any = this.loginForm.value;

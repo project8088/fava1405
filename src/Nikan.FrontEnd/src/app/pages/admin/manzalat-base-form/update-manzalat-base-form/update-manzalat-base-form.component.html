@@ -20,7 +20,7 @@
             @if (form.get('title')?.hasError('required')) {
               <mat-error>عنوان طرح را وارد کنید.</mat-error>
             }
-            @if (form.get('title').errors?.maxlength) {
+            @if (form.get('title')?.hasError('maxlength')) {
               <mat-error>حداکثر 500 کاراکتر</mat-error>
             }
           </mat-form-field>
@@ -44,7 +44,7 @@
             @if (form.get('minAge')?.hasError('pattern')) {
               <mat-error> فقط عدد وارد کنید </mat-error>
             }
-            @if (form.get('minAge').errors?.min || form.get('minAge').errors?.max) {
+            @if (form.get('minAge')?.hasError('min') || form.get('minAge')?.hasError('max')) {
               <mat-error> سن باید بین 0 تا 99 سال باشد </mat-error>
             }
           </mat-form-field>
@@ -57,7 +57,7 @@
             @if (form.get('maxAge')?.hasError('pattern')) {
               <mat-error> فقط عدد وارد کنید </mat-error>
             }
-            @if (form.get('maxAge').errors?.min || form.get('maxAge').errors?.max) {
+            @if (form.get('maxAge')?.hasError('min') || form.get('maxAge')?.hasError('max')) {
               <mat-error> سن باید بین 0 تا 99 سال باشد </mat-error>
             }
           </mat-form-field>

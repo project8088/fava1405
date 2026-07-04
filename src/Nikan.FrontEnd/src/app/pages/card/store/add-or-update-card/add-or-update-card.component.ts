@@ -10,14 +10,14 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   isSaving=false;
 
-  loading: boolean;
+    loading?: boolean;
   cardTypeId: string;
   cardTypeList: any[] = [];
 
@@ -26,9 +26,9 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.cardTypeId;
 
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.id = p.id;
+        this.id = p['id'];
         this.getStoreInfo();
       } else {
         this.id = '';
@@ -88,7 +88,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
     if (this.storeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.storeForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     let form = this.storeForm.value;

@@ -23,7 +23,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id;
+      this.userCode = p['id'];
     });
   }
 

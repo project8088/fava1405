@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   companyId: string = '';
   mainForm: FormGroup;
   isSaving=false;
@@ -35,7 +35,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getAddressInfo();
     });
   }
@@ -81,7 +81,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     if (this.mainForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.mainForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.mainForm.value;
     this.isSaving = true;

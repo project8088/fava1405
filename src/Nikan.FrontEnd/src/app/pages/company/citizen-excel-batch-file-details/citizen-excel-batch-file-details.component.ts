@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
-  loading: boolean;
+    loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'gender',
@@ -47,7 +47,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
-      this.importId = p.id;
+      this.importId = p['id'];
       this.getList();
     });
   }
@@ -85,7 +85,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
   }
 
   applyFilter() {
-    this.dataSource.filter = this.searchForm.get('title').value;
+    this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
   confirm() {

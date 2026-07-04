@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   userGroupAccessList: any[] = [];
   groupList: any[] = [];
   unitId: string = '';
@@ -26,7 +26,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
     });
 
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.unitId = p.id;
+      if (p['id'] != '0' && p['id']) this.unitId = p['id'];
       this.getuserRoleList();
     });
   }
@@ -63,7 +63,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
     var form = this.form.value;
     this.isSaving = true;

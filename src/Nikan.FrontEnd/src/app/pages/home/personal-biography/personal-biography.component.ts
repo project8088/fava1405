@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class PersonalBiographyComponent extends AppBase implements OnInit {
   id: string;
-  loading: boolean;
+    loading?: boolean;
   userInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
@@ -21,7 +21,7 @@ export class PersonalBiographyComponent extends AppBase implements OnInit {
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getUserInfo();
     });
   }

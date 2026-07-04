@@ -30,7 +30,7 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p.id ? p.id : null;
+      this.userCode = p['id'] ? p['id'] : null;
     });
 
     this.searchForm = this.fb.group({});

@@ -17,7 +17,7 @@ export class AdminUserPermissionsComponent extends AppBase implements OnInit {
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      this.groupId = p.id;
+      this.groupId = p['id'];
     });
   }
 

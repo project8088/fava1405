@@ -56,7 +56,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     ];
 
     this.route.params.subscribe((p) => {
-      this.companyId = p.id;
+      this.companyId = p['id'];
     });
 
     this.searchForm = this.fb.group({
@@ -72,7 +72,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 

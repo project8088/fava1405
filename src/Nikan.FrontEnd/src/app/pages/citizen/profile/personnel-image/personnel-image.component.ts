@@ -17,7 +17,7 @@ export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   isSaving: boolean = false;
   personalPictureIsUploaded: boolean = false;
   personalPicture_Confirmed: number = null;
-  userId: string;
+  userId?: string;
   cardForm: FormGroup;
   loadingState: boolean;
   baseUrl: string = ServerApis.baseUrl;

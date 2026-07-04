@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenEditMobileComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   editForm: FormGroup;
 
   confirmForm: FormGroup;
@@ -26,7 +26,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
 
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
-  timerCounterString: string;
+  timerCounterString='';
   resendTimerInterval: any;
   isConfirm = false;
 
@@ -59,16 +59,16 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   }
 
   sendCode() {
-    if (this.editForm.get('newmobileNumber').invalid) {
+    if (this.editForm.get('newmobileNumber')?.invalid) {
       this.toastrService.warning('شماره موبایل جدید  خود را وارد کنید.');
-      this.editForm.get('newmobileNumber').markAsTouched();
-      return false;
+      this.editForm.get('newmobileNumber')?.markAsTouched();
+        return ;
     }
 
     this.sendingSMS = true;
     this.dataService
       .post(ServerApis.checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber, {
-        NewMobileNumber: this.editForm.get('newmobileNumber').value,
+        NewMobileNumber: this.editForm.get('newmobileNumber')?.value,
       })
       .subscribe(
         (response) => {
@@ -95,7 +95,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
     if (this.confirmForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.confirmForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
 
@@ -153,7 +153,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
    * convert 300s to 5:00
    * @param {any} given_seconds
    */
-  convertSecondstoTime(given_seconds) {
+  convertSecondstoTime(given_seconds:number) {
     var dateObj = new Date(given_seconds * 1000);
     var hours = dateObj.getUTCHours();
     var minutes = dateObj.getUTCMinutes();

@@ -12,7 +12,7 @@ export class ViewJobseekerProfileComponent extends AppBase implements OnInit {
   @Input('jobseekerId') jobseekerId: string = '';
 
   jobseeker: any = {};
-  loadingData: boolean;
+  loadingData?: boolean;
   maritalStatus: boolean;
 
   baseUrl: string = ServerApis.baseUrl;

@@ -37,7 +37,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
 
   @Output('optionSelected') optionSelected: EventEmitter<any>;
 
-  loading: boolean;
+    loading?: boolean;
   filteredList: Observable<any[]>;
 
   constructor(@Self() public ngControl: NgControl) {
@@ -141,7 +141,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item): string {
+  displayFn(item:any): string {
     return item && item.text ? item.text : '';
   }
 

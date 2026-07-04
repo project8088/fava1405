@@ -8,7 +8,7 @@ import { FaqListComponent } from './faq/faq-list.component';
 import { IndexComponent } from './index/index.component';
 import { MainPageDetailsComponent } from './page-details/page-details.component';
 import { TicketAnswerComponent } from './ticket-answer/ticket-answer.component';
-import { TicketComponent } from './ticket/ticket.component - Copy';
+import { TicketComponent } from './ticket/ticket.component';
 
 const routes: Routes = [
   {

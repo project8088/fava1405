@@ -50,7 +50,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.queueId = p.id;
+      this.queueId = p['id'];
     });
 
     this.searchForm = this.fb.group({

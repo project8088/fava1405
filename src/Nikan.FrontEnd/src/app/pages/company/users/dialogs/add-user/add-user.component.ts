@@ -47,8 +47,8 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
    * بررسی یکی بودن کلمه عبور و تائید آن
    */
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPassword = group.controls.confirmPassword.value;
+    let pass = group.controls['password']?.value;
+    let confirmPassword = group.controls['confirmPassword']?.value;
 
     return pass === confirmPassword ? null : { notSame: true };
   }
@@ -59,7 +59,7 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.userForm.value;
 

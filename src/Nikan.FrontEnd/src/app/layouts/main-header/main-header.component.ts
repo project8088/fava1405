@@ -16,7 +16,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
   isAuth: boolean;
   user: AuthUser;
   datetime: any;
-  loading: boolean;
+    loading?: boolean;
   slag: string;
   setting: SiteSettingViewModel;
 

@@ -14,7 +14,7 @@ declare var $: any;
 })
 export class CompanyInfoComponent extends AppBase implements OnInit {
   companyInfo: CompanyInfoDto;
-  loading: boolean;
+    loading?: boolean;
   companyId: string = '';
   user: AuthUser;
   baseUrl = ServerApis.baseUrl;
@@ -22,7 +22,7 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
     super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
-      if (p.id != '0' && p.id) this.companyId = p.id;
+      if (p['id'] != '0' && p['id']) this.companyId = p['id'];
       this.getInfo();
     });
   }

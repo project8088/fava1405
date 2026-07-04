@@ -96,7 +96,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     this.getCardDetails();
     this.getAddresses();
 
-    this.addressForm.get('addressType').valueChanges.subscribe((value) => {
+    this.addressForm.get('addressType')?.valueChanges.subscribe((value) => {
       if (value === 2) this.loadHomeAddress();
       else this.loadWorkAddress();
     });
@@ -122,7 +122,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
   saveAddress() {
     this.dataService
       .get(ServerApis.cardPriceInfo, {
-        addressId: this.addressForm.get('id').value,
+        addressId: this.addressForm.get('id')?.value,
         cardInfoId: this.card.cardInfoId,
       })
       .subscribe(
@@ -140,7 +140,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.form.value;

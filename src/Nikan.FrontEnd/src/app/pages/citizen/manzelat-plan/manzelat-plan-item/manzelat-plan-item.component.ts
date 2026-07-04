@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userId: string;
+  userId?: string;
   theForm: FormGroup;
   loadingState: boolean;
   baseEnums: any = {};
@@ -24,7 +24,7 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
     });
 
     this.theForm = this.fb.group({

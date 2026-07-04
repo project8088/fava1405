@@ -16,11 +16,11 @@ import { AppBase } from '@app/app.base';
 })
 export class PreregisterComponent extends AppBase implements OnInit {
   form: FormGroup;
-  loading: boolean;
+    loading?: boolean;
   isSaving: boolean = false;
   nationalityList;
   serviceId: number;
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
+  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor(
     private accounService: UserRegisterService,
@@ -40,13 +40,13 @@ export class PreregisterComponent extends AppBase implements OnInit {
       captchaId: [''],
     });
 
-    this.form.get('nationality').valueChanges.subscribe((value) => {
+    this.form.get('nationality')?.valueChanges.subscribe((value) => {
       if (+value === 0) {
         this.form
           .get('nationCode')
           .setValidators([this.customValidator.checkNationalCode, Validators.required]);
       } else {
-        this.form.get('nationCode').setValidators([Validators.required]);
+        this.form.get('nationCode')?.setValidators([Validators.required]);
       }
       this.form.get('nationCode').updateValueAndValidity();
     });

@@ -38,7 +38,7 @@ export class CardAddUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-      return false;
+        return ;
     }
     var formValue = this.userForm.value;
 

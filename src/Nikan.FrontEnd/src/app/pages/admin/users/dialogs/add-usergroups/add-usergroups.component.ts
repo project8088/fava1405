@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
   isSaving=false;
-  isUpdate: boolean;
+  isUpdate=false;
   userGroupsForm: FormGroup;
   id: string;
   loading: boolean = true;
@@ -51,7 +51,7 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
     if (this.userGroupsForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userGroupsForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.userGroupsForm.value;

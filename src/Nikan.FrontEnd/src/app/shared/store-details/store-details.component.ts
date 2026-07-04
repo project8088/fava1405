@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class StoreDetailsComponent extends AppBase implements OnInit {
   id: string;
-  loading: boolean;
+    loading?: boolean;
   info: any;
   user: AuthUser;
 
@@ -19,7 +19,7 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
     super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getInfo();
     });
   }

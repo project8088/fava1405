@@ -42,7 +42,7 @@ export class AdminAddRefundTransactionDialogComponent extends AppBase implements
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

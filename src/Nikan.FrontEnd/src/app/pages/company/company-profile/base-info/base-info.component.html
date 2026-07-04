@@ -48,8 +48,8 @@
           <mat-error>سال تاسیس را وارد کنید</mat-error>
         }
         @if (
-          form.get('establishedYear').errors?.minlength ||
-          form.get('establishedYear').errors?.maxlength
+          form.get('establishedYear')?.hasError('minlength') ||
+          form.get('establishedYear')?.hasError('maxlength')
         ) {
           <mat-error>سال تاسیس را 4 رقم وارد کنید</mat-error>
         }

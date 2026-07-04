@@ -43,7 +43,7 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.citizenId = p.id ? p.id : null;
+      this.citizenId = p['id'] ? p['id'] : null;
     });
 
     this.searchForm = this.fb.group({

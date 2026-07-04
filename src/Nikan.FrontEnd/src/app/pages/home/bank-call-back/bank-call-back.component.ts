@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class BankCallBackComponent extends AppBase implements OnInit {
-  loading: boolean;
+    loading?: boolean;
   id: string;
 
   response: any;
@@ -17,8 +17,8 @@ export class BankCallBackComponent extends AppBase implements OnInit {
   constructor() {
     super();
     this.route.queryParams.subscribe((p) => {
-      if (p.id) {
-        this.id = p.id;
+      if (p['id']) {
+        this.id = p['id'];
         this.payVerify();
       } else {
         this.toastrService.warning('شناسه پرداخت وارد نشده است.');

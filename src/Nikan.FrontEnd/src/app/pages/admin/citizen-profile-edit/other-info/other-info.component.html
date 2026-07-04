@@ -17,7 +17,7 @@
         formControlName="cityOfBirth"
         [label]="'شهر محل تولد'"
         [getByParent]="true"
-        [parentId]="form.get('provinceCityOfBirth').value?.key"
+        [parentId]="form.get('provinceCityOfBirth')?.value?.key"
         [required]="true"
         class="col-sm-6 col-md-4"
       ></input-auto-complete>
@@ -89,7 +89,7 @@
         formControlName="shCity"
         [label]="'شهر محل صدور شناسنامه'"
         [getByParent]="true"
-        [parentId]="form.get('provinceShCity').value?.key"
+        [parentId]="form.get('provinceShCity')?.value?.key"
         [required]="true"
         class="col-sm-6 col-md-4"
       ></input-auto-complete>

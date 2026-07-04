@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
 export class MainNewsDetailsComponent extends AppBase implements OnInit {
   newsId: string;
   user: AuthUser;
-  loadingData: boolean;
+  loadingData?: boolean;
   news: NewsDto;
   tags: string[] = [];
 
@@ -46,7 +46,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
     });
 
     this.route.params.subscribe((p) => {
-      this.newsId = p.id;
+      this.newsId = p['id'];
       this.getDetailsInfo();
       this.getComments();
     });
@@ -107,7 +107,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
     let form = this.frm.value;
     let param: NewsCommentDto = {

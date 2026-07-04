@@ -15,9 +15,9 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
   isSaving=false;
   frm: FormGroup;
   baseEnums: any = {};
-  isUpdate: boolean;
+  isUpdate=false;
   calcChargeTypeList: any = ([] = []);
-  loadingData: boolean;
+  loadingData?: boolean;
   id: string;
   constructor(
     private matDialogRef: MatDialogRef<AdminAddSabtAhvalDialogComponent>,
@@ -52,7 +52,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     this.isSaving = true;

@@ -18,7 +18,7 @@ import { AppBase } from '@app/app.base';
 export class AdminChangePasswordDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   changePasswordForm: FormGroup;
-  userId: string;
+  userId?: string;
 
   loading: boolean = true;
 
@@ -55,8 +55,8 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
    * بررسی یکی بودن کلمه عبور و تائید آن
    */
   checkPasswords(group: FormGroup) {
-    let pass = group.controls.password.value;
-    let confirmPassword = group.controls.confirmPassword.value;
+    let pass = group.controls['password']?.value;
+    let confirmPassword = group.controls['confirmPassword']?.value;
 
     return pass === confirmPassword ? null : { notSame: true };
   }
@@ -67,7 +67,7 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
     if (this.changePasswordForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.changePasswordForm.markAllAsTouched();
-      return false;
+        return ;
     }
 
     var formValue = this.changePasswordForm.value;

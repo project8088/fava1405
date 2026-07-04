@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate: boolean;
+  isUpdate=false;
   id: string;
   form: FormGroup;
 
@@ -21,14 +21,14 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
   seoTags: any[] = [];
 
   isSaving=false;
-  loading: boolean;
+    loading?: boolean;
   siteName: string;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.id = p.id;
+        this.id = p['id'];
         this.getWebPage();
       } else {
         this.id = '';

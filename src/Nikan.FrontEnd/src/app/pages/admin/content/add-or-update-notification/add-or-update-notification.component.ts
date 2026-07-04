@@ -13,21 +13,21 @@ export class AdminAddOrUpdateNotificationComponent
   extends AppBase
   implements OnInit, AfterViewInit
 {
-  isUpdate: boolean;
+  isUpdate=false;
   notificationId: string;
   notyForm: FormGroup;
 
   isSaving=false;
   imageUrl: string = '';
-  loading: boolean;
+    loading?: boolean;
   baseUrl = ServerApis.baseUrl;
 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      if (p.id && p.id != '0') {
+      if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
-        this.notificationId = p.id;
+        this.notificationId = p['id'];
         this.getNotificationInfo();
       } else {
         this.notificationId = '';
@@ -101,7 +101,7 @@ export class AdminAddOrUpdateNotificationComponent
 
  
 
-  getAttachmentId(ev) {
+  getAttachmentId(ev:{uploadUrl:string}) {
     this.imageUrl = ev.uploadUrl;
   }
 

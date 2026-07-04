@@ -15,7 +15,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
   frm: FormGroup;
   isSaving=false;
   id: string = '';
-  loading: boolean;
+    loading?: boolean;
   list: any[] = [];
   user: AuthUser;
   constructor() {
@@ -23,7 +23,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {
-      this.id = p.id;
+      this.id = p['id'];
       this.getList();
     });
 
@@ -92,7 +92,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     var form = this.frm.value;

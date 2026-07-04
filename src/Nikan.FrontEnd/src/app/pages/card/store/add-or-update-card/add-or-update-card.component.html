@@ -53,8 +53,8 @@
               <mat-error>درصد مالیات را وارد کنید.</mat-error>
             }
             @if (
-              storeForm.get('vatForCardCost').errors?.max ||
-              storeForm.get('vatForCardCost').errors?.min
+              storeForm.get('vatForCardCost')?.hasError('max') ||
+              storeForm.get('vatForCardCost')?.hasError('min')
             ) {
               <mat-error>بین 0 تا 100</mat-error>
             }
@@ -66,7 +66,7 @@
               <mat-error>درصد مالیات هزینه پستی را وارد کنید.</mat-error>
             }
             @if (
-              storeForm.get('vatForPost').errors?.max || storeForm.get('vatForPost').errors?.min
+              storeForm.get('vatForPost')?.hasError('max') || storeForm.get('vatForPost')?.hasError('min')
             ) {
               <mat-error>بین 0 تا 100</mat-error>
             }

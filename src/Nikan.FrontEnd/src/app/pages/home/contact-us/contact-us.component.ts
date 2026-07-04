@@ -44,7 +44,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
 
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.contactForm.get('name').setValue(this.user.displayName);
+      this.contactForm.get('name')?.setvalue(this.user.displayName);
     }
 
     this.getOrganizations();
@@ -87,7 +87,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
 
     this.dataService
       .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.contactForm.get('organizationId').value,
+        organId: this.contactForm.get('organizationId')?.value,
       })
       .subscribe(
         (response) => {
@@ -109,7 +109,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
     if (this.contactForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.contactForm.markAllAsTouched();
-      return false;
+        return ;
     }
     this.isSaving = true;
     let formData = this.contactForm.value;
