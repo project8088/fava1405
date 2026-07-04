@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import * as CkEditor from '../../../../../assets/ckeditor';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -17,7 +16,6 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
   mainForm: FormGroup;
   isSaving: boolean;
 
-  htmlEditor: any;
 
   constructor(private customValidators: CustomFormValidators) {
     super();
@@ -43,7 +41,6 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
   }
 
   ngAfterViewInit(): void {
-    this.loadCkEditor(this.mainForm.get('content').value);
   }
 
   ngOnInit(): void {}
@@ -69,9 +66,6 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
                 ? response.data.numberOfEmployees
                 : 0,
             });
-            setTimeout(() => {
-              this.loadCkEditor(this.mainForm.get('content').value);
-            }, 1000);
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
@@ -95,7 +89,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     let dataToPost = {
       companyId: +this.companyId,
       slagUrl: form.slagUrl,
-      content: this.htmlEditor ? this.htmlEditor.getData() : '',
+      content: form.content,
       insuranceNumber: form.insuranceNumber,
       companyRepresentative: form.companyRepresentative,
       numberOfEmployees: form.numberOfEmployees,
@@ -116,104 +110,4 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     );
   }
 
-  /**
-   * لود کردن html editor
-   * */
-  loadCkEditor(content) {
-    if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = '';
-      CkEditor.create(document.querySelector('.html-editor'), {
-        removePlugins: ['Title'],
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'indent',
-            'alignment',
-            'outdent',
-            'pageBreak',
-            '|',
-            'fontBackgroundColor',
-            'fontColor',
-            'fontFamily',
-            'fontSize',
-            'highlight',
-            'removeFormat',
-            '|',
-            'imageUpload',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'code',
-            'codeBlock',
-            'exportPdf',
-            'horizontalLine',
-            'specialCharacters',
-            'todoList',
-            '|',
-            'undo',
-            'redo',
-          ],
-        },
-        language: 'fa',
-        image: {
-          // Configure the available styles.
-          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
-          // You need to configure the image toolbar, too, so it shows the new style
-          // buttons as well as the resize buttons.
-          toolbar: [
-            'imageStyle:alignLeft',
-            'imageStyle:alignCenter',
-            'imageStyle:alignRight',
-            '|',
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side',
-          ],
-        },
-        table: {
-          contentToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells',
-            'tableCellProperties',
-            'tableProperties',
-          ],
-        },
-        licenseKey: '',
-        title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید',
-        },
-        placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-      })
-        .then((editor) => {
-          //window.editor = editor;
-
-          this.htmlEditor = editor;
-          if (content) {
-            this.htmlEditor.setData(content);
-          }
-
-          //this.htmlEditor.model.document.on('change', () => {
-          //});
-          //on blure
-          //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          //  if (!isFocused) {
-
-          //  }
-          //});
-        })
-        .catch((error) => {
-          //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
-          console.error(error);
-        });
-    }
-  }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import * as CkEditor from '../../../../../assets/ckeditor';
 import { ServerApis } from '../../../../core/server-apis';
 import { AppBase } from '@app/app.base';
 
@@ -18,7 +17,6 @@ export class AdminAddOrUpdateNotificationComponent
   notificationId: string;
   notyForm: FormGroup;
 
-  htmlEditor: any;
   isSaving: boolean;
   imageUrl: string = '';
   loading: boolean;
@@ -53,9 +51,7 @@ export class AdminAddOrUpdateNotificationComponent
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      if (!this.isUpdate) this.loadCkEditor('');
-    }, 500);
+   
   }
 
   getNotificationInfo() {
@@ -83,9 +79,7 @@ export class AdminAddOrUpdateNotificationComponent
                 : '',
             });
             this.imageUrl = response.data.imageUrl;
-            setTimeout(() => {
-              this.loadCkEditor(response.data.body);
-            }, 1000);
+          
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
@@ -105,103 +99,7 @@ export class AdminAddOrUpdateNotificationComponent
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  /**
-   * لود کردن html editor
-   * */
-  loadCkEditor(content) {
-    if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = '';
-      CkEditor.create(document.querySelector('.html-editor'), {
-        removePlugins: ['Title'],
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'indent',
-            'alignment',
-            'outdent',
-            'pageBreak',
-            '|',
-            'fontBackgroundColor',
-            'fontColor',
-            'fontFamily',
-            'fontSize',
-            'highlight',
-            'removeFormat',
-            '|',
-            'imageUpload',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'code',
-            'codeBlock',
-            'exportPdf',
-            'horizontalLine',
-            'specialCharacters',
-            'todoList',
-            '|',
-            'undo',
-            'redo',
-          ],
-        },
-        language: 'fa',
-        image: {
-          // Configure the available styles.
-          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
-          // You need to configure the image toolbar, too, so it shows the new style
-          // buttons as well as the resize buttons.
-          toolbar: [
-            'imageStyle:alignLeft',
-            'imageStyle:alignCenter',
-            'imageStyle:alignRight',
-            '|',
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side',
-          ],
-        },
-        table: {
-          contentToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells',
-            'tableCellProperties',
-            'tableProperties',
-          ],
-        },
-        licenseKey: '',
-        title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید',
-        },
-        placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-      })
-        .then((editor) => {
-          //window.editor = editor;
-          this.htmlEditor = editor;
-          if (content) {
-            this.htmlEditor.setData(content);
-          }
-          //this.htmlEditor.model.document.on('change', () => {
-          //});
-          //on blure
-          //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused)
-
-          //});
-        })
-        .catch((error) => {
-          //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
-          console.error(error);
-        });
-    }
-  }
+ 
 
   getAttachmentId(ev) {
     this.imageUrl = ev.uploadUrl;
@@ -211,18 +109,14 @@ export class AdminAddOrUpdateNotificationComponent
     if (this.notyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.notyForm.markAllAsTouched();
-      return false;
+      return ;
     }
-    let notificationBody = this.htmlEditor ? this.htmlEditor.getData() : '';
-    if (!notificationBody) {
-      this.toastrService.warning('محتوای خبر را وارد کنید.');
-      return false;
-    }
+    
     let form = this.notyForm.value;
     let params: any = {
       id: this.notificationId ? +this.notificationId : '',
       title: form.title,
-      body: notificationBody,
+      body: form.body,
       description: form.description,
       isActive: form.isActive,
       isPrivate: form.isPrivate,

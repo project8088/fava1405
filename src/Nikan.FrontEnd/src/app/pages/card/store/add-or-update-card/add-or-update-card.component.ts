@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import * as CkEditor from '../../../../../assets/ckeditor';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -21,7 +20,6 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   loading: boolean;
   cardTypeId: string;
   cardTypeList: any[] = [];
-  htmlEditor: any;
 
   constructor() {
     super();
@@ -58,7 +56,6 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   }
 
   ngAfterViewInit() {
-    if (!this.isUpdate) this.loadCkEditor('');
   }
 
   getStoreInfo() {
@@ -75,9 +72,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
             response.data.cardTypeId = response.data.cardTypeId.toString();
             this.storeForm.patchValue(response.data);
 
-            setTimeout(() => {
-              this.loadCkEditor(response.data.buyCardDescription);
-            }, 1000);
+         
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
@@ -100,7 +95,6 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
 
     let params = form;
     params.cardTypeId = +this.cardTypeId;
-    if (this.htmlEditor.getData()) params.buyCardDescription = this.htmlEditor.getData();
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateCard, params).subscribe(
       (response) => {
@@ -126,101 +120,5 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-  /**
-   * لود کردن html editor
-   * */
-  loadCkEditor(buyCardDescription) {
-    if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = '';
-      CkEditor.create(document.querySelector('.html-editor'), {
-        removePlugins: ['Title'],
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'indent',
-            'alignment',
-            'outdent',
-            'pageBreak',
-            '|',
-            'fontBackgroundColor',
-            'fontColor',
-            'fontFamily',
-            'fontSize',
-            'highlight',
-            'removeFormat',
-            '|',
-            'imageUpload',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'code',
-            'codeBlock',
-            'exportPdf',
-            'horizontalLine',
-            'specialCharacters',
-            'todoList',
-            '|',
-            'undo',
-            'redo',
-          ],
-        },
-        language: 'fa',
-        image: {
-          // Configure the available styles.
-          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
-          // You need to configure the image toolbar, too, so it shows the new style
-          // buttons as well as the resize buttons.
-          toolbar: [
-            'imageStyle:alignLeft',
-            'imageStyle:alignCenter',
-            'imageStyle:alignRight',
-            '|',
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side',
-          ],
-        },
-        table: {
-          buyCardDescriptionToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells',
-            'tableCellProperties',
-            'tableProperties',
-          ],
-        },
-        licenseKey: '',
-        title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید',
-        },
-        placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-      })
-        .then((editor) => {
-          //window.editor = editor;
-          this.htmlEditor = editor;
-          if (buyCardDescription) {
-            this.htmlEditor.setData(buyCardDescription);
-          }
-          //this.htmlEditor.model.document.on('change', () => {
-          //});
-          //on blure
-          //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused)
 
-          //});
-        })
-        .catch((error) => {
-          //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
-          console.error(error);
-        });
-    }
-  }
 }

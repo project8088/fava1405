@@ -42,7 +42,7 @@
                 <input matInput formControlName="content" maxlength="500">
                 <mat-error *ngIf="mainForm.get('content').errors?.required">محتوای صفحه اختصاصی را وارد کنید</mat-error>
               </mat-form-field>-->
-      <div class="html-editor"></div>
+      <html-editor formControlName="content"></html-editor>
       <div class="col d-flex align-items-center justify-content-end">
         <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
           <span>ذخیره</span>

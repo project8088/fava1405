@@ -22,6 +22,7 @@
     "@angular/material-luxon-adapter": "^22.0.3",
     "@angular/platform-browser": "^22.0.0",
     "@angular/router": "^22.0.0",
+    "@tinymce/tinymce-angular": "^9.1.1",
     "angular-highcharts": "^21.0.2",
     "highcharts": "^13.0.0",
     "jwt-decode": "^4.0.0",
@@ -31,6 +32,7 @@
     "ngx-uploader": "^17.0.1",
     "rxjs": "~7.8.0",
     "sweetalert2": "^11.26.25",
+    "tinymce": "^8.6.0",
     "tslib": "^2.3.0"
   },
   "devDependencies": {

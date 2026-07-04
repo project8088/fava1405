@@ -85,7 +85,7 @@
         <p>
           <mat-checkbox color="default" formControlName="isActive">فعال/غیرفعال</mat-checkbox>
         </p>
-        <div class="html-editor"></div>
+        <html-editor formControlName="content"></html-editor>
         <app-uploader
           (attachmentId)="getAttachmentId($event)"
           [autoUpload]="true"

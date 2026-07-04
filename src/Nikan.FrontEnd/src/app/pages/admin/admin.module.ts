@@ -131,6 +131,7 @@ import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.co
 import { AdminAddRefundUserDialogComponent } from './Refund/dialog/add-refund-user/add-refund-user.component';
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
+import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor.module';
 
 @NgModule({
   declarations: [
@@ -272,6 +273,7 @@ import { AdminConfigComponent } from './config/config.component';
     ReactiveFormsModule,
     MaterialModule,
     RouterModule,
+    HtmlEditorModule,
   ],
   entryComponents: [
     AdminAddUserGrousDialogComponent,

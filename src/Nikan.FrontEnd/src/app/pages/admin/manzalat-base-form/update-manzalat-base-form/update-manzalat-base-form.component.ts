@@ -3,7 +3,6 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ENTER } from '@angular/cdk/keycodes';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import * as CkEditor from '../../../../../assets/ckeditor';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -20,7 +19,6 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  htmlEditor: any;
   isSaving: boolean;
   loading: boolean;
   siteName: string;
@@ -66,9 +64,6 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
             orderIndex: response.data.orderIndex,
             gender: response.data.gender,
           });
-          setTimeout(() => {
-            this.loadCkEditor(response.data.description);
-          }, 5000);
         } else {
           var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
           this.toastrService.error(msg);
@@ -80,113 +75,19 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
     );
   }
 
-  /**
-   * لود کردن html editor
-   * */
-  loadCkEditor(content) {
-    if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = '';
-      CkEditor.create(document.querySelector('.html-editor'), {
-        removePlugins: ['Title'],
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'indent',
-            'alignment',
-            'outdent',
-            'pageBreak',
-            '|',
-            'fontBackgroundColor',
-            'fontColor',
-            'fontFamily',
-            'fontSize',
-            'highlight',
-            'removeFormat',
-            '|',
-            'imageUpload',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'code',
-            'codeBlock',
-            'exportPdf',
-            'horizontalLine',
-            'specialCharacters',
-            'todoList',
-            '|',
-            'undo',
-            'redo',
-          ],
-        },
-        language: 'fa',
-        image: {
-          // Configure the available styles.
-          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
-          // You need to configure the image toolbar, too, so it shows the new style
-          // buttons as well as the resize buttons.
-          toolbar: [
-            'imageStyle:alignLeft',
-            'imageStyle:alignCenter',
-            'imageStyle:alignRight',
-            '|',
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side',
-          ],
-        },
-        table: {
-          contentToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells',
-            'tableCellProperties',
-            'tableProperties',
-          ],
-        },
-        licenseKey: '',
-        title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید',
-        },
-        placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-      })
-        .then((editor) => {
-          //window.editor = editor;
-          this.htmlEditor = editor;
-          if (content) {
-            this.htmlEditor.setData(content);
-          }
-        })
-        .catch((error) => {
-          alert('error' + error);
-          console.error(error);
-        });
-    }
-  }
+  
 
   save() {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return false;
-    }
-    let newsBody = this.htmlEditor ? this.htmlEditor.getData() : '';
-    if (!newsBody) {
-      this.toastrService.warning('شرایط و توضیحات عضویت در طرح را وارد نمایید.');
-      return false;
+      return ;
     }
     let form = this.form.value;
     let params: any = {
       id: this.id ? +this.id : '',
       title: form.title,
-      description: newsBody,
+      description: form.body,
       minAge: form.minAge,
       maxAge: form.maxAge,
       isActive: form.isActive,

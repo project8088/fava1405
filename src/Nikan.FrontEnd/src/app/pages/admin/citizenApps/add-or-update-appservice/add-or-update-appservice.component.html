@@ -129,7 +129,8 @@
           </mat-checkbox>
         </p>
         <p>در صورت داشتن قوانین و مقررات در قسمت زیر آن را شرح دهید</p>
-        <div class="html-editor"></div>
+
+        <html-editor formControlName="terms"></html-editor>
         <app-uploader
           (attachmentId)="getAttachmentId($event)"
           [autoUpload]="true"

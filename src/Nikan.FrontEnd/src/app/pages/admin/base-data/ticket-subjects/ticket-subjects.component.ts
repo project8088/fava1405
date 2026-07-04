@@ -5,7 +5,6 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import * as CkEditor from '../../../../../assets/ckeditor';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -24,7 +23,6 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     'operation',
   ];
 
-  htmlEditor: any;
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -149,9 +147,6 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
 
   addnewSubject() {
     this.showAddOrUpdatePanel = true;
-    setTimeout(() => {
-      this.loadCkEditor('');
-    }, 500);
     window.scrollTo(0, 0);
   }
 
@@ -198,25 +193,16 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     });
     this.showAddOrUpdatePanel = true;
     window.scrollTo(0, 0);
-    setTimeout(() => {
-      this.loadCkEditor(row.description);
-    }, 500);
   }
 
   save() {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return false;
-    }
-    let description = this.htmlEditor ? this.htmlEditor.getData() : '';
-    if (!description) {
-      this.toastrService.warning('توضیحات را وارد کنید.');
-      return false;
+      return ;
     }
     this.isSaving = true;
     var params = this.frm.value;
-    params.description = description;
 
     this.dataService.post(ServerApis.addOrUpdateTicketSubject, params).subscribe(
       (response) => {
@@ -226,7 +212,6 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
           this.frm.get('isActive').setValue(true);
-          this.htmlEditor.setData('');
           this.getList();
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
@@ -239,101 +224,5 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     );
   }
 
-  /**
-   * لود کردن html editor
-   * */
-  loadCkEditor(content) {
-    if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = '';
-      CkEditor.create(document.querySelector('.html-editor'), {
-        removePlugins: ['Title'],
-        toolbar: {
-          items: [
-            'heading',
-            '|',
-            'bold',
-            'italic',
-            'underline',
-            'link',
-            'bulletedList',
-            'numberedList',
-            '|',
-            'indent',
-            'alignment',
-            'outdent',
-            'pageBreak',
-            '|',
-            'fontBackgroundColor',
-            'fontColor',
-            'fontFamily',
-            'fontSize',
-            'highlight',
-            'removeFormat',
-            '|',
-            'imageUpload',
-            'blockQuote',
-            'insertTable',
-            'mediaEmbed',
-            'code',
-            'codeBlock',
-            'exportPdf',
-            'horizontalLine',
-            'specialCharacters',
-            'todoList',
-            '|',
-            'undo',
-            'redo',
-          ],
-        },
-        language: 'fa',
-        image: {
-          // Configure the available styles.
-          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
-          // You need to configure the image toolbar, too, so it shows the new style
-          // buttons as well as the resize buttons.
-          toolbar: [
-            'imageStyle:alignLeft',
-            'imageStyle:alignCenter',
-            'imageStyle:alignRight',
-            '|',
-            'imageTextAlternative',
-            'imageStyle:full',
-            'imageStyle:side',
-          ],
-        },
-        table: {
-          contentToolbar: [
-            'tableColumn',
-            'tableRow',
-            'mergeTableCells',
-            'tableCellProperties',
-            'tableProperties',
-          ],
-        },
-        licenseKey: '',
-        title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید',
-        },
-        placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-      })
-        .then((editor) => {
-          //window.editor = editor;
-          this.htmlEditor = editor;
-          if (content) {
-            this.htmlEditor.setData(content);
-          }
-          //this.htmlEditor.model.document.on('change', () => {
-          //});
-          //on blure
-          //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused)
-
-          //});
-        })
-        .catch((error) => {
-          //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
-          console.error(error);
-        });
-    }
-  }
+  
 }
