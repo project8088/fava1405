@@ -5,8 +5,7 @@ import {
   UploadInput,
   UploadFile,
   humanizeBytes,
-  UploaderOptions,
-  UploadStatus,
+  UploaderOptions
 } from 'ngx-uploader';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../core/server-apis';

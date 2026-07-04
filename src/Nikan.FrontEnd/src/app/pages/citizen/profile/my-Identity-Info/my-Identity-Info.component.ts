@@ -1,12 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CitizenFamilyDialogComponent } from '../_dialogs/family-dialog/family-dialog.component';
-import { CitizenProfileComponent } from '../profile.component';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import Swal from 'sweetalert2';
-import { citizenFamilyModel } from '@core/models/citizen/family.model';
-import { karjoEducationDto } from '@core/models/citizen/education';
 import { AppBase } from "@app/app.base";
 
 @Component({

@@ -3,7 +3,6 @@ import { FormGroup, Validators } from '@angular/forms';
 
 import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '@core/server-apis';
-import { SideNavMenuComponent } from 'src/app/shared/side-nav-menu/side-nav-menu.component';
 import { UploadUserAvatarDialogComponent } from 'src/app/shared/_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from "@app/app.base";
 

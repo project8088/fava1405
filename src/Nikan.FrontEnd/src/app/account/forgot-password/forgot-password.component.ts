@@ -1,8 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-
-import { AuthService } from '@core/authentication/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';

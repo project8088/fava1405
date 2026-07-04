@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { AuthUser } from '@core/authentication/user.model';
-import { ServerApis } from '@core/server-apis';
 import { AppBase } from "@app/app.base";
 
 @Component({

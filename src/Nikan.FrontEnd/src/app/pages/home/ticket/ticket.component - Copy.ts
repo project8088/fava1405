@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
@@ -7,7 +7,6 @@ import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { AuthService } from '@core/authentication/auth.service';
-import { EventEmitter } from 'events';
 
 @Component({
   selector: 'app-ticket',

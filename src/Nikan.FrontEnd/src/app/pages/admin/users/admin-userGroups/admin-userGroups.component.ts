@@ -1,6 +1,6 @@
 /// <reference path="../../../../core/models/users/usergroups.ts" />
 
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { userGroupsDto } from '@core/models/users/userGroups';
 import Swal from 'sweetalert2';
 import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-usergroups.component';

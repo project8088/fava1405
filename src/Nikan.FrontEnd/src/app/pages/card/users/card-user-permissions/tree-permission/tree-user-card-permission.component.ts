@@ -1,14 +1,10 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  AfterViewInit,
   Input,
   Output,
   EventEmitter,
 } from '@angular/core';
-import { ServerApis } from '../../../../../core/server-apis';
-import Swal from 'sweetalert2';
 import { AppBase } from "@app/app.base";
 
 @Component({

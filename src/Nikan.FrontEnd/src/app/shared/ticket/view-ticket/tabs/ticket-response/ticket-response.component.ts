@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../../../core/authentication/user.model';

@@ -47,7 +47,6 @@ import { AdminUserGroupsComponent } from './users/admin-userGroups/admin-userGro
 import { AdminUserPermissionsComponent } from './users/user-permissions/user-permissions.component';
 import { AdminUsersComponent } from './users/admin-users/admin-users.component';
 import { ChangeCurrentUserPasswordComponent } from '../../shared/change-current-user-password/change-current-user-password.component';
-import { CommonModule } from '@angular/common';
 import { CompanyAddOrUpdatePersonalComponent } from '../company/personal/add-or-update-personal/add-or-update-personal.component';
 import { CompanyInfoComponent } from '../../shared/company-info/company-info.component';
 import { CompanyPersonalUsersComponent } from '../company/personal/personal-users/personal-users.component';

@@ -1,5 +1,4 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import * as moment from 'jalali-moment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AppBase } from "@app/app.base";
 

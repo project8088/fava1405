@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
@@ -10,7 +9,6 @@ import { AdminCitizenImageDialogComponent } from '../../_dialogs/citizen-image/c
 import { AdminCitizenRejectImageDialogComponent } from '../../_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { AdminCitizenSmsListDialogComponent } from '../../_dialogs/citizen-sms-list/citizen-sms-list.component';
 import { ServerApis } from '@core/server-apis';
-import { isNgTemplate } from '@angular/compiler';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from "@app/app.base";
 

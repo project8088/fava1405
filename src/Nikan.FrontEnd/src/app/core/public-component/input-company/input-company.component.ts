@@ -2,17 +2,13 @@ import {
   Component,
   OnInit,
   Input,
-  forwardRef,
-  Optional,
   Self,
   Output,
   EventEmitter,
 } from '@angular/core';
 import {
   ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
   Validators,
-  FormControl,
   NgControl,
 } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';

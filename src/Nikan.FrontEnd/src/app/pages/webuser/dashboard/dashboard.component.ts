@@ -1,5 +1,4 @@
 import { OnInit, Component } from '@angular/core';
-import { ServerApis } from '../../../core/server-apis';
 import { AppBase } from "@app/app.base";
 
 @Component({

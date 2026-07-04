@@ -1,14 +1,13 @@
-import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, throwError } from 'rxjs';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
-import { catchError, finalize, map, tap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { catchError, finalize, map } from 'rxjs/operators';
 
 import { ApiResult } from '../models/response';
 import { AuthUser } from './user.model';
 import { LocalStorageService } from '../services/localstorage.service';
 import { Router } from '@angular/router';
 import { ServerApis } from '../server-apis';
-import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import jwt_decode from 'jwt-decode';
 

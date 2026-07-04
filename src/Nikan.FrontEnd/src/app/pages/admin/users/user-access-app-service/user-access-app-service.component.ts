@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { RequireMatch } from '../../../../core/custom-validator/requireMatch';
 import Swal from 'sweetalert2';
 import { AppBase } from "@app/app.base";
 

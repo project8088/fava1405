@@ -9,7 +9,7 @@ import { Observable, BehaviorSubject, throwError } from 'rxjs';
 import { catchError, take, filter, switchMap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
-import { Router, RouterStateSnapshot } from '@angular/router';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorageService } from '../services/localstorage.service';
 

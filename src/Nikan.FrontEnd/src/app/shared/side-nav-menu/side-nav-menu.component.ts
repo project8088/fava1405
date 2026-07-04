@@ -1,6 +1,5 @@
-import { ActivatedRoute } from '@angular/router';
-import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 import { AuthUser } from '../../core/authentication/user.model';
 import { ServerApis } from '../../core/server-apis';
 import { SideNavMenuItem } from '../../core/models/menuItems';

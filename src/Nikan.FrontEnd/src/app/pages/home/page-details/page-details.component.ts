@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';

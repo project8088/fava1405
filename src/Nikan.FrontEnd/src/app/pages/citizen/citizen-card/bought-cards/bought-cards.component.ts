@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
 import { ChangeCardAddressDialogComponent } from '../../_dialogs/change-card-address/change-card-address.component';
 import { AppBase } from "@app/app.base";

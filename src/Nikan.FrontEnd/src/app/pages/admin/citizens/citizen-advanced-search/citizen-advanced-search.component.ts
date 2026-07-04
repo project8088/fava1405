@@ -1,19 +1,13 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Observable, merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-
-import { AdminCompanyChangeStatusDialogComponent } from '../../_dialogs/company-change-status/company-change-status.component';
-import { AdminCompanyContractDialogComponent } from '../../_dialogs/company-contract/company-contract.component';
-import { AuthService } from '@core/authentication/auth.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { RegisterServiceModel } from '@core/models/register-service.model';
 import { ServerApis } from '../../../../core/server-apis';
-import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from "@app/app.base";
 

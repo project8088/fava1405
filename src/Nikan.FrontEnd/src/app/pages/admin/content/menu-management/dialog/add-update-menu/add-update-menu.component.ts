@@ -1,7 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-
-import Swal from 'sweetalert2';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../../../core/server-apis';
 import { forkJoin } from 'rxjs';

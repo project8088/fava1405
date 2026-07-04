@@ -1,17 +1,6 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { AuthService } from '@core/authentication/auth.service';
-import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
-import { MatTableDataSource } from '@angular/material/table';
-import { AdminUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
-import { AdminChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
-import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AppBase } from "@app/app.base";
 
 @Component({

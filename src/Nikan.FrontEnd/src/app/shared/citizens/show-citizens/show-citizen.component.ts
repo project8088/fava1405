@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { AppBase } from "@app/app.base";
 

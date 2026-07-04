@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import Swal from 'sweetalert2';
 import { AppBase } from "@app/app.base";
 
 @Component({

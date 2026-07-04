@@ -1,7 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { AuthUser } from '../../../core/authentication/user.model';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
 import { AppBase } from "@app/app.base";

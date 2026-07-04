@@ -1,6 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
 import { AppBase } from "@app/app.base";
 

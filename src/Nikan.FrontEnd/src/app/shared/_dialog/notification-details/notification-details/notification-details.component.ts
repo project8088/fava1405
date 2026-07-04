@@ -1,5 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
-import * as moment from 'jalali-moment';
+import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
 import { AppBase } from "@app/app.base";
 

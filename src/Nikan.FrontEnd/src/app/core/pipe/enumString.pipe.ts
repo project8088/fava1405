@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
-import * as moment from 'jalali-moment';
 import { DataService } from '../services/data-service.service';
 
 @Pipe({

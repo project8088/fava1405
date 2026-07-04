@@ -1,8 +1,4 @@
-import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
-import { MatChipInputEvent } from '@angular/material/chips';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import Swal from 'sweetalert2';
+import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { AppBase } from "@app/app.base";
 

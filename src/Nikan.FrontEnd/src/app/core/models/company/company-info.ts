@@ -1,8 +1,4 @@
 import {
-  ActivityLicenseEnum,
-  ActivityLicenseTypeEnum,
-  CompanyOwnerTypeEnum,
-  EarthConditionEnum,
   FieldOfActivityEnum,
 } from '../enums';
 

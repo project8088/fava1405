@@ -1,4 +1,4 @@
-import { ApiResult, RegisterServiceModel } from '../../core/models/models';
+import { ApiResult } from '../../core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';

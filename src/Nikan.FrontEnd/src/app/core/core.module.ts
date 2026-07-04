@@ -1,6 +1,6 @@
-import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { Injectable, ModuleWithProviders, NgModule, forwardRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { NgModule } from '@angular/core';
 import { OnlyDecimalDirective, OnlyNumberDirective } from './directive/numbers-only';
 
 import { ArrayRandomizePipe } from './pipe/randomize.pipe';
@@ -14,7 +14,6 @@ import { EnumStringPipe } from './pipe/enumString.pipe';
 import { ErrorInterceptor } from './authentication/error.interceptor';
 import { InputAutoCompleteComponent } from './public-component/input-auto-complete/input-auto-complete.component';
 import { InputCompanyAutoCompleteComponent } from './public-component/input-company/input-company.component';
-import { JalaliDatePickerModule } from './jalali/mat-core.module';
 import { JalaliPipe } from './pipe/jalali';
 import { MaterialModule } from './material/material.module';
 import { OnlyPersianCharacterDirective } from './directive/persian-only';

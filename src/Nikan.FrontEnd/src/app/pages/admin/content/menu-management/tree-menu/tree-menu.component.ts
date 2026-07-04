@@ -1,8 +1,6 @@
 import {
   Component,
   OnInit,
-  ViewChild,
-  AfterViewInit,
   Input,
   Output,
   EventEmitter,

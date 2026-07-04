@@ -1,15 +1,13 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { ApiResult } from '../models/response';
-import { BaseDataModel } from '../models/base-data-model';
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './localstorage.service';
 import { Router } from '@angular/router';
 import { ServerApis } from '../server-apis';
 import { SiteSettingViewModel } from '../models/setting';
-import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 
 const httpOptions = {

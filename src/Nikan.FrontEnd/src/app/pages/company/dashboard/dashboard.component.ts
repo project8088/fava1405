@@ -1,4 +1,4 @@
-import { Component, OnInit, Sanitizer } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { ViewNotificationDetailsDialogComponent } from '../../../shared/_dialog/notification-details/notification-details.component';
 import { AuthUser } from '../../../core/authentication/user.model';

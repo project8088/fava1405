@@ -1,18 +1,13 @@
-import { Component, forwardRef, Input, OnInit, Output, Self } from '@angular/core';
+import { Component, Input, OnInit, Output, Self } from '@angular/core';
 import {
   ControlValueAccessor,
   Validator,
-  FormControl,
   NgControl,
   AbstractControl,
   ValidationErrors,
-  Validators,
-  NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
+  Validators
 } from '@angular/forms';
-import { RequireMatch } from '../../custom-validator/requireMatch';
 import * as moment from 'jalali-moment';
-import { JalaliMomentDateAdapter } from '../../jalali/jalali-moment-date-adapter';
 import { EventEmitter } from '@angular/core';
 import { AppBase } from "@app/app.base";
 

@@ -27,7 +27,6 @@ import { MaterialModule } from '../../core/material/material.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';
-import { SideNavMenuComponent } from 'src/app/shared/side-nav-menu/side-nav-menu.component';
 import { CitizenRefundStatusComponent } from './refund/citizen-refund-status.component';
 import { CitizenRefundAccessListComponent } from './refund/citizen-refund-access-list/citizen-refund-access-list.component';
 import { CitizenRefundAccessDetailsListComponent } from './refund/citizen-refund-access-details-list/citizen-refund-access-details-list.component';

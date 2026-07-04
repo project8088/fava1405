@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, AfterViewInit, Injector } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Chart } from 'angular-highcharts';
 import { ServerApis } from '@core/server-apis';
