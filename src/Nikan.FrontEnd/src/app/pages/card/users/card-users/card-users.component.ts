@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-card-users',
   templateUrl: './card-users.component.html',
   styleUrls: ['./card-users.component.scss'],
+    standalone: false
 })
 export class CardUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [

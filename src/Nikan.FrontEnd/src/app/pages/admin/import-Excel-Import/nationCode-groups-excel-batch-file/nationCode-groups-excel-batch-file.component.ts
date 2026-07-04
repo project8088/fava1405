@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-nationCode-groups-excel-batch-file',
   templateUrl: './nationCode-groups-excel-batch-file.component.html',
   styleUrls: ['./nationCode-groups-excel-batch-file.component.scss'],
+    standalone: false
 })
 export class AdminNationCodeGroupsExcelBatchFileListComponent extends AppBase implements AfterViewInit {
   loading: boolean;

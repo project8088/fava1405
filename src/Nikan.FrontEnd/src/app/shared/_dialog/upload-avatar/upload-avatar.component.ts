@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-upload-avatar-dialog',
   templateUrl: './upload-avatar.component.html',
   styleUrls: ['./upload-avatar.component.scss'],
+    standalone: false
 })
 export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';

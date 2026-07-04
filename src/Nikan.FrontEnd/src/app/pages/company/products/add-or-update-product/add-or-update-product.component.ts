@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-add-or-update-product',
   templateUrl: './add-or-update-product.component.html',
   styleUrls: ['./add-or-update-product.component.scss'],
+    standalone: false
 })
 export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

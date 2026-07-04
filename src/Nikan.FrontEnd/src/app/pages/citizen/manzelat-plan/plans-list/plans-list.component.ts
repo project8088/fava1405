@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-plans-list',
   templateUrl: './plans-list.component.html',
   styleUrls: ['./plans-list.component.scss'],
+    standalone: false
 })
 export class PlansListComponent extends AppBase implements OnInit {
   loading: boolean = true;

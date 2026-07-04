@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-faq',
   templateUrl: './add-or-update-faq.component.html',
   styleUrls: ['./add-or-update-faq.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

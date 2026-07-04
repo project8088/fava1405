@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'menu-dynamic',
   templateUrl: './menu-dynamic.component.html',
   styleUrls: ['./menu-dynamic.component.scss'],
+    standalone: false
 })
 export class MenuDynamicComponent extends AppBase implements OnInit, OnDestroy {
   @Input('menu') menuItems: SideNavMenuItem[];

@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-refund-info-dialog',
   templateUrl: './refund-info.component.html',
   styleUrls: ['./refund-info.component.scss'],
+    standalone: false
 })
 export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

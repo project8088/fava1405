@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-edit-mobile',
   templateUrl: './edit-mobile.component.html',
   styleUrls: ['./edit-mobile.component.scss'],
+    standalone: false
 })
 export class CitizenEditMobileComponent extends AppBase implements OnInit {
   loading: boolean = true;

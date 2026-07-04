@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'admin-event-details-dialog',
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.scss'],
+    standalone: false
 })
 export class AdminViewEventDetailsDialogComponent extends AppBase implements OnInit {
   id: string = '';

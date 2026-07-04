@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-notification',
   templateUrl: './add-or-update-notification.component.html',
   styleUrls: ['./add-or-update-notification.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateNotificationComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

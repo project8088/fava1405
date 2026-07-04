@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-profile-dialog',
   templateUrl: './citizen-profile.component.html',
   styleUrls: ['./citizen-profile.component.scss'],
+    standalone: false
 })
 export class CitizenProfileDialogComponent extends AppBase implements OnInit {
   userCode: string;

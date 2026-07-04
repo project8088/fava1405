@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-refund-excel-batch-file-details',
   templateUrl: './refund-excel-batch-file-details.component.html',
   styleUrls: ['./refund-excel-batch-file-details.component.scss'],
+    standalone: false
 })
 export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;

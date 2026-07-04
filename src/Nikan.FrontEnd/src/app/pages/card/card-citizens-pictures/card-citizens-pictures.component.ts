@@ -17,6 +17,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-card-citizens-pictures',
   templateUrl: './card-citizens-pictures.component.html',
   styleUrls: ['./card-citizens-pictures.component.scss'],
+    standalone: false
 })
 export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;

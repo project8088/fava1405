@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
   styleUrls: ['./company-profile.component.scss'],
+    standalone: false
 })
 export class CompanyProfileComponent extends AppBase implements OnInit {
   user: AuthUser;

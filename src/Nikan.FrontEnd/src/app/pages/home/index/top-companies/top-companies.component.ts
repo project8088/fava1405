@@ -9,6 +9,7 @@ declare var $: any;
   selector: 'home-top-companies',
   templateUrl: './top-companies.component.html',
   styleUrls: ['./top-companies.component.scss'],
+    standalone: false
 })
 export class HomeTopCompaniesListComponent extends AppBase implements OnInit {
   data: any[] = [];

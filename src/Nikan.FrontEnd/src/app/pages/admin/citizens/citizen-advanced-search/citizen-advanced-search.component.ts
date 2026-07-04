@@ -21,6 +21,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-advanced-search',
   templateUrl: './citizen-advanced-search.component.html',
   styleUrls: ['./citizen-advanced-search.component.scss'],
+    standalone: false
 })
 export class AdminCitizenAdvancedSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-manzalat-registration',
   templateUrl: './citizen-manzalat-registration.component.html',
   styleUrls: ['./citizen-manzalat-registration.component.scss'],
+    standalone: false
 })
 export class AppCitizenManzalatRegistrationComponent extends AppBase implements AfterViewInit {
   userCode: string;

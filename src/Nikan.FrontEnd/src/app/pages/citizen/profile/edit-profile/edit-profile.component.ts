@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
+    standalone: false
 })
 export class CitizenEditProfileComponent extends AppBase implements OnInit {
   loading: boolean = true;

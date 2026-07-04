@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-update-user-dialog',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss'],
+    standalone: false
 })
 export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-update-queue-dialog',
   templateUrl: './add-update-queue.component.html',
   styleUrls: ['./add-update-queue.component.scss'],
+    standalone: false
 })
 export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

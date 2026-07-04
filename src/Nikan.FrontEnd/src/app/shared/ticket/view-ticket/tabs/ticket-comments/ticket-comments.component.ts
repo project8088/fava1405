@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-comments',
   templateUrl: './ticket-comments.component.html',
   styleUrls: ['./ticket-comments.component.scss'],
+    standalone: false
 })
 export class TicketCommentsComponent extends AppBase implements OnInit {
   frm: FormGroup;

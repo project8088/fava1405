@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-organization-list',
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss'],
+    standalone: false
 })
 export class AdminOrganizationListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

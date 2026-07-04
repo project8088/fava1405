@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'side-nav-menu',
   templateUrl: './side-nav-menu.component.html',
   styleUrls: ['./side-nav-menu.component.scss'],
+    standalone: false
 })
 export class SideNavMenuComponent extends AppBase implements OnInit {
   @Input('menu') menuItems: SideNavMenuItem[];

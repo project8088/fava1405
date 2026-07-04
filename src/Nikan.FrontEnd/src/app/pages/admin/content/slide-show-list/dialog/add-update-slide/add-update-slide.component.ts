@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-update-slide-dialog',
   templateUrl: './add-update-slide.component.html',
   styleUrls: ['./add-update-slide.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;

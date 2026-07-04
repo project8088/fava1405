@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-delivery-queue-operator',
   templateUrl: './delivery-queue-operator.component.html',
   styleUrls: ['./delivery-queue-operator.component.scss'],
+    standalone: false
 })
 export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

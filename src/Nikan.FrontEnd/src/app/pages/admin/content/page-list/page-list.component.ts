@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-page-list',
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.scss'],
+    standalone: false
 })
 export class AdminPageListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

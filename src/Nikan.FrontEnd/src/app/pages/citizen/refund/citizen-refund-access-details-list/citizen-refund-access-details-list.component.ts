@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-refund-access-details-list',
   templateUrl: './citizen-refund-access-details-list.component.html',
   styleUrls: ['./citizen-refund-access-details-list.component.scss'],
+    standalone: false
 })
 export class CitizenRefundAccessDetailsListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-importPersonel-excel-dialog',
   templateUrl: './importPersonel-excel.component.html',
   styleUrls: ['./importPersonel-excel.component.scss'],
+    standalone: false
 })
 export class CompanyImportExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importPersonnelFromExcel;

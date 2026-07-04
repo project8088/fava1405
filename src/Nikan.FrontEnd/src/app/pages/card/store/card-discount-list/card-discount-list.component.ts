@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-card-discount-list',
   templateUrl: './card-discount-list.component.html',
   styleUrls: ['./card-discount-list.component.scss'],
+    standalone: false
 })
 export class CardDiscountListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

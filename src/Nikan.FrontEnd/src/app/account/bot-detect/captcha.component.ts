@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
 @Component({
   selector: 'botdetect-captcha',
   template: '',
+    standalone: false
 })
 export class CaptchaComponent extends AppBase implements OnInit {
   @Input() styleName: string; // backward compatible

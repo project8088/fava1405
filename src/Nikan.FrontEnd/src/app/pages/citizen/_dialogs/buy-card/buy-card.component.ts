@@ -49,6 +49,7 @@ interface ICardDetails {
   selector: 'app-buy-card',
   templateUrl: './buy-card.component.html',
   styleUrls: ['./buy-card.component.scss'],
+    standalone: false
 })
 export class BuyCardDialogComponent extends AppBase implements OnInit {
   citizenId: number;

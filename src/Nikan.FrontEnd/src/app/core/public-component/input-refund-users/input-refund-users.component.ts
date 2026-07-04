@@ -25,7 +25,7 @@ import { AppBase } from "@app/app.base";
 @Component({
   selector: 'input-refund-users',
   templateUrl: './input-refund-users.component.html',
-  styleUrls: ['./input-refund-users.component.scss'],
+  styleUrls: ['./input-refund-users.component.scss'],,
   //providers: [
   //  {
   //    provide: NG_VALUE_ACCESSOR,
@@ -33,6 +33,7 @@ import { AppBase } from "@app/app.base";
   //    multi: true
   //  }
   //]
+    standalone: false
 })
 export class InputRefundUsersAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;

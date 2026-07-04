@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'main-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
+    standalone: false
 })
 export class ProductListComponent extends AppBase implements AfterViewInit, OnInit {
   data: any[] = [];

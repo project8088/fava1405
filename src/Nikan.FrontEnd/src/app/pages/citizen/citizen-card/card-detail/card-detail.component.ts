@@ -55,6 +55,7 @@ interface ICardDetails {
   selector: 'app-card-detail',
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss'],
+    standalone: false
 })
 export class CardDetailComponent extends AppBase implements OnInit {
   citizenId: number;

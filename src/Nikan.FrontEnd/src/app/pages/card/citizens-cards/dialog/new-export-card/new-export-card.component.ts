@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-new-export-card-dialog',
   templateUrl: './new-export-card.component.html',
   styleUrls: ['./new-export-card.component.scss'],
+    standalone: false
 })
 export class CardNewExportCardDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

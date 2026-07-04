@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-manzalat-base-list',
   templateUrl: './manzalat-base-list.component.html',
   styleUrls: ['./manzalat-base-list.component.scss'],
+    standalone: false
 })
 export class AdminManzalatBaseFromListComponent extends AppBase implements OnInit {
   userGroupList: userGroupsDto[] = [];

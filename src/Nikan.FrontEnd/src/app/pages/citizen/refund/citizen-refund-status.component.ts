@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-refund-status',
   templateUrl: './citizen-refund-status.component.html',
   styleUrls: ['./citizen-refund-status.component.scss'],
+    standalone: false
 })
 export class CitizenRefundStatusComponent extends AppBase implements OnInit {
   userId: string;

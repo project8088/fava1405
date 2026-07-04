@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-adm-update-user-dialog',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss'],
+    standalone: false
 })
 export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

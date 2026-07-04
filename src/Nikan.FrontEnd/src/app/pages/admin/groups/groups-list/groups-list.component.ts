@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-groups-list',
   templateUrl: './groups-list.component.html',
   styleUrls: ['./groups-list.component.scss'],
+    standalone: false
 })
 export class AdminGroupListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

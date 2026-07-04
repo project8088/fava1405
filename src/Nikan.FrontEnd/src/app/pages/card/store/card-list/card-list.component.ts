@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
+    standalone: false
 })
 export class OrderCardListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

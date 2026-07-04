@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
+    standalone: false
 })
 export class AdminContactUsListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

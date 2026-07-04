@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-my-family',
   templateUrl: './my-family.component.html',
   styleUrls: ['./my-family.component.scss'],
+    standalone: false
 })
 export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   familyList: any[] = [];

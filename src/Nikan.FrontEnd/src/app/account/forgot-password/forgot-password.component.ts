@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
+    standalone: false
 })
 export class ForgotPasswordComponent extends AppBase implements OnInit {
   userId: string = '';

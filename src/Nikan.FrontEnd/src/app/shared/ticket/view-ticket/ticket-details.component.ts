@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-details',
   templateUrl: './ticket-details.component.html',
   styleUrls: ['./ticket-details.component.scss'],
+    standalone: false
 })
 export class TicketDetailsComponent extends AppBase implements OnInit {
   isAdmin: boolean;

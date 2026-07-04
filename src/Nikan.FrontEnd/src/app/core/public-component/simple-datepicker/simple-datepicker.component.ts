@@ -20,7 +20,7 @@ import { AppBase } from "@app/app.base";
   // tslint:disable-next-line: component-selector
   selector: 'simple-jalali-datepicker',
   templateUrl: './simple-datepicker.component.html',
-  styleUrls: ['./simple-datepicker.component.scss'],
+  styleUrls: ['./simple-datepicker.component.scss'],,
   // providers: [
   //   {
   //     provide: NG_VALUE_ACCESSOR,
@@ -33,6 +33,7 @@ import { AppBase } from "@app/app.base";
   //     useExisting: SimpleJalaliDatepickerComponent
   //   }
   // ]
+    standalone: false
 })
 export class SimpleJalaliDatepickerComponent extends AppBase implements OnInit, ControlValueAccessor, Validator {
   @Input() required = false;

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-add-or-update-appservice',
   templateUrl: './add-or-update-appservice.component.html',
   styleUrls: ['./add-or-update-appservice.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

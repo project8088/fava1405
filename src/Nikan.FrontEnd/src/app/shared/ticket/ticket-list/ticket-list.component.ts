@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.scss'],
+    standalone: false
 })
 export class TicketListComponent extends AppBase implements OnInit, AfterViewInit {
   introductionInfo: any = {};

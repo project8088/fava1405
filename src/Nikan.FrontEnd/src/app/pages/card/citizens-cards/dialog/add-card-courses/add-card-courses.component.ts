@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-add-card-courses-dialog',
   templateUrl: './add-card-courses.component.html',
   styleUrls: ['./add-card-courses.component.scss'],
+    standalone: false
 })
 export class CardAddCardCoursesDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-activity-info',
   templateUrl: './activity-info.component.html',
   styleUrls: ['./activity-info.component.scss'],
+    standalone: false
 })
 export class CompanyActivityInfoComponent extends AppBase implements OnInit {
   loading: boolean;

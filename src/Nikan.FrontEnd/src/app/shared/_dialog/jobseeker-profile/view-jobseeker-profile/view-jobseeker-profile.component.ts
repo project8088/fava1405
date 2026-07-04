@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-jobseeker-profile',
   templateUrl: './view-jobseeker-profile.component.html',
   styleUrls: ['./view-jobseeker-profile.component.scss'],
+    standalone: false
 })
 export class ViewJobseekerProfileComponent extends AppBase implements OnInit {
   @Input('jobseekerId') jobseekerId: string = '';

@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss'],
+    standalone: false
 })
 export class TicketComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;

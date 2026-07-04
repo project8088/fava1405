@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'citizen-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
+    standalone: false
 })
 export class CitizenTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-feedback-dialog',
   templateUrl: './add-feedback.component.html',
   styleUrls: ['./add-feedback.component.scss'],
+    standalone: false
 })
 export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
   userCode: string = '';

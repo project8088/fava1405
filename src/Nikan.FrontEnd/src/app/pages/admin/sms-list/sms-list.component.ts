@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-sms-list',
   templateUrl: './sms-list.component.html',
   styleUrls: ['./sms-list.component.scss'],
+    standalone: false
 })
 export class AdminSmsListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

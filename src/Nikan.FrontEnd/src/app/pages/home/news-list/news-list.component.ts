@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'main-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss'],
+    standalone: false
 })
 export class MainNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   data: any[] = [];

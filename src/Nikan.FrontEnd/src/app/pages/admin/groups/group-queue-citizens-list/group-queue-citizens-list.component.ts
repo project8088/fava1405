@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-group-queue-citizens-list',
   templateUrl: './group-queue-citizens-list.component.html',
   styleUrls: ['./group-queue-citizens-list.component.scss'],
+    standalone: false
 })
 export class AdminGroupQueueCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

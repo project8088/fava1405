@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-show-citizen',
   templateUrl: './show-citizen.component.html',
   styleUrls: ['./show-citizen.component.scss'],
+    standalone: false
 })
 export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
   userCode: string;

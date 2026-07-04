@@ -8,6 +8,7 @@ declare var $: any;
   selector: 'app-attachments',
   templateUrl: './attachments.component.html',
   styleUrls: ['./attachments.component.scss'],
+    standalone: false
 })
 export class AttachmentListComponent extends AppBase implements OnInit {
   @Input('guid') guid: string;

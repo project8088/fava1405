@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-card-profile-dialog',
   templateUrl: './card-profile.component.html',
   styleUrls: ['./card-profile.component.scss'],
+    standalone: false
 })
 export class CardProfileDialogComponent extends AppBase implements OnInit {
   id: string;

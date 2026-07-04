@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-tree-user-web-api-permission',
   templateUrl: './tree-user-web-api-permission.component.html',
   styleUrls: ['./tree-user-web-api-permission.component.scss'],
+    standalone: false
 })
 export class AdminTreeWebApiPermissionComponent extends AppBase implements OnInit {
   @Input('permissionItems') permissionItems: any;

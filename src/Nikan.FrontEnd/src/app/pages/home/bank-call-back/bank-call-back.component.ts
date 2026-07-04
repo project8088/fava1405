@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-bank-call-back',
   templateUrl: './bank-call-back.component.html',
   styleUrls: ['./bank-call-back.component.scss'],
+    standalone: false
 })
 export class BankCallBackComponent extends AppBase implements OnInit {
   loading: boolean;

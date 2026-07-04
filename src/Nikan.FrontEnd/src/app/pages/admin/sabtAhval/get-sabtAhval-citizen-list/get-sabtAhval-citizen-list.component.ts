@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-sabtAhval-citizen-list',
   templateUrl: './get-sabtAhval-citizen-list.component.html',
   styleUrls: ['./get-sabtAhval-citizen-list.component.scss'],
+    standalone: false
 })
 export class AdminSabtAhvalCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   id: number;

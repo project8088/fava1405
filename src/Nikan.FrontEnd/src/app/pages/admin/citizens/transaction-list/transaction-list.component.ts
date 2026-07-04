@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-transaction-list',
   templateUrl: './citizen-transaction-list.component.html',
   styleUrls: ['./citizen-transaction-list.component.scss'],
+    standalone: false
 })
 export class AdminCitizenTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

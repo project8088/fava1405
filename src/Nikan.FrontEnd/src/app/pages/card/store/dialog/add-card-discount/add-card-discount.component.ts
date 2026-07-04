@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-card-discount-dialog',
   templateUrl: './add-card-discount.component.html',
   styleUrls: ['./add-card-discount.component.scss'],
+    standalone: false
 })
 export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

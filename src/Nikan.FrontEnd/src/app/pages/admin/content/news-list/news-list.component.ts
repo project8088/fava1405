@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss'],
+    standalone: false
 })
 export class AdminNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-import-refund-excel-dialog',
   templateUrl: './import-refund-excel.component.html',
   styleUrls: ['./import-refund-excel.component.scss'],
+    standalone: false
 })
 export class AdminImportRefundExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importRefundListFromExcel;

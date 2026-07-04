@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-admin-userGroup',
   templateUrl: './admin-userGroups.component.html',
   styleUrls: ['./admin-userGroups.component.scss'],
+    standalone: false
 })
 export class AdminUserGroupsComponent extends AppBase implements OnInit {
   userGroupList: userGroupsDto[] = [];

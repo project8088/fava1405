@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-pay-setting',
   templateUrl: './pay-setting.component.html',
   styleUrls: ['./pay-setting.component.scss'],
+    standalone: false
 })
 export class AdminPaySettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;

@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-cancellation-citizen-card-dialog',
   templateUrl: './cancellation-citizen-card.component.html',
   styleUrls: ['./cancellation-citizen-card.component.scss'],
+    standalone: false
 })
 export class AdminCancellationCitizenCardDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-about-us',
   templateUrl: './about-us.component.html',
   styleUrls: ['./about-us.component.scss'],
+    standalone: false
 })
 export class AboutUsComponent extends AppBase implements OnInit {
   constructor() {

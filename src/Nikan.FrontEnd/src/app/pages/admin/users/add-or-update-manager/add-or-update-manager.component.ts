@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-manager',
   templateUrl: './add-or-update-manager.component.html',
   styleUrls: ['./add-or-update-manager.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

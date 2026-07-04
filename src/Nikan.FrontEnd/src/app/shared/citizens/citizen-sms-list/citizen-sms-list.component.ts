@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-sms-list',
   templateUrl: './citizen-sms-list.component.html',
   styleUrls: ['./citizen-sms-list.component.scss'],
+    standalone: false
 })
 export class AppCitizenSmsListComponent extends AppBase implements OnInit {
   search: string = '';

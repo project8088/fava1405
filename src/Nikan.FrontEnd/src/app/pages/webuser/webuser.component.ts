@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'webuser-webuserpanel',
   templateUrl: './webuser.component.html',
   styleUrls: ['./webuser.component.scss'],
+    standalone: false
 })
 export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';

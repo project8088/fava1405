@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-faq-groups',
   templateUrl: './faq-groups.component.html',
   styleUrls: ['./faq-groups.component.scss'],
+    standalone: false
 })
 export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = ['row', 'title', 'description', 'isActive', 'operation'];

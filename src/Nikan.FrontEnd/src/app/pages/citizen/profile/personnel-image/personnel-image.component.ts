@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-personnel-image',
   templateUrl: './personnel-image.component.html',
   styleUrls: ['./personnel-image.component.scss'],
+    standalone: false
 })
 export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   loading: boolean = true;

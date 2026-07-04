@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-company-contract-dialog',
   templateUrl: './company-contract.component.html',
   styleUrls: ['./company-contract.component.scss'],
+    standalone: false
 })
 export class AdminCompanyContractDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};

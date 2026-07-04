@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-personal-users',
   templateUrl: './personal-users.component.html',
   styleUrls: ['./personal-users.component.scss'],
+    standalone: false
 })
 export class CompanyPersonalUsersComponent extends AppBase implements OnInit, AfterViewInit {
   displayedColumns: string[] = [];

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-jobseeker-profile-dialog',
   templateUrl: './jobseeker-profile.component.html',
   styleUrls: ['./jobseeker-profile.component.scss'],
+    standalone: false
 })
 export class JobseekerProfileDialogComponent extends AppBase implements OnInit {
   id: string;

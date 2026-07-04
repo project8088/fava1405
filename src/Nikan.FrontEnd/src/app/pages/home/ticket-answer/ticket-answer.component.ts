@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-answer',
   templateUrl: './ticket-answer.component.html',
   styleUrls: ['./ticket-answer.component.scss'],
+    standalone: false
 })
 export class TicketAnswerComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;

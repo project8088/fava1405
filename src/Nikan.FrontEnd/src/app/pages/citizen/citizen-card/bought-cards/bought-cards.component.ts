@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-bought-cards',
   templateUrl: './bought-cards.component.html',
   styleUrls: ['./bought-cards.component.scss'],
+    standalone: false
 })
 export class BoughtCardsComponent extends AppBase implements OnInit {
   loading: boolean = true;

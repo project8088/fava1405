@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'webuser-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class WebUserDashboardComponent extends AppBase implements OnInit {
   loading: boolean;

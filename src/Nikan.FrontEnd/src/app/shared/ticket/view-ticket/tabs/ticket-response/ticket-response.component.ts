@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-response',
   templateUrl: './ticket-response.component.html',
   styleUrls: ['./ticket-response.component.scss'],
+    standalone: false
 })
 export class TicketResponseComponent extends AppBase implements OnInit, AfterViewInit {
   id: string = '';

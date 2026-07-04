@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-news-comments',
   templateUrl: './news-comments.component.html',
   styleUrls: ['./news-comments.component.scss'],
+    standalone: false
 })
 export class AdminNewsCommentsComponent extends AppBase implements OnInit {
   newsId: string;

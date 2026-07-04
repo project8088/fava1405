@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
+    standalone: false
 })
 export class CompanyAddressInfoComponent extends AppBase implements OnInit {
   loading: boolean;

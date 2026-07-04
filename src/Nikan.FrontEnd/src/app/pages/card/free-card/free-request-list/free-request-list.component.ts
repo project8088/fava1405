@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-free-request-list',
   templateUrl: './free-request-list.component.html',
   styleUrls: ['./free-request-list.component.scss'],
+    standalone: false
 })
 export class CardFreeRequestCardListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

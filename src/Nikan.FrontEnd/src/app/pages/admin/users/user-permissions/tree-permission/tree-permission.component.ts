@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-tree-permission',
   templateUrl: './tree-permission.component.html',
   styleUrls: ['./tree-permission.component.scss'],
+    standalone: false
 })
 export class AdminTreePermissionComponent extends AppBase implements OnInit {
   @Input('permissionItems') permissionItems: any;

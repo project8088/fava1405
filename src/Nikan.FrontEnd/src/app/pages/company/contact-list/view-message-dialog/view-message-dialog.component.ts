@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-message-dialog',
   templateUrl: './view-message-dialog.component.html',
   styleUrls: ['./view-message-dialog.component.scss'],
+    standalone: false
 })
 export class ViewMessageDialogComponent extends AppBase implements OnInit {
   row: any;

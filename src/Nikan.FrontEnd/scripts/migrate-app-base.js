@@ -1,28 +1,3 @@
- /**
- * refactor-components.js
- *
- * این اسکریپت تمام فایل‌های *.component.ts پروژه رو پیدا می‌کنه،
- * کلاس کامپوننت رو از AppBase ارث‌بری می‌ده و وابستگی‌هایی که از قبل
- * داخل AppBase با inject() ساخته شدن رو از سازنده (constructor) حذف می‌کنه.
- *
- * نصب پیش‌نیاز:
- *   npm install ts-morph glob
- *
- * اجرا (از ریشه پروژه انگیولار):
- *   node refactor-components.js
- *   یا با الگوی دلخواه:
- *   node refactor-components.js "projects/**\/*.component.ts"
- *
- * ⚠️ حتماً قبل از اجرا commit بگیر یا روی یک برنچ جدا تست کن،
- * چون این اسکریپت فایل‌ها رو مستقیم روی دیسک بازنویسی می‌کنه.
- *
- * محدودیت شناخته‌شده:
- * فقط الگوی "parameter property" رو تشخیص می‌ده، یعنی:
- *   constructor(private dataService: DataService) {}
- * اگر سرویسی بدون private/public/protected در سازنده گرفته میشه و
- * دستی به یک فیلد دیگه assign میشه، این مورد رو باید دستی چک کنی.
- */
-
 const path = require('path');
 const fs = require('fs');
 const { Project, SyntaxKind, Node } = require('ts-morph');

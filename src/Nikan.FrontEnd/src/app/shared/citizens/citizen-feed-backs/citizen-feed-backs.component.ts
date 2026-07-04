@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-feed-back-list',
   templateUrl: './citizen-feed-backs.component.html',
   styleUrls: ['./citizen-feed-backs.component.scss'],
+    standalone: false
 })
 export class AppCitizenFeedBackListComponent extends AppBase implements AfterViewInit {
   listfeedback: any[] = [];

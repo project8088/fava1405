@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-sms-setting',
   templateUrl: './sms-setting.component.html',
   styleUrls: ['./sms-setting.component.scss'],
+    standalone: false
 })
 export class SmsSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;

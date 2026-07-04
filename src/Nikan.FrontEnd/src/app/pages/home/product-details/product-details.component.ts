@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
+    standalone: false
 })
 export class MainProductDetailsComponent extends AppBase implements OnInit {
   id: string;

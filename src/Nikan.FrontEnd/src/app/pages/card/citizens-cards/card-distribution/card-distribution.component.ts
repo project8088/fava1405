@@ -17,6 +17,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-card-distribution',
   templateUrl: './card-distribution.component.html',
   styleUrls: ['./card-distribution.component.scss'],
+    standalone: false
 })
 export class CardCarddistributionComponent extends AppBase implements AfterViewInit {
   @ViewChild('value') searchElement: ElementRef;

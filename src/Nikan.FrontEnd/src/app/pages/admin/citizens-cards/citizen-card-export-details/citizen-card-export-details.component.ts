@@ -25,6 +25,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-card-export-details',
   templateUrl: './citizen-card-export-details.component.html',
   styleUrls: ['./citizen-card-export-details.component.scss'],
+    standalone: false
 })
 export class AdminCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

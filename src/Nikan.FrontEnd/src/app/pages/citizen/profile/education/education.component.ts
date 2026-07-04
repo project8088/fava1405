@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-education',
   templateUrl: './education.component.html',
   styleUrls: ['./education.component.scss'],
+    standalone: false
 })
 export class CitizenEducationComponent extends AppBase implements OnInit {
   educationList: karjoEducationDto[] = [];

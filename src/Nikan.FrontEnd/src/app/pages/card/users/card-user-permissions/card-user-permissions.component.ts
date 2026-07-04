@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-card-user-permissions',
   templateUrl: './card-user-permissions.component.html',
   styleUrls: ['./card-user-permissions.component.scss'],
+    standalone: false
 })
 export class CardUserPermissionsComponent extends AppBase implements OnInit {
   userId: string;

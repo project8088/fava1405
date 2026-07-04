@@ -17,6 +17,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss'],
+    standalone: false
 })
 export class HomeCompaniesListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

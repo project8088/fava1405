@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-add-or-update-personal',
   templateUrl: './add-or-update-personal.component.html',
   styleUrls: ['./add-or-update-personal.component.scss'],
+    standalone: false
 })
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

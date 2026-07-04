@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-setting',
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
+    standalone: false
 })
 export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;

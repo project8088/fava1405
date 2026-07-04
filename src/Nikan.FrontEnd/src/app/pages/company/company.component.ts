@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss'],
+    standalone: false
 })
 export class CompanyComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';

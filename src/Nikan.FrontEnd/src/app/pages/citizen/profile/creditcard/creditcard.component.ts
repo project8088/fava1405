@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-creditcard',
   templateUrl: './creditcard.component.html',
   styleUrls: ['./creditcard.component.scss'],
+    standalone: false
 })
 export class CreditcardComponent extends AppBase implements OnInit {
   loading: boolean = true;

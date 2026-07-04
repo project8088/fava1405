@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-family-dialog',
   templateUrl: './family-dialog.component.html',
   styleUrls: ['./family-dialog.component.scss'],
+    standalone: false
 })
 export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-menu-management',
   templateUrl: './menu-management.component.html',
   styleUrls: ['./menu-management.component.scss'],
+    standalone: false
 })
 export class AdminMenuManagementComponent extends AppBase implements OnInit {
   data: any[] = [];

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-manzalat-setting',
   templateUrl: './manzalat-setting.component.html',
   styleUrls: ['./manzalat-setting.component.scss'],
+    standalone: false
 })
 export class ManzalatSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-add-or-update-free-card',
   templateUrl: './add-or-update-free-card.component.html',
   styleUrls: ['./add-or-update-free-card.component.scss'],
+    standalone: false
 })
 export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

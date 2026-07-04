@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-job-details',
   templateUrl: './view-job-details.component.html',
   styleUrls: ['./view-job-details.component.scss'],
+    standalone: false
 })
 export class ViewJobDetailsComponent extends AppBase implements OnInit {
   @Input('jobId') jobId: string = '';

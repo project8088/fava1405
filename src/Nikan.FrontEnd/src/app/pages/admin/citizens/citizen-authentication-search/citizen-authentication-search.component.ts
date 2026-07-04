@@ -17,6 +17,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-authentication-search',
   templateUrl: './citizen-authentication-search.component.html',
   styleUrls: ['./citizen-authentication-search.component.scss'],
+    standalone: false
 })
 export class AdminCitizenAuthenticationSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

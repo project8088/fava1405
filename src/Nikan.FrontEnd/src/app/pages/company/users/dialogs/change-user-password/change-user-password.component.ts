@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-change-user-password-dialog',
   templateUrl: './change-user-password.component.html',
   styleUrls: ['./change-user-password.component.scss'],
+    standalone: false
 })
 export class CompanyChangePasswordDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -20,6 +20,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-card-course-queue-list',
   templateUrl: './card-course-queue-list.component.html',
   styleUrls: ['./card-course-queue-list.component.scss'],
+    standalone: false
 })
 export class CardCardCourseQueuelistComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

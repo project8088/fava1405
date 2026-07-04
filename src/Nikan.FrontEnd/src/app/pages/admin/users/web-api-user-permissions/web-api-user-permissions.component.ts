@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-web-api-user-permissions',
   templateUrl: './web-api-user-permissions.component.html',
   styleUrls: ['./web-api-user-permissions.component.scss'],
+    standalone: false
 })
 export class AdminWebApiUserPermissionsComponent extends AppBase implements OnInit {
   userId: string;

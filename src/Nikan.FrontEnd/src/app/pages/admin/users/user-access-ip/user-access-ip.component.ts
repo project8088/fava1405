@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'user-access-ip',
   templateUrl: './user-access-ip.component.html',
   styleUrls: ['./user-access-ip.component.scss'],
+    standalone: false
 })
 export class AdminUserAccessIpComponent extends AppBase implements OnInit {
   loading: boolean;

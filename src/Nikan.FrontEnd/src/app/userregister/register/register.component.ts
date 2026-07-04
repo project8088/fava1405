@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
+    standalone: false
 })
 export class RegisterComponent extends AppBase implements OnInit {
   serviceId: number = 0;

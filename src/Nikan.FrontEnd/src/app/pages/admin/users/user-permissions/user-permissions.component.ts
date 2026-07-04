@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-user-permissions',
   templateUrl: './user-permissions.component.html',
   styleUrls: ['./user-permissions.component.scss'],
+    standalone: false
 })
 export class AdminUserPermissionsComponent extends AppBase implements OnInit {
   groupId: string;

@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-preregister',
   templateUrl: './preregister.component.html',
   styleUrls: ['./preregister.component.scss'],
+    standalone: false
 })
 export class PreregisterComponent extends AppBase implements OnInit {
   form: FormGroup;

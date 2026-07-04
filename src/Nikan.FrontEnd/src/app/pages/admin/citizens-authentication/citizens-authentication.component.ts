@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizens-authentication',
   templateUrl: './citizens-authentication.component.html',
   styleUrls: ['./citizens-authentication.component.scss'],
+    standalone: false
 })
 export class AdminCitizenAuthenticationComponent extends AppBase implements AfterViewInit {
   data: any[] = [];

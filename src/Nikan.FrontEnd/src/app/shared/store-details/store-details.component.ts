@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-store-details',
   templateUrl: './store-details.component.html',
   styleUrls: ['./store-details.component.scss'],
+    standalone: false
 })
 export class StoreDetailsComponent extends AppBase implements OnInit {
   id: string;

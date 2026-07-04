@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
+    standalone: false
 })
 export class AdminComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'default';

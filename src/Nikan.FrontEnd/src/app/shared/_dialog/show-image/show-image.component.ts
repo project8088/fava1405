@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-show-image',
   templateUrl: './show-image.component.html',
   styleUrls: ['./show-image.component.scss'],
+    standalone: false
 })
 export class ShowImageDialogComponent extends AppBase implements OnInit {
   data;

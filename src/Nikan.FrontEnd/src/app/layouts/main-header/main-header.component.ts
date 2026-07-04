@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss'],
+    standalone: false
 })
 export class MainHeaderComponent extends AppBase implements OnInit {
   isAuth: boolean;

@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss'],
+    standalone: false
 })
 export class UploaderComponent extends AppBase implements OnInit {
   @Input('autoUpload') autoUpload: boolean = true;

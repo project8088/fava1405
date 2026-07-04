@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-update-manzalat-base-form',
   templateUrl: './update-manzalat-base-form.component.html',
   styleUrls: ['./update-manzalat-base-form.component.scss'],
+    standalone: false
 })
 export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

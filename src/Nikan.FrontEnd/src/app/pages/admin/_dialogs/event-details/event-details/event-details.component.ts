@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'admin-view-event-details',
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.scss'],
+    standalone: false
 })
 export class AdminViewEventDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';

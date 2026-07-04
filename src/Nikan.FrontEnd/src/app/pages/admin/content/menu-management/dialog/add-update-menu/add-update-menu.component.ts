@@ -13,6 +13,7 @@ declare var $: any;
   selector: 'app-add-update-menu-dialog',
   templateUrl: './add-update-menu.component.html',
   styleUrls: ['./add-update-menu.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;

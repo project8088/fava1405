@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-main-footer',
   templateUrl: './main-footer.component.html',
   styleUrls: ['./main-footer.component.scss'],
+    standalone: false
 })
 export class MainFooterComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;

@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-report-refund-dialog',
   templateUrl: './report-refund.component.html',
   styleUrls: ['./report-refund.component.scss'],
+    standalone: false
 })
 export class AdminReportRefundDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

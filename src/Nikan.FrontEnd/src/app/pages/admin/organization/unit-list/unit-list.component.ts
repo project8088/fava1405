@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-unit-list',
   templateUrl: './unit-list.component.html',
   styleUrls: ['./unit-list.component.scss'],
+    standalone: false
 })
 export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   organizationId: string;

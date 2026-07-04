@@ -25,6 +25,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-card-advanced-search',
   templateUrl: './citizen-card-advanced-search.component.html',
   styleUrls: ['./citizen-card-advanced-search.component.scss'],
+    standalone: false
 })
 export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

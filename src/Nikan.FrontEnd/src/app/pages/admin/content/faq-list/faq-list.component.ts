@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-faq-list',
   templateUrl: './faq-list.component.html',
   styleUrls: ['./faq-list.component.scss'],
+    standalone: false
 })
 export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

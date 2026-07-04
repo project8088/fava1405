@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-my-Identity-Info',
   templateUrl: './my-Identity-Info.component.html',
   styleUrls: ['./my-Identity-Info.component.scss'],
+    standalone: false
 })
 export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;

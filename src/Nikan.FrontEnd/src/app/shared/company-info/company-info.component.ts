@@ -10,6 +10,7 @@ declare var $: any;
   selector: 'app-company-info',
   templateUrl: './company-info.component.html',
   styleUrls: ['./company-info.component.scss'],
+    standalone: false
 })
 export class CompanyInfoComponent extends AppBase implements OnInit {
   companyInfo: CompanyInfoDto;

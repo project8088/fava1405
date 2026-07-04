@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-cropper',
   templateUrl: './cropper.component.html',
   styleUrls: ['./cropper.component.scss'],
+    standalone: false
 })
 export class CropperComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';

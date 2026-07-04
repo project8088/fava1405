@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-organization-unit-groups',
   templateUrl: './organization-unit-groups.component.html',
   styleUrls: ['./organization-unit-groups.component.scss'],
+    standalone: false
 })
 export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnInit {
   loading: boolean;

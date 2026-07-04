@@ -23,6 +23,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-citizen-card-in-queue',
   templateUrl: './citizen-card-in-queue.component.html',
   styleUrls: ['./citizen-card-in-queue.component.scss'],
+    standalone: false
 })
 export class CardCitizenCardInQueueComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

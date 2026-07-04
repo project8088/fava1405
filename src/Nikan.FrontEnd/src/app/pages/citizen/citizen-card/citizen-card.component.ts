@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-card',
   templateUrl: './citizen-card.component.html',
   styleUrls: ['./citizen-card.component.scss'],
+    standalone: false
 })
 export class CitizenCardComponent extends AppBase implements OnInit {
   constructor(

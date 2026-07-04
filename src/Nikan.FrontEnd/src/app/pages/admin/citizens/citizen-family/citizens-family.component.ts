@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizens-family',
   templateUrl: './citizens-family.component.html',
   styleUrls: ['./citizens-family.component.scss'],
+    standalone: false
 })
 export class AdminCitizensFamilyComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

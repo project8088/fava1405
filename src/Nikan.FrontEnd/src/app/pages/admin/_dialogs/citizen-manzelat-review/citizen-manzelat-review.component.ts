@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-manzelat-review',
   templateUrl: './citizen-manzelat-review.component.html',
   styleUrls: ['./citizen-manzelat-review.component.scss'],
+    standalone: false
 })
 export class AdminCitizenManzelatReviewComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({

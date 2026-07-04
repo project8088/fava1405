@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-product-groups',
   templateUrl: './product-groups.component.html',
   styleUrls: ['./product-groups.component.scss'],
+    standalone: false
 })
 export class CompanyProductGroupsListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

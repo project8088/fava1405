@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class CitizenDashboardComponent extends AppBase implements OnInit {
   loading: boolean;

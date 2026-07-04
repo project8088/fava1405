@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-manzelat-citizens',
   templateUrl: './manzelat-citizens.component.html',
   styleUrls: ['./manzelat-citizens.component.scss'],
+    standalone: false
 })
 export class AdminManzelatCitizensComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

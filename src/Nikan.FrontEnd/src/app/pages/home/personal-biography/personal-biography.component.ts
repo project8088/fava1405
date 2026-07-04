@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-personal-biography',
   templateUrl: './personal-biography.component.html',
   styleUrls: ['./personal-biography.component.scss'],
+    standalone: false
 })
 export class PersonalBiographyComponent extends AppBase implements OnInit {
   id: string;

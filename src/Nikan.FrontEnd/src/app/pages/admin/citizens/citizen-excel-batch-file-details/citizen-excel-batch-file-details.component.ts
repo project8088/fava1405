@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-excel-batch-file-details',
   templateUrl: './citizen-excel-batch-file-details.component.html',
   styleUrls: ['./citizen-excel-batch-file-details.component.scss'],
+    standalone: false
 })
 export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;

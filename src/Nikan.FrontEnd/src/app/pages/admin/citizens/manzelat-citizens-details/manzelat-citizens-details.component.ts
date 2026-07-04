@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-manzelat-citizens-details',
   templateUrl: './manzelat-citizens-details.component.html',
   styleUrls: ['./manzelat-citizens-details.component.scss'],
+    standalone: false
 })
 export class AdminManzelatCitizensDetailsComponent extends AppBase implements OnInit {
   userCode: string;

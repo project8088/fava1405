@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-ticket-activity',
   templateUrl: './ticket-activity.component.html',
   styleUrls: ['./ticket-activity.component.scss'],
+    standalone: false
 })
 export class TicketActivityComponent extends AppBase implements OnInit {
   frm: FormGroup;

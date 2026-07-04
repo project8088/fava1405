@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-company-change-status-dialog',
   templateUrl: './company-change-status.component.html',
   styleUrls: ['./company-change-status.component.scss'],
+    standalone: false
 })
 export class AdminCompanyChangeStatusDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};

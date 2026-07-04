@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-news-details',
   templateUrl: './news-details.component.html',
   styleUrls: ['./news-details.component.scss'],
+    standalone: false
 })
 export class MainNewsDetailsComponent extends AppBase implements OnInit {
   newsId: string;

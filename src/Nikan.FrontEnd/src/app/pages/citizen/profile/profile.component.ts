@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
+    standalone: false
 })
 export class CitizenProfileComponent extends AppBase implements OnInit {
   userId: string;

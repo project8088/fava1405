@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'crd-tree-user-card-permission',
   templateUrl: './tree-user-card-permission.component.html',
   styleUrls: ['./tree-user-card-permission.component.scss'],
+    standalone: false
 })
 export class CardTreeCardPermissionComponent extends AppBase implements OnInit {
   @Input('permissionItems') permissionItems: any;

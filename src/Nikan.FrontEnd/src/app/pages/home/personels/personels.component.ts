@@ -8,6 +8,7 @@ declare var $: any;
   selector: 'home-personels',
   templateUrl: './personels.component.html',
   styleUrls: ['./personels.component.scss'],
+    standalone: false
 })
 export class HomePersonelsListComponent extends AppBase implements OnInit {
   loadingManagers: boolean;

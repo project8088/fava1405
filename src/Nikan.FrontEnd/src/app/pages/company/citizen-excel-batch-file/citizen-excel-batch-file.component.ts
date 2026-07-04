@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-excel-batch-file',
   templateUrl: './citizen-excel-batch-file.component.html',
   styleUrls: ['./citizen-excel-batch-file.component.scss'],
+    standalone: false
 })
 export class CompanyCitizenExcelBatchFileListComponent extends AppBase implements AfterViewInit {
   loading: boolean;

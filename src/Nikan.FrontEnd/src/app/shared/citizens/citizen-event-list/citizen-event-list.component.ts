@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-event-list',
   templateUrl: './citizen-event-list.component.html',
   styleUrls: ['./citizen-event-list.component.scss'],
+    standalone: false
 })
 export class AppCitizenEventListComponent extends AppBase implements OnInit {
   search: string = '';

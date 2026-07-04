@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-card',
   templateUrl: './add-or-update-card.component.html',
   styleUrls: ['./add-or-update-card.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

@@ -19,6 +19,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-web-api-users',
   templateUrl: './web-api-users.component.html',
   styleUrls: ['./web-api-users.component.scss'],
+    standalone: false
 })
 export class AdminWebApiUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [

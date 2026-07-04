@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-captcha',
   templateUrl: './captcha.component.html',
   styleUrls: ['./captcha.component.scss'],
+    standalone: false
 })
 export class CaptchaComponent extends AppBase implements OnInit {
   loadingCaptcha: boolean = false;

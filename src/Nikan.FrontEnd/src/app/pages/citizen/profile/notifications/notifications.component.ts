@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['./notifications.component.scss'],
+    standalone: false
 })
 export class CitizenNotificationsComponent extends AppBase implements OnInit {
   constructor() {

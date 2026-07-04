@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent extends AppBase implements OnInit {
   loginForm: FormGroup;

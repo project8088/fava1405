@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'user-access-app-service',
   templateUrl: './user-access-app-service.component.html',
   styleUrls: ['./user-access-app-service.component.scss'],
+    standalone: false
 })
 export class AdminUserAppAccessServiceComponent extends AppBase implements OnInit {
   loading: boolean;

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-import-nationCode-groups-excel-dialog',
   templateUrl: './import-nationCode-groups-excel.component.html',
   styleUrls: ['./import-nationCode-groups-excel.component.scss'],
+    standalone: false
 })
 export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importGroupNationCodeFromExcel;

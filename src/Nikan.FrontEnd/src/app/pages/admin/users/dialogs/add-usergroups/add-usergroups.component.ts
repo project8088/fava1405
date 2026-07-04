@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-adm-add-usergroups-dialog',
   templateUrl: './add-usergroups.component.html',
   styleUrls: ['./add-usergroups.component.scss'],
+    standalone: false
 })
 export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

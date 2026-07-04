@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-citizen-profile',
   templateUrl: './view-citizen-profile.component.html',
   styleUrls: ['./view-citizen-profile.component.scss'],
+    standalone: false
 })
 export class ViewCitizenProfileComponent extends AppBase implements OnInit {
   @Input('userCode') userCode: string = '';

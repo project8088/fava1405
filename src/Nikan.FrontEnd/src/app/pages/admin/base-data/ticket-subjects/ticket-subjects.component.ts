@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-ticket-subjects',
   templateUrl: './ticket-subjects.component.html',
   styleUrls: ['./ticket-subjects.component.scss'],
+    standalone: false
 })
 export class AdminTicketSubjectsComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

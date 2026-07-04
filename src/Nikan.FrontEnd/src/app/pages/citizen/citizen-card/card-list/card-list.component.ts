@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
+    standalone: false
 })
 export class CitizenCardListComponent extends AppBase implements OnInit {
   constructor(

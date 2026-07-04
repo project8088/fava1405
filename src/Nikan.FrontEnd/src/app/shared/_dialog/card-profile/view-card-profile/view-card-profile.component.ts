@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-card-profile',
   templateUrl: './view-card-profile.component.html',
   styleUrls: ['./view-card-profile.component.scss'],
+    standalone: false
 })
 export class ViewCardProfileComponent extends AppBase implements OnInit {
   @Input('cardId') cardId: string = '';

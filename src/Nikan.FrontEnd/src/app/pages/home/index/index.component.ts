@@ -10,6 +10,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
+    standalone: false
 })
 export class IndexComponent extends AppBase implements OnInit, AfterViewInit, OnDestroy {
   lastNews: NewsDto[] = [];

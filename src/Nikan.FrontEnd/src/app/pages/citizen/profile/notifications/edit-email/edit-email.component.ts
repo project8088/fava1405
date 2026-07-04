@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-edit-email',
   templateUrl: './edit-email.component.html',
   styleUrls: ['./edit-email.component.scss'],
+    standalone: false
 })
 export class CitizenEditEmailComponent extends AppBase implements OnInit {
   loading: boolean = true;

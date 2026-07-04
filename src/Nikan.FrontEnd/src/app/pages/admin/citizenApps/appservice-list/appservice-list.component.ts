@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-appservice-list',
   templateUrl: './appservice-list.component.html',
   styleUrls: ['./appservice-list.component.scss'],
+    standalone: false
 })
 export class AdminAppserviceListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

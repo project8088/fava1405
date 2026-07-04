@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-edit-image',
   templateUrl: './citizen-edit-image.component.html',
   styleUrls: ['./citizen-edit-image.component.scss'],
+    standalone: false
 })
 export class AdminCitizenEditImageDialogComponent extends AppBase implements OnInit {
   citizen: any;

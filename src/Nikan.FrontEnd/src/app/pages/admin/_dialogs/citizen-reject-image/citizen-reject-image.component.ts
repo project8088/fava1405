@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-reject-image',
   templateUrl: './citizen-reject-image.component.html',
   styleUrls: ['./citizen-reject-image.component.scss'],
+    standalone: false
 })
 export class AdminCitizenRejectImageDialogComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({

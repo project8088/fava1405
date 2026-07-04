@@ -19,6 +19,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-citizen-card-distribute-course-list',
   templateUrl: './citizen-card-distribute-course-list.component.html',
   styleUrls: ['./citizen-card-distribute-course-list.component.scss'],
+    standalone: false
 })
 export class CardCitizenCardDistributeCourseListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

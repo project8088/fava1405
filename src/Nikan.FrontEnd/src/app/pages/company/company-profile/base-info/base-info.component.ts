@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-base-info',
   templateUrl: './base-info.component.html',
   styleUrls: ['./base-info.component.scss'],
+    standalone: false
 })
 export class CompanyBaseInfoComponent extends AppBase implements OnInit {
   loading: boolean;

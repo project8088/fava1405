@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-notification-list',
   templateUrl: './notification-list.component.html',
   styleUrls: ['./notification-list.component.scss'],
+    standalone: false
 })
 export class AdminNotificationListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

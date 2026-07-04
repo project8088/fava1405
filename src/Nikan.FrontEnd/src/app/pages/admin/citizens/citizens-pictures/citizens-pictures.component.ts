@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizens-pictures',
   templateUrl: './citizens-pictures.component.html',
   styleUrls: ['./citizens-pictures.component.scss'],
+    standalone: false
 })
 export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;

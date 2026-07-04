@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-manzelat-plan-item',
   templateUrl: './manzelat-plan-item.component.html',
   styleUrls: ['./manzelat-plan-item.component.scss'],
+    standalone: false
 })
 export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit {
   loading: boolean = true;

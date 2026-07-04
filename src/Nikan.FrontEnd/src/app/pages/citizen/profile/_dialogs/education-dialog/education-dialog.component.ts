@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-education-dialog',
   templateUrl: './education-dialog.component.html',
   styleUrls: ['./education-dialog.component.scss'],
+    standalone: false
 })
 export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

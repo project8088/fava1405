@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-sabtAhval-dialog',
   templateUrl: './add-sabtAhval.component.html',
   styleUrls: ['./add-sabtAhval.component.scss'],
+    standalone: false
 })
 export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

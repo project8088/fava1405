@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-terms',
   templateUrl: './terms.component.html',
   styleUrls: ['./terms.component.scss'],
+    standalone: false
 })
 export class TermsComponent extends AppBase implements OnInit {
   regLink: string = '';

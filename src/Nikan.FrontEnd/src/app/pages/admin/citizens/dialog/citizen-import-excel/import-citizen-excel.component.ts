@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-import-citizen-excel-dialog',
   templateUrl: './import-citizen-excel.component.html',
   styleUrls: ['./import-citizen-excel.component.scss'],
+    standalone: false
 })
 export class AdminImportCitizenExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importCitizenListFromExcel;

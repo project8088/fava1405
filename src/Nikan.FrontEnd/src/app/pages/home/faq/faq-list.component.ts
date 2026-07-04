@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-faq-list',
   templateUrl: './faq-list.component.html',
   styleUrls: ['./faq-list.component.scss'],
+    standalone: false
 })
 export class FaqListComponent extends AppBase implements OnInit {
   loadingGroup: boolean;

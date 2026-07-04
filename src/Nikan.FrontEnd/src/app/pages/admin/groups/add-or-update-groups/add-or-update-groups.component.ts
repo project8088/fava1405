@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-add-or-update-groups',
   templateUrl: './add-or-update-groups.component.html',
   styleUrls: ['./add-or-update-groups.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

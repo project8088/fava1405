@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-adm-update-citizen-sabt-state-by-card-dialog',
   templateUrl: './update-citizen-sabt-state-by-card.component.html',
   styleUrls: ['./update-citizen-sabt-state-by-card.component.scss'],
+    standalone: false
 })
 export class CardUpdateCitizenSabtStateByCardDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

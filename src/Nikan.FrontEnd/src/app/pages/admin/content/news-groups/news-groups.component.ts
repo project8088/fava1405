@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-news-groups',
   templateUrl: './news-groups.component.html',
   styleUrls: ['./news-groups.component.scss'],
+    standalone: false
 })
 export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = ['row', 'title', 'description', 'isActive', 'operation'];

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-company-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class CompnayDashboardComponent extends AppBase implements OnInit {
   loading: boolean;

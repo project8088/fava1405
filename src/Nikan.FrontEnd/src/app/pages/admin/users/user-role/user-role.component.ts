@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'users-role',
   templateUrl: './user-role.component.html',
   styleUrls: ['./user-role.component.scss'],
+    standalone: false
 })
 export class UserRoleListComponent extends AppBase implements OnInit {
   loading: boolean;

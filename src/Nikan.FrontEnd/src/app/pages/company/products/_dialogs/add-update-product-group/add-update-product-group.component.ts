@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-add-update-product-group-dialog',
   templateUrl: './add-update-product-group.component.html',
   styleUrls: ['./add-update-product-group.component.scss'],
+    standalone: false
 })
 export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

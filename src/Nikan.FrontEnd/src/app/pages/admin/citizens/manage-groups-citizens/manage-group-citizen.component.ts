@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'manage-group-citizen',
   templateUrl: './manage-group-citizen.component.html',
   styleUrls: ['./manage-group-citizen.component.scss'],
+    standalone: false
 })
 export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit {
   loading: boolean;

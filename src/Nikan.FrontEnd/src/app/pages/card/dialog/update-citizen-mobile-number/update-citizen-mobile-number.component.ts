@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-adm-update-citizen-mobile-number-dialog',
   templateUrl: './update-citizen-mobile-number.component.html',
   styleUrls: ['./update-citizen-mobile-number.component.scss'],
+    standalone: false
 })
 export class CardUpdateCitizenMobileNumberDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-import-card-number-dialog',
   templateUrl: './import-card-number.component.html',
   styleUrls: ['./import-card-number.component.scss'],
+    standalone: false
 })
 export class AdminImportCardNumberDialogComponent extends AppBase implements OnInit {
   exportInfo: any = {};

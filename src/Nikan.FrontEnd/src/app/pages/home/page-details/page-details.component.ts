@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-page-details',
   templateUrl: './page-details.component.html',
   styleUrls: ['./page-details.component.scss'],
+    standalone: false
 })
 export class MainPageDetailsComponent extends AppBase implements OnInit {
   slug: string;

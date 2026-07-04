@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-page',
   templateUrl: './add-or-update-page.component.html',
   styleUrls: ['./add-or-update-page.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

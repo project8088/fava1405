@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-register-report-chart',
   templateUrl: './citizen-register-report-chart.component.html',
   styleUrls: ['./citizen-register-report-chart.component.scss'],
+    standalone: false
 })
 export class AdminDashboardCitizenRegisterReportChartComponent extends AppBase implements OnInit, OnDestroy {
   loading: boolean;

@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-main-info',
   templateUrl: './main-info.component.html',
   styleUrls: ['./main-info.component.scss'],
+    standalone: false
 })
 export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
+    standalone: false
 })
 export class AdminConfigComponent extends AppBase implements OnInit {
   id: string;

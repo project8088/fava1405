@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'citizen-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
+    standalone: false
 })
 export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit {
   editMode: boolean = false;

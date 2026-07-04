@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
+    standalone: false
 })
 export class CardTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

@@ -8,6 +8,7 @@ declare var $: any;
   selector: 'home-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
+    standalone: false
 })
 export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
   datetime: string = '';

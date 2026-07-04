@@ -25,7 +25,7 @@ import { AppBase } from "@app/app.base";
 @Component({
   selector: 'input-company',
   templateUrl: './input-company.component.html',
-  styleUrls: ['./input-company.component.scss'],
+  styleUrls: ['./input-company.component.scss'],,
   //providers: [
   //  {
   //    provide: NG_VALUE_ACCESSOR,
@@ -33,6 +33,7 @@ import { AppBase } from "@app/app.base";
   //    multi: true
   //  }
   //]
+    standalone: false
 })
 export class InputCompanyAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;

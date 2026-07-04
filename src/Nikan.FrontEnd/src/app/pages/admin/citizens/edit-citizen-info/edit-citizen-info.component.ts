@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-edit-citizen-info',
   templateUrl: './edit-citizen-info.component.html',
   styleUrls: ['./edit-citizen-info.component.scss'],
+    standalone: false
 })
 export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;

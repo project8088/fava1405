@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
+    standalone: false
 })
 export class CompanyTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

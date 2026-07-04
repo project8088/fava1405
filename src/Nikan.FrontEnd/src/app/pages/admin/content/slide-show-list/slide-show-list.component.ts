@@ -12,6 +12,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-slide-show-list',
   templateUrl: './slide-show-list.component.html',
   styleUrls: ['./slide-show-list.component.scss'],
+    standalone: false
 })
 export class AdminSlideShowListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

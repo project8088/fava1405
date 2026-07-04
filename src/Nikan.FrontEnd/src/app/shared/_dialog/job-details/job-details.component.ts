@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-job-details-dialog',
   templateUrl: './job-details.component.html',
   styleUrls: ['./job-details.component.scss'],
+    standalone: false
 })
 export class ViewJobDetailsDialogComponent extends AppBase implements OnInit {
   jobId: string = '';

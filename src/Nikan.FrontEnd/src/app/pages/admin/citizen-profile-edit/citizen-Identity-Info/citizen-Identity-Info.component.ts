@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizen-Identity-Info',
   templateUrl: './citizen-Identity-Info.component.html',
   styleUrls: ['./citizen-Identity-Info.component.scss'],
+    standalone: false
 })
 export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;

@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
+    standalone: false
 })
 export class TimerComponent extends AppBase implements OnInit {
   timerCounter: number = 120;

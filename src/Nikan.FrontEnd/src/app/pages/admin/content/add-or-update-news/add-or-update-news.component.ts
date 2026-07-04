@@ -13,6 +13,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-add-or-update-news',
   templateUrl: './add-or-update-news.component.html',
   styleUrls: ['./add-or-update-news.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;

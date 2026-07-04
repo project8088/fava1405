@@ -14,6 +14,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
+    standalone: false
 })
 export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;

@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-userregister',
   templateUrl: './userregister.component.html',
   styleUrls: ['./userregister.component.scss'],
+    standalone: false
 })
 export class UserRegisterComponent extends AppBase implements OnInit {
   constructor() {

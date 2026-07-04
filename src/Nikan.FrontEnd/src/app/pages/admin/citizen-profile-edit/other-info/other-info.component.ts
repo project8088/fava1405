@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'citizen-other-info',
   templateUrl: './other-info.component.html',
   styleUrls: ['./other-info.component.scss'],
+    standalone: false
 })
 export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
   loading: boolean;

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-group-transfer-dialog',
   templateUrl: './group-transfer.component.html',
   styleUrls: ['./group-transfer.component.scss'],
+    standalone: false
 })
 export class AdminGroupTransferDialogComponent extends AppBase implements OnInit {
   sourceGroupId: number;

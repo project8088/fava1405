@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-citizen-shahrvandi-card-export-details',
   templateUrl: './citizen-shahrvandi-card-export-details.component.html',
   styleUrls: ['./citizen-shahrvandi-card-export-details.component.scss'],
+    standalone: false
 })
 export class CardShahrvandiCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

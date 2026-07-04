@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-update-citizen-Identity-Info',
   templateUrl: './update-citizen-Identity-Info.component.html',
   styleUrls: ['./update-citizen-Identity-Info.component.scss'],
+    standalone: false
 })
 export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;

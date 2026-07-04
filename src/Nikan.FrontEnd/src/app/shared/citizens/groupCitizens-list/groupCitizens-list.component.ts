@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-groupCitizens-list',
   templateUrl: './groupCitizens-list.component.html',
   styleUrls: ['./groupCitizens-list.component.scss'],
+    standalone: false
 })
 export class AppGroupCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser'];

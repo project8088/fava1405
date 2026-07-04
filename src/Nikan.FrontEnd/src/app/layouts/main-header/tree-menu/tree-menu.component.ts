@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'main-tree-menu',
   templateUrl: './tree-menu.component.html',
   styleUrls: ['./tree-menu.component.scss'],
+    standalone: false
 })
 export class MainTreeMenuComponent extends AppBase implements OnInit {
   @Input('menuItems') menuItems: any[];

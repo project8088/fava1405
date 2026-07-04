@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-manager-users',
   templateUrl: './manager-users.component.html',
   styleUrls: ['./manager-users.component.scss'],
+    standalone: false
 })
 export class AdminManagerUsersComponent extends AppBase implements OnInit, AfterViewInit {
   displayedColumns: string[] = [

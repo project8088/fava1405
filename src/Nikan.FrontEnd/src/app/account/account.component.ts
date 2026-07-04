@@ -6,6 +6,7 @@ declare var $: any;
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
+    standalone: false
 })
 export class AccountComponent extends AppBase implements OnInit, AfterViewInit {
   constructor() {

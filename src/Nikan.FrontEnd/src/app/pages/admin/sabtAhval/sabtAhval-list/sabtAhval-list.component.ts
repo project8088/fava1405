@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-sabtAhval-list',
   templateUrl: './sabtAhval-list.component.html',
   styleUrls: ['./sabtAhval-list.component.scss'],
+    standalone: false
 })
 export class AdminSabtAhvalListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

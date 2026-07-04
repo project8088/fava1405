@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-send-ticket-dialog',
   templateUrl: './send-ticket.component.html',
   styleUrls: ['./send-ticket.component.scss'],
+    standalone: false
 })
 export class SendTicketDialogComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;

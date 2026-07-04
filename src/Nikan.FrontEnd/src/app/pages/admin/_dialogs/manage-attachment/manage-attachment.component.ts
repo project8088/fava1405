@@ -10,6 +10,7 @@ declare var $: any;
   selector: 'app-manage-attachment-dialog',
   templateUrl: './manage-attachment.component.html',
   styleUrls: ['./manage-attachment.component.scss'],
+    standalone: false
 })
 export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
   attachments: any[] = [];

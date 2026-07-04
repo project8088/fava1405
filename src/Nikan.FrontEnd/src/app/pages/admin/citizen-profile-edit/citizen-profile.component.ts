@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-profile',
   templateUrl: './citizen-profile.component.html',
   styleUrls: ['./citizen-profile.component.scss'],
+    standalone: false
 })
 export class AdminCitizenProfileComponent extends AppBase implements OnInit {
   user: AuthUser;

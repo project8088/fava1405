@@ -23,6 +23,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-citizen-card-search-in-queue',
   templateUrl: './citizen-card-search-in-queue.component.html',
   styleUrls: ['./citizen-card-search-in-queue.component.scss'],
+    standalone: false
 })
 export class CardCitizenCardSearchInQueueComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

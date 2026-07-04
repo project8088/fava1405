@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'card-citizen-manzalat-card-export-details',
   templateUrl: './citizen-manzalat-card-export-details.component.html',
   styleUrls: ['./citizen-manzalat-card-export-details.component.scss'],
+    standalone: false
 })
 export class CardManzalatCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

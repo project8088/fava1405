@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizens-in-group',
   templateUrl: './citizens-in-group.component.html',
   styleUrls: ['./citizens-in-group.component.scss'],
+    standalone: false
 })
 export class AdminCitizensInGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [

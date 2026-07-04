@@ -18,6 +18,7 @@ import { AppBase } from "@app/app.base";
   selector: 'admin-register-company',
   templateUrl: './register-company.component.html',
   styleUrls: ['./register-company.component.scss'],
+    standalone: false
 })
 export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
   isSaving: boolean;

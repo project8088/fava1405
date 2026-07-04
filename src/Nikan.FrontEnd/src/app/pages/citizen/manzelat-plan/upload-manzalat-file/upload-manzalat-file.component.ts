@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-upload-manzalat-file',
   templateUrl: './upload-manzalat-file.component.html',
   styleUrls: ['./upload-manzalat-file.component.scss'],
+    standalone: false
 })
 export class CitizenUploadManzalatDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;

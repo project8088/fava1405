@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-refund-access-list',
   templateUrl: './refund-access-list.component.html',
   styleUrls: ['./refund-access-list.component.scss'],
+    standalone: false
 })
 export class AdminRefundAccessListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [

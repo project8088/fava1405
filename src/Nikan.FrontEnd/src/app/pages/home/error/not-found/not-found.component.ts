@@ -5,6 +5,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
+    standalone: false
 })
 export class NotFoundComponent extends AppBase implements OnInit {
   constructor() {

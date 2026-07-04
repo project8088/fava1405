@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-company-page',
   templateUrl: './company-page.component.html',
   styleUrls: ['./company-page.component.scss'],
+    standalone: false
 })
 export class CompanyPageComponent extends AppBase implements OnInit {
   companyInfo: CompanyInfoDto;

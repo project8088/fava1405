@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-family-details',
   templateUrl: './citizen-family-details.component.html',
   styleUrls: ['./citizen-family-details.component.scss'],
+    standalone: false
 })
 export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnInit {
   userCode: string;

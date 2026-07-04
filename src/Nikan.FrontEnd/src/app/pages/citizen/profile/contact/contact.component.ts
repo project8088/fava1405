@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
+    standalone: false
 })
 export class CitizenContactComponent extends AppBase implements OnInit {
   editMode: boolean = false;

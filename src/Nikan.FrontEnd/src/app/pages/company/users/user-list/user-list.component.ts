@@ -15,6 +15,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
+    standalone: false
 })
 export class CompanyUserListComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [

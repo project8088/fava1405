@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-citizens-notification',
   templateUrl: './citizens-notification.component.html',
   styleUrls: ['./citizens-notification.component.scss'],
+    standalone: false
 })
 export class AdminAddOrUpdateCitizensNotificationComponent extends AppBase implements OnInit, AfterViewInit {
   notificationId: string;

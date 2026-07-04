@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-reject-family',
   templateUrl: './citizen-reject-family.component.html',
   styleUrls: ['./citizen-reject-family.component.scss'],
+    standalone: false
 })
 export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({

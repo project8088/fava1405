@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-view-notification-details',
   templateUrl: './notification-details.component.html',
   styleUrls: ['./notification-details.component.scss'],
+    standalone: false
 })
 export class ViewNotificationDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';

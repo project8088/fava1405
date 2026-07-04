@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-adm-add-webapi-users-dialog',
   templateUrl: './add-webapi-users.component.html',
   styleUrls: ['./add-webapi-users.component.scss'],
+    standalone: false
 })
 export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'company-signature-info',
   templateUrl: './signature-info.component.html',
   styleUrls: ['./signature-info.component.scss'],
+    standalone: false
 })
 export class CompanySignatureInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;

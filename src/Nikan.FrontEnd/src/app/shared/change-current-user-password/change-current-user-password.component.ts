@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'change-current-user-password',
   templateUrl: './change-current-user-password.component.html',
   styleUrls: ['./change-current-user-password.component.scss'],
+    standalone: false
 })
 export class ChangeCurrentUserPasswordComponent extends AppBase implements OnInit {
   isSaving: boolean;

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss'],
+    standalone: false
 })
 export class CitizenDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;

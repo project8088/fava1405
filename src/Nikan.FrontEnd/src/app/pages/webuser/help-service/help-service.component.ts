@@ -11,6 +11,7 @@ import { AppBase } from "@app/app.base";
   selector: 'home-help-service',
   templateUrl: './help-service.component.html',
   styleUrls: ['./help-service.component.scss'],
+    standalone: false
 })
 export class WebUserHelpServiceDetailsComponent extends AppBase implements OnInit {
   newsId: string;

@@ -8,6 +8,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-pay-test',
   templateUrl: './pay-test.component.html',
   styleUrls: ['./pay-test.component.scss'],
+    standalone: false
 })
 export class AdminPayTestComponent extends AppBase implements OnInit {
   loading: boolean;

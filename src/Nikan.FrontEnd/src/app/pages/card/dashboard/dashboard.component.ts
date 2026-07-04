@@ -6,6 +6,7 @@ import { AppBase } from "@app/app.base";
   selector: 'crd-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class CardDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];

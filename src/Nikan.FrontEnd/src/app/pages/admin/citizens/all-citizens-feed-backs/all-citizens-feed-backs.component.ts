@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-all-citizens-feed-backs',
   templateUrl: './all-citizens-feed-backs.component.html',
   styleUrls: ['./all-citizens-feed-backs.component.scss'],
+    standalone: false
 })
 export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnInit {
   search: string = '';

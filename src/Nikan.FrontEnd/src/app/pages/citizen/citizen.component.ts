@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-citizen',
   templateUrl: './citizen.component.html',
   styleUrls: ['./citizen.component.scss'],
+    standalone: false
 })
 export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
   miniSideBar: boolean;

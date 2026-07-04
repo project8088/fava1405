@@ -12,6 +12,7 @@ declare var $: any;
   selector: 'home-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
+    standalone: false
 })
 export class HomeServicesListComponent extends AppBase implements OnInit {
   data: any[] = [];

@@ -16,6 +16,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-check-state-life-list',
   templateUrl: './check-state-life-list.component.html',
   styleUrls: ['./check-state-life-list.component.scss'],
+    standalone: false
 })
 export class AdminCheckStateLifeListComponent extends AppBase implements AfterViewInit, OnInit {
   id: number;

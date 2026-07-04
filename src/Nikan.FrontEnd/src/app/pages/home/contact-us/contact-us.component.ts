@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
+    standalone: false
 })
 export class ContactUsComponent extends AppBase implements OnInit {
   contactForm: FormGroup;

@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-user-access-group-permissions',
   templateUrl: './user-access-group-permissions.component.html',
   styleUrls: ['./user-access-group-permissions.component.scss'],
+    standalone: false
 })
 export class AdminUserAccessGroupPermissionsComponent extends AppBase implements OnInit {
   loading: boolean;

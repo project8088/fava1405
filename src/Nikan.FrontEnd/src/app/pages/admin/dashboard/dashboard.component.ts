@@ -7,6 +7,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+    standalone: false
 })
 export class AdminDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];

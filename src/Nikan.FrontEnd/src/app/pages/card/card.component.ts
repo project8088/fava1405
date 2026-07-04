@@ -9,6 +9,7 @@ import { AppBase } from "@app/app.base";
   selector: 'crd-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
+    standalone: false
 })
 export class CardComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';

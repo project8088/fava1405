@@ -10,6 +10,7 @@ import { AppBase } from "@app/app.base";
   selector: 'adm-change-card-address-dialog',
   templateUrl: './change-card-address.component.html',
   styleUrls: ['./change-card-address.component.scss'],
+    standalone: false
 })
 export class ChangeCardAddressDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
