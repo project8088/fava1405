@@ -72,7 +72,7 @@
           </ng-container>
           <ng-container matColumnDef="sendOnDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ارسال</th>
-            <td mat-cell *matCellDef="let row">{{ row.sendOnDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.sendOnDate | luxonFormat}}</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

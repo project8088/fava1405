@@ -37,9 +37,9 @@
                     <div class="col-md-6">
                       <strong> تاریخ ثبت نام: </strong>
                       <span>
-                        {{ citizen.creationDate | jalali }}
+                        {{ citizen.creationDate | luxonFormat}}
                         <small>
-                          {{ citizen.creationDate | jalali: 'HH:mm' }}
+                          {{ citizen.creationDate | luxonFormat: 'HH:mm' }}
                         </small>
                       </span>
                     </div>
@@ -69,7 +69,7 @@
                   </div>
                   <div class="col-sm-6 col-md-4">
                     <strong> تاریخ تولد: </strong>
-                    <span>{{ citizen.birthDate | jalali }}</span>
+                    <span>{{ citizen.birthDate | luxonFormat}}</span>
                   </div>
                   <div class="col-sm-6 col-md-4">
                     <strong> وضعیت پایان خدمت: </strong>
@@ -129,9 +129,9 @@
                   <div class="col-sm-6 col-md-4">
                     <strong>آخرین بروزرسانی اطلاعات: </strong>
                     <span>
-                      {{ citizen.lastUpdateOnDate | jalali }}
+                      {{ citizen.lastUpdateOnDate | luxonFormat}}
                       <small>
-                        {{ citizen.lastUpdateOnDate | jalali: 'HH:mm' }}
+                        {{ citizen.lastUpdateOnDate | luxonFormat: 'HH:mm' }}
                       </small>
                     </span>
                   </div>
@@ -190,7 +190,7 @@
                 <div class="row">
                   <mat-chip-list aria-label="citizen groups">
                     @for (item of citizen.groups; track item) {
-                      <mat-chip>{{ item.group }} ({{ item.creationDate | jalali }})</mat-chip>
+                      <mat-chip>{{ item.group }} ({{ item.creationDate | luxonFormat}})</mat-chip>
                     }
                   </mat-chip-list>
                 </div>
@@ -219,7 +219,7 @@
                         <div class="vertical-timeline-element-content bounce-in">
                           <h4 class="timeline-title text-success">ثبت نام در سامانه</h4>
                           <span class="vertical-timeline-element-date">{{
-                            citizen.citizenHistory?.regsiterOnDate | jalali
+                            citizen.citizenHistory?.regsiterOnDate | luxonFormat
                           }}</span>
                         </div>
                       </div>
@@ -238,7 +238,7 @@
                           }
 
                           <span class="vertical-timeline-element-date">{{
-                            citizen.citizenHistory?.lastPictureUploadOnDate | jalali
+                            citizen.citizenHistory?.lastPictureUploadOnDate | luxonFormat
                           }}</span>
                         </div>
                       </div>
@@ -259,7 +259,7 @@
                             {{ citizen.citizenHistory?.cardDescription }}
                           </p>
                           <span class="vertical-timeline-element-date">{{
-                            citizen.citizenHistory?.buyCard | jalali
+                            citizen.citizenHistory?.buyCard | luxonFormat
                           }}</span>
                         </div>
                       </div>
@@ -280,7 +280,7 @@
                             {{ citizen.citizenHistory?.cardsendToPrintDescription }}
                           </p>
                           <span class="vertical-timeline-element-date">{{
-                            citizen.citizenHistory?.cardSendToPrint | jalali
+                            citizen.citizenHistory?.cardSendToPrint | luxonFormat
                           }}</span>
                         </div>
                       </div>
@@ -300,7 +300,7 @@
                           }
 
                           <span class="vertical-timeline-element-date">{{
-                            citizen.citizenHistory?.cardPrinted | jalali
+                            citizen.citizenHistory?.cardPrinted | luxonFormat
                           }}</span>
                         </div>
                       </div>

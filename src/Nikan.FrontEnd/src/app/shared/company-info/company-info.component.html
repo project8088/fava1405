@@ -80,7 +80,7 @@
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>تاریخ ثبت/پروانه کسب/تاسیس: </span>
-                <strong>{{ companyInfo.activityLicenseDate | jalali }}</strong>
+                <strong>{{ companyInfo.activityLicenseDate | luxonFormat}}</strong>
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>مساحت زمین شرکت: </span>
@@ -282,11 +282,11 @@
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>تاریخ قراداد: </span>
-                  <strong>{{ companyInfo.contractOnDate | jalali }}</strong>
+                  <strong>{{ companyInfo.contractOnDate | luxonFormat}}</strong>
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>تاریخ قراداد آب: </span>
-                  <strong>{{ companyInfo.waterContractOnDate | jalali }}</strong>
+                  <strong>{{ companyInfo.waterContractOnDate | luxonFormat}}</strong>
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>شناسه واریز قبض آب: </span>

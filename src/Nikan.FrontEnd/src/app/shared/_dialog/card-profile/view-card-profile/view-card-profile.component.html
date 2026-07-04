@@ -58,7 +58,7 @@
           <li class="list-group-item">
             <strong> تاریخ درخواست : </strong>
             <strong class="text-info">
-              {{ card.requestDate | jalali }}
+              {{ card.requestDate | luxonFormat}}
             </strong>
           </li>
           <li class="list-group-item">
@@ -77,7 +77,7 @@
           <li class="list-group-item">
             <strong> زمان پرداخت : </strong>
             <strong class="text-info">
-              {{ card.transactionOnDate | jalali }}
+              {{ card.transactionOnDate | luxonFormat}}
             </strong>
           </li>
           <li class="list-group-item">
@@ -119,19 +119,19 @@
           <li class="list-group-item">
             <strong> تاریخ فعال سازی : </strong>
             <strong class="text-info">
-              {{ card.cardActivationDate | jalali }}
+              {{ card.cardActivationDate | luxonFormat}}
             </strong>
           </li>
           <li class="list-group-item">
             <strong> تاریخ انقضاء : </strong>
             <strong class="text-info">
-              {{ card.cardExpirationDate | jalali }}
+              {{ card.cardExpirationDate | luxonFormat}}
             </strong>
           </li>
           <li class="list-group-item">
             <strong> تاریخ تحویل : </strong>
             <strong class="text-info">
-              {{ card.deliveredOnDate | jalali }}
+              {{ card.deliveredOnDate | luxonFormat}}
             </strong>
           </li>
           <li class="list-group-item">

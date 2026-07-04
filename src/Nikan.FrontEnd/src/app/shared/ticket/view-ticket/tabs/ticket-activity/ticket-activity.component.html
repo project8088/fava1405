@@ -54,7 +54,7 @@
         <strong>{{ item.userOwner }}</strong>
       </div>
       <div>
-        <small>در تاریخ: {{ item.onDate | jalali: 'YYYY/MM/DD' }} - {{ item.minute }} دقیقه </small>
+        <small>در تاریخ: {{ item.onDate | luxonFormat: 'yyyy/LL/dd' }} - {{ item.minute }} دقیقه </small>
         <button mat-icon-button (click)="delete(item)">
           <i class="fa fa-times"></i>
         </button>

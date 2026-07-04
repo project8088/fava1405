@@ -33,7 +33,7 @@
                     <span
                       ><i class="fa fa-calendar-o"></i>
                       آخرین ویرایش سرویس :
-                      {{ news?.onDate | jalali: 'dddd DD MMMM YYYY' }}
+                      {{ news?.onDate | luxonFormat: 'dddd DD MMMM YYYY' }}
                     </span>
                   </div>
                   <blockquote>

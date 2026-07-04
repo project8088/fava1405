@@ -14,17 +14,19 @@ import { EnumStringPipe } from './pipe/enumString.pipe';
 import { ErrorInterceptor } from './authentication/error.interceptor';
 import { InputAutoCompleteComponent } from './public-component/input-auto-complete/input-auto-complete.component';
 import { InputCompanyAutoCompleteComponent } from './public-component/input-company/input-company.component';
-import { JalaliPipe } from './pipe/jalali';
 import { MaterialModule } from './material/material.module';
 import { OnlyPersianCharacterDirective } from './directive/persian-only';
 import { SafePipe } from './pipe/safehtml';
 import { TomanPipe } from './pipe/toman.pipe';
 import { SimpleJalaliDatepickerComponent } from './public-component/simple-datepicker/simple-datepicker.component';
 import { InputRefundUsersAutoCompleteComponent } from './public-component/input-refund-users/input-refund-users.component';
+import { LuxonFormatPipe } from './pipe/luxon-format.pipe';
+import { LuxonFromNowPipe } from './pipe/luxon-from-now.pipe';
 
 @NgModule({
   declarations: [
-    JalaliPipe,
+    LuxonFormatPipe,
+    LuxonFromNowPipe,
     TomanPipe,
     ArraySortPipe,
     ArrayRandomizePipe,
@@ -48,8 +50,9 @@ import { InputRefundUsersAutoCompleteComponent } from './public-component/input-
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
   exports: [
+    LuxonFormatPipe,
+    LuxonFromNowPipe,
     MaterialModule,
-    JalaliPipe,
     TomanPipe,
     ArraySortPipe,
     ArrayRandomizePipe,

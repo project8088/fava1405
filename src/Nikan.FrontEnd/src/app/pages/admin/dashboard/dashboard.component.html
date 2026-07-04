@@ -159,7 +159,7 @@
                 <div (click)="openevents(message)" matLine>
                   <p style="float: left">{{ message.eventSection }}</p>
                   <p style="float: right">
-                    {{ message.createDate | jalali: 'HH:mm MM/DD' }}
+                    {{ message.createDate | luxonFormat }}
                     <strong> | </strong>
                     {{ message.user }}
                   </p>

@@ -1,8 +1,6 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
 
-@Pipe({
-  name: 'random',
-})
+@Pipe({ standalone: false, name: 'random' })
 @Injectable()
 export class ArrayRandomizePipe implements PipeTransform {
   transform(array: any, Randomize: boolean = true): any[] {

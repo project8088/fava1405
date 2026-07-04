@@ -1,8 +1,6 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
 //example *ngFor="let item of list| sort: 'priority';let i=index;"
-@Pipe({
-  name: 'sort',
-})
+@Pipe({ standalone: false, name: 'sort' })
 @Injectable()
 export class ArraySortPipe implements PipeTransform {
   transform(array: any, field: string): any[] {

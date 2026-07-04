@@ -172,7 +172,7 @@
         </ng-container>
         <ng-container matColumnDef="createdOn">
           <th mat-header-cell *matHeaderCellDef>تاریخ ثبت</th>
-          <td mat-cell *matCellDef="let row">{{ row.createdOn | jalali: 'HH:mm YYYY/MM/DD' }}</td>
+          <td mat-cell *matCellDef="let row">{{ row.createdOn | luxonFormat }}</td>
         </ng-container>
         <ng-container matColumnDef="ticketStatus">
           <th mat-header-cell *matHeaderCellDef>وضعیت</th>

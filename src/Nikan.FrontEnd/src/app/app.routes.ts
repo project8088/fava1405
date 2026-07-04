@@ -5,25 +5,7 @@ export const routes: Routes = [
   { path: '', redirectTo: '/account/login', pathMatch: 'full' },
   {
     path: 'home',
-    component: HomeComponent,
-    children: [
-      { path: '', component: IndexComponent },
-      { path: 'contact-us', component: ContactUsComponent },
-
-      { path: '404', component: NotFoundComponent },
-
-      { path: 'page/:slug', component: MainPageDetailsComponent },
-
-      { path: 'faq', component: FaqListComponent },
-      { path: 'ticket', component: TicketComponent },
-      { path: 'ticket-answer', component: TicketAnswerComponent },
-
-      {
-        path: 'bankcallback',
-        component: BankCallBackComponent,
-        data: { id: '' },
-      },
-    ],
+    loadChildren: () => import('./pages/home/home-module').then((m) => m.HomeModule),
   },
 
   {

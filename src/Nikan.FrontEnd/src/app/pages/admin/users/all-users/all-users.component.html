@@ -172,11 +172,11 @@
           </ng-container>
           <ng-container matColumnDef="createdOnDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ثبت نام</th>
-            <td mat-cell *matCellDef="let row">{{ row.createdOnDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.createdOnDate | luxonFormat}}</td>
           </ng-container>
           <ng-container matColumnDef="lastLoggedIn">
             <th mat-header-cell *matHeaderCellDef>آخرین ورود</th>
-            <td mat-cell *matCellDef="let row">{{ row.lastLoggedIn | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.lastLoggedIn | luxonFormat}}</td>
           </ng-container>
           <ng-container matColumnDef="roles">
             <th mat-header-cell *matHeaderCellDef>نقش کاربر</th>

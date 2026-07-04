@@ -15,7 +15,7 @@
         <tbody>
           @for (message of events; track message) {
             <tr>
-              <th>{{ message.createDate | jalali: 'HH:mm YY/MM/DD' }}</th>
+              <th>{{ message.createDate | luxonFormat }}</th>
               <td>
                 {{ message.eventSection }}
               </td>

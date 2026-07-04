@@ -99,14 +99,14 @@
           <ng-container matColumnDef="birthDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ تولد</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.birthDate | jalali }}
+              {{ row.birthDate | luxonFormat}}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="verifyDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ استعلام</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.verifyDate | jalali: 'HH:mm MM/DD' }}
+              {{ row.verifyDate | luxonFormat }}
             </td>
           </ng-container>
 

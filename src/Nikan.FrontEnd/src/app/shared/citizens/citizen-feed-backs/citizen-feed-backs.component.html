@@ -49,7 +49,7 @@
             <strong> توسط {{ item.byUser }} ( {{ item.feedback }} ) </strong>
           </div>
           <div>
-            <small> {{ item.onDate | jalali: 'HH:mm YYYY/MM/DD' }}</small>
+            <small> {{ item.onDate | luxonFormat }}</small>
           </div>
         </div>
         <mat-card-content>

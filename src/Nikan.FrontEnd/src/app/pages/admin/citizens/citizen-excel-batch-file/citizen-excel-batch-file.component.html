@@ -90,7 +90,7 @@
 
           <ng-container matColumnDef="onDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ثبت</th>
-            <td mat-cell *matCellDef="let row">{{ row.onDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.onDate | luxonFormat}}</td>
           </ng-container>
 
           <ng-container matColumnDef="count">

@@ -48,7 +48,7 @@
                     <!--<span><i class="fa fa-user-o"></i>By <a href="blog.html">Anderson</a></span>-->
                     <span
                       ><i class="fa fa-calendar-o"></i
-                      >{{ page?.createdOnDate | jalali: 'dddd DD MMMM YYYY' }}</span
+                      >{{ page?.createdOnDate | luxonFormat: 'dddd DD MMMM YYYY' }}</span
                     >
                     <!--<span><i class="fa fa-folder-o"></i><a href="blog.html">Business</a></span>-->
                   </div>

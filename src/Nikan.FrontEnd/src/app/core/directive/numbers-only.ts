@@ -1,12 +1,10 @@
 import { Directive, ElementRef, HostListener } from '@angular/core';
 
-@Directive({
-  selector: 'input[numbersOnly]',
-})
+@Directive({ standalone: false, selector: 'input[numbersOnly]' })
 export class OnlyNumberDirective {
   constructor(private _el: ElementRef) {}
 
-  @HostListener('input', ['$event']) onInputChange(event) {
+  @HostListener('input', ['$event']) onInputChange(event: InputEvent) {
     const initalValue = this._el.nativeElement.value;
     this._el.nativeElement.value = initalValue.replace(/[^0-9]*/g, '');
     if (initalValue !== this._el.nativeElement.value) {
@@ -15,13 +13,11 @@ export class OnlyNumberDirective {
   }
 }
 
-@Directive({
-  selector: 'input[decimalOnly]',
-})
+@Directive({ standalone: false, selector: 'input[decimalOnly]' })
 export class OnlyDecimalDirective {
   constructor(private _el: ElementRef) {}
 
-  @HostListener('input', ['$event']) onInputChange(event) {
+  @HostListener('input', ['$event']) onInputChange(event: InputEvent) {
     const initalValue = this._el.nativeElement.value;
     var num = initalValue.replace(/[^0-9/.]*/g, '');
     if (num.match(/\./g)) if (num.match(/\./g).length > 1) num = parseFloat(num);

@@ -56,7 +56,7 @@
                   <div class="tm-blog-meta">
                     <span
                       ><i class="fa fa-calendar-o"></i
-                      >{{ news?.onDate | jalali: 'dddd DD MMMM YYYY' }}</span
+                      >{{ news?.onDate | luxonFormat: 'dddd DD MMMM YYYY' }}</span
                     >
                   </div>
                   <h3>{{ news?.title }}</h3>

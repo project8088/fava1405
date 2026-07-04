@@ -43,7 +43,7 @@
                   </div>
                   <div class="col-md-6">
                     <strong> تاریخ ثبت نام: </strong>
-                    <span>{{ citizen.creationDate | jalali }}</span>
+                    <span>{{ citizen.creationDate | luxonFormat}}</span>
                   </div>
                 </div>
               </div>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-md-6">
                   <strong> تاریخ تولد: </strong>
-                  <span>{{ citizen.birthDate | jalali }}</span>
+                  <span>{{ citizen.birthDate | luxonFormat}}</span>
                 </div>
                 <div class="col-md-6">
                   <strong> وضعیت پایان خدمت: </strong>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <strong>آخرین برورسانی اطلاعات: </strong>
-                  <span>{{ citizen.lastUpdateOnDate | jalali }}</span>
+                  <span>{{ citizen.lastUpdateOnDate | luxonFormat}}</span>
                 </div>
               </div>
               <!--------------------------------------------------------------------------------------------------->

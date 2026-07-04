@@ -42,11 +42,11 @@
         </div>
 
         <div class="col-sm-6">
-          <span> تاریخ تولد: </span><strong>{{ info.birthDate | jalali }}</strong>
+          <span> تاریخ تولد: </span><strong>{{ info.birthDate | luxonFormat}}</strong>
         </div>
 
         <div class="col-sm-6">
-          <span> آخرین ویرایش: </span><strong>{{ info.lastUpdateOnDate | jalali }}</strong>
+          <span> آخرین ویرایش: </span><strong>{{ info.lastUpdateOnDate | luxonFormat}}</strong>
         </div>
       </div>
     </div>

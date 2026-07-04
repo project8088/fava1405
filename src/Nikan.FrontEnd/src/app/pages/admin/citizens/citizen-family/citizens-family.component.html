@@ -175,7 +175,7 @@
           <ng-container matColumnDef="familyBirthDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ تولد</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.familyBirthDate | jalali }}
+              {{ row.familyBirthDate | luxonFormat}}
             </td>
           </ng-container>
 
@@ -218,7 +218,7 @@
 
           <ng-container matColumnDef="creationDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ثبت نام</th>
-            <td mat-cell *matCellDef="let row">{{ row.creationDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.creationDate | luxonFormat}}</td>
           </ng-container>
 
           <ng-container matColumnDef="sabtStatus">

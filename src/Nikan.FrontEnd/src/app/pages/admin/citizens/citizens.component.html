@@ -133,8 +133,8 @@
           <ng-container matColumnDef="creationDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ثبت نام</th>
             <td mat-cell *matCellDef="let row">
-              <strong title="{{ row.creationDate | jalali: 'HH:mm' }}">
-                {{ row.creationDate | jalali }}
+              <strong title="{{ row.creationDate | luxonFormat: 'HH:mm' }}">
+                {{ row.creationDate | luxonFormat}}
               </strong>
             </td>
           </ng-container>

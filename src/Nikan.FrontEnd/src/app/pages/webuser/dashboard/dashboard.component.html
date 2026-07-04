@@ -14,11 +14,11 @@
             </li>
             <li class="list-group-item">
               <span> تاریخ شروع قرائت: </span
-              ><strong>{{ activeWaterMeter.startDate | jalali }}</strong>
+              ><strong>{{ activeWaterMeter.startDate | luxonFormat}}</strong>
             </li>
             <li class="list-group-item">
               <span> تاریخ پایان قرائت: </span
-              ><strong>{{ activeWaterMeter.endDate | jalali }}</strong>
+              ><strong>{{ activeWaterMeter.endDate | luxonFormat}}</strong>
             </li>
             <li class="list-group-item">
               <a

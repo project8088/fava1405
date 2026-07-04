@@ -51,9 +51,9 @@
     </mat-select>
   </mat-form-field>
 </div>
-@if (ngControl?.hasError('required')) {
+@if (myControl?.hasError('required')) {
   <small>تاریخ {{ label }} را وارد کنید</small>
 }
-@if (ngControl?.hasError('invalid')) {
+@if (myControl?.hasError('invalid')) {
   <small>فرمت تاریخ صحیح نیست</small>
 }

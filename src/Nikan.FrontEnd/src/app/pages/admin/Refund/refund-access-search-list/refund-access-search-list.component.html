@@ -196,7 +196,7 @@
           <ng-container matColumnDef="refundOnDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ بررسی استرداد</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.refundOnDate | jalali }}
+              {{ row.refundOnDate | luxonFormat}}
             </td>
           </ng-container>
 

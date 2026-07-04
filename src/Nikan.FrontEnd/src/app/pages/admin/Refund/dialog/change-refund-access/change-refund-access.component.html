@@ -18,7 +18,7 @@
         <span>کلاس: </span><strong>{{ info.className }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>تاریخ دسترسی: </span><strong>{{ info.onDate | jalali: 'HH:mm YYYY/MM/DD' }}</strong>
+        <span>تاریخ دسترسی: </span><strong>{{ info.onDate | luxonFormat }}</strong>
       </div>
     </div>
   </div>

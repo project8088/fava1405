@@ -45,7 +45,7 @@
             <td>{{ item.size / 1024 | number }}Kb</td>
             <td>{{ item.userName }}</td>
             <td>{{ item.downloadsCount | number }}</td>
-            <td>{{ item.attachedOn | jalali }}</td>
+            <td>{{ item.attachedOn | luxonFormat}}</td>
             <td>
               <button mat-icon-button (click)="deleteAttachment(item)" matTooltip="حذف فایل پیوست">
                 <i class="fa fa-trash"></i>

@@ -66,7 +66,7 @@
           </ng-container>
           <ng-container matColumnDef="creationDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ تعریف</th>
-            <td mat-cell *matCellDef="let row">{{ row.creationDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.creationDate | luxonFormat}}</td>
           </ng-container>
           <ng-container matColumnDef="discountIsActive">
             <th mat-header-cell *matHeaderCellDef>فعال</th>
@@ -99,12 +99,12 @@
 
           <ng-container matColumnDef="startDate">
             <th mat-header-cell *matHeaderCellDef>شروع</th>
-            <td mat-cell *matCellDef="let row">{{ row.startDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.startDate | luxonFormat}}</td>
           </ng-container>
 
           <ng-container matColumnDef="endDate">
             <th mat-header-cell *matHeaderCellDef>پایان</th>
-            <td mat-cell *matCellDef="let row">{{ row.endDate | jalali }}</td>
+            <td mat-cell *matCellDef="let row">{{ row.endDate | luxonFormat}}</td>
           </ng-container>
 
           <ng-container matColumnDef="operation">

@@ -17,7 +17,7 @@
       @for (item of data; track item) {
         <div>
           <div>{{ item.messageText }}</div>
-          <div>{{ item.sendOnDate | jalali }}</div>
+          <div>{{ item.sendOnDate | luxonFormat}}</div>
         </div>
       }
     </div>

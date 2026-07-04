@@ -10,7 +10,7 @@
     @if (!loading) {
       <form [formGroup]="personalForm" class="p-4">
         <div class="custom-alert">
-          تاریخ آخرین ویرایش اطلاعات: {{ lastModifiedOnDate | jalali }}
+          تاریخ آخرین ویرایش اطلاعات: {{ lastModifiedOnDate | luxonFormat}}
         </div>
         <div class="row">
           <mat-form-field class="col-sm-6 col-md-4">

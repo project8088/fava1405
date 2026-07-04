@@ -2,6 +2,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 import { DataService } from '../services/data-service.service';
 
 @Pipe({
+  standalone: false,
   name: 'enumString',
   //  pure: false
 })

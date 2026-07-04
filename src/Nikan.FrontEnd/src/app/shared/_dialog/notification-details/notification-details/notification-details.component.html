@@ -16,7 +16,7 @@
         <strong>شماره اطلاعیه: </strong><span> {{ notification.notificationNumber }}</span>
       </div>
       <div>
-        <i class="fa fa-calendar-day mr-2"></i><span> {{ notification.publishDate | jalali }}</span>
+        <i class="fa fa-calendar-day mr-2"></i><span> {{ notification.publishDate | luxonFormat}}</span>
       </div>
     </div>
     <div>

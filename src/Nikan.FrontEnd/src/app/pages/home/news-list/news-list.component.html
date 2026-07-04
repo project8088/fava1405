@@ -51,7 +51,7 @@
                   <div class="covernews d-flex flex-row justify-content-between px-3 text-white">
                     <span class="bottom_p"
                       ><i class="fas fa-clock ml-1"></i>
-                      {{ item.onDate | jalali: 'dddd DD MMMM YYYY' }}
+                      {{ item.onDate | luxonFormat: 'dddd DD MMMM YYYY' }}
                     </span>
                   </div>
                 </a>

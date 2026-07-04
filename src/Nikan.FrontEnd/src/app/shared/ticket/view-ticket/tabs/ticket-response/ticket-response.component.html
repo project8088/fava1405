@@ -2,7 +2,7 @@
   <div>
     <div class="d-flex align-items-center justify-content-between pb-3">
       <strong>کد رهگیری: {{ ticket?.code }}</strong>
-      <strong>{{ ticket?.createdOn | jalali: 'HH:mm YYYY/MM/DD' }}</strong>
+      <strong>{{ ticket?.createdOn | luxonFormat }}</strong>
     </div>
     <h4 class="py-2">{{ ticket.subject }}</h4>
     <table class="table table-bordered">
@@ -133,7 +133,7 @@
       [class.light]="item.ownerId == user?.ownerId"
     >
       <strong>{{ item.ownerDisplayName }}</strong>
-      <small> {{ item.responseTextOnDate | jalali: 'HH:mm YYYY/MM/DD' }}</small>
+      <small> {{ item.responseTextOnDate | luxonFormat }}</small>
     </div>
     <mat-card-content>
       <pre class="text-justify">{{ item.responseText }}</pre>

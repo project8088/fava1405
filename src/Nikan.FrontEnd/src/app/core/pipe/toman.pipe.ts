@@ -1,8 +1,6 @@
 import { Pipe, PipeTransform, Injectable } from '@angular/core';
 
-@Pipe({
-  name: 'toman',
-})
+@Pipe({ standalone: false, name: 'toman' })
 @Injectable()
 export class TomanPipe implements PipeTransform {
   s1 = new Array('', 'يک', 'دو', 'سه', 'چهار', 'پنج', 'شش', 'هفت', 'هشت', 'نه');

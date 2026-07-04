@@ -84,7 +84,7 @@
                       {{ item.familyRelation | enumString: 'familyRelationships' }}
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
-                      تاریخ تولد : {{ item.familyBirthDate | jalali }}
+                      تاریخ تولد : {{ item.familyBirthDate | luxonFormat}}
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                       وضعیت تاهل:
@@ -92,7 +92,7 @@
                     </div>
                     <div class="col-12 col-md-6 col-lg-6">
                       <span>تاریخ ثبت نام: </span>
-                      <strong>{{ item.creationDate | jalali }}</strong>
+                      <strong>{{ item.creationDate | luxonFormat}}</strong>
                     </div>
                   </div>
                 </div>
