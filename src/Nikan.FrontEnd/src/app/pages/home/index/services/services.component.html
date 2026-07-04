@@ -1,32 +1,35 @@
-<section class="container mt-4 text-center" *ngIf="data.length > 0">
-  <h5 class="IRANSansWeb_Medium bt-color">خدمات ما</h5>
-  <p>خدمات اصلی سامانه شهروندی</p>
-
-  <div class="d-flex align-items-center justify-content-center py-3" *ngIf="isLoadingResults">
-    <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-  </div>
-
-  <div id="owl-Service3" class="owl-carousel">
-    <div class="card mx-1" *ngFor="let row of data">
-      <div class="card-body">
-        <a class="d-flex align-items-center text-center justify-content-center">
-          <img class="rounded-circle" [src]="baseUrl + row.imageUrl" alt="" />
-          <i class="fa fa-building fa-3x mb-3"></i>
-        </a>
-        <h6>{{ row.serviceName }}</h6>
-
-        <p>
-          {{ row.descriptions }}
-        </p>
-
-        <!-- <a routerLink="/home/sale/+{{row.id}}" class="btn btn-grad px-5 text-white mt-3 rad25">مشاهده</a> -->
+@if (data.length > 0) {
+  <section class="container mt-4 text-center">
+    <h5 class="IRANSansWeb_Medium bt-color">خدمات ما</h5>
+    <p>خدمات اصلی سامانه شهروندی</p>
+    @if (isLoadingResults) {
+      <div class="d-flex align-items-center justify-content-center py-3">
+        @if (isLoadingResults) {
+          <mat-spinner color="default"></mat-spinner>
+        }
       </div>
+    }
+    <div id="owl-Service3" class="owl-carousel">
+      @for (row of data; track row) {
+        <div class="card mx-1">
+          <div class="card-body">
+            <a class="d-flex align-items-center text-center justify-content-center">
+              <img class="rounded-circle" [src]="baseUrl + row.imageUrl" alt="" />
+              <i class="fa fa-building fa-3x mb-3"></i>
+            </a>
+            <h6>{{ row.serviceName }}</h6>
+            <p>
+              {{ row.descriptions }}
+            </p>
+            <!-- <a routerLink="/home/sale/+{{row.id}}" class="btn btn-grad px-5 text-white mt-3 rad25">مشاهده</a> -->
+          </div>
+        </div>
+      }
     </div>
-  </div>
-
-  <!--<div class="text-center mb-5">
+    <!--<div class="text-center mb-5">
     <a class="btn btn-grad px-5 text-white mt-3 rad25" routerLink="/home/unit-sales">
       مشاهده بیشتر
     </a>
   </div>-->
-</section>
+  </section>
+}

@@ -11,11 +11,13 @@
       <mat-form-field class="col-sm-12">
         <mat-label>گروه مقصد را انتخاب کنید</mat-label>
         <mat-select formControlName="destinationGroupId" [compareWith]="compareFn">
-          <mat-option [value]="item.key" *ngFor="let item of groupList">{{ item.text }}</mat-option>
+          @for (item of groupList; track item) {
+            <mat-option [value]="item.key">{{ item.text }}</mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="form.get('destinationGroupId').errors?.required"
-          >گروه مقصد را انتخاب کنید.</mat-error
-        >
+        @if (form.get('destinationGroupId').errors?.required) {
+          <mat-error>گروه مقصد را انتخاب کنید.</mat-error>
+        }
       </mat-form-field>
     </div>
 

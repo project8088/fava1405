@@ -9,24 +9,36 @@
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-    <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="primary"></mat-spinner>
-    </div>
+    @if (loading) {
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="primary"></mat-spinner>
+      </div>
+    }
 
-    <div *ngFor="let item of configList">
-      <p *ngIf="item.isSuccess" class="alert alert-success">
-        {{ item.message }}
-      </p>
-      <p *ngIf="!item.isSuccess" class="alert alert-danger">
-        {{ item.message }}
-      </p>
-    </div>
+    @for (item of configList; track item) {
+      <div>
+        @if (item.isSuccess) {
+          <p class="alert alert-success">
+            {{ item.message }}
+          </p>
+        }
+        @if (!item.isSuccess) {
+          <p class="alert alert-danger">
+            {{ item.message }}
+          </p>
+        }
+      </div>
+    }
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
       <button mat-raised-button color="default" (click)="config()" [disabled]="isSaving || loading">
-        <span *ngIf="isSaving">منتظر بمانید...</span>
-        <span *ngIf="!isSaving">پیکربندی</span>
+        @if (isSaving) {
+          <span>منتظر بمانید...</span>
+        }
+        @if (!isSaving) {
+          <span>پیکربندی</span>
+        }
         <mat-spinner [hidden]="!isSaving" diameter="20" color="primary"></mat-spinner>
       </button>
     </div>

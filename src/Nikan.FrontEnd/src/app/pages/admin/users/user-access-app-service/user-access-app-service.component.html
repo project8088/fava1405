@@ -2,61 +2,77 @@
   <span> خدمات قابل دسترس </span>
 </div>
 
-<div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-  <mat-spinner diameter="50" color="default"></mat-spinner>
-</div>
+@if (loading) {
+  <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
+  </div>
+}
 
 <mat-card class="custom-card">
-  <form [formGroup]="form" *ngIf="!loading">
-    <div class="row my-4">
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label> خدمات </mat-label>
-        <mat-select formControlName="serviceId">
-          <mat-option [value]="item.key" *ngFor="let item of appList">
-            {{ item.text }}
-          </mat-option>
-        </mat-select>
-        <mat-error *ngIf="form.get('serviceId').errors?.required"> خدمات را مشخص کنید</mat-error>
-      </mat-form-field>
-
-      <div class="col d-flex align-items-center justify-content-start">
-        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
-          <span>اضافه کردن</span>
-          <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
-        </button>
+  @if (!loading) {
+    <form [formGroup]="form">
+      <div class="row my-4">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label> خدمات </mat-label>
+          <mat-select formControlName="serviceId">
+            @for (item of appList; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
+          </mat-select>
+          @if (form.get('serviceId').errors?.required) {
+            <mat-error> خدمات را مشخص کنید</mat-error>
+          }
+        </mat-form-field>
+        <div class="col d-flex align-items-center justify-content-start">
+          <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+            <span>اضافه کردن</span>
+            <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  }
 
   <div class="container">
     <div class="row">
       <div class="col-md-6">
         <div class="py-4 list-container">
-          <div class="list-item" *ngFor="let item of userAppAccessList">
-            <div class="list-content">
-              <div class="row">
-                <div class="col-sm-3">
-                  <span> {{ item.service }}</span>
+          @for (item of userAppAccessList; track item) {
+            <div class="list-item">
+              <div class="list-content">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <span> {{ item.service }}</span>
+                  </div>
                 </div>
               </div>
+              <div class="menu">
+                @if (!item.loading) {
+                  <button mat-icon-button (click)="delete(item)" matTooltip="حذف">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                }
+                @if (item.loading) {
+                  <mat-spinner color="default" diameter="25"></mat-spinner>
+                }
+              </div>
             </div>
+          }
+        </div>
 
-            <div class="menu">
-              <button mat-icon-button (click)="delete(item)" *ngIf="!item.loading" matTooltip="حذف">
-                <i class="fa fa-trash"></i>
-              </button>
-              <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
-            </div>
+        @if (userAppAccessList.length == 0 && !loading) {
+          <div class="no-any-items">
+            <i class="fa fa-info-circle"></i>
+            اطلاعاتی ثبت نشده است
           </div>
-        </div>
-
-        <div class="no-any-items" *ngIf="userAppAccessList.length == 0 && !loading">
-          <i class="fa fa-info-circle"></i>
-          اطلاعاتی ثبت نشده است
-        </div>
-        <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-          <mat-spinner diameter="50" color="default"></mat-spinner>
-        </div>
+        }
+        @if (loading) {
+          <div class="p-5 d-flex align-items-center justify-content-center">
+            <mat-spinner diameter="50" color="default"></mat-spinner>
+          </div>
+        }
       </div>
       <div class="col-md-6"></div>
     </div>

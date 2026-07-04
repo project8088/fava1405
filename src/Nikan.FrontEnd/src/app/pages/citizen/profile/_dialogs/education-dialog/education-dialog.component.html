@@ -1,6 +1,10 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-  <h5 cdkDragHandle class="title" *ngIf="education">ویرایش تحصیلات</h5>
-  <h5 cdkDragHandle class="title" *ngIf="!education">ثبت تحصیلات جدید</h5>
+  @if (education) {
+    <h5 cdkDragHandle class="title">ویرایش تحصیلات</h5>
+  }
+  @if (!education) {
+    <h5 cdkDragHandle class="title">ثبت تحصیلات جدید</h5>
+  }
 
   <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
@@ -16,53 +20,58 @@
           [compareWith]="compareFn"
           (selectionChange)="changeGrade()"
         >
-          <mat-option *ngFor="let item of baseEnums.educationLevel" [value]="item">
-            {{ item.text }}
-          </mat-option>
+          @for (item of baseEnums.educationLevel; track item) {
+            <mat-option [value]="item">
+              {{ item.text }}
+            </mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="educationForm.get('grade').errors?.required">
-          مقطع تحصیلی را انتخاب کنید.
-        </mat-error>
+        @if (educationForm.get('grade').errors?.required) {
+          <mat-error> مقطع تحصیلی را انتخاب کنید. </mat-error>
+        }
       </mat-form-field>
 
-      <mat-form-field class="col-sm-6 col-md-4" *ngIf="educationForm.get('grade').value.key >= 0">
-        <mat-label>رشته تحصیلی</mat-label>
-        <input
-          matInput
-          formControlName="major"
-          [matAutocomplete]="autoMajors"
-          #majorInput
-          #majorTrigger="matAutocompleteTrigger"
-        />
-
-        <mat-autocomplete #autoMajors="matAutocomplete" [displayWith]="displayFn">
-          <mat-option *ngFor="let option of filteredFieldStudies | async" [value]="option">
-            {{ option.text }}
-          </mat-option>
-        </mat-autocomplete>
-        <mat-error
-          *ngIf="
+      @if (educationForm.get('grade').value.key >= 0) {
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>رشته تحصیلی</mat-label>
+          <input
+            matInput
+            formControlName="major"
+            [matAutocomplete]="autoMajors"
+            #majorInput
+            #majorTrigger="matAutocompleteTrigger"
+          />
+          <mat-autocomplete #autoMajors="matAutocomplete" [displayWith]="displayFn">
+            @for (option of filteredFieldStudies | async; track option) {
+              <mat-option [value]="option">
+                {{ option.text }}
+              </mat-option>
+            }
+          </mat-autocomplete>
+          @if (
             educationForm.get('major').errors?.incorrect ||
             educationForm.get('major').errors?.required
-          "
-        >
-          رشته تحصیلی را از لیست انتخاب کنید
-        </mat-error>
-        <mat-spinner matSuffix diameter="20" [hidden]="!loadingFieldStudies"></mat-spinner>
-      </mat-form-field>
+          ) {
+            <mat-error> رشته تحصیلی را از لیست انتخاب کنید </mat-error>
+          }
+          <mat-spinner matSuffix diameter="20" [hidden]="!loadingFieldStudies"></mat-spinner>
+        </mat-form-field>
+      }
 
-      <mat-form-field class="col-sm-6 col-md-4" *ngIf="educationForm.get('grade').value.key >= 0">
-        <mat-label>نام دانشگاه</mat-label>
-        <input
-          matInput
-          formControlName="university"
-          autocomplete="doNotAutoComplete"
-          maxlength="50"
-        />
-        <mat-error *ngIf="educationForm.get('university').errors?.required">
-          نام دانشگاه را وارد کنید.
-        </mat-error>
-      </mat-form-field>
+      @if (educationForm.get('grade').value.key >= 0) {
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>نام دانشگاه</mat-label>
+          <input
+            matInput
+            formControlName="university"
+            autocomplete="doNotAutoComplete"
+            maxlength="50"
+          />
+          @if (educationForm.get('university').errors?.required) {
+            <mat-error> نام دانشگاه را وارد کنید. </mat-error>
+          }
+        </mat-form-field>
+      }
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>تاریخ شروع تحصیل</mat-label>
@@ -74,20 +83,18 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="educationForm.get('dateOfStart').errors?.required">
-          تاریخ شروع تحصیل را انتخاب کنید.
-        </mat-error>
-        <mat-error
-          *ngIf="
-            educationForm.get('dateOfStart').errors?.matDatepickerMin ||
-            educationForm.get('dateOfStart').errors?.matDatepickerMax
-          "
-        >
-          تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-        </mat-error>
-        <mat-error *ngIf="educationForm.get('dateOfStart').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
+        @if (educationForm.get('dateOfStart').errors?.required) {
+          <mat-error> تاریخ شروع تحصیل را انتخاب کنید. </mat-error>
+        }
+        @if (
+          educationForm.get('dateOfStart').errors?.matDatepickerMin ||
+          educationForm.get('dateOfStart').errors?.matDatepickerMax
+        ) {
+          <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+        }
+        @if (educationForm.get('dateOfStart').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
@@ -100,20 +107,18 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
         <mat-datepicker #dpE></mat-datepicker>
-        <mat-error *ngIf="educationForm.get('dateOfEnd').errors?.required">
-          تاریخ پایان تحصیل را انتخاب کنید.
-        </mat-error>
-        <mat-error
-          *ngIf="
-            educationForm.get('dateOfEnd').errors?.matDatepickerMin ||
-            educationForm.get('dateOfEnd').errors?.matDatepickerMax
-          "
-        >
-          تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-        </mat-error>
-        <mat-error *ngIf="educationForm.get('dateOfEnd').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
+        @if (educationForm.get('dateOfEnd').errors?.required) {
+          <mat-error> تاریخ پایان تحصیل را انتخاب کنید. </mat-error>
+        }
+        @if (
+          educationForm.get('dateOfEnd').errors?.matDatepickerMin ||
+          educationForm.get('dateOfEnd').errors?.matDatepickerMax
+        ) {
+          <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+        }
+        @if (educationForm.get('dateOfEnd').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
       </mat-form-field>
     </div>
   </form>

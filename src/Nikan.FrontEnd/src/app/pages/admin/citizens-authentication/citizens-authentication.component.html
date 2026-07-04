@@ -23,61 +23,69 @@
       </div>
     </form>
 
-    <div class="p-3" *ngIf="!loading">
-      <div class="row">
-        <div class="col-12 col-md-8 col-lg-8">
-          <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>کدملی : </span>
-              {{ citizen.nationalCode }}
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>نام : </span>
-              <strong>{{ citizen.firstName }}</strong>
-              &nbsp;
-              <strong>{{ citizen.lastName }}</strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>نام پدر: </span>
-              <strong>{{ citizen.fatherName }}</strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>تاریخ تولد: </span>
-              <strong>{{ citizen.birthDate }}</strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>شماره شناسنامه: </span>
-              <strong>{{ citizen.identityId }}</strong>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-              <span> پیام احراز: </span>
-              <strong>{{ citizen.messages }}</strong>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>جنسیت : </span>
-
-              <strong *ngIf="citizen.gender == 0" class="text-info"> خانم </strong>
-              <strong *ngIf="citizen.gender == 1" class="text-success"> آقا </strong>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت ثبت احوال: </span>
-              <strong *ngIf="citizen.isMatch == true" class="text-info"> تایید </strong>
-              <strong *ngIf="citizen.isMatch == false" class="text-danger"> عدم تایید </strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت فوتی: </span>
-              <strong *ngIf="citizen.isDead == true" class="text-danger"> فوتی </strong>
-              <strong *ngIf="citizen.isDead == false" class="text-success"> در قید حیات </strong>
+    @if (!loading) {
+      <div class="p-3">
+        <div class="row">
+          <div class="col-12 col-md-8 col-lg-8">
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>کدملی : </span>
+                {{ citizen.nationalCode }}
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>نام : </span>
+                <strong>{{ citizen.firstName }}</strong>
+                &nbsp;
+                <strong>{{ citizen.lastName }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>نام پدر: </span>
+                <strong>{{ citizen.fatherName }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>تاریخ تولد: </span>
+                <strong>{{ citizen.birthDate }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>شماره شناسنامه: </span>
+                <strong>{{ citizen.identityId }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span> پیام احراز: </span>
+                <strong>{{ citizen.messages }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>جنسیت : </span>
+                @if (citizen.gender == 0) {
+                  <strong class="text-info"> خانم </strong>
+                }
+                @if (citizen.gender == 1) {
+                  <strong class="text-success"> آقا </strong>
+                }
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>وضعیت ثبت احوال: </span>
+                @if (citizen.isMatch == true) {
+                  <strong class="text-info"> تایید </strong>
+                }
+                @if (citizen.isMatch == false) {
+                  <strong class="text-danger"> عدم تایید </strong>
+                }
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>وضعیت فوتی: </span>
+                @if (citizen.isDead == true) {
+                  <strong class="text-danger"> فوتی </strong>
+                }
+                @if (citizen.isDead == false) {
+                  <strong class="text-success"> در قید حیات </strong>
+                }
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    }
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 </mat-card>

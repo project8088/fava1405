@@ -32,7 +32,9 @@
       [attr.readonly]="disabled"
       [disabled]="disabled"
     >
-      <mat-option [value]="item" *ngFor="let item of letters">{{ item }}</mat-option>
+      @for (item of letters; track item) {
+        <mat-option [value]="item">{{ item }}</mat-option>
+      }
     </mat-select>
   </div>
 
@@ -51,6 +53,6 @@
 </div>
 
 <input type="hidden" [formControl]="ngControl.control" [required]="required" dir="ltr" />
-<small class="text-danger" *ngIf="ngControl?.hasError('required') && !disabled">
-  شماره پلاک خودرو را وارد کنید
-</small>
+@if (ngControl?.hasError('required') && !disabled) {
+  <small class="text-danger"> شماره پلاک خودرو را وارد کنید </small>
+}

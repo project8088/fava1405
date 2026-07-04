@@ -29,13 +29,13 @@
       <mat-form-field class="col-md-6">
         <mat-label>مرکز تحویل کارت</mat-label>
         <mat-select formControlName="centerId">
-          <mat-option [value]="item.key" *ngFor="let item of centerList">{{
-            item.text
-          }}</mat-option>
+          @for (item of centerList; track item) {
+            <mat-option [value]="item.key">{{ item.text }}</mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="frm.get('centerId').errors?.required"
-          >مرکز تحویل کارت را انتخاب کنید.</mat-error
-        >
+        @if (frm.get('centerId').errors?.required) {
+          <mat-error>مرکز تحویل کارت را انتخاب کنید.</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-6">
@@ -48,13 +48,13 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="frm.get('backCardOnDate').errors?.required">
-          تاریخ برگشت کارت را انتخاب کنید.
-        </mat-error>
+        @if (frm.get('backCardOnDate').errors?.required) {
+          <mat-error> تاریخ برگشت کارت را انتخاب کنید. </mat-error>
+        }
 
-        <mat-error *ngIf="frm.get('backCardOnDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
+        @if (frm.get('backCardOnDate').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-12">

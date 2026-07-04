@@ -1,6 +1,8 @@
-<div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-  <mat-spinner diameter="50" color="default"></mat-spinner>
-</div>
+@if (loading) {
+  <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
+  </div>
+}
 <div class="row">
   <div class="col-sm-6">
     <app-uploader
@@ -11,10 +13,8 @@
       [url]="signatureUrl"
     ></app-uploader>
 
-    <img
-      [src]="baseUrl + imageSignatureUrl"
-      class="img-thumbnail thumb-128"
-      *ngIf="imageSignatureUrl"
-    />
+    @if (imageSignatureUrl) {
+      <img [src]="baseUrl + imageSignatureUrl" class="img-thumbnail thumb-128" />
+    }
   </div>
 </div>

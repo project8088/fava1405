@@ -13,8 +13,12 @@
     <div class="side-nav">
       <mat-toolbar color="purple">
         <button mat-icon-button (click)="miniSideBar = !miniSideBar">
-          <i class="fa fa-arrow-left" *ngIf="miniSideBar"></i>
-          <i class="fa fa-arrow-right" *ngIf="!miniSideBar"></i>
+          @if (miniSideBar) {
+            <i class="fa fa-arrow-left"></i>
+          }
+          @if (!miniSideBar) {
+            <i class="fa fa-arrow-right"></i>
+          }
         </button>
         <span>مدیریت کارت</span>
       </mat-toolbar>
@@ -24,15 +28,11 @@
 
   <mat-sidenav-content class="dashboard-content">
     <mat-toolbar color="purple" class="fixed-toolbar">
-      <button
-        type="button"
-        aria-label="Toggle sidenav"
-        mat-icon-button
-        (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async"
-      >
-        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
-      </button>
+      @if (isHandset$ | async) {
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      }
       <!--<span>ادمین</span>-->
       <span class="spacer"></span>
 

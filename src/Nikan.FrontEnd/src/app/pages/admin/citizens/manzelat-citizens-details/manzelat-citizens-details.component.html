@@ -12,100 +12,103 @@
     <button (click)="back()" mat-stroked-button color="default">بازگشت</button>
   </mat-card-header>
   <mat-card-content>
-    <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
-      <mat-spinner diameter="35" color="default"></mat-spinner>
-    </div>
-    <div class="p-3" *ngIf="!loading">
-      <div class="row">
-        <div class="col-12 col-md-4 col-lg-4">
-          <img class="citizen-image" [src]="baseUrl + citizen.personalPictureUrl" />
-        </div>
-
-        <div class="col-12 col-md-8 col-lg-8">
-          <div class="row">
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>کدملی : </span>
-
-              <a
-                class="text-info"
-                target="_blank"
-                href="/admin/show-citizen/{{ citizen.userCode }}"
-              >
-                {{ citizen.nationCode }}
-                <i class="fa fa-eye mr-2"></i>
-              </a>
+    @if (loading) {
+      <div class="d-flex align-items-center justify-content-center p-5">
+        <mat-spinner diameter="35" color="default"></mat-spinner>
+      </div>
+    }
+    @if (!loading) {
+      <div class="p-3">
+        <div class="row">
+          <div class="col-12 col-md-4 col-lg-4">
+            <img class="citizen-image" [src]="baseUrl + citizen.personalPictureUrl" />
+          </div>
+          <div class="col-12 col-md-8 col-lg-8">
+            <div class="row">
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>کدملی : </span>
+                <a
+                  class="text-info"
+                  target="_blank"
+                  href="/admin/show-citizen/{{ citizen.userCode }}"
+                >
+                  {{ citizen.nationCode }}
+                  <i class="fa fa-eye mr-2"></i>
+                </a>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>نام : </span>
+                <strong>{{ citizen.firstName }}</strong>
+                &nbsp;
+                <strong>{{ citizen.lastName }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>نام پدر: </span>
+                <strong>{{ citizen.fatherName }}</strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>وضعیت تاهل: </span>
+                <strong>
+                  {{ citizen.mariageStatus | enumString: 'maritalStatus' }}
+                </strong>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>تاریخ تولد: </span>
+                <strong>{{ citizen.birthDate | jalali }}</strong>
+                <small>
+                  ( {{ citizen.age }}
+                  ساله)
+                </small>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>شماره موبایل: </span>
+                <strong>{{ citizen.mobile }}</strong>
+                <a (click)="openCitizenEditMobileNumber(citizen.userCode)">
+                  <i class="fa fa-pencil"></i>
+                </a>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>وضعیت فرم: </span>
+                @if (citizen.formStatuse == 0) {
+                  <strong class="text-info"> در حال بررسی </strong>
+                }
+                @if (citizen.formStatuse == 1) {
+                  <strong class="text-success"> تایید شده </strong>
+                }
+                @if (citizen.formStatuse == 2) {
+                  <strong class="text-danger"> عدم تایید </strong>
+                }
+                @if (citizen.formStatuse > 0) {
+                  <strong class="text-info"> توسط ({{ citizen.ckeckOperation }}) </strong>
+                }
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>وضعیت ثبت احوال: </span>
+                <strong>
+                  {{ citizen.sabtStatus | enumString: 'sabtStatus' }}
+                </strong>
+                <a (click)="sendcitizenForAuthentication(citizen.citizenId)">
+                  (احراز هویت شهروند)
+                </a>
+                <a (click)="openUpdateCitizenSabtStateDialog()">
+                  <i class="fa fa-pencil"></i>
+                </a>
+              </div>
+              <div class="col-12 col-md-6 col-lg-6">
+                <span>آدرس: </span>
+                <strong>{{ citizen.fullAddress }}</strong>
+              </div>
+              <hr />
+              <mat-chip-list aria-label="citizen groups">
+                @for (grp of citizen.citizenGroups; track grp) {
+                  <mat-chip>{{ grp }} </mat-chip>
+                }
+              </mat-chip-list>
             </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>نام : </span>
-              <strong>{{ citizen.firstName }}</strong>
-              &nbsp;
-              <strong>{{ citizen.lastName }}</strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>نام پدر: </span>
-              <strong>{{ citizen.fatherName }}</strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت تاهل: </span>
-              <strong>
-                {{ citizen.mariageStatus | enumString: 'maritalStatus' }}
-              </strong>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>تاریخ تولد: </span>
-              <strong>{{ citizen.birthDate | jalali }}</strong>
-              <small>
-                ( {{ citizen.age }}
-                ساله)
-              </small>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>شماره موبایل: </span>
-              <strong>{{ citizen.mobile }}</strong>
-              <a (click)="openCitizenEditMobileNumber(citizen.userCode)">
-                <i class="fa fa-pencil"></i>
-              </a>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت فرم: </span>
-
-              <strong *ngIf="citizen.formStatuse == 0" class="text-info"> در حال بررسی </strong>
-              <strong *ngIf="citizen.formStatuse == 1" class="text-success"> تایید شده </strong>
-              <strong *ngIf="citizen.formStatuse == 2" class="text-danger"> عدم تایید </strong>
-              <strong *ngIf="citizen.formStatuse > 0" class="text-info">
-                توسط ({{ citizen.ckeckOperation }})
-              </strong>
-            </div>
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت ثبت احوال: </span>
-              <strong>
-                {{ citizen.sabtStatus | enumString: 'sabtStatus' }}
-              </strong>
-
-              <a (click)="sendcitizenForAuthentication(citizen.citizenId)"> (احراز هویت شهروند) </a>
-              <a (click)="openUpdateCitizenSabtStateDialog()">
-                <i class="fa fa-pencil"></i>
-              </a>
-            </div>
-
-            <div class="col-12 col-md-6 col-lg-6">
-              <span>آدرس: </span>
-              <strong>{{ citizen.fullAddress }}</strong>
-            </div>
-            <hr />
-            <mat-chip-list aria-label="citizen groups">
-              <mat-chip *ngFor="let grp of citizen.citizenGroups">{{ grp }} </mat-chip>
-            </mat-chip-list>
           </div>
         </div>
       </div>
-    </div>
+    }
 
     <!-- ----------------------------------------------------------------------- -->
   </mat-card-content>
@@ -115,42 +118,51 @@
 <div class="col-12">
   <h3>شهروند در فرم های زیر ثبت نام نموده است</h3>
   <hr />
-  <div *ngFor="let item of data" class="row my-2 justify-content-center">
-    <div *ngIf="item.citizenIsRegisterThisForm" class="col-12 col-md-10 col-lg-10">
-      <mat-card>
-        <mat-card-content>
-          <div class="col-12">
-            <div class="row">
-              <div class="col-12 col-md-4 col-lg-4">
-                <b>{{ item.title }} </b>
+  @for (item of data; track item) {
+    <div class="row my-2 justify-content-center">
+      @if (item.citizenIsRegisterThisForm) {
+        <div class="col-12 col-md-10 col-lg-10">
+          <mat-card>
+            <mat-card-content>
+              <div class="col-12">
+                <div class="row">
+                  <div class="col-12 col-md-4 col-lg-4">
+                    <b>{{ item.title }} </b>
+                  </div>
+                  <div class="col-12 col-md-3 col-lg-4">
+                    وضعیت :
+                    @if (item.formResult == null) {
+                      <strong class="text-info"> در حال بررسی </strong>
+                    }
+                    @if (item.formResult == true) {
+                      <strong class="text-success"> تایید شده </strong>
+                    }
+                    @if (item.formResult == false) {
+                      <strong class="text-danger"> عدم تایید </strong>
+                    }
+                  </div>
+                  <div class="col-12 col-md-3 col-lg-4">
+                    مدارک:
+                    <img
+                      (click)="showImageDialog(item)"
+                      class="pointer img-thumb"
+                      [src]="baseUrl + item.fileUrl"
+                    />
+                  </div>
+                </div>
               </div>
-              <div class="col-12 col-md-3 col-lg-4">
-                وضعیت :
-
-                <strong *ngIf="item.formResult == null" class="text-info"> در حال بررسی </strong>
-                <strong *ngIf="item.formResult == true" class="text-success"> تایید شده </strong>
-                <strong *ngIf="item.formResult == false" class="text-danger"> عدم تایید </strong>
-              </div>
-              <div class="col-12 col-md-3 col-lg-4">
-                مدارک:
-                <img
-                  (click)="showImageDialog(item)"
-                  class="pointer img-thumb"
-                  [src]="baseUrl + item.fileUrl"
-                />
-              </div>
-            </div>
-          </div>
-        </mat-card-content>
-        <mat-card-actions class="d-flex justify-content-end">
-          <button mat-raised-button color="default" (click)="openReviewDialog(item, 'Check')">
-            بررسی<i class="fa fa-list mx-2"></i>
-          </button>
-          <button (click)="openReviewDialog(item, 'Remove')" mat-raised-button color="accent">
-            حذف <i class="fa fa-trash mx-2"></i>
-          </button>
-        </mat-card-actions>
-      </mat-card>
+            </mat-card-content>
+            <mat-card-actions class="d-flex justify-content-end">
+              <button mat-raised-button color="default" (click)="openReviewDialog(item, 'Check')">
+                بررسی<i class="fa fa-list mx-2"></i>
+              </button>
+              <button (click)="openReviewDialog(item, 'Remove')" mat-raised-button color="accent">
+                حذف <i class="fa fa-trash mx-2"></i>
+              </button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      }
     </div>
-  </div>
+  }
 </div>

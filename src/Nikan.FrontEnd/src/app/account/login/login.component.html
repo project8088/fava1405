@@ -11,14 +11,11 @@
       required
     />
   </div>
-  <span
-    *ngIf="
-      loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched
-    "
-    class="text-danger"
-  >
-    نام کاربری خود را وارد کنید
-  </span>
+  @if (
+    loginForm.controls['username'].hasError('required') && loginForm.controls['username'].touched
+  ) {
+    <span class="text-danger"> نام کاربری خود را وارد کنید </span>
+  }
 
   <div class="form-group">
     <input
@@ -30,14 +27,11 @@
       required
     />
   </div>
-  <span
-    *ngIf="
-      loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched
-    "
-    class="text-danger"
-  >
-    کلمه عبور خود را وارد کنید
-  </span>
+  @if (
+    loginForm.controls['password'].hasError('required') && loginForm.controls['password'].touched
+  ) {
+    <span class="text-danger"> کلمه عبور خود را وارد کنید </span>
+  }
 
   <div class="bot-detect-container">
     <input

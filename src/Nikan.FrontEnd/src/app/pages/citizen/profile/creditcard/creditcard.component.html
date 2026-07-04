@@ -1,50 +1,49 @@
 <mat-card class="m-3">
   <mat-card-header class="card-header mx-n3 mt-n3">اطلاعات مالی</mat-card-header>
   <mat-card-content>
-    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
-
-    <form [formGroup]="cardForm" *ngIf="!loading" class="p-4">
-      <div class="col-md-12">
-        <strong>
-          ثبت اطلاعات بانکی برای شهروندان اختیاری می باشد و صرفا بابت برگشت هزینه کلاسهای آموزشی می
-          باشد .
-        </strong>
+    @if (loading) {
+      <div class="p-5 d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
+    }
 
-      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-        <mat-label>شماره کارت</mat-label>
-        <input matInput formControlName="cardNumber" maxlength="16" numbersOnly />
-        <mat-error *ngIf="cardForm.get('cardNumber').errors?.required">
-          شماره کارت خود را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="cardForm.get('cardNumber').errors?.invalid">
-          شماره کارت وارد شده صحیح نیست
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-        <mat-label>شماره شبا </mat-label>
-        <input matInput formControlName="shabaNumber" maxlength="24" numbersOnly />
-        <mat-error *ngIf="cardForm.get('shabaNumber').errors?.required">
-          شماره کارت خود را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="cardForm.get('shabaNumber').errors?.invalid">
-          شماره کارت وارد شده صحیح نیست
-        </mat-error>
-      </mat-form-field>
-    </form>
+    @if (!loading) {
+      <form [formGroup]="cardForm" class="p-4">
+        <div class="col-md-12">
+          <strong>
+            ثبت اطلاعات بانکی برای شهروندان اختیاری می باشد و صرفا بابت برگشت هزینه کلاسهای آموزشی
+            می باشد .
+          </strong>
+        </div>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>شماره کارت</mat-label>
+          <input matInput formControlName="cardNumber" maxlength="16" numbersOnly />
+          @if (cardForm.get('cardNumber').errors?.required) {
+            <mat-error> شماره کارت خود را وارد کنید. </mat-error>
+          }
+          @if (cardForm.get('cardNumber').errors?.invalid) {
+            <mat-error> شماره کارت وارد شده صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>شماره شبا </mat-label>
+          <input matInput formControlName="shabaNumber" maxlength="24" numbersOnly />
+          @if (cardForm.get('shabaNumber').errors?.required) {
+            <mat-error> شماره کارت خود را وارد کنید. </mat-error>
+          }
+          @if (cardForm.get('shabaNumber').errors?.invalid) {
+            <mat-error> شماره کارت وارد شده صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+      </form>
+    }
   </mat-card-content>
   <mat-card-footer class="p-3 d-flex justify-content-end">
-    <button
-      mat-raised-button
-      color="default"
-      *ngIf="!loading"
-      [disabled]="isSaving"
-      (click)="saveForm()"
-    >
-      <span>ذخیره </span>
-      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
-    </button>
+    @if (!loading) {
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveForm()">
+        <span>ذخیره </span>
+        <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+      </button>
+    }
   </mat-card-footer>
 </mat-card>

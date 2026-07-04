@@ -22,20 +22,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ شروع را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
@@ -48,29 +46,27 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نقش</mat-label>
           <mat-select formControlName="roleId">
             <mat-option [value]="null">همه</mat-option>
-            <mat-option [value]="item.key" *ngFor="let item of roleList">{{
-              item.text
-            }}</mat-option>
+            @for (item of roleList; track item) {
+              <mat-option [value]="item.key">{{ item.text }}</mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
@@ -103,12 +99,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -140,30 +142,32 @@
             <th mat-header-cell *matHeaderCellDef>ایمیل</th>
             <td mat-cell *matCellDef="let row">
               {{ row.emailAddress }}
-              <div class="text-danger" *ngIf="row.emailVerification == false && row.emailAddress">
-                <small> تائید نشده </small>
-              </div>
-              <div class="text-success" *ngIf="row.emailVerification == true && row.emailAddress">
-                <small> تائید شده </small>
-              </div>
+              @if (row.emailVerification == false && row.emailAddress) {
+                <div class="text-danger">
+                  <small> تائید نشده </small>
+                </div>
+              }
+              @if (row.emailVerification == true && row.emailAddress) {
+                <div class="text-success">
+                  <small> تائید شده </small>
+                </div>
+              }
             </td>
           </ng-container>
           <ng-container matColumnDef="mobileNumber">
             <th mat-header-cell *matHeaderCellDef>شماره موبایل</th>
             <td mat-cell *matCellDef="let row">
               {{ row.mobileNumber }}
-              <div
-                class="text-danger"
-                *ngIf="row.mobileNumberVerification == false && row.emailAddress"
-              >
-                <small> تائید نشده </small>
-              </div>
-              <div
-                class="text-success"
-                *ngIf="row.mobileNumberVerification == true && row.emailAddress"
-              >
-                <small> تائید شده </small>
-              </div>
+              @if (row.mobileNumberVerification == false && row.emailAddress) {
+                <div class="text-danger">
+                  <small> تائید نشده </small>
+                </div>
+              }
+              @if (row.mobileNumberVerification == true && row.emailAddress) {
+                <div class="text-success">
+                  <small> تائید شده </small>
+                </div>
+              }
             </td>
           </ng-container>
           <ng-container matColumnDef="createdOnDate">
@@ -178,16 +182,29 @@
             <th mat-header-cell *matHeaderCellDef>نقش کاربر</th>
             <td mat-cell *matCellDef="let row">
               <mat-chip-list aria-label="Fish selection">
-                <mat-chip *ngFor="let item of row.roles">
-                  <span *ngIf="item.toLowerCase() == 'admin'">ادمین</span>
-                  <span *ngIf="item.toLowerCase() == 'user'">کاربر</span>
-                  <span *ngIf="item.toLowerCase() == 'company'">شرکت</span>
-                  <span *ngIf="item.toLowerCase() == 'citizen'">شهروندی</span>
-                  <span *ngIf="item.toLowerCase() == 'card'">مدیریت کارت</span>
-                  <span *ngIf="item.toLowerCase() == 'webapiuser'">توسعه دهنده</span>
-
-                  {{ item }}
-                </mat-chip>
+                @for (item of row.roles; track item) {
+                  <mat-chip>
+                    @if (item.toLowerCase() == 'admin') {
+                      <span>ادمین</span>
+                    }
+                    @if (item.toLowerCase() == 'user') {
+                      <span>کاربر</span>
+                    }
+                    @if (item.toLowerCase() == 'company') {
+                      <span>شرکت</span>
+                    }
+                    @if (item.toLowerCase() == 'citizen') {
+                      <span>شهروندی</span>
+                    }
+                    @if (item.toLowerCase() == 'card') {
+                      <span>مدیریت کارت</span>
+                    }
+                    @if (item.toLowerCase() == 'webapiuser') {
+                      <span>توسعه دهنده</span>
+                    }
+                    {{ item }}
+                  </mat-chip>
+                }
               </mat-chip-list>
             </td>
           </ng-container>

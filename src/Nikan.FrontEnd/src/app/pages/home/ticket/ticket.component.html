@@ -201,121 +201,125 @@
               نمایید .
             </div>
 
-            <div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
-              <mat-spinner diameter="50" color="default"></mat-spinner>
-            </div>
-            <div class="p-5" *ngIf="!loadingData">
-              <form [formGroup]="ticketForm">
-                <div class="row">
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label>نام و نام خانوادگی</mat-label>
-                    <input matInput type="text" formControlName="name" />
-                    <mat-error *ngIf="ticketForm.get('name').errors?.required">
-                      نام خود را وارد کنید
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label> شماره موبایل (اختیاری) </mat-label>
-                    <input
-                      matInput
-                      type="text"
-                      formControlName="mobileNumber"
-                      maxlength="11"
-                      numbersOnly
-                    />
-                    <mat-error *ngIf="ticketForm.get('mobileNumber').errors?.invalid">
-                      شماره موبایل صحیح نیست!
-                    </mat-error>
-                  </mat-form-field>
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label> کد ملی (اختیاری) </mat-label>
-                    <input
-                      matInput
-                      type="text"
-                      maxlength="10"
-                      numbersOnly
-                      formControlName="nationCode"
-                    />
-                    <mat-error *ngIf="ticketForm.get('nationCode').errors?.nationCode">
-                      کدملی صحیح نیست!
-                    </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label>سازمان</mat-label>
-                    <mat-select
-                      formControlName="organizationId"
-                      (selectionChange)="getUnitsOfOrganization()"
+            @if (loadingData) {
+              <div class="d-flex align-items-center justify-content-center">
+                <mat-spinner diameter="50" color="default"></mat-spinner>
+              </div>
+            }
+            @if (!loadingData) {
+              <div class="p-5">
+                <form [formGroup]="ticketForm">
+                  <div class="row">
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label>نام و نام خانوادگی</mat-label>
+                      <input matInput type="text" formControlName="name" />
+                      @if (ticketForm.get('name').errors?.required) {
+                        <mat-error> نام خود را وارد کنید </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label> شماره موبایل (اختیاری) </mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        formControlName="mobileNumber"
+                        maxlength="11"
+                        numbersOnly
+                      />
+                      @if (ticketForm.get('mobileNumber').errors?.invalid) {
+                        <mat-error> شماره موبایل صحیح نیست! </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label> کد ملی (اختیاری) </mat-label>
+                      <input
+                        matInput
+                        type="text"
+                        maxlength="10"
+                        numbersOnly
+                        formControlName="nationCode"
+                      />
+                      @if (ticketForm.get('nationCode').errors?.nationCode) {
+                        <mat-error> کدملی صحیح نیست! </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label>سازمان</mat-label>
+                      <mat-select
+                        formControlName="organizationId"
+                        (selectionChange)="getUnitsOfOrganization()"
+                      >
+                        @for (item of organizationList; track item) {
+                          <mat-option [value]="item.key">{{ item.text }}</mat-option>
+                        }
+                      </mat-select>
+                      @if (ticketForm.get('organizationId').errors?.required) {
+                        <mat-error> سازمان را مشخص کنید. </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label>واحد</mat-label>
+                      <mat-select formControlName="organizationalUnitId">
+                        @for (item of unitList; track item) {
+                          <mat-option [value]="item.key">{{ item.text }}</mat-option>
+                        }
+                      </mat-select>
+                      @if (ticketForm.get('organizationalUnitId').errors?.required) {
+                        <mat-error> واحد را مشخص کنید. </mat-error>
+                      }
+                      <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+                      <mat-label>اولویت پیام</mat-label>
+                      <mat-select formControlName="priority">
+                        @for (item of periorityList; track item) {
+                          <mat-option [value]="item.key">{{ item.text }}</mat-option>
+                        }
+                      </mat-select>
+                      @if (ticketForm.get('priority').errors?.required) {
+                        <mat-error> اولویت پیام را مشخص کنید. </mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+                  <div class="row">
+                    <mat-form-field appearance="outline" class="col-sm-12">
+                      <mat-label>عنوان پیام</mat-label>
+                      <input matInput formControlName="subject" />
+                      @if (ticketForm.get('subject').errors?.required) {
+                        <mat-error> عنوان پیام را وارد کنید </mat-error>
+                      }
+                      @if (ticketForm.get('subject').errors?.maxlength) {
+                        <mat-error> حداکثر 1000 کاراکتر </mat-error>
+                      }
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="col-sm-12">
+                      <mat-label>
+                        متن پیام (شرح درخواست خود را به صورت کامل وارد نمایید)
+                      </mat-label>
+                      <textarea matInput formControlName="ticketMessage" rows="5"></textarea>
+                      @if (ticketForm.get('ticketMessage').errors?.required) {
+                        <mat-error> متن پیام را وارد کنید </mat-error>
+                      }
+                      @if (ticketForm.get('ticketMessage').errors?.maxlength) {
+                        <mat-error> حداکثر 10،000 کاراکتر </mat-error>
+                      }
+                    </mat-form-field>
+                  </div>
+                  <div class="d-flex align-items-center justify-content-end">
+                    <button
+                      class="btn btn btn-teal mb-3 text-white"
+                      [disabled]="isSaving"
+                      (click)="saveInfo()"
                     >
-                      <mat-option [value]="item.key" *ngFor="let item of organizationList">{{
-                        item.text
-                      }}</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="ticketForm.get('organizationId').errors?.required">
-                      سازمان را مشخص کنید.
-                    </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label>واحد</mat-label>
-                    <mat-select formControlName="organizationalUnitId">
-                      <mat-option [value]="item.key" *ngFor="let item of unitList">{{
-                        item.text
-                      }}</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="ticketForm.get('organizationalUnitId').errors?.required">
-                      واحد را مشخص کنید.
-                    </mat-error>
-                    <mat-spinner matSuffix diameter="20" [hidden]="!loadingUnit"></mat-spinner>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                    <mat-label>اولویت پیام</mat-label>
-                    <mat-select formControlName="priority">
-                      <mat-option [value]="item.key" *ngFor="let item of periorityList">{{
-                        item.text
-                      }}</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="ticketForm.get('priority').errors?.required">
-                      اولویت پیام را مشخص کنید.
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="row">
-                  <mat-form-field appearance="outline" class="col-sm-12">
-                    <mat-label>عنوان پیام</mat-label>
-                    <input matInput formControlName="subject" />
-                    <mat-error *ngIf="ticketForm.get('subject').errors?.required">
-                      عنوان پیام را وارد کنید
-                    </mat-error>
-                    <mat-error *ngIf="ticketForm.get('subject').errors?.maxlength">
-                      حداکثر 1000 کاراکتر
-                    </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="outline" class="col-sm-12">
-                    <mat-label> متن پیام (شرح درخواست خود را به صورت کامل وارد نمایید) </mat-label>
-                    <textarea matInput formControlName="ticketMessage" rows="5"></textarea>
-                    <mat-error *ngIf="ticketForm.get('ticketMessage').errors?.required">
-                      متن پیام را وارد کنید
-                    </mat-error>
-                    <mat-error *ngIf="ticketForm.get('ticketMessage').errors?.maxlength">
-                      حداکثر 10،000 کاراکتر
-                    </mat-error>
-                  </mat-form-field>
-                </div>
-                <div class="d-flex align-items-center justify-content-end">
-                  <button
-                    class="btn btn btn-teal mb-3 text-white"
-                    [disabled]="isSaving"
-                    (click)="saveInfo()"
-                  >
-                    <mat-spinner color="default" diameter="20" *ngIf="isSaving"></mat-spinner>
-                    <span>ارسال</span>
-                  </button>
-                </div>
-              </form>
-            </div>
+                      @if (isSaving) {
+                        <mat-spinner color="default" diameter="20"></mat-spinner>
+                      }
+                      <span>ارسال</span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            }
           </div>
         </div>
       </div>

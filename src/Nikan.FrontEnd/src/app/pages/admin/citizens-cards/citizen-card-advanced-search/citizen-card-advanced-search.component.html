@@ -48,20 +48,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ درخواست کارت را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ درخواست کارت نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ درخواست کارت را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ درخواست کارت نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="col-md-3">
           <mat-label>تا تاریخ درخواست </mat-label>
@@ -73,29 +71,29 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-md-3">
           <mat-label>وضعیت کارت</mat-label>
           <mat-select formControlName="requestStatuse">
             <mat-option [value]="null">همه</mat-option>
-            <mat-option *ngFor="let item of baseEnums.requestStatuse" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
+            @for (item of baseEnums.requestStatuse; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -132,9 +130,11 @@
           <mat-label> عنوان تخفیف</mat-label>
           <mat-select formControlName="discountGroupId">
             <mat-option [value]="null">همه</mat-option>
-            <mat-option *ngFor="let item of baseEnums.discountList" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
+            @for (item of baseEnums.discountList; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -151,9 +151,11 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            <mat-option *ngFor="let item of baseEnums.citizenGroups" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
+            @for (item of baseEnums.citizenGroups; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
         <mat-form-field class="col-md-3">
@@ -181,12 +183,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -262,18 +270,24 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button *ngIf="row.cardNumber" mat-menu-item (click)="openBackCard(row)">
-                  <i class="fa fa-podcast mr-2"></i>
-                  برگشت کارت
-                </button>
-                <button *ngIf="row.cardNumber" mat-menu-item (click)="openDeliveredCard(row)">
-                  <i class="fa fa-podcast mr-2"></i>
-                  تحویل کارت
-                </button>
-                <button *ngIf="row.cardNumber" mat-menu-item (click)="openCancellationCard(row)">
-                  <i class="fa fa-podcast mr-2"></i>
-                  ابطال کارت
-                </button>
+                @if (row.cardNumber) {
+                  <button mat-menu-item (click)="openBackCard(row)">
+                    <i class="fa fa-podcast mr-2"></i>
+                    برگشت کارت
+                  </button>
+                }
+                @if (row.cardNumber) {
+                  <button mat-menu-item (click)="openDeliveredCard(row)">
+                    <i class="fa fa-podcast mr-2"></i>
+                    تحویل کارت
+                  </button>
+                }
+                @if (row.cardNumber) {
+                  <button mat-menu-item (click)="openCancellationCard(row)">
+                    <i class="fa fa-podcast mr-2"></i>
+                    ابطال کارت
+                  </button>
+                }
                 <button mat-menu-item (click)="openCardProfile(row)">
                   <i class="fa fa-eye mr-2"></i>
                   مشاهده اطلاعات کارت

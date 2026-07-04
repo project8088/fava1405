@@ -15,14 +15,16 @@
         </ng-template>
       </mat-tab>
 
-      <mat-tab *ngIf="isAdmin">
-        <ng-template mat-tab-label> فعالیت روی تیکت </ng-template>
-        <ng-template matTabContent>
-          <div class="p-3">
-            <app-ticket-activity></app-ticket-activity>
-          </div>
-        </ng-template>
-      </mat-tab>
+      @if (isAdmin) {
+        <mat-tab>
+          <ng-template mat-tab-label> فعالیت روی تیکت </ng-template>
+          <ng-template matTabContent>
+            <div class="p-3">
+              <app-ticket-activity></app-ticket-activity>
+            </div>
+          </ng-template>
+        </mat-tab>
+      }
 
       <mat-tab>
         <ng-template mat-tab-label> یادداشت های تیکت </ng-template>

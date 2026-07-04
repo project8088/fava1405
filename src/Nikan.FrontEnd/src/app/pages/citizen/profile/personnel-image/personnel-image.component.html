@@ -42,23 +42,28 @@
       </div>
       <div class="col-sm-9 col-md-6 text-center mt-3">
         <!--<button mat-raised-button color="primary" (click)="openUploadDialog()">
-      انتخاب تصویر
-    </button>-->
+        انتخاب تصویر
+      </button>-->
 
         <div class="p-3 d-flex align-items-center justify-content-center">
           <div class="image-box">
-            <mat-spinner diameter="50" *ngIf="loading" color="default"></mat-spinner>
-            <img [src]="baseUrl + imageUrl" class="w-100 h-100 object-cover" *ngIf="imageUrl" />
-            <span
-              *ngIf="personalPicture_Confirmed !== null"
-              [ngClass]="{
-                'text-white bg-danger': personalPicture_Confirmed === 0,
-                'text-white bg-success': personalPicture_Confirmed === 1,
-                'text-white bg-warninr': personalPicture_Confirmed === 2,
-              }"
-            >
-              {{ imageStates[personalPicture_Confirmed] }}
-            </span>
+            @if (loading) {
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            }
+            @if (imageUrl) {
+              <img [src]="baseUrl + imageUrl" class="w-100 h-100 object-cover" />
+            }
+            @if (personalPicture_Confirmed !== null) {
+              <span
+                [ngClass]="{
+                  'text-white bg-danger': personalPicture_Confirmed === 0,
+                  'text-white bg-success': personalPicture_Confirmed === 1,
+                  'text-white bg-warninr': personalPicture_Confirmed === 2,
+                }"
+              >
+                {{ imageStates[personalPicture_Confirmed] }}
+              </span>
+            }
           </div>
         </div>
       </div>

@@ -1,151 +1,153 @@
-<div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
-  <mat-spinner diameter="50" color="default"></mat-spinner>
-</div>
-<div class="citizen-details" *ngIf="!loadingData">
-  <div class="box-header">
-    <h3 class="box-title">مشخصات کارت</h3>
+@if (loadingData) {
+  <div class="d-flex align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
   </div>
-  <div class="row">
-    <div class="col-sm-4">
-      <h4>مشخصات کارت</h4>
-      <ul class="list-group list-group-unbordered">
-        <li class="list-group-item">
-          <strong> کارت : </strong>
-          <strong class="text-info">
-            {{ card.cardTitle }}
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> قیمت کارت : </strong>
-
-          <strong class="text-info">
-            {{ card.cardCost }}
-            ریال
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> ارسال پستی داخل شهر/خارج شهر : </strong>
-
-          <strong class="text-info">
-            {{ card.postalCostInCity }}
-            ریال /
-            {{ card.postalCostOutCity }}
-            ریال
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> هزینه صدور کارت المثنی : </strong>
-
-          <strong class="text-info">
-            {{ card.doubleCardCost }}
-            ریال
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> درصدارزش افزوده خرید کارت /ارسال پستی : </strong>
-
-          <strong class="text-info">
-            {{ card.vatForCardCost }}
-            /
-            {{ card.vatForPost }}
-            درصد
-          </strong>
-        </li>
-      </ul>
+}
+@if (!loadingData) {
+  <div class="citizen-details">
+    <div class="box-header">
+      <h3 class="box-title">مشخصات کارت</h3>
     </div>
-    <div class="col-sm-4">
-      <h4>مشخصات خرید</h4>
-      <ul class="list-group list-group-unbordered">
-        <li class="list-group-item">
-          <strong> تاریخ درخواست : </strong>
-          <strong class="text-info">
-            {{ card.requestDate | jalali }}
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> هزینه نهایی : </strong>
-          <strong class="text-info">
-            {{ card.amountTransaction }}
-            ریال
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> کدرهگیری بانک : </strong>
-          <strong class="text-info">
-            {{ card.transactionBankReferenceId }}
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> زمان پرداخت : </strong>
-          <strong class="text-info">
-            {{ card.transactionOnDate | jalali }}
-          </strong>
-        </li>
-
-        <li class="list-group-item">
-          <strong> نوع تحویل کارت </strong>
-          <strong *ngIf="card.deliverType == 1" class="text-warning"> پستی </strong>
-          <strong *ngIf="card.deliverType == 2" class="text-danger"> تحویل در مرکز </strong>
-          <strong *ngIf="card.deliverType == 1" class="text-info">
-            {{ card.deliveringAddress }}
-          </strong>
-          <strong *ngIf="card.deliverType == 2" class="text-info">
-            {{ card.deliveringCenter }}
-          </strong>
-        </li>
-      </ul>
-    </div>
-    <div class="col-sm-4">
-      <h4>مشخصات چاپ و تحویل</h4>
-      <ul class="list-group list-group-unbordered">
-        <li class="list-group-item">
-          <strong> وضعیت فعلی کارت : </strong>
-
-          <strong class="text-info">
-            {{ card.requestStatuse | enumString: 'cardRequestStatus' }}
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> شماره کارت : </strong>
-          <strong class="text-info">
-            {{ card.cardNumber }}
-          </strong>
-        </li>
-
-        <li class="list-group-item">
-          <strong> تاریخ فعال سازی : </strong>
-          <strong class="text-info">
-            {{ card.cardActivationDate | jalali }}
-          </strong>
-        </li>
-        <li class="list-group-item">
-          <strong> تاریخ انقضاء : </strong>
-          <strong class="text-info">
-            {{ card.cardExpirationDate | jalali }}
-          </strong>
-        </li>
-
-        <li class="list-group-item">
-          <strong> تاریخ تحویل : </strong>
-          <strong class="text-info">
-            {{ card.deliveredOnDate | jalali }}
-          </strong>
-        </li>
-
-        <li class="list-group-item">
-          <strong> تحویل توسط : </strong>
-          <strong class="text-info">
-            {{ card.deliveredByOperation }}
-          </strong>
-        </li>
-
-        <li class="list-group-item">
-          <strong> توضیحات : </strong>
-          <strong class="text-info">
-            {{ card.adminDescription }}
-          </strong>
-        </li>
-      </ul>
+    <div class="row">
+      <div class="col-sm-4">
+        <h4>مشخصات کارت</h4>
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <strong> کارت : </strong>
+            <strong class="text-info">
+              {{ card.cardTitle }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> قیمت کارت : </strong>
+            <strong class="text-info">
+              {{ card.cardCost }}
+              ریال
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> ارسال پستی داخل شهر/خارج شهر : </strong>
+            <strong class="text-info">
+              {{ card.postalCostInCity }}
+              ریال /
+              {{ card.postalCostOutCity }}
+              ریال
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> هزینه صدور کارت المثنی : </strong>
+            <strong class="text-info">
+              {{ card.doubleCardCost }}
+              ریال
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> درصدارزش افزوده خرید کارت /ارسال پستی : </strong>
+            <strong class="text-info">
+              {{ card.vatForCardCost }}
+              /
+              {{ card.vatForPost }}
+              درصد
+            </strong>
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-4">
+        <h4>مشخصات خرید</h4>
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <strong> تاریخ درخواست : </strong>
+            <strong class="text-info">
+              {{ card.requestDate | jalali }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> هزینه نهایی : </strong>
+            <strong class="text-info">
+              {{ card.amountTransaction }}
+              ریال
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> کدرهگیری بانک : </strong>
+            <strong class="text-info">
+              {{ card.transactionBankReferenceId }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> زمان پرداخت : </strong>
+            <strong class="text-info">
+              {{ card.transactionOnDate | jalali }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> نوع تحویل کارت </strong>
+            @if (card.deliverType == 1) {
+              <strong class="text-warning"> پستی </strong>
+            }
+            @if (card.deliverType == 2) {
+              <strong class="text-danger"> تحویل در مرکز </strong>
+            }
+            @if (card.deliverType == 1) {
+              <strong class="text-info">
+                {{ card.deliveringAddress }}
+              </strong>
+            }
+            @if (card.deliverType == 2) {
+              <strong class="text-info">
+                {{ card.deliveringCenter }}
+              </strong>
+            }
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-4">
+        <h4>مشخصات چاپ و تحویل</h4>
+        <ul class="list-group list-group-unbordered">
+          <li class="list-group-item">
+            <strong> وضعیت فعلی کارت : </strong>
+            <strong class="text-info">
+              {{ card.requestStatuse | enumString: 'cardRequestStatus' }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> شماره کارت : </strong>
+            <strong class="text-info">
+              {{ card.cardNumber }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> تاریخ فعال سازی : </strong>
+            <strong class="text-info">
+              {{ card.cardActivationDate | jalali }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> تاریخ انقضاء : </strong>
+            <strong class="text-info">
+              {{ card.cardExpirationDate | jalali }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> تاریخ تحویل : </strong>
+            <strong class="text-info">
+              {{ card.deliveredOnDate | jalali }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> تحویل توسط : </strong>
+            <strong class="text-info">
+              {{ card.deliveredByOperation }}
+            </strong>
+          </li>
+          <li class="list-group-item">
+            <strong> توضیحات : </strong>
+            <strong class="text-info">
+              {{ card.adminDescription }}
+            </strong>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+}

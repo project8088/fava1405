@@ -3,112 +3,106 @@
 </div>
 
 <mat-card class="custom-card">
-  <div class="d-flex align-items-center justify-content-end" *ngIf="!currentUser.isAdmin">
-    <button mat-raised-button color="default" (click)="openNewTicketDialog()">
-      <i class="fa fa-plus mr-2"></i>
-      <span>ارسال تیکت جدید</span>
-    </button>
-  </div>
+  @if (!currentUser.isAdmin) {
+    <div class="d-flex align-items-center justify-content-end">
+      <button mat-raised-button color="default" (click)="openNewTicketDialog()">
+        <i class="fa fa-plus mr-2"></i>
+        <span>ارسال تیکت جدید</span>
+      </button>
+    </div>
+  }
 
-  <form [formGroup]="searchForm" *ngIf="currentUser.isAdmin">
-    <div class="row my-4">
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>عنوان تیکت</mat-label>
-        <input matInput formControlName="title" />
-      </mat-form-field>
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>نام ارسال کننده</mat-label>
-        <input matInput formControlName="ownerName" />
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>مشکل حل شده</mat-label>
-        <mat-select formControlName="isSolved">
-          <mat-option [value]="null">همه</mat-option>
-          <mat-option [value]="false">مشکل حل نشده</mat-option>
-          <mat-option [value]="true">مشکل حل شده</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>از تاریخ</mat-label>
-        <input
-          matInput
-          [matDatepicker]="dpS"
-          formControlName="fromDate"
-          [max]="searchForm.get('toDate').value"
-        />
-        <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
-        <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-          تاریخ شروع را مشخص کنید.
-        </mat-error>
-        <mat-error
-          *ngIf="
+  @if (currentUser.isAdmin) {
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>عنوان تیکت</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>نام ارسال کننده</mat-label>
+          <input matInput formControlName="ownerName" />
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>مشکل حل شده</mat-label>
+          <mat-select formControlName="isSolved">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="false">مشکل حل نشده</mat-option>
+            <mat-option [value]="true">مشکل حل شده</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>از تاریخ</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="fromDate"
+            [max]="searchForm.get('toDate').value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
             searchForm.get('fromDate').errors?.matDatepickerMin ||
             searchForm.get('fromDate').errors?.matDatepickerMax
-          "
-        >
-          تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-        </mat-error>
-        <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>تا تاریخ</mat-label>
-        <input
-          matInput
-          [matDatepicker]="dpE"
-          formControlName="toDate"
-          [min]="searchForm.get('fromDate').value"
-        />
-        <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
-        <mat-datepicker #dpE></mat-datepicker>
-        <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-          تاریخ پایان را مشخص کنید.
-        </mat-error>
-        <mat-error
-          *ngIf="
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>تا تاریخ</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="toDate"
+            [min]="searchForm.get('fromDate').value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
             searchForm.get('toDate').errors?.matDatepickerMin ||
             searchForm.get('toDate').errors?.matDatepickerMax
-          "
-        >
-          تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-        </mat-error>
-        <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>بسته شده</mat-label>
-        <mat-select formControlName="iscolsed">
-          <mat-option [value]="null">همه</mat-option>
-          <mat-option [value]="false">تیکت های بسته شده</mat-option>
-          <mat-option [value]="true">تیکت های باز</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>وضعیت</mat-label>
-        <mat-select formControlName="ticketStatus">
-          <mat-option [value]="null">همه</mat-option>
-          <mat-option [value]="item.key" *ngFor="let item of ticketStatus">{{
-            item.text
-          }}</mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="col d-flex align-items-center justify-content-end">
-        <button mat-raised-button color="default" (click)="applyFilter()">
-          <i class="fa fa-search mr-2"></i>
-          <span>جستجو</span>
-        </button>
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>بسته شده</mat-label>
+          <mat-select formControlName="iscolsed">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="false">تیکت های بسته شده</mat-option>
+            <mat-option [value]="true">تیکت های باز</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>وضعیت</mat-label>
+          <mat-select formControlName="ticketStatus">
+            <mat-option [value]="null">همه</mat-option>
+            @for (item of ticketStatus; track item) {
+              <mat-option [value]="item.key">{{ item.text }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
       </div>
-    </div>
-  </form>
+    </form>
+  }
 
   <div class="d-flex align-items-center justify-content-end p-3">
     <button mat-icon-button color="default" (click)="getList()" matTooltip="بروز رسانی">
@@ -116,12 +110,18 @@
     </button>
   </div>
   <div class="datatable-container mat-elevation-z8">
-    <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-    </div>
-    <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && resultsLength == 0">
-      <strong>اطلاعاتی وجود ندارد!</strong>
-    </div>
+    @if (isLoadingResults) {
+      <div class="datatable-loading-shade">
+        @if (isLoadingResults) {
+          <mat-spinner color="default"></mat-spinner>
+        }
+      </div>
+    }
+    @if (isLoadingResults == false && resultsLength == 0) {
+      <div class="datatable-loading-shade">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+    }
 
     <div class="datatable-table-container">
       <table mat-table [dataSource]="data" class="datatable-table">
@@ -140,14 +140,16 @@
           </td>
         </ng-container>
 
-        <ng-container matColumnDef="organName" *ngIf="currentUser.isAdmin">
-          <th mat-header-cell *matHeaderCellDef>سازمان/واحد</th>
-          <td mat-cell *matCellDef="let row">
-            {{ row.organizationalUnit.parentText }}
-            -
-            {{ row.organizationalUnit.text }}
-          </td>
-        </ng-container>
+        @if (currentUser.isAdmin) {
+          <ng-container matColumnDef="organName">
+            <th mat-header-cell *matHeaderCellDef>سازمان/واحد</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.organizationalUnit.parentText }}
+              -
+              {{ row.organizationalUnit.text }}
+            </td>
+          </ng-container>
+        }
 
         <ng-container matColumnDef="fullName">
           <th mat-header-cell *matHeaderCellDef>ارسال کننده</th>
@@ -186,7 +188,9 @@
         <ng-container matColumnDef="operation">
           <th mat-header-cell *matHeaderCellDef>عملیات</th>
           <td mat-cell *matCellDef="let row">
-            <mat-spinner *ngIf="row.loading" [diameter]="25" color="default"></mat-spinner>
+            @if (row.loading) {
+              <mat-spinner [diameter]="25" color="default"></mat-spinner>
+            }
 
             <button mat-icon-button (click)="viewTicket(row)" matTooltip="مشاهده تیکت">
               <i class="fa fa-eye"></i>

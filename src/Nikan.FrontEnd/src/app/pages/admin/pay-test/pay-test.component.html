@@ -10,16 +10,18 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شناسه پرداخت</mat-label>
           <input matInput formControlName="orderId" maxlength="100" numbersOnly />
-          <mat-error *ngIf="form.get('orderId').errors?.required"
-            >شناسه پرداخت را وارد کنید.</mat-error
-          >
+          @if (form.get('orderId').errors?.required) {
+            <mat-error>شناسه پرداخت را وارد کنید.</mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>مبلغ</mat-label>
           <input matInput formControlName="amount" maxlength="100" numbersOnly />
           <span matSuffix>ریال</span>
-          <mat-error *ngIf="form.get('amount').errors?.required">مبلغ را وارد کنید.</mat-error>
+          @if (form.get('amount').errors?.required) {
+            <mat-error>مبلغ را وارد کنید.</mat-error>
+          }
         </mat-form-field>
 
         <div class="col d-flex align-items-center">
@@ -39,9 +41,9 @@
     >
       <input type="text" name="RefId" id="RefId" [(ngModel)]="RefId" />
     </form>
-    <div class="alert alert-info p-5" *ngIf="waitForRedirectToBank">
-      در حال اتصال به درگاه پرداخت...
-    </div>
+    @if (waitForRedirectToBank) {
+      <div class="alert alert-info p-5">در حال اتصال به درگاه پرداخت...</div>
+    }
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 </mat-card>

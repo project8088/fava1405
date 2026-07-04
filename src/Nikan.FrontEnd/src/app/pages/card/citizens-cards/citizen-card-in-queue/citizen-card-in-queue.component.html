@@ -16,22 +16,24 @@
 
 <mat-card class="custom-card">
   <mat-card-content>
-    <div *ngIf="!loadingData" class="box-info-dash">
-      <div class="row">
-        <div class="col-sm-6">
-          <span> صف : </span><strong>{{ info.name }}</strong>
-        </div>
-        <div class="col-sm-6">
-          <span> اولویت: </span><strong>{{ info.indexOrder }}</strong>
-        </div>
-        <div class="col-sm-6">
-          <span>تعداد کارتهای موجود : </span><strong>{{ info.cardCount }}</strong>
-        </div>
-        <div class="col-sm-6">
-          <span> تاریخ ایجاد: </span><strong>{{ info.onDate | jalali }}</strong>
+    @if (!loadingData) {
+      <div class="box-info-dash">
+        <div class="row">
+          <div class="col-sm-6">
+            <span> صف : </span><strong>{{ info.name }}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span> اولویت: </span><strong>{{ info.indexOrder }}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span>تعداد کارتهای موجود : </span><strong>{{ info.cardCount }}</strong>
+          </div>
+          <div class="col-sm-6">
+            <span> تاریخ ایجاد: </span><strong>{{ info.onDate | jalali }}</strong>
+          </div>
         </div>
       </div>
-    </div>
+    }
 
     <form [formGroup]="searchForm">
       <div class="row my-4">
@@ -89,12 +91,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table

@@ -36,13 +36,13 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="frm.get('deliveredOnDate').errors?.required">
-          تاریخ تحویل کارت را انتخاب کنید.
-        </mat-error>
+        @if (frm.get('deliveredOnDate').errors?.required) {
+          <mat-error> تاریخ تحویل کارت را انتخاب کنید. </mat-error>
+        }
 
-        <mat-error *ngIf="frm.get('deliveredOnDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
+        @if (frm.get('deliveredOnDate').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-12">

@@ -53,7 +53,9 @@
           (click)="commitRefundByAdmin(info.refundId)"
         >
           <span>تایید برگشت </span>
-          <mat-spinner *ngIf="refundloading" diameter="25" color="default"></mat-spinner>
+          @if (refundloading) {
+            <mat-spinner diameter="25" color="default"></mat-spinner>
+          }
         </button>
         <br />
         <strong class="text-danger">
@@ -89,39 +91,46 @@
     </div>
   </div>
 
-  <div *ngIf="showSaveCardNumberPanel" class="box-info-dash">
-    <div class="row">
-      <div class="col-md-12">
-        <form [formGroup]="frm">
-          <div class="row">
-            <mat-form-field class="col-md-12">
-              <mat-label> شماره کارت شهروند (شماره کارت 16 رقمی ) </mat-label>
-              <input matInput formControlName="ownerBankCardNumber" minlength="16" maxlength="16" />
-              <mat-error *ngIf="frm.get('ownerBankCardNumber').errors?.required">
-                شماره کارت شهروند را وارد کنید.
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="col-sm-12">
-              <mat-label>توضیحات</mat-label>
-              <textarea
-                matInput
-                formControlName="adminDescription"
-                rows="5"
-                autocomplete="doNotAutoComplete"
-              ></textarea>
-              <mat-error *ngIf="frm.get('adminDescription').errors?.required">
-                توضیحات را وارد کنید.
-              </mat-error>
-            </mat-form-field>
-          </div>
-        </form>
-        <button mat-raised-button class="btn btn-info" [disabled]="isSaving" (click)="saveInfo()">
-          <span> ذخیره شماره کارت </span>
-          <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
-        </button>
+  @if (showSaveCardNumberPanel) {
+    <div class="box-info-dash">
+      <div class="row">
+        <div class="col-md-12">
+          <form [formGroup]="frm">
+            <div class="row">
+              <mat-form-field class="col-md-12">
+                <mat-label> شماره کارت شهروند (شماره کارت 16 رقمی ) </mat-label>
+                <input
+                  matInput
+                  formControlName="ownerBankCardNumber"
+                  minlength="16"
+                  maxlength="16"
+                />
+                @if (frm.get('ownerBankCardNumber').errors?.required) {
+                  <mat-error> شماره کارت شهروند را وارد کنید. </mat-error>
+                }
+              </mat-form-field>
+              <mat-form-field appearance="outline" class="col-sm-12">
+                <mat-label>توضیحات</mat-label>
+                <textarea
+                  matInput
+                  formControlName="adminDescription"
+                  rows="5"
+                  autocomplete="doNotAutoComplete"
+                ></textarea>
+                @if (frm.get('adminDescription').errors?.required) {
+                  <mat-error> توضیحات را وارد کنید. </mat-error>
+                }
+              </mat-form-field>
+            </div>
+          </form>
+          <button mat-raised-button class="btn btn-info" [disabled]="isSaving" (click)="saveInfo()">
+            <span> ذخیره شماره کارت </span>
+            <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+          </button>
+        </div>
       </div>
     </div>
-  </div>
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>انصراف</button>

@@ -1,52 +1,55 @@
-<li
-  class="nav-item"
-  [routerLinkActive]="'active'"
-  *ngFor="let item of menuItems"
-  [class.dropdown]="item.children.length > 0"
->
-  <a
-    class=""
-    routerLink="{{ item.menuPath }}"
-    *ngIf="item.children.length == 0 && item.isSystem"
-    [class.nav-link]="!hasChild"
-    [class.dropdown-item]="hasChild"
-    [attr.target]="item.openInNewPage ? '_blank' : '_self'"
-  >
-    <i class="{{ item.iconFile }}" *ngIf="item.iconFile"></i>
-    {{ item.menuName }}
-  </a>
-
-  <a
-    class=""
-    href="{{ item.menuPath }}"
-    *ngIf="item.children.length == 0 && !item.isSystem"
-    [class.nav-link]="!hasChild"
-    [class.dropdown-item]="hasChild"
-    [attr.target]="item.openInNewPage ? '_blank' : '_self'"
-  >
-    <i class="{{ item.iconFile }}" *ngIf="item.iconFile"></i>
-    {{ item.menuName }}
-  </a>
-
-  <a
-    class="nav-link dropdown-toggle"
-    href="#"
-    *ngIf="item.children.length > 0"
-    (click)="item.showChild = !item.showChild"
-    id="drp{{ item.id }}"
-    role="button"
-    data-toggle="dropdown"
-    aria-haspopup="true"
-    aria-expanded="false"
-  >
-    {{ item.menuName }}
-  </a>
-  <main-tree-menu
-    [menuItems]="item.children"
-    *ngIf="item.children.length > 0"
-    [hasChild]="true"
-    class="dropdown-menu"
-    [class.show]="item.showChild"
-    [attr.aria-labelledby]="'drp' + item.id"
-  ></main-tree-menu>
-</li>
+@for (item of menuItems; track item) {
+  <li class="nav-item" [routerLinkActive]="'active'" [class.dropdown]="item.children.length > 0">
+    @if (item.children.length == 0 && item.isSystem) {
+      <a
+        class=""
+        routerLink="{{ item.menuPath }}"
+        [class.nav-link]="!hasChild"
+        [class.dropdown-item]="hasChild"
+        [attr.target]="item.openInNewPage ? '_blank' : '_self'"
+      >
+        @if (item.iconFile) {
+          <i class="{{ item.iconFile }}"></i>
+        }
+        {{ item.menuName }}
+      </a>
+    }
+    @if (item.children.length == 0 && !item.isSystem) {
+      <a
+        class=""
+        href="{{ item.menuPath }}"
+        [class.nav-link]="!hasChild"
+        [class.dropdown-item]="hasChild"
+        [attr.target]="item.openInNewPage ? '_blank' : '_self'"
+      >
+        @if (item.iconFile) {
+          <i class="{{ item.iconFile }}"></i>
+        }
+        {{ item.menuName }}
+      </a>
+    }
+    @if (item.children.length > 0) {
+      <a
+        class="nav-link dropdown-toggle"
+        href="#"
+        (click)="item.showChild = !item.showChild"
+        id="drp{{ item.id }}"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        {{ item.menuName }}
+      </a>
+    }
+    @if (item.children.length > 0) {
+      <main-tree-menu
+        [menuItems]="item.children"
+        [hasChild]="true"
+        class="dropdown-menu"
+        [class.show]="item.showChild"
+        [attr.aria-labelledby]="'drp' + item.id"
+      ></main-tree-menu>
+    }
+  </li>
+}

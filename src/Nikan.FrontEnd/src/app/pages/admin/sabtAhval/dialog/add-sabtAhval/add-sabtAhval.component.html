@@ -6,69 +6,68 @@
   </button>
 </div>
 <mat-dialog-content>
-  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loadingData">
-    <mat-spinner diameter="50" color="default"></mat-spinner>
-  </div>
-
-  <form [formGroup]="frm" *ngIf="!loadingData">
-    <div class="row">
-      <mat-form-field class="col-md-3">
-        <mat-label> استعلام</mat-label>
-        <mat-select formControlName="exportType">
-          <mat-option [value]="0"> ثبت احوال </mat-option>
-          <mat-option [value]="1"> وضعیت حیات </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-3">
-        <mat-label>تاریخ شروع </mat-label>
-        <input matInput [matDatepicker]="sdpicker" formControlName="fromDate" />
-        <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
-        <mat-datepicker #sdpicker></mat-datepicker>
-        <mat-error *ngIf="frm.get('fromDate').errors?.required">
-          تاریخ شروع را انتخاب کنید.
-        </mat-error>
-        <mat-error *ngIf="frm.get('fromDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-sm-6 col-md-3">
-        <mat-label>تاریخ پایان </mat-label>
-        <input matInput [matDatepicker]="edpicker" formControlName="toDate" />
-        <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
-        <mat-datepicker #edpicker></mat-datepicker>
-        <mat-error *ngIf="frm.get('toDate').errors?.required">
-          تاریخ پایان را انتخاب کنید.
-        </mat-error>
-        <mat-error *ngIf="frm.get('toDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field class="col-md-3">
-        <mat-label> گروه شهروندی</mat-label>
-        <mat-select formControlName="groupId">
-          <mat-option [value]="null">همه </mat-option>
-          <mat-option *ngFor="let item of baseEnums.citizenGroups" [value]="item.key">
-            {{ item.text }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+  @if (loadingData) {
+    <div class="d-flex align-items-center justify-content-center p-5">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
-  </form>
+  }
+
+  @if (!loadingData) {
+    <form [formGroup]="frm">
+      <div class="row">
+        <mat-form-field class="col-md-3">
+          <mat-label> استعلام</mat-label>
+          <mat-select formControlName="exportType">
+            <mat-option [value]="0"> ثبت احوال </mat-option>
+            <mat-option [value]="1"> وضعیت حیات </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-3">
+          <mat-label>تاریخ شروع </mat-label>
+          <input matInput [matDatepicker]="sdpicker" formControlName="fromDate" />
+          <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
+          <mat-datepicker #sdpicker></mat-datepicker>
+          @if (frm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را انتخاب کنید. </mat-error>
+          }
+          @if (frm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-3">
+          <mat-label>تاریخ پایان </mat-label>
+          <input matInput [matDatepicker]="edpicker" formControlName="toDate" />
+          <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
+          <mat-datepicker #edpicker></mat-datepicker>
+          @if (frm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را انتخاب کنید. </mat-error>
+          }
+          @if (frm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label> گروه شهروندی</mat-label>
+          <mat-select formControlName="groupId">
+            <mat-option [value]="null">همه </mat-option>
+            @for (item of baseEnums.citizenGroups; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </form>
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>انصراف</button>
 
-  <button
-    mat-raised-button
-    color="default"
-    [disabled]="isSaving"
-    (click)="saveInfo()"
-    *ngIf="!loadingData"
-  >
-    <span>تایید </span>
-    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
-  </button>
+  @if (!loadingData) {
+    <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
+      <span>تایید </span>
+      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+    </button>
+  }
 </mat-dialog-actions>

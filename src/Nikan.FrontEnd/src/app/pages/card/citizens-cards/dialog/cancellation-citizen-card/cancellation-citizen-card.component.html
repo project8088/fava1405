@@ -29,13 +29,15 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>دلیل ابطال کارت</mat-label>
         <mat-select formControlName="cardCancellationItemId">
-          <mat-option [value]="'item.key'" *ngFor="let item of baseInfo.cardCancellationItem">
-            {{ item.text }}
-          </mat-option>
+          @for (item of baseInfo.cardCancellationItem; track item) {
+            <mat-option [value]="'item.key'">
+              {{ item.text }}
+            </mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="frm.get('cardCancellationItemId').errors?.required"
-          >دلیل ابطال کارت را مشخص کنید</mat-error
-        >
+        @if (frm.get('cardCancellationItemId').errors?.required) {
+          <mat-error>دلیل ابطال کارت را مشخص کنید</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-6">
@@ -48,13 +50,13 @@
         />
         <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
         <mat-datepicker #dpS></mat-datepicker>
-        <mat-error *ngIf="frm.get('cardCancellationOnDate').errors?.required">
-          تاریخ ابطال کارت را انتخاب کنید.
-        </mat-error>
+        @if (frm.get('cardCancellationOnDate').errors?.required) {
+          <mat-error> تاریخ ابطال کارت را انتخاب کنید. </mat-error>
+        }
 
-        <mat-error *ngIf="frm.get('cardCancellationOnDate').errors?.matDatepickerParse">
-          فرمت تاریخ صحیح نیست
-        </mat-error>
+        @if (frm.get('cardCancellationOnDate').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-12">

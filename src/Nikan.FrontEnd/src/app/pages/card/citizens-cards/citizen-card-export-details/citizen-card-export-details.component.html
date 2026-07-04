@@ -36,12 +36,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -62,11 +68,9 @@
           <ng-container matColumnDef="imageUrl">
             <th mat-header-cell *matHeaderCellDef>تصویر</th>
             <td mat-cell *matCellDef="let row">
-              <img
-                [src]="baseUrl + row.imageUrl"
-                class="img-thumbnail thumb-64"
-                *ngIf="row.imageUrl"
-              />
+              @if (row.imageUrl) {
+                <img [src]="baseUrl + row.imageUrl" class="img-thumbnail thumb-64" />
+              }
             </td>
           </ng-container>
 

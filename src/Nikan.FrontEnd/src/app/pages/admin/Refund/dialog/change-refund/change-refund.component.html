@@ -28,38 +28,38 @@
       <mat-form-field class="col-md-4">
         <mat-label>شناسه سفارش</mat-label>
         <input matInput formControlName="orderId" numbersOnly maxlength="20" />
-        <mat-error *ngIf="frm.get('orderId').errors?.required">
-          شناسه سفارش را وارد کنید.
-        </mat-error>
+        @if (frm.get('orderId').errors?.required) {
+          <mat-error> شناسه سفارش را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>شناسه پرداخت</mat-label>
         <input matInput formControlName="transactionCode" numbersOnly maxlength="20" />
-        <mat-error *ngIf="frm.get('transactionCode').errors?.required">
-          شناسه پرداخت را وارد کنید.
-        </mat-error>
+        @if (frm.get('transactionCode').errors?.required) {
+          <mat-error> شناسه پرداخت را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label> مبلغ تراکنش</mat-label>
         <input matInput formControlName="refundAmount" numbersOnly maxlength="10" />
-        <mat-error *ngIf="frm.get('refundAmount').errors?.required">
-          مبلغ تراکنش را وارد کنید.
-        </mat-error>
+        @if (frm.get('refundAmount').errors?.required) {
+          <mat-error> مبلغ تراکنش را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>مبلغ استرداد </mat-label>
         <input matInput formControlName="totalRefundAmount" numbersOnly maxlength="10" />
-        <mat-error *ngIf="frm.get('totalRefundAmount').errors?.required">
-          مبلغ استرداد را وارد کنید.
-        </mat-error>
+        @if (frm.get('totalRefundAmount').errors?.required) {
+          <mat-error> مبلغ استرداد را وارد کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-md-4">
         <mat-label>شماره کارت استرداد</mat-label>
         <input matInput formControlName="refundCardNumber" maxlength="50" />
-        <mat-error *ngIf="frm.get('refundCardNumber').errors?.required">
-          شماره کارت استرداد را وارد کنید.
-        </mat-error>
+        @if (frm.get('refundCardNumber').errors?.required) {
+          <mat-error> شماره کارت استرداد را وارد کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-6">

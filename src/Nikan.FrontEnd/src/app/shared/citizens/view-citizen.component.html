@@ -12,96 +12,93 @@
     <button (click)="back()" mat-stroked-button color="default">بازگشت</button>
   </mat-card-header>
   <mat-card-content>
-    <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
-      <mat-spinner diameter="35" color="default"></mat-spinner>
-    </div>
-    <div class="p-3" *ngIf="!loading">
-      <div class="row">
-        <div class="col-sm-6 col-md-4">
-          <span>کدملی : </span>
-          <strong>{{ info.nationCode }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>نام : </span>
-          <strong>{{ info.firstName }}</strong>
-          &nbsp;
-          <strong>{{ info.lastName }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>نام پدر: </span>
-          <strong>{{ info.fatherName }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span> ثبت نام از طریق خدمت : </span>
-          <strong>{{ info.registerByService }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>وضعیت تاهل: </span>
-          <strong>{{ info.mariageStatus | enumString: 'mariageStatus' }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>تاریخ تولد: </span>
-          <strong>{{ info.birthDate | jalali }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>شماره موبایل: </span>
-          <strong>{{ info.mobileNumber }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>سطج تحصبلات: </span>
-          <strong>{{ info.educationLevel | enumString: 'educationLevel' }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>گروه تحصیلی: </span>
-          <strong>{{ info.educationGroup }}</strong>
-        </div>
-
-        <div class="col-sm-6 col-md-4">
-          <span>وضعیت تحصیلی: </span>
-          <strong>
-            {{ info.educationStatues | enumString: 'educationStatues' }}
-          </strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>رشته تحصیلی: </span>
-          <strong>{{ info.educationField }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>گروه شغلی: </span>
-          <strong>{{ info.jobGroup }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>عنوان شغل: </span>
-          <strong>{{ info.jobTitle }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>آدرس ایمیل: </span>
-          <strong>{{ info.eMail }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>تاریخ ثبت نام: </span>
-          <strong>{{ info.creationDate | jalali }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>وضعیت ثبت احوال: </span>
-          <strong>{{ info.sabtStatus | enumString: 'sabtStatus' }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>وضعیت تصویر پرسنلی: </span>
-          <strong>{{ info.personalPicture_Confirmed | enumString: 'personalPicture' }}</strong>
-        </div>
-        <div class="col-sm-6 col-md-4">
-          <span>آخرین برورسانی اطلاعات: </span>
-          <strong>{{ info.lastUpdateOnDate | jalali }}</strong>
+    @if (loading) {
+      <div class="d-flex align-items-center justify-content-center p-5">
+        <mat-spinner diameter="35" color="default"></mat-spinner>
+      </div>
+    }
+    @if (!loading) {
+      <div class="p-3">
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <span>کدملی : </span>
+            <strong>{{ info.nationCode }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>نام : </span>
+            <strong>{{ info.firstName }}</strong>
+            &nbsp;
+            <strong>{{ info.lastName }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>نام پدر: </span>
+            <strong>{{ info.fatherName }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span> ثبت نام از طریق خدمت : </span>
+            <strong>{{ info.registerByService }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>وضعیت تاهل: </span>
+            <strong>{{ info.mariageStatus | enumString: 'mariageStatus' }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>تاریخ تولد: </span>
+            <strong>{{ info.birthDate | jalali }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>شماره موبایل: </span>
+            <strong>{{ info.mobileNumber }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>سطج تحصبلات: </span>
+            <strong>{{ info.educationLevel | enumString: 'educationLevel' }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>گروه تحصیلی: </span>
+            <strong>{{ info.educationGroup }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>وضعیت تحصیلی: </span>
+            <strong>
+              {{ info.educationStatues | enumString: 'educationStatues' }}
+            </strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>رشته تحصیلی: </span>
+            <strong>{{ info.educationField }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>گروه شغلی: </span>
+            <strong>{{ info.jobGroup }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>عنوان شغل: </span>
+            <strong>{{ info.jobTitle }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>آدرس ایمیل: </span>
+            <strong>{{ info.eMail }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>تاریخ ثبت نام: </span>
+            <strong>{{ info.creationDate | jalali }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>وضعیت ثبت احوال: </span>
+            <strong>{{ info.sabtStatus | enumString: 'sabtStatus' }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>وضعیت تصویر پرسنلی: </span>
+            <strong>{{ info.personalPicture_Confirmed | enumString: 'personalPicture' }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>آخرین برورسانی اطلاعات: </span>
+            <strong>{{ info.lastUpdateOnDate | jalali }}</strong>
+          </div>
         </div>
       </div>
-    </div>
+    }
 
     <!-- ----------------------------------------------------------------------- -->
 

@@ -11,22 +11,24 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>وضعیت </mat-label>
         <mat-select formControlName="userCompanyAccountStatus" (selectionChange)="changeStatus()">
-          <mat-option [value]="item.key" *ngFor="let item of userCompanyAccountStatus">{{
-            item.text
-          }}</mat-option>
+          @for (item of userCompanyAccountStatus; track item) {
+            <mat-option [value]="item.key">{{ item.text }}</mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="form.get('userCompanyAccountStatus').errors?.required">
-          وضعیت را مشخص کنید.
-        </mat-error>
+        @if (form.get('userCompanyAccountStatus').errors?.required) {
+          <mat-error> وضعیت را مشخص کنید. </mat-error>
+        }
       </mat-form-field>
 
-      <mat-form-field class="col-sm-12" *ngIf="form.get('userCompanyAccountStatus').value == 2">
-        <mat-label>دلیل رد</mat-label>
-        <input matInput formControlName="rejectDesription" autocomplete="doNotAutoComplete" />
-        <mat-error *ngIf="form.get('rejectDesription').errors?.required">
-          دلیل رد را وارد کنید.
-        </mat-error>
-      </mat-form-field>
+      @if (form.get('userCompanyAccountStatus').value == 2) {
+        <mat-form-field class="col-sm-12">
+          <mat-label>دلیل رد</mat-label>
+          <input matInput formControlName="rejectDesription" autocomplete="doNotAutoComplete" />
+          @if (form.get('rejectDesription').errors?.required) {
+            <mat-error> دلیل رد را وارد کنید. </mat-error>
+          }
+        </mat-form-field>
+      }
     </div>
   </form>
 </mat-dialog-content>

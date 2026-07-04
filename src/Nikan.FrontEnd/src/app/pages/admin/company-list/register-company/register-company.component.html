@@ -15,26 +15,26 @@
             autocomplete="doNotAutoComplete"
             maxlength="500"
           />
-          <mat-error *ngIf="registerForm.get('companyName').errors?.required">
-            عنوان شرکت را را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('companyName').errors?.maxlength">
-            حداکثر 500 کاراکتر
-          </mat-error>
+          @if (registerForm.get('companyName').errors?.required) {
+            <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('companyName').errors?.maxlength) {
+            <mat-error> حداکثر 500 کاراکتر </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>عنوان شرکت (لاتین)</mat-label>
           <input matInput formControlName="englishName" autocomplete="doNotAutoComplete" />
-          <mat-error *ngIf="registerForm.get('englishName').errors?.required">
-            عنوان شرکت را را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('englishName').errors?.maxlength">
-            حداکثر 500 کاراکتر
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('englishName').errors?.pattern">
-            فقط کاراکتر های لاتین مجاز است.
-          </mat-error>
+          @if (registerForm.get('englishName').errors?.required) {
+            <mat-error> عنوان شرکت را را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('englishName').errors?.maxlength) {
+            <mat-error> حداکثر 500 کاراکتر </mat-error>
+          }
+          @if (registerForm.get('englishName').errors?.pattern) {
+            <mat-error> فقط کاراکتر های لاتین مجاز است. </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
@@ -45,15 +45,15 @@
             autocomplete="doNotAutoComplete"
             maxlength="100"
           />
-          <mat-error *ngIf="registerForm.get('companyRepresentative').errors?.required">
-            نام نماینده شرکت را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('companyRepresentative').errors?.pattern">
-            فقط از کاراکترهای فارسی استفاده کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('companyRepresentative').errors?.maxlength">
-            حداکثر 100 کاراکتر
-          </mat-error>
+          @if (registerForm.get('companyRepresentative').errors?.required) {
+            <mat-error> نام نماینده شرکت را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('companyRepresentative').errors?.pattern) {
+            <mat-error> فقط از کاراکترهای فارسی استفاده کنید. </mat-error>
+          }
+          @if (registerForm.get('companyRepresentative').errors?.maxlength) {
+            <mat-error> حداکثر 100 کاراکتر </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
@@ -66,92 +66,98 @@
             maxlength="4"
             minlength="4"
           />
-          <mat-error *ngIf="registerForm.get('establishedYear').errors?.required">
-            سال تاسیس را وارد کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              registerForm.get('establishedYear').errors?.maxlength ||
-              registerForm.get('establishedYear').errors?.minlength
-            "
-          >
-            سال تاسیس را 4 رقمی وارد کنید
-          </mat-error>
+          @if (registerForm.get('establishedYear').errors?.required) {
+            <mat-error> سال تاسیس را وارد کنید. </mat-error>
+          }
+          @if (
+            registerForm.get('establishedYear').errors?.maxlength ||
+            registerForm.get('establishedYear').errors?.minlength
+          ) {
+            <mat-error> سال تاسیس را 4 رقمی وارد کنید </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شماره موبایل</mat-label>
           <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
-          <mat-error *ngIf="registerForm.get('mobileNumber').errors?.required">
-            شماره موبایل را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('mobileNumber').errors?.invalid">
-            شماره موبایل صحیح نیست.
-          </mat-error>
+          @if (registerForm.get('mobileNumber').errors?.required) {
+            <mat-error> شماره موبایل را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('mobileNumber').errors?.invalid) {
+            <mat-error> شماره موبایل صحیح نیست. </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>ایمیل</mat-label>
           <input matInput formControlName="email" maxlength="50" />
-          <mat-error *ngIf="registerForm.get('email').errors?.required">
-            ایمیل را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('email').errors?.email"> ایمیل صحیح نیست. </mat-error>
+          @if (registerForm.get('email').errors?.required) {
+            <mat-error> ایمیل را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('email').errors?.email) {
+            <mat-error> ایمیل صحیح نیست. </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>کد اقتصادی شرکت</mat-label>
           <input matInput formControlName="txtTinNo" maxlength="20" numbersOnly />
-          <mat-error *ngIf="registerForm.get('txtTinNo').errors?.required">
-            کد اقتصادی شرکت را وارد کنید.
-          </mat-error>
+          @if (registerForm.get('txtTinNo').errors?.required) {
+            <mat-error> کد اقتصادی شرکت را وارد کنید. </mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>شماره ثبت شرکت</mat-label>
           <input matInput formControlName="txtRegNO" maxlength="20" numbersOnly />
-          <mat-error *ngIf="registerForm.get('txtRegNO').errors?.required">
-            شماره ثبت شرکت را وارد کنید.
-          </mat-error>
+          @if (registerForm.get('txtRegNO').errors?.required) {
+            <mat-error> شماره ثبت شرکت را وارد کنید. </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام کاربری</mat-label>
           <input matInput type="text" formControlName="userName" autocomplete="doNotAutoComplete" />
-          <mat-error *ngIf="registerForm.get('userName').errors?.required">
-            نام کاربری را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('userName').errors?.pattern">
-            فقط از کاراکترهای لاتین استفاده کنید
-          </mat-error>
+          @if (registerForm.get('userName').errors?.required) {
+            <mat-error> نام کاربری را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('userName').errors?.pattern) {
+            <mat-error> فقط از کاراکترهای لاتین استفاده کنید </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>کلمه عبور</mat-label>
           <input matInput type="password" formControlName="password" autocomplete="new-password" />
-          <mat-error *ngIf="registerForm.get('password').errors?.required">
-            کلمه عبور را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('password').errors?.weakPassword">
-            کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
-          </mat-error>
+          @if (registerForm.get('password').errors?.required) {
+            <mat-error> کلمه عبور را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('password').errors?.weakPassword) {
+            <mat-error>
+              کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
+            </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>تکرار کلمه عبور</mat-label>
           <input matInput type="password" formControlName="confirmPassword" autocomplete="off" />
-          <mat-error *ngIf="registerForm.get('confirmPassword').errors?.required">
-            تکرار کلمه عبور را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="registerForm.get('confirmPassword').errors?.weakPassword">
-            کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
-          </mat-error>
+          @if (registerForm.get('confirmPassword').errors?.required) {
+            <mat-error> تکرار کلمه عبور را وارد کنید. </mat-error>
+          }
+          @if (registerForm.get('confirmPassword').errors?.weakPassword) {
+            <mat-error>
+              کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
+            </mat-error>
+          }
         </mat-form-field>
       </div>
 
-      <div *ngIf="registerForm.hasError('notSame') && registerForm.get('confirmPassword').value">
-        <span class="text-danger"> تکرار کلمه عبور صحیح نیست! </span>
-      </div>
+      @if (registerForm.hasError('notSame') && registerForm.get('confirmPassword').value) {
+        <div>
+          <span class="text-danger"> تکرار کلمه عبور صحیح نیست! </span>
+        </div>
+      }
     </form>
   </mat-card-content>
   <mat-card-footer class="p-3 d-flex justify-content-end">

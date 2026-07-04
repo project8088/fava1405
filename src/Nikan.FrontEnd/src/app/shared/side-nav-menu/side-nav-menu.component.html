@@ -7,8 +7,12 @@
         matTooltip="برای تغییر تصویر پروفایل خود کلیک کنید."
         (click)="openUploadDialog()"
       >
-        <img class="object-fit-cover" src="assets/images/avatar.png" *ngIf="!userImage" />
-        <img class="object-fit-cover" [src]="baseUrl + userImage" *ngIf="userImage" />
+        @if (!userImage) {
+          <img class="object-fit-cover" src="assets/images/avatar.png" />
+        }
+        @if (userImage) {
+          <img class="object-fit-cover" [src]="baseUrl + userImage" />
+        }
       </div>
       <div>
         <div class="username">{{ user?.userName }}</div>
@@ -19,7 +23,7 @@
   <menu-dynamic [menu]="menuItems" class="daynamic-menu"></menu-dynamic>
 
   <!--<a (click)="logout()" class="exit">
-          <i class="fa fa-power-off"></i>
-          <span>خروج از حساب کاربری</span>
-      </a>-->
+  <i class="fa fa-power-off"></i>
+  <span>خروج از حساب کاربری</span>
+</a>-->
 </div>

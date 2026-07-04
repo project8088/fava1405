@@ -5,14 +5,14 @@ import { ApiResult } from 'src/app/core/models/response';
 import { DataService } from 'src/app/core/services/data-service.service';
 import { ServerApis } from 'src/app/core/server-apis';
 import { ToastrService } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
+
 import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-redirect',
   templateUrl: './redirect.component.html',
   styleUrls: ['./redirect.component.scss'],
-  imports: [CommonModule, MatCardModule],
+  imports: [MatCardModule],
 })
 export class RedirectComponent implements OnInit {
   serviceId;

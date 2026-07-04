@@ -54,42 +54,50 @@
           <mat-form-field appearance="outline" class="w-100">
             <mat-label>ملیت</mat-label>
             <mat-select formControlName="nationality">
-              <mat-option *ngFor="let item of nationalityList" [value]="item.key">
-                {{ item.text }}
-              </mat-option>
+              @for (item of nationalityList; track item) {
+                <mat-option [value]="item.key">
+                  {{ item.text }}
+                </mat-option>
+              }
             </mat-select>
-            <mat-hint
-              class="text-danger"
-              *ngIf="form.controls['nationality'].errors && ngForm.submitted"
-            >
-              <span *ngIf="form.controls['nationality'].errors['required']">
-                لطفا ملیت خود را انتخاب کنید
-              </span>
-            </mat-hint>
+            @if (form.controls['nationality'].errors && ngForm.submitted) {
+              <mat-hint class="text-danger">
+                @if (form.controls['nationality'].errors['required']) {
+                  <span> لطفا ملیت خود را انتخاب کنید </span>
+                }
+              </mat-hint>
+            }
           </mat-form-field>
 
           <mat-form-field class="w-100 pb-0 mb-1" appearance="outline">
-            <mat-label *ngIf="isIranian()">کدملی</mat-label>
-            <mat-label *ngIf="!isIranian()">شماره گذرنامه</mat-label>
+            @if (isIranian()) {
+              <mat-label>کدملی</mat-label>
+            }
+            @if (!isIranian()) {
+              <mat-label>شماره گذرنامه</mat-label>
+            }
             <input formControlName="nationCode" numbersOnly matInput minlength="10" />
-            <mat-hint
-              class="text-danger"
-              *ngIf="form.controls['nationCode'].errors && ngForm.submitted"
-            >
-              <span *ngIf="form.controls['nationCode'].errors['required']">
-                {{ isIranian() ? 'کد ملی خود را وارد کنید' : 'شماره گذرنامه خود را وارد کنید' }}
-              </span>
-              <span *ngIf="form.controls['nationCode'].errors['pattern']">
-                {{
-                  isIranian()
-                    ? 'کد ملی باید حداقل 10 کارکتر باشد'
-                    : 'شماره گذرنامه باید حداقل 10 کارکتر باشد'
-                }}
-              </span>
-            </mat-hint>
-            <mat-error *ngIf="form.get('nationCode').errors?.invalid">
-              کد ملی وارد شده صحیح نیست
-            </mat-error>
+            @if (form.controls['nationCode'].errors && ngForm.submitted) {
+              <mat-hint class="text-danger">
+                @if (form.controls['nationCode'].errors['required']) {
+                  <span>
+                    {{ isIranian() ? 'کد ملی خود را وارد کنید' : 'شماره گذرنامه خود را وارد کنید' }}
+                  </span>
+                }
+                @if (form.controls['nationCode'].errors['pattern']) {
+                  <span>
+                    {{
+                      isIranian()
+                        ? 'کد ملی باید حداقل 10 کارکتر باشد'
+                        : 'شماره گذرنامه باید حداقل 10 کارکتر باشد'
+                    }}
+                  </span>
+                }
+              </mat-hint>
+            }
+            @if (form.get('nationCode').errors?.invalid) {
+              <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
+            }
           </mat-form-field>
 
           <mat-form-field class="w-100" appearance="outline">
@@ -99,18 +107,16 @@
               matInput
               placeholder="شماره موبایل خود را وارد کنید..."
             />
-            <mat-hint
-              class="text-danger"
-              *ngIf="form.controls['mobileNumber'].errors && ngForm.submitted"
-            >
-              <span *ngIf="form.controls['mobileNumber'].errors['required']">
-                لطفا شماره موبایل خود را وارد کنید
-              </span>
-
-              <span *ngIf="form.controls['mobileNumber'].errors['pattern']">
-                شماره موبایل صحیح نیست
-              </span>
-            </mat-hint>
+            @if (form.controls['mobileNumber'].errors && ngForm.submitted) {
+              <mat-hint class="text-danger">
+                @if (form.controls['mobileNumber'].errors['required']) {
+                  <span> لطفا شماره موبایل خود را وارد کنید </span>
+                }
+                @if (form.controls['mobileNumber'].errors['pattern']) {
+                  <span> شماره موبایل صحیح نیست </span>
+                }
+              </mat-hint>
+            }
           </mat-form-field>
 
           <div class="my-3">
@@ -123,14 +129,13 @@
             </mat-checkbox>
 
             <div>
-              <mat-hint
-                class="text-danger"
-                *ngIf="form.controls['isAgree'].errors && ngForm.submitted"
-              >
-                <span *ngIf="form.controls['isAgree'].errors['required']">
-                  انتخاب این گزینه ضروری است
-                </span>
-              </mat-hint>
+              @if (form.controls['isAgree'].errors && ngForm.submitted) {
+                <mat-hint class="text-danger">
+                  @if (form.controls['isAgree'].errors['required']) {
+                    <span> انتخاب این گزینه ضروری است </span>
+                  }
+                </mat-hint>
+              }
             </div>
           </div>
 

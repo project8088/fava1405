@@ -22,20 +22,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ درخواست نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ درخواست نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="col-md-3">
           <mat-label>تا تاریخ </mat-label>
@@ -47,20 +45,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <div class="col d-flex align-items-center justify-content-end">
@@ -83,12 +79,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -157,29 +159,35 @@
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
             <td mat-cell *matCellDef="let row">
-              <mat-spinner *ngIf="row.loading" diameter="25" color="default"></mat-spinner>
-              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!row.loading">
-                <mat-icon>more_vert</mat-icon>
-              </button>
+              @if (row.loading) {
+                <mat-spinner diameter="25" color="default"></mat-spinner>
+              }
+              @if (!row.loading) {
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              }
               <mat-menu #menu="matMenu">
-                <button *ngIf="!row.isSend" mat-menu-item (click)="sendToPrint(row)">
-                  <i class="fa fa-podcast mr-2"></i>
-                  ارسال برای چاپ
-                </button>
+                @if (!row.isSend) {
+                  <button mat-menu-item (click)="sendToPrint(row)">
+                    <i class="fa fa-podcast mr-2"></i>
+                    ارسال برای چاپ
+                  </button>
+                }
 
-                <button *ngIf="!row.isReceive" mat-menu-item (click)="delete(row)">
-                  <i class="text-danger fa fa-trash mr-2"></i>
-                  <span class="text-danger">حذف خروجی</span>
-                </button>
+                @if (!row.isReceive) {
+                  <button mat-menu-item (click)="delete(row)">
+                    <i class="text-danger fa fa-trash mr-2"></i>
+                    <span class="text-danger">حذف خروجی</span>
+                  </button>
+                }
 
-                <button
-                  *ngIf="!row.isReceive && row.isSend"
-                  mat-menu-item
-                  (click)="openGetCardNumberDialog(row)"
-                >
-                  <i class="fa fa-podcast mr-2"></i>
-                  شماره گذاری
-                </button>
+                @if (!row.isReceive && row.isSend) {
+                  <button mat-menu-item (click)="openGetCardNumberDialog(row)">
+                    <i class="fa fa-podcast mr-2"></i>
+                    شماره گذاری
+                  </button>
+                }
 
                 <button mat-menu-item routerLink="/card/export-details-citizen-card/{{ row.id }}">
                   <i class="fa fa-money-bill mr-2"></i>
@@ -202,9 +210,9 @@
                 </button>
 
                 <!--<button mat-menu-item (click)="createZipFilePicture(row)">
-                  <i class="fa fa-podcast mr-2"></i>
-                  ایجاد فایل تصاویر
-                </button>-->
+                <i class="fa fa-podcast mr-2"></i>
+                ایجاد فایل تصاویر
+              </button>-->
               </mat-menu>
             </td>
           </ng-container>

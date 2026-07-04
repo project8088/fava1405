@@ -13,16 +13,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let message of events">
-            <th>{{ message.createDate | jalali: 'HH:mm YY/MM/DD' }}</th>
-            <td>
-              {{ message.eventSection }}
-            </td>
-            <td>
-              {{ message.userIp }}
-            </td>
-            <td>{{ message.description }}</td>
-          </tr>
+          @for (message of events; track message) {
+            <tr>
+              <th>{{ message.createDate | jalali: 'HH:mm YY/MM/DD' }}</th>
+              <td>
+                {{ message.eventSection }}
+              </td>
+              <td>
+                {{ message.userIp }}
+              </td>
+              <td>{{ message.description }}</td>
+            </tr>
+          }
         </tbody>
       </table>
     </div>

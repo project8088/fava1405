@@ -1,123 +1,117 @@
-<div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-  <mat-spinner diameter="50" color="default"></mat-spinner>
-</div>
-<form [formGroup]="form" *ngIf="!loading">
-  <div class="row my-4">
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>شماره پرونده</mat-label>
-      <input matInput formControlName="fileCode" numbersOnly maxlength="20" />
-      <mat-error *ngIf="form.get('fileCode').errors?.required">شماره پرونده را وارد کنید</mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>کد قرارداد</mat-label>
-      <input matInput formControlName="contractCode" numbersOnly maxlength="20" />
-      <mat-error *ngIf="form.get('contractCode').errors?.required"
-        >کد قرارداد را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>تاریخ قراداد</mat-label>
-      <input matInput [matDatepicker]="cpicker" formControlName="contractOnDate" />
-      <mat-datepicker-toggle matSuffix [for]="cpicker"></mat-datepicker-toggle>
-      <mat-datepicker #cpicker></mat-datepicker>
-      <mat-error *ngIf="form.get('contractOnDate').errors?.required">
-        تاریخ قراداد را انتخاب کنید.
-      </mat-error>
-      <mat-error *ngIf="form.get('contractOnDate').errors?.matDatepickerParse">
-        فرمت تاریخ صحیح نیست
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>تاریخ قراداد آب</mat-label>
-      <input matInput [matDatepicker]="wpicker" formControlName="waterContractOnDate" />
-      <mat-datepicker-toggle matSuffix [for]="wpicker"></mat-datepicker-toggle>
-      <mat-datepicker #wpicker></mat-datepicker>
-      <mat-error *ngIf="form.get('waterContractOnDate').errors?.required">
-        تاریخ قراداد آب را انتخاب کنید.
-      </mat-error>
-      <mat-error *ngIf="form.get('waterContractOnDate').errors?.matDatepickerParse">
-        فرمت تاریخ صحیح نیست
-      </mat-error>
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>شناسه واریز قبض آب</mat-label>
-      <input matInput formControlName="waterDepositId" maxlength="30" />
-      <mat-error *ngIf="form.get('waterDepositId').errors?.required"
-        >شناسه واریز قبض آب را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>کد تفصیلی آب</mat-label>
-      <input matInput formControlName="waterCode" maxlength="30" />
-      <mat-error *ngIf="form.get('waterCode').errors?.required"
-        >کد تفصیلی آب را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>شناسه واریزی قبض شارژ</mat-label>
-      <input matInput formControlName="chargeDepositId" maxlength="30" />
-      <mat-error *ngIf="form.get('chargeDepositId').errors?.required"
-        >شناسه واریزی قبض شارژ را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>کد تفصیلی شارژ</mat-label>
-      <input matInput formControlName="chargeCode" maxlength="30" />
-      <mat-error *ngIf="form.get('chargeCode').errors?.required"
-        >کد تفصیلی شارژ را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>شارژ معین کد</mat-label>
-      <input matInput formControlName="chargeMoeinCode" maxlength="30" />
-      <mat-error *ngIf="form.get('chargeMoeinCode').errors?.required"
-        >شارژ معین کد را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <mat-form-field class="col-sm-6 col-md-4">
-      <mat-label>حجم مخازن آب هوایی</mat-label>
-      <input matInput formControlName="volumeAirTanks" numbersOnly maxlength="20" />
-      <mat-error *ngIf="form.get('volumeAirTanks').errors?.required"
-        >حجم مخازن آب هوایی را وارد کنید</mat-error
-      >
-    </mat-form-field>
-
-    <p class="col-sm-12">
-      <mat-checkbox color="default" formControlName="isBusinessUnit">
-        این مشترک دارای واحد تجاری است؟
-      </mat-checkbox>
-    </p>
-
-    <p class="col-sm-12">
-      <mat-checkbox color="default" formControlName="isBuildingCompany">
-        این شرکت در حال ساخت می باشد؟
-      </mat-checkbox>
-    </p>
-    <p class="col-sm-12">
-      <mat-checkbox color="default" formControlName="issueWaterBill">
-        قبض آب صادر شود؟
-      </mat-checkbox>
-    </p>
-    <p class="col-sm-12">
-      <mat-checkbox color="default" formControlName="issueChargeBill">
-        قبض شارژ صادر شود؟
-      </mat-checkbox>
-    </p>
-
-    <div class="col d-flex align-items-center justify-content-end">
-      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
-        <span>ذخیره</span>
-        <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
-      </button>
-    </div>
+@if (loading) {
+  <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
   </div>
-</form>
+}
+@if (!loading) {
+  <form [formGroup]="form">
+    <div class="row my-4">
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>شماره پرونده</mat-label>
+        <input matInput formControlName="fileCode" numbersOnly maxlength="20" />
+        @if (form.get('fileCode').errors?.required) {
+          <mat-error>شماره پرونده را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>کد قرارداد</mat-label>
+        <input matInput formControlName="contractCode" numbersOnly maxlength="20" />
+        @if (form.get('contractCode').errors?.required) {
+          <mat-error>کد قرارداد را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>تاریخ قراداد</mat-label>
+        <input matInput [matDatepicker]="cpicker" formControlName="contractOnDate" />
+        <mat-datepicker-toggle matSuffix [for]="cpicker"></mat-datepicker-toggle>
+        <mat-datepicker #cpicker></mat-datepicker>
+        @if (form.get('contractOnDate').errors?.required) {
+          <mat-error> تاریخ قراداد را انتخاب کنید. </mat-error>
+        }
+        @if (form.get('contractOnDate').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>تاریخ قراداد آب</mat-label>
+        <input matInput [matDatepicker]="wpicker" formControlName="waterContractOnDate" />
+        <mat-datepicker-toggle matSuffix [for]="wpicker"></mat-datepicker-toggle>
+        <mat-datepicker #wpicker></mat-datepicker>
+        @if (form.get('waterContractOnDate').errors?.required) {
+          <mat-error> تاریخ قراداد آب را انتخاب کنید. </mat-error>
+        }
+        @if (form.get('waterContractOnDate').errors?.matDatepickerParse) {
+          <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>شناسه واریز قبض آب</mat-label>
+        <input matInput formControlName="waterDepositId" maxlength="30" />
+        @if (form.get('waterDepositId').errors?.required) {
+          <mat-error>شناسه واریز قبض آب را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>کد تفصیلی آب</mat-label>
+        <input matInput formControlName="waterCode" maxlength="30" />
+        @if (form.get('waterCode').errors?.required) {
+          <mat-error>کد تفصیلی آب را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>شناسه واریزی قبض شارژ</mat-label>
+        <input matInput formControlName="chargeDepositId" maxlength="30" />
+        @if (form.get('chargeDepositId').errors?.required) {
+          <mat-error>شناسه واریزی قبض شارژ را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>کد تفصیلی شارژ</mat-label>
+        <input matInput formControlName="chargeCode" maxlength="30" />
+        @if (form.get('chargeCode').errors?.required) {
+          <mat-error>کد تفصیلی شارژ را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>شارژ معین کد</mat-label>
+        <input matInput formControlName="chargeMoeinCode" maxlength="30" />
+        @if (form.get('chargeMoeinCode').errors?.required) {
+          <mat-error>شارژ معین کد را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field class="col-sm-6 col-md-4">
+        <mat-label>حجم مخازن آب هوایی</mat-label>
+        <input matInput formControlName="volumeAirTanks" numbersOnly maxlength="20" />
+        @if (form.get('volumeAirTanks').errors?.required) {
+          <mat-error>حجم مخازن آب هوایی را وارد کنید</mat-error>
+        }
+      </mat-form-field>
+      <p class="col-sm-12">
+        <mat-checkbox color="default" formControlName="isBusinessUnit">
+          این مشترک دارای واحد تجاری است؟
+        </mat-checkbox>
+      </p>
+      <p class="col-sm-12">
+        <mat-checkbox color="default" formControlName="isBuildingCompany">
+          این شرکت در حال ساخت می باشد؟
+        </mat-checkbox>
+      </p>
+      <p class="col-sm-12">
+        <mat-checkbox color="default" formControlName="issueWaterBill">
+          قبض آب صادر شود؟
+        </mat-checkbox>
+      </p>
+      <p class="col-sm-12">
+        <mat-checkbox color="default" formControlName="issueChargeBill">
+          قبض شارژ صادر شود؟
+        </mat-checkbox>
+      </p>
+      <div class="col d-flex align-items-center justify-content-end">
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          <span>ذخیره</span>
+          <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
+        </button>
+      </div>
+    </div>
+  </form>
+}

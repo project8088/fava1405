@@ -28,31 +28,33 @@
       <mat-form-field class="col-md-4">
         <mat-label>شماره نامه</mat-label>
         <input matInput formControlName="letterNumber" numbersOnly maxlength="10" />
-        <mat-error *ngIf="frm.get('letterNumber').errors?.required">
-          شماره نامه را وارد کنید.
-        </mat-error>
+        @if (frm.get('letterNumber').errors?.required) {
+          <mat-error> شماره نامه را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>نام واحد</mat-label>
         <input matInput formControlName="unitName" maxlength="50" />
-        <mat-error *ngIf="frm.get('unitName').errors?.required"> نام واحد را وارد کنید. </mat-error>
+        @if (frm.get('unitName').errors?.required) {
+          <mat-error> نام واحد را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>نام کلاس</mat-label>
         <input matInput formControlName="className" maxlength="50" />
-        <mat-error *ngIf="frm.get('className').errors?.required">
-          نام کلاس را وارد کنید.
-        </mat-error>
+        @if (frm.get('className').errors?.required) {
+          <mat-error> نام کلاس را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>کد ملی مسئول استرداد</mat-label>
         <input matInput formControlName="nationalCode" numbersOnly maxlength="10" />
-        <mat-error *ngIf="frm.get('nationalCode').errors?.required">
-          کد ملی را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="frm.get('nationalCode').errors?.invalid">
-          کد ملی وارد شده صحیح نیست
-        </mat-error>
+        @if (frm.get('nationalCode').errors?.required) {
+          <mat-error> کد ملی را وارد کنید. </mat-error>
+        }
+        @if (frm.get('nationalCode').errors?.invalid) {
+          <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-6">

@@ -27,14 +27,18 @@
     </form>
 
     <div class="d-flex align-items-center justify-content-end mb-3">
-      <button mat-raised-button color="accent" (click)="sendSms()" class="mx-2" *ngIf="!sendingSms">
-        <i class="fa fa-envelope mr-2"></i>
-        ارسال پیامک
-      </button>
-      <div class="d-flex align-items-center px-3" *ngIf="sendingSms">
-        <mat-spinner diameter="20" color="default"></mat-spinner>
-        <span>در حال ارسال پیامک</span>
-      </div>
+      @if (!sendingSms) {
+        <button mat-raised-button color="accent" (click)="sendSms()" class="mx-2">
+          <i class="fa fa-envelope mr-2"></i>
+          ارسال پیامک
+        </button>
+      }
+      @if (sendingSms) {
+        <div class="d-flex align-items-center px-3">
+          <mat-spinner diameter="20" color="default"></mat-spinner>
+          <span>در حال ارسال پیامک</span>
+        </div>
+      }
 
       <button
         mat-raised-button
@@ -46,12 +50,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -73,9 +83,11 @@
               </mat-checkbox>
             </th>
             <td mat-cell *matCellDef="let row; let i = index">
-              <span *ngIf="row.sabtStatus == 0">
-                <mat-checkbox color="default" [(ngModel)]="row.selected"></mat-checkbox>
-              </span>
+              @if (row.sabtStatus == 0) {
+                <span>
+                  <mat-checkbox color="default" [(ngModel)]="row.selected"></mat-checkbox>
+                </span>
+              }
             </td>
           </ng-container>
 
@@ -127,21 +139,31 @@
           <ng-container matColumnDef="sabtStatus">
             <th mat-header-cell *matHeaderCellDef>وضعیت ثبت احوال</th>
             <td mat-cell *matCellDef="let row">
-              <span class="text-danger" *ngIf="row.sabtStatus == 0">
-                {{ row.sabtStatus | enumString: 'sabtStatus' }}
-              </span>
-              <span class="text-success" *ngIf="row.sabtStatus == 1">
-                {{ row.sabtStatus | enumString: 'sabtStatus' }}
-              </span>
-              <span class="text-danger" *ngIf="row.sabtStatus == 2">
-                {{ row.sabtStatus | enumString: 'sabtStatus' }}
-              </span>
-              <span class="text-info" *ngIf="row.sabtStatus == 3">
-                {{ row.sabtStatus | enumString: 'sabtStatus' }}
-              </span>
-              <span class="text-warning" *ngIf="row.sabtStatus == 4">
-                {{ row.sabtStatus | enumString: 'sabtStatus' }}
-              </span>
+              @if (row.sabtStatus == 0) {
+                <span class="text-danger">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+              @if (row.sabtStatus == 1) {
+                <span class="text-success">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+              @if (row.sabtStatus == 2) {
+                <span class="text-danger">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+              @if (row.sabtStatus == 3) {
+                <span class="text-info">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+              @if (row.sabtStatus == 4) {
+                <span class="text-warning">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
             </td>
           </ng-container>
 

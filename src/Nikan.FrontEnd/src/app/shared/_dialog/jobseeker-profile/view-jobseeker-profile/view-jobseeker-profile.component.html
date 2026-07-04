@@ -1,358 +1,427 @@
-<div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
-  <mat-spinner diameter="50" color="default"></mat-spinner>
-</div>
-<div class="jobseeker-details" *ngIf="!loadingData">
-  <!--<div class="box-header">
-      <h3 class="box-title">اطلاعات فردی</h3>
-    </div>-->
-  <div class="row d-flex align-items-center box-dash">
-    <div>
-      <img class="avatar" [src]="baseUrl + jobseeker.imageUrl" *ngIf="jobseeker.imageUrl" />
-      <img class="avatar" src="assets/images/avatar.png" *ngIf="!jobseeker.imageUrl" />
-    </div>
-    <div class="col row">
-      <div class="col-sm-6">
-        <strong> کد ملی: </strong>
-        <span>{{ jobseeker.nationalCode }}</span>
-      </div>
-      <div class="col-sm-6">
-        <strong> نام کاربری: </strong>
-        <span>{{ jobseeker.userName }}</span>
-      </div>
-      <div class="col-sm-6">
-        <strong> نام: </strong>
-        <span>{{ jobseeker.firstName }}</span>
-      </div>
-      <div class="col-sm-6">
-        <strong> نام خانوادگی: </strong>
-        <span>{{ jobseeker.lastName }}</span>
-      </div>
-      <div class="col-sm-6">
-        <strong> تاریخ ثبت نام: </strong>
-        <span>{{ jobseeker.createdOnDate | jalali }}</span>
-      </div>
-      <div class="col-sm-6">
-        <strong> تاریخ تشکیل پرونده: </strong>
-        <span>{{ jobseeker.filingDate }}</span>
-      </div>
-    </div>
+@if (loadingData) {
+  <div class="d-flex align-items-center justify-content-center">
+    <mat-spinner diameter="50" color="default"></mat-spinner>
   </div>
-  <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <strong> جنسیت: </strong>
-      <span>{{ jobseeker.gender }}</span>
+}
+@if (!loadingData) {
+  <div class="jobseeker-details">
+    <!--<div class="box-header">
+    <h3 class="box-title">اطلاعات فردی</h3>
+  </div>-->
+    <div class="row d-flex align-items-center box-dash">
+      <div>
+        @if (jobseeker.imageUrl) {
+          <img class="avatar" [src]="baseUrl + jobseeker.imageUrl" />
+        }
+        @if (!jobseeker.imageUrl) {
+          <img class="avatar" src="assets/images/avatar.png" />
+        }
+      </div>
+      <div class="col row">
+        <div class="col-sm-6">
+          <strong> کد ملی: </strong>
+          <span>{{ jobseeker.nationalCode }}</span>
+        </div>
+        <div class="col-sm-6">
+          <strong> نام کاربری: </strong>
+          <span>{{ jobseeker.userName }}</span>
+        </div>
+        <div class="col-sm-6">
+          <strong> نام: </strong>
+          <span>{{ jobseeker.firstName }}</span>
+        </div>
+        <div class="col-sm-6">
+          <strong> نام خانوادگی: </strong>
+          <span>{{ jobseeker.lastName }}</span>
+        </div>
+        <div class="col-sm-6">
+          <strong> تاریخ ثبت نام: </strong>
+          <span>{{ jobseeker.createdOnDate | jalali }}</span>
+        </div>
+        <div class="col-sm-6">
+          <strong> تاریخ تشکیل پرونده: </strong>
+          <span>{{ jobseeker.filingDate }}</span>
+        </div>
+      </div>
     </div>
-
-    <div class="col-sm-6 col-md-4">
-      <strong> نام پدر: </strong>
-      <span>{{ jobseeker.fatherName }}</span>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <strong> جنسیت: </strong>
+        <span>{{ jobseeker.gender }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> نام پدر: </strong>
+        <span>{{ jobseeker.fatherName }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> تاریخ تولد: </strong>
+        <span>{{ jobseeker.dateOfBirth }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> وضعیت پایان خدمت: </strong>
+        <span>{{ jobseeker.soldierState }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> نوع کارجو: </strong>
+        <span>{{ jobseeker.karjoType }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> وضعیت کارجو: </strong>
+        <span>{{ jobseeker.karjoState }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> وضعیت تاهل: </strong>
+        <span>{{ jobseeker.marital }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> تعداد فرزند: </strong>
+        <span>{{ jobseeker.numberOfChildren }}</span>
+      </div>
     </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> تاریخ تولد: </strong>
-      <span>{{ jobseeker.dateOfBirth }}</span>
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">اطلاعات تماس</h3>
     </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> وضعیت پایان خدمت: </strong>
-      <span>{{ jobseeker.soldierState }}</span>
+    <div class="row">
+      <div class="col-sm-6 col-md-4">
+        <strong> شماره موبایل: </strong>
+        <span>{{ jobseeker.mobileNumber }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> شماره تلفن ثابت: </strong>
+        <span>{{ jobseeker.cellNumber }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> استان: </strong>
+        <span>{{ jobseeker.province }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> شهرستان: </strong>
+        <span>{{ jobseeker.city }}</span>
+      </div>
+      <div class="col-sm-6 col-md-4">
+        <strong> کد پستی: </strong>
+        <span>{{ jobseeker.zipCode }}</span>
+      </div>
+      <div class="col-sm-12">
+        <strong> آدرس: </strong>
+        <span>{{ jobseeker.address }}</span>
+      </div>
     </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> نوع کارجو: </strong>
-      <span>{{ jobseeker.karjoType }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> وضعیت کارجو: </strong>
-      <span>{{ jobseeker.karjoState }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> وضعیت تاهل: </strong>
-      <span>{{ jobseeker.marital }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> تعداد فرزند: </strong>
-      <span>{{ jobseeker.numberOfChildren }}</span>
-    </div>
-  </div>
-
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">اطلاعات تماس</h3>
-  </div>
-  <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <strong> شماره موبایل: </strong>
-      <span>{{ jobseeker.mobileNumber }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> شماره تلفن ثابت: </strong>
-      <span>{{ jobseeker.cellNumber }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> استان: </strong>
-      <span>{{ jobseeker.province }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> شهرستان: </strong>
-      <span>{{ jobseeker.city }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> کد پستی: </strong>
-      <span>{{ jobseeker.zipCode }}</span>
-    </div>
-    <div class="col-sm-12">
-      <strong> آدرس: </strong>
-      <span>{{ jobseeker.address }}</span>
-    </div>
-  </div>
-
-  <!--------------------------------------------------------------------------------------------------->
-  <div
-    class="box-header"
-    *ngIf="
+    <!--------------------------------------------------------------------------------------------------->
+    @if (
       jobseeker.familiarName ||
       jobseeker.familiarRelationship ||
       jobseeker.familiarCellNumber ||
       jobseeker.familiarMobile ||
       jobseeker.familiarOfficeCellNumber
-    "
-  >
-    <h3 class="box-title">اطلاعات معرف</h3>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.familiarName">
-      <strong> نام: </strong>
-      <span>{{ jobseeker.familiarName }}</span>
+    ) {
+      <div class="box-header">
+        <h3 class="box-title">اطلاعات معرف</h3>
+      </div>
+    }
+    <div class="row">
+      @if (jobseeker.familiarName) {
+        <div class="col-sm-6 col-md-4">
+          <strong> نام: </strong>
+          <span>{{ jobseeker.familiarName }}</span>
+        </div>
+      }
+      @if (jobseeker.familiarRelationship) {
+        <div class="col-sm-6 col-md-4">
+          <strong> نسبت: </strong>
+          <span>{{ jobseeker.familiarRelationship }}</span>
+        </div>
+      }
+      @if (jobseeker.familiarCellNumber) {
+        <div class="col-sm-6 col-md-4">
+          <strong> شماره تماس: </strong>
+          <span>{{ jobseeker.familiarCellNumber }}</span>
+        </div>
+      }
+      @if (jobseeker.familiarMobile) {
+        <div class="col-sm-6 col-md-4">
+          <strong> شماره موبایل: </strong>
+          <span>{{ jobseeker.familiarMobile }}</span>
+        </div>
+      }
+      @if (jobseeker.familiarOfficeCellNumber) {
+        <div class="col-sm-6 col-md-4">
+          <strong> تلفن محل کار: </strong>
+          <span>{{ jobseeker.familiarOfficeCellNumber }}</span>
+        </div>
+      }
     </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.familiarRelationship">
-      <strong> نسبت: </strong>
-      <span>{{ jobseeker.familiarRelationship }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.familiarCellNumber">
-      <strong> شماره تماس: </strong>
-      <span>{{ jobseeker.familiarCellNumber }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.familiarMobile">
-      <strong> شماره موبایل: </strong>
-      <span>{{ jobseeker.familiarMobile }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.familiarOfficeCellNumber">
-      <strong> تلفن محل کار: </strong>
-      <span>{{ jobseeker.familiarOfficeCellNumber }}</span>
-    </div>
-  </div>
-
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">اطلاعات تکمیلی</h3>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4">
-      <strong> دین: </strong>
-      <span>{{ jobseeker.religion }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> ملیت: </strong>
-      <span>{{ jobseeker.karjoNationality }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> سرپرست خانوار: </strong>
-      <span *ngIf="jobseeker.breadWinners">بله</span>
-      <span *ngIf="!jobseeker.breadWinners">خیر</span>
-    </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.lastGrade">
-      <strong> آخرین مقطع تحصیلی: </strong>
-      <span>{{ jobseeker.lastGrade }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4" *ngIf="jobseeker.lastMajor">
-      <strong> آخرین رشته تحصیلی: </strong>
-      <span>{{ jobseeker.lastMajor }}</span>
-    </div>
-  </div>
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">اطلاعات تحصیلی</h3>
-  </div>
-  <div
-    class="no-any-items"
-    *ngIf="jobseeker.karjoEducation?.length == 0 || !jobseeker.karjoEducation"
-  >
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات تحصیلی ثبت نشده است!</span>
-  </div>
-  <div class="row" *ngFor="let item of jobseeker.karjoEducation">
-    <div class="col-sm-6 col-md-4">
-      <strong> مقطع تحصیلی: </strong>
-      <span>{{ item.grade }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> رشته تحصیلی: </strong>
-      <span>{{ item.major }}</span>
-    </div>
-  </div>
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">سوابق کاری</h3>
-  </div>
-  <div class="no-any-items" *ngIf="jobseeker.karjoWork?.length == 0 || !jobseeker.karjoWork">
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات سوابق کاری ثبت نشده است!</span>
-  </div>
-  <div class="row" *ngFor="let item of jobseeker.karjoWork">
-    <div class="col-sm-6 col-md-4">
-      <strong> عنوان شرکت: </strong>
-      <span>{{ item.titleCompany }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> سمت: </strong>
-      <span>{{ item.post }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> تاریخ شروع به کار: </strong>
-      <span>{{ item.dateOfStart }}</span>
-    </div>
-    <div class="col-sm-6 col-md-4">
-      <strong> تاریخ پایان کار: </strong>
-      <span>{{ item.dateOfEnd }}</span>
-    </div>
-  </div>
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">مهارت ها</h3>
-  </div>
-  <div class="no-any-items" *ngIf="jobseeker.karjoSkills?.length == 0 || !jobseeker.karjoSkills">
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات مهارتی ثبت نشده است!</span>
-  </div>
-  <mat-chip-list aria-label="karjoSkills">
-    <mat-chip *ngFor="let item of jobseeker.karjoSkills">
-      <span>{{ item.skill }}</span>
-    </mat-chip>
-  </mat-chip-list>
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">مهارت های کامپیوتری</h3>
-  </div>
-  <div
-    class="no-any-items"
-    *ngIf="jobseeker.userComputerSkills?.length == 0 || !jobseeker.userComputerSkills"
-  >
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات مهارت های کامپیوتری ثبت نشده است!</span>
-  </div>
-  <mat-chip-list aria-label="UserComputerSkills">
-    <mat-chip *ngFor="let item of jobseeker.userComputerSkills">
-      <span>{{ item.skill }}</span>
-    </mat-chip>
-  </mat-chip-list>
-
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">دوره های آموزشی</h3>
-  </div>
-  <div class="no-any-items" *ngIf="jobseeker.karjoAmozesh?.length == 0 || !jobseeker.karjoAmozesh">
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات دوره های آموزشی ثبت نشده است!</span>
-  </div>
-  <mat-chip-list aria-label="karjoAmozesh">
-    <mat-chip *ngFor="let item of jobseeker.karjoAmozesh">
-      <span>{{ item.title }}</span> &nbsp;&nbsp; <span>{{ item.timeDure }} ساعت</span> &nbsp;&nbsp;
-      <span> سال: {{ item.title }}</span>
-    </mat-chip>
-  </mat-chip-list>
-  <!--------------------------------------------------------------------------------------------------->
-  <div class="box-header">
-    <h3 class="box-title">زبان های خارجی</h3>
-  </div>
-  <div
-    class="no-any-items"
-    *ngIf="jobseeker.karjoLanguage?.length == 0 || !jobseeker.karjoLanguage"
-  >
-    <i class="fa fa-info-circle"></i>
-    <span>اطلاعات زبان های خارجی ثبت نشده است!</span>
-  </div>
-  <mat-chip-list aria-label="karjoLanguage">
-    <mat-chip *ngFor="let item of jobseeker.karjoLanguage">
-      <span>{{ item.languageTitle }}</span>
-    </mat-chip>
-  </mat-chip-list>
-
-  <!--------------------------------------------------------------------------------------------------->
-  <div *ngIf="jobseeker.userWorkStatus">
+    <!--------------------------------------------------------------------------------------------------->
     <div class="box-header">
-      <h3 class="box-title">وضعیت کاری</h3>
+      <h3 class="box-title">اطلاعات تکمیلی</h3>
     </div>
-
     <div class="row">
       <div class="col-sm-6 col-md-4">
-        <strong> شرکت فعلی: </strong>
-        <span>{{ jobseeker.userWorkStatus.currentTitleCompany }}</span>
+        <strong> دین: </strong>
+        <span>{{ jobseeker.religion }}</span>
       </div>
       <div class="col-sm-6 col-md-4">
-        <strong> شماره بیمه: </strong>
-        <span>{{ jobseeker.userWorkStatus.insuranceNumber }}</span>
+        <strong> ملیت: </strong>
+        <span>{{ jobseeker.karjoNationality }}</span>
       </div>
       <div class="col-sm-6 col-md-4">
-        <strong> تعداد سوابق کاری: </strong>
-        <span>{{ jobseeker.userWorkStatus.workExperience }}</span>
+        <strong> سرپرست خانوار: </strong>
+        @if (jobseeker.breadWinners) {
+          <span>بله</span>
+        }
+        @if (!jobseeker.breadWinners) {
+          <span>خیر</span>
+        }
       </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> تمایل کار در خارج از استان محل سکونت: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.outsideTheCountry">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.outsideTheCountry">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> تمایل کار در خارج از محدوده سکونت: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.outsideTheScope">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.outsideTheScope">خیر</span>
-      </div>
-
-      <div class="col-sm-6 col-md-4">
-        <strong> تمایل به کارآموزی: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.karAmoze">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.karAmoze">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> بلند مدت: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.longTimeFullTime">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.longTimeFullTime">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> کوتاه مدت: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.shortTimeFullTime">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.shortTimeFullTime">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> نیمه وقت: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.partTime">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.partTime">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> پروژه ای: </strong>
-        <span *ngIf="jobseeker.userWorkStatus.project">بله</span>
-        <span *ngIf="!jobseeker.userWorkStatus.project">خیر</span>
-      </div>
-      <div class="col-sm-6 col-md-4">
-        <strong> وضعیت فعلی: </strong>
-        <span>{{ jobseeker.userWorkStatus.currentWorkStatus }}</span>
-      </div>
+      @if (jobseeker.lastGrade) {
+        <div class="col-sm-6 col-md-4">
+          <strong> آخرین مقطع تحصیلی: </strong>
+          <span>{{ jobseeker.lastGrade }}</span>
+        </div>
+      }
+      @if (jobseeker.lastMajor) {
+        <div class="col-sm-6 col-md-4">
+          <strong> آخرین رشته تحصیلی: </strong>
+          <span>{{ jobseeker.lastMajor }}</span>
+        </div>
+      }
     </div>
-    <strong *ngIf="jobseeker.userWorkStatus.jobs?.length > 0">مشاغل درخواستی: </strong>
-    <mat-chip-list aria-label="مشاغل درخواستی">
-      <mat-chip *ngFor="let item of jobseeker.userWorkStatus.jobs">{{ item.text }}</mat-chip>
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">اطلاعات تحصیلی</h3>
+    </div>
+    @if (jobseeker.karjoEducation?.length == 0 || !jobseeker.karjoEducation) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات تحصیلی ثبت نشده است!</span>
+      </div>
+    }
+    @for (item of jobseeker.karjoEducation; track item) {
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <strong> مقطع تحصیلی: </strong>
+          <span>{{ item.grade }}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <strong> رشته تحصیلی: </strong>
+          <span>{{ item.major }}</span>
+        </div>
+      </div>
+    }
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">سوابق کاری</h3>
+    </div>
+    @if (jobseeker.karjoWork?.length == 0 || !jobseeker.karjoWork) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات سوابق کاری ثبت نشده است!</span>
+      </div>
+    }
+    @for (item of jobseeker.karjoWork; track item) {
+      <div class="row">
+        <div class="col-sm-6 col-md-4">
+          <strong> عنوان شرکت: </strong>
+          <span>{{ item.titleCompany }}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <strong> سمت: </strong>
+          <span>{{ item.post }}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <strong> تاریخ شروع به کار: </strong>
+          <span>{{ item.dateOfStart }}</span>
+        </div>
+        <div class="col-sm-6 col-md-4">
+          <strong> تاریخ پایان کار: </strong>
+          <span>{{ item.dateOfEnd }}</span>
+        </div>
+      </div>
+    }
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">مهارت ها</h3>
+    </div>
+    @if (jobseeker.karjoSkills?.length == 0 || !jobseeker.karjoSkills) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات مهارتی ثبت نشده است!</span>
+      </div>
+    }
+    <mat-chip-list aria-label="karjoSkills">
+      @for (item of jobseeker.karjoSkills; track item) {
+        <mat-chip>
+          <span>{{ item.skill }}</span>
+        </mat-chip>
+      }
     </mat-chip-list>
-    <strong *ngIf="jobseeker.userWorkStatus.cites?.length > 0">شهرهایی تمایل به همکاری: </strong>
-    <mat-chip-list aria-label="شهرهایی تمایل به همکاری">
-      <mat-chip *ngFor="let item of jobseeker.userWorkStatus.cites">{{ item.text }}</mat-chip>
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">مهارت های کامپیوتری</h3>
+    </div>
+    @if (jobseeker.userComputerSkills?.length == 0 || !jobseeker.userComputerSkills) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات مهارت های کامپیوتری ثبت نشده است!</span>
+      </div>
+    }
+    <mat-chip-list aria-label="UserComputerSkills">
+      @for (item of jobseeker.userComputerSkills; track item) {
+        <mat-chip>
+          <span>{{ item.skill }}</span>
+        </mat-chip>
+      }
+    </mat-chip-list>
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">دوره های آموزشی</h3>
+    </div>
+    @if (jobseeker.karjoAmozesh?.length == 0 || !jobseeker.karjoAmozesh) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات دوره های آموزشی ثبت نشده است!</span>
+      </div>
+    }
+    <mat-chip-list aria-label="karjoAmozesh">
+      @for (item of jobseeker.karjoAmozesh; track item) {
+        <mat-chip>
+          <span>{{ item.title }}</span> &nbsp;&nbsp;
+          <span>{{ item.timeDure }} ساعت</span> &nbsp;&nbsp;
+          <span> سال: {{ item.title }}</span>
+        </mat-chip>
+      }
+    </mat-chip-list>
+    <!--------------------------------------------------------------------------------------------------->
+    <div class="box-header">
+      <h3 class="box-title">زبان های خارجی</h3>
+    </div>
+    @if (jobseeker.karjoLanguage?.length == 0 || !jobseeker.karjoLanguage) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        <span>اطلاعات زبان های خارجی ثبت نشده است!</span>
+      </div>
+    }
+    <mat-chip-list aria-label="karjoLanguage">
+      @for (item of jobseeker.karjoLanguage; track item) {
+        <mat-chip>
+          <span>{{ item.languageTitle }}</span>
+        </mat-chip>
+      }
+    </mat-chip-list>
+    <!--------------------------------------------------------------------------------------------------->
+    @if (jobseeker.userWorkStatus) {
+      <div>
+        <div class="box-header">
+          <h3 class="box-title">وضعیت کاری</h3>
+        </div>
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <strong> شرکت فعلی: </strong>
+            <span>{{ jobseeker.userWorkStatus.currentTitleCompany }}</span>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> شماره بیمه: </strong>
+            <span>{{ jobseeker.userWorkStatus.insuranceNumber }}</span>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> تعداد سوابق کاری: </strong>
+            <span>{{ jobseeker.userWorkStatus.workExperience }}</span>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> تمایل کار در خارج از استان محل سکونت: </strong>
+            @if (jobseeker.userWorkStatus.outsideTheCountry) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.outsideTheCountry) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> تمایل کار در خارج از محدوده سکونت: </strong>
+            @if (jobseeker.userWorkStatus.outsideTheScope) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.outsideTheScope) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> تمایل به کارآموزی: </strong>
+            @if (jobseeker.userWorkStatus.karAmoze) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.karAmoze) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> بلند مدت: </strong>
+            @if (jobseeker.userWorkStatus.longTimeFullTime) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.longTimeFullTime) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> کوتاه مدت: </strong>
+            @if (jobseeker.userWorkStatus.shortTimeFullTime) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.shortTimeFullTime) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> نیمه وقت: </strong>
+            @if (jobseeker.userWorkStatus.partTime) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.partTime) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> پروژه ای: </strong>
+            @if (jobseeker.userWorkStatus.project) {
+              <span>بله</span>
+            }
+            @if (!jobseeker.userWorkStatus.project) {
+              <span>خیر</span>
+            }
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <strong> وضعیت فعلی: </strong>
+            <span>{{ jobseeker.userWorkStatus.currentWorkStatus }}</span>
+          </div>
+        </div>
+        @if (jobseeker.userWorkStatus.jobs?.length > 0) {
+          <strong>مشاغل درخواستی: </strong>
+        }
+        <mat-chip-list aria-label="مشاغل درخواستی">
+          @for (item of jobseeker.userWorkStatus.jobs; track item) {
+            <mat-chip>{{ item.text }}</mat-chip>
+          }
+        </mat-chip-list>
+        @if (jobseeker.userWorkStatus.cites?.length > 0) {
+          <strong>شهرهایی تمایل به همکاری: </strong>
+        }
+        <mat-chip-list aria-label="شهرهایی تمایل به همکاری">
+          @for (item of jobseeker.userWorkStatus.cites; track item) {
+            <mat-chip>{{ item.text }}</mat-chip>
+          }
+        </mat-chip-list>
+      </div>
+    }
+    <!--------------------------------------------------------------------------------------------------->
+    @if (jobseeker.karjoGroup?.length > 0) {
+      <strong>گروه های کارجو: </strong>
+    }
+    <mat-chip-list aria-label="jobseeker karjoGroup">
+      @for (item of jobseeker.karjoGroup; track item) {
+        <mat-chip>{{ item.group }} تاریخ عضویت:{{ item.createdOnDate }}</mat-chip>
+      }
     </mat-chip-list>
   </div>
-
-  <!--------------------------------------------------------------------------------------------------->
-
-  <strong *ngIf="jobseeker.karjoGroup?.length > 0">گروه های کارجو: </strong>
-  <mat-chip-list aria-label="jobseeker karjoGroup">
-    <mat-chip *ngFor="let item of jobseeker.karjoGroup"
-      >{{ item.group }} تاریخ عضویت:{{ item.createdOnDate }}</mat-chip
-    >
-  </mat-chip-list>
-</div>
+}

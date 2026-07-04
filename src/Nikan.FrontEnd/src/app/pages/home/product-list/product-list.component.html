@@ -1,14 +1,14 @@
 <!-- Breadcrumb Area -->
 <!-- <div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1" data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
-  <div class="container">
-    <div class="tm-breadcrumb">
-      <h2 class="tm-breadcrumb-title">محصولات</h2>
-      <ul>
-        <li><a routerLink="/home">صفحه اصلی</a></li>
-        <li>محصولات</li>
-      </ul>
-    </div>
+<div class="container">
+  <div class="tm-breadcrumb">
+    <h2 class="tm-breadcrumb-title">محصولات</h2>
+    <ul>
+      <li><a routerLink="/home">صفحه اصلی</a></li>
+      <li>محصولات</li>
+    </ul>
   </div>
+</div>
 </div> -->
 <!--// Breadcrumb Area -->
 <!-- Main Content -->
@@ -19,55 +19,60 @@
       <div class="row">
         <div class="col-lg-9 col-12 order-1 order-lg-2">
           <div class="tm-blog-list sticky-sidebar">
-            <div
-              class="d-flex align-items-center justify-content-center py-5"
-              *ngIf="isLoadingResults"
-            >
-              <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-            </div>
-            <div
-              class="d-flex align-items-center justify-content-center py-5"
-              *ngIf="isLoadingResults == false && listCount == 0"
-            >
-              <strong>اطلاعاتی وجود ندارد!</strong>
-            </div>
+            @if (isLoadingResults) {
+              <div class="d-flex align-items-center justify-content-center py-5">
+                @if (isLoadingResults) {
+                  <mat-spinner color="default"></mat-spinner>
+                }
+              </div>
+            }
+            @if (isLoadingResults == false && listCount == 0) {
+              <div class="d-flex align-items-center justify-content-center py-5">
+                <strong>اطلاعاتی وجود ندارد!</strong>
+              </div>
+            }
 
             <div class="row mt-30-reverse blog-masonry-active">
-              <div class="col-sm-6 col-md-4 mt-30" *ngFor="let item of data">
-                <div class="card p-2 news-card">
-                  <a class="relative">
-                    <img
-                      [src]="baseUrl + item.imageUrl"
-                      alt="{{ item.title }}"
-                      *ngIf="item.imageUrl"
-                      class="mb-3 img-fluid rad12"
-                    />
-                    <img
-                      src="assets/images/news-default.jpg"
-                      alt="{{ item.title }}"
-                      *ngIf="!item.imageUrl"
-                      class="mb-3 img-fluid rad12"
-                    />
-                    <div class="covernews d-flex flex-row justify-content-between px-3 text-white">
-                      <span class="bottom_p">
-                        <i class="fa fa-money-bill-alt"></i>{{ item.price | number }} ریال</span
+              @for (item of data; track item) {
+                <div class="col-sm-6 col-md-4 mt-30">
+                  <div class="card p-2 news-card">
+                    <a class="relative">
+                      @if (item.imageUrl) {
+                        <img
+                          [src]="baseUrl + item.imageUrl"
+                          alt="{{ item.title }}"
+                          class="mb-3 img-fluid rad12"
+                        />
+                      }
+                      @if (!item.imageUrl) {
+                        <img
+                          src="assets/images/news-default.jpg"
+                          alt="{{ item.title }}"
+                          class="mb-3 img-fluid rad12"
+                        />
+                      }
+                      <div
+                        class="covernews d-flex flex-row justify-content-between px-3 text-white"
                       >
-                    </div>
-                  </a>
-
-                  <h5>
-                    <a routerLink="/home/product-details/{{ item.id }}">{{ item.title }}</a>
-                  </h5>
-                  <p class="card-content">
-                    {{ item.description }}
-                  </p>
-                  <a
-                    routerLink="/home/product-details/{{ item.id }}"
-                    class="text-danger text-center pb-3"
-                    >مشاهده جزئیات...</a
-                  >
+                        <span class="bottom_p">
+                          <i class="fa fa-money-bill-alt"></i>{{ item.price | number }} ریال</span
+                        >
+                      </div>
+                    </a>
+                    <h5>
+                      <a routerLink="/home/product-details/{{ item.id }}">{{ item.title }}</a>
+                    </h5>
+                    <p class="card-content">
+                      {{ item.description }}
+                    </p>
+                    <a
+                      routerLink="/home/product-details/{{ item.id }}"
+                      class="text-danger text-center pb-3"
+                      >مشاهده جزئیات...</a
+                    >
+                  </div>
                 </div>
-              </div>
+              }
             </div>
 
             <div class="tm-pagination mt-50">
@@ -109,13 +114,15 @@
               <h6 class="IRANSansWeb_Medium bt-color bg-light py-2 px-3 mb-3 rad25">دسته بندی</h6>
 
               <ul class="prof">
-                <li *ngFor="let item of groupList" (click)="openProductByParent(item)">
-                  <a>
-                    <i class="far fa-file-alt text-info ml-1"></i>
-                    {{ item.text }}
-                  </a>
-                  <!-- <span> {{item.onDate|jalali}}</span> -->
-                </li>
+                @for (item of groupList; track item) {
+                  <li (click)="openProductByParent(item)">
+                    <a>
+                      <i class="far fa-file-alt text-info ml-1"></i>
+                      {{ item.text }}
+                    </a>
+                    <!-- <span> {{item.onDate|jalali}}</span> -->
+                  </li>
+                }
               </ul>
             </div>
 

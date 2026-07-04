@@ -23,23 +23,27 @@
     </div>
   </div>
 
-  <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
-    <mat-spinner diameter="50" color="default"></mat-spinner>
-  </div>
-  <form [formGroup]="userForm" *ngIf="!loading">
-    <div class="row">
-      <mat-form-field class="col-sm-6 col-md-4">
-        <mat-label>شماره موبایل</mat-label>
-        <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
-        <mat-error *ngIf="userForm.get('mobileNumber').errors?.required">
-          شماره موبایل را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('mobileNumber').errors?.invalid">
-          شماره موبایل صحیح نیست.
-        </mat-error>
-      </mat-form-field>
+  @if (loading) {
+    <div class="d-flex align-items-center justify-content-center p-5">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
-  </form>
+  }
+  @if (!loading) {
+    <form [formGroup]="userForm">
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>شماره موبایل</mat-label>
+          <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
+          @if (userForm.get('mobileNumber').errors?.required) {
+            <mat-error> شماره موبایل را وارد کنید. </mat-error>
+          }
+          @if (userForm.get('mobileNumber').errors?.invalid) {
+            <mat-error> شماره موبایل صحیح نیست. </mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </form>
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>انصراف</button>

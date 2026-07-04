@@ -30,20 +30,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ شروع را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
@@ -56,20 +54,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <div class="col d-flex align-items-center justify-content-end">
@@ -92,12 +88,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -127,8 +129,12 @@
           <ng-container matColumnDef="exportType">
             <th mat-header-cell *matHeaderCellDef>استعلام</th>
             <td mat-cell *matCellDef="let row">
-              <strong *ngIf="row.exportType == 0"> ثبت احوال </strong>
-              <strong *ngIf="row.exportType == 1"> حیات </strong>
+              @if (row.exportType == 0) {
+                <strong> ثبت احوال </strong>
+              }
+              @if (row.exportType == 1) {
+                <strong> حیات </strong>
+              }
             </td>
           </ng-container>
 
@@ -191,46 +197,48 @@
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
             <td mat-cell *matCellDef="let row">
-              <mat-spinner *ngIf="row.loading" diameter="25" color="default"></mat-spinner>
-              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!row.loading">
-                <mat-icon>more_vert</mat-icon>
-              </button>
+              @if (row.loading) {
+                <mat-spinner diameter="25" color="default"></mat-spinner>
+              }
+              @if (!row.loading) {
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              }
               <mat-menu #menu="matMenu">
-                <button
-                  *ngIf="row.exportType == 0"
-                  mat-menu-item
-                  routerLink="/admin/sabtAhval-citizens/{{ row.id }}"
-                >
-                  <i class="fa fa-eye mr-2"></i>
-                  <span>مشاهده جزئیات</span>
-                </button>
+                @if (row.exportType == 0) {
+                  <button mat-menu-item routerLink="/admin/sabtAhval-citizens/{{ row.id }}">
+                    <i class="fa fa-eye mr-2"></i>
+                    <span>مشاهده جزئیات</span>
+                  </button>
+                }
 
-                <button
-                  *ngIf="row.exportType == 1"
-                  mat-menu-item
-                  routerLink="/admin/check-state-life-list/{{ row.id }}"
-                >
-                  <i class="fa fa-eye mr-2"></i>
-                  <span>مشاهده جزئیات</span>
-                </button>
-                <button
-                  mat-menu-item
-                  (click)="send(row)"
-                  *ngIf="row.exportType == 0 && !row.isConfirmed"
-                >
-                  <i class="fa fa-check mr-2"></i>
-                  <span>تائید ارسال</span>
-                </button>
+                @if (row.exportType == 1) {
+                  <button mat-menu-item routerLink="/admin/check-state-life-list/{{ row.id }}">
+                    <i class="fa fa-eye mr-2"></i>
+                    <span>مشاهده جزئیات</span>
+                  </button>
+                }
+                @if (row.exportType == 0 && !row.isConfirmed) {
+                  <button mat-menu-item (click)="send(row)">
+                    <i class="fa fa-check mr-2"></i>
+                    <span>تائید ارسال</span>
+                  </button>
+                }
 
-                <button mat-menu-item (click)="sendChekStateLife(row)" *ngIf="row.exportType == 1">
-                  <i class="fa fa-check mr-2"></i>
-                  <span>تائید ارسال</span>
-                </button>
+                @if (row.exportType == 1) {
+                  <button mat-menu-item (click)="sendChekStateLife(row)">
+                    <i class="fa fa-check mr-2"></i>
+                    <span>تائید ارسال</span>
+                  </button>
+                }
 
-                <button mat-menu-item (click)="delete(row)" *ngIf="!row.isConfirmed">
-                  <i class="fa fa-trash mr-2"></i>
-                  <span>حذف</span>
-                </button>
+                @if (!row.isConfirmed) {
+                  <button mat-menu-item (click)="delete(row)">
+                    <i class="fa fa-trash mr-2"></i>
+                    <span>حذف</span>
+                  </button>
+                }
               </mat-menu>
             </td>
           </ng-container>

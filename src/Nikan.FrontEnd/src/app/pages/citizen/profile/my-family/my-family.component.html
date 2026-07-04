@@ -10,107 +10,111 @@
   </mat-card-header>
   <mat-card-content>
     <div class="p-4 list-container">
-      <div class="list-item" *ngFor="let item of familyList">
-        <div class="list-content" (click)="openFamilyDialog(item)">
-          <div class="row">
-            <div class="col-sm-4">
-              <strong>نام: </strong><span> {{ item.familyCitizen }}</span>
-            </div>
-            <div class="col-sm-4">
-              <strong> کد ملی: </strong><span> {{ item.familyNationCode }}</span>
-            </div>
-            <div class="col-sm-4">
-              <strong> نسبت: </strong
-              ><span> {{ item.familyRelation | enumString: 'familyRelationships' }}</span>
+      @for (item of familyList; track item) {
+        <div class="list-item">
+          <div class="list-content" (click)="openFamilyDialog(item)">
+            <div class="row">
+              <div class="col-sm-4">
+                <strong>نام: </strong><span> {{ item.familyCitizen }}</span>
+              </div>
+              <div class="col-sm-4">
+                <strong> کد ملی: </strong><span> {{ item.familyNationCode }}</span>
+              </div>
+              <div class="col-sm-4">
+                <strong> نسبت: </strong
+                ><span> {{ item.familyRelation | enumString: 'familyRelationships' }}</span>
+              </div>
             </div>
           </div>
+          <div class="menu">
+            @if (!item.loading) {
+              <button mat-icon-button (click)="openFamilyDialog(item)" matTooltip="ویرایش">
+                <i class="fa fa-edit"></i>
+              </button>
+            }
+            @if (!item.loading) {
+              <button mat-icon-button (click)="deleteEducation(item)" matTooltip="حذف">
+                <i class="fa fa-trash"></i>
+              </button>
+            }
+            @if (item.loading) {
+              <mat-spinner color="default" diameter="25"></mat-spinner>
+            }
+          </div>
         </div>
+      }
+    </div>
 
-        <div class="menu">
-          <button
-            mat-icon-button
-            (click)="openFamilyDialog(item)"
-            *ngIf="!item.loading"
-            matTooltip="ویرایش"
-          >
-            <i class="fa fa-edit"></i>
-          </button>
-          <button
-            mat-icon-button
-            (click)="deleteEducation(item)"
-            *ngIf="!item.loading"
-            matTooltip="حذف"
-          >
-            <i class="fa fa-trash"></i>
-          </button>
-          <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
-        </div>
+    @if (familyList.length == 0 && !loading) {
+      <div class="no-any-items">
+        <i class="fa fa-info-circle"></i>
+        اطلاعاتی ثبت نشده است
       </div>
-    </div>
-
-    <div class="no-any-items" *ngIf="familyList.length == 0 && !loading">
-      <i class="fa fa-info-circle"></i>
-      اطلاعاتی ثبت نشده است
-    </div>
-    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
+    }
+    @if (loading) {
+      <div class="p-5 d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 </mat-card>
 
-<div class="m-3 border" *ngIf="familyByfamilyList && familyByfamilyList?.length">
-  <div
-    class="bg-light p-2 font-09 font-weight-bold d-flex col align-items-center justify-content-between"
-  >
-    شما بوسیله افراد زیر بعنوان عضو خانوده اضافه شده اید
-  </div>
-
-  <div class="col-12">
-    <div *ngFor="let item of familyByfamilyList" class="row my-2 justify-content-center">
-      <div class="col-12 col-md-10 col-lg-10">
-        <mat-card>
-          <mat-card-content>
-            <div class="col-12">
-              <div class="row">
-                <div class="col-12 col-md-6 col-lg-6">
-                  <b>{{ item.familyCitizen }} </b>
+@if (familyByfamilyList && familyByfamilyList?.length) {
+  <div class="m-3 border">
+    <div
+      class="bg-light p-2 font-09 font-weight-bold d-flex col align-items-center justify-content-between"
+    >
+      شما بوسیله افراد زیر بعنوان عضو خانوده اضافه شده اید
+    </div>
+    <div class="col-12">
+      @for (item of familyByfamilyList; track item) {
+        <div class="row my-2 justify-content-center">
+          <div class="col-12 col-md-10 col-lg-10">
+            <mat-card>
+              <mat-card-content>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12 col-md-6 col-lg-6">
+                      <b>{{ item.familyCitizen }} </b>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">کد ملی: {{ item.familyNationCode }}</div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                      نسبت :
+                      {{ item.familyRelation | enumString: 'familyRelationships' }}
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                      تاریخ تولد : {{ item.familyBirthDate | jalali }}
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                      وضعیت تاهل:
+                      {{ item.familyMariageStatus | enumString: 'maritalStatus' }}
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-6">
+                      <span>تاریخ ثبت نام: </span>
+                      <strong>{{ item.creationDate | jalali }}</strong>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-12 col-md-6 col-lg-6">کد ملی: {{ item.familyNationCode }}</div>
-                <div class="col-12 col-md-6 col-lg-6">
-                  نسبت :
-                  {{ item.familyRelation | enumString: 'familyRelationships' }}
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                  تاریخ تولد : {{ item.familyBirthDate | jalali }}
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                  وضعیت تاهل:
-                  {{ item.familyMariageStatus | enumString: 'maritalStatus' }}
-                </div>
-                <div class="col-12 col-md-6 col-lg-6">
-                  <span>تاریخ ثبت نام: </span>
-                  <strong>{{ item.creationDate | jalali }}</strong>
-                </div>
-              </div>
-            </div>
-          </mat-card-content>
-          <mat-card-actions class="d-flex justify-content-end">
-            <button mat-raised-button color="default">
-              <!-- (click)="toggleConfirmFamily(item, true)" -->
-              تایید<i class="fa fa-check mx-2"></i>
-            </button>
-            <button mat-raised-button color="warn">
-              <!-- (click)="toggleConfirmFamily(item, false)" -->
-              عدم تایید<i class="fa fa-times mx-2"></i>
-            </button>
-            <button mat-raised-button color="accent">
-              <!-- (click)="openRejectFamilyeDialog(item)" -->
-              حذف <i class="fa fa-trash mx-2"></i>
-            </button>
-          </mat-card-actions>
-        </mat-card>
-      </div>
+              </mat-card-content>
+              <mat-card-actions class="d-flex justify-content-end">
+                <button mat-raised-button color="default">
+                  <!-- (click)="toggleConfirmFamily(item, true)" -->
+                  تایید<i class="fa fa-check mx-2"></i>
+                </button>
+                <button mat-raised-button color="warn">
+                  <!-- (click)="toggleConfirmFamily(item, false)" -->
+                  عدم تایید<i class="fa fa-times mx-2"></i>
+                </button>
+                <button mat-raised-button color="accent">
+                  <!-- (click)="openRejectFamilyeDialog(item)" -->
+                  حذف <i class="fa fa-trash mx-2"></i>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+          </div>
+        </div>
+      }
     </div>
   </div>
-</div>
+}

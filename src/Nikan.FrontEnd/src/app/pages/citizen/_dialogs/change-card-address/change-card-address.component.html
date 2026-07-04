@@ -20,56 +20,58 @@
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> شماره تلفن ثابت</mat-label>
         <input type="text" matInput maxlength="8" numbersOnly formControlName="phone" />
-        <mat-error *ngIf="homeForm.get('phone').errors?.required">
-          شماره تلفن ثابت را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('phone').errors?.required) {
+          <mat-error> شماره تلفن ثابت را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> شهر محل سکونت</mat-label>
         <mat-select formControlName="cityId">
-          <mat-option *ngFor="let item of isfahanCities" [value]="item.key">
-            {{ item.text }}
-          </mat-option>
+          @for (item of isfahanCities; track item) {
+            <mat-option [value]="item.key">
+              {{ item.text }}
+            </mat-option>
+          }
         </mat-select>
 
-        <mat-error *ngIf="homeForm.get('cityId').errors?.required">
-          شهر محل سکونت را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('cityId').errors?.required) {
+          <mat-error> شهر محل سکونت را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> منطقه</mat-label>
         <input type="text" matInput numbersOnly maxlength="2" formControlName="region" />
-        <mat-error *ngIf="homeForm.get('region').errors?.required">
-          منطقه محل سکونت خود را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('region').errors?.required) {
+          <mat-error> منطقه محل سکونت خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> خیابان</mat-label>
         <input type="text" matInput formControlName="street" />
-        <mat-error *ngIf="homeForm.get('street').errors?.required">
-          خیابان محل سکونت خود را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('street').errors?.required) {
+          <mat-error> خیابان محل سکونت خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> کوچه</mat-label>
         <input type="text" matInput formControlName="alley" />
-        <mat-error *ngIf="homeForm.get('alley').errors?.required">
-          کوچه محل سکونت خود را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('alley').errors?.required) {
+          <mat-error> کوچه محل سکونت خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> پلاک</mat-label>
         <input type="text" numbersOnly matInput formControlName="plaque" />
-        <mat-error *ngIf="homeForm.get('plaque').errors?.required">
-          پلاک محل سکونت خود را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('plaque').errors?.required) {
+          <mat-error> پلاک محل سکونت خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> کد پستی</mat-label>
         <input type="text" numbersOnly matInput formControlName="postalCode" />
-        <mat-error *ngIf="homeForm.get('postalCode').errors?.required">
-          کد پستی خود را وارد کنید.
-        </mat-error>
+        @if (homeForm.get('postalCode').errors?.required) {
+          <mat-error> کد پستی خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
     </div>
   </form>

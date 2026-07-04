@@ -1,64 +1,77 @@
 <mat-card class="m-3">
   <mat-card-header class="card-header mx-n3 mt-n3">ویرایش شماره موبایل</mat-card-header>
   <mat-card-content>
-    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
-
-    <form *ngIf="!loading" [formGroup]="editForm" class="mx-4 mt-4">
-      <div>
-        <span class="px-3">{{ oldMobileNumber }}</span>
-        <span *ngIf="!isConfirm" class="text-danger mx-2">(تایید نشده)</span>
-        <span *ngIf="isConfirm" class="text-success mx-2">(تایید شده)</span>
+    @if (loading) {
+      <div class="p-5 d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
-      <hr />
-      <div *ngIf="!showConfirmCode">
-        <div class="alert alert-info">
-          در صورت نیاز به تغییر شماره موبایل خود در قسمت زیر شماره موبایل جدید خود را وارد و سپس
-          برروی دریافت کد تایید کلیک نمایید .
-        </div>
+    }
 
-        <mat-form-field appearance="outline" class="col-sm-6 col-md-6">
-          <mat-label>شماره موبایل جدید </mat-label>
-          <input
-            matInput
-            formControlName="newmobileNumber"
-            class="text-left"
-            minlength="11"
-            maxlength="11"
-            numbersOnly
-          />
-          <mat-error *ngIf="editForm.get('newmobileNumber').errors?.required">
-            شماره موبایل خود را وارد کنید.
-          </mat-error>
-          <mat-error *ngIf="editForm.get('newmobileNumber').errors?.invalid">
-            شماره موبایل وارد شده صحیح نیست
-          </mat-error>
+    @if (!loading) {
+      <form [formGroup]="editForm" class="mx-4 mt-4">
+        <div>
+          <span class="px-3">{{ oldMobileNumber }}</span>
+          @if (!isConfirm) {
+            <span class="text-danger mx-2">(تایید نشده)</span>
+          }
+          @if (isConfirm) {
+            <span class="text-success mx-2">(تایید شده)</span>
+          }
+        </div>
+        <hr />
+        @if (!showConfirmCode) {
+          <div>
+            <div class="alert alert-info">
+              در صورت نیاز به تغییر شماره موبایل خود در قسمت زیر شماره موبایل جدید خود را وارد و سپس
+              برروی دریافت کد تایید کلیک نمایید .
+            </div>
+            <mat-form-field appearance="outline" class="col-sm-6 col-md-6">
+              <mat-label>شماره موبایل جدید </mat-label>
+              <input
+                matInput
+                formControlName="newmobileNumber"
+                class="text-left"
+                minlength="11"
+                maxlength="11"
+                numbersOnly
+              />
+              @if (editForm.get('newmobileNumber').errors?.required) {
+                <mat-error> شماره موبایل خود را وارد کنید. </mat-error>
+              }
+              @if (editForm.get('newmobileNumber').errors?.invalid) {
+                <mat-error> شماره موبایل وارد شده صحیح نیست </mat-error>
+              }
+            </mat-form-field>
+            <div class="d-flex align-items-center justify-content-end mt-5">
+              <button
+                mat-raised-button
+                color="default"
+                (click)="sendCode()"
+                [disabled]="sendingSMS"
+              >
+                <mat-spinner diameter="25" [hidden]="!sendingSMS"></mat-spinner>
+                <span> دریافت کد تغییر شماره موبایل</span>
+              </button>
+            </div>
+            <button mat-button [hidden]="!sendingSMS" (click)="cancelEdit()">انصراف</button>
+          </div>
+        }
+      </form>
+    }
+    @if (showConfirmCode) {
+      <form [formGroup]="confirmForm" class="mx-4">
+        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+          <mat-label>کد تایید دریافتی </mat-label>
+          <input matInput formControlName="smsActiveCode" class="text-left" numbersOnly />
+          @if (confirmForm.get('smsActiveCode').errors?.required) {
+            <mat-error> کد تایید دریافتی را وارد کنید. </mat-error>
+          }
         </mat-form-field>
-
-        <div class="d-flex align-items-center justify-content-end mt-5">
-          <button mat-raised-button color="default" (click)="sendCode()" [disabled]="sendingSMS">
-            <mat-spinner diameter="25" [hidden]="!sendingSMS"></mat-spinner>
-            <span> دریافت کد تغییر شماره موبایل</span>
-          </button>
-        </div>
-
-        <button mat-button [hidden]="!sendingSMS" (click)="cancelEdit()">انصراف</button>
-      </div>
-    </form>
-    <form [formGroup]="confirmForm" *ngIf="showConfirmCode" class="mx-4">
-      <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-        <mat-label>کد تایید دریافتی </mat-label>
-        <input matInput formControlName="smsActiveCode" class="text-left" numbersOnly />
-        <mat-error *ngIf="confirmForm.get('smsActiveCode').errors?.required">
-          کد تایید دریافتی را وارد کنید.
-        </mat-error>
-      </mat-form-field>
-
-      <button mat-raised-button color="default" (click)="saveForm()" [disabled]="isSaving">
-        <mat-spinner diameter="25" [hidden]="!isSaving"></mat-spinner>
-        <span> تایید </span>
-      </button>
-    </form>
+        <button mat-raised-button color="default" (click)="saveForm()" [disabled]="isSaving">
+          <mat-spinner diameter="25" [hidden]="!isSaving"></mat-spinner>
+          <span> تایید </span>
+        </button>
+      </form>
+    }
   </mat-card-content>
 </mat-card>

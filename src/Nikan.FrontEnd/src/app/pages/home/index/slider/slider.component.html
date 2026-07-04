@@ -34,20 +34,21 @@
     </div>
     <div class="col-lg-9 mb-lg-0 mb-3 order-lg-2 order-1">
       <div id="owl-slider" class="owl-carousel">
-        <div class="item" *ngFor="let item of slideShow; let i = index">
-          <a href="{{ item.url }}" target="_blank">
-            <img [src]="baseUrl + item.imageUrl" [alt]="item.caption" class="img-fluid" />
-
-            <div class="caption">
-              <!-- <p>
-                        {{item.caption}}
-                      </p> -->
-              <p>
-                {{ item.description }}
-              </p>
-            </div>
-          </a>
-        </div>
+        @for (item of slideShow; track item; let i = $index) {
+          <div class="item">
+            <a href="{{ item.url }}" target="_blank">
+              <img [src]="baseUrl + item.imageUrl" [alt]="item.caption" class="img-fluid" />
+              <div class="caption">
+                <!-- <p>
+                {{item.caption}}
+              </p> -->
+                <p>
+                  {{ item.description }}
+                </p>
+              </div>
+            </a>
+          </div>
+        }
       </div>
     </div>
   </div>

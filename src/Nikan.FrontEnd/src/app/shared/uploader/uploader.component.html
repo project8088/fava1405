@@ -1,14 +1,14 @@
 <div class="uploader col-sm-12">
   <!--<div class="drop-container" ngFileDrop [options]="options" (uploadOutput)="onUploadOutput($event)" [uploaderInput]="uploaderInput" [ngClass]="{ 'is-drop-over': dragOver }">
-    <h5>فایل خود را بکشید و در این قسمت رها کنید و یا بر روی دکمه زیر کلیک کنید.</h5>
+  <h5>فایل خود را بکشید و در این قسمت رها کنید و یا بر روی دکمه زیر کلیک کنید.</h5>
 
-    <label class="upload-button mt-3">
-      <input type="file" ngFileSelect [options]="options"
-             (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploaderInput"
-             [accept]="acceptedInputFile">
-      انتخاب فایل
-    </label>
-  </div>-->
+  <label class="upload-button mt-3">
+    <input type="file" ngFileSelect [options]="options"
+      (uploadOutput)="onUploadOutput($event)" [uploadInput]="uploaderInput"
+      [accept]="acceptedInputFile">
+    انتخاب فایل
+  </label>
+</div>-->
 
   <label class="upload-button mt-3 d-inline-flex">
     <input
@@ -24,39 +24,45 @@
     <mat-icon>file_upload</mat-icon>
   </label>
 
-  <div *ngFor="let f of files">
-    <p class="ellipsis">
-      <strong>{{ f.name }}</strong>
-    </p>
-    <div nowrap dir="ltr">{{ f.size / 1024 | number: '.2' }} KB</div>
-    <div nowrap class="d-flex align-items-center justify-content-between">
-      <div>
-        <strong>سرعت آپلود: </strong><span dir="ltr"> {{ f.progress.data.speedHuman }}</span>
-      </div>
-      <div>
-        <span *ngIf="f.progress.status == 0 && !errorInUpload" class="text-info">منتظر آپلود</span>
-        <span *ngIf="f.progress.status == 1 && !errorInUpload" class="text-primary"
-          >در حال آپلود</span
-        >
-        <span *ngIf="f.progress.status == 2 && !errorInUpload" class="text-success"
-          >آپلود انجام شد</span
-        >
-        <span *ngIf="f.progress.status == 3 && !errorInUpload" class="text-warning"
-          >آپلود لغو شد</span
-        >
-        <span *ngIf="errorInUpload" class="text-danger">خطا در ذخیره فایل</span>
-      </div>
-    </div>
+  @for (f of files; track f) {
     <div>
-      <div class="progress">
-        <div
-          class="progress-bar"
-          role="progressbar"
-          [ngStyle]="{ width: f.progress.data.percentage + '%' }"
-        >
-          {{ f.progress.data.percentage }}
+      <p class="ellipsis">
+        <strong>{{ f.name }}</strong>
+      </p>
+      <div nowrap dir="ltr">{{ f.size / 1024 | number: '.2' }} KB</div>
+      <div nowrap class="d-flex align-items-center justify-content-between">
+        <div>
+          <strong>سرعت آپلود: </strong><span dir="ltr"> {{ f.progress.data.speedHuman }}</span>
+        </div>
+        <div>
+          @if (f.progress.status == 0 && !errorInUpload) {
+            <span class="text-info">منتظر آپلود</span>
+          }
+          @if (f.progress.status == 1 && !errorInUpload) {
+            <span class="text-primary">در حال آپلود</span>
+          }
+          @if (f.progress.status == 2 && !errorInUpload) {
+            <span class="text-success">آپلود انجام شد</span>
+          }
+          @if (f.progress.status == 3 && !errorInUpload) {
+            <span class="text-warning">آپلود لغو شد</span>
+          }
+          @if (errorInUpload) {
+            <span class="text-danger">خطا در ذخیره فایل</span>
+          }
+        </div>
+      </div>
+      <div>
+        <div class="progress">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [ngStyle]="{ width: f.progress.data.percentage + '%' }"
+          >
+            {{ f.progress.data.percentage }}
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  }
 </div>

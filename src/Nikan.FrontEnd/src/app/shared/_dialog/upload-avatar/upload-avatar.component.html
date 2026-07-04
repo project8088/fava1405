@@ -1,7 +1,11 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
   <h5 cdkDragHandle class="title">
-    <span *ngIf="user.isCompany">آپلود لوگو</span>
-    <span *ngIf="!user.isCompany"> تصویر پروفایل </span>
+    @if (user.isCompany) {
+      <span>آپلود لوگو</span>
+    }
+    @if (!user.isCompany) {
+      <span> تصویر پروفایل </span>
+    }
   </h5>
   <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
@@ -14,34 +18,39 @@
         انتخاب تصویر
         <input type="file" (change)="fileChangeEvent($event)" />
       </label>
-      <div class="text-center" *ngIf="croppedImage">تصویر:</div>
+      @if (croppedImage) {
+        <div class="text-center">تصویر:</div>
+      }
       <img [src]="croppedImage" class="img" />
-      <div *ngIf="croppedImage">
-        <button
-          mat-fab
-          color="default"
-          aria-label="چرخش به راست"
-          alt="چرخش به راست"
-          (click)="rotateRight()"
-        >
-          <i class="fa fa-undo fa-flip-horizontal"></i>
-        </button>
-
-        <button
-          mat-fab
-          color="default"
-          aria-label="چرخش به چپ"
-          alt="چرخش به چپ"
-          (click)="rotateLeft()"
-        >
-          <i class="fa fa-undo"></i>
-        </button>
-      </div>
+      @if (croppedImage) {
+        <div>
+          <button
+            mat-fab
+            color="default"
+            aria-label="چرخش به راست"
+            alt="چرخش به راست"
+            (click)="rotateRight()"
+          >
+            <i class="fa fa-undo fa-flip-horizontal"></i>
+          </button>
+          <button
+            mat-fab
+            color="default"
+            aria-label="چرخش به چپ"
+            alt="چرخش به چپ"
+            (click)="rotateLeft()"
+          >
+            <i class="fa fa-undo"></i>
+          </button>
+        </div>
+      }
     </div>
     <div class="col-sm-10" style="height: 100%">
-      <div class="loading-shade" *ngIf="loading">
-        <mat-spinner color="default"></mat-spinner>
-      </div>
+      @if (loading) {
+        <div class="loading-shade">
+          <mat-spinner color="default"></mat-spinner>
+        </div>
+      }
       <image-cropper
         [imageBase64]="imageBase64"
         [imageChangedEvent]="imageChangedEvent"

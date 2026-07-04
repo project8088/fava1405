@@ -13,17 +13,15 @@
   </h3>
   <form [formGroup]="form" class="mx-3">
     <div class="row my-2">
-      <mat-form-field
-        *ngIf="data.command !== 'Remove'"
-        appearance="outline"
-        class="h-100 textarea-field col-12"
-      >
-        <mat-label>نتیجه برسی</mat-label>
-        <mat-select formControlName="formResult">
-          <mat-option [value]="true">تایید</mat-option>
-          <mat-option [value]="false">عدم تایید</mat-option>
-        </mat-select>
-      </mat-form-field>
+      @if (data.command !== 'Remove') {
+        <mat-form-field appearance="outline" class="h-100 textarea-field col-12">
+          <mat-label>نتیجه برسی</mat-label>
+          <mat-select formControlName="formResult">
+            <mat-option [value]="true">تایید</mat-option>
+            <mat-option [value]="false">عدم تایید</mat-option>
+          </mat-select>
+        </mat-form-field>
+      }
       <mat-form-field appearance="outline" class="h-100 textarea-field col-12">
         <mat-label>توضیحات</mat-label>
         <textarea matInput formControlName="formResultDescription"></textarea>

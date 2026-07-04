@@ -22,48 +22,57 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of attachments">
-          <td class="lightGallery" *ngIf="item.isImage">
-            <a href="{{ baseUrl + item.filePath }}" target="_blank">
-              <img [src]="baseUrl + item.filePath" class="img-thumbnail thumb-64" />
-            </a>
-          </td>
-          <td class="" *ngIf="!item.isImage">
-            <a href="{{ baseUrl + item.filePath }}" target="_blank">
-              <strong>{{ item.extension }}</strong>
-            </a>
-          </td>
+        @for (item of attachments; track item) {
+          <tr>
+            @if (item.isImage) {
+              <td class="lightGallery">
+                <a href="{{ baseUrl + item.filePath }}" target="_blank">
+                  <img [src]="baseUrl + item.filePath" class="img-thumbnail thumb-64" />
+                </a>
+              </td>
+            }
+            @if (!item.isImage) {
+              <td class="">
+                <a href="{{ baseUrl + item.filePath }}" target="_blank">
+                  <strong>{{ item.extension }}</strong>
+                </a>
+              </td>
+            }
+            <td>{{ item.fileName }}</td>
+            <td>{{ item.extension }}</td>
+            <td>{{ item.caption }}</td>
+            <td>{{ item.contentType }}</td>
+            <td>{{ item.size / 1024 | number }}Kb</td>
+            <td>{{ item.userName }}</td>
+            <td>{{ item.downloadsCount | number }}</td>
+            <td>{{ item.attachedOn | jalali }}</td>
+            <td>
+              <button mat-icon-button (click)="deleteAttachment(item)" matTooltip="حذف فایل پیوست">
+                <i class="fa fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+        }
 
-          <td>{{ item.fileName }}</td>
-          <td>{{ item.extension }}</td>
-          <td>{{ item.caption }}</td>
-          <td>{{ item.contentType }}</td>
-          <td>{{ item.size / 1024 | number }}Kb</td>
-          <td>{{ item.userName }}</td>
-          <td>{{ item.downloadsCount | number }}</td>
-          <td>{{ item.attachedOn | jalali }}</td>
-          <td>
-            <button mat-icon-button (click)="deleteAttachment(item)" matTooltip="حذف فایل پیوست">
-              <i class="fa fa-trash"></i>
-            </button>
-          </td>
-        </tr>
+        @if (loadingData) {
+          <tr>
+            <td colspan="10">
+              <div class="d-flex align-items-center justify-content-center p-3">
+                <mat-spinner diamter="25" color="default"></mat-spinner>
+              </div>
+            </td>
+          </tr>
+        }
 
-        <tr *ngIf="loadingData">
-          <td colspan="10">
-            <div class="d-flex align-items-center justify-content-center p-3">
-              <mat-spinner diamter="25" color="default"></mat-spinner>
-            </div>
-          </td>
-        </tr>
-
-        <tr *ngIf="attachments.length == 0 && !loadingData">
-          <td colspan="10">
-            <div class="d-flex align-items-center justify-content-center p-3">
-              فایلی برای مشاهده وجود ندارد!
-            </div>
-          </td>
-        </tr>
+        @if (attachments.length == 0 && !loadingData) {
+          <tr>
+            <td colspan="10">
+              <div class="d-flex align-items-center justify-content-center p-3">
+                فایلی برای مشاهده وجود ندارد!
+              </div>
+            </td>
+          </tr>
+        }
       </tbody>
     </table>
   </div>

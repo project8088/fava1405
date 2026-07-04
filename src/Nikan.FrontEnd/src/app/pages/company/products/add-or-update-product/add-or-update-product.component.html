@@ -1,113 +1,115 @@
 <div class="content-header">
-  <span *ngIf="!isUpdate">ثبت محصول جدید</span>
-  <span *ngIf="isUpdate">ویرایش محصول</span>
+  @if (!isUpdate) {
+    <span>ثبت محصول جدید</span>
+  }
+  @if (isUpdate) {
+    <span>ویرایش محصول</span>
+  }
 </div>
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-    <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
-
-    <form [formGroup]="productForm" *ngIf="!loading">
-      <div class="row">
-        <mat-form-field class="col-sm-12">
-          <mat-label>عنوان محصول</mat-label>
-          <input matInput formControlName="title" type="text" maxlength="500" />
-          <mat-error *ngIf="productForm.get('title').errors?.required"
-            >عنوان محصول را وارد کنید.</mat-error
-          >
-          <mat-error *ngIf="productForm.get('title').errors?.maxlength"
-            >حداکثر 500 کاراکتر</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="col-sm-12">
-          <mat-label>توضیحات</mat-label>
-          <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-          <mat-error *ngIf="productForm.get('description').errors?.required"
-            >توضیحات را وارد کنید.</mat-error
-          >
-          <mat-error *ngIf="productForm.get('description').errors?.maxlength"
-            >حداکثر 2000 کاراکتر</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>شناسه محصول</mat-label>
-          <input matInput formControlName="code" type="text" maxlength="20" />
-          <mat-error *ngIf="productForm.get('code').errors?.required"
-            >شناسه محصول را وارد کنید.</mat-error
-          >
-          <mat-error *ngIf="productForm.get('code').errors?.maxlength">حداکثر 20 کاراکتر</mat-error>
-        </mat-form-field>
-
-        <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>گروه اصلی محصول</mat-label>
-          <mat-select formControlName="productParentId" (selectionChange)="getProductByParent()">
-            <mat-option [value]="item.key" *ngFor="let item of parentProductList">{{
-              item.text
-            }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="productForm.get('productParentId').errors?.required"
-            >گروه محصول را انتخاب کنید.</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>گروه محصول</mat-label>
-          <mat-select formControlName="productGroupId">
-            <mat-option [value]="item.key" *ngFor="let item of productGroupList">{{
-              item.text
-            }}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="productForm.get('productGroupId').errors?.required"
-            >گروه محصول را انتخاب کنید.</mat-error
-          >
-          <mat-spinner
-            color="default"
-            diameter="20"
-            *ngIf="loadingProductGroup"
-            matSuffix
-          ></mat-spinner>
-        </mat-form-field>
-
-        <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>مبلغ</mat-label>
-          <input matInput formControlName="price" type="text" numbersOnly />
-          <mat-error *ngIf="productForm.get('price').errors?.required"
-            >مبلغ را وارد کنید.</mat-error
-          >
-        </mat-form-field>
+    @if (loading) {
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
+    }
 
-      <p>
-        <mat-checkbox color="default" formControlName="isActive">فعال/غیرفعال</mat-checkbox>
-      </p>
-
-      <div class="html-editor"></div>
-
-      <app-uploader
-        (attachmentId)="getAttachmentId($event)"
-        [autoUpload]="true"
-        [btnTitle]="'انتخاب تصویر'"
-      ></app-uploader>
-
-      <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" *ngIf="imageUrl" />
-    </form>
+    @if (!loading) {
+      <form [formGroup]="productForm">
+        <div class="row">
+          <mat-form-field class="col-sm-12">
+            <mat-label>عنوان محصول</mat-label>
+            <input matInput formControlName="title" type="text" maxlength="500" />
+            @if (productForm.get('title').errors?.required) {
+              <mat-error>عنوان محصول را وارد کنید.</mat-error>
+            }
+            @if (productForm.get('title').errors?.maxlength) {
+              <mat-error>حداکثر 500 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-12">
+            <mat-label>توضیحات</mat-label>
+            <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
+            @if (productForm.get('description').errors?.required) {
+              <mat-error>توضیحات را وارد کنید.</mat-error>
+            }
+            @if (productForm.get('description').errors?.maxlength) {
+              <mat-error>حداکثر 2000 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>شناسه محصول</mat-label>
+            <input matInput formControlName="code" type="text" maxlength="20" />
+            @if (productForm.get('code').errors?.required) {
+              <mat-error>شناسه محصول را وارد کنید.</mat-error>
+            }
+            @if (productForm.get('code').errors?.maxlength) {
+              <mat-error>حداکثر 20 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>گروه اصلی محصول</mat-label>
+            <mat-select formControlName="productParentId" (selectionChange)="getProductByParent()">
+              @for (item of parentProductList; track item) {
+                <mat-option [value]="item.key">{{ item.text }}</mat-option>
+              }
+            </mat-select>
+            @if (productForm.get('productParentId').errors?.required) {
+              <mat-error>گروه محصول را انتخاب کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>گروه محصول</mat-label>
+            <mat-select formControlName="productGroupId">
+              @for (item of productGroupList; track item) {
+                <mat-option [value]="item.key">{{ item.text }}</mat-option>
+              }
+            </mat-select>
+            @if (productForm.get('productGroupId').errors?.required) {
+              <mat-error>گروه محصول را انتخاب کنید.</mat-error>
+            }
+            @if (loadingProductGroup) {
+              <mat-spinner color="default" diameter="20" matSuffix></mat-spinner>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>مبلغ</mat-label>
+            <input matInput formControlName="price" type="text" numbersOnly />
+            @if (productForm.get('price').errors?.required) {
+              <mat-error>مبلغ را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <p>
+          <mat-checkbox color="default" formControlName="isActive">فعال/غیرفعال</mat-checkbox>
+        </p>
+        <div class="html-editor"></div>
+        <app-uploader
+          (attachmentId)="getAttachmentId($event)"
+          [autoUpload]="true"
+          [btnTitle]="'انتخاب تصویر'"
+        ></app-uploader>
+        @if (imageUrl) {
+          <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" />
+        }
+      </form>
+    }
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
-      <button
-        mat-raised-button
-        color="default"
-        (click)="save()"
-        [disabled]="isSaving"
-        *ngIf="!loading"
-      >
-        <span *ngIf="isSaving">منتظر بمانید...</span>
-        <span *ngIf="!isSaving">ذخیره</span>
-        <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
-      </button>
+      @if (!loading) {
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          @if (isSaving) {
+            <span>منتظر بمانید...</span>
+          }
+          @if (!isSaving) {
+            <span>ذخیره</span>
+          }
+          <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+        </button>
+      }
     </div>
   </mat-card-footer>
 </mat-card>

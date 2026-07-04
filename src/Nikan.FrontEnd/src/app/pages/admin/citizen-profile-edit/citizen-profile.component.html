@@ -8,9 +8,9 @@
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
-    <button mat-stroked-button color="default" (click)="back()" *ngIf="user?.isAdmin">
-      باز گشت
-    </button>
+    @if (user?.isAdmin) {
+      <button mat-stroked-button color="default" (click)="back()">باز گشت</button>
+    }
   </mat-card-header>
   <mat-tab-group>
     <mat-tab>

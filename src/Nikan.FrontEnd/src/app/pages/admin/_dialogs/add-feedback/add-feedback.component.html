@@ -11,11 +11,13 @@
       <mat-form-field class="col-sm-12">
         <mat-label>موضوع بازخورد</mat-label>
         <mat-select formControlName="feedbackId" [compareWith]="compareFn">
-          <mat-option [value]="item.key" *ngFor="let item of groupList">{{ item.text }}</mat-option>
+          @for (item of groupList; track item) {
+            <mat-option [value]="item.key">{{ item.text }}</mat-option>
+          }
         </mat-select>
-        <mat-error *ngIf="form.get('feedbackId').errors?.required"
-          >موضوع بازخورد را انتخاب کنید.</mat-error
-        >
+        @if (form.get('feedbackId').errors?.required) {
+          <mat-error>موضوع بازخورد را انتخاب کنید.</mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="col-sm-12">
@@ -26,9 +28,9 @@
           rows="5"
           autocomplete="doNotAutoComplete"
         ></textarea>
-        <mat-error *ngIf="form.get('feedbackDescription').errors?.required">
-          بازخورد خود را وارد کنید.
-        </mat-error>
+        @if (form.get('feedbackDescription').errors?.required) {
+          <mat-error> بازخورد خود را وارد کنید. </mat-error>
+        }
       </mat-form-field>
     </div>
   </form>

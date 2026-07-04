@@ -4,78 +4,79 @@
     لیست مدارک شهروند
   </mat-card-header>
   <mat-card-content>
-    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
+    @if (loading) {
+      <div class="p-5 d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
 
     <div class="overflow-auto">
-      <table
-        class="w-100 table-layout-fixed"
-        *ngIf="!loading"
-        mat-table
-        [dataSource]="baseDocuments"
-      >
-        <ng-container matColumnDef="documentGroup">
-          <th mat-header-cell *matHeaderCellDef>مدرک درخواست</th>
-          <td mat-cell *matCellDef="let element">
-            <div class="my-4">{{ element.documentGroup }}</div>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="description">
-          <th mat-header-cell *matHeaderCellDef>توضیحات</th>
-          <td mat-cell *matCellDef="let element" class="p-3">
-            {{ element.description | jalali }}
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="attachedOnDate">
-          <th mat-header-cell *matHeaderCellDef>تاریخ بارگذاری</th>
-          <td mat-cell *matCellDef="let element" class="p-3">
-            <span *ngIf="element.id !== 0">{{ element.attachedOnDate | jalali }}</span>
-          </td>
-        </ng-container>
-
-        <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef>وضعیت</th>
-          <td mat-cell *matCellDef="let element">
-            <app-uploader
-              *ngIf="element.id === 0"
-              (attachmentId)="getImage($event)"
-              [data]="{ groupId: element.documentGroupId }"
-              [autoUpload]="true"
-              [btnTitle]="' انتخاب فایل'"
-              [url]="uploadUrl"
-            ></app-uploader>
-            <div class="d-flex" *ngIf="element.id !== 0">
-              <img
-                class="flex-shrink-0 document-thumb object-fit-cover"
-                [src]="baseUrl + element.filePath"
-              />
-              <a
-                mat-stroked-button
-                class="mx-2 flex-shrink-0"
-                [href]="baseUrl + element.filePath"
-                target="_blank"
-              >
-                مشاهده
-                <mat-icon>remove_red_eye</mat-icon>
-              </a>
-              <button
-                class="flex-shrink-0"
-                (click)="removeDocument(element.id, element.documentGroup)"
-                mat-stroked-button
-                color="accent"
-              >
-                حذف
-                <mat-icon>delete</mat-icon>
-              </button>
-            </div>
-          </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-      </table>
+      @if (!loading) {
+        <table class="w-100 table-layout-fixed" mat-table [dataSource]="baseDocuments">
+          <ng-container matColumnDef="documentGroup">
+            <th mat-header-cell *matHeaderCellDef>مدرک درخواست</th>
+            <td mat-cell *matCellDef="let element">
+              <div class="my-4">{{ element.documentGroup }}</div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>توضیحات</th>
+            <td mat-cell *matCellDef="let element" class="p-3">
+              {{ element.description | jalali }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="attachedOnDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ بارگذاری</th>
+            <td mat-cell *matCellDef="let element" class="p-3">
+              @if (element.id !== 0) {
+                <span>{{ element.attachedOnDate | jalali }}</span>
+              }
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>وضعیت</th>
+            <td mat-cell *matCellDef="let element">
+              @if (element.id === 0) {
+                <app-uploader
+                  (attachmentId)="getImage($event)"
+                  [data]="{ groupId: element.documentGroupId }"
+                  [autoUpload]="true"
+                  [btnTitle]="' انتخاب فایل'"
+                  [url]="uploadUrl"
+                ></app-uploader>
+              }
+              @if (element.id !== 0) {
+                <div class="d-flex">
+                  <img
+                    class="flex-shrink-0 document-thumb object-fit-cover"
+                    [src]="baseUrl + element.filePath"
+                  />
+                  <a
+                    mat-stroked-button
+                    class="mx-2 flex-shrink-0"
+                    [href]="baseUrl + element.filePath"
+                    target="_blank"
+                  >
+                    مشاهده
+                    <mat-icon>remove_red_eye</mat-icon>
+                  </a>
+                  <button
+                    class="flex-shrink-0"
+                    (click)="removeDocument(element.id, element.documentGroup)"
+                    mat-stroked-button
+                    color="accent"
+                  >
+                    حذف
+                    <mat-icon>delete</mat-icon>
+                  </button>
+                </div>
+              }
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      }
     </div>
   </mat-card-content>
 </mat-card>

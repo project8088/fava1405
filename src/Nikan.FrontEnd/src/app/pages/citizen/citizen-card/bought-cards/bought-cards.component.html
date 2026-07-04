@@ -6,11 +6,15 @@
       .
     </div>
 
-    <div *ngIf="loading" class="d-flex align-items-center justify-content-center">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
+    @if (loading) {
+      <div class="d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
 
-    <strong *ngIf="cards && cards.length == 0" class="my-3 mx-3"> کارتی خریداری نشده است! </strong>
+    @if (cards && cards.length == 0) {
+      <strong class="my-3 mx-3"> کارتی خریداری نشده است! </strong>
+    }
 
     <table mat-table [dataSource]="cards">
       <ng-container matColumnDef="requestDate">
@@ -54,11 +58,13 @@
           :
           {{ element.deliveringAddress }}
 
-          <span class="text-info" *ngIf="element.deliverType === 1">
-            <a (click)="openCardAddress(element)">
-              <span> ویرایش آدرس تحویل کارت </span>
-            </a>
-          </span>
+          @if (element.deliverType === 1) {
+            <span class="text-info">
+              <a (click)="openCardAddress(element)">
+                <span> ویرایش آدرس تحویل کارت </span>
+              </a>
+            </span>
+          }
         </td>
       </ng-container>
 

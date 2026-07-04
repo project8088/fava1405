@@ -50,7 +50,9 @@
                       [disabled]="searching"
                       (click)="searchTrackingCode()"
                     >
-                      <mat-spinner color="default" diameter="20" *ngIf="searching"></mat-spinner>
+                      @if (searching) {
+                        <mat-spinner color="default" diameter="20"></mat-spinner>
+                      }
                       <span>جستجو</span>
                     </button>
                   </div>
@@ -58,28 +60,32 @@
                 <div class="col-sm-4"></div>
               </div>
 
-              <div *ngIf="ticketAnswer">
-                <p>
-                  <strong>موضوع: </strong> <span>{{ ticketAnswer.subject }}</span>
-                </p>
-                <p>
-                  <strong>متن پیام: </strong> <span>{{ ticketAnswer.ticketMessage }}</span>
-                </p>
-                <p *ngIf="ticketAnswer.responseTextOnDate">
-                  <strong>تاریخ ثبت پاسخ: </strong>
-                  <span>
-                    {{
-                      ticketAnswer.responseTextOnDate
-                        | jalali
-                          : 'YYYY/MM/DD ساعت
-                    HH:mm'
-                    }}
-                  </span>
-                </p>
-                <p>
-                  <strong>پاسخ: </strong> <span>{{ ticketAnswer.responseText }}</span>
-                </p>
-              </div>
+              @if (ticketAnswer) {
+                <div>
+                  <p>
+                    <strong>موضوع: </strong> <span>{{ ticketAnswer.subject }}</span>
+                  </p>
+                  <p>
+                    <strong>متن پیام: </strong> <span>{{ ticketAnswer.ticketMessage }}</span>
+                  </p>
+                  @if (ticketAnswer.responseTextOnDate) {
+                    <p>
+                      <strong>تاریخ ثبت پاسخ: </strong>
+                      <span>
+                        {{
+                          ticketAnswer.responseTextOnDate
+                            | jalali
+                              : 'YYYY/MM/DD ساعت
+                        HH:mm'
+                        }}
+                      </span>
+                    </p>
+                  }
+                  <p>
+                    <strong>پاسخ: </strong> <span>{{ ticketAnswer.responseText }}</span>
+                  </p>
+                </div>
+              }
 
               <br />
               <br />

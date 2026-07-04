@@ -3,19 +3,27 @@
   <mat-card-content>
     <div class="box-info-dash">
       <div class="row">
-        <div *ngIf="info.sabtStatus === 1" class="col-sm-6 alert alert-success m-3">
-          اطلاعات شناسنامه ایی شما تایید شده است .
-        </div>
-        <div *ngIf="info.sabtStatus === 0" class="col-sm-6 alert alert-danger m-3">
-          اطلاعات شما مورد تایید ثبت احوال قرار نگرفت، لطفا اطلاعات صحیح خود را وارد کنید .
-        </div>
+        @if (info.sabtStatus === 1) {
+          <div class="col-sm-6 alert alert-success m-3">
+            اطلاعات شناسنامه ایی شما تایید شده است .
+          </div>
+        }
+        @if (info.sabtStatus === 0) {
+          <div class="col-sm-6 alert alert-danger m-3">
+            اطلاعات شما مورد تایید ثبت احوال قرار نگرفت، لطفا اطلاعات صحیح خود را وارد کنید .
+          </div>
+        }
       </div>
 
       <div class="row">
         <div class="col-sm-6">
           <span> جنسیت : </span>
-          <strong *ngIf="info.gender"> آقا</strong>
-          <strong *ngIf="!info.gender"> خانم</strong>
+          @if (info.gender) {
+            <strong> آقا</strong>
+          }
+          @if (!info.gender) {
+            <strong> خانم</strong>
+          }
         </div>
         <div class="col-sm-6">
           <span> کد ملی: </span><strong>{{ info.nationCode }}</strong>

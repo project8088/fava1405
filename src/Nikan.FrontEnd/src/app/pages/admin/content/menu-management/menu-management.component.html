@@ -10,15 +10,18 @@
     </button>
   </mat-card-header>
   <mat-card-content>
-    <div class="d-flex align-items-center justify-content-center py-5" *ngIf="isLoadingResults">
-      <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-    </div>
-    <div
-      class="d-flex align-items-center justify-content-center py-5"
-      *ngIf="isLoadingResults == false && data.length == 0"
-    >
-      <strong>اطلاعاتی وجود ندارد!</strong>
-    </div>
+    @if (isLoadingResults) {
+      <div class="d-flex align-items-center justify-content-center py-5">
+        @if (isLoadingResults) {
+          <mat-spinner color="default"></mat-spinner>
+        }
+      </div>
+    }
+    @if (isLoadingResults == false && data.length == 0) {
+      <div class="d-flex align-items-center justify-content-center py-5">
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
+    }
 
     <adm-tree-menu [menuItems]="data" (onUpdate)="getList()"></adm-tree-menu>
   </mat-card-content>

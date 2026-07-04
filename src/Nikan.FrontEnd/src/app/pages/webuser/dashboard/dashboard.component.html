@@ -2,44 +2,47 @@
   <div class="box-info-dash">
     <div class="row mt-3">
       <div class="col-md-12">
-        <div *ngIf="loadingActiveWaterMeter == false" class="alert alert-danger">
-          {{ errorMessage }}
-        </div>
-        <ul *ngIf="loadingActiveWaterMeter" class="list-group">
-          <li class="list-group-item">
-            <span> عنوان دوره: </span><strong>{{ activeWaterMeter.title }}</strong>
-          </li>
-          <li class="list-group-item">
-            <span> تاریخ شروع قرائت: </span
-            ><strong>{{ activeWaterMeter.startDate | jalali }}</strong>
-          </li>
-          <li class="list-group-item">
-            <span> تاریخ پایان قرائت: </span
-            ><strong>{{ activeWaterMeter.endDate | jalali }}</strong>
-          </li>
-
-          <li class="list-group-item">
-            <a
-              class="text-danger"
-              href="/waterpanel/all-water-meter-un-register/{{ activeWaterMeter.id }}"
-            >
-              <span>مشاهده لیست کنتورهای قرائت نشده</span>
-            </a>
-            <strong> | </strong>
-            <a
-              class="text-success"
-              href="/waterpanel/all-water-meter-register/{{ activeWaterMeter.id }}"
-            >
-              <span>مشاهده لیست کنتورهای قرائت شده</span>
-            </a>
-          </li>
-          <li class="list-group-item">
-            <button mat-raised-button color="default" routerLink="/waterpanel/water-meter-info">
-              <i class="fa fa-eye mr-2"></i>
-              <span>پیمایش کنتور</span>
-            </button>
-          </li>
-        </ul>
+        @if (loadingActiveWaterMeter == false) {
+          <div class="alert alert-danger">
+            {{ errorMessage }}
+          </div>
+        }
+        @if (loadingActiveWaterMeter) {
+          <ul class="list-group">
+            <li class="list-group-item">
+              <span> عنوان دوره: </span><strong>{{ activeWaterMeter.title }}</strong>
+            </li>
+            <li class="list-group-item">
+              <span> تاریخ شروع قرائت: </span
+              ><strong>{{ activeWaterMeter.startDate | jalali }}</strong>
+            </li>
+            <li class="list-group-item">
+              <span> تاریخ پایان قرائت: </span
+              ><strong>{{ activeWaterMeter.endDate | jalali }}</strong>
+            </li>
+            <li class="list-group-item">
+              <a
+                class="text-danger"
+                href="/waterpanel/all-water-meter-un-register/{{ activeWaterMeter.id }}"
+              >
+                <span>مشاهده لیست کنتورهای قرائت نشده</span>
+              </a>
+              <strong> | </strong>
+              <a
+                class="text-success"
+                href="/waterpanel/all-water-meter-register/{{ activeWaterMeter.id }}"
+              >
+                <span>مشاهده لیست کنتورهای قرائت شده</span>
+              </a>
+            </li>
+            <li class="list-group-item">
+              <button mat-raised-button color="default" routerLink="/waterpanel/water-meter-info">
+                <i class="fa fa-eye mr-2"></i>
+                <span>پیمایش کنتور</span>
+              </button>
+            </li>
+          </ul>
+        }
       </div>
     </div>
   </div>

@@ -1,14 +1,14 @@
 <!-- Breadcrumb Area -->
 <!-- <div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1" data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
-  <div class="container">
-    <div class="tm-breadcrumb">
-      <h2 class="tm-breadcrumb-title">بیوگرافی</h2>
-      <ul>
-        <li><a routerLink="/home">صفحه اصلی</a></li> 
-        <li>بیوگرافی</li>
-      </ul>
-    </div>
+<div class="container">
+  <div class="tm-breadcrumb">
+    <h2 class="tm-breadcrumb-title">بیوگرافی</h2>
+    <ul>
+      <li><a routerLink="/home">صفحه اصلی</a></li>
+      <li>بیوگرافی</li>
+    </ul>
   </div>
+</div>
 </div> -->
 <!--// Breadcrumb Area -->
 <!-- Main Content -->
@@ -16,25 +16,29 @@
   <!-- Blogs Area -->
   <div class="">
     <div class="container p-md-5 box p-4 mt-4">
-      <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loading">
-        <mat-spinner color="default"></mat-spinner>
-      </div>
-
-      <div class="profile" *ngIf="!loading && userInfo">
-        <div class="profile-image">
-          <img [src]="baseUrl + userInfo.imageUrl" />
+      @if (loading) {
+        <div class="d-flex align-items-center justify-content-center py-5">
+          <mat-spinner color="default"></mat-spinner>
         </div>
-        <h5 class="text-center name-family">
-          {{
-            (userInfo.namePrefix | enumString: 'namePrefix') +
-              ' ' +
-              userInfo.firstName +
-              ' ' +
-              userInfo.lastName
-          }}
-        </h5>
-        <div class="bio" [innerHtml]="userInfo.biography | safeHtml"></div>
-      </div>
+      }
+
+      @if (!loading && userInfo) {
+        <div class="profile">
+          <div class="profile-image">
+            <img [src]="baseUrl + userInfo.imageUrl" />
+          </div>
+          <h5 class="text-center name-family">
+            {{
+              (userInfo.namePrefix | enumString: 'namePrefix') +
+                ' ' +
+                userInfo.firstName +
+                ' ' +
+                userInfo.lastName
+            }}
+          </h5>
+          <div class="bio" [innerHtml]="userInfo.biography | safeHtml"></div>
+        </div>
+      }
     </div>
   </div>
   <!--// Blogs Area -->

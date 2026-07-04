@@ -5,199 +5,197 @@
         <ng-template mat-tab-label> اطلاعات شهروند </ng-template>
         <ng-template matTabContent>
           <div class="p-3 d-flex">
-            <div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
-              <mat-spinner diameter="50" color="default"></mat-spinner>
-            </div>
-            <div class="citizen-details" *ngIf="!loadingData">
-              <div class="row d-flex align-items-center box-dash">
-                <div>
-                  <img
-                    class="avatar"
-                    [src]="baseUrl + citizen.personalPictureUrl"
-                    *ngIf="citizen.personalPictureUrl"
-                  />
-                  <img
-                    class="avatar"
-                    src="assets/images/avatar.png"
-                    *ngIf="!citizen.personalPictureUrl"
-                  />
-                </div>
-                <div class="col row">
-                  <div class="col-md-6">
-                    <strong *ngIf="citizen.nationId > 0"> شماره شناسایی </strong>
-                    <strong *ngIf="citizen.nationId == 0"> کدملی </strong>
-                    <span>{{ citizen.nationCode }}</span>
-
-                    <strong class="text-danger" *ngIf="citizen.nationId > 0">
-                      ({{ citizen.nation }})
-                    </strong>
+            @if (loadingData) {
+              <div class="d-flex align-items-center justify-content-center">
+                <mat-spinner diameter="50" color="default"></mat-spinner>
+              </div>
+            }
+            @if (!loadingData) {
+              <div class="citizen-details">
+                <div class="row d-flex align-items-center box-dash">
+                  <div>
+                    @if (citizen.personalPictureUrl) {
+                      <img class="avatar" [src]="baseUrl + citizen.personalPictureUrl" />
+                    }
+                    @if (!citizen.personalPictureUrl) {
+                      <img class="avatar" src="assets/images/avatar.png" />
+                    }
                   </div>
-                  <div class="col-md-6">
-                    <strong> تاریخ ثبت نام: </strong>
+                  <div class="col row">
+                    <div class="col-md-6">
+                      @if (citizen.nationId > 0) {
+                        <strong> شماره شناسایی </strong>
+                      }
+                      @if (citizen.nationId == 0) {
+                        <strong> کدملی </strong>
+                      }
+                      <span>{{ citizen.nationCode }}</span>
+                      @if (citizen.nationId > 0) {
+                        <strong class="text-danger"> ({{ citizen.nation }}) </strong>
+                      }
+                    </div>
+                    <div class="col-md-6">
+                      <strong> تاریخ ثبت نام: </strong>
+                      <span>
+                        {{ citizen.creationDate | jalali }}
+                        <small>
+                          {{ citizen.creationDate | jalali: 'HH:mm' }}
+                        </small>
+                      </span>
+                    </div>
+                    <div class="col-md-6">
+                      <strong> نام: </strong>
+                      <span>{{ citizen.firstName }}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <strong> نام خانوادگی: </strong>
+                      <span>{{ citizen.lastName }}</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <strong> جنسیت: </strong>
+                    @if (!citizen.gender) {
+                      <span> خانم </span>
+                    }
+                    @if (citizen.gender) {
+                      <span> آقا </span>
+                    }
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> نام پدر: </strong>
+                    <span>{{ citizen.fatherName }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> تاریخ تولد: </strong>
+                    <span>{{ citizen.birthDate | jalali }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> وضعیت پایان خدمت: </strong>
+                    <span>{{ citizen.soldierState | enumString: 'soldierState' }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> ثبت نام از طریق خدمت : </strong>
                     <span>
-                      {{ citizen.creationDate | jalali }}
+                      {{ citizen.registerByService }}
+                      ( {{ citizen.addByUser }})
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> وضعیت تاهل: </strong>
+                    <span>{{ citizen.mariageStatus | enumString: 'maritalStatus' }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> تعداد فرزند: </strong>
+                    <span>{{ citizen.numberOfChildren }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>سطح تحصیلات: </strong>
+                    <span>{{ citizen.educationLevel | enumString: 'educationLevel' }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>گروه تحصیلی: </strong>
+                    <span>{{ citizen.educationGroup }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>وضعیت تحصیلی: </strong>
+                    <span>
+                      {{ citizen.educationStatues | enumString: 'educationStatues' }}
+                    </span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>رشته تحصیلی: </strong>
+                    <span>{{ citizen.educationField }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>گروه شغلی: </strong>
+                    <span>{{ citizen.jobGroup }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>عنوان شغل: </strong>
+                    <span>{{ citizen.jobTitle }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>وضعیت ثبت احوال: </strong>
+                    <span>{{ citizen.sabtStatus | enumString: 'sabtStatus' }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>وضعیت تصویر پرسنلی: </strong>
+                    <strong>{{
+                      citizen.personalPicture_Confirmed | enumString: 'personalPicture'
+                    }}</strong>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong>آخرین بروزرسانی اطلاعات: </strong>
+                    <span>
+                      {{ citizen.lastUpdateOnDate | jalali }}
                       <small>
-                        {{ citizen.creationDate | jalali: 'HH:mm' }}
+                        {{ citizen.lastUpdateOnDate | jalali: 'HH:mm' }}
                       </small>
                     </span>
                   </div>
-
-                  <div class="col-md-6">
-                    <strong> نام: </strong>
-                    <span>{{ citizen.firstName }}</span>
+                </div>
+                <!--------------------------------------------------------------------------------------------------->
+                <div class="box-header">
+                  <h3 class="box-title">اطلاعات تماس و آدرس</h3>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6 col-md-4">
+                    <strong> شماره موبایل: </strong>
+                    <span>{{ citizen.mobileNumber }}</span>
                   </div>
-                  <div class="col-md-6">
-                    <strong> نام خانوادگی: </strong>
-                    <span>{{ citizen.lastName }}</span>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> شماره تلفن ثابت: </strong>
+                    <span>{{ citizen.address?.phone }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> آدرس ایمیل: </strong>
+                    <span>{{ citizen.eMail }}</span>
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> شهر: </strong>
+                    <span
+                      >{{ citizen.address?.city?.parentText }}
+                      {{ citizen.address?.city?.text }}</span
+                    >
+                  </div>
+                  <div class="col-sm-6 col-md-4">
+                    <strong> منطقه: </strong>
+                    <span>{{ citizen.address?.region }}</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <strong> خیابان: </strong>
+                    <span>{{ citizen.address?.street }}</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <strong> کوچه: </strong>
+                    <span>{{ citizen.address?.alley }}</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <strong> پلاک: </strong>
+                    <span>{{ citizen.address?.plaque }}</span>
+                  </div>
+                  <div class="col-sm-3">
+                    <strong> کد پستی: </strong>
+                    <span>{{ citizen.address?.postalCode }}</span>
+                  </div>
+                  <div class="col-sm-12">
+                    <span>{{ citizen.address?.fullAddress }}</span>
                   </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 col-md-4">
-                  <strong> جنسیت: </strong>
-                  <span *ngIf="!citizen.gender"> خانم </span>
-                  <span *ngIf="citizen.gender"> آقا </span>
+                <div class="box-header">
+                  <h3 class="box-title">گروه های شهروندی</h3>
                 </div>
-
-                <div class="col-sm-6 col-md-4">
-                  <strong> نام پدر: </strong>
-                  <span>{{ citizen.fatherName }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> تاریخ تولد: </strong>
-                  <span>{{ citizen.birthDate | jalali }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> وضعیت پایان خدمت: </strong>
-                  <span>{{ citizen.soldierState | enumString: 'soldierState' }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> ثبت نام از طریق خدمت : </strong>
-                  <span>
-                    {{ citizen.registerByService }}
-                    ( {{ citizen.addByUser }})
-                  </span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> وضعیت تاهل: </strong>
-                  <span>{{ citizen.mariageStatus | enumString: 'maritalStatus' }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> تعداد فرزند: </strong>
-                  <span>{{ citizen.numberOfChildren }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>سطح تحصیلات: </strong>
-                  <span>{{ citizen.educationLevel | enumString: 'educationLevel' }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>گروه تحصیلی: </strong>
-                  <span>{{ citizen.educationGroup }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>وضعیت تحصیلی: </strong>
-                  <span>
-                    {{ citizen.educationStatues | enumString: 'educationStatues' }}
-                  </span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>رشته تحصیلی: </strong>
-                  <span>{{ citizen.educationField }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>گروه شغلی: </strong>
-                  <span>{{ citizen.jobGroup }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>عنوان شغل: </strong>
-                  <span>{{ citizen.jobTitle }}</span>
-                </div>
-
-                <div class="col-sm-6 col-md-4">
-                  <strong>وضعیت ثبت احوال: </strong>
-                  <span>{{ citizen.sabtStatus | enumString: 'sabtStatus' }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>وضعیت تصویر پرسنلی: </strong>
-                  <strong>{{
-                    citizen.personalPicture_Confirmed | enumString: 'personalPicture'
-                  }}</strong>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong>آخرین بروزرسانی اطلاعات: </strong>
-                  <span>
-                    {{ citizen.lastUpdateOnDate | jalali }}
-
-                    <small>
-                      {{ citizen.lastUpdateOnDate | jalali: 'HH:mm' }}
-                    </small>
-                  </span>
+                <div class="row">
+                  <mat-chip-list aria-label="citizen groups">
+                    @for (item of citizen.groups; track item) {
+                      <mat-chip>{{ item.group }} ({{ item.creationDate | jalali }})</mat-chip>
+                    }
+                  </mat-chip-list>
                 </div>
               </div>
-
-              <!--------------------------------------------------------------------------------------------------->
-              <div class="box-header">
-                <h3 class="box-title">اطلاعات تماس و آدرس</h3>
-              </div>
-              <div class="row">
-                <div class="col-sm-6 col-md-4">
-                  <strong> شماره موبایل: </strong>
-                  <span>{{ citizen.mobileNumber }}</span>
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> شماره تلفن ثابت: </strong>
-                  <span>{{ citizen.address?.phone }}</span>
-                </div>
-
-                <div class="col-sm-6 col-md-4">
-                  <strong> آدرس ایمیل: </strong>
-                  <span>{{ citizen.eMail }}</span>
-                </div>
-
-                <div class="col-sm-6 col-md-4">
-                  <strong> شهر: </strong>
-                  <span
-                    >{{ citizen.address?.city?.parentText }} {{ citizen.address?.city?.text }}</span
-                  >
-                </div>
-                <div class="col-sm-6 col-md-4">
-                  <strong> منطقه: </strong>
-                  <span>{{ citizen.address?.region }}</span>
-                </div>
-                <div class="col-sm-3">
-                  <strong> خیابان: </strong>
-                  <span>{{ citizen.address?.street }}</span>
-                </div>
-
-                <div class="col-sm-3">
-                  <strong> کوچه: </strong>
-                  <span>{{ citizen.address?.alley }}</span>
-                </div>
-                <div class="col-sm-3">
-                  <strong> پلاک: </strong>
-                  <span>{{ citizen.address?.plaque }}</span>
-                </div>
-                <div class="col-sm-3">
-                  <strong> کد پستی: </strong>
-                  <span>{{ citizen.address?.postalCode }}</span>
-                </div>
-                <div class="col-sm-12">
-                  <span>{{ citizen.address?.fullAddress }}</span>
-                </div>
-              </div>
-
-              <div class="box-header">
-                <h3 class="box-title">گروه های شهروندی</h3>
-              </div>
-
-              <div class="row">
-                <mat-chip-list aria-label="citizen groups">
-                  <mat-chip *ngFor="let item of citizen.groups"
-                    >{{ item.group }} ({{ item.creationDate | jalali }})</mat-chip
-                  >
-                </mat-chip-list>
-              </div>
-            </div>
+            }
           </div>
         </ng-template>
       </mat-tab>
@@ -232,18 +230,12 @@
                           <i class="badge badge-dot badge-dot-xl badge-success"></i>
                         </span>
                         <div class="vertical-timeline-element-content bounce-in">
-                          <h4
-                            *ngIf="citizen.citizenHistory?.lastPictureUploadOnDate"
-                            class="timeline-title text-success"
-                          >
-                            بارگذاری تصویر پرسنلی
-                          </h4>
-                          <h4
-                            *ngIf="!citizen.citizenHistory?.lastPictureUploadOnDate"
-                            class="timeline-title text-danger"
-                          >
-                            بارگذاری تصویر پرسنلی
-                          </h4>
+                          @if (citizen.citizenHistory?.lastPictureUploadOnDate) {
+                            <h4 class="timeline-title text-success">بارگذاری تصویر پرسنلی</h4>
+                          }
+                          @if (!citizen.citizenHistory?.lastPictureUploadOnDate) {
+                            <h4 class="timeline-title text-danger">بارگذاری تصویر پرسنلی</h4>
+                          }
 
                           <span class="vertical-timeline-element-date">{{
                             citizen.citizenHistory?.lastPictureUploadOnDate | jalali
@@ -257,18 +249,12 @@
                           <i class="badge badge-dot badge-dot-xl badge-success"></i>
                         </span>
                         <div class="vertical-timeline-element-content bounce-in">
-                          <h4
-                            *ngIf="citizen.citizenHistory?.buyCard"
-                            class="timeline-title text-success"
-                          >
-                            درخواست کارت
-                          </h4>
-                          <h4
-                            *ngIf="!citizen.citizenHistory?.buyCard"
-                            class="timeline-title text-danger"
-                          >
-                            درخواست کارت
-                          </h4>
+                          @if (citizen.citizenHistory?.buyCard) {
+                            <h4 class="timeline-title text-success">درخواست کارت</h4>
+                          }
+                          @if (!citizen.citizenHistory?.buyCard) {
+                            <h4 class="timeline-title text-danger">درخواست کارت</h4>
+                          }
                           <p>
                             {{ citizen.citizenHistory?.cardDescription }}
                           </p>
@@ -284,18 +270,12 @@
                           <i class="badge badge-dot badge-dot-xl badge-success"></i>
                         </span>
                         <div class="vertical-timeline-element-content bounce-in">
-                          <h4
-                            *ngIf="citizen.citizenHistory?.cardSendToPrint"
-                            class="timeline-title text-success"
-                          >
-                            ارسال برای چاپ
-                          </h4>
-                          <h4
-                            *ngIf="!citizen.citizenHistory?.cardSendToPrint"
-                            class="timeline-title text-danger"
-                          >
-                            ارسال برای چاپ
-                          </h4>
+                          @if (citizen.citizenHistory?.cardSendToPrint) {
+                            <h4 class="timeline-title text-success">ارسال برای چاپ</h4>
+                          }
+                          @if (!citizen.citizenHistory?.cardSendToPrint) {
+                            <h4 class="timeline-title text-danger">ارسال برای چاپ</h4>
+                          }
                           <p>
                             {{ citizen.citizenHistory?.cardsendToPrintDescription }}
                           </p>
@@ -312,18 +292,12 @@
                           <i class="badge badge-dot badge-dot-xl badge-success"></i>
                         </span>
                         <div class="vertical-timeline-element-content bounce-in">
-                          <h4
-                            *ngIf="citizen.citizenHistory?.cardPrinted"
-                            class="timeline-title text-success"
-                          >
-                            چاپ کارت
-                          </h4>
-                          <h4
-                            *ngIf="!citizen.citizenHistory?.cardPrinted"
-                            class="timeline-title text-danger"
-                          >
-                            چاپ کارت
-                          </h4>
+                          @if (citizen.citizenHistory?.cardPrinted) {
+                            <h4 class="timeline-title text-success">چاپ کارت</h4>
+                          }
+                          @if (!citizen.citizenHistory?.cardPrinted) {
+                            <h4 class="timeline-title text-danger">چاپ کارت</h4>
+                          }
 
                           <span class="vertical-timeline-element-date">{{
                             citizen.citizenHistory?.cardPrinted | jalali

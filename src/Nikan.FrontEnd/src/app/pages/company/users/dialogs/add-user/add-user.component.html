@@ -11,83 +11,89 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام</mat-label>
         <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
-        <mat-error *ngIf="userForm.get('firstName').errors?.required">
-          نام را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('firstName').errors?.pattern">
-          فقط از حروف فارسی استفاده کنید.
-        </mat-error>
+        @if (userForm.get('firstName').errors?.required) {
+          <mat-error> نام را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('firstName').errors?.pattern) {
+          <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام خانوادگی</mat-label>
         <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
-        <mat-error *ngIf="userForm.get('lastName').errors?.required">
-          نام خانوادگی را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('lastName').errors?.pattern">
-          فقط از حروف فارسی استفاده کنید.
-        </mat-error>
+        @if (userForm.get('lastName').errors?.required) {
+          <mat-error> نام خانوادگی را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('lastName').errors?.pattern) {
+          <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل</mat-label>
         <input matInput formControlName="mobile" maxlength="11" numbersOnly />
-        <mat-error *ngIf="userForm.get('mobile').errors?.required">
-          شماره موبایل را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('mobile').errors?.invalid">
-          شماره موبایل صحیح نیست.
-        </mat-error>
+        @if (userForm.get('mobile').errors?.required) {
+          <mat-error> شماره موبایل را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('mobile').errors?.invalid) {
+          <mat-error> شماره موبایل صحیح نیست. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آدرس ایمیل</mat-label>
         <input matInput formControlName="email" />
 
-        <mat-error *ngIf="userForm.get('email').errors?.email">
-          ایمیل وارد شده صحیح نیست!
-        </mat-error>
+        @if (userForm.get('email').errors?.email) {
+          <mat-error> ایمیل وارد شده صحیح نیست! </mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="row">
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام کاربری</mat-label>
         <input matInput formControlName="username" />
-        <mat-error *ngIf="userForm.get('username').errors?.required">
-          نام کاربری را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('username').errors?.pattern">
-          فقط از حروف لاتین استفاده کنید.
-        </mat-error>
+        @if (userForm.get('username').errors?.required) {
+          <mat-error> نام کاربری را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('username').errors?.pattern) {
+          <mat-error> فقط از حروف لاتین استفاده کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کلمه عبور</mat-label>
         <input matInput type="password" formControlName="password" autocomplete="new-password" />
-        <mat-error *ngIf="userForm.get('password').errors?.required">
-          کلمه عبور را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('password').errors?.weakPassword">
-          کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
-        </mat-error>
+        @if (userForm.get('password').errors?.required) {
+          <mat-error> کلمه عبور را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('password').errors?.weakPassword) {
+          <mat-error>
+            کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
+          </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>تکرار کلمه عبور</mat-label>
         <input matInput type="password" formControlName="confirmPassword" />
-        <mat-error *ngIf="userForm.get('confirmPassword').errors?.required">
-          تکرار کلمه عبور را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('confirmPassword').errors?.weakPassword">
-          کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
-        </mat-error>
+        @if (userForm.get('confirmPassword').errors?.required) {
+          <mat-error> تکرار کلمه عبور را وارد کنید. </mat-error>
+        }
+        @if (userForm.get('confirmPassword').errors?.weakPassword) {
+          <mat-error>
+            کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
+          </mat-error>
+        }
       </mat-form-field>
     </div>
 
-    <div *ngIf="userForm.hasError('notSame') && userForm.get('confirmPassword').value">
-      <span class="text-danger"> تکرار کلمه عبور صحیح نیست! </span>
-    </div>
+    @if (userForm.hasError('notSame') && userForm.get('confirmPassword').value) {
+      <div>
+        <span class="text-danger"> تکرار کلمه عبور صحیح نیست! </span>
+      </div>
+    }
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

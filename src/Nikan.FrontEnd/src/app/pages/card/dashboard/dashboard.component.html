@@ -8,109 +8,110 @@
       <mat-card class="custom-card">
         <mat-card-header> آمار سامانه </mat-card-header>
         <mat-card-content>
-          <div class="list-container row" *ngIf="!loading">
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong> کل کارت های صادر شده </strong>
+          @if (!loading) {
+            <div class="list-container row">
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong> کل کارت های صادر شده </strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.allCardCount }}</span>
+                  </div>
                 </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.allCardCount }}</span>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>درخواست های جدید</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.cardNewRequest }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>تصاویر در دست بررسی</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.personelPictureCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>کارت های تحویل داده شده</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.deliveredCards }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>تیکت های بسته شده</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.closedTicketCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>تیکت های جدید</strong>
+                  </div>
+                  <div>
+                    <span class="num"> </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong> درخواست های امروز </strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.cardNewRequestTodayCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>کارت های منزلت</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.manzalatCardCount | number }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>کارت های شهروندی</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.shahrvaniCardCount | number }}</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>درخواست های جدید</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.cardNewRequest }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>تصاویر در دست بررسی</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.personelPictureCount }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>کارت های تحویل داده شده</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.deliveredCards }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>تیکت های بسته شده</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.closedTicketCount }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>تیکت های جدید</strong>
-                </div>
-                <div>
-                  <span class="num"> </span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong> درخواست های امروز </strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.cardNewRequestTodayCount }}</span>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>کارت های منزلت</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.manzalatCardCount | number }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-              <div class="list-item">
-                <div>
-                  <strong>کارت های شهروندی</strong>
-                </div>
-                <div>
-                  <span class="num">{{ statisticalInfo?.shahrvaniCardCount | number }}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          }
 
           <!--<div class="no-any-items" *ngIf="statisticalInfo?.length==0 && !loading">
-    <i class="fa fa-info-circle"></i>
-    اطلاعاتی ثبت نشده است
-  </div>-->
-          <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-            <mat-spinner diameter="50" color="default"></mat-spinner>
-          </div>
+          <i class="fa fa-info-circle"></i>
+          اطلاعاتی ثبت نشده است
+        </div>-->
+          @if (loading) {
+            <div class="p-5 d-flex align-items-center justify-content-center">
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            </div>
+          }
         </mat-card-content>
       </mat-card>
     </div>

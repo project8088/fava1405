@@ -11,25 +11,26 @@
     {{ user?.rejectDescription }}
   </p>
 
-  <div class="image-buttons" *ngIf="user?.userCompanyStatus == 1">
-    <div class="img-btn" routerLink="/company/users/0">
-      <i class="text-success fa fa-users"></i>
-      <span>کاربران</span>
+  @if (user?.userCompanyStatus == 1) {
+    <div class="image-buttons">
+      <div class="img-btn" routerLink="/company/users/0">
+        <i class="text-success fa fa-users"></i>
+        <span>کاربران</span>
+      </div>
+      <div class="img-btn" routerLink="/company/personal/0">
+        <i class="text-success fa fa-users"></i>
+        <span>پرسنل</span>
+      </div>
+      <div class="img-btn" routerLink="/company/company-profile/0">
+        <i class="text-success fa fa-pencil"></i>
+        <span> ویرایش اطلاعات شرکت </span>
+      </div>
+      <div class="img-btn" routerLink="/company/tickets">
+        <i class="text-success fa fa-envelope"></i>
+        <span>تیکت ها</span>
+      </div>
     </div>
-    <div class="img-btn" routerLink="/company/personal/0">
-      <i class="text-success fa fa-users"></i>
-      <span>پرسنل</span>
-    </div>
-    <div class="img-btn" routerLink="/company/company-profile/0">
-      <i class="text-success fa fa-pencil"></i>
-      <span> ویرایش اطلاعات شرکت </span>
-    </div>
-
-    <div class="img-btn" routerLink="/company/tickets">
-      <i class="text-success fa fa-envelope"></i>
-      <span>تیکت ها</span>
-    </div>
-  </div>
+  }
 
   <div class="row">
     <div class="col-md-12">
@@ -37,41 +38,42 @@
         <mat-card-header> آخرین اطلاعیه ها </mat-card-header>
         <mat-card-content>
           <div class="list-container">
-            <div
-              class="list-item"
-              *ngFor="let item of notifications"
-              (click)="openNotificationDetails(item)"
-            >
-              <div class="list-content">
-                <div class="d-flex align-items-center justify-content-between">
-                  <div>
-                    <strong>شماره اطلاعیه: </strong><span> {{ item.notificationNumber }}</span>
+            @for (item of notifications; track item) {
+              <div class="list-item" (click)="openNotificationDetails(item)">
+                <div class="list-content">
+                  <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                      <strong>شماره اطلاعیه: </strong><span> {{ item.notificationNumber }}</span>
+                    </div>
+                    <div>
+                      <i class="fa fa-calendar-day mr-2"></i
+                      ><span> {{ item.publishDate | jalali }}</span>
+                    </div>
                   </div>
-                  <div>
-                    <i class="fa fa-calendar-day mr-2"></i
-                    ><span> {{ item.publishDate | jalali }}</span>
-                  </div>
-                </div>
-
-                <div class="row">
-                  <div class="col-sm-12">
-                    <strong> {{ item.title }}</strong>
-                  </div>
-                  <div class="col-sm-12">
-                    <small> {{ item.description }}</small>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <strong> {{ item.title }}</strong>
+                    </div>
+                    <div class="col-sm-12">
+                      <small> {{ item.description }}</small>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            }
           </div>
 
-          <div class="no-any-items" *ngIf="notifications.length == 0 && !loading">
-            <i class="fa fa-info-circle"></i>
-            اطلاعاتی ثبت نشده است
-          </div>
-          <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
-            <mat-spinner diameter="50" color="default"></mat-spinner>
-          </div>
+          @if (notifications.length == 0 && !loading) {
+            <div class="no-any-items">
+              <i class="fa fa-info-circle"></i>
+              اطلاعاتی ثبت نشده است
+            </div>
+          }
+          @if (loading) {
+            <div class="p-5 d-flex align-items-center justify-content-center">
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            </div>
+          }
         </mat-card-content>
       </mat-card>
     </div>

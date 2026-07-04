@@ -6,119 +6,127 @@
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-    <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-      <mat-spinner diameter="50" color="default"></mat-spinner>
-    </div>
-
-    <form [formGroup]="storeForm" *ngIf="!loading">
-      <div class="row">
-        <mat-form-field class="col-md-3">
-          <mat-label> عنوان درخواست</mat-label>
-          <input matInput formControlName="discountTitle" type="text" />
-          <mat-error *ngIf="storeForm.get('discountTitle').errors?.required">
-            عنوان درخواست را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="col-md-3">
-          <mat-label> سازمان درخواست کننده</mat-label>
-          <input matInput formControlName="freeCardApplicantOrganization" type="text" />
-          <mat-error *ngIf="storeForm.get('freeCardApplicantOrganization').errors?.required">
-            سازمان درخواست کننده را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="col-md-3">
-          <mat-label> شماره نامه </mat-label>
-          <input matInput formControlName="letterNumber" type="text" />
-          <mat-error *ngIf="storeForm.get('letterNumber').errors?.required">
-            شماره نامه را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field class="col-md-3">
-          <mat-label> نوع کارت</mat-label>
-          <mat-select formControlName="cardTypeId">
-            <mat-option *ngFor="let item of baseEnums.cardTypeList" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="storeForm.get('cardTypeId').errors?.required">
-            نوع کارت را مشخص کنید.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field class="col-md-3">
-          <mat-label>نوع تحویل</mat-label>
-          <mat-select formControlName="deliverType">
-            <mat-option *ngFor="let item of baseEnums.cardDeliverType" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="storeForm.get('deliverType').errors?.required">
-            نوع تحویل را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field *ngIf="storeForm.get('deliverType').value == 2" class="col-md-3">
-          <mat-label>مرکز تحویل</mat-label>
-          <mat-select formControlName="centerID">
-            <mat-option *ngFor="let item of baseEnums.centerList" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="storeForm.get('centerID').errors?.required">
-            مرکز تحویل را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field class="col-md-3">
-          <mat-label>وضعیت تصویر پرسنلی </mat-label>
-          <mat-select formControlName="imagerReviewStatusFormFreeCard">
-            <mat-option
-              *ngFor="let item of baseEnums.imagerReviewStatusFormFreeCard"
-              [value]="item.key"
-            >
-              {{ item.text }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="storeForm.get('imagerReviewStatusFormFreeCard').errors?.required">
-            وضعیت تصویر پرسنلی را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-        <mat-form-field class="col-md-3">
-          <mat-label> گروه شهروندی</mat-label>
-          <mat-select formControlName="groupId">
-            <mat-option *ngFor="let item of baseEnums.citizenGroups" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
-          </mat-select>
-          <mat-error *ngIf="storeForm.get('groupId').errors?.required">
-            گروه شهروندی را وارد کنید.</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field class="col-sm-12">
-          <mat-label> توضیحات </mat-label>
-          <textarea matInput formControlName="description" rows="3"></textarea>
-          <mat-error *ngIf="storeForm.get('description').errors?.required">
-            توضیحات را وارد کنید.
-          </mat-error>
-        </mat-form-field>
+    @if (loading) {
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
-    </form>
+    }
+
+    @if (!loading) {
+      <form [formGroup]="storeForm">
+        <div class="row">
+          <mat-form-field class="col-md-3">
+            <mat-label> عنوان درخواست</mat-label>
+            <input matInput formControlName="discountTitle" type="text" />
+            @if (storeForm.get('discountTitle').errors?.required) {
+              <mat-error> عنوان درخواست را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <mat-label> سازمان درخواست کننده</mat-label>
+            <input matInput formControlName="freeCardApplicantOrganization" type="text" />
+            @if (storeForm.get('freeCardApplicantOrganization').errors?.required) {
+              <mat-error> سازمان درخواست کننده را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <mat-label> شماره نامه </mat-label>
+            <input matInput formControlName="letterNumber" type="text" />
+            @if (storeForm.get('letterNumber').errors?.required) {
+              <mat-error> شماره نامه را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <mat-label> نوع کارت</mat-label>
+            <mat-select formControlName="cardTypeId">
+              @for (item of baseEnums.cardTypeList; track item) {
+                <mat-option [value]="item.key">
+                  {{ item.text }}
+                </mat-option>
+              }
+            </mat-select>
+            @if (storeForm.get('cardTypeId').errors?.required) {
+              <mat-error> نوع کارت را مشخص کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <mat-label>نوع تحویل</mat-label>
+            <mat-select formControlName="deliverType">
+              @for (item of baseEnums.cardDeliverType; track item) {
+                <mat-option [value]="item.key">
+                  {{ item.text }}
+                </mat-option>
+              }
+            </mat-select>
+            @if (storeForm.get('deliverType').errors?.required) {
+              <mat-error> نوع تحویل را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          @if (storeForm.get('deliverType').value == 2) {
+            <mat-form-field class="col-md-3">
+              <mat-label>مرکز تحویل</mat-label>
+              <mat-select formControlName="centerID">
+                @for (item of baseEnums.centerList; track item) {
+                  <mat-option [value]="item.key">
+                    {{ item.text }}
+                  </mat-option>
+                }
+              </mat-select>
+              @if (storeForm.get('centerID').errors?.required) {
+                <mat-error> مرکز تحویل را وارد کنید.</mat-error>
+              }
+            </mat-form-field>
+          }
+          <mat-form-field class="col-md-3">
+            <mat-label>وضعیت تصویر پرسنلی </mat-label>
+            <mat-select formControlName="imagerReviewStatusFormFreeCard">
+              @for (item of baseEnums.imagerReviewStatusFormFreeCard; track item) {
+                <mat-option [value]="item.key">
+                  {{ item.text }}
+                </mat-option>
+              }
+            </mat-select>
+            @if (storeForm.get('imagerReviewStatusFormFreeCard').errors?.required) {
+              <mat-error> وضعیت تصویر پرسنلی را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-md-3">
+            <mat-label> گروه شهروندی</mat-label>
+            <mat-select formControlName="groupId">
+              @for (item of baseEnums.citizenGroups; track item) {
+                <mat-option [value]="item.key">
+                  {{ item.text }}
+                </mat-option>
+              }
+            </mat-select>
+            @if (storeForm.get('groupId').errors?.required) {
+              <mat-error> گروه شهروندی را وارد کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-12">
+            <mat-label> توضیحات </mat-label>
+            <textarea matInput formControlName="description" rows="3"></textarea>
+            @if (storeForm.get('description').errors?.required) {
+              <mat-error> توضیحات را وارد کنید. </mat-error>
+            }
+          </mat-form-field>
+        </div>
+      </form>
+    }
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
-      <button
-        mat-raised-button
-        color="default"
-        (click)="save()"
-        [disabled]="isSaving"
-        *ngIf="!loading"
-      >
-        <span *ngIf="isSaving">منتظر بمانید...</span>
-        <span *ngIf="!isSaving">ثبت درخواست</span>
-        <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
-      </button>
+      @if (!loading) {
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          @if (isSaving) {
+            <span>منتظر بمانید...</span>
+          }
+          @if (!isSaving) {
+            <span>ثبت درخواست</span>
+          }
+          <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+        </button>
+      }
     </div>
   </mat-card-footer>
 </mat-card>

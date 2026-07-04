@@ -29,12 +29,16 @@
     </div>
 
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          <mat-spinner color="default"></mat-spinner>
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -64,8 +68,12 @@
           <ng-container matColumnDef="setPrice">
             <th mat-header-cell *matHeaderCellDef>قیمت گذاری</th>
             <td mat-cell *matCellDef="let row">
-              <span class="text-danger" *ngIf="!row.setPrice">خیر</span>
-              <span class="text-success" *ngIf="row.setPrice">بله</span>
+              @if (!row.setPrice) {
+                <span class="text-danger">خیر</span>
+              }
+              @if (row.setPrice) {
+                <span class="text-success">بله</span>
+              }
             </td>
           </ng-container>
 
@@ -100,26 +108,35 @@
           <ng-container matColumnDef="cardIsActive">
             <th mat-header-cell *matHeaderCellDef>فعال</th>
             <td mat-cell *matCellDef="let row">
-              <span class="text-danger" *ngIf="!row.cardIsActive">خیر</span>
-              <span class="text-success" *ngIf="row.cardIsActive">بله</span>
+              @if (!row.cardIsActive) {
+                <span class="text-danger">خیر</span>
+              }
+              @if (row.cardIsActive) {
+                <span class="text-success">بله</span>
+              }
             </td>
           </ng-container>
 
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!row.loading">
-                <mat-icon>more_vert</mat-icon>
-              </button>
-              <mat-menu #menu="matMenu">
-                <button
-                  *ngIf="row.setPrice"
-                  mat-menu-item
-                  routerLink="/card/order-addupdate-card/{{ row.cardTypeId }}/{{ row.cardInfoId }}"
-                >
-                  <i class="fa fa-eye mr-2"></i>
-                  <span>ویرایش</span>
+              @if (!row.loading) {
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
                 </button>
+              }
+              <mat-menu #menu="matMenu">
+                @if (row.setPrice) {
+                  <button
+                    mat-menu-item
+                    routerLink="/card/order-addupdate-card/{{ row.cardTypeId }}/{{
+                      row.cardInfoId
+                    }}"
+                  >
+                    <i class="fa fa-eye mr-2"></i>
+                    <span>ویرایش</span>
+                  </button>
+                }
                 <button
                   mat-menu-item
                   routerLink="/card/order-addupdate-card/{{ row.cardTypeId }}/0"

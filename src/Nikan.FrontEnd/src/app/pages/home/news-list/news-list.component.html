@@ -1,14 +1,14 @@
 <!-- Breadcrumb Area -->
 <!-- <div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1" data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
-  <div class="container">
-    <div class="tm-breadcrumb">
-      <h2 class="tm-breadcrumb-title">اخبار سایت</h2>
-      <ul>
-        <li><a routerLink="/home">صفحه اصلی</a></li>
-        <li>اخبار</li>
-      </ul>
-    </div>
+<div class="container">
+  <div class="tm-breadcrumb">
+    <h2 class="tm-breadcrumb-title">اخبار سایت</h2>
+    <ul>
+      <li><a routerLink="/home">صفحه اصلی</a></li>
+      <li>اخبار</li>
+    </ul>
   </div>
+</div>
 </div> -->
 <!--// Breadcrumb Area -->
 <!-- Main Content -->
@@ -17,54 +17,57 @@
     <div class="row">
       <div class="col-lg-8 col-12 order-1 order-lg-2">
         <div class="tm-blog-list sticky-sidebar">
-          <div
-            class="d-flex align-items-center justify-content-center py-5"
-            *ngIf="isLoadingResults"
-          >
-            <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-          </div>
-          <div
-            class="d-flex align-items-center justify-content-center py-5"
-            *ngIf="isLoadingResults == false && listCount == 0"
-          >
-            <strong>اطلاعاتی وجود ندارد!</strong>
-          </div>
+          @if (isLoadingResults) {
+            <div class="d-flex align-items-center justify-content-center py-5">
+              @if (isLoadingResults) {
+                <mat-spinner color="default"></mat-spinner>
+              }
+            </div>
+          }
+          @if (isLoadingResults == false && listCount == 0) {
+            <div class="d-flex align-items-center justify-content-center py-5">
+              <strong>اطلاعاتی وجود ندارد!</strong>
+            </div>
+          }
 
           <div class="row mt-30-reverse blog-masonry-active">
-            <div class="card p-2 news-card" *ngFor="let item of data">
-              <a class="relative">
-                <img
-                  [src]="baseUrl + item.imageUrl"
-                  alt="{{ item.title }}"
-                  *ngIf="item.imageUrl"
-                  class="mb-3 img-fluid rad12"
-                />
-                <img
-                  src="assets/images/news-default.jpg"
-                  alt="{{ item.title }}"
-                  *ngIf="!item.imageUrl"
-                  class="mb-3 img-fluid rad12"
-                />
-
-                <div class="covernews d-flex flex-row justify-content-between px-3 text-white">
-                  <span class="bottom_p"
-                    ><i class="fas fa-clock ml-1"></i>
-                    {{ item.onDate | jalali: 'dddd DD MMMM YYYY' }}
-                  </span>
-                </div>
-              </a>
-
-              <h5>
-                <a routerLink="/home/news-details/{{ item.id }}">{{ item.title }}</a>
-              </h5>
-              <p class="card-content">
-                {{ item.description }}
-              </p>
-
-              <a routerLink="/home/news-details/{{ item.id }}" class="text-danger text-center pb-3"
-                >مشاهده خبر »</a
-              >
-            </div>
+            @for (item of data; track item) {
+              <div class="card p-2 news-card">
+                <a class="relative">
+                  @if (item.imageUrl) {
+                    <img
+                      [src]="baseUrl + item.imageUrl"
+                      alt="{{ item.title }}"
+                      class="mb-3 img-fluid rad12"
+                    />
+                  }
+                  @if (!item.imageUrl) {
+                    <img
+                      src="assets/images/news-default.jpg"
+                      alt="{{ item.title }}"
+                      class="mb-3 img-fluid rad12"
+                    />
+                  }
+                  <div class="covernews d-flex flex-row justify-content-between px-3 text-white">
+                    <span class="bottom_p"
+                      ><i class="fas fa-clock ml-1"></i>
+                      {{ item.onDate | jalali: 'dddd DD MMMM YYYY' }}
+                    </span>
+                  </div>
+                </a>
+                <h5>
+                  <a routerLink="/home/news-details/{{ item.id }}">{{ item.title }}</a>
+                </h5>
+                <p class="card-content">
+                  {{ item.description }}
+                </p>
+                <a
+                  routerLink="/home/news-details/{{ item.id }}"
+                  class="text-danger text-center pb-3"
+                  >مشاهده خبر »</a
+                >
+              </div>
+            }
           </div>
 
           <div class="tm-pagination mt-50">
@@ -100,20 +103,18 @@
                   />
                   <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
                   <mat-datepicker #dpS></mat-datepicker>
-                  <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-                    تاریخ شروع را مشخص کنید.
-                  </mat-error>
-                  <mat-error
-                    *ngIf="
-                      searchForm.get('fromDate').errors?.matDatepickerMin ||
-                      searchForm.get('fromDate').errors?.matDatepickerMax
-                    "
-                  >
-                    تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-                  </mat-error>
-                  <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-                    فرمت تاریخ صحیح نیست
-                  </mat-error>
+                  @if (searchForm.get('fromDate').errors?.required) {
+                    <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+                  }
+                  @if (
+                    searchForm.get('fromDate').errors?.matDatepickerMin ||
+                    searchForm.get('fromDate').errors?.matDatepickerMax
+                  ) {
+                    <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+                  }
+                  @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+                    <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+                  }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="col-sm-12">
@@ -126,20 +127,18 @@
                   />
                   <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
                   <mat-datepicker #dpE></mat-datepicker>
-                  <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-                    تاریخ پایان را مشخص کنید.
-                  </mat-error>
-                  <mat-error
-                    *ngIf="
-                      searchForm.get('toDate').errors?.matDatepickerMin ||
-                      searchForm.get('toDate').errors?.matDatepickerMax
-                    "
-                  >
-                    تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-                  </mat-error>
-                  <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-                    فرمت تاریخ صحیح نیست
-                  </mat-error>
+                  @if (searchForm.get('toDate').errors?.required) {
+                    <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+                  }
+                  @if (
+                    searchForm.get('toDate').errors?.matDatepickerMin ||
+                    searchForm.get('toDate').errors?.matDatepickerMax
+                  ) {
+                    <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+                  }
+                  @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+                    <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+                  }
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="col-sm-12">

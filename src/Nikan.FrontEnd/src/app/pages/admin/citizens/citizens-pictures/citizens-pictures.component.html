@@ -15,9 +15,11 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            <mat-option *ngFor="let item of baseEnums.citizenGroups" [value]="item.key">
-              {{ item.text }}
-            </mat-option>
+            @for (item of baseEnums.citizenGroups; track item) {
+              <mat-option [value]="item.key">
+                {{ item.text }}
+              </mat-option>
+            }
           </mat-select>
         </mat-form-field>
 
@@ -51,20 +53,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ شروع را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
         <mat-form-field class="col-md-3">
           <mat-label>تا تاریخ ثبت نام</mat-label>
@@ -76,20 +76,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
       </div>
       <div class="row">
@@ -123,156 +121,156 @@
       <mat-spinner class="d-inline-block" diameter="30" color="default"></mat-spinner>
     </div>
 
-    <div
-      *ngFor="let item of data"
-      class="citizen-image-box col-11 col-md-6 col-lg-3 my-2 text-center"
-    >
-      <mat-card>
-        <mat-card-content>
-          <img
-            (click)="openImageDialog(item)"
-            class="pointer citizen-image border"
-            [src]="baseUrl + item.personalPictureUrl + '?' + item.imageVersion"
-          />
-          <div class="row align-items-center">
-            <b
-              class="col-12 col-md-6 col-lg-6 text-overflow-ellipsis white-space-nowrap my-2 d-block overflow-hidden"
-            >
-              {{ item.gender ? 'آقای' : 'خانم' }} {{ item.firstName }}
-              {{ item.lastName }}
+    @for (item of data; track item) {
+      <div class="citizen-image-box col-11 col-md-6 col-lg-3 my-2 text-center">
+        <mat-card>
+          <mat-card-content>
+            <img
+              (click)="openImageDialog(item)"
+              class="pointer citizen-image border"
+              [src]="baseUrl + item.personalPictureUrl + '?' + item.imageVersion"
+            />
+            <div class="row align-items-center">
+              <b
+                class="col-12 col-md-6 col-lg-6 text-overflow-ellipsis white-space-nowrap my-2 d-block overflow-hidden"
+              >
+                {{ item.gender ? 'آقای' : 'خانم' }} {{ item.firstName }}
+                {{ item.lastName }}
+              </b>
+              <b class="col-12 col-md-6 col-lg-6">{{ item.nationCode }}</b>
+            </div>
+            <b class="d-block text-primary">
+              {{ item.age }} سال
+              @if (item.personalPicture_Confirmed === 0) {
+                <i title="تایید نشده" class="mx-2 fas fa-thumbs-down text-danger fa-2x"></i>
+              }
+              @if (item.personalPicture_Confirmed === 1) {
+                <i title="تایید شده" class="mx-2 fas fa-thumbs-up text-success fa-2x"></i>
+              }
             </b>
-            <b class="col-12 col-md-6 col-lg-6">{{ item.nationCode }}</b>
-          </div>
-
-          <b class="d-block text-primary">
-            {{ item.age }} سال
-
-            <i
-              title="تایید نشده"
-              *ngIf="item.personalPicture_Confirmed === 0"
-              class="mx-2 fas fa-thumbs-down text-danger fa-2x"
-            ></i>
-            <i
-              title="تایید شده"
-              *ngIf="item.personalPicture_Confirmed === 1"
-              class="mx-2 fas fa-thumbs-up text-success fa-2x"
-            ></i>
-          </b>
-
-          <div>
-            [{{ item.creationDate | jalali }}] [300 * 200]
-
-            <a (click)="openCitizenProfile(item.userCode)">
-              <i
-                title="نمایش پروفایل شهروند"
-                class="fas fa-eye pointer fa-2x mx-2 text-primary"
-              ></i>
-            </a>
-          </div>
-        </mat-card-content>
-        <mat-card-footer>
-          <div class="d-flex align-items-center justify-content-end p-3">
-            <button
-              title="تایید تصویر"
-              *ngIf="
+            <div>
+              [{{ item.creationDate | jalali }}] [300 * 200]
+              <a (click)="openCitizenProfile(item.userCode)">
+                <i
+                  title="نمایش پروفایل شهروند"
+                  class="fas fa-eye pointer fa-2x mx-2 text-primary"
+                ></i>
+              </a>
+            </div>
+          </mat-card-content>
+          <mat-card-footer>
+            <div class="d-flex align-items-center justify-content-end p-3">
+              @if (
                 item.personalPicture_Confirmed === null ||
                 item.personalPicture_Confirmed === 2 ||
                 item.personalPicture_Confirmed === 0
-              "
-              class="action-button m-1"
-              mat-raised-button
-              color="primary"
-              (click)="confirmImage(item)"
-              [disabled]="item.isConfirming"
-            >
-              <span *ngIf="!item.isConfirming"><mat-icon>check</mat-icon></span>
-              <mat-spinner
-                class="m-0"
-                [hidden]="!item.isConfirming"
-                diameter="20"
-                color="white"
-              ></mat-spinner>
-            </button>
-
-            <button
-              title="عدم تایید تصویر"
-              *ngIf="
+              ) {
+                <button
+                  title="تایید تصویر"
+                  class="action-button m-1"
+                  mat-raised-button
+                  color="primary"
+                  (click)="confirmImage(item)"
+                  [disabled]="item.isConfirming"
+                >
+                  @if (!item.isConfirming) {
+                    <span><mat-icon>check</mat-icon></span>
+                  }
+                  <mat-spinner
+                    class="m-0"
+                    [hidden]="!item.isConfirming"
+                    diameter="20"
+                    color="white"
+                  ></mat-spinner>
+                </button>
+              }
+              @if (
                 item.personalPicture_Confirmed === null ||
                 item.personalPicture_Confirmed === 2 ||
                 item.personalPicture_Confirmed === 1
-              "
-              class="action-button m-1"
-              mat-raised-button
-              color="accent"
-              (click)="openRejectImageDialog(item)"
-              [disabled]="isSaving"
-            >
-              <span *ngIf="!item.isSaving">
-                <mat-icon>close</mat-icon>
-              </span>
-              <mat-spinner
-                class="m-0"
-                [hidden]="!item.isSaving"
-                diameter="20"
-                color="white"
-              ></mat-spinner>
-            </button>
-
-            <button
-              title="نمایش پیامهای ارسالی به شهروند"
-              class="action-button m-1"
-              mat-raised-button
-              color="default"
-              (click)="openMessagesDialog(item)"
-              [disabled]="isSaving"
-            >
-              <span *ngIf="!item.isSaving"><mat-icon>email</mat-icon></span>
-              <mat-spinner
-                class="m-0"
-                [hidden]="!item.isSaving"
-                diameter="20"
-                color="white"
-              ></mat-spinner>
-            </button>
-
-            <button
-              title="ویرایش تصویر"
-              class="action-button m-1"
-              mat-raised-button
-              color="default"
-              (click)="openEditImageDialog(item)"
-              [disabled]="isSaving"
-            >
-              <span *ngIf="!item.isSaving">
-                <i class="fa fa-pen"></i>
-              </span>
-              <mat-spinner
-                class="m-0"
-                [hidden]="!item.isSaving"
-                diameter="20"
-                color="white"
-              ></mat-spinner>
-            </button>
-            <button
-              title="بازخوانی تصویر"
-              class="action-button m-1"
-              mat-raised-button
-              color="default"
-              (click)="refreshImage(item)"
-              [disabled]="isSaving"
-            >
-              <span *ngIf="!item.isSaving"><mat-icon>sync</mat-icon></span>
-              <mat-spinner
-                class="m-0"
-                [hidden]="!item.isSaving"
-                diameter="20"
-                color="white"
-              ></mat-spinner>
-            </button>
-          </div>
-        </mat-card-footer>
-      </mat-card>
-    </div>
+              ) {
+                <button
+                  title="عدم تایید تصویر"
+                  class="action-button m-1"
+                  mat-raised-button
+                  color="accent"
+                  (click)="openRejectImageDialog(item)"
+                  [disabled]="isSaving"
+                >
+                  @if (!item.isSaving) {
+                    <span>
+                      <mat-icon>close</mat-icon>
+                    </span>
+                  }
+                  <mat-spinner
+                    class="m-0"
+                    [hidden]="!item.isSaving"
+                    diameter="20"
+                    color="white"
+                  ></mat-spinner>
+                </button>
+              }
+              <button
+                title="نمایش پیامهای ارسالی به شهروند"
+                class="action-button m-1"
+                mat-raised-button
+                color="default"
+                (click)="openMessagesDialog(item)"
+                [disabled]="isSaving"
+              >
+                @if (!item.isSaving) {
+                  <span><mat-icon>email</mat-icon></span>
+                }
+                <mat-spinner
+                  class="m-0"
+                  [hidden]="!item.isSaving"
+                  diameter="20"
+                  color="white"
+                ></mat-spinner>
+              </button>
+              <button
+                title="ویرایش تصویر"
+                class="action-button m-1"
+                mat-raised-button
+                color="default"
+                (click)="openEditImageDialog(item)"
+                [disabled]="isSaving"
+              >
+                @if (!item.isSaving) {
+                  <span>
+                    <i class="fa fa-pen"></i>
+                  </span>
+                }
+                <mat-spinner
+                  class="m-0"
+                  [hidden]="!item.isSaving"
+                  diameter="20"
+                  color="white"
+                ></mat-spinner>
+              </button>
+              <button
+                title="بازخوانی تصویر"
+                class="action-button m-1"
+                mat-raised-button
+                color="default"
+                (click)="refreshImage(item)"
+                [disabled]="isSaving"
+              >
+                @if (!item.isSaving) {
+                  <span><mat-icon>sync</mat-icon></span>
+                }
+                <mat-spinner
+                  class="m-0"
+                  [hidden]="!item.isSaving"
+                  diameter="20"
+                  color="white"
+                ></mat-spinner>
+              </button>
+            </div>
+          </mat-card-footer>
+        </mat-card>
+      </div>
+    }
   </div>
 
   <mat-paginator

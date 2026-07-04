@@ -1,6 +1,10 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-  <h5 cdkDragHandle class="title" *ngIf="!isUpdate">ثبت اسلاید شو</h5>
-  <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش اسلاید شو</h5>
+  @if (!isUpdate) {
+    <h5 cdkDragHandle class="title">ثبت اسلاید شو</h5>
+  }
+  @if (isUpdate) {
+    <h5 cdkDragHandle class="title">ویرایش اسلاید شو</h5>
+  }
 
   <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
@@ -12,13 +16,17 @@
       <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
         <mat-label> عنوان </mat-label>
         <input matInput formControlName="caption" autocomplete="doNotAutoComplete" maxlength="50" />
-        <mat-error *ngIf="form.get('caption').errors?.required"> عنوان را وارد کنید. </mat-error>
+        @if (form.get('caption').errors?.required) {
+          <mat-error> عنوان را وارد کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
         <mat-label>آدرس </mat-label>
         <input matInput formControlName="url" autocomplete="doNotAutoComplete" maxlength="50" />
-        <mat-error *ngIf="form.get('url').errors?.required"> آدرس را وارد کنید. </mat-error>
+        @if (form.get('url').errors?.required) {
+          <mat-error> آدرس را وارد کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
@@ -29,17 +37,17 @@
           autocomplete="doNotAutoComplete"
           maxlength="50"
         />
-        <mat-error *ngIf="form.get('indexOrder').errors?.required">
-          ترتیب نمایش را وارد کنید.
-        </mat-error>
+        @if (form.get('indexOrder').errors?.required) {
+          <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
+        }
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="col-sm-12">
         <mat-label> توضیحات</mat-label>
         <input matInput formControlName="description" autocomplete="doNotAutoComplete" />
-        <mat-error *ngIf="form.get('description').errors?.required">
-          توضیحات را وارد کنید.
-        </mat-error>
+        @if (form.get('description').errors?.required) {
+          <mat-error> توضیحات را وارد کنید. </mat-error>
+        }
       </mat-form-field>
     </div>
     <p>
@@ -53,7 +61,9 @@
     >
     </app-uploader>
 
-    <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" *ngIf="imageUrl" />
+    @if (imageUrl) {
+      <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" />
+    }
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>

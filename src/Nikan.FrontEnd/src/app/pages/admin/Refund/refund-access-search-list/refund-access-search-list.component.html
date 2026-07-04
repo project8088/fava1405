@@ -42,20 +42,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ شروع را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('fromDate').errors?.matDatepickerMin ||
-              searchForm.get('fromDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('fromDate').errors?.required) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate').errors?.matDatepickerMin ||
+            searchForm.get('fromDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-md-3">
@@ -68,20 +66,18 @@
           />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.required">
-            تاریخ پایان را مشخص کنید.
-          </mat-error>
-          <mat-error
-            *ngIf="
-              searchForm.get('toDate').errors?.matDatepickerMin ||
-              searchForm.get('toDate').errors?.matDatepickerMax
-            "
-          >
-            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-          </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
-            فرمت تاریخ صحیح نیست
-          </mat-error>
+          @if (searchForm.get('toDate').errors?.required) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate').errors?.matDatepickerMin ||
+            searchForm.get('toDate').errors?.matDatepickerMax
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate').errors?.matDatepickerParse) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
@@ -121,12 +117,18 @@
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -210,42 +212,56 @@
           <ng-container matColumnDef="isClosed">
             <th mat-header-cell *matHeaderCellDef>وضعیت دسترسی</th>
             <td mat-cell *matCellDef="let row">
-              <strong class="text-info" *ngIf="!row.isClosed">باز</strong>
-              <strong class="text-danger" *ngIf="row.isClosed">بسته شده</strong>
+              @if (!row.isClosed) {
+                <strong class="text-info">باز</strong>
+              }
+              @if (row.isClosed) {
+                <strong class="text-danger">بسته شده</strong>
+              }
             </td>
           </ng-container>
 
           <ng-container matColumnDef="refundState">
             <th mat-header-cell *matHeaderCellDef>وضعیت</th>
             <td mat-cell *matCellDef="let row">
-              <strong class="text-success" *ngIf="row.refundState == 1">برگشت داده شده</strong>
-              <strong class="text-info" *ngIf="row.refundState == 0">ثبت شماره کارت</strong>
-              <strong class="text-danger" *ngIf="row.refundState == 2"> بدون پاسخ</strong>
-              <strong class="text-warning" *ngIf="row.refundState == null"> انجام نشده</strong>
+              @if (row.refundState == 1) {
+                <strong class="text-success">برگشت داده شده</strong>
+              }
+              @if (row.refundState == 0) {
+                <strong class="text-info">ثبت شماره کارت</strong>
+              }
+              @if (row.refundState == 2) {
+                <strong class="text-danger"> بدون پاسخ</strong>
+              }
+              @if (row.refundState == null) {
+                <strong class="text-warning"> انجام نشده</strong>
+              }
             </td>
           </ng-container>
 
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
             <td mat-cell *matCellDef="let row">
-              <mat-spinner *ngIf="row.loading" diameter="25" color="default"></mat-spinner>
-              <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="!row.loading">
-                <mat-icon>more_vert</mat-icon>
-              </button>
+              @if (row.loading) {
+                <mat-spinner diameter="25" color="default"></mat-spinner>
+              }
+              @if (!row.loading) {
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              }
               <mat-menu #menu="matMenu">
                 <button mat-menu-item (click)="getCardNumber(row)">
                   <i class="fa fa-podcast mr-2"></i>
                   دریافت شماره کارت
                 </button>
 
-                <button
-                  *ngIf="row.refundState == null"
-                  mat-menu-item
-                  (click)="openRefundInfoDialog(row)"
-                >
-                  <i class="fa fa-eye mr-2"></i>
-                  بررسی استرداد
-                </button>
+                @if (row.refundState == null) {
+                  <button mat-menu-item (click)="openRefundInfoDialog(row)">
+                    <i class="fa fa-eye mr-2"></i>
+                    بررسی استرداد
+                  </button>
+                }
 
                 <button mat-menu-item (click)="openChangeRefundDialog(row)">
                   <i class="fa fa-pencil mr-2"></i>

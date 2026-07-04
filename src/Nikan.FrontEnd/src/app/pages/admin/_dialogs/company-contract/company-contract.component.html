@@ -6,9 +6,11 @@
   </button>
 </div>
 <mat-dialog-content>
-  <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-    <mat-spinner diameter="50" color="default"></mat-spinner>
-  </div>
+  @if (loading) {
+    <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+  }
   <app-uploader
     (attachmentId)="getContract($event)"
     [autoUpload]="true"
@@ -17,11 +19,9 @@
     [url]="contractUrl"
   ></app-uploader>
 
-  <img
-    [src]="baseUrl + imageContractUrl"
-    class="img-thumbnail thumb-128"
-    *ngIf="imageContractUrl"
-  />
+  @if (imageContractUrl) {
+    <img [src]="baseUrl + imageContractUrl" class="img-thumbnail thumb-128" />
+  }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>انصراف</button>

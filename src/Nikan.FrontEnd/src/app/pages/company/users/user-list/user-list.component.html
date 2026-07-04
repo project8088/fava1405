@@ -4,9 +4,11 @@
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
-    <button mat-stroked-button color="default" (click)="back()" *ngIf="user?.isAdmin" class="mr-2">
-      باز گشت به لیست شرکت ها
-    </button>
+    @if (user?.isAdmin) {
+      <button mat-stroked-button color="default" (click)="back()" class="mr-2">
+        باز گشت به لیست شرکت ها
+      </button>
+    }
 
     <button mat-raised-button color="default" (click)="openAddUserDialog()">
       <i class="fa fa-plus mr-2"></i>
@@ -42,12 +44,18 @@
     </div>
 
     <div class="datatable-container mat-elevation-z8">
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults">
-        <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
-      </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
-        <strong>اطلاعاتی وجود ندارد!</strong>
-      </div>
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
 
       <div class="datatable-table-container">
         <table
@@ -79,30 +87,32 @@
             <th mat-header-cell *matHeaderCellDef>ایمیل</th>
             <td mat-cell *matCellDef="let row">
               {{ row.emailAddress }}
-              <div class="text-danger" *ngIf="row.emailVerification == false && row.emailAddress">
-                <small> تائید نشده </small>
-              </div>
-              <div class="text-success" *ngIf="row.emailVerification == true && row.emailAddress">
-                <small> تائید شده </small>
-              </div>
+              @if (row.emailVerification == false && row.emailAddress) {
+                <div class="text-danger">
+                  <small> تائید نشده </small>
+                </div>
+              }
+              @if (row.emailVerification == true && row.emailAddress) {
+                <div class="text-success">
+                  <small> تائید شده </small>
+                </div>
+              }
             </td>
           </ng-container>
           <ng-container matColumnDef="mobileNumber">
             <th mat-header-cell *matHeaderCellDef>شماره موبایل</th>
             <td mat-cell *matCellDef="let row">
               {{ row.mobileNumber }}
-              <div
-                class="text-danger"
-                *ngIf="row.mobileNumberVerification == false && row.emailAddress"
-              >
-                <small> تائید نشده </small>
-              </div>
-              <div
-                class="text-success"
-                *ngIf="row.mobileNumberVerification == true && row.emailAddress"
-              >
-                <small> تائید شده </small>
-              </div>
+              @if (row.mobileNumberVerification == false && row.emailAddress) {
+                <div class="text-danger">
+                  <small> تائید نشده </small>
+                </div>
+              }
+              @if (row.mobileNumberVerification == true && row.emailAddress) {
+                <div class="text-success">
+                  <small> تائید شده </small>
+                </div>
+              }
             </td>
           </ng-container>
           <ng-container matColumnDef="createdOnDate">
@@ -117,13 +127,25 @@
             <th mat-header-cell *matHeaderCellDef>نقش کاربر</th>
             <td mat-cell *matCellDef="let row">
               <mat-chip-list aria-label="Fish selection">
-                <mat-chip *ngFor="let item of row.roles">
-                  <span *ngIf="item.toLowerCase() == 'admin'">ادمین</span>
-                  <span *ngIf="item.toLowerCase() == 'user'">کاربر</span>
-                  <span *ngIf="item.toLowerCase() == 'company'">شرکت</span>
-                  <span *ngIf="item.toLowerCase() == 'karjo'">کارجو</span>
-                  <span *ngIf="item.toLowerCase() == 'guard'">حراست</span>
-                </mat-chip>
+                @for (item of row.roles; track item) {
+                  <mat-chip>
+                    @if (item.toLowerCase() == 'admin') {
+                      <span>ادمین</span>
+                    }
+                    @if (item.toLowerCase() == 'user') {
+                      <span>کاربر</span>
+                    }
+                    @if (item.toLowerCase() == 'company') {
+                      <span>شرکت</span>
+                    }
+                    @if (item.toLowerCase() == 'karjo') {
+                      <span>کارجو</span>
+                    }
+                    @if (item.toLowerCase() == 'guard') {
+                      <span>حراست</span>
+                    }
+                  </mat-chip>
+                }
               </mat-chip-list>
             </td>
           </ng-container>

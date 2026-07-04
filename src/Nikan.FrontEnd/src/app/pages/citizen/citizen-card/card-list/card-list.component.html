@@ -14,10 +14,12 @@
     </div>
 
     <div class="image-buttons">
-      <div *ngFor="let item of availableCards" (click)="checkCanOrderCard(item)" class="img-btn">
-        <i class="fa fa-cart-arrow-down"></i>
-        <span>{{ item.cardType }}</span>
-      </div>
+      @for (item of availableCards; track item) {
+        <div (click)="checkCanOrderCard(item)" class="img-btn">
+          <i class="fa fa-cart-arrow-down"></i>
+          <span>{{ item.cardType }}</span>
+        </div>
+      }
     </div>
   </mat-card-content>
 </mat-card>
