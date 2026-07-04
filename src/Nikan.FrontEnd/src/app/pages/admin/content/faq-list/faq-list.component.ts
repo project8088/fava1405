@@ -5,13 +5,13 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-faq-list',
   templateUrl: './faq-list.component.html',
   styleUrls: ['./faq-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -32,9 +32,8 @@ export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewI
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'users-role',
   templateUrl: './user-role.component.html',
   styleUrls: ['./user-role.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class UserRoleListComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -19,10 +19,8 @@ export class UserRoleListComponent extends AppBase implements OnInit {
   form: FormGroup;
   isSaving: boolean;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       roleId: [null, [Validators.required]],
     });

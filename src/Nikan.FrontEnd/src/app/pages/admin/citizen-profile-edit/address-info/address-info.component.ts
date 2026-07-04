@@ -4,13 +4,13 @@ import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'r
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'citizen-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit {
   editMode: boolean = false;
@@ -29,10 +29,8 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
   states: any[] = [];
   cities: Observable<[]>;
 
-  constructor(
-    private helperService: HelperService,
-  ) {
-      super();
+  constructor(private helperService: HelperService) {
+    super();
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
       region: [null],

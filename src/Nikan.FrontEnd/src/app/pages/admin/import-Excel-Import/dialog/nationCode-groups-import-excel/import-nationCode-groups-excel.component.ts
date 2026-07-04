@@ -1,13 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-import-nationCode-groups-excel-dialog',
   templateUrl: './import-nationCode-groups-excel.component.html',
   styleUrls: ['./import-nationCode-groups-excel.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importGroupNationCodeFromExcel;
@@ -17,9 +17,9 @@ export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase imp
 
   constructor(
     private matDialogRef: MatDialogRef<AdminImportNationCodeGroupsExcelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     if (_data.groupId) {
       this.data.groupId = _data.groupId;
     } else {

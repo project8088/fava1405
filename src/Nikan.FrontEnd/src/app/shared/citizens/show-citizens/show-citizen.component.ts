@@ -1,12 +1,12 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-show-citizen',
   templateUrl: './show-citizen.component.html',
   styleUrls: ['./show-citizen.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
   userCode: string;
@@ -15,9 +15,8 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
   imageUrl: string;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

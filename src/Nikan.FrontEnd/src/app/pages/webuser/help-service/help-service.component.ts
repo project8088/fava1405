@@ -5,13 +5,13 @@ import { ServerApis } from '../../../core/server-apis';
 import { NewsDto, NewsCommentDto } from '../../../core/models/news';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { Meta, Title } from '@angular/platform-browser';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-help-service',
   templateUrl: './help-service.component.html',
   styleUrls: ['./help-service.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class WebUserHelpServiceDetailsComponent extends AppBase implements OnInit {
   newsId: string;
@@ -38,7 +38,7 @@ export class WebUserHelpServiceDetailsComponent extends AppBase implements OnIni
     private titleService: Title,
     private metaService: Meta,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.newsId = p.id;
       this.getDetailsInfo();

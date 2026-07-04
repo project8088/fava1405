@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-plans-list',
   templateUrl: './plans-list.component.html',
   styleUrls: ['./plans-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class PlansListComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -19,7 +19,8 @@ export class PlansListComponent extends AppBase implements OnInit {
 
   routes = ['janbazan', 'maloulin', 'zanan-sarparast', 'bazneshaste', 'salmandan'];
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {
     this.getManzelatSetrices();

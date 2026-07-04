@@ -9,13 +9,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-manzelat-citizens',
   templateUrl: './manzelat-citizens.component.html',
   styleUrls: ['./manzelat-citizens.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminManzelatCitizensComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -45,10 +45,8 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

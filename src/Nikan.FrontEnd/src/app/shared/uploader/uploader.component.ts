@@ -5,17 +5,17 @@ import {
   UploadInput,
   UploadFile,
   humanizeBytes,
-  UploaderOptions
+  UploaderOptions,
 } from 'ngx-uploader';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class UploaderComponent extends AppBase implements OnInit {
   @Input('autoUpload') autoUpload: boolean = true;
@@ -42,9 +42,9 @@ export class UploaderComponent extends AppBase implements OnInit {
   acceptedInputFile: string;
 
   errorInUpload: boolean = false;
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.options = {

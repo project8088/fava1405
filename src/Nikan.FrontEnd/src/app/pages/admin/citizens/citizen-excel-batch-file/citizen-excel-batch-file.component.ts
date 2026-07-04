@@ -6,13 +6,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { AdminImportCitizenExcelDialogComponent } from '../dialog/citizen-import-excel/import-citizen-excel.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-excel-batch-file',
   templateUrl: './citizen-excel-batch-file.component.html',
   styleUrls: ['./citizen-excel-batch-file.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenExcelBatchFileListComponent extends AppBase implements AfterViewInit {
   loading: boolean;
@@ -35,9 +35,8 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

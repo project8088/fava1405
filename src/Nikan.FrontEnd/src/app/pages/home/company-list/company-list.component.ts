@@ -6,13 +6,13 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class HomeCompaniesListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -34,9 +34,8 @@ export class HomeCompaniesListComponent extends AppBase implements AfterViewInit
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

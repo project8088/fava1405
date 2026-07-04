@@ -6,13 +6,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '../../core/server-apis';
 import { UserRegisterService } from '../userregister.service';
 import { CaptchaComponent } from 'src/app/account/bot-detect/captcha.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-preregister',
   templateUrl: './preregister.component.html',
   styleUrls: ['./preregister.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class PreregisterComponent extends AppBase implements OnInit {
   form: FormGroup;
@@ -26,7 +26,7 @@ export class PreregisterComponent extends AppBase implements OnInit {
     private accounService: UserRegisterService,
     private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       serviceId: [null, [Validators.required]],
       nationality: ['0', [Validators.required]],

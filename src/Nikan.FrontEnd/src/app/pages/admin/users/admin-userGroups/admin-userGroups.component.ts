@@ -7,13 +7,13 @@ import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-admin-userGroup',
   templateUrl: './admin-userGroups.component.html',
   styleUrls: ['./admin-userGroups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUserGroupsComponent extends AppBase implements OnInit {
   userGroupList: userGroupsDto[] = [];
@@ -25,10 +25,9 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();}
+  constructor(private customValidator: CustomFormValidators) {
+    super();
+  }
 
   ngOnInit() {
     this.getList();

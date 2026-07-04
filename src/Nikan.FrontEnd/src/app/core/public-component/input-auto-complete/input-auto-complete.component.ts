@@ -1,27 +1,16 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Self,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  Validators,
-  NgControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'input-auto-complete',
   templateUrl: './input-auto-complete.component.html',
-  styleUrls: ['./input-auto-complete.component.scss'],,
+  styleUrls: ['./input-auto-complete.component.scss'],
   //providers: [
   //  {
   //    provide: NG_VALUE_ACCESSOR,
@@ -29,7 +18,7 @@ import { AppBase } from "@app/app.base";
   //    multi: true
   //  }
   //]
-    standalone: false
+  standalone: false,
 })
 export class InputAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;
@@ -51,10 +40,8 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
   loading: boolean;
   filteredList: Observable<any[]>;
 
-  constructor(
-    @Self() public ngControl: NgControl,
-  ) {
-      super();
+  constructor(@Self() public ngControl: NgControl) {
+    super();
     ngControl.valueAccessor = this;
     //this.ngControl = new FormControl(null, [RequireMatch]);
   }

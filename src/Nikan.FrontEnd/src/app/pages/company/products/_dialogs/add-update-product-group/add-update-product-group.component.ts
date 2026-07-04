@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-add-update-product-group-dialog',
   templateUrl: './add-update-product-group.component.html',
   styleUrls: ['./add-update-product-group.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -18,9 +18,9 @@ export class CompanyAddUpdateProductGroupDialogComponent extends AppBase impleme
 
   constructor(
     private matDialogRef: MatDialogRef<CompanyAddUpdateProductGroupDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       id: [null, []],
       name: [null, [Validators.required]],

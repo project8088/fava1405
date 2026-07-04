@@ -7,13 +7,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-excel-batch-file-details',
   templateUrl: './refund-excel-batch-file-details.component.html',
   styleUrls: ['./refund-excel-batch-file-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;
@@ -41,10 +41,8 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
   searchForm: FormGroup;
   frm: FormGroup;
   events: any[] = [];
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.frm = fb.group({
       unitName: [null, [Validators.required]],
       className: ['', [Validators.required]],

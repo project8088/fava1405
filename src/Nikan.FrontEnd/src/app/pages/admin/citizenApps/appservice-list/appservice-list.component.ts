@@ -8,13 +8,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-appservice-list',
   templateUrl: './appservice-list.component.html',
   styleUrls: ['./appservice-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAppserviceListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -35,10 +35,8 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       serviceName: [''],
     });

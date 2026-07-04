@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -9,7 +9,7 @@ declare var $: any;
   selector: 'home-services',
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class HomeServicesListComponent extends AppBase implements OnInit {
   data: any[] = [];
@@ -19,9 +19,9 @@ export class HomeServicesListComponent extends AppBase implements OnInit {
 
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     this.getList();

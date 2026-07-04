@@ -1,11 +1,11 @@
 import { OnInit, Component } from '@angular/core';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'webuser-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class WebUserDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -13,9 +13,9 @@ export class WebUserDashboardComponent extends AppBase implements OnInit {
   errorMessage: string = '';
   loadingActiveWaterMeter: boolean = false;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
   ngOnInit() {
     this.getActiveWaterMeterPeriod();
   }

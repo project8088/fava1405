@@ -1,26 +1,20 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import { AppBase } from "@app/app.base";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-tree-user-web-api-permission',
   templateUrl: './tree-user-web-api-permission.component.html',
   styleUrls: ['./tree-user-web-api-permission.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminTreeWebApiPermissionComponent extends AppBase implements OnInit {
   @Input('permissionItems') permissionItems: any;
 
   @Output() onUpdate = new EventEmitter<boolean>();
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {}
 

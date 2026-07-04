@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-manzalat-setting',
   templateUrl: './manzalat-setting.component.html',
   styleUrls: ['./manzalat-setting.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ManzalatSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.settingForm = this.fb.group({
       minAgeSalmand: [0],
       minAgeBazneshasteh: [0],

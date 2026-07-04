@@ -5,13 +5,13 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-news-groups',
   templateUrl: './news-groups.component.html',
   styleUrls: ['./news-groups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = ['row', 'title', 'description', 'isActive', 'operation'];
@@ -29,9 +29,8 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
   showAddOrUpdatePanel: boolean;
   isSaving: boolean;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.frm = fb.group({
       id: [null],
       title: [null, [Validators.required]],

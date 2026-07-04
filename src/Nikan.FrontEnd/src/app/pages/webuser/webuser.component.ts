@@ -4,13 +4,13 @@ import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
 import { ServerApis } from '../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'webuser-webuserpanel',
   templateUrl: './webuser.component.html',
   styleUrls: ['./webuser.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
@@ -24,10 +24,9 @@ export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

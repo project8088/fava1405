@@ -8,13 +8,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizens-in-group',
   templateUrl: './citizens-in-group.component.html',
   styleUrls: ['./citizens-in-group.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizensInGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -36,10 +36,8 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

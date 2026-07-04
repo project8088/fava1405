@@ -12,15 +12,18 @@ import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report
 import Swal from 'sweetalert2';
 import { CitizenRefundInfoDialogComponent } from '../../../citizen/refund/dialog/refund-info/refund-info.component';
 import { AdminAddRefundTransactionDialogComponent } from '../dialog/add-refund-transaction/add-refund-transaction.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-access-details-list',
   templateUrl: './refund-access-details-list.component.html',
   styleUrls: ['./refund-access-details-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class AdminRefundAccessDetailsListComponent extends AppBase implements AfterViewInit, OnInit {
+export class AdminRefundAccessDetailsListComponent
+  extends AppBase
+  implements AfterViewInit, OnInit
+{
   displayedColumns: string[] = [
     'row',
     'orderId',
@@ -47,9 +50,8 @@ export class AdminRefundAccessDetailsListComponent extends AppBase implements Af
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],

@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ForgotPasswordComponent extends AppBase implements OnInit {
   userId: string = '';
@@ -32,10 +32,8 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
 
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.forgotForm = this.fb.group(
       {
         userEnteredCaptchaCode: [null, [Validators.required]],

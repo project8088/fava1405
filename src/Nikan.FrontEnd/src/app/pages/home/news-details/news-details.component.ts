@@ -5,13 +5,13 @@ import { ServerApis } from '../../../core/server-apis';
 import { NewsDto, NewsCommentDto } from '../../../core/models/news';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { Meta, Title } from '@angular/platform-browser';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-news-details',
   templateUrl: './news-details.component.html',
   styleUrls: ['./news-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainNewsDetailsComponent extends AppBase implements OnInit {
   newsId: string;
@@ -38,7 +38,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
     private titleService: Title,
     private metaService: Meta,
   ) {
-      super();
+    super();
     this.frm = this.fb.group({
       commentMessage: [null, [Validators.required]],
       emailAddress: [null, [Validators.required, this.customValidator.checkEmail]],

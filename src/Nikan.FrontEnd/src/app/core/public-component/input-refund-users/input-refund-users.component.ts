@@ -1,27 +1,16 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Self,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  Validators,
-  NgControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'input-refund-users',
   templateUrl: './input-refund-users.component.html',
-  styleUrls: ['./input-refund-users.component.scss'],,
+  styleUrls: ['./input-refund-users.component.scss'],
   //providers: [
   //  {
   //    provide: NG_VALUE_ACCESSOR,
@@ -29,9 +18,12 @@ import { AppBase } from "@app/app.base";
   //    multi: true
   //  }
   //]
-    standalone: false
+  standalone: false,
 })
-export class InputRefundUsersAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
+export class InputRefundUsersAutoCompleteComponent
+  extends AppBase
+  implements ControlValueAccessor, OnInit
+{
   @Input() disabled: boolean;
 
   @Input('label') label: string = 'مسئول استرداد';
@@ -44,10 +36,8 @@ export class InputRefundUsersAutoCompleteComponent extends AppBase implements Co
   loading: boolean;
   filteredList: Observable<any[]>;
 
-  constructor(
-    @Self() public ngControl: NgControl,
-  ) {
-      super();
+  constructor(@Self() public ngControl: NgControl) {
+    super();
     ngControl.valueAccessor = this;
     //this.ngControl = new FormControl(null, [RequireMatch]);
   }

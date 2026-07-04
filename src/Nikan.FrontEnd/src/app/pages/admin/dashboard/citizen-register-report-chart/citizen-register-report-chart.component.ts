@@ -3,15 +3,18 @@ import { Subscription } from 'rxjs';
 import { Chart } from 'angular-highcharts';
 import { ServerApis } from '@core/server-apis';
 import { FormGroup } from '@angular/forms';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-register-report-chart',
   templateUrl: './citizen-register-report-chart.component.html',
   styleUrls: ['./citizen-register-report-chart.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class AdminDashboardCitizenRegisterReportChartComponent extends AppBase implements OnInit, OnDestroy {
+export class AdminDashboardCitizenRegisterReportChartComponent
+  extends AppBase
+  implements OnInit, OnDestroy
+{
   loading: boolean;
   report: any = {};
   subscribeReport: Subscription;
@@ -20,9 +23,8 @@ export class AdminDashboardCitizenRegisterReportChartComponent extends AppBase i
 
   reportForm: FormGroup;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.reportForm = this.fb.group({
       startDate: [null, []],
       endDate: [null, []],

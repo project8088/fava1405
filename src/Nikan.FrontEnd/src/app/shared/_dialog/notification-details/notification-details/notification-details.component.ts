@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-view-notification-details',
   templateUrl: './notification-details.component.html',
   styleUrls: ['./notification-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ViewNotificationDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';
@@ -17,9 +17,9 @@ export class ViewNotificationDetailsComponent extends AppBase implements OnInit 
 
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getInfo();

@@ -7,13 +7,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-group-queue-citizens-list',
   templateUrl: './group-queue-citizens-list.component.html',
   styleUrls: ['./group-queue-citizens-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminGroupQueueCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -35,9 +35,8 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.groupId = p.id ? p.id : null;
     });

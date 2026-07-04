@@ -9,13 +9,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-advanced-search',
   templateUrl: './citizen-advanced-search.component.html',
   styleUrls: ['./citizen-advanced-search.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenAdvancedSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -49,7 +49,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

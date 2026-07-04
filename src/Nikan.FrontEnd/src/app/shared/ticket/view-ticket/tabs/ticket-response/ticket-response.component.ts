@@ -5,13 +5,13 @@ import { AuthUser } from '../../../../../core/authentication/user.model';
 import { ServerApis } from '../../../../../core/server-apis';
 import { UploaderComponent } from '../../../../uploader/uploader.component';
 import { CitizenProfileDialogComponent } from '../../../../_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket-response',
   templateUrl: './ticket-response.component.html',
   styleUrls: ['./ticket-response.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketResponseComponent extends AppBase implements OnInit, AfterViewInit {
   id: string = '';
@@ -30,9 +30,8 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
   rootModule: string;
   @ViewChild(UploaderComponent) uploader;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.uploadData.Guid = this.newGuid();
 
     this.answerForm = this.fb.group({

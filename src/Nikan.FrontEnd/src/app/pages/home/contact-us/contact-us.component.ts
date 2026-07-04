@@ -4,13 +4,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { SiteSettingViewModel } from '../../../core/models/setting';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ContactUsComponent extends AppBase implements OnInit {
   contactForm: FormGroup;
@@ -24,10 +24,8 @@ export class ContactUsComponent extends AppBase implements OnInit {
   user: AuthUser;
   setting: SiteSettingViewModel;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.contactForm = this.fb.group({
       subject: [null, [Validators.required, Validators.maxLength(1000)]],
       message: [null, [Validators.required, Validators.maxLength(10000)]],

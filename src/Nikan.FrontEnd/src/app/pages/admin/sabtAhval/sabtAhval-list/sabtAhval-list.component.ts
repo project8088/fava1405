@@ -9,13 +9,13 @@ import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { AdminAddSabtAhvalDialogComponent } from '../dialog/add-sabtAhval/add-sabtAhval.component';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-sabtAhval-list',
   templateUrl: './sabtAhval-list.component.html',
   styleUrls: ['./sabtAhval-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminSabtAhvalListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -41,9 +41,8 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

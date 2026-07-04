@@ -4,13 +4,13 @@ import { ServerApis } from '../../../core/server-apis';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 
 import { Title, Meta } from '@angular/platform-browser';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainProductDetailsComponent extends AppBase implements OnInit {
   id: string;
@@ -28,7 +28,7 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
     private titleService: Title,
     private metaService: Meta,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.getDetailsInfo();

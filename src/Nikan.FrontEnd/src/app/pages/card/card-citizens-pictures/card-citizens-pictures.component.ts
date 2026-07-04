@@ -9,13 +9,13 @@ import { AdminCitizenImageDialogComponent } from '../../admin/_dialogs/citizen-i
 import { AdminCitizenEditImageDialogComponent } from '../../admin/_dialogs/citizen-edit-image/citizen-edit-image.component';
 import { AdminCitizenRejectImageDialogComponent } from '../../admin/_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-card-citizens-pictures',
   templateUrl: './card-citizens-pictures.component.html',
   styleUrls: ['./card-citizens-pictures.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
@@ -29,9 +29,8 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   loadingData: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { ChangeCardAddressDialogComponent } from '../../_dialogs/change-card-address/change-card-address.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-bought-cards',
   templateUrl: './bought-cards.component.html',
   styleUrls: ['./bought-cards.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class BoughtCardsComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -22,9 +22,9 @@ export class BoughtCardsComponent extends AppBase implements OnInit {
     'deliverType',
   ];
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getList();

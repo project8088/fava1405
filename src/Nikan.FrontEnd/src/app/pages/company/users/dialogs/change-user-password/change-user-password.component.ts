@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-change-user-password-dialog',
   templateUrl: './change-user-password.component.html',
   styleUrls: ['./change-user-password.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyChangePasswordDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -25,7 +25,7 @@ export class CompanyChangePasswordDialogComponent extends AppBase implements OnI
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.changePasswordForm = this.fb.group(
       {
         userId: [null],

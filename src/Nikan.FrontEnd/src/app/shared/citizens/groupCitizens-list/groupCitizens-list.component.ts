@@ -6,13 +6,13 @@ import { merge, of as observableOf } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-groupCitizens-list',
   templateUrl: './groupCitizens-list.component.html',
   styleUrls: ['./groupCitizens-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppGroupCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser'];
@@ -27,9 +27,8 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });

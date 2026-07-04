@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-page-details',
   templateUrl: './page-details.component.html',
   styleUrls: ['./page-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainPageDetailsComponent extends AppBase implements OnInit {
   slug: string;
@@ -23,7 +23,7 @@ export class MainPageDetailsComponent extends AppBase implements OnInit {
     private titleService: Title,
     private metaService: Meta,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.slug = p.slug;
       this.getDetailsInfo();

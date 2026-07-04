@@ -3,13 +3,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '../../core/models/menuItems';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen',
   templateUrl: './citizen.component.html',
   styleUrls: ['./citizen.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
   miniSideBar: boolean;
@@ -34,10 +34,9 @@ export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

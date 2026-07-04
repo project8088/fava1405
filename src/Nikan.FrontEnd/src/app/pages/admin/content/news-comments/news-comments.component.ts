@@ -6,13 +6,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-news-comments',
   templateUrl: './news-comments.component.html',
   styleUrls: ['./news-comments.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminNewsCommentsComponent extends AppBase implements OnInit {
   newsId: string;
@@ -38,10 +38,8 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       query: [null, []],
     });

@@ -13,13 +13,13 @@ import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-prof
 import { AdminBackCitizenCardDialogComponent } from '../dialog/back-citizen-card/back-citizen-card.component';
 import { AdminDeliveredCitizenCardDialogComponent } from '../dialog/delivered-citizen-card/delivered-citizen-card.component';
 import { AdminCancellationCitizenCardDialogComponent } from '../dialog/cancellation-citizen-card/cancellation-citizen-card.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-card-advanced-search',
   templateUrl: './citizen-card-advanced-search.component.html',
   styleUrls: ['./citizen-card-advanced-search.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -50,7 +50,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

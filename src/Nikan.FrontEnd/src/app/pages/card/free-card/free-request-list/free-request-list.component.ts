@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-free-request-list',
   templateUrl: './free-request-list.component.html',
   styleUrls: ['./free-request-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardFreeRequestCardListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -41,9 +41,8 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.id;
     });

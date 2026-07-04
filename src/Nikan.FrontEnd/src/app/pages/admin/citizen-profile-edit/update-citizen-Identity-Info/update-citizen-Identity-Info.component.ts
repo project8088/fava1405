@@ -4,13 +4,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-update-citizen-Identity-Info',
   templateUrl: './update-citizen-Identity-Info.component.html',
   styleUrls: ['./update-citizen-Identity-Info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -28,9 +28,9 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
 
   constructor(
     private helperService: HelperService,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],
       nationalCode: [{ value: '' }],

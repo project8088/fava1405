@@ -9,13 +9,13 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-card-discount-dialog',
   templateUrl: './add-card-discount.component.html',
   styleUrls: ['./add-card-discount.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -32,9 +32,9 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   constructor(
     private matDialogRef: MatDialogRef<CardAddCardDiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.frm = this.fb.group({
       cardTypeId: [null],
       discountPercent: [null, [Validators.required]],

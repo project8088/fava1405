@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 interface ICard {
   attachmentGroup: string;
@@ -49,7 +49,7 @@ interface ICardDetails {
   selector: 'app-buy-card',
   templateUrl: './buy-card.component.html',
   styleUrls: ['./buy-card.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class BuyCardDialogComponent extends AppBase implements OnInit {
   citizenId: number;
@@ -84,7 +84,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
       feedbackId: [null, [Validators.required]],

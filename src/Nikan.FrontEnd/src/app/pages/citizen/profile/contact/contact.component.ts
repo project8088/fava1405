@@ -4,13 +4,13 @@ import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'r
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenContactComponent extends AppBase implements OnInit {
   editMode: boolean = false;
@@ -28,10 +28,8 @@ export class CitizenContactComponent extends AppBase implements OnInit {
   states: any[] = [];
   cities: Observable<[]>;
 
-  constructor(
-    private helperService: HelperService,
-  ) {
-      super();
+  constructor(private helperService: HelperService) {
+    super();
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
       region: [null],

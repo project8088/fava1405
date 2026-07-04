@@ -5,17 +5,17 @@ import {
   NgControl,
   AbstractControl,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
 import * as moment from 'jalali-moment';
 import { EventEmitter } from '@angular/core';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'simple-jalali-datepicker',
   templateUrl: './simple-datepicker.component.html',
-  styleUrls: ['./simple-datepicker.component.scss'],,
+  styleUrls: ['./simple-datepicker.component.scss'],
   // providers: [
   //   {
   //     provide: NG_VALUE_ACCESSOR,
@@ -28,9 +28,12 @@ import { AppBase } from "@app/app.base";
   //     useExisting: SimpleJalaliDatepickerComponent
   //   }
   // ]
-    standalone: false
+  standalone: false,
 })
-export class SimpleJalaliDatepickerComponent extends AppBase implements OnInit, ControlValueAccessor, Validator {
+export class SimpleJalaliDatepickerComponent
+  extends AppBase
+  implements OnInit, ControlValueAccessor, Validator
+{
   @Input() required = false;
   @Input() disabled = false;
   @Input() appearance = 'outline';
@@ -57,7 +60,7 @@ export class SimpleJalaliDatepickerComponent extends AppBase implements OnInit, 
   yearList = [];
   isLeapYear = false;
   constructor(@Self() public ngControl: NgControl) {
-      super();
+    super();
     ngControl.valueAccessor = this;
     const momentLocaleData = moment.localeData('fa');
 

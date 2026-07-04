@@ -1,12 +1,12 @@
 import { OnInit, Component } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'crd-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
@@ -15,9 +15,9 @@ export class CardDashboardComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
   matDialog: any;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getStatisticalReport();

@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'citizen-base-info',
   templateUrl: './base-info.component.html',
   styleUrls: ['./base-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -21,10 +21,8 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   userStatus: number;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       firstName: [null, [Validators.required, Validators.maxLength(40)]],
       lastName: [null, [Validators.maxLength(40), Validators.maxLength(500)]],

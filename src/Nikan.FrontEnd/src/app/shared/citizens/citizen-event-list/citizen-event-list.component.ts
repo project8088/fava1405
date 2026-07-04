@@ -3,13 +3,13 @@ import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-event-list',
   templateUrl: './citizen-event-list.component.html',
   styleUrls: ['./citizen-event-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppCitizenEventListComponent extends AppBase implements OnInit {
   search: string = '';
@@ -22,9 +22,8 @@ export class AppCitizenEventListComponent extends AppBase implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchForm: FormGroup;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
       this.getListevents();

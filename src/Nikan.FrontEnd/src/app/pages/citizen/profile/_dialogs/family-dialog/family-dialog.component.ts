@@ -8,13 +8,13 @@ import { ServerApis } from '../../../../../core/server-apis';
 import { MatStepper } from '@angular/material/stepper';
 import { HelperService } from '@core/services/helper.service';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-family-dialog',
   templateUrl: './family-dialog.component.html',
   styleUrls: ['./family-dialog.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -48,7 +48,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.dataService.getEnums().subscribe((data) => {
       this.baseEnums.maritalStatus = data['maritalStatus'];
       this.baseEnums.educationStatues = data['educationStatues'];

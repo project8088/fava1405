@@ -8,13 +8,13 @@ import { CustomFormValidators } from '../../../core/custom-validator/form-valida
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { ViewMessageDialogComponent } from './view-message-dialog/view-message-dialog.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-contact-list',
   templateUrl: './contact-list.component.html',
   styleUrls: ['./contact-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyContactUsListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -36,10 +36,8 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -10,13 +10,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminImportNationCodeGroupsExcelDialogComponent } from '../../import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 import { AdminGroupTransferDialogComponent } from '../_dialogs/group-transfer/group-transfer.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-groups-list',
   templateUrl: './groups-list.component.html',
   styleUrls: ['./groups-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminGroupListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -39,10 +39,8 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       groupname: [''],
     });

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-faq-list',
   templateUrl: './faq-list.component.html',
   styleUrls: ['./faq-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class FaqListComponent extends AppBase implements OnInit {
   loadingGroup: boolean;
@@ -19,9 +19,8 @@ export class FaqListComponent extends AppBase implements OnInit {
 
   selectedFaqGroupId: number;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.getFaqGroup();
   }
 

@@ -9,13 +9,13 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-new-export-card-dialog',
   templateUrl: './new-export-card.component.html',
   styleUrls: ['./new-export-card.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardNewExportCardDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -31,9 +31,9 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
   constructor(
     private matDialogRef: MatDialogRef<CardNewExportCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.frm = this.fb.group({
       startDate: [null],
       endDate: [null],

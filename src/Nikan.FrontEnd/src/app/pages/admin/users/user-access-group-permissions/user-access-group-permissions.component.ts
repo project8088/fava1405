@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-user-access-group-permissions',
   templateUrl: './user-access-group-permissions.component.html',
   styleUrls: ['./user-access-group-permissions.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUserAccessGroupPermissionsComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -19,10 +19,8 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
   form: FormGroup;
   isSaving: boolean;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       groupId: [null, [Validators.required]],
     });

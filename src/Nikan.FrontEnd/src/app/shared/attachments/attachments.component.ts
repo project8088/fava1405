@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'app-attachments',
   templateUrl: './attachments.component.html',
   styleUrls: ['./attachments.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AttachmentListComponent extends AppBase implements OnInit {
   @Input('guid') guid: string;
@@ -18,9 +18,9 @@ export class AttachmentListComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.uploadAttachment;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     if (!this.guid) return false;

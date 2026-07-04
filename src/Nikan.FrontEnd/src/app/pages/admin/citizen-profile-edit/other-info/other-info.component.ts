@@ -5,13 +5,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { BaseDataModel } from '../../../../core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { HelperService } from '../../../../core/services/helper.service';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'citizen-other-info',
   templateUrl: './other-info.component.html',
   styleUrls: ['./other-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -31,9 +31,9 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
 
   constructor(
     private helperService: HelperService,
-    private customValidators: CustomFormValidators
+    private customValidators: CustomFormValidators,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       provinceShCity: [null],
       shCity: [null, []],

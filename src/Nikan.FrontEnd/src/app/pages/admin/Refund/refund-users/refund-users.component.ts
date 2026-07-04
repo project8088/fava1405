@@ -8,13 +8,13 @@ import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AdminAddRefundUserDialogComponent } from '../dialog/add-refund-user/add-refund-user.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-users',
   templateUrl: './refund-users.component.html',
   styleUrls: ['./refund-users.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminRefundUsersComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -37,9 +37,8 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       name: [''],
       nationCode: [''],

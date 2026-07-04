@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-main-info',
   templateUrl: './main-info.component.html',
   styleUrls: ['./main-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -19,10 +19,8 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
 
   htmlEditor: any;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.mainForm = this.fb.group({
       slagUrl: [
         null,

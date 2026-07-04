@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-organization-unit-groups',
   templateUrl: './organization-unit-groups.component.html',
   styleUrls: ['./organization-unit-groups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -19,10 +19,8 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
   form: FormGroup;
   isSaving: boolean;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       groupId: [null, [Validators.required]],
     });

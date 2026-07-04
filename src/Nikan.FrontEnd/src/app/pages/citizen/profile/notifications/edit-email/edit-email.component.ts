@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-edit-email',
   templateUrl: './edit-email.component.html',
   styleUrls: ['./edit-email.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenEditEmailComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -31,9 +31,8 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
 
   @ViewChild('timer', { static: false }) timer: TimerComponent;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.cardForm = this.fb.group({
       email: [null, [Validators.required]],
     });

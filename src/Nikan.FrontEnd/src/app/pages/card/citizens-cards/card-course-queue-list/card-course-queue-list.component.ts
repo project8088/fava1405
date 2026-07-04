@@ -12,13 +12,13 @@ import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardAddOrUpadateQueueDialogComponent } from '../dialog/add-update-queue/add-update-queue.component';
 import { CardDeliveryQueueOperatorDialogComponent } from '../dialog/delivery-queue-operator/delivery-queue-operator.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-card-course-queue-list',
   templateUrl: './card-course-queue-list.component.html',
   styleUrls: ['./card-course-queue-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCardCourseQueuelistComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -51,7 +51,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.courseId = p.id;
     });

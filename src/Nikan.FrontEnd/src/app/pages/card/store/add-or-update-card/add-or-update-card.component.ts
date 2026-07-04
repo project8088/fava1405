@@ -2,13 +2,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-add-or-update-card',
   templateUrl: './add-or-update-card.component.html',
   styleUrls: ['./add-or-update-card.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -23,9 +23,8 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   cardTypeList: any[] = [];
   htmlEditor: any;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.cardTypeId;
 

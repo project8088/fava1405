@@ -3,13 +3,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-upload-avatar-dialog',
   templateUrl: './upload-avatar.component.html',
   styleUrls: ['./upload-avatar.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';
@@ -27,9 +27,9 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   user: AuthUser;
   constructor(
     private matDialogRef: MatDialogRef<UploadUserAvatarDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.user = this.authService.currentUserValue;
     this.imageUrl = ServerApis.baseUrl + _data.imageUrl;
     this.setCropperImage(this.imageUrl);

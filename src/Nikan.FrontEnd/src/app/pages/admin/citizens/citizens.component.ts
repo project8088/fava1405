@@ -10,13 +10,13 @@ import { ServerApis } from '../../../core/server-apis';
 import { AdminUpdateCitizenMobileNumberDialogComponent } from './dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 import { AdminChangePasswordDialogComponent } from '../users/dialogs/change-user-password/change-user-password.component';
 import { AdminUpdateCitizenSabtStateDialogComponent } from './dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizens',
   templateUrl: './citizens.component.html',
   styleUrls: ['./citizens.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizensComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -39,10 +39,8 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

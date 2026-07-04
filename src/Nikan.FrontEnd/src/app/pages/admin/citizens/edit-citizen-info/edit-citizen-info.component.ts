@@ -7,13 +7,13 @@ import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-edit-citizen-info',
   templateUrl: './edit-citizen-info.component.html',
   styleUrls: ['./edit-citizen-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -34,9 +34,9 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       state: [null, []],
       stateId: [null, []],

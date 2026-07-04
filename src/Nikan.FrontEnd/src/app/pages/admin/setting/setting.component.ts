@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-setting',
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
@@ -18,9 +18,8 @@ export class AdminSettingComponent extends AppBase implements OnInit {
   logoUrl: string;
   uploadUrl: string = ServerApis.uploadSiteLogo;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.settingForm = this.fb.group({
       siteUrl: [null, [Validators.required]],
       siteName: [null, [Validators.required]],

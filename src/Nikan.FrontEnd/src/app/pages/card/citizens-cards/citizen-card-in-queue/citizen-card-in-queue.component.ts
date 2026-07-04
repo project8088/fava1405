@@ -11,13 +11,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-citizen-card-in-queue',
   templateUrl: './citizen-card-in-queue.component.html',
   styleUrls: ['./citizen-card-in-queue.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCitizenCardInQueueComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -48,7 +48,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.queueId = p.id;
     });

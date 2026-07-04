@@ -1,18 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-captcha',
   templateUrl: './captcha.component.html',
   styleUrls: ['./captcha.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CaptchaComponent extends AppBase implements OnInit {
   loadingCaptcha: boolean = false;
   captchaImage: string = '';
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {
     this.getCaptcha();

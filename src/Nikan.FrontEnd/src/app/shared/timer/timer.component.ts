@@ -1,13 +1,13 @@
 import { Component, OnInit, Output } from '@angular/core';
 
 import { EventEmitter } from 'events';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-timer',
   templateUrl: './timer.component.html',
   styleUrls: ['./timer.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TimerComponent extends AppBase implements OnInit {
   timerCounter: number = 120;
@@ -17,7 +17,8 @@ export class TimerComponent extends AppBase implements OnInit {
   @Output() onEnd = new EventEmitter();
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {}
 

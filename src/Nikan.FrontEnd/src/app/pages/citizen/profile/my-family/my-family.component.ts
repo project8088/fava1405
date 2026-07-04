@@ -4,13 +4,13 @@ import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-my-family',
   templateUrl: './my-family.component.html',
   styleUrls: ['./my-family.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   familyList: any[] = [];
@@ -23,10 +23,8 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  constructor(
-    private profileComponent: CitizenProfileComponent
-  ) {
-      super();
+  constructor(private profileComponent: CitizenProfileComponent) {
+    super();
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getFamilyList();

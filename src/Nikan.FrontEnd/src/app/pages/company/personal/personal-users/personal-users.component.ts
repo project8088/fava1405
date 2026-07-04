@@ -9,13 +9,13 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-personal-users',
   templateUrl: './personal-users.component.html',
   styleUrls: ['./personal-users.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyPersonalUsersComponent extends AppBase implements OnInit, AfterViewInit {
   displayedColumns: string[] = [];
@@ -35,10 +35,8 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
   user: AuthUser;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.user = this.authService.currentUserValue;
     this.displayedColumns = [
       'row',

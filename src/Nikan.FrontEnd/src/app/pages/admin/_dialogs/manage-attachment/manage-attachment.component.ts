@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-manage-attachment-dialog',
   templateUrl: './manage-attachment.component.html',
   styleUrls: ['./manage-attachment.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
   attachments: any[] = [];
@@ -26,9 +26,9 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
 
   constructor(
     private matDialogRef: MatDialogRef<ManageAttachmentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     if (_data.guid) {
       this.data.guid = _data.guid;
     } else {

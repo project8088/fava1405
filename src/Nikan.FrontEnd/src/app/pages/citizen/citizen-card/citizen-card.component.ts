@@ -4,19 +4,18 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-card',
   templateUrl: './citizen-card.component.html',
   styleUrls: ['./citizen-card.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenCardComponent extends AppBase implements OnInit {
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   cards;
   availableCards;

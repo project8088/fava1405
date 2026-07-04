@@ -1,20 +1,20 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-image',
   templateUrl: './citizen-image.component.html',
   styleUrls: ['./citizen-image.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenImageDialogComponent extends AppBase implements OnInit {
   citizen;
   baseUrl = ServerApis.baseUrl;
 
   constructor(@Inject(MAT_DIALOG_DATA) private _data: any) {
-      super();
+    super();
     this.citizen = _data;
   }
 

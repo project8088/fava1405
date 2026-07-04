@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-pay-setting',
   templateUrl: './pay-setting.component.html',
   styleUrls: ['./pay-setting.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminPaySettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.settingForm = this.fb.group({
       bankCustomerId: [null, [Validators.required]],
       bankPassword: [null, [Validators.required]],

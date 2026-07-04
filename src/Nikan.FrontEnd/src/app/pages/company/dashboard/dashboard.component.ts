@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { ViewNotificationDetailsDialogComponent } from '../../../shared/_dialog/notification-details/notification-details.component';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompnayDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -19,9 +19,8 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
 
   user: AuthUser;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
     });

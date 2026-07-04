@@ -11,13 +11,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
 import { AdminImportCardNumberDialogComponent } from '../dialog/import-card-number/import-card-number.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-card-export-search',
   templateUrl: './citizen-card-export-search.component.html',
   styleUrls: ['./citizen-card-export-search.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenCardExportSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -47,7 +47,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

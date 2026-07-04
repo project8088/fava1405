@@ -4,13 +4,13 @@ import { AuthUser } from '../../core/authentication/user.model';
 import { ServerApis } from '../../core/server-apis';
 import { SideNavMenuItem } from '../../core/models/menuItems';
 import { UploadUserAvatarDialogComponent } from '../_dialog/upload-avatar/upload-avatar.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'side-nav-menu',
   templateUrl: './side-nav-menu.component.html',
   styleUrls: ['./side-nav-menu.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class SideNavMenuComponent extends AppBase implements OnInit {
   @Input('menu') menuItems: SideNavMenuItem[];
@@ -27,9 +27,9 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
   ) {
-      super();
+    super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
     });

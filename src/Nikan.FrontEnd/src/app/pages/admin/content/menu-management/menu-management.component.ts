@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
 import { AdminAddOrUpdateMenuDialogComponent } from './dialog/add-update-menu/add-update-menu.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-menu-management',
   templateUrl: './menu-management.component.html',
   styleUrls: ['./menu-management.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminMenuManagementComponent extends AppBase implements OnInit {
   data: any[] = [];
   isLoadingResults: boolean = true;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     this.getList();

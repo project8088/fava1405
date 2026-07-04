@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'home-managers',
   templateUrl: './managers.component.html',
   styleUrls: ['./managers.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class HomeManagersListComponent extends AppBase implements OnInit {
   loadingManagers: boolean;
@@ -16,7 +16,8 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit() {
     this.getManagerList();

@@ -3,13 +3,13 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-manzalat-registration',
   templateUrl: './citizen-manzalat-registration.component.html',
   styleUrls: ['./citizen-manzalat-registration.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppCitizenManzalatRegistrationComponent extends AppBase implements AfterViewInit {
   userCode: string;
@@ -23,9 +23,8 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });

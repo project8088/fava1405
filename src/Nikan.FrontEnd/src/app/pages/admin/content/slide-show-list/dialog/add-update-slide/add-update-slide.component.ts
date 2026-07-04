@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-update-slide-dialog',
   templateUrl: './add-update-slide.component.html',
   styleUrls: ['./add-update-slide.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
@@ -21,9 +21,9 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
 
   constructor(
     private matDialogRef: MatDialogRef<AdminAddOrUpdateSlideShowDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       id: [null],
       caption: ['', [Validators.required]],

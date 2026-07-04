@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../../core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-group-transfer-dialog',
   templateUrl: './group-transfer.component.html',
   styleUrls: ['./group-transfer.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminGroupTransferDialogComponent extends AppBase implements OnInit {
   sourceGroupId: number;
@@ -18,9 +18,9 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
 
   constructor(
     private matDialogRef: MatDialogRef<AdminGroupTransferDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       destinationGroupId: [null, [Validators.required]],
       sourceGroupId: [null],

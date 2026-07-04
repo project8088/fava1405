@@ -7,13 +7,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenEditProfileComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -33,7 +33,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
     private customValidator: CustomFormValidators,
     private profileComponent: CitizenProfileComponent,
   ) {
-      super();
+    super();
     this.route.parent.params.subscribe((p) => {
       this.userCode = p.id && p.id != '0' ? p.id : '';
       this.getPersonalInfo();

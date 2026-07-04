@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-pay-test',
   templateUrl: './pay-test.component.html',
   styleUrls: ['./pay-test.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminPayTestComponent extends AppBase implements OnInit {
   loading: boolean;
   form: FormGroup;
   RefId: string;
   waitForRedirectToBank: boolean;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.form = this.fb.group({
       amount: [0, [Validators.required]],
       orderId: [0, [Validators.required]],

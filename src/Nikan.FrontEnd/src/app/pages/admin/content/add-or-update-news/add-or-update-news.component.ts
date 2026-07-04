@@ -5,13 +5,13 @@ import { ENTER } from '@angular/cdk/keycodes';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { ServerApis } from '../../../../core/server-apis';
 import { NewsDto } from '../../../../core/models/news';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-or-update-news',
   templateUrl: './add-or-update-news.component.html',
   styleUrls: ['./add-or-update-news.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -28,9 +28,8 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
   loading: boolean;
 
   groupList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

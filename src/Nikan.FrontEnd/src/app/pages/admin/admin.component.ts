@@ -3,13 +3,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '../../core/models/menuItems';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'default';
@@ -164,10 +164,9 @@ export class AdminComponent extends AppBase implements OnInit, OnDestroy {
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

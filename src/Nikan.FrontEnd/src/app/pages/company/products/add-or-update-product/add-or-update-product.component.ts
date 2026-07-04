@@ -2,13 +2,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-add-or-update-product',
   templateUrl: './add-or-update-product.component.html',
   styleUrls: ['./add-or-update-product.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -25,9 +25,8 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   productGroupList: any[] = [];
   htmlEditor: any;
   loadingProductGroup: boolean;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

@@ -9,13 +9,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CardAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-card-users',
   templateUrl: './card-users.component.html',
   styleUrls: ['./card-users.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
@@ -41,10 +41,8 @@ export class CardUsersComponent extends AppBase implements OnInit {
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class LoginComponent extends AppBase implements OnInit {
   loginForm: FormGroup;
@@ -20,9 +20,8 @@ export class LoginComponent extends AppBase implements OnInit {
 
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.queryParams.subscribe((p) => {
       if (p.returnUrl) this.returnUrl = p.returnUrl;
     });

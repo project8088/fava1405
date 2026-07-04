@@ -4,13 +4,13 @@ import { AuthUser } from '../../core/authentication/user.model';
 import { RegisterServiceModel } from '@core/models/register-service.model';
 import { ServerApis } from '../../core/server-apis';
 import { SiteSettingViewModel } from '../../core/models/setting';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainHeaderComponent extends AppBase implements OnInit {
   isAuth: boolean;
@@ -29,7 +29,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
     private title: Title,
     private meta: Meta,
   ) {
-      super();
+    super();
     this.authService.currentUser.subscribe((u) => {
       if (u) {
         this.user = u;

@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-config',
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminConfigComponent extends AppBase implements OnInit {
   id: string;
@@ -16,9 +16,9 @@ export class AdminConfigComponent extends AppBase implements OnInit {
 
   configList: any[] = [];
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {}
 

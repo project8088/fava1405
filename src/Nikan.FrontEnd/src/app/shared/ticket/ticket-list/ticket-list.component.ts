@@ -9,13 +9,13 @@ import { FormGroup } from '@angular/forms';
 
 import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketListComponent extends AppBase implements OnInit, AfterViewInit {
   introductionInfo: any = {};
@@ -33,9 +33,8 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
   searchForm: FormGroup;
   ticketStatus: any[] = [];
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       ticketStatus: [null],
       iscolsed: [null],

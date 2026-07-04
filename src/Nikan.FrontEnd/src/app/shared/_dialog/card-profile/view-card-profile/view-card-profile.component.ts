@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-view-card-profile',
   templateUrl: './view-card-profile.component.html',
   styleUrls: ['./view-card-profile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ViewCardProfileComponent extends AppBase implements OnInit {
   @Input('cardId') cardId: string = '';
@@ -17,9 +17,9 @@ export class ViewCardProfileComponent extends AppBase implements OnInit {
 
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getCitizenInfo();

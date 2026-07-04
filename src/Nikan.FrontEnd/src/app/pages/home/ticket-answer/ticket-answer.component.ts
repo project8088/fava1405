@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket-answer',
   templateUrl: './ticket-answer.component.html',
   styleUrls: ['./ticket-answer.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketAnswerComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
@@ -21,10 +21,9 @@ export class TicketAnswerComponent extends AppBase implements OnInit {
   trackingCode: string = '';
   ticketAnswer: any;
   loadingSubject: boolean;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();}
+  constructor(private customValidator: CustomFormValidators) {
+    super();
+  }
 
   ngOnInit(): void {}
 

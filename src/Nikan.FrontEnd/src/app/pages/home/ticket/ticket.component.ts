@@ -4,13 +4,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
@@ -22,10 +22,8 @@ export class TicketComponent extends AppBase implements OnInit {
   unitList: any = ([] = []);
   loadingUnit: boolean;
   user: AuthUser;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.ticketForm = this.fb.group({
       subject: [null, [Validators.required]],
       ticketMessage: [null, [Validators.required, Validators.maxLength(10000)]],

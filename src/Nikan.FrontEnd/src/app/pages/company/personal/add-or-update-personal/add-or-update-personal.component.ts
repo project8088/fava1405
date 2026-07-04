@@ -5,13 +5,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { forkJoin } from 'rxjs';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-add-or-update-personal',
   templateUrl: './add-or-update-personal.component.html',
   styleUrls: ['./add-or-update-personal.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -28,10 +28,8 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   baseUrl: string = ServerApis.baseUrl;
   htmlEditor: any;
   user: AuthUser;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {

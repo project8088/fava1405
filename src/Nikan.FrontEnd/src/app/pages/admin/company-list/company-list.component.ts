@@ -10,13 +10,13 @@ import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminCompanyContractDialogComponent } from '../_dialogs/company-contract/company-contract.component';
 import { AdminCompanyChangeStatusDialogComponent } from '../_dialogs/company-change-status/company-change-status.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCompaniesListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -40,10 +40,8 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

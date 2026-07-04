@@ -2,15 +2,18 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-or-update-notification',
   templateUrl: './add-or-update-notification.component.html',
   styleUrls: ['./add-or-update-notification.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class AdminAddOrUpdateNotificationComponent extends AppBase implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateNotificationComponent
+  extends AppBase
+  implements OnInit, AfterViewInit
+{
   isUpdate: boolean;
   notificationId: string;
   notyForm: FormGroup;
@@ -21,9 +24,8 @@ export class AdminAddOrUpdateNotificationComponent extends AppBase implements On
   loading: boolean;
   baseUrl = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

@@ -2,12 +2,12 @@ import { Component, Input, OnInit, ElementRef } from '@angular/core';
 
 import { CaptchaService } from './captcha.service';
 import { CaptchaHelperService } from './captcha-helper.service';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'botdetect-captcha',
   template: '',
-    standalone: false
+  standalone: false,
 })
 export class CaptchaComponent extends AppBase implements OnInit {
   @Input() styleName: string; // backward compatible
@@ -18,7 +18,8 @@ export class CaptchaComponent extends AppBase implements OnInit {
     private captchaService: CaptchaService,
     private captchaHelper: CaptchaHelperService,
   ) {
-      super();}
+    super();
+  }
 
   // provide captchaEndpoint for getting captcha challenge.
   set captchaEndpoint(captchaEndpoint: string) {

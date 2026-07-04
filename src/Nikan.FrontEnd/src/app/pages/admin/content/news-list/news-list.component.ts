@@ -8,13 +8,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -40,10 +40,8 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
   groupList: any[] = [];
   baseUrl = ServerApis.baseUrl;
 
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       groupId: [null],
       fromDate: [null],

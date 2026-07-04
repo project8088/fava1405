@@ -4,13 +4,13 @@ import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../core/server-apis';
 import { ShortKarjoProfile } from '@core/models/citizen/global-information';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenProfileComponent extends AppBase implements OnInit {
   userId: string;
@@ -23,10 +23,8 @@ export class CitizenProfileComponent extends AppBase implements OnInit {
     shareReplay(),
   );
 
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
     this.route.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getPersonalInfo();

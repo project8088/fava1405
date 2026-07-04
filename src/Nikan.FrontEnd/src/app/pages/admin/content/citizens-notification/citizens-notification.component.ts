@@ -1,15 +1,18 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizens-notification',
   templateUrl: './citizens-notification.component.html',
   styleUrls: ['./citizens-notification.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class AdminAddOrUpdateCitizensNotificationComponent extends AppBase implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateCitizensNotificationComponent
+  extends AppBase
+  implements OnInit, AfterViewInit
+{
   notificationId: string;
   notyForm: FormGroup;
 
@@ -19,9 +22,8 @@ export class AdminAddOrUpdateCitizensNotificationComponent extends AppBase imple
   isSaving: boolean;
   loading: boolean;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.notificationId = p.id;

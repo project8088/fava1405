@@ -2,22 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'change-current-user-password',
   templateUrl: './change-current-user-password.component.html',
   styleUrls: ['./change-current-user-password.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ChangeCurrentUserPasswordComponent extends AppBase implements OnInit {
   isSaving: boolean;
   changePasswordForm: FormGroup;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.changePasswordForm = this.fb.group(
       {
         username: [null],

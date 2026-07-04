@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-adm-update-citizen-sabt-state-dialog',
   templateUrl: './update-citizen-sabt-state.component.html',
   styleUrls: ['./update-citizen-sabt-state.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -22,9 +22,9 @@ export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implemen
   constructor(
     private matDialogRef: MatDialogRef<AdminUpdateCitizenSabtStateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     if (_data) {
       this.userCode = _data.userCode;
       this.getUserInfo();

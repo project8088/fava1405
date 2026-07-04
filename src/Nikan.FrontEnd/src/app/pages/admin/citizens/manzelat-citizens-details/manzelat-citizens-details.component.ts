@@ -6,13 +6,13 @@ import { ShowImageDialogComponent } from 'src/app/shared/_dialog/show-image/show
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-manzelat-citizens-details',
   templateUrl: './manzelat-citizens-details.component.html',
   styleUrls: ['./manzelat-citizens-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminManzelatCitizensDetailsComponent extends AppBase implements OnInit {
   userCode: string;
@@ -22,9 +22,8 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
   imageUrl: string;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

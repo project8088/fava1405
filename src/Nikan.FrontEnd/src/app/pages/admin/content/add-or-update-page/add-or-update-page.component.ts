@@ -5,13 +5,13 @@ import { ENTER } from '@angular/cdk/keycodes';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { ServerApis } from '../../../../core/server-apis';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-or-update-page',
   templateUrl: './add-or-update-page.component.html',
   styleUrls: ['./add-or-update-page.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -25,10 +25,8 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
   isSaving: boolean;
   loading: boolean;
   siteName: string;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 import { ServerApis } from '../../core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
 import { UserRegisterService } from '../userregister.service';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class RegisterComponent extends AppBase implements OnInit {
   serviceId: number = 0;
@@ -47,9 +47,9 @@ export class RegisterComponent extends AppBase implements OnInit {
   constructor(
     private AccountService: UserRegisterService,
     private helperService: HelperService,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.dataService.getEnums().subscribe((data) => {
       this.maritalStatus = this.getListOptions(data['maritalStatus']);
       //this.educationStatues = this.getListOptions(data['educationStatues']);

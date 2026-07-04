@@ -6,13 +6,13 @@ import { merge, of as observableOf } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-transaction-list',
   templateUrl: './citizen-transaction-list.component.html',
   styleUrls: ['./citizen-transaction-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -40,9 +40,8 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.citizenId = p.id ? p.id : null;
     });

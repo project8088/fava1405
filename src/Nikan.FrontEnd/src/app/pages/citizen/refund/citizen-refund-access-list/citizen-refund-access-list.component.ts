@@ -7,13 +7,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { AdminReportRefundDialogComponent } from '../../../admin/Refund/dialog/report-refund/report-refund.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-refund-access-list',
   templateUrl: './citizen-refund-access-list.component.html',
   styleUrls: ['./citizen-refund-access-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenRefundAccessListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -41,9 +41,8 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       letterNumber: [''],
     });

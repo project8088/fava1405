@@ -4,13 +4,13 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-update-manzalat-base-form',
   templateUrl: './update-manzalat-base-form.component.html',
   styleUrls: ['./update-manzalat-base-form.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -24,10 +24,8 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
   isSaving: boolean;
   loading: boolean;
   siteName: string;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.getItem();

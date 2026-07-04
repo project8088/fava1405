@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-refund-info',
   templateUrl: './citizen-refund-info.component.html',
   styleUrls: ['./citizen-refund-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -18,10 +18,8 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
   info: any;
   refundId: string;
   matDialogRef: any;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.frm = this.fb.group({
       refundId: [null],
       ownerBankCardNumber: [''],

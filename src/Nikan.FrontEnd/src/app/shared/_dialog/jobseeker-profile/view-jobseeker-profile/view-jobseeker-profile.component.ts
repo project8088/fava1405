@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-view-jobseeker-profile',
   templateUrl: './view-jobseeker-profile.component.html',
   styleUrls: ['./view-jobseeker-profile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ViewJobseekerProfileComponent extends AppBase implements OnInit {
   @Input('jobseekerId') jobseekerId: string = '';
@@ -16,9 +16,9 @@ export class ViewJobseekerProfileComponent extends AppBase implements OnInit {
 
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getJobseekerInfo();

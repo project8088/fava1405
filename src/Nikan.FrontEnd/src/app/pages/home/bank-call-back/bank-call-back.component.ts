@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-bank-call-back',
   templateUrl: './bank-call-back.component.html',
   styleUrls: ['./bank-call-back.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class BankCallBackComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -14,9 +14,8 @@ export class BankCallBackComponent extends AppBase implements OnInit {
 
   response: any;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.queryParams.subscribe((p) => {
       if (p.id) {
         this.id = p.id;

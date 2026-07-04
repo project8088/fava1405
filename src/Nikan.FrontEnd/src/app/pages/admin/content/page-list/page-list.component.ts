@@ -9,13 +9,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import Swal from 'sweetalert2';
 import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-page-list',
   templateUrl: './page-list.component.html',
   styleUrls: ['./page-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminPageListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -35,10 +35,8 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

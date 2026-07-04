@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
 import { FormGroup } from '@angular/forms';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-view-citizen-profile',
   templateUrl: './view-citizen-profile.component.html',
   styleUrls: ['./view-citizen-profile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ViewCitizenProfileComponent extends AppBase implements OnInit {
   @Input('userCode') userCode: string = '';
@@ -21,9 +21,9 @@ export class ViewCitizenProfileComponent extends AppBase implements OnInit {
 
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getCitizenInfo();

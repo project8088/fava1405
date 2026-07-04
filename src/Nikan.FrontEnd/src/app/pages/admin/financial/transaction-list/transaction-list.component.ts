@@ -7,13 +7,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -40,9 +40,8 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       nationCode: [''],
       fromDate: [null],

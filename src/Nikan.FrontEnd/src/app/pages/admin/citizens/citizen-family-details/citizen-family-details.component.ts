@@ -3,13 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { AdminCitizenRejectFamilyComponent } from '../../_dialogs/citizen-reject-family/citizen-reject-family.component';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-family-details',
   templateUrl: './citizen-family-details.component.html',
   styleUrls: ['./citizen-family-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnInit {
   userCode: string;
@@ -20,9 +20,8 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
   imageUrl: string;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

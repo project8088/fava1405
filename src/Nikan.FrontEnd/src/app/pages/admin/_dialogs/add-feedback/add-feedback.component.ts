@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-feedback-dialog',
   templateUrl: './add-feedback.component.html',
   styleUrls: ['./add-feedback.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
   userCode: string = '';
@@ -19,9 +19,9 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
 
   constructor(
     private matDialogRef: MatDialogRef<AdminAddFeedBackDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
       feedbackId: [null, [Validators.required]],

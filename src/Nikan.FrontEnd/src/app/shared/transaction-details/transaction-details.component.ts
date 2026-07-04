@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServerApis } from '../../core/server-apis';
 import { AuthUser } from '../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TransactionDetailsComponent extends AppBase implements OnInit, AfterViewInit {
   id: string;
@@ -15,9 +15,8 @@ export class TransactionDetailsComponent extends AppBase implements OnInit, Afte
   user: AuthUser;
   isLoadingResults: boolean = true;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.user = this.authService.currentUserValue;
   }
 

@@ -11,13 +11,13 @@ import { AdminChangeRefundDialogComponent } from '../dialog/change-refund/change
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';
 import { CitizenRefundInfoDialogComponent } from '../../../citizen/refund/dialog/refund-info/refund-info.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-access-search-list',
   templateUrl: './refund-access-search-list.component.html',
   styleUrls: ['./refund-access-search-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminRefundAccessSearchListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -47,9 +47,8 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],

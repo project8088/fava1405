@@ -1,21 +1,21 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'admin-view-event-details',
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminViewEventDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';
   loadingData: boolean = true;
   event: any = {};
   baseUrl: string = ServerApis.baseUrl;
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getInfo();

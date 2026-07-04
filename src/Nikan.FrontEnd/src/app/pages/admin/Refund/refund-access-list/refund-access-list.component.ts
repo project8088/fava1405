@@ -10,13 +10,13 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
 import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-access/change-refund-access.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-access-list',
   templateUrl: './refund-access-list.component.html',
   styleUrls: ['./refund-access-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminRefundAccessListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -44,9 +44,8 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

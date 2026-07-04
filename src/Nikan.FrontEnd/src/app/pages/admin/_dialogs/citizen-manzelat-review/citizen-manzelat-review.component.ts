@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-manzelat-review',
   templateUrl: './citizen-manzelat-review.component.html',
   styleUrls: ['./citizen-manzelat-review.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenManzelatReviewComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({
@@ -24,9 +24,9 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenManzelatReviewComponent>
+    private matDialogRef: MatDialogRef<AdminCitizenManzelatReviewComponent>,
   ) {
-      super();
+    super();
     this.data = _data;
 
     if (this.data.command === 'Remove') this.data.title = 'حذف فرم ' + this.data.manzelatForm.title;

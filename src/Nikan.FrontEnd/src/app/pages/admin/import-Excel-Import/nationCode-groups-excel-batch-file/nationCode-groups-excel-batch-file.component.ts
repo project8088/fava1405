@@ -6,15 +6,18 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { AdminImportNationCodeGroupsExcelDialogComponent } from '../dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-nationCode-groups-excel-batch-file',
   templateUrl: './nationCode-groups-excel-batch-file.component.html',
   styleUrls: ['./nationCode-groups-excel-batch-file.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class AdminNationCodeGroupsExcelBatchFileListComponent extends AppBase implements AfterViewInit {
+export class AdminNationCodeGroupsExcelBatchFileListComponent
+  extends AppBase
+  implements AfterViewInit
+{
   loading: boolean;
   displayedColumns: string[] = [
     'row',
@@ -34,9 +37,8 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent extends AppBase im
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

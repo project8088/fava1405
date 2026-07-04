@@ -1,13 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import * as moment from 'jalali-moment';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-view-job-details',
   templateUrl: './view-job-details.component.html',
   styleUrls: ['./view-job-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ViewJobDetailsComponent extends AppBase implements OnInit {
   @Input('jobId') jobId: string = '';
@@ -17,9 +17,9 @@ export class ViewJobDetailsComponent extends AppBase implements OnInit {
 
   jobOpportunity: any = {};
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.getJobInfo();

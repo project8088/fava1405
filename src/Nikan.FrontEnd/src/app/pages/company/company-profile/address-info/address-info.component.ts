@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyAddressInfoComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -17,10 +17,8 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
   addressForm: FormGroup;
   isSaving: boolean;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.addressForm = this.fb.group({
       mobileNumber: [null, [Validators.required, this.customValidators.checkMobileNumber]],
       mobileNumber2: [null, [this.customValidators.checkMobileNumber]],

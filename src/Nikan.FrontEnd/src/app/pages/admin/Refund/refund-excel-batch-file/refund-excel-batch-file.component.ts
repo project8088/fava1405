@@ -6,13 +6,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { AdminImportRefundExcelDialogComponent } from '../dialog/refund-import-excel/import-refund-excel.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-refund-excel-batch-file',
   templateUrl: './refund-excel-batch-file.component.html',
   styleUrls: ['./refund-excel-batch-file.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminRefundExcelBatchFileListComponent extends AppBase implements AfterViewInit {
   loading: boolean;
@@ -34,9 +34,8 @@ export class AdminRefundExcelBatchFileListComponent extends AppBase implements A
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

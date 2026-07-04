@@ -3,13 +3,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-send-ticket-dialog',
   templateUrl: './send-ticket.component.html',
   styleUrls: ['./send-ticket.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class SendTicketDialogComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
@@ -24,9 +24,9 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
   user: AuthUser;
   constructor(
     private matDialogRef: MatDialogRef<SendTicketDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.user = this.authService.currentUserValue;
     this.ticketForm = this.fb.group({
       subject: [null, []],

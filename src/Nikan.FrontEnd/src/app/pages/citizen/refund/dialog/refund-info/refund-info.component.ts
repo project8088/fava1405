@@ -4,13 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-refund-info-dialog',
   templateUrl: './refund-info.component.html',
   styleUrls: ['./refund-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -22,9 +22,9 @@ export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit 
   constructor(
     private matDialogRef: MatDialogRef<CitizenRefundInfoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.info = _data.info;
 
     this.frm = this.fb.group({

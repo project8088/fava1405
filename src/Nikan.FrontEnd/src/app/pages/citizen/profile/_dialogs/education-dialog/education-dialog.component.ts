@@ -6,13 +6,13 @@ import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'r
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { karjoEducationDto } from '@core/models/citizen/education';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-education-dialog',
   templateUrl: './education-dialog.component.html',
   styleUrls: ['./education-dialog.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -35,7 +35,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     if (_data) {
       this.education = _data.education ? _data.education : '';
       this.userId = _data.userId ? _data.userId : '';

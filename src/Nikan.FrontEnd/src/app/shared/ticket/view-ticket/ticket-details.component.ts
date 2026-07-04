@@ -1,16 +1,16 @@
 import { OnInit, Component } from '@angular/core';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket-details',
   templateUrl: './ticket-details.component.html',
   styleUrls: ['./ticket-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketDetailsComponent extends AppBase implements OnInit {
   isAdmin: boolean;
   constructor() {
-      super();
+    super();
     this.isAdmin = this.authService.getAuthUser().isAdmin;
   }
   ngOnInit() {}

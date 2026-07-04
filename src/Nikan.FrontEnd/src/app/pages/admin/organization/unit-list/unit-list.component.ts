@@ -6,13 +6,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-unit-list',
   templateUrl: './unit-list.component.html',
   styleUrls: ['./unit-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   organizationId: string;
@@ -31,10 +31,8 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   showAddOrUpdatePanel: boolean;
   isSaving: boolean;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.frm = fb.group({
       id: [''],
       organizationId: [null],

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../core/server-apis';
 import { AuthUser } from '../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-store-details',
   templateUrl: './store-details.component.html',
   styleUrls: ['./store-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class StoreDetailsComponent extends AppBase implements OnInit {
   id: string;
@@ -15,9 +15,8 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
   info: any;
   user: AuthUser;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
       this.id = p.id;

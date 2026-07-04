@@ -4,13 +4,13 @@ import Swal from 'sweetalert2';
 import { CitizenEducationDialogComponent } from '../_dialogs/education-dialog/education-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-education',
   templateUrl: './education.component.html',
   styleUrls: ['./education.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenEducationComponent extends AppBase implements OnInit {
   educationList: karjoEducationDto[] = [];
@@ -22,10 +22,8 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  constructor(
-    private profileComponent: CitizenProfileComponent,
-  ) {
-      super();
+  constructor(private profileComponent: CitizenProfileComponent) {
+    super();
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getEducationList();

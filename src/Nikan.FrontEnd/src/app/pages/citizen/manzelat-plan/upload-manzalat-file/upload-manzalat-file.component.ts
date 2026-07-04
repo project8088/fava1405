@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-upload-manzalat-file',
   templateUrl: './upload-manzalat-file.component.html',
   styleUrls: ['./upload-manzalat-file.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenUploadManzalatDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -25,9 +25,8 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   uploadUrl: string = ServerApis.uploadManzalatAttachment;
   id: string;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.baseFormInfo();

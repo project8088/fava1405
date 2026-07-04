@@ -5,13 +5,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-update-Identity-Info',
   templateUrl: './update-Identity-Info.component.html',
   styleUrls: ['./update-Identity-Info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -32,7 +32,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
     private customValidator: CustomFormValidators,
     private profileComponent: CitizenProfileComponent,
   ) {
-      super();
+    super();
     this.getIdentityInfo();
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],

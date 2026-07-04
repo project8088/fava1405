@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'main-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   data: any[] = [];
@@ -27,10 +27,8 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
 
   groupList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       groupId: [null],
       fromDate: [null],

@@ -10,13 +10,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-authentication-search',
   templateUrl: './citizen-authentication-search.component.html',
   styleUrls: ['./citizen-authentication-search.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenAuthenticationSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -51,7 +51,7 @@ export class AdminCitizenAuthenticationSearchComponent extends AppBase implement
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

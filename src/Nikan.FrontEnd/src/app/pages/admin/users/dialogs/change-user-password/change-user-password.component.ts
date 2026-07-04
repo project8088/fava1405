@@ -7,13 +7,13 @@ import {
 } from '@angular/material/autocomplete';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-adm-change-user-password-dialog',
   templateUrl: './change-user-password.component.html',
   styleUrls: ['./change-user-password.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminChangePasswordDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -27,7 +27,7 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.changePasswordForm = this.fb.group(
       {
         userId: [null],

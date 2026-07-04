@@ -11,13 +11,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-citizen-card-export-details',
   templateUrl: './citizen-card-export-details.component.html',
   styleUrls: ['./citizen-card-export-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -49,7 +49,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.exportId = p.id;
     });

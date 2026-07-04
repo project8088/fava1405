@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-Identity-Info',
   templateUrl: './citizen-Identity-Info.component.html',
   styleUrls: ['./citizen-Identity-Info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -15,9 +15,8 @@ export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit
   info: any;
   userStatus: number;
   userCode: string = '';
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id) this.userCode = p.id;
       this.getPersonalInfo();

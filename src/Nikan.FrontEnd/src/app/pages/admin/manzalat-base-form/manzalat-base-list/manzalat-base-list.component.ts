@@ -3,13 +3,13 @@ import { userGroupsDto } from '@core/models/users/userGroups';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-manzalat-base-list',
   templateUrl: './manzalat-base-list.component.html',
   styleUrls: ['./manzalat-base-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminManzalatBaseFromListComponent extends AppBase implements OnInit {
   userGroupList: userGroupsDto[] = [];
@@ -21,10 +21,9 @@ export class AdminManzalatBaseFromListComponent extends AppBase implements OnIni
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();}
+  constructor(private customValidator: CustomFormValidators) {
+    super();
+  }
 
   ngOnInit() {
     this.getList();

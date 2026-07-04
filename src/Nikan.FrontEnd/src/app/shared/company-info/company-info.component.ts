@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CompanyInfoDto } from '../../core/models/company/company-info';
 import { ServerApis } from '../../core/server-apis';
 import { AuthUser } from '../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-company-info',
   templateUrl: './company-info.component.html',
   styleUrls: ['./company-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyInfoComponent extends AppBase implements OnInit {
   companyInfo: CompanyInfoDto;
@@ -18,9 +18,8 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
   companyId: string = '';
   user: AuthUser;
   baseUrl = ServerApis.baseUrl;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id) this.companyId = p.id;

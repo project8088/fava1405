@@ -6,13 +6,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
@@ -39,9 +39,8 @@ export class CompanyTransactionListComponent extends AppBase implements AfterVie
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

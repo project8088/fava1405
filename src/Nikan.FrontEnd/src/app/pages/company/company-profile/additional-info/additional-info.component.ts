@@ -2,13 +2,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-additional-info',
   templateUrl: './additional-info.component.html',
   styleUrls: ['./additional-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -16,10 +16,8 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
   form: FormGroup;
   isSaving: boolean;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       companyId: [null],
       contractCode: [null],

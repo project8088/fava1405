@@ -5,13 +5,13 @@ import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-sms-list',
   templateUrl: './citizen-sms-list.component.html',
   styleUrls: ['./citizen-sms-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppCitizenSmsListComponent extends AppBase implements OnInit {
   search: string = '';
@@ -35,9 +35,8 @@ export class AppCitizenSmsListComponent extends AppBase implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchForm: FormGroup;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });

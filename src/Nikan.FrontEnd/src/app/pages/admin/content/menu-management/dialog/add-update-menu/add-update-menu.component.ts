@@ -3,7 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../../../core/server-apis';
 import { forkJoin } from 'rxjs';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -11,7 +11,7 @@ declare var $: any;
   selector: 'app-add-update-menu-dialog',
   templateUrl: './add-update-menu.component.html',
   styleUrls: ['./add-update-menu.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
@@ -34,9 +34,9 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
   ];
   constructor(
     private matDialogRef: MatDialogRef<AdminAddOrUpdateMenuDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.menuForm = this.fb.group({
       id: [null],
       menuName: [null, [Validators.required, Validators.maxLength(50)]],

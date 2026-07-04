@@ -10,15 +10,18 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-citizen-shahrvandi-card-export-details',
   templateUrl: './citizen-shahrvandi-card-export-details.component.html',
   styleUrls: ['./citizen-shahrvandi-card-export-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class CardShahrvandiCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
+export class CardShahrvandiCitizenCardExportDetailsComponent
+  extends AppBase
+  implements AfterViewInit
+{
   displayedColumns: string[] = [
     'nationCode',
     'citizenFirstName',
@@ -45,7 +48,7 @@ export class CardShahrvandiCitizenCardExportDetailsComponent extends AppBase imp
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.exportId = p.id;
     });

@@ -4,13 +4,13 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-or-update-faq',
   templateUrl: './add-or-update-faq.component.html',
   styleUrls: ['./add-or-update-faq.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -28,9 +28,8 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
 
   tagNames: any[] = [];
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.faqForm = this.fb.group({
       id: [null],
       title: [null, [Validators.required, Validators.maxLength(500)]],

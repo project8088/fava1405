@@ -5,13 +5,13 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { BaseDataModel } from '../../core/models/base-data-model';
 import { ServerApis } from '../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-register-company',
   templateUrl: './register-company.component.html',
   styleUrls: ['./register-company.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class RegisterCompanyComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -26,10 +26,8 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
   stateList: BaseDataModel[] = [];
   filteredState: Observable<any[]>;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.registerForm = this.fb.group(
       {
         companyName: [null, [Validators.required]],

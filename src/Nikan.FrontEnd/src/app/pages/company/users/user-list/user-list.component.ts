@@ -9,13 +9,13 @@ import { CompanyUpdateUserDialogComponent } from '../dialogs/update-user/update-
 import { CompanyChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { CompanyAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyUserListComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
@@ -45,10 +45,8 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
   groupList: any[] = [];
   user: AuthUser;
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
       this.companyId = p.id;

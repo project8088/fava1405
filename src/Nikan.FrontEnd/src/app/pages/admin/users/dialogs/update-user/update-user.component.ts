@@ -9,13 +9,13 @@ import { BaseDataModel } from '@core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-adm-update-user-dialog',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -48,9 +48,9 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   constructor(
     private matDialogRef: MatDialogRef<AdminUpdateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     if (_data) {
       this.userId = _data.userId;
       this.getUserInfo();

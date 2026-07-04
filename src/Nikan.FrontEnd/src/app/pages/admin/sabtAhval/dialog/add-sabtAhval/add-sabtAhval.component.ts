@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-sabtAhval-dialog',
   templateUrl: './add-sabtAhval.component.html',
   styleUrls: ['./add-sabtAhval.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -22,9 +22,9 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
   constructor(
     private matDialogRef: MatDialogRef<AdminAddSabtAhvalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.frm = this.fb.group({
       fromDate: [null, [Validators.required]],
       exportType: [null, [Validators.required]],

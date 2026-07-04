@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { NewsDto } from '../../../core/models/news';
 import { ServerApis } from '../../../core/server-apis';
 import { SiteSettingViewModel } from '../../../core/models/setting';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -10,7 +10,7 @@ declare var $: any;
   selector: 'app-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class IndexComponent extends AppBase implements OnInit, AfterViewInit, OnDestroy {
   lastNews: NewsDto[] = [];
@@ -20,7 +20,8 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
   setting: SiteSettingViewModel;
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {
     this.getLastNews();

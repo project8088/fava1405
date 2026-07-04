@@ -9,13 +9,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-card-distribution',
   templateUrl: './card-distribution.component.html',
   styleUrls: ['./card-distribution.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCarddistributionComponent extends AppBase implements AfterViewInit {
   @ViewChild('value') searchElement: ElementRef;
@@ -37,10 +37,8 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       this.courseId = p.id;
     });

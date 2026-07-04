@@ -6,19 +6,18 @@ import { BuyCardDialogComponent } from '../../_dialogs/buy-card/buy-card.compone
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenCardListComponent extends AppBase implements OnInit {
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
 
   cards;
   availableCards;

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'home-personal-biography',
   templateUrl: './personal-biography.component.html',
   styleUrls: ['./personal-biography.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class PersonalBiographyComponent extends AppBase implements OnInit {
   id: string;
@@ -19,7 +19,7 @@ export class PersonalBiographyComponent extends AppBase implements OnInit {
     private titleService: Title,
     private metaService: Meta,
   ) {
-      super();
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.getUserInfo();

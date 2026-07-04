@@ -2,13 +2,13 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-company-change-status-dialog',
   templateUrl: './company-change-status.component.html',
   styleUrls: ['./company-change-status.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCompanyChangeStatusDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};
@@ -19,9 +19,9 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
 
   constructor(
     private matDialogRef: MatDialogRef<AdminCompanyChangeStatusDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any
+    @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
-      super();
+    super();
     this.form = this.fb.group({
       rejectDesription: [''],
       userCompanyAccountStatus: [null, [Validators.required]],

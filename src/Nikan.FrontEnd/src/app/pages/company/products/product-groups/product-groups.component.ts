@@ -6,13 +6,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { CompanyAddUpdateProductGroupDialogComponent } from '../_dialogs/add-update-product-group/add-update-product-group.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-product-groups',
   templateUrl: './product-groups.component.html',
   styleUrls: ['./product-groups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyProductGroupsListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -26,9 +26,8 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

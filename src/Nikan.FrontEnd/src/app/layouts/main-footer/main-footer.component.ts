@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../core/server-apis';
 import { SiteSettingViewModel } from '../../core/models/setting';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-main-footer',
   templateUrl: './main-footer.component.html',
   styleUrls: ['./main-footer.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MainFooterComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
   setting: SiteSettingViewModel;
   constructor() {
-      super();
+    super();
     this.dataService.getSetting().subscribe((response) => {
       this.setting = response;
     });

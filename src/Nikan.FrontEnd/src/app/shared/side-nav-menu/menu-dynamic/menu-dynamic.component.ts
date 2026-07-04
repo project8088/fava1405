@@ -1,18 +1,19 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { SideNavMenuItem } from '../../../core/models/menuItems';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'menu-dynamic',
   templateUrl: './menu-dynamic.component.html',
   styleUrls: ['./menu-dynamic.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class MenuDynamicComponent extends AppBase implements OnInit, OnDestroy {
   @Input('menu') menuItems: SideNavMenuItem[];
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {}
 

@@ -6,13 +6,13 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class OrderCardListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -40,9 +40,8 @@ export class OrderCardListComponent extends AppBase implements OnInit, AfterView
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       cardTypeId: [null],
       fromDate: [null],

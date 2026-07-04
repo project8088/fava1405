@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -24,9 +24,8 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
   baseDocuments: Object[];
   displayedColumns: string[] = ['documentGroup', 'description', 'attachedOnDate', 'id'];
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.cardForm = this.fb.group({
       personnelImage: [null, [Validators.required]],
     });

@@ -7,15 +7,18 @@ import { ServerApis } from '../../../../core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenRefundInfoDialogComponent } from '../dialog/refund-info/refund-info.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-refund-access-details-list',
   templateUrl: './citizen-refund-access-details-list.component.html',
   styleUrls: ['./citizen-refund-access-details-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
-export class CitizenRefundAccessDetailsListComponent extends AppBase implements AfterViewInit, OnInit {
+export class CitizenRefundAccessDetailsListComponent
+  extends AppBase
+  implements AfterViewInit, OnInit
+{
   displayedColumns: string[] = [
     'row',
     'orderId',
@@ -42,9 +45,8 @@ export class CitizenRefundAccessDetailsListComponent extends AppBase implements 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],

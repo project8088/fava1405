@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-signature-info',
   templateUrl: './signature-info.component.html',
   styleUrls: ['./signature-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanySignatureInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -20,10 +20,8 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
 
   data: any;
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id) this.companyId = p.id;
       this.data = {

@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 interface ICard {
   attachmentGroup: string;
@@ -55,7 +55,7 @@ interface ICardDetails {
   selector: 'app-card-detail',
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardDetailComponent extends AppBase implements OnInit {
   citizenId: number;
@@ -88,10 +88,8 @@ export class CardDetailComponent extends AppBase implements OnInit {
   workAddress;
   orderDetails;
 
-  constructor(
-    private helperService: HelperService,
-  ) {
-      super();
+  constructor(private helperService: HelperService) {
+    super();
     this.route.queryParams.subscribe((params) => {
       if (params['id']) {
         this.cardInfoId = params['id'];

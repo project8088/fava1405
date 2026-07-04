@@ -10,13 +10,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AdminUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
 import { AdminChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { AdminAddWebApiUserDialogComponent } from '../dialogs/add-webapi-users/add-webapi-users.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-web-api-users',
   templateUrl: './web-api-users.component.html',
   styleUrls: ['./web-api-users.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminWebApiUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
@@ -44,10 +44,8 @@ export class AdminWebApiUsersComponent extends AppBase implements OnInit {
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

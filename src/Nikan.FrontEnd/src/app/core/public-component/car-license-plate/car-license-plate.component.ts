@@ -1,23 +1,12 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Self,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  ControlValueAccessor,
-  Validators,
-  NgControl,
-} from '@angular/forms';
+import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'car-license-plate',
   templateUrl: './car-license-plate.component.html',
-  styleUrls: ['./car-license-plate.component.scss'],,
+  styleUrls: ['./car-license-plate.component.scss'],
   //providers: [
   //  {
   //    provide: NG_VALUE_ACCESSOR,
@@ -25,7 +14,7 @@ import { AppBase } from "@app/app.base";
   //    multi: true
   //  }
   //]
-    standalone: false
+  standalone: false,
 })
 export class CarLicensePlateComponent extends AppBase implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;
@@ -63,10 +52,8 @@ export class CarLicensePlateComponent extends AppBase implements ControlValueAcc
   s3: number;
   s4: number;
 
-  constructor(
-    @Self() public ngControl: NgControl,
-  ) {
-      super();
+  constructor(@Self() public ngControl: NgControl) {
+    super();
     ngControl.valueAccessor = this;
     //this.ngControl = new FormControl(null, [RequireMatch]);
   }

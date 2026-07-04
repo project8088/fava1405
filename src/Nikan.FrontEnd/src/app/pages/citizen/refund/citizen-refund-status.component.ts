@@ -2,13 +2,13 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { ShortKarjoProfile } from '@core/models/citizen/global-information';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-refund-status',
   templateUrl: './citizen-refund-status.component.html',
   styleUrls: ['./citizen-refund-status.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenRefundStatusComponent extends AppBase implements OnInit {
   userId: string;
@@ -16,9 +16,8 @@ export class CitizenRefundStatusComponent extends AppBase implements OnInit {
   personInfo: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();}
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
+  }
   ngOnInit(): void {}
 }

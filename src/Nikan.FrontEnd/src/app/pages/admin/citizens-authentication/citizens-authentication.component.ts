@@ -5,13 +5,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizens-authentication',
   templateUrl: './citizens-authentication.component.html',
   styleUrls: ['./citizens-authentication.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenAuthenticationComponent extends AppBase implements AfterViewInit {
   data: any[] = [];
@@ -21,9 +21,8 @@ export class AdminCitizenAuthenticationComponent extends AppBase implements Afte
   citizen: any = {};
 
   searchForm: FormGroup;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       birthDate: [null],
       nationCode: [''],

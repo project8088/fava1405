@@ -7,13 +7,13 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-citizen-excel-batch-file-details',
   templateUrl: './citizen-excel-batch-file-details.component.html',
   styleUrls: ['./citizen-excel-batch-file-details.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;
@@ -44,10 +44,8 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
   searchForm: FormGroup;
   frm: FormGroup;
   events: any[] = [];
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       isValidRow: [null],
     });

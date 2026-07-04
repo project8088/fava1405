@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-update-user-dialog',
   templateUrl: './update-user.component.html',
   styleUrls: ['./update-user.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -22,9 +22,9 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
   constructor(
     private matDialogRef: MatDialogRef<CompanyUpdateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.companyId = _data.companyId;
     if (_data.userId) {
       this.userId = _data.userId;

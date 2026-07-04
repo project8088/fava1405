@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-add-or-update-groups',
   templateUrl: './add-or-update-groups.component.html',
   styleUrls: ['./add-or-update-groups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -20,9 +20,8 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
   loading: boolean;
   parentGroups: any[] = [];
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

@@ -6,13 +6,13 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-all-citizens-feed-backs',
   templateUrl: './all-citizens-feed-backs.component.html',
   styleUrls: ['./all-citizens-feed-backs.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnInit {
   search: string = '';
@@ -33,9 +33,8 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchForm: FormGroup;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       feedbackId: [null],
       fromDate: [null],

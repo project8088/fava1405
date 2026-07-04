@@ -4,13 +4,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import { ServerApis } from '../../../../core/server-apis';
 import { forkJoin } from 'rxjs';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-add-or-update-manager',
   templateUrl: './add-or-update-manager.component.html',
   styleUrls: ['./add-or-update-manager.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -25,10 +25,8 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
   organizationalPositionList: any = ([] = []);
   loadingData: boolean = true;
   htmlEditor: any;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

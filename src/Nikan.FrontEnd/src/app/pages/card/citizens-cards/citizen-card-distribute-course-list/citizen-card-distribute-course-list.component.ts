@@ -12,13 +12,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardAddCardCoursesDialogComponent } from '../dialog/add-card-courses/add-card-courses.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-citizen-card-distribute-course-list',
   templateUrl: './citizen-card-distribute-course-list.component.html',
   styleUrls: ['./citizen-card-distribute-course-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCitizenCardDistributeCourseListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -46,7 +46,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

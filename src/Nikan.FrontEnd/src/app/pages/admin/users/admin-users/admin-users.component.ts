@@ -10,13 +10,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AdminUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
 import { AdminChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-admin-users',
   templateUrl: './admin-users.component.html',
   styleUrls: ['./admin-users.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
@@ -44,10 +44,8 @@ export class AdminUsersComponent extends AppBase implements OnInit {
 
   groupList: any[] = [];
 
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

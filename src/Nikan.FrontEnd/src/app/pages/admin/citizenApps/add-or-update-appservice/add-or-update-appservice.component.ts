@@ -2,13 +2,13 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-add-or-update-appservice',
   templateUrl: './add-or-update-appservice.component.html',
   styleUrls: ['./add-or-update-appservice.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -22,9 +22,8 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
 
   htmlEditor: any;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

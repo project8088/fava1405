@@ -1,13 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-add-or-update-free-card',
   templateUrl: './add-or-update-free-card.component.html',
   styleUrls: ['./add-or-update-free-card.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -22,9 +22,8 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
 
   cardTypeList: any[] = [];
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

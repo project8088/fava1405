@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-my-Identity-Info',
   templateUrl: './my-Identity-Info.component.html',
   styleUrls: ['./my-Identity-Info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -15,9 +15,9 @@ export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
   info: any;
   userStatus: number;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {
     this.getPersonalInfo();

@@ -10,13 +10,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-citizen-card-search-in-queue',
   templateUrl: './citizen-card-search-in-queue.component.html',
   styleUrls: ['./citizen-card-search-in-queue.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardCitizenCardSearchInQueueComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -48,7 +48,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
-      super();
+    super();
     this.searchForm = this.fb.group({
       name: [''],
       nationCode: [''],

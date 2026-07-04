@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-sms-list',
   templateUrl: './sms-list.component.html',
   styleUrls: ['./sms-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminSmsListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -35,10 +35,8 @@ export class AdminSmsListComponent extends AppBase implements AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-creditcard',
   templateUrl: './creditcard.component.html',
   styleUrls: ['./creditcard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CreditcardComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -16,9 +16,8 @@ export class CreditcardComponent extends AppBase implements OnInit {
   cardForm: FormGroup;
   loadingState: boolean;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.cardForm = this.fb.group({
       cardNumber: [null, [Validators.required]],
       shabaNumber: [null, [Validators.required]],

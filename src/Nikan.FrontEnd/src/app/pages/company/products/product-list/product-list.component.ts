@@ -5,13 +5,13 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-product-list',
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyProductListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -36,9 +36,8 @@ export class CompanyProductListComponent extends AppBase implements OnInit, Afte
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

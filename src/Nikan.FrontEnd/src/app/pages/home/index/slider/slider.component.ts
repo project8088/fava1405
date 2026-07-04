@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 declare var $: any;
 
@@ -8,7 +8,7 @@ declare var $: any;
   selector: 'home-slider',
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
   datetime: string = '';
@@ -16,7 +16,8 @@ export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor() {
-      super();}
+    super();
+  }
 
   ngOnInit(): void {
     this.dataService.get(ServerApis.getAllMainPageSlideShow, {}).subscribe((response) => {

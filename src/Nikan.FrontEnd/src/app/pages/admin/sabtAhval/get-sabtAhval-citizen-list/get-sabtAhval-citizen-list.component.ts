@@ -5,13 +5,13 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-sabtAhval-citizen-list',
   templateUrl: './get-sabtAhval-citizen-list.component.html',
   styleUrls: ['./get-sabtAhval-citizen-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminSabtAhvalCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   id: number;
@@ -37,10 +37,8 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
 
   sendingSms: boolean = false;
   selectAll: boolean = false;
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
     });

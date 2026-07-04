@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-manzelat-plan-item',
   templateUrl: './manzelat-plan-item.component.html',
   styleUrls: ['./manzelat-plan-item.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -21,9 +21,8 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
   data: any;
   id: number = 0;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
     });

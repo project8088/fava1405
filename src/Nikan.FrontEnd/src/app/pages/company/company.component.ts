@@ -4,13 +4,13 @@ import { shareReplay, map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { SideNavMenuItem } from '../../core/models/menuItems';
 import { AuthUser } from '../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-company',
   templateUrl: './company.component.html',
   styleUrls: ['./company.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
@@ -21,10 +21,8 @@ export class CompanyComponent extends AppBase implements OnInit, OnDestroy {
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(
-    private breakpointObserver: BreakpointObserver
-  ) {
-      super();
+  constructor(private breakpointObserver: BreakpointObserver) {
+    super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
       if (!this.user) return false;

@@ -4,13 +4,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '@core/server-apis';
 import { UploadUserAvatarDialogComponent } from 'src/app/shared/_dialog/upload-avatar/upload-avatar.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-personnel-image',
   templateUrl: './personnel-image.component.html',
   styleUrls: ['./personnel-image.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -30,7 +30,7 @@ export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
     private profileComponent: CitizenProfileComponent,
     // private navBar: SideNavMenuComponent
   ) {
-      super();
+    super();
     this.cardForm = this.fb.group({
       personnelImage: [null, [Validators.required]],
     });

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -16,9 +16,9 @@ export class CitizenDashboardComponent extends AppBase implements OnInit {
   citizen: any = {};
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
   ngOnInit(): void {
     this.dataService.get(ServerApis.getAppDashbordList).subscribe(
       (response) => {

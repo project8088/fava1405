@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CardAddCardDiscountDialogComponent } from '../dialog/add-card-discount/add-card-discount.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-card-discount-list',
   templateUrl: './card-discount-list.component.html',
   styleUrls: ['./card-discount-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardDiscountListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -42,9 +42,8 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.id;
     });

@@ -4,13 +4,13 @@ import { CustomFormValidators } from '../../../../core/custom-validator/form-val
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-check-state-life-list',
   templateUrl: './check-state-life-list.component.html',
   styleUrls: ['./check-state-life-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCheckStateLifeListComponent extends AppBase implements AfterViewInit, OnInit {
   id: number;
@@ -35,10 +35,8 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
 
   sendingSms: boolean = false;
 
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
     });

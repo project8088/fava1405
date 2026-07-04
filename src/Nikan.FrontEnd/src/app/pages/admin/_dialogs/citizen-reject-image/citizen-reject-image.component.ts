@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-reject-image',
   templateUrl: './citizen-reject-image.component.html',
   styleUrls: ['./citizen-reject-image.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenRejectImageDialogComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({
@@ -24,9 +24,9 @@ export class AdminCitizenRejectImageDialogComponent extends AppBase implements O
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenRejectImageDialogComponent>
+    private matDialogRef: MatDialogRef<AdminCitizenRejectImageDialogComponent>,
   ) {
-      super();
+    super();
     this.citizen = _data;
   }
 

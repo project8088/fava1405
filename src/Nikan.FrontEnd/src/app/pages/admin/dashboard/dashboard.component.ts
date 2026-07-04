@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
 import { AdminViewEventDetailsDialogComponent } from '../_dialogs/event-details/event-details.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
@@ -15,9 +15,9 @@ export class AdminDashboardComponent extends AppBase implements OnInit {
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {}
   ngAfterViewInit() {

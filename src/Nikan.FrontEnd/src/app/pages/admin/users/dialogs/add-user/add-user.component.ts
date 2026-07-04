@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-adm-add-user-dialog',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -24,9 +24,9 @@ export class AdminAddUserDialogComponent extends AppBase implements OnInit {
   constructor(
     private matDialogRef: MatDialogRef<AdminAddUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.userForm = this.fb.group(
       {
         id: [null],

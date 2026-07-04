@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'company-base-info',
   templateUrl: './base-info.component.html',
   styleUrls: ['./base-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CompanyBaseInfoComponent extends AppBase implements OnInit {
   loading: boolean;
@@ -18,10 +18,8 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
   isSaving: boolean;
   baseInfo: any = {};
 
-  constructor(
-    private customValidators: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidators: CustomFormValidators) {
+    super();
     this.form = this.fb.group({
       companyName: [null, [Validators.required, Validators.maxLength(500)]],
       englishName: [

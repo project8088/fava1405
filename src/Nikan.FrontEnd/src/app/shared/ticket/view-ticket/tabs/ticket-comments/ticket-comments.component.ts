@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../../../core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-ticket-comments',
   templateUrl: './ticket-comments.component.html',
   styleUrls: ['./ticket-comments.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TicketCommentsComponent extends AppBase implements OnInit {
   frm: FormGroup;
@@ -18,9 +18,8 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
   loading: boolean;
   list: any[] = [];
   user: AuthUser;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {

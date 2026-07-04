@@ -2,13 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-reject-family',
   templateUrl: './citizen-reject-family.component.html',
   styleUrls: ['./citizen-reject-family.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({
@@ -24,9 +24,9 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenRejectFamilyComponent>
+    private matDialogRef: MatDialogRef<AdminCitizenRejectFamilyComponent>,
   ) {
-      super();
+    super();
     this.citizen = _data;
   }
 

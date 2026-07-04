@@ -1,13 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { AuthUser } from '@core/authentication/user.model';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-cropper',
   templateUrl: './cropper.component.html',
   styleUrls: ['./cropper.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CropperComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';
@@ -26,9 +26,9 @@ export class CropperComponent extends AppBase implements OnInit {
 
   imageBase64;
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.setCropperImage(this.imageUrl);

@@ -1,29 +1,23 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ServerApis } from '../../../../../core/server-apis';
 import { AdminAddOrUpdateMenuDialogComponent } from '../dialog/add-update-menu/add-update-menu.component';
 import Swal from 'sweetalert2';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-tree-menu',
   templateUrl: './tree-menu.component.html',
   styleUrls: ['./tree-menu.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminTreeMenuComponent extends AppBase implements OnInit {
   @Input('menuItems') menuItems: any[];
 
   @Output() onUpdate = new EventEmitter<boolean>();
 
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit() {}
 

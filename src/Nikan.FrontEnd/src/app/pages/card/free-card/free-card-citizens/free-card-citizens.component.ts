@@ -7,13 +7,13 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'free-card-citizens',
   templateUrl: './free-card-citizens.component.html',
   styleUrls: ['./free-card-citizens.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardFreeCardCitizensComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -30,9 +30,8 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.params.subscribe((p) => {
       this.requestId = p.id;
     });

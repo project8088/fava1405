@@ -8,13 +8,13 @@ import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-personal-info',
   templateUrl: './personal-info.component.html',
   styleUrls: ['./personal-info.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -41,7 +41,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
     private customValidator: CustomFormValidators,
     private profileComponent: CitizenProfileComponent,
   ) {
-      super();
+    super();
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getPersonalInfo();

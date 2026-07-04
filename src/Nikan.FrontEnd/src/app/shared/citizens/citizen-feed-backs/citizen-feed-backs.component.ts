@@ -4,13 +4,13 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-feed-back-list',
   templateUrl: './citizen-feed-backs.component.html',
   styleUrls: ['./citizen-feed-backs.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AppCitizenFeedBackListComponent extends AppBase implements AfterViewInit {
   listfeedback: any[] = [];
@@ -25,9 +25,8 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   feedbackfrm: FormGroup;
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.feedbackfrm = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
       feedbackId: [null, [Validators.required]],

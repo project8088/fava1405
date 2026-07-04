@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiResult } from '@core/models/response';
 import { ServerApis } from '@core/server-apis';
 import { MatCardModule } from '@angular/material/card';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-redirect',
@@ -16,9 +16,9 @@ export class RedirectComponent extends AppBase implements OnInit {
   loading: boolean = true;
   url: string;
   returnUrl: string = '';
-  constructor(
-) {
-      super();}
+  constructor() {
+    super();
+  }
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((p) => {

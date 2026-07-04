@@ -1,23 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-card-user-permissions',
   templateUrl: './card-user-permissions.component.html',
   styleUrls: ['./card-user-permissions.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardUserPermissionsComponent extends AppBase implements OnInit {
   userId: string;
   data: any[] = [];
   isLoadingResults: boolean = true;
   isSaving: boolean;
-  constructor(
-    private customValidator: CustomFormValidators
-  ) {
-      super();
+  constructor(private customValidator: CustomFormValidators) {
+    super();
     this.route.params.subscribe((p) => {
       this.userId = p.id;
     });

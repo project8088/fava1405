@@ -4,13 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import { HelperService } from '../../../../core/services/helper.service';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-change-card-address-dialog',
   templateUrl: './change-card-address.component.html',
   styleUrls: ['./change-card-address.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class ChangeCardAddressDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -23,9 +23,9 @@ export class ChangeCardAddressDialogComponent extends AppBase implements OnInit 
     private matDialogRef: MatDialogRef<ChangeCardAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private helperService: HelperService,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.info = _data.info;
     debugger;
 

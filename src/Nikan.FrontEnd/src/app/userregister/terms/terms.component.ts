@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-terms',
   templateUrl: './terms.component.html',
   styleUrls: ['./terms.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class TermsComponent extends AppBase implements OnInit {
   regLink: string = '';
@@ -15,9 +15,8 @@ export class TermsComponent extends AppBase implements OnInit {
   loadingData: boolean;
   toastrService: any;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.route.queryParams.subscribe((params) => {
       this.serviceId = params.serviceId;
     });

@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-citizen-edit-mobile',
   templateUrl: './edit-mobile.component.html',
   styleUrls: ['./edit-mobile.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CitizenEditMobileComponent extends AppBase implements OnInit {
   loading: boolean = true;
@@ -33,9 +33,8 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   oldMobileNumber = false;
   @ViewChild('phoneTimer', { static: false }) phoneTimer: TimerComponent;
 
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.editForm = this.fb.group({
       newmobileNumber: [null, [Validators.required]],
     });

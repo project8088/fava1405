@@ -6,13 +6,13 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './dialog/add-update-slide/add-update-slide.component';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'adm-slide-show-list',
   templateUrl: './slide-show-list.component.html',
   styleUrls: ['./slide-show-list.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminSlideShowListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
@@ -35,9 +35,8 @@ export class AdminSlideShowListComponent extends AppBase implements OnInit, Afte
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(
-) {
-      super();
+  constructor() {
+    super();
     this.searchForm = this.fb.group({
       title: [''],
     });

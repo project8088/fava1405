@@ -3,13 +3,13 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'card-delivery-queue-operator',
   templateUrl: './delivery-queue-operator.component.html',
   styleUrls: ['./delivery-queue-operator.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -20,9 +20,9 @@ export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements
   constructor(
     private matDialogRef: MatDialogRef<CardDeliveryQueueOperatorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     this.info = _data.info;
 
     this.frm = this.fb.group({

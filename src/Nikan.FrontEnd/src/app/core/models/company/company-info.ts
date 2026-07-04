@@ -1,6 +1,4 @@
-import {
-  FieldOfActivityEnum,
-} from '../enums';
+import { FieldOfActivityEnum } from '../enums';
 
 export class CompanyInfoDto {
   public companyId: number;

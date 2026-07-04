@@ -4,13 +4,13 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
 import { userGroupsDto } from '../../../../../core/models/users/usergroups';
-import { AppBase } from "@app/app.base";
+import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-adm-add-usergroups-dialog',
   templateUrl: './add-usergroups.component.html',
   styleUrls: ['./add-usergroups.component.scss'],
-    standalone: false
+  standalone: false,
 })
 export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
@@ -25,7 +25,7 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private customValidator: CustomFormValidators,
   ) {
-      super();
+    super();
     if (_data) {
       this.userGroups = _data.userGroups ? _data.userGroups : '';
       this.isUpdate = true;
