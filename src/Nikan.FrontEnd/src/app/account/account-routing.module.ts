@@ -13,7 +13,7 @@ const routes: Routes = [
     children: [
       { path: 'register-company', component: RegisterCompanyComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'forgot-password', component: ForgotPasswordComponent } 
+      { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
 ];

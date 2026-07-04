@@ -1,5 +1,3 @@
- 
-
 <div class="content-header">
   <span>جستجوی کارت در داخل صف توزیع کارت</span>
   <div class="bread-crumbs">
@@ -7,7 +5,7 @@
     <div class="bread-crumb-item" routerLink="/card/card-distribute-course-list">
       لیست دورههای توزیع کارت
     </div>
-    <div class="bread-crumb-item" routerLink="/card/card-course-queue-list/{{courseId}}">
+    <div class="bread-crumb-item" routerLink="/card/card-course-queue-list/{{ courseId }}">
       لیست صف
     </div>
     <div class="bread-crumb-item active">
@@ -16,35 +14,27 @@
   </div>
 </div>
 
-
 <mat-card class="custom-card">
-
-  
   <mat-card-content>
-
-
-    <div *ngIf="!loadingData"  class="box-info-dash">
+    <div *ngIf="!loadingData" class="box-info-dash">
       <div class="row">
         <div class="col-sm-6">
-          <span>  صف :  </span><strong>{{info.name}}</strong>
+          <span> صف : </span><strong>{{ info.name }}</strong>
         </div>
         <div class="col-sm-6">
-          <span>  اولویت:  </span><strong>{{info.indexOrder}}</strong>
+          <span> اولویت: </span><strong>{{ info.indexOrder }}</strong>
         </div>
         <div class="col-sm-6">
-          <span>تعداد کارتهای موجود  :  </span><strong>{{info.cardCount}}</strong>
+          <span>تعداد کارتهای موجود : </span><strong>{{ info.cardCount }}</strong>
         </div>
         <div class="col-sm-6">
-          <span>  تاریخ ایجاد:  </span><strong>{{info.onDate| jalali}}</strong>
+          <span> تاریخ ایجاد: </span><strong>{{ info.onDate | jalali }}</strong>
         </div>
-
       </div>
     </div>
 
-
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
         <mat-form-field class="col-md-3">
           <mat-label>نام شهروند</mat-label>
           <input matInput formControlName="name" />
@@ -58,7 +48,6 @@
           <mat-label>شماره کارت</mat-label>
           <input matInput formControlName="cardNumber" />
         </mat-form-field>
-
 
         <mat-form-field class="col-md-3">
           <mat-label>نوع کارت</mat-label>
@@ -74,25 +63,15 @@
           <input matInput formControlName="courseNumber" />
         </mat-form-field>
 
-
-
-
         <mat-form-field class="col-md-3">
           <mat-label>نوع صف</mat-label>
           <mat-select formControlName="queueInputType">
             <mat-option [value]="null">همه</mat-option>
-            <mat-option [value]="0">پستی   </mat-option>
-            <mat-option [value]="1">مرکز تحویل  </mat-option>
+            <mat-option [value]="0">پستی </mat-option>
+            <mat-option [value]="1">مرکز تحویل </mat-option>
             <mat-option [value]="2"> موقت</mat-option>
-
           </mat-select>
         </mat-form-field>
-
-
-
-
-
-
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="applyFilter()">
@@ -106,27 +85,26 @@
     <div class="d-flex align-items-center justify-content-end mb-3">
       <button mat-raised-button color="default" (click)="exportExcel()">
         <i class="fa fa-file-excel mr-2"></i>
-        خروجی اکسل
-
-        (65k)
+        خروجی اکسل (65k)
       </button>
     </div>
     <div class="datatable-container mat-elevation-z8">
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div class="datatable-loading-shade"
-           *ngIf="isLoadingResults == false && listCount == 0">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-        <table mat-table
-               [dataSource]="data"
-               class="datatable-table"
-               #exporter="matTableExporter"
-               matTableExporter
-               [hiddenColumns]="[displayedColumns.length - 1]">
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="row">
             <th mat-header-cell *matHeaderCellDef width="40">#</th>
             <td mat-cell *matCellDef="let row; let i = index">
@@ -166,10 +144,6 @@
             </td>
           </ng-container>
 
-
-
-
-
           <ng-container matColumnDef="queueOnDate">
             <th mat-header-cell *matHeaderCellDef>ارسال به صف</th>
             <td mat-cell *matCellDef="let row">
@@ -177,23 +151,23 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="deliverType">
-            <th mat-header-cell *matHeaderCellDef>نوع تحویل  </th>
+            <th mat-header-cell *matHeaderCellDef>نوع تحویل</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.deliverType | enumString: "cardDeliverType" }}
+              {{ row.deliverType | enumString: 'cardDeliverType' }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="courseNumber">
             <th mat-header-cell *matHeaderCellDef>دوره توزیع</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.courseNumber}}
+              {{ row.courseNumber }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="queueName">
-            <th mat-header-cell *matHeaderCellDef> صف  </th>
+            <th mat-header-cell *matHeaderCellDef>صف</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.queueName}}
+              {{ row.queueName }}
             </td>
           </ng-container>
 
@@ -204,7 +178,6 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-
                 <button mat-menu-item (click)="delete(row)">
                   <i class="fa fa-trash mr-2"></i>
                   <span>حذف</span>
@@ -213,22 +186,21 @@
                   <i class="fa fa-eye mr-2"></i>
                   مشاهده اطلاعات کارت
                 </button>
-
-
               </mat-menu>
             </td>
           </ng-container>
 
-          <tr mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-      <mat-paginator [length]="listCount"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
-                     showFirstLastButtons
-                     (page)="pageEvent($event)"></mat-paginator>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
     </div>
   </mat-card-content>
   <mat-card-footer></mat-card-footer>

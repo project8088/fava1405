@@ -5,7 +5,7 @@ import { CompanyRoutingModule } from './company-routing.module';
 import { CoreModule } from '../../core/core.module';
 import { MaterialModule } from '../../core/material/material.module';
 import { SharedModule } from '../../shared/shared.module';
- 
+
 import { CompnayDashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -13,11 +13,11 @@ import { CompanyProfileComponent } from './company-profile/company-profile.compo
 import { CompanyAddressInfoComponent } from './company-profile/address-info/address-info.component';
 import { CompanyMainInfoComponent } from './company-profile/main-info/main-info.component';
 import { CompanyBaseInfoComponent } from './company-profile/base-info/base-info.component';
- 
+
 import { CompanyContactUsListComponent } from './contact-list/contact-list.component';
 import { CompanyActivityInfoComponent } from './company-profile/activity-info/activity-info.component';
 import { ViewMessageDialogComponent } from './contact-list/view-message-dialog/view-message-dialog.component';
- 
+
 import { CompanyPersonalUsersComponent } from './personal/personal-users/personal-users.component';
 import { CompanyAddOrUpdatePersonalComponent } from './personal/add-or-update-personal/add-or-update-personal.component';
 import { CompanySignatureInfoComponent } from './company-profile/signature-info/signature-info.component';
@@ -30,15 +30,15 @@ import { CompanyProductGroupsListComponent } from './products/product-groups/pro
 import { CompanyAddUpdateProductGroupDialogComponent } from './products/_dialogs/add-update-product-group/add-update-product-group.component';
 import { CompanyProductListComponent } from './products/product-list/product-list.component';
 import { CompanyAddOrUpdateProductComponent } from './products/add-or-update-product/add-or-update-product.component';
- 
+
 import { CompanyTransactionListComponent } from './transaction-list/transaction-list.component';
 import { CompanyCitizenExcelBatchFileListComponent } from './citizen-excel-batch-file/citizen-excel-batch-file.component';
 import { CompanyImportExcelDialogComponent } from './_dialogs/importPersonel-excel/importPersonel-excel.component';
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
- 
 
 @NgModule({
-  declarations: [CompanyComponent ,
+  declarations: [
+    CompanyComponent,
     CompnayDashboardComponent,
     CompanyProfileComponent,
     CompanyAddressInfoComponent,
@@ -47,7 +47,7 @@ import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-ba
     CompanyContactUsListComponent,
     CompanyActivityInfoComponent,
     ViewMessageDialogComponent,
-    
+
     CompanyPersonalUsersComponent,
     CompanyAddOrUpdatePersonalComponent,
     CompanySignatureInfoComponent,
@@ -59,23 +59,21 @@ import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-ba
     CompanyProductGroupsListComponent,
     CompanyAddUpdateProductGroupDialogComponent,
     CompanyProductListComponent,
-    CompanyAddOrUpdateProductComponent, 
+    CompanyAddOrUpdateProductComponent,
     CompanyTransactionListComponent,
     CompanyCitizenExcelBatchFileListComponent,
     CompanyImportExcelDialogComponent,
-    CompanyCitizenExcelBatchFileDetailsComponent
-    
+    CompanyCitizenExcelBatchFileDetailsComponent,
   ],
   imports: [
     CoreModule,
     CommonModule,
     CompanyRoutingModule,
     MaterialModule,
-    SharedModule,  
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
-
+    RouterModule,
   ],
   entryComponents: [
     ViewMessageDialogComponent,
@@ -83,8 +81,7 @@ import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-ba
     CompanyUpdateUserDialogComponent,
     CompanyChangePasswordDialogComponent,
     CompanyAddUpdateProductGroupDialogComponent,
-    CompanyImportExcelDialogComponent
-    
-  ]
+    CompanyImportExcelDialogComponent,
+  ],
 })
-export class CompanyModule { }
+export class CompanyModule {}

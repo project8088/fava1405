@@ -6,9 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
- import { MatDialog } from '@angular/material/dialog';
- import { Router } from '@angular/router';
-import { merge, of as observableOf  } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-access/change-refund-access.component';
@@ -19,13 +19,17 @@ import { AdminAddRefundUserDialogComponent } from '../dialog/add-refund-user/add
 @Component({
   selector: 'adm-refund-users',
   templateUrl: './refund-users.component.html',
-  styleUrls: ['./refund-users.component.scss']
+  styleUrls: ['./refund-users.component.scss'],
 })
-export class AdminRefundUsersComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'citizen', 'nationCode', 'creationDate','addByUser',   'operation'];
-
- 
+export class AdminRefundUsersComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'citizen',
+    'nationCode',
+    'creationDate',
+    'addByUser',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -40,37 +44,26 @@ export class AdminRefundUsersComponent implements AfterViewInit, OnInit{
   transactionForList: any[] = [];
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) {
-
-    this.searchForm = this.fb.group({ 
-      name: [''], 
+    this.searchForm = this.fb.group({
+      name: [''],
       nationCode: [''],
-      
     });
-
   }
 
-
-  ngOnInit() {
-
-
-  }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.getList();
   }
 
-   
-
   getList() {
     var param: any = this.searchForm.value;
-     param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-   
-   
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
 
     merge()
       .pipe(
@@ -79,35 +72,31 @@ export class AdminRefundUsersComponent implements AfterViewInit, OnInit{
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchRefundUser, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -116,19 +105,17 @@ export class AdminRefundUsersComponent implements AfterViewInit, OnInit{
     this.getList();
   }
 
- 
- 
-   
   openAddRefundUserDialog() {
-    this.matDialog.open(AdminAddRefundUserDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {  },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminAddRefundUserDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {},
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   delete(row) {
@@ -138,22 +125,26 @@ export class AdminRefundUsersComponent implements AfterViewInit, OnInit{
       showConfirmButton: true,
       confirmButtonText: 'بله',
       showCancelButton: true,
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.deleteRefundUser, { userCode: row.userCode }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-        });
+        this.dataService.get(ServerApis.deleteRefundUser, { userCode: row.userCode }).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
+          },
+        );
       }
     });
   }
-
 }

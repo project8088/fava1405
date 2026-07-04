@@ -1,8 +1,6 @@
 <div class="content-header">
   <span>اطلاعات شرکت</span>
-
 </div>
-
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
@@ -12,9 +10,7 @@
   </mat-card-header>
   <mat-tab-group>
     <mat-tab>
-      <ng-template mat-tab-label>
-        اطلاعات اصلی شرکت
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات اصلی شرکت </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-base-info></company-base-info>
@@ -22,79 +18,50 @@
       </ng-template>
     </mat-tab>
     <mat-tab>
-      <ng-template mat-tab-label>
-        اطلاعات آدرس
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات آدرس </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-address-info></company-address-info>
-
         </div>
       </ng-template>
     </mat-tab>
     <mat-tab>
-      <ng-template mat-tab-label>
-        فعالیت های شرکت
-      </ng-template>
+      <ng-template mat-tab-label> فعالیت های شرکت </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-activity-info></company-activity-info>
-
         </div>
       </ng-template>
     </mat-tab>
 
     <mat-tab>
-      <ng-template mat-tab-label>
-        سایر اطلاعات شرکت
-      </ng-template>
+      <ng-template mat-tab-label> سایر اطلاعات شرکت </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-main-info></company-main-info>
-
         </div>
       </ng-template>
     </mat-tab>
 
-
     <mat-tab>
-      <ng-template mat-tab-label>
-        نمونه مهر و امضا
-      </ng-template>
+      <ng-template mat-tab-label> نمونه مهر و امضا </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-signature-info></company-signature-info>
-
         </div>
       </ng-template>
     </mat-tab>
 
-
     <mat-tab *ngIf="user?.isAdmin">
-      <ng-template mat-tab-label>
-        اطلاعات تکمیلی
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات تکمیلی </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <company-additional-info></company-additional-info>
-
         </div>
       </ng-template>
     </mat-tab>
-
-
-
-
-
-
-
   </mat-tab-group>
 
-
-
-
-        <mat-card-content>
-
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
+  <mat-card-content> </mat-card-content>
+  <mat-card-footer></mat-card-footer>
 </mat-card>

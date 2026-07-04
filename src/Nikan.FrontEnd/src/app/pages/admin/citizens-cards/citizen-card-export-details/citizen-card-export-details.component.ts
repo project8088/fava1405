@@ -40,7 +40,7 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
     'requestStatuse',
     'deliverType',
     'cardNumber',
-    'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -49,7 +49,6 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
   isLoadingResults: boolean = true;
   exportId: string;
   baseEnums: any = {};
- 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -62,38 +61,30 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private route: ActivatedRoute,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
-
     this.route.params.subscribe((p) => {
       this.exportId = p.id;
     });
 
-
     this.searchForm = this.fb.group({
-      
       name: [''],
-      nationCode: [''], 
+      nationCode: [''],
       cardNumber: [''],
-       requestStatuse: [null],
-       exportId: [0],
-      
-      
+      requestStatuse: [null],
+      exportId: [0],
     });
   }
 
   ngAfterViewInit() {
-    this.getList(); 
+    this.getList();
   }
 
-  
- 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
     param.exportId = +this.exportId;
-
 
     merge()
       .pipe(
@@ -106,21 +97,17 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -137,15 +124,15 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -153,56 +140,55 @@ export class AdminCitizenCardExportDetailsComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.citizenCardInfoId
+        id: row.citizenCardInfoId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   openBackCard(item) {
-    this.matDialog.open(AdminBackCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminBackCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openDeliveredCard(item) {
-    this.matDialog.open(AdminDeliveredCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminDeliveredCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openCancellationCard(item) {
-    this.matDialog.open(AdminCancellationCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminCancellationCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-
- 
-
-
 }

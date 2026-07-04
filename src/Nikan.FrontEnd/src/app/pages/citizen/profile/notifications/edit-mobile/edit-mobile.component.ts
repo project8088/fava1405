@@ -20,30 +20,25 @@ export class CitizenEditMobileComponent implements OnInit {
 
   confirmForm: FormGroup;
   loadingState: boolean;
- 
 
   emailForm: FormGroup;
 
   sendingSMS: boolean = false;
   showConfirmCode: boolean = false;
-  
-
-
 
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
   timerCounterString: string;
   resendTimerInterval: any;
   isConfirm = false;
- 
-  
+
   oldMobileNumber = false;
-  @ViewChild('phoneTimer', { static: false }) phoneTimer:TimerComponent
+  @ViewChild('phoneTimer', { static: false }) phoneTimer: TimerComponent;
 
   constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.editForm = this.fb.group({
       newmobileNumber: [null, [Validators.required]],
@@ -58,19 +53,15 @@ export class CitizenEditMobileComponent implements OnInit {
   ngOnInit(): void {}
 
   getCitizenMobileNumber() {
-    this.dataService
-      .get(ServerApis.getCitizenMobileNumber)
-      .subscribe((data) => {
-        this.loading = false;
-        this.oldMobileNumber = data.data.mobileNumber; 
-        this.isConfirm = data.data.isConfirm;
-        this.editForm.patchValue({
-          citizenId:data.data.citizenId, 
-        });
+    this.dataService.get(ServerApis.getCitizenMobileNumber).subscribe((data) => {
+      this.loading = false;
+      this.oldMobileNumber = data.data.mobileNumber;
+      this.isConfirm = data.data.isConfirm;
+      this.editForm.patchValue({
+        citizenId: data.data.citizenId,
       });
+    });
   }
-
- 
 
   sendCode() {
     if (this.editForm.get('newmobileNumber').invalid) {
@@ -79,33 +70,31 @@ export class CitizenEditMobileComponent implements OnInit {
       return false;
     }
 
-    
-  
-    this.sendingSMS = true; 
-    this.dataService.post(ServerApis.checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber, {
-      NewMobileNumber: this.editForm.get('newmobileNumber').value
-    }).subscribe(response => {
-      this.sendingSMS = false;
-      if (response.isSuccess) {
-        this.toastrService.success("کد تائید شماره موبایل با موفقیت ارسال شد.");
-        this.lastTimerCounter = this.lastTimerCounter + 60;
-        this.timerCounter = this.lastTimerCounter;
-        this.startTimer(); 
-         this.showConfirmCode = true;
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است.";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.sendingSMS = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-    });
+    this.sendingSMS = true;
+    this.dataService
+      .post(ServerApis.checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber, {
+        NewMobileNumber: this.editForm.get('newmobileNumber').value,
+      })
+      .subscribe(
+        (response) => {
+          this.sendingSMS = false;
+          if (response.isSuccess) {
+            this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
+            this.lastTimerCounter = this.lastTimerCounter + 60;
+            this.timerCounter = this.lastTimerCounter;
+            this.startTimer();
+            this.showConfirmCode = true;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.sendingSMS = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
-
-
-
-
 
   saveForm() {
     if (this.confirmForm.invalid) {
@@ -117,66 +106,54 @@ export class CitizenEditMobileComponent implements OnInit {
 
     var formValue = this.editForm.value;
     var confirmFormValue = this.confirmForm.value;
-    this.dataService.post(ServerApis.updteCitizenMobileNumber,   {
-      MobileNumber: formValue.newmobileNumber,
-      SmsActiveCode: confirmFormValue.smsActiveCode,
-     
-    }).subscribe(
-      (response) => {
-        if (response && response.isSuccess) {
-          this.showForm();
-          this.isSaving = false;
-          this.getCitizenMobileNumber();
-          this.showConfirmCode = false;
+    this.dataService
+      .post(ServerApis.updteCitizenMobileNumber, {
+        MobileNumber: formValue.newmobileNumber,
+        SmsActiveCode: confirmFormValue.smsActiveCode,
+      })
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.showForm();
+            this.isSaving = false;
+            this.getCitizenMobileNumber();
+            this.showConfirmCode = false;
 
-          this.toastrService.success(response.messages);
-        } else {
+            this.toastrService.success(response.messages);
+          } else {
+            this.isSaving = false;
+            let msg = response.messages ? response.messages : 'شماره موبایل معتبر نیست';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
           this.isSaving = false;
-          let msg = response.messages
-            ? response.messages
-            : 'شماره موبایل معتبر نیست';
-          this.toastrService.error(msg);
-        }
-      },
-      (error) => {
-        this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
-    );
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
 
-  toggleEditMode(){
-    
-  }
+  toggleEditMode() {}
   cancelEdit() {
     this.showForm();
-    this.getCitizenMobileNumber()
+    this.getCitizenMobileNumber();
   }
 
-
-
-
-  showForm() {
-  
-   
-    
+  showForm() {}
+  /**
+   * تایمر برای ارسال مجدد کد تائید
+   * */
+  startTimer() {
+    this.resendTimerInterval = setInterval(() => {
+      this.timerCounter--;
+      this.timerCounterString = this.convertSecondstoTime(this.timerCounter);
+      if (this.timerCounter <= 0) {
+        clearInterval(this.resendTimerInterval);
+        this.timerCounter = 0;
+      }
+    }, 1000);
   }
-    /**
-       * تایمر برای ارسال مجدد کد تائید
-       * */
-     startTimer() {
-      this.resendTimerInterval = setInterval(() => {
-        this.timerCounter--;
-        this.timerCounterString = this.convertSecondstoTime(this.timerCounter);
-        if (this.timerCounter <= 0) {
-          clearInterval(this.resendTimerInterval);
-          this.timerCounter = 0;
-        }
-      }, 1000);
-    }
 
-    
-    
   /**
    * convert 300s to 5:00
    * @param {any} given_seconds
@@ -187,11 +164,13 @@ export class CitizenEditMobileComponent implements OnInit {
     var minutes = dateObj.getUTCMinutes();
     var seconds = dateObj.getSeconds();
 
-    var timeString = hours.toString().padStart(2, '0')
-      + ':' + minutes.toString().padStart(2, '0')
-      + ':' + seconds.toString().padStart(2, '0');
+    var timeString =
+      hours.toString().padStart(2, '0') +
+      ':' +
+      minutes.toString().padStart(2, '0') +
+      ':' +
+      seconds.toString().padStart(2, '0');
 
     return timeString;
   }
-
 }

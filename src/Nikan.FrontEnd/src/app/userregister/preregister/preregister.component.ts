@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
 import { UserRegisterService } from '../userregister.service';
 import { CaptchaComponent } from 'src/app/account/bot-detect/captcha.component';
 
-
 @Component({
   selector: 'app-preregister',
   templateUrl: './preregister.component.html',
@@ -24,9 +23,6 @@ export class PreregisterComponent implements OnInit {
   serviceId: number;
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
-
-
-
   constructor(
     private dataService: DataService,
     private accounService: UserRegisterService,
@@ -34,31 +30,26 @@ export class PreregisterComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
     this.form = this.fb.group({
       serviceId: [null, [Validators.required]],
       nationality: ['0', [Validators.required]],
-      mobileNumber: [   null,   [   Validators.required,  Validators.pattern(/(^\(\d{3}\)\s\d{3}-\d{4}$)|(^\d{10})/),  ],
-      ],
-      nationCode: [
+      mobileNumber: [
         null,
-        [Validators.required, this.customValidator.checkNationalCode],
+        [Validators.required, Validators.pattern(/(^\(\d{3}\)\s\d{3}-\d{4}$)|(^\d{10})/)],
       ],
+      nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
       isAgree: [null, [Validators.required]],
       userEnteredCaptchaCode: [null, [Validators.required]],
-      captchaId: ['']
-
+      captchaId: [''],
     });
 
     this.form.get('nationality').valueChanges.subscribe((value) => {
       if (+value === 0) {
         this.form
           .get('nationCode')
-          .setValidators([
-            this.customValidator.checkNationalCode,
-            Validators.required,
-          ]);
+          .setValidators([this.customValidator.checkNationalCode, Validators.required]);
       } else {
         this.form.get('nationCode').setValidators([Validators.required]);
       }
@@ -78,10 +69,7 @@ export class PreregisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.captchaComponent.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
-
-
   }
   submitForm(): void {
     if (this.form.valid) {
@@ -94,7 +82,7 @@ export class PreregisterComponent implements OnInit {
           nationCode: form.nationCode,
           nationality: form.nationality,
           userEnteredCaptchaCode: form.userEnteredCaptchaCode,
-          CaptchaId : this.captchaComponent.captchaId,
+          CaptchaId: this.captchaComponent.captchaId,
           serviceId: form.serviceId,
         })
         .subscribe(
@@ -106,9 +94,7 @@ export class PreregisterComponent implements OnInit {
                 nationality: form.nationality,
               });
               this.toastrService.success(data.messages);
-              this.toastrService.success(
-                'در حال انتقال به مراحل ثبت نام شهروند...'
-              );
+              this.toastrService.success('در حال انتقال به مراحل ثبت نام شهروند...');
 
               this.router.navigate(['/userregister/register'], {
                 queryParams: { serviceId: this.form.value.serviceId },
@@ -123,7 +109,7 @@ export class PreregisterComponent implements OnInit {
             this.isSaving = false;
             this.captchaComponent.reloadImage();
             this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-          }
+          },
         );
     }
   }

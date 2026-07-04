@@ -28,17 +28,16 @@ export class AdminCitizensPicturesComponent implements OnInit {
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   personalPictureStatuses: [];
-  list: any; 
+  list: any;
   loading: boolean = true;
   loadingData: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-
 
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
     private toastrService: ToastrService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -50,11 +49,7 @@ export class AdminCitizensPicturesComponent implements OnInit {
     });
 
     this.getGroups();
-
   }
-
-
-
 
   ngOnInit(): void {
     this.getList();
@@ -70,10 +65,9 @@ export class AdminCitizensPicturesComponent implements OnInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
 
   getList() {
     this.loadingData = true;
@@ -81,8 +75,7 @@ export class AdminCitizensPicturesComponent implements OnInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 50;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
@@ -98,16 +91,12 @@ export class AdminCitizensPicturesComponent implements OnInit {
             var items = response.data.citizens ? response.data.citizens : [];
             this.list = items;
 
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             this.loadingData = false;
             return items;
           } else {
             this.loadingData = false;
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
@@ -115,14 +104,14 @@ export class AdminCitizensPicturesComponent implements OnInit {
           this.loadingData = false;
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
       });
   }
   getEnums() {}
- 
+
   confirmImage(citizen) {
     citizen.isConfirming = true;
     this.dataService
@@ -137,22 +126,13 @@ export class AdminCitizensPicturesComponent implements OnInit {
             }
           }
           citizen.isConfirming = false;
-        }
-        else {
+        } else {
           citizen.isConfirming = false;
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       });
   }
-
-
-
- 
-
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -165,23 +145,14 @@ export class AdminCitizensPicturesComponent implements OnInit {
     this.getList();
   }
 
-  copyPicture() { 
-    this.dataService
-      .get(ServerApis.copyPicture)
-      .subscribe((response) => {
-        if (response.isSuccess) {
-          this.toastrService.success(response.messages); 
-        }
-        else {
-
-
-        }
-      });
+  copyPicture() {
+    this.dataService.get(ServerApis.copyPicture).subscribe((response) => {
+      if (response.isSuccess) {
+        this.toastrService.success(response.messages);
+      } else {
+      }
+    });
   }
-
-  
-
-
 
   openImageDialog(citizen) {
     this.matDialog
@@ -245,10 +216,10 @@ export class AdminCitizensPicturesComponent implements OnInit {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
   refreshImage(citizen) {

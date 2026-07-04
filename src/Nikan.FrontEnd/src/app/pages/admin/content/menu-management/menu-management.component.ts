@@ -13,101 +13,72 @@ import { AdminAddOrUpdateMenuDialogComponent } from './dialog/add-update-menu/ad
 @Component({
   selector: 'adm-menu-management',
   templateUrl: './menu-management.component.html',
-  styleUrls: ['./menu-management.component.scss']
+  styleUrls: ['./menu-management.component.scss'],
 })
 export class AdminMenuManagementComponent implements OnInit {
-
- 
-
-
-
-  data: any[] = [];  
+  data: any[] = [];
   isLoadingResults: boolean = true;
-     
 
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
-    private matDialog: MatDialog
-  ) {
-
-  
-
-  }
+    private matDialog: MatDialog,
+  ) {}
 
   ngOnInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllMenuItems, {}).subscribe(response => {
-      this.isLoadingResults = false;
-      if (response.isSuccess) {
-        var data = response.data ? response.data : [];
-        data.sort((a, b) => {
-          if (a.tabOrder > b.tabOrder)
-            return 1;
-          else if (a.tabOrder < b.tabOrder)
-            return -1;
-          else
-            return 0;
-        });
-        this.data = this.getNestedChildren(data);
-      //  console.log(this.data);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
+    this.dataService.get(ServerApis.getAllMenuItems, {}).subscribe(
+      (response) => {
+        this.isLoadingResults = false;
+        if (response.isSuccess) {
+          var data = response.data ? response.data : [];
+          data.sort((a, b) => {
+            if (a.tabOrder > b.tabOrder) return 1;
+            else if (a.tabOrder < b.tabOrder) return -1;
+            else return 0;
+          });
+          this.data = this.getNestedChildren(data);
+          //  console.log(this.data);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isLoadingResults = false;
+      },
+    );
+  }
+
+  getNestedChildren(arr, parentId = null) {
+    var out = [];
+    for (var i in arr) {
+      if (arr[i].parentId == parentId) {
+        var children = this.getNestedChildren(arr, arr[i].id);
+
+        arr[i].children = children;
+
+        out.push(arr[i]);
       }
-    }, error => {
-      this.isLoadingResults = false;   
-
-    });
-  }
-
-
-
-
-
-  getNestedChildren(arr, parentId=null) {
-  var out = []
-  for (var i in arr) {
-    if (arr[i].parentId == parentId) {
-      var children = this.getNestedChildren(arr, arr[i].id)
-
-     arr[i].children = children
-      
-      out.push(arr[i])
     }
+    return out;
   }
-  return out
-}
-
-   
-
-
-  
-
-
-
-
 
   openMenuDialog(menu) {
-    this.matDialog.open(AdminAddOrUpdateMenuDialogComponent, {
-      data: menu,
-      panelClass: 'custom-dialog'
-    }).afterClosed().subscribe(resp => {
-      if (resp)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminAddOrUpdateMenuDialogComponent, {
+        data: menu,
+        panelClass: 'custom-dialog',
+      })
+      .afterClosed()
+      .subscribe((resp) => {
+        if (resp) this.getList();
+      });
   }
-
-
-
 }

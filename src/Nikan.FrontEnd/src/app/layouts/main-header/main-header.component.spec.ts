@@ -8,9 +8,8 @@ describe('MainHeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MainHeaderComponent ]
-    })
-    .compileComponents();
+      declarations: [MainHeaderComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

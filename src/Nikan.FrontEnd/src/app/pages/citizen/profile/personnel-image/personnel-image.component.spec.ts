@@ -8,9 +8,8 @@ describe('CitizenPersonnelImageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenPersonnelImageComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenPersonnelImageComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

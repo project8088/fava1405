@@ -35,7 +35,7 @@ export class MainHeaderComponent implements OnInit {
     private dataService: DataService,
     private title: Title,
     private router: Router,
-    private meta: Meta
+    private meta: Meta,
   ) {
     this.authService.currentUser.subscribe((u) => {
       if (u) {
@@ -83,16 +83,13 @@ export class MainHeaderComponent implements OnInit {
       },
       (error) => {
         this.loadingMenu = false;
-      }
+      },
     );
-
 
     this.dataService.get(ServerApis.getAppRegisterListForMainPage).subscribe(
       (response) => {
         this.loading = false;
-        const registerTypes: RegisterServiceModel[] = response.data
-          ? response.data
-          : [];
+        const registerTypes: RegisterServiceModel[] = response.data ? response.data : [];
         this.registerTypes = registerTypes.map((el) => {
           return { value: String(el.serviceId), text: el.serviceName, ...el };
         });
@@ -100,15 +97,13 @@ export class MainHeaderComponent implements OnInit {
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
   ngOnInit(): void {
-    this.dataService
-      .get(ServerApis.getCurrentShorDate, {})
-      .subscribe((response) => {
-        if (response.data) this.datetime = response.data;
-      });
+    this.dataService.get(ServerApis.getCurrentShorDate, {}).subscribe((response) => {
+      if (response.data) this.datetime = response.data;
+    });
   }
 
   dashboard() {

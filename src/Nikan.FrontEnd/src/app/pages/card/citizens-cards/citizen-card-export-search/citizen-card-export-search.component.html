@@ -5,59 +5,63 @@
 <mat-card class="custom-card">
   <mat-card-content>
     <div class="d-flex align-items-center justify-content-end pb-4">
-
       <button mat-raised-button color="default" (click)="opennewExportDialog()">
         <span> خروجی جدید</span>
       </button>
     </div>
 
-
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
         <mat-form-field class="col-md-3">
-          <mat-label>از تاریخ    </mat-label>
-          <input matInput
-                 [matDatepicker]="dpS"
-                 formControlName="fromDate"
-                 [max]="searchForm.get('toDate').value" />
+          <mat-label>از تاریخ </mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="fromDate"
+            [max]="searchForm.get('toDate').value"
+          />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
           <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
-            تاریخ     را مشخص کنید.
+            تاریخ را مشخص کنید.
           </mat-error>
-          <mat-error *ngIf="
+          <mat-error
+            *ngIf="
               searchForm.get('fromDate').errors?.matDatepickerMin ||
               searchForm.get('fromDate').errors?.matDatepickerMax
-            ">
-            تاریخ درخواست   نباید از تاریخ پایان بزرگتر باشد!
+            "
+          >
+            تاریخ درخواست نباید از تاریخ پایان بزرگتر باشد!
           </mat-error>
           <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
             فرمت تاریخ صحیح نیست
           </mat-error>
         </mat-form-field>
         <mat-form-field class="col-md-3">
-          <mat-label>تا تاریخ    </mat-label>
-          <input matInput
-                 [matDatepicker]="dpE"
-                 formControlName="toDate"
-                 [min]="searchForm.get('fromDate').value" />
+          <mat-label>تا تاریخ </mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="toDate"
+            [min]="searchForm.get('fromDate').value"
+          />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
           <mat-error *ngIf="searchForm.get('toDate').errors?.required">
             تاریخ پایان را مشخص کنید.
           </mat-error>
-          <mat-error *ngIf="
+          <mat-error
+            *ngIf="
               searchForm.get('toDate').errors?.matDatepickerMin ||
               searchForm.get('toDate').errors?.matDatepickerMax
-            ">
+            "
+          >
             تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
           </mat-error>
           <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
             فرمت تاریخ صحیح نیست
           </mat-error>
         </mat-form-field>
-
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="applyFilter()">
@@ -69,9 +73,11 @@
     </form>
 
     <div class="d-flex align-items-center justify-content-end mb-3">
-      <button mat-raised-button
-              color="default"
-              (click)="exporter.exportTable('xlsx', { fileName: 'excel' })">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
         <i class="fa fa-file-excel mr-2"></i>
         خروجی اکسل
       </button>
@@ -80,25 +86,25 @@
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div class="datatable-loading-shade"
-           *ngIf="isLoadingResults == false && listCount == 0">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-        <table mat-table
-               [dataSource]="data"
-               class="datatable-table"
-               #exporter="matTableExporter"
-               matTableExporter
-               [hiddenColumns]="[displayedColumns.length - 1]">
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="row">
             <th mat-header-cell *matHeaderCellDef width="40">#</th>
             <td mat-cell *matCellDef="let row; let i = index">
               {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
             </td>
           </ng-container>
-
 
           <ng-container matColumnDef="export_Number">
             <th mat-header-cell *matHeaderCellDef>دوره</th>
@@ -114,7 +120,6 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="exporterByUser">
             <th mat-header-cell *matHeaderCellDef>خروجی توسط</th>
             <td mat-cell *matCellDef="let row">
@@ -129,26 +134,22 @@
             </td>
           </ng-container>
 
-
-
           <ng-container matColumnDef="dateReceive">
-            <th mat-header-cell *matHeaderCellDef>تاریخ   دریافت</th>
+            <th mat-header-cell *matHeaderCellDef>تاریخ دریافت</th>
             <td mat-cell *matCellDef="let row">
               {{ row.dateReceive | jalali }}
             </td>
           </ng-container>
 
-
-
           <ng-container matColumnDef="dateSend">
-            <th mat-header-cell *matHeaderCellDef>تاریخ   ارسال</th>
+            <th mat-header-cell *matHeaderCellDef>تاریخ ارسال</th>
             <td mat-cell *matCellDef="let row">
               {{ row.dateSend | jalali }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="creationDate">
-            <th mat-header-cell *matHeaderCellDef>تاریخ   ایجاد</th>
+            <th mat-header-cell *matHeaderCellDef>تاریخ ایجاد</th>
             <td mat-cell *matCellDef="let row">
               {{ row.creationDate | jalali }}
             </td>
@@ -161,7 +162,6 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-
                 <button *ngIf="!row.isSend" mat-menu-item (click)="sendToPrint(row)">
                   <i class="fa fa-podcast mr-2"></i>
                   ارسال برای چاپ
@@ -172,26 +172,31 @@
                   <span class="text-danger">حذف خروجی</span>
                 </button>
 
-                <button *ngIf="!row.isReceive  && row.isSend" mat-menu-item (click)="openGetCardNumberDialog(row)">
+                <button
+                  *ngIf="!row.isReceive && row.isSend"
+                  mat-menu-item
+                  (click)="openGetCardNumberDialog(row)"
+                >
                   <i class="fa fa-podcast mr-2"></i>
                   شماره گذاری
                 </button>
 
-
-
-                <button mat-menu-item
-                        routerLink="/card/export-details-citizen-card/{{ row.id }}">
+                <button mat-menu-item routerLink="/card/export-details-citizen-card/{{ row.id }}">
                   <i class="fa fa-money-bill mr-2"></i>
-                  <span>  لیست کارتها</span>
+                  <span> لیست کارتها</span>
                 </button>
 
-                <button mat-menu-item
-                        routerLink="/card/export-details-citizen-card-for-print/{{ row.id }}">
+                <button
+                  mat-menu-item
+                  routerLink="/card/export-details-citizen-card-for-print/{{ row.id }}"
+                >
                   <i class="fa fa-money-bill mr-2"></i>
                   <span> دریافت خروجی شهروندی</span>
                 </button>
-                <button mat-menu-item
-                        routerLink="/card/export-details-manzalat-card-for-print/{{ row.id }}">
+                <button
+                  mat-menu-item
+                  routerLink="/card/export-details-manzalat-card-for-print/{{ row.id }}"
+                >
                   <i class="fa fa-money-bill mr-2"></i>
                   <span> دریافت خروجی منزلت</span>
                 </button>
@@ -204,19 +209,17 @@
             </td>
           </ng-container>
 
-
-
-
-          <tr mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-      <mat-paginator [length]="listCount"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
-                     showFirstLastButtons
-                     (page)="pageEvent($event)"></mat-paginator>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
     </div>
   </mat-card-content>
   <mat-card-footer></mat-card-footer>

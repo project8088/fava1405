@@ -2,7 +2,7 @@ export interface AuthUser {
   userId: string;
   userName: string;
   displayName: string;
-  roles: string[] | null; 
+  roles: string[] | null;
   rootModule?: string;
   isAdmin?: boolean;
   isCitizen?: boolean;
@@ -10,7 +10,6 @@ export interface AuthUser {
   isJobseeker?: boolean;
   isCardUser?: boolean;
   isWebUser?: boolean;
-
 
   userCompanyStatus?: number;
   rejectDescription?: string;

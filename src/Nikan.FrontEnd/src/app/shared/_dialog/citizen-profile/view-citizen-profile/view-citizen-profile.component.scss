@@ -22,13 +22,10 @@
   padding: 40px 20px 6px;
 }
 
-
-
-
 .vertical-timeline {
   width: 100%;
   position: relative;
-  padding: 1.5rem 0 1rem
+  padding: 1.5rem 0 1rem;
 }
 
 .vertical-timeline::before {
@@ -39,63 +36,53 @@
   height: 100%;
   width: 4px;
   background: #e9ecef;
-  border-radius: .25rem
+  border-radius: 0.25rem;
 }
 
 .vertical-timeline-element {
   position: relative;
-  margin: 0 0 1rem
+  margin: 0 0 1rem;
 }
 
 .vertical-timeline--animate .vertical-timeline-element-icon.bounce-in {
   visibility: visible;
-  animation: cd-bounce-1 .8s
+  animation: cd-bounce-1 0.8s;
 }
 
 .vertical-timeline-element-icon {
   position: absolute;
   top: 0;
-  left: 60px
+  left: 60px;
 }
 
 .vertical-timeline-element-icon .badge-dot-xl {
-  box-shadow: 0 0 0 5px #fff
+  box-shadow: 0 0 0 5px #fff;
 }
-
-
-
 
 .badge-dot-xl::before {
   content: '';
   width: 10px;
   height: 10px;
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   position: absolute;
   left: 50%;
   top: 50%;
   margin: -5px 0 0 -5px;
-  background: #fff
+  background: #fff;
 }
-
-
-
-
-
-
-
 
 .vertical-timeline-element-content {
   position: relative;
   margin-left: 90px;
-  font-size: .8rem
+  font-size: 0.8rem;
 }
 
 .vertical-timeline-element-content .timeline-title {
-  font-size: .8rem;
+  font-size: 0.8rem;
   text-transform: uppercase;
-  margin: 0 0 .5rem;
+  margin: 0 0 0.5rem;
   padding: 2px 0 0;
-  font-weight: bold
+  font-weight: bold;
 }
 
 .vertical-timeline-element-content .vertical-timeline-element-date {
@@ -106,12 +93,12 @@
   padding-right: 10px;
   text-align: right;
   color: #adb5bd;
-  font-size: .7619rem;
-  white-space: nowrap
+  font-size: 0.7619rem;
+  white-space: nowrap;
 }
 
 .vertical-timeline-element-content:after {
-  content: "";
+  content: '';
   display: table;
-  clear: both
+  clear: both;
 }

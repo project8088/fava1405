@@ -8,54 +8,48 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'adm-sms-setting',
   templateUrl: './sms-setting.component.html',
-  styleUrls: ['./sms-setting.component.scss']
+  styleUrls: ['./sms-setting.component.scss'],
 })
 export class SmsSettingComponent implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
-  loading: boolean; 
+  loading: boolean;
 
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {
     this.settingForm = this.fb.group({
-
-      smsUserName: [null ],
-      smsPassword: [null ],
-      domainName: [null ],
+      smsUserName: [null],
+      smsPassword: [null],
+      domainName: [null],
       senderNumber: [null],
       countValidMobileNumber: [null],
       smsToken: [null],
-     
-    sendSmsAfterAdminLogin: [false],
-     sendSmsAfterRejectCitizenInformationInUpdateForm: [false] 
 
+      sendSmsAfterAdminLogin: [false],
+      sendSmsAfterRejectCitizenInformationInUpdateForm: [false],
     });
-
   }
-
-
-
 
   ngOnInit(): void {
     this.loading = true;
-    this.dataService.get(ServerApis.geSmsSettings).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.settingForm.patchValue(response.data);
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-
-    })
+    this.dataService.get(ServerApis.geSmsSettings).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.settingForm.patchValue(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-
 
   saveSetting() {
     if (this.settingForm.invalid) {
@@ -66,25 +60,19 @@ export class SmsSettingComponent implements OnInit {
 
     this.isSaving = true;
     var params = this.settingForm.value;
-    this.dataService.post(ServerApis.updateSmsSettings, params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.')
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-
-    })
+    this.dataService.post(ServerApis.updateSmsSettings, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
-
-
-
- 
-
-
 }
-

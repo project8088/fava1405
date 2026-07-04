@@ -8,9 +8,8 @@ describe('CitizenDashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CitizenDashboardComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenDashboardComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

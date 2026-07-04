@@ -1,46 +1,29 @@
-<mat-card class="m-3"> 
-
-
+<mat-card class="m-3">
   <mat-card-header class="card-header mt-n3 mx-n3">اطلاعات شناسنامه ایی</mat-card-header>
   <mat-card-content>
-    <div class="p-5 d-flex align-items-center justify-content-center"
-         *ngIf="loading">
+    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
     <div *ngIf="info.sabtStatus === 0" class="alert alert-danger m-3">
-      اطلاعات شما مورد تایید ثبت احوال قرار نگرفت،
-      کد ملی  
-      با تاریخ تولد شما تطابق ندارد
-
-      .
+      اطلاعات شما مورد تایید ثبت احوال قرار نگرفت، کد ملی با تاریخ تولد شما تطابق ندارد .
     </div>
 
     <div *ngIf="info.sabtStatus === 4" class="alert alert-info m-3">
-       اطلاعات شما در دست بررسی می باشد
-      .
-     
+      اطلاعات شما در دست بررسی می باشد .
     </div>
 
-    
-
-    
     <form [formGroup]="personalForm" *ngIf="!loading" class="p-4">
-       
       <div class="row">
-
-
-
-
-
-
         <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
           <mat-label>کد ملی (نام کاربری)</mat-label>
-          <input matInput
-                 [readonly]="true"
-                 formControlName="nationalCode"
-                 maxlength="10"
-                 numbersOnly />
+          <input
+            matInput
+            [readonly]="true"
+            formControlName="nationalCode"
+            maxlength="10"
+            numbersOnly
+          />
           <mat-error *ngIf="personalForm.get('nationalCode').errors?.required">
             کد ملی خود را وارد کنید.
           </mat-error>
@@ -60,10 +43,12 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
           <mat-label>نام</mat-label>
-          <input matInput
-                 [readonly]="noEditStatus()"
-                 formControlName="firstName"
-                 autocomplete="doNotAutoComplete" />
+          <input
+            matInput
+            [readonly]="noEditStatus()"
+            formControlName="firstName"
+            autocomplete="doNotAutoComplete"
+          />
           <mat-error *ngIf="personalForm.get('firstName').errors?.required">
             نام را وارد کنید.
           </mat-error>
@@ -73,10 +58,12 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
           <mat-label> نام خانوادگی</mat-label>
-          <input [readonly]="noEditStatus()"
-                 matInput
-                 formControlName="lastName"
-                 autocomplete="doNotAutoComplete" />
+          <input
+            [readonly]="noEditStatus()"
+            matInput
+            formControlName="lastName"
+            autocomplete="doNotAutoComplete"
+          />
           <mat-error *ngIf="personalForm.get('lastName').errors?.required">
             نام خانوادگی را وارد کنید.
           </mat-error>
@@ -86,10 +73,12 @@
         </mat-form-field>
         <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
           <mat-label>نام پدر </mat-label>
-          <input matInput
-                 formControlName="fatherName"
-                 autocomplete="doNotAutoComplete"
-                 [readonly]="noEditStatus()" />
+          <input
+            matInput
+            formControlName="fatherName"
+            autocomplete="doNotAutoComplete"
+            [readonly]="noEditStatus()"
+          />
           <mat-error *ngIf="personalForm.get('fatherName').errors?.required">
             نام پدر را وارد کنید.
           </mat-error>
@@ -97,27 +86,22 @@
             فقط از حروف فارسی استفاده کنید.
           </mat-error>
         </mat-form-field>
-        
-        <simple-jalali-datepicker class="col-sm-6 col-md-4"
-                                  formControlName="birthDate">
+
+        <simple-jalali-datepicker class="col-sm-6 col-md-4" formControlName="birthDate">
         </simple-jalali-datepicker>
       </div>
-     
-
-     
     </form>
   </mat-card-content>
-  <mat-card-footer *ngIf="userStatus !== 2"
-                   class="p-3 d-flex justify-content-end">
-    <button mat-raised-button
-            color="primary"
-            *ngIf="!loading"
-            [disabled]="isSaving"
-            (click)="savePersonalInfo()">
+  <mat-card-footer *ngIf="userStatus !== 2" class="p-3 d-flex justify-content-end">
+    <button
+      mat-raised-button
+      color="primary"
+      *ngIf="!loading"
+      [disabled]="isSaving"
+      (click)="savePersonalInfo()"
+    >
       <span>ثبت اطلاعات شناسنامه ایی </span>
-      <mat-spinner diameter="20"
-                   color="default"
-                   [hidden]="!isSaving"></mat-spinner>
+      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
     </button>
   </mat-card-footer>
 </mat-card>

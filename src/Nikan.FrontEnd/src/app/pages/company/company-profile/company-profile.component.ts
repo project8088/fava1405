@@ -6,24 +6,20 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
-  styleUrls: ['./company-profile.component.scss']
+  styleUrls: ['./company-profile.component.scss'],
 })
 export class CompanyProfileComponent implements OnInit {
   user: AuthUser;
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
     this.user = this.authService.currentUserValue;
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   back() {
     this.router.navigate(['/admin/companies']);
   }
-
-
 }

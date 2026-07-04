@@ -17,32 +17,25 @@ export class CitizenDashboardComponent implements OnInit {
   citizen: any = {};
   baseUrl: string = ServerApis.baseUrl;
 
-
   constructor(
     private toastrService: ToastrService,
-    private dataService: DataService
+    private dataService: DataService,
   ) {}
   ngOnInit(): void {
     this.dataService.get(ServerApis.getAppDashbordList).subscribe(
       (response) => {
         this.loading = false;
-        const registerTypes: RegisterServiceModel[] = response.data
-          ? response.data
-          : [];
+        const registerTypes: RegisterServiceModel[] = response.data ? response.data : [];
         this.registerTypes = registerTypes;
       },
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
 
     this.getCitizenInfo();
-
-
-
   }
-
 
   getCitizenInfo() {
     this.loadingData = true;
@@ -52,24 +45,14 @@ export class CitizenDashboardComponent implements OnInit {
         if (response.isSuccess) {
           this.citizen = response.data ? response.data : {};
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
-
-
   }
-
-
-
-
-
-
 }

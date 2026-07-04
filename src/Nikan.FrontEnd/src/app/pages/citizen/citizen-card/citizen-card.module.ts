@@ -16,7 +16,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CitizenCardListComponent,
     CitizenCardComponent,
     BoughtCardsComponent,
-    CardDetailComponent
+    CardDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -25,7 +25,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
     SharedModule,
     CoreModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 })
 export class CitizenCardModule {}

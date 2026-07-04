@@ -3,13 +3,7 @@
     {{ data.title }}
   </h5>
 
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -19,7 +13,11 @@
   </h3>
   <form [formGroup]="form" class="mx-3">
     <div class="row my-2">
-      <mat-form-field *ngIf="data.command !== 'Remove' " appearance="outline" class="h-100 textarea-field col-12">
+      <mat-form-field
+        *ngIf="data.command !== 'Remove'"
+        appearance="outline"
+        class="h-100 textarea-field col-12"
+      >
         <mat-label>نتیجه برسی</mat-label>
         <mat-select formControlName="formResult">
           <mat-option [value]="true">تایید</mat-option>
@@ -31,23 +29,16 @@
         <textarea matInput formControlName="formResultDescription"></textarea>
       </mat-form-field>
 
-      <mat-checkbox formControlName="sendSms" class="col-12" color="default"> پیامک ارسال شود؟ </mat-checkbox>
+      <mat-checkbox formControlName="sendSms" class="col-12" color="default">
+        پیامک ارسال شود؟
+      </mat-checkbox>
     </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button
-    mat-raised-button
-    color="default"
-    [disabled]="isSaving"
-    (click)="saveInfo()"
-  >
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
     <span>ذخیره </span>
-    <mat-spinner
-      diameter="20"
-      color="default"
-      [hidden]="!isSaving"
-    ></mat-spinner>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
   </button>
   <button mat-raised-button mat-dialog-close>انصراف</button>
 </mat-dialog-actions>

@@ -1,57 +1,51 @@
-export class karjoWorkDto
-{
-    public id? :number;
+export class karjoWorkDto {
+  public id?: number;
 
-    /// <summary>
-    /// عنوان شرکت
-    /// </summary>
-    public  titleCompany :string;
-    //------------------------------------------------------------------
+  /// <summary>
+  /// عنوان شرکت
+  /// </summary>
+  public titleCompany: string;
+  //------------------------------------------------------------------
 
-    /// <summary>
-    /// سمت
-    /// </summary>
-    public  post :string;
+  /// <summary>
+  /// سمت
+  /// </summary>
+  public post: string;
 
+  public city: string;
+  public cityId: number;
 
-    public  city :string;
-    public  cityId :number;
+  /// <summary>
+  /// تاریخ شروع
+  /// </summary>
+  public dateOfStart?: string;
 
+  /// <summary>
+  /// تاریخ پایان
+  /// </summary>
+  public dateOfEnd?: string;
 
-    /// <summary>
-    /// تاریخ شروع
-    /// </summary>
-    public  dateOfStart? :string;
+  public dateStart?: string;
 
-    /// <summary>
-    /// تاریخ پایان
-    /// </summary>
-    public  dateOfEnd? :string;
+  //------------------------------------------------------------------
+  public dateEnd?: string;
 
+  public userId?: string;
 
-    public  dateStart? :string;
+  /// <summary>
+  /// دلیل قطع همکاری
+  /// </summary>
+  public cutCooperation: string;
 
-    //------------------------------------------------------------------
-    public  dateEnd? :string;
+  /// <summary>
+  /// آیا بیمه رد میکرده ؟
+  /// </summary>
+  public isBimeh: boolean;
 
+  /// <summary>
+  /// شماره تماس شرکت
+  /// </summary>
+  public phoneNumber?: string;
 
-    public  userId? :string;
-
-    /// <summary>
-    /// دلیل قطع همکاری
-    /// </summary>
-    public  cutCooperation :string;
-
-    /// <summary>
-    /// آیا بیمه رد میکرده ؟
-    /// </summary>
-    public  isBimeh :boolean;
-
-    /// <summary>
-    /// شماره تماس شرکت
-    /// </summary>
-    public phoneNumber? :string;
-
-    public loading?:boolean;
-
+  public loading?: boolean;
 }

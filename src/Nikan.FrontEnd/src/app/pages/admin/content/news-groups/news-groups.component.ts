@@ -11,13 +11,10 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'adm-news-groups',
   templateUrl: './news-groups.component.html',
-  styleUrls: ['./news-groups.component.scss']
+  styleUrls: ['./news-groups.component.scss'],
 })
 export class AdminNewsGroupsComponent implements AfterViewInit {
-
-  displayedColumns: string[] = ['row', 'title','description','isActive', 'operation'];
-
-
+  displayedColumns: string[] = ['row', 'title', 'description', 'isActive', 'operation'];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -34,94 +31,85 @@ export class AdminNewsGroupsComponent implements AfterViewInit {
 
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
-    private fb: FormBuilder, 
+    private toastrService: ToastrService,
+    private fb: FormBuilder,
   ) {
-
     this.frm = fb.group({
       id: [null],
       title: [null, [Validators.required]],
       description: [null],
-      isActive:[true]
+      isActive: [true],
     });
-
 
     this.searchForm = this.fb.group({
-      query: [null, []]
+      query: [null, []],
     });
-
   }
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllNewGroups, {}).subscribe(response => {
-      this.isLoadingResults = false;
-      if (response.isSuccess) {
-        this.data = response.data ? response.data : [];
-        this.dataSource.data = this.data;
-        this.listCount = this.data.length;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isLoadingResults = false;   
-
-    });
-
-
+    this.dataService.get(ServerApis.getAllNewGroups, {}).subscribe(
+      (response) => {
+        this.isLoadingResults = false;
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isLoadingResults = false;
+      },
+    );
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
 
-
   applyFilter() {
     this.dataSource.filter = this.searchForm.get('query').value;
-
   }
 
-
-
   delete(row) {
-
     Swal.fire({
-      title:'حذف',
-      text: 'آیا برای حذف "'+row.title+'" اطمینان دارید؟',
+      title: 'حذف',
+      text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeNewsGroups,{
-          id: row.id, 
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.removeNewsGroups, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت حذف شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
 
@@ -130,10 +118,10 @@ export class AdminNewsGroupsComponent implements AfterViewInit {
       id: row.id,
       title: row.title,
       description: row.description,
-      isActive:row.isActive
+      isActive: row.isActive,
     });
     this.showAddOrUpdatePanel = true;
-        window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
 
   save() {
@@ -143,28 +131,30 @@ export class AdminNewsGroupsComponent implements AfterViewInit {
       return false;
     }
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateNewsGroup, this.frm.value).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-        this.showAddOrUpdatePanel = false;
-        this.frm.reset();
-        this.frm.get('isActive').setValue(true);
-
-        this.getList();
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    }, error => {
+    this.dataService.post(ServerApis.addOrUpdateNewsGroup, this.frm.value).subscribe(
+      (response) => {
         this.isSaving = false;
-    });
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.showAddOrUpdatePanel = false;
+          this.frm.reset();
+          this.frm.get('isActive').setValue(true);
 
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
 
-/**
-*  افزودن کارفرمای جدید
-* */
+  /**
+   *  افزودن کارفرمای جدید
+   * */
   //openNewEmployementDialog(item) {
   //  this.matDialog.open(PlacementAddNewEmployerDialogComponent, {
   //    panelClass: 'custom-dialog',
@@ -179,8 +169,4 @@ export class AdminNewsGroupsComponent implements AfterViewInit {
   //    }
   //  });
   //}
-   
-
-
-
 }

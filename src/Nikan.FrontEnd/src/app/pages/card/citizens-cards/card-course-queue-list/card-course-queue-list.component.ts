@@ -2,7 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators'; 
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -18,7 +18,7 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
 import { CardAddOrUpadateQueueDialogComponent } from '../dialog/add-update-queue/add-update-queue.component';
 import { CardDeliveryQueueOperatorDialogComponent } from '../dialog/delivery-queue-operator/delivery-queue-operator.component';
- 
+
 @Component({
   selector: 'card-card-course-queue-list',
   templateUrl: './card-course-queue-list.component.html',
@@ -26,8 +26,8 @@ import { CardDeliveryQueueOperatorDialogComponent } from '../dialog/delivery-que
 })
 export class CardCardCourseQueuelistComponent implements AfterViewInit {
   displayedColumns: string[] = [
-    'row', 
-    'name', 
+    'row',
+    'name',
     'cardTypeId',
     'queueInputType',
     'indexOrder',
@@ -36,8 +36,7 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
     'isLock',
     'cardCount',
     'groups',
-    'operation'
-    
+    'operation',
   ];
 
   data: any[] = [];
@@ -48,8 +47,6 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   printUrl: string = ServerApis.prinQueueForPost;
-
-
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -62,32 +59,27 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private route: ActivatedRoute,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
-   
     this.route.params.subscribe((p) => {
       this.courseId = p.id;
     });
 
-
-    this.searchForm = this.fb.group({ 
-      name: [''], 
-      courseId: [0], 
+    this.searchForm = this.fb.group({
+      name: [''],
+      courseId: [0],
     });
   }
 
   ngAfterViewInit() {
-    this.getList(); 
+    this.getList();
   }
 
-  
- 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 2000;
     param.courseId = +this.courseId;
-
 
     merge()
       .pipe(
@@ -100,21 +92,17 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -131,35 +119,37 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.citizenId
+        id: row.citizenId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   openAddCardQueueDialog(item) {
-    this.matDialog.open(CardAddOrUpadateQueueDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: { 
-        item: item,
-        courseId: this.courseId 
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(CardAddOrUpadateQueueDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          item: item,
+          courseId: this.courseId,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
 
   delete(row) {
-
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -167,40 +157,48 @@ export class CardCardCourseQueuelistComponent implements AfterViewInit {
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.removeCardQueue, {
-          id: row.id,
-        }).subscribe(response => {
-          row.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          row.loading = false;
-        });
+        this.dataService
+          .get(ServerApis.removeCardQueue, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              row.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت حذف شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              row.loading = false;
+            },
+          );
       }
-
     });
   }
 
   cardDeliveryQueueOperator(item) {
-    this.matDialog.open(CardDeliveryQueueOperatorDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        info: item 
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(CardDeliveryQueueOperatorDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          info: item,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
 }

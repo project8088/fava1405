@@ -8,9 +8,8 @@ describe('ViewJobDetailsDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewJobDetailsDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [ViewJobDetailsDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'; 
+import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,13 +6,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 @Component({
   selector: 'app-citizen-profile-dialog',
   templateUrl: './citizen-profile.component.html',
-  styleUrls: ['./citizen-profile.component.scss']
+  styleUrls: ['./citizen-profile.component.scss'],
 })
 export class CitizenProfileDialogComponent implements OnInit {
-  userCode: string; 
-  
-  
-
+  userCode: string;
 
   constructor(
     private matDialog: MatDialog,
@@ -21,22 +18,13 @@ export class CitizenProfileDialogComponent implements OnInit {
   ) {
     debugger;
     if (_data) {
-      this.userCode = _data.userCode;  
-
+      this.userCode = _data.userCode;
     }
   }
 
-  ngOnInit(): void {
-  }
-
-
-
+  ngOnInit(): void {}
 
   closeDialog(result) {
     this.matDialogRef.close(result);
   }
-
-
-
-
 }

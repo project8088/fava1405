@@ -22,28 +22,23 @@
   </form>
 </div>
 
-
-
-
-
 <mat-card *ngFor="let item of list" class="mt-3">
-  <div class="card-title d-flex align-items-center justify-content-between" [class.light]="item.userOwnerId == user?.userId">
+  <div
+    class="card-title d-flex align-items-center justify-content-between"
+    [class.light]="item.userOwnerId == user?.userId"
+  >
     <div>
       <strong class="tag" *ngIf="item.isPrivate">خصوصی </strong>
-      <strong>{{item.userOwner}}</strong>
+      <strong>{{ item.userOwner }}</strong>
     </div>
     <div>
-      <small> {{item.onDate|jalali:'HH:mm YYYY/MM/DD'}}</small>
+      <small> {{ item.onDate | jalali: 'HH:mm YYYY/MM/DD' }}</small>
       <button mat-icon-button (click)="delete(item)">
         <i class="fa fa-times"></i>
       </button>
     </div>
-
   </div>
   <mat-card-content>
-    <pre class="text-justify">{{item.commentText}}</pre>
+    <pre class="text-justify">{{ item.commentText }}</pre>
   </mat-card-content>
 </mat-card>
-
-
-

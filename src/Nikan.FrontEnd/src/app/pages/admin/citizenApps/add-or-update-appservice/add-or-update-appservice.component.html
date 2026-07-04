@@ -1,80 +1,83 @@
 <div class="content-header">
   <span *ngIf="!isUpdate">ثبت خدمت شهروندی جدید</span>
   <span *ngIf="isUpdate">ویرایش خدمت شهروندی</span>
-
 </div>
 
-
 <mat-card class="custom-card">
-  <mat-card-header class="d-flex align-items-center justify-content-end">
-
-  </mat-card-header>
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-
     <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
-
     <form [formGroup]="storeForm" *ngIf="!loading">
       <div class="row">
-
         <mat-form-field class="col-sm-12">
-          <mat-label>عنوان  خدمت</mat-label>
+          <mat-label>عنوان خدمت</mat-label>
           <input matInput formControlName="serviceName" type="text" maxlength="500" />
-          <mat-error *ngIf="storeForm.get('serviceName').errors?.required">عنوان  خدمات را وارد کنید.</mat-error>
-          <mat-error *ngIf="storeForm.get('serviceName').errors?.maxlength">حداکثر 500 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('serviceName').errors?.required"
+            >عنوان خدمات را وارد کنید.</mat-error
+          >
+          <mat-error *ngIf="storeForm.get('serviceName').errors?.maxlength"
+            >حداکثر 500 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-12">
           <mat-label>توضیحات</mat-label>
           <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
-          <mat-error *ngIf="storeForm.get('description').errors?.required">توضیحات را وارد کنید.</mat-error>
-          <mat-error *ngIf="storeForm.get('description').errors?.maxlength">حداکثر 2000 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('description').errors?.required"
+            >توضیحات را وارد کنید.</mat-error
+          >
+          <mat-error *ngIf="storeForm.get('description').errors?.maxlength"
+            >حداکثر 2000 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-2">
           <mat-label>اولویت</mat-label>
           <input matInput formControlName="priority" type="text" numbersOnly />
-          <mat-error *ngIf="storeForm.get('priority').errors?.required">اولویت را وارد کنید.</mat-error>
+          <mat-error *ngIf="storeForm.get('priority').errors?.required"
+            >اولویت را وارد کنید.</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-10">
-          <mat-label>
-            لینک
-          </mat-label>
+          <mat-label> لینک </mat-label>
           <input matInput formControlName="link" type="text" maxlength="5000" />
-          <mat-error *ngIf="storeForm.get('link').errors?.required">لینک  خدمات را وارد کنید.</mat-error>
+          <mat-error *ngIf="storeForm.get('link').errors?.required"
+            >لینک خدمات را وارد کنید.</mat-error
+          >
           <mat-error *ngIf="storeForm.get('link').errors?.maxlength">حداکثر 5000 کاراکتر</mat-error>
         </mat-form-field>
         <mat-form-field class="col-sm-3">
-          <mat-label>
-            پارامتر اول
-          </mat-label>
+          <mat-label> پارامتر اول </mat-label>
           <input matInput formControlName="paramName1" type="text" maxlength="5000" />
           <mat-error *ngIf="storeForm.get('paramName1').errors?.required">پارامتر اول.</mat-error>
-          <mat-error *ngIf="storeForm.get('paramName1').errors?.maxlength">حداکثر 5000 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('paramName1').errors?.maxlength"
+            >حداکثر 5000 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-3">
-          <mat-label>
-            مقدار پارامتر اول
-          </mat-label>
+          <mat-label> مقدار پارامتر اول </mat-label>
           <input matInput formControlName="paramValue1" type="text" maxlength="5000" />
           <mat-error *ngIf="storeForm.get('paramValue1').errors?.required">پارامتر اول.</mat-error>
-          <mat-error *ngIf="storeForm.get('paramValue1').errors?.maxlength">حداکثر 5000 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('paramValue1').errors?.maxlength"
+            >حداکثر 5000 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-3">
-          <mat-label>
-            پارامتر دوم
-          </mat-label>
+          <mat-label> پارامتر دوم </mat-label>
           <input matInput formControlName="paramName2" type="text" maxlength="5000" />
           <mat-error *ngIf="storeForm.get('paramName2').errors?.required">پارامتر اول.</mat-error>
-          <mat-error *ngIf="storeForm.get('paramName2').errors?.maxlength">حداکثر 5000 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('paramName2').errors?.maxlength"
+            >حداکثر 5000 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-3">
-          <mat-label>
-            مقدار پارامتر دوم
-          </mat-label>
+          <mat-label> مقدار پارامتر دوم </mat-label>
           <input matInput formControlName="paramValue2" type="text" maxlength="5000" />
           <mat-error *ngIf="storeForm.get('paramValue2').errors?.required">پارامتر اول.</mat-error>
-          <mat-error *ngIf="storeForm.get('paramValue2').errors?.maxlength">حداکثر 5000 کاراکتر</mat-error>
+          <mat-error *ngIf="storeForm.get('paramValue2').errors?.maxlength"
+            >حداکثر 5000 کاراکتر</mat-error
+          >
         </mat-form-field>
       </div>
 
@@ -89,17 +92,13 @@
         </mat-checkbox>
       </p>
 
-      
-
       <p>
         <mat-checkbox color="default" formControlName="openInNewWindow">
           بازشدن در پنجره جدید
         </mat-checkbox>
       </p>
       <p>
-        <mat-checkbox color="default" formControlName="isLinkService">
-          لینک سرویس
-        </mat-checkbox>
+        <mat-checkbox color="default" formControlName="isLinkService"> لینک سرویس </mat-checkbox>
       </p>
       <p>
         <mat-checkbox color="default" formControlName="isMain">
@@ -114,31 +113,27 @@
           دارای قوانین و مقررات
         </mat-checkbox>
       </p>
-      <p>
-        در صورت داشتن قوانین و مقررات در قسمت زیر آن را شرح دهید
-      </p>
-      <div class="html-editor">
+      <p>در صورت داشتن قوانین و مقررات در قسمت زیر آن را شرح دهید</p>
+      <div class="html-editor"></div>
 
-      </div>
-
-
-
-      <app-uploader (attachmentId)="getAttachmentId($event)" [autoUpload]="true"
-                    [btnTitle]="'انتخاب تصویر'"></app-uploader>
-
+      <app-uploader
+        (attachmentId)="getAttachmentId($event)"
+        [autoUpload]="true"
+        [btnTitle]="'انتخاب تصویر'"
+      ></app-uploader>
 
       <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" *ngIf="imageUrl" />
-
-
     </form>
-
-
-
-
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
-      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving" *ngIf="!loading">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="save()"
+        [disabled]="isSaving"
+        *ngIf="!loading"
+      >
         <span *ngIf="isSaving">منتظر بمانید...</span>
         <span *ngIf="!isSaving">ذخیره</span>
         <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

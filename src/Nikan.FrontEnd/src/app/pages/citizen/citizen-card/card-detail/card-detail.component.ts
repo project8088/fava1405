@@ -1,11 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -34,15 +29,13 @@ interface ICard {
 }
 
 interface ICardDetails {
-
-
   cardInfoId: string;
   cardTypeId: number;
   cardType: string;
   buyCardDescription: string;
   creationDate: string;
   attachmentGroup: string;
- 
+
   cardCost: number;
   doubleCardCost: number;
   vatForCardCost: number;
@@ -52,20 +45,14 @@ interface ICardDetails {
   cardDiscountAmount: number;
   totalDiscountAmount: number;
 
-
-
-
   expirationDate: string;
   operation: string;
   operationId: number;
   postalCostInCity: number;
   postalCostOutCity: number;
   startFromDate: string;
- 
+
   cardIsActive: boolean;
-
-
-
 }
 @Component({
   selector: 'app-card-detail',
@@ -75,8 +62,6 @@ interface ICardDetails {
 export class CardDetailComponent implements OnInit {
   citizenId: number;
   addressId: number;
-
-  
 
   states;
   loading: boolean = true;
@@ -110,16 +95,14 @@ export class CardDetailComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private router: Router,
-    private route:ActivatedRoute,
-    private helperService: HelperService
+    private route: ActivatedRoute,
+    private helperService: HelperService,
   ) {
-    
     this.route.queryParams.subscribe((params) => {
       if (params['id']) {
-        this.cardInfoId = params['id']; 
+        this.cardInfoId = params['id'];
       } else this.router.navigate(['/citizen-card']);
     });
-
   }
 
   ngOnInit() {
@@ -131,7 +114,7 @@ export class CardDetailComponent implements OnInit {
       else this.loadWorkAddress();
     });
   }
-//getCardInfo
+  //getCardInfo
   getCardDetails() {
     this.dataService
       .get(ServerApis.getCitizenCardPriceInfo, {
@@ -145,19 +128,14 @@ export class CardDetailComponent implements OnInit {
         (error) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
-  
-
-  
 
   getAddresses() {
-    this.dataService
-      .get(ServerApis.getCitizenOfficeAddress)
-      .subscribe((data) => {
-        this.workAddress = data.data;
-      });
+    this.dataService.get(ServerApis.getCitizenOfficeAddress).subscribe((data) => {
+      this.workAddress = data.data;
+    });
 
     this.dataService.get(ServerApis.getCitizenHomeAddress).subscribe((data) => {
       this.homeAddress = data.data;
@@ -211,9 +189,6 @@ export class CardDetailComponent implements OnInit {
       });
   }
 
-  
-
-
   submitAddress(stepper: MatStepper) {
     const form = this.addressForm.getRawValue();
     debugger;
@@ -232,14 +207,12 @@ export class CardDetailComponent implements OnInit {
                 addressId: response.data.id,
                 CardInfoId: this.cardInfoId,
               })
-              .subscribe(response=>{
-                this.orderDetails =  response.data;
+              .subscribe((response) => {
+                this.orderDetails = response.data;
               });
             stepper.next();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
           this.isSaving = false;
@@ -247,49 +220,43 @@ export class CardDetailComponent implements OnInit {
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
-   
 
   ordercard() {
-   
-
-    this.loading = true; 
-    this.dataService.post(ServerApis.buyCardByCitizens, {
-      CardInfoId:  this.cardInfoId,
-      DeliveringAddressId: +this.addressId
-
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess) {
-        if (response.data.isfree) {
-          this.toastrService.success(' ثبت درخواست کارت شما با موفقیت ثبت گردید.');
-          setTimeout(() => {
-            this.router.navigate(['/citizen/citizen-card']);
-
-          }, 1000);
-        }
-        else {
-          this.RefId = response.data.refId;
-          console.log(document.getElementById('payformmellatbank'));
-          var form: any = document.getElementById('payformmellatbank');
-          this.waitForRedirectToBank = true;
-          setTimeout(() => { form.submit(); }, 1000);
-        }
-       
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
-
+    this.loading = true;
+    this.dataService
+      .post(ServerApis.buyCardByCitizens, {
+        CardInfoId: this.cardInfoId,
+        DeliveringAddressId: +this.addressId,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess) {
+            if (response.data.isfree) {
+              this.toastrService.success(' ثبت درخواست کارت شما با موفقیت ثبت گردید.');
+              setTimeout(() => {
+                this.router.navigate(['/citizen/citizen-card']);
+              }, 1000);
+            } else {
+              this.RefId = response.data.refId;
+              console.log(document.getElementById('payformmellatbank'));
+              var form: any = document.getElementById('payformmellatbank');
+              this.waitForRedirectToBank = true;
+              setTimeout(() => {
+                form.submit();
+              }, 1000);
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
-
-
-
-
 }

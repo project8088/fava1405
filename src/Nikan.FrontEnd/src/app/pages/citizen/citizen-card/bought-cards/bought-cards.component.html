@@ -1,22 +1,16 @@
 <mat-card class="custom-card">
   <mat-card-header> لیست کارت های خریداری شده </mat-card-header>
   <mat-card-content>
-
     <div class="alert alert-info">
-       در صورتیکه آدرس تحویل کارت شما تغییر کرده است از این قسمت
-      آدرس جدید تحویل کارت را وارد نمایید
+      در صورتیکه آدرس تحویل کارت شما تغییر کرده است از این قسمت آدرس جدید تحویل کارت را وارد نمایید
       .
     </div>
 
-
-    <div *ngIf="loading"
-         class="d-flex align-items-center justify-content-center">
+    <div *ngIf="loading" class="d-flex align-items-center justify-content-center">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
-    <strong *ngIf="cards && cards.length == 0" class="my-3 mx-3">
-      کارتی خریداری نشده است!
-    </strong>
+    <strong *ngIf="cards && cards.length == 0" class="my-3 mx-3"> کارتی خریداری نشده است! </strong>
 
     <table mat-table [dataSource]="cards">
       <ng-container matColumnDef="requestDate">
@@ -29,7 +23,7 @@
       <ng-container matColumnDef="requestStatuse">
         <th mat-header-cell *matHeaderCellDef>وضعیت درخواست</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.requestStatuse | enumString: "cardRequestStatus" }}
+          {{ element.requestStatuse | enumString: 'cardRequestStatus' }}
         </td>
       </ng-container>
 
@@ -40,7 +34,7 @@
         </td>
       </ng-container>
       <ng-container matColumnDef="cardTitle">
-        <th mat-header-cell *matHeaderCellDef>  عنوان کارت</th>
+        <th mat-header-cell *matHeaderCellDef>عنوان کارت</th>
         <td mat-cell *matCellDef="let element">
           {{ element.cardTitle }}
         </td>
@@ -55,16 +49,14 @@
       <ng-container matColumnDef="deliverType">
         <th mat-header-cell *matHeaderCellDef>نوع تحویل</th>
         <td mat-cell *matCellDef="let element">
-          {{ element.deliverType === 1 ? "تحویل پستی" : "تحویل در مرکز" }}
+          {{ element.deliverType === 1 ? 'تحویل پستی' : 'تحویل در مرکز' }}
 
           :
-          {{element.deliveringAddress}}
+          {{ element.deliveringAddress }}
 
-          <span class="text-info" *ngIf="element.deliverType === 1" >
-            <a  (click)="openCardAddress(element)"> 
-              <span>
-                ویرایش آدرس تحویل کارت
-              </span>
+          <span class="text-info" *ngIf="element.deliverType === 1">
+            <a (click)="openCardAddress(element)">
+              <span> ویرایش آدرس تحویل کارت </span>
             </a>
           </span>
         </td>

@@ -18,7 +18,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatCardModule } from '@angular/material/card';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MatAutocompleteModule } from '@angular/material/autocomplete'; 
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
@@ -29,7 +29,6 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatListModule } from '@angular/material/list';
-
 
 const materialComponents = [
   MatInputModule,
@@ -60,21 +59,12 @@ const materialComponents = [
   MatChipsModule,
   MatButtonToggleModule,
   MatListModule,
-]
+];
 
 @NgModule({
-
   declarations: [],
-  imports: [
-    CommonModule,
-    materialComponents
-  ],
-  exports: [
-    materialComponents
-  ],
-  providers: [
-    { provide: MatPaginatorIntl, useClass: getFarsiPaginatorIntl }
-  ]
+  imports: [CommonModule, materialComponents],
+  exports: [materialComponents],
+  providers: [{ provide: MatPaginatorIntl, useClass: getFarsiPaginatorIntl }],
 })
 export class MaterialModule {}
-

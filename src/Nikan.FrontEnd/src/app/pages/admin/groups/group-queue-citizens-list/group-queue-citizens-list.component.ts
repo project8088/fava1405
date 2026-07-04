@@ -4,12 +4,11 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 
- 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
- 
+
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../../core/services/data-service.service';
@@ -18,11 +17,17 @@ import { ServerApis } from '../../../../core/server-apis';
 @Component({
   selector: 'adm-group-queue-citizens-list',
   templateUrl: './group-queue-citizens-list.component.html',
-  styleUrls: ['./group-queue-citizens-list.component.scss']
+  styleUrls: ['./group-queue-citizens-list.component.scss'],
 })
-export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'group', 'nationCode', 'creationDate', 'addByUser','operation' ];
+export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'group',
+    'nationCode',
+    'creationDate',
+    'addByUser',
+    'operation',
+  ];
   groupId: string;
   searchForm: FormGroup;
 
@@ -33,16 +38,15 @@ export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnIn
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-   
+
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.groupId = p.id ? p.id : null;
     });
 
@@ -51,15 +55,11 @@ export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnIn
       toDate: [null],
       nationCode: [''],
       groupname: [''],
-      groupId: [null]
+      groupId: [null],
     });
-
   }
 
-
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.getList();
   }
@@ -71,34 +71,36 @@ export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnIn
       showConfirmButton: true,
       confirmButtonText: 'بله',
       showCancelButton: true,
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeQueue, { id: row.id }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-        });
+        this.dataService.get(ServerApis.removeQueue, { id: row.id }).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
+          },
+        );
       }
     });
   }
-   
+
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
-   
     param.groupId = this.groupId;
 
     merge()
@@ -108,41 +110,36 @@ export class AdminGroupQueueCitizensListComponent implements AfterViewInit, OnIn
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchCitizensQueue, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
 
+  pageEvent(event: PageEvent) {
+    this.getList();
+  }
 
-    pageEvent(event: PageEvent) {
-        this.getList();
+  applyFilter() {
+    if (this.paginator) {
+      this.paginator.firstPage();
     }
-
-    applyFilter() {
-        if (this.paginator) {
-            this.paginator.firstPage();
-        }
-        this.getList();
-    }
- 
-
+    this.getList();
+  }
 }

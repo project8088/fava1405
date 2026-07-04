@@ -19,18 +19,12 @@ export class CitizenRefundStatusComponent implements OnInit {
   loading: boolean;
   personInfo: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
-   
+
   constructor(
     private breakpointObserver: BreakpointObserver,
     private route: ActivatedRoute,
     private dataService: DataService,
-    private toastrService: ToastrService
-  ) {
-    
-  }
+    private toastrService: ToastrService,
+  ) {}
   ngOnInit(): void {}
-
-  
-
-  
 }

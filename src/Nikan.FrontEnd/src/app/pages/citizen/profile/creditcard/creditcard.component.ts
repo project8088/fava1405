@@ -10,7 +10,6 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './creditcard.component.html',
   styleUrls: ['./creditcard.component.scss'],
 })
-
 export class CreditcardComponent implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
@@ -21,7 +20,7 @@ export class CreditcardComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.cardForm = this.fb.group({
       cardNumber: [null, [Validators.required]],
@@ -34,36 +33,30 @@ export class CreditcardComponent implements OnInit {
   ngOnInit(): void {}
 
   getCardInfo() {
-    this.dataService
-      .get(ServerApis.getCitizenBankCardNumber)
-      .subscribe((data) => {
-        this.loading = false;
-        this.cardForm.patchValue({
-          cardNumber: data.data.cardNumber,
-          shabaNumber: data.data.shabaNumber,
-        });
+    this.dataService.get(ServerApis.getCitizenBankCardNumber).subscribe((data) => {
+      this.loading = false;
+      this.cardForm.patchValue({
+        cardNumber: data.data.cardNumber,
+        shabaNumber: data.data.shabaNumber,
       });
+    });
   }
 
   saveForm() {
     const form = this.cardForm.getRawValue();
-    this.dataService
-      .post(ServerApis.updteCitizenBankCardNumber, form)
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+    this.dataService.post(ServerApis.updteCitizenBankCardNumber, form).subscribe(
+      (response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-      );
+      },
+      (error) => {
+        this.isSaving = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
 }

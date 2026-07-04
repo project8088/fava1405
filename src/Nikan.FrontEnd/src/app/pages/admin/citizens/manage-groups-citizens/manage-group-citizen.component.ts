@@ -11,10 +11,9 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'manage-group-citizen',
   templateUrl: './manage-group-citizen.component.html',
-  styleUrls: ['./manage-group-citizen.component.scss']
+  styleUrls: ['./manage-group-citizen.component.scss'],
 })
 export class AdminManageGroupsCitizenComponent implements OnInit {
-
   loading: boolean;
   citizengroupList: any[] = [];
   groupList: any[] = [];
@@ -27,54 +26,46 @@ export class AdminManageGroupsCitizenComponent implements OnInit {
     private customValidators: CustomFormValidators,
     private dataService: DataService,
     private toastrService: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.form = this.fb.group({
       groupId: [null, [Validators.required]],
       expireDate: [null],
     });
 
-
-
-
-    this.route.params.subscribe(p => {
-      if (p.id != '0' && p.id)
-        this.userCode = p.id;
+    this.route.params.subscribe((p) => {
+      if (p.id != '0' && p.id) this.userCode = p.id;
       this.getcitizengroupList();
     });
   }
 
-
-
-
   ngOnInit(): void {
-    this.dataService.get(ServerApis.getGroups).subscribe(response => {
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
       this.groupList = response.data ? response.data : [];
     });
-
   }
-
-
 
   getcitizengroupList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getGroupsCitizensInfo, {
-      userCode: this.userCode
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.citizengroupList = response.data ? response.data : [];
-
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
+    this.dataService
+      .get(ServerApis.getGroupsCitizensInfo, {
+        userCode: this.userCode,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            this.citizengroupList = response.data ? response.data : [];
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
-
-
 
   save() {
     if (this.form.invalid) {
@@ -89,58 +80,56 @@ export class AdminManageGroupsCitizenComponent implements OnInit {
       userCode: this.userCode,
       expireDate: form.expireDate,
     };
-    this.dataService.post(ServerApis.addCitizenToGroup, dataToPost).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.form.reset();
-        this.getcitizengroupList();
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
-
+    this.dataService.post(ServerApis.addCitizenToGroup, dataToPost).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.form.reset();
+          this.getcitizengroupList();
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
 
-
-
-
   delete(row) {
-
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'بله',
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
         let dataToPost = {
           GroupId: row.groupId,
-          CitizenId: row.citizenId
+          CitizenId: row.citizenId,
         };
 
-        this.dataService.post(ServerApis.removeCitizenFromGroup, dataToPost).subscribe(response => {
-          row.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getcitizengroupList();
-          } else {
-            let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          row.loading = false;
-        })
+        this.dataService.post(ServerApis.removeCitizenFromGroup, dataToPost).subscribe(
+          (response) => {
+            row.loading = false;
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getcitizengroupList();
+            } else {
+              let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            row.loading = false;
+          },
+        );
       }
     });
   }
-
-
-
 }

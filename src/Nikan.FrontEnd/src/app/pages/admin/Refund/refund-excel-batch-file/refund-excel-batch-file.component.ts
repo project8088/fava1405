@@ -8,18 +8,24 @@ import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
- import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import { AdminImportRefundExcelDialogComponent } from '../dialog/refund-import-excel/import-refund-excel.component';
- @Component({
+@Component({
   selector: 'adm-refund-excel-batch-file',
-   templateUrl: './refund-excel-batch-file.component.html',
-   styleUrls: ['./refund-excel-batch-file.component.scss']
+  templateUrl: './refund-excel-batch-file.component.html',
+  styleUrls: ['./refund-excel-batch-file.component.scss'],
 })
 export class AdminRefundExcelBatchFileListComponent implements AfterViewInit {
   loading: boolean;
-   displayedColumns: string[] = ['row', 'importId', 'fileName', 'importBy', 'onDate', 'isConfirm','operation'];
-
-
+  displayedColumns: string[] = [
+    'row',
+    'importId',
+    'fileName',
+    'importBy',
+    'onDate',
+    'isConfirm',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -39,60 +45,44 @@ export class AdminRefundExcelBatchFileListComponent implements AfterViewInit {
     this.searchForm = this.fb.group({
       title: [''],
     });
-
-
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.refundImportFileList, {}).subscribe(response => {
-      this.isLoadingResults = false;
-      if (response.isSuccess) {
-        this.data = response.data ? response.data : [];
-        this.dataSource.data = this.data;
-        this.listCount = this.data.length;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isLoadingResults = false;
-
-    });
-
-
+    this.dataService.get(ServerApis.refundImportFileList, {}).subscribe(
+      (response) => {
+        this.isLoadingResults = false;
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isLoadingResults = false;
+      },
+    );
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
 
-
   applyFilter() {
     this.dataSource.filter = this.searchForm.get('title').value;
-
   }
-
-
-
-
 
   delete(row) {
     Swal.fire({
@@ -101,32 +91,35 @@ export class AdminRefundExcelBatchFileListComponent implements AfterViewInit {
       showConfirmButton: true,
       confirmButtonText: 'بله',
       showCancelButton: true,
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeRefundImportFile, { importId: row.importId }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-        });
+        this.dataService
+          .get(ServerApis.removeRefundImportFile, { importId: row.importId })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
+            },
+          );
       }
     });
   }
 
-    
-
-   openExcelDialog() {
-     this.matDialog.open(AdminImportRefundExcelDialogComponent, {
-       panelClass: 'custom-dialog',
-       width:'60%'
-     });
-   }
-
-
+  openExcelDialog() {
+    this.matDialog.open(AdminImportRefundExcelDialogComponent, {
+      panelClass: 'custom-dialog',
+      width: '60%',
+    });
+  }
 }

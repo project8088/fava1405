@@ -2,9 +2,7 @@
   <span>مدیریت خانوده شهروند</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
-    <div class="bread-crumb-item" routerLink="/admin/companies">
-      شهروندان ها
-    </div>
+    <div class="bread-crumb-item" routerLink="/admin/companies">شهروندان ها</div>
     <div class="bread-crumb-item active">مدیریت خانواده شهروند</div>
   </div>
 </div>
@@ -14,19 +12,13 @@
     <button (click)="back()" mat-stroked-button color="default">بازگشت</button>
   </mat-card-header>
   <mat-card-content>
-    <div
-      class="d-flex align-items-center justify-content-center p-5"
-      *ngIf="loading"
-    >
+    <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loading">
       <mat-spinner diameter="35" color="default"></mat-spinner>
     </div>
     <div class="p-3" *ngIf="!loading">
       <div class="row">
         <div class="col-12 col-md-4 col-lg-4">
-          <img
-            class="citizen-image"
-            [src]="baseUrl + citizen.personalPictureUrl"
-          />
+          <img class="citizen-image" [src]="baseUrl + citizen.personalPictureUrl" />
         </div>
 
         <div class="col-12 col-md-8 col-lg-8">
@@ -41,8 +33,6 @@
                 <a (click)="openCitizenProfile(citizen.userCode)">
                   {{ citizen.nationCode }}
                 </a>
-
-              
               </strong>
             </div>
 
@@ -60,16 +50,13 @@
 
             <div class="col-12 col-md-6 col-lg-6">
               <span>وضعیت تاهل: </span>
-              <strong>{{
-                citizen.mariageStatus | enumString: "maritalStatus"
-              }}</strong>
+              <strong>{{ citizen.mariageStatus | enumString: 'maritalStatus' }}</strong>
             </div>
 
             <div class="col-12 col-md-6 col-lg-6">
               <span>تاریخ تولد: </span>
               <strong>{{ citizen.birthDate | jalali }}</strong>
             </div>
-           
           </div>
         </div>
       </div>
@@ -94,17 +81,17 @@
                 کد ملی:
                 <a (click)="openCitizenProfile(item.familyUserCode)">
                   {{ item.familyNationCode }}
-                </a> 
+                </a>
               </div>
               <div class="col-12 col-md-6 col-lg-6">
                 نسبت :
-                {{ item.familyRelation | enumString: "familyRelationships" }}
+                {{ item.familyRelation | enumString: 'familyRelationships' }}
               </div>
               <div class="col-12 col-md-6 col-lg-6">
                 تاریخ تولد : {{ item.familyBirthDate | jalali }}
               </div>
               <div class="col-12 col-md-6 col-lg-6">
-                وضعیت تاهل: {{ item.familyMariageStatus | enumString: "maritalStatus" }}
+                وضعیت تاهل: {{ item.familyMariageStatus | enumString: 'maritalStatus' }}
               </div>
               <div class="col-12 col-md-6 col-lg-6">
                 <span>تاریخ ثبت نام: </span>
@@ -114,53 +101,33 @@
               <div class="col-md-12">
                 <span>وضعیت تایید: </span>
 
+                <strong class="text-success" *ngIf="item.confirm">
+                  تایید شده توسط
+                  {{ item.confirmerUser }}
 
-              <strong class="text-success" *ngIf="item.confirm">
-                تایید شده
-                توسط
-                {{ item.confirmerUser}}
+                  در تاریخ
+                  {{ item.confirmDate | jalali }}
+                </strong>
+                <strong class="text-danger" *ngIf="item.confirm == false">
+                  عدم تایید توسط
+                  {{ item.confirmerUser }}
+                  در تاریخ
+                  {{ item.confirmDate | jalali }}
+                </strong>
 
-                در تاریخ
-                {{ item.confirmDate | jalali }}
-              </strong>
-              <strong class="text-danger" *ngIf="item.confirm==false">
-                عدم تایید
-                توسط
-                {{ item.confirmerUser}}
-                در تاریخ
-                {{ item.confirmDate | jalali }}
-              </strong>
-                
-                <strong class="text-warning" *ngIf="item.confirm==null"> بررسی نشده</strong>
-
-
-                
+                <strong class="text-warning" *ngIf="item.confirm == null"> بررسی نشده</strong>
               </div>
-
-
             </div>
           </div>
         </mat-card-content>
         <mat-card-actions class="d-flex justify-content-end">
-          <button
-            mat-raised-button
-            color="default"
-            (click)="toggleConfirmFamily(item, true)"
-          >
+          <button mat-raised-button color="default" (click)="toggleConfirmFamily(item, true)">
             تایید<i class="fa fa-check mx-2"></i>
           </button>
-          <button
-            mat-raised-button
-            color="warn"
-            (click)="toggleConfirmFamily(item, false)"
-          >
+          <button mat-raised-button color="warn" (click)="toggleConfirmFamily(item, false)">
             عدم تایید<i class="fa fa-times mx-2"></i>
           </button>
-          <button
-            (click)="openRejectFamilyeDialog(item)"
-            mat-raised-button
-            color="accent"
-          >
+          <button (click)="openRejectFamilyeDialog(item)" mat-raised-button color="accent">
             حذف <i class="fa fa-trash mx-2"></i>
           </button>
         </mat-card-actions>

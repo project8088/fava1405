@@ -40,7 +40,7 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
     'requestStatuse',
     'deliverType',
     'cardNumber',
-    'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -61,7 +61,7 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -79,7 +79,6 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
       deliverType: [null],
       groupId: [null],
       gender: [null],
-
     });
   }
 
@@ -106,7 +105,6 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
     this.dataService.getEnums().subscribe(
       (response) => {
         if (response) {
-
           this.baseEnums.sabtStatus = response.sabtStatus;
           this.baseEnums.requestStatuse = response.cardRequestStatus;
           this.baseEnums.groupIds = response.groupIds;
@@ -114,7 +112,7 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
   }
 
@@ -125,11 +123,9 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
 
   getGroups() {
     this.dataService.get(ServerApis.getGroups).subscribe(
@@ -138,33 +134,16 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-
-
-
 
     merge()
       .pipe(
@@ -177,21 +156,17 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -208,15 +183,15 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -224,55 +199,57 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.id
+        id: row.id,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   openBackCard(item) {
-    this.matDialog.open(AdminBackCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminBackCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openDeliveredCard(item) {
-    this.matDialog.open(AdminDeliveredCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminDeliveredCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openCancellationCard(item) {
-    this.matDialog.open(AdminCancellationCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminCancellationCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-
 
   getDisCountGroupBaseList() {
     this.dataService.get(ServerApis.getDisCountGroupBaseList).subscribe(
@@ -281,38 +258,24 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
-
-
 
   exportExcel() {
     var param: any = this.searchForm.value;
     param.offset = 0;
     param.count = 65000;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
-
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
-    this.dataService.downloadFile(ServerApis.citizencardAdvSearch_Export, param, '', 'export-citizen-cards.xls');
-
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
+    this.dataService.downloadFile(
+      ServerApis.citizencardAdvSearch_Export,
+      param,
+      '',
+      'export-citizen-cards.xls',
+    );
   }
-
-
-
-
-
-
-
-
-
-
 }

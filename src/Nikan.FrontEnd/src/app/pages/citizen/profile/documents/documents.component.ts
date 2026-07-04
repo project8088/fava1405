@@ -23,17 +23,12 @@ export class CitizenDocumentsComponent implements OnInit {
   uploadUrl: string = ServerApis.uploadDocGroupAttachment;
 
   baseDocuments: Object[];
-  displayedColumns: string[] = [
-    'documentGroup',
-    'description',
-    'attachedOnDate',
-    'id',
-  ];
+  displayedColumns: string[] = ['documentGroup', 'description', 'attachedOnDate', 'id'];
 
   constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.cardForm = this.fb.group({
       personnelImage: [null, [Validators.required]],
@@ -46,12 +41,10 @@ export class CitizenDocumentsComponent implements OnInit {
 
   getDocGroupsBaseList() {
     this.loading = true;
-    this.dataService
-      .get(ServerApis.getAllDocGrpupsAndUserDocuments)
-      .subscribe((data) => {
-        this.loading = false;
-        this.baseDocuments = data.data;
-      });
+    this.dataService.get(ServerApis.getAllDocGrpupsAndUserDocuments).subscribe((data) => {
+      this.loading = false;
+      this.baseDocuments = data.data;
+    });
   }
   removeDocument(id, title) {
     Swal.fire({
@@ -63,20 +56,16 @@ export class CitizenDocumentsComponent implements OnInit {
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService
-          .get(ServerApis.removeUserDocument + '?id=' + id)
-          .subscribe((response) => {
-            if (response.isSuccess) {
-              this.toastrService.success('با موفقیت حذف شد.');
-            } else {
-              let msg = response.messages
-                ? response.messages
-                : 'متاسفانه خطایی در سرور رخ داده است!';
-              this.toastrService.error(msg);
-            }
+        this.dataService.get(ServerApis.removeUserDocument + '?id=' + id).subscribe((response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('با موفقیت حذف شد.');
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
 
-            this.getDocGroupsBaseList();
-          });
+          this.getDocGroupsBaseList();
+        });
       }
     });
   }
@@ -88,16 +77,14 @@ export class CitizenDocumentsComponent implements OnInit {
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 

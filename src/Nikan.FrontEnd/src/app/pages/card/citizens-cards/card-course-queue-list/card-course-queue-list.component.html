@@ -1,39 +1,28 @@
- 
-
-
 <div class="content-header">
-  <span>   لیست صف های توزیع کارت</span>
+  <span> لیست صف های توزیع کارت</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/card/dashboard">داشبورد</div>
     <div class="bread-crumb-item" routerLink="/card/card-distribute-course-list">
       دوره های توزیع کارت
     </div>
-    <div class="bread-crumb-item active">   لیست صف های توزیع کارت</div>
+    <div class="bread-crumb-item active">لیست صف های توزیع کارت</div>
   </div>
 </div>
 
-
-
- 
-
 <mat-card class="custom-card">
   <mat-card-content>
-    <div class="d-flex align-items-center justify-content-end pb-4"> 
+    <div class="d-flex align-items-center justify-content-end pb-4">
       <button mat-raised-button color="default" (click)="openAddCardQueueDialog('')">
         <span> صف جدید</span>
       </button>
     </div>
 
-
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
         <mat-form-field class="col-md-3">
           <mat-label>نام صف</mat-label>
           <input matInput formControlName="name" />
         </mat-form-field>
-
-
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="applyFilter()">
@@ -45,9 +34,11 @@
     </form>
 
     <div class="d-flex align-items-center justify-content-end mb-3">
-      <button mat-raised-button
-              color="default"
-              (click)="exporter.exportTable('xlsx', { fileName: 'excel' })">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
         <i class="fa fa-file-excel mr-2"></i>
         خروجی اکسل
       </button>
@@ -56,20 +47,19 @@
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div class="datatable-loading-shade"
-           *ngIf="isLoadingResults == false && listCount == 0">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-        <table mat-table
-               [dataSource]="data"
-               class="datatable-table"
-               #exporter="matTableExporter"
-               matTableExporter
-               [hiddenColumns]="[displayedColumns.length - 1]">
-
-
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="row">
             <th mat-header-cell *matHeaderCellDef width="40">#</th>
             <td mat-cell *matCellDef="let row; let i = index">
@@ -77,13 +67,10 @@
             </td>
           </ng-container>
 
-
-
-
           <ng-container matColumnDef="name">
             <th mat-header-cell *matHeaderCellDef>صف</th>
             <td mat-cell *matCellDef="let row">
-              <strong style="color:{{row.defaultColor}}">
+              <strong style="color:{{ row.defaultColor }}">
                 {{ row.name }}
               </strong>
             </td>
@@ -92,33 +79,19 @@
           <ng-container matColumnDef="cardTypeId">
             <th mat-header-cell *matHeaderCellDef>نوع کارت</th>
             <td mat-cell *matCellDef="let row">
-              <strong *ngIf="row.cardTypeId==8">
-                شهروندی
-              </strong>
-              <strong *ngIf="row.cardTypeId==9">
-                منزلت
-              </strong>
-
+              <strong *ngIf="row.cardTypeId == 8"> شهروندی </strong>
+              <strong *ngIf="row.cardTypeId == 9"> منزلت </strong>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="queueInputType">
             <th mat-header-cell *matHeaderCellDef>نوع تحویل</th>
             <td mat-cell *matCellDef="let row">
-              <strong *ngIf="row.queueInputType==0">
-                پستی
-              </strong>
-              <strong *ngIf="row.queueInputType==1">
-                تحویل در مرکز
-              </strong>
-              <strong *ngIf="row.queueInputType==2">
-                موقت
-              </strong>
-
+              <strong *ngIf="row.queueInputType == 0"> پستی </strong>
+              <strong *ngIf="row.queueInputType == 1"> تحویل در مرکز </strong>
+              <strong *ngIf="row.queueInputType == 2"> موقت </strong>
             </td>
           </ng-container>
-
-
 
           <ng-container matColumnDef="indexOrder">
             <th mat-header-cell *matHeaderCellDef>اولویت</th>
@@ -127,37 +100,26 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="onDate">
             <th mat-header-cell *matHeaderCellDef>تاریخ ایجاد</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.onDate | jalali}}
+              {{ row.onDate | jalali }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="isActive">
             <th mat-header-cell *matHeaderCellDef>وضعیت</th>
             <td mat-cell *matCellDef="let row">
-              <strong *ngIf="row.isActive">
-                فعال
-              </strong>
-              <strong *ngIf="!row.isActive">
-                آرشیو
-              </strong>
+              <strong *ngIf="row.isActive"> فعال </strong>
+              <strong *ngIf="!row.isActive"> آرشیو </strong>
             </td>
           </ng-container>
-
-
 
           <ng-container matColumnDef="isLock">
             <th mat-header-cell *matHeaderCellDef>وضعیت دسترسی</th>
             <td mat-cell *matCellDef="let row">
-              <strong class="text-danger" *ngIf="row.isLock">
-                قفل
-              </strong>
-              <strong class="text-info" *ngIf="!row.isLock">
-                باز
-              </strong>
+              <strong class="text-danger" *ngIf="row.isLock"> قفل </strong>
+              <strong class="text-info" *ngIf="!row.isLock"> باز </strong>
             </td>
           </ng-container>
 
@@ -171,23 +133,12 @@
           <ng-container matColumnDef="groups">
             <th mat-header-cell *matHeaderCellDef>گروههای شهروندی</th>
             <td mat-cell *matCellDef="let row">
-              
               <span *ngFor="let item of row.allGroups">
-                {{item}}
-                <strong>
-                  |
-                </strong>
+                {{ item }}
+                <strong> | </strong>
               </span>
-
-
             </td>
           </ng-container>
-
-
-
-
-
-
 
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
@@ -200,10 +151,9 @@
                   <i class="fa fa-pencil mr-2"></i>
                   ویرایش
                 </button>
-                <button mat-menu-item
-                        routerLink="/card/citizen-card-in-queue/{{ row.id }}">
+                <button mat-menu-item routerLink="/card/citizen-card-in-queue/{{ row.id }}">
                   <i class="fa fa-money-bill mr-2"></i>
-                  <span>  لیست کارتها</span>
+                  <span> لیست کارتها</span>
                 </button>
 
                 <button mat-menu-item (click)="delete(row)">
@@ -214,45 +164,69 @@
                   <i class="fa fa-pencil mr-2"></i>
                   ارسال صف به پست/مرکز تحویل
                 </button>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=1" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=1"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت چاپ طرح منزلت
                 </a>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=2" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=2"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت چاپ کارت شهروندی
                 </a>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=3" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=3"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت تحویل لیست به پست
                 </a>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=4" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=4"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت تحویل لیست به مرکز
                 </a>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=5" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=5"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت تحویل پست به شهروند
                 </a>
-                <a mat-menu-item href="{{printUrl}}?queueId={{ row.guidId }}&printType=6" target="_blank">
+                <a
+                  mat-menu-item
+                  href="{{ printUrl }}?queueId={{ row.guidId }}&printType=6"
+                  target="_blank"
+                >
                   <i class="fa fa-print"></i>
                   فرمت لیست بارکد
                 </a>
-                
               </mat-menu>
             </td>
           </ng-container>
 
-          <tr mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-      <mat-paginator [length]="listCount"
-                     [pageSize]="2000"
-                     [pageSizeOptions]="[ 2000,5000,10000]"
-                     showFirstLastButtons
-                     (page)="pageEvent($event)"></mat-paginator>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="2000"
+        [pageSizeOptions]="[2000, 5000, 10000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
     </div>
   </mat-card-content>
   <mat-card-footer></mat-card-footer>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
- 
+
 import { ChangeCurrentUserPasswordComponent } from '../../shared/change-current-user-password/change-current-user-password.component';
 import { TicketListComponent } from '../../shared/ticket/ticket-list/ticket-list.component';
 import { TicketDetailsComponent } from '../../shared/ticket/view-ticket/ticket-details.component';
@@ -30,14 +30,14 @@ import { AppShowCitizenComponent } from '../../shared/citizens/show-citizens/sho
 import { CardFreeRequestCardListComponent } from './free-card/free-request-list/free-request-list.component';
 import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free-card/add-or-update-free-card.component';
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';
- 
-
 
 const routes: Routes = [
   {
-    path: '', component: CardComponent, children: [
+    path: '',
+    component: CardComponent,
+    children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: CardDashboardComponent }, 
+      { path: 'dashboard', component: CardDashboardComponent },
       { path: 'tickets', component: TicketListComponent },
       { path: 'advanced-search-card-citizen', component: CardCitizenCardAdvancedSearchComponent },
       { path: 'transaction-list', component: CardTransactionListComponent },
@@ -47,46 +47,45 @@ const routes: Routes = [
       { path: 'card-citizens-pictures', component: CardCitizensPicturesComponent },
       { path: 'export-card-citizen', component: CardCitizenCardExportSearchComponent },
       { path: 'export-details-citizen-card/:id', component: CardCitizenCardExportDetailsComponent },
-      { path: 'export-details-citizen-card-for-print/:id', component: CardShahrvandiCitizenCardExportDetailsComponent },
-      { path: 'export-details-manzalat-card-for-print/:id', component: CardManzalatCitizenCardExportDetailsComponent },
+      {
+        path: 'export-details-citizen-card-for-print/:id',
+        component: CardShahrvandiCitizenCardExportDetailsComponent,
+      },
+      {
+        path: 'export-details-manzalat-card-for-print/:id',
+        component: CardManzalatCitizenCardExportDetailsComponent,
+      },
       { path: 'card-course-queue-list/:id', component: CardCardCourseQueuelistComponent },
-
 
       { path: 'change-password', component: ChangeCurrentUserPasswordComponent },
       { path: 'search-citizen', component: CardCitizenSearchComponent },
-      { path: 'card-distribute-course-list', component: CardCitizenCardDistributeCourseListComponent },
+      {
+        path: 'card-distribute-course-list',
+        component: CardCitizenCardDistributeCourseListComponent,
+      },
 
       { path: 'citizen-card-search-in-queue', component: CardCitizenCardSearchInQueueComponent },
       { path: 'citizen-card-in-queue/:id', component: CardCitizenCardInQueueComponent },
       { path: 'card-distribution/:id', component: CardCarddistributionComponent },
 
-
-
       { path: 'order-card-list', component: OrderCardListComponent },
       { path: 'order-addupdate-card/:cardTypeId/:id', component: OrderAddOrUpdateCardComponent },
       { path: 'card-discount-list/:id', component: CardDiscountListComponent },
 
-
       { path: 'show-citizen/:id', component: AppShowCitizenComponent },
-
-
 
       { path: 'free-request-card-list', component: CardFreeRequestCardListComponent },
       { path: 'free-request-addupdate/:id', component: CardAddOrUpdateFreeCardComponent },
       { path: 'free-request-citizens/:id', component: CardFreeCardCitizensComponent },
 
-
-
-
       { path: 'card-permissions/:id', component: CardUserPermissionsComponent },
-
-    ]
-  }
+    ],
+  },
 ];
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CardRoutingModule { }
+export class CardRoutingModule {}

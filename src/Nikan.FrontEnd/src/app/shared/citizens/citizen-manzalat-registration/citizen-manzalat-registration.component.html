@@ -1,43 +1,38 @@
- 
 <mat-card class="custom-card">
-  <mat-card-header class="d-flex align-items-center justify-content-end">
-  </mat-card-header>
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
     <div class="field-set">
       <label class="field-set-title">شهروند در فرم های زیر ثبت نام نموده است</label>
     </div>
-    <div class="col-12"> 
+    <div class="col-12">
       <div *ngFor="let item of data" class="row my-2 justify-content-center">
-        <div  *ngIf="item.citizenIsRegisterThisForm"   class="col-12 col-md-10 col-lg-10">
+        <div *ngIf="item.citizenIsRegisterThisForm" class="col-12 col-md-10 col-lg-10">
           <mat-card>
             <mat-card-content>
-              <div class="col-12"  >
+              <div class="col-12">
                 <div class="row">
                   <div class="col-12 col-md-4 col-lg-4">
                     <b>{{ item.title }} </b>
                   </div>
                   <div class="col-12 col-md-3 col-lg-4">
-                    وضعیت : 
-                    <strong *ngIf="item.formResult==null" class="text-info">
+                    وضعیت :
+                    <strong *ngIf="item.formResult == null" class="text-info">
                       در حال بررسی
                     </strong>
-                    <strong *ngIf="item.formResult==true" class="text-success">
+                    <strong *ngIf="item.formResult == true" class="text-success">
                       تایید شده
                     </strong>
-                    <strong *ngIf="item.formResult==false" class="text-danger">
+                    <strong *ngIf="item.formResult == false" class="text-danger">
                       عدم تایید
                     </strong>
-
                   </div>
                   <div class="col-12 col-md-3 col-lg-4">
                     مدارک:
-                    <img  class="pointer img-thumb"
-                         [src]="baseUrl + item.fileUrl" />
+                    <img class="pointer img-thumb" [src]="baseUrl + item.fileUrl" />
                   </div>
                 </div>
               </div>
             </mat-card-content>
-
           </mat-card>
         </div>
       </div>

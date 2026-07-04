@@ -13,7 +13,6 @@
 <!--// Breadcrumb Area -->
 <!-- Main Content -->
 <main class="main-content">
-
   <!-- Blogs Area -->
   <div class="">
     <div class="container p-md-5 box p-4 mt-4">
@@ -23,19 +22,21 @@
 
       <div class="profile" *ngIf="!loading && userInfo">
         <div class="profile-image">
-          <img [src]="baseUrl + userInfo.imageUrl">
+          <img [src]="baseUrl + userInfo.imageUrl" />
         </div>
         <h5 class="text-center name-family">
-          {{(userInfo.namePrefix|enumString:'namePrefix') + ' ' + userInfo.firstName + ' ' + userInfo.lastName}}
-
+          {{
+            (userInfo.namePrefix | enumString: 'namePrefix') +
+              ' ' +
+              userInfo.firstName +
+              ' ' +
+              userInfo.lastName
+          }}
         </h5>
-        <div class="bio" [innerHtml]="userInfo.biography|safeHtml"></div>
+        <div class="bio" [innerHtml]="userInfo.biography | safeHtml"></div>
       </div>
-
     </div>
   </div>
   <!--// Blogs Area -->
-
-
 </main>
 <!--// Main Content -->

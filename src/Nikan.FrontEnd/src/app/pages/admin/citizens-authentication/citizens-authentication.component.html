@@ -1,30 +1,18 @@
 <div class="content-header">
-    <span>احراز هویت آنلاین شهروند</span>
-
+  <span>احراز هویت آنلاین شهروند</span>
 </div>
 
-
 <mat-card class="custom-card">
-    
   <mat-card-content>
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
-
         <mat-form-field class="col-md-3">
           <mat-label>کد ملی</mat-label>
-          <input matInput formControlName="nationCode">
+          <input matInput formControlName="nationCode" />
         </mat-form-field>
-        
-          <simple-jalali-datepicker class="col-md-6 col-lg-12"
-                                    formControlName="birthDate">
-          </simple-jalali-datepicker>
-      
 
-        
-
-
-
+        <simple-jalali-datepicker class="col-md-6 col-lg-12" formControlName="birthDate">
+        </simple-jalali-datepicker>
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="getinfo()">
@@ -35,17 +23,13 @@
       </div>
     </form>
 
-
     <div class="p-3" *ngIf="!loading">
       <div class="row">
-
-
-
         <div class="col-12 col-md-8 col-lg-8">
           <div class="row">
             <div class="col-12 col-md-6 col-lg-6">
-              <span>کدملی : </span> 
-                {{ citizen.nationalCode  }} 
+              <span>کدملی : </span>
+              {{ citizen.nationalCode }}
             </div>
 
             <div class="col-12 col-md-6 col-lg-6">
@@ -60,12 +44,9 @@
               <strong>{{ citizen.fatherName }}</strong>
             </div>
 
-           
-
             <div class="col-12 col-md-6 col-lg-6">
               <span>تاریخ تولد: </span>
               <strong>{{ citizen.birthDate }}</strong>
-               
             </div>
 
             <div class="col-12 col-md-6 col-lg-6">
@@ -77,47 +58,26 @@
               <strong>{{ citizen.messages }}</strong>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-              <span>جنسیت  : </span>
+              <span>جنسیت : </span>
 
-              <strong *ngIf="citizen.gender==0" class="text-info">
-              خانم
-              </strong>
-              <strong *ngIf="citizen.gender==1" class="text-success">
-                آقا
-              </strong>
-              
-
-
-
+              <strong *ngIf="citizen.gender == 0" class="text-info"> خانم </strong>
+              <strong *ngIf="citizen.gender == 1" class="text-success"> آقا </strong>
             </div>
             <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت ثبت احوال: </span> 
-              <strong *ngIf="citizen.isMatch==true" class="text-info">
-                تایید
-              </strong>
-              <strong *ngIf="citizen.isMatch==false" class="text-danger">
-                عدم تایید
-              </strong> 
+              <span>وضعیت ثبت احوال: </span>
+              <strong *ngIf="citizen.isMatch == true" class="text-info"> تایید </strong>
+              <strong *ngIf="citizen.isMatch == false" class="text-danger"> عدم تایید </strong>
             </div>
 
             <div class="col-12 col-md-6 col-lg-6">
-              <span>وضعیت   فوتی: </span>
-              <strong *ngIf="citizen.isDead==true" class="text-danger">
-                فوتی
-              </strong>
-              <strong *ngIf="citizen.isDead==false" class="text-success">
-              در قید حیات
-              </strong>
+              <span>وضعیت فوتی: </span>
+              <strong *ngIf="citizen.isDead == true" class="text-danger"> فوتی </strong>
+              <strong *ngIf="citizen.isDead == false" class="text-success"> در قید حیات </strong>
             </div>
-           
-
           </div>
         </div>
       </div>
     </div>
-
-
-
   </mat-card-content>
-    <mat-card-footer></mat-card-footer>
+  <mat-card-footer></mat-card-footer>
 </mat-card>

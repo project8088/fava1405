@@ -12,7 +12,7 @@ import * as CkEditor from '../../../../../assets/ckeditor';
 @Component({
   selector: 'adm-add-or-update-manager',
   templateUrl: './add-or-update-manager.component.html',
-  styleUrls: ['./add-or-update-manager.component.scss']
+  styleUrls: ['./add-or-update-manager.component.scss'],
 })
 export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -22,9 +22,9 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
   loading: boolean = true;
   imageUrl: string = '';
   baseUrl: string = ServerApis.baseUrl;
-  namePrefixList: any = [] = [];
-  provinceList: any = [] = [];
-  organizationalPositionList: any = [] = [];
+  namePrefixList: any = ([] = []);
+  provinceList: any = ([] = []);
+  organizationalPositionList: any = ([] = []);
   loadingData: boolean = true;
   htmlEditor: any;
   constructor(
@@ -34,10 +34,9 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
     private customValidator: CustomFormValidators,
     private dataService: DataService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
   ) {
-
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;
         this.id = p.id;
@@ -54,9 +53,30 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
       userCompanyId: [null],
       organizationalPositionId: [null, [Validators.required]],
       namePrefix: [null, [Validators.required]],
-      firstName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
-      lastName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
-      fatherName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
+      firstName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
+      lastName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
+      fatherName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
       nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
       mobileNumber: [null, [Validators.required, this.customValidator.checkMobileNumber]],
       cellNumber: [null, [Validators.required, this.customValidator.checkPhoneNumber]],
@@ -73,26 +93,18 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
       isManagementMembers: [false],
       biography: [''],
       hasSpecificDisease: [false],
-      descriptionDisease: ['']
+      descriptionDisease: [''],
     });
   }
 
-
-
-
-
   ngOnInit() {
-
     this.getBaseData();
-
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      if (!this.isUpdate)
-        this.loadCkEditor('');
-      else
-        this.loadCkEditor(this.userForm.get('biography').value);
+      if (!this.isUpdate) this.loadCkEditor('');
+      else this.loadCkEditor(this.userForm.get('biography').value);
     }, 500);
   }
   getBaseData() {
@@ -100,52 +112,46 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
     forkJoin(
       this.dataService.get(ServerApis.getProvinces),
       this.dataService.getEnums(),
-      this.dataService.get(ServerApis.getPositionList)
+      this.dataService.get(ServerApis.getPositionList),
     ).subscribe(([provinces, enums, positions]) => {
       this.loadingData = false;
       this.provinceList = provinces.data ? provinces.data : [];
       this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
       this.organizationalPositionList = positions.data ? positions.data : [];
-
     });
   }
-
-
 
   getUserInfo() {
     this.loading = true;
-    this.dataService.get(
-      ServerApis.getPersonelInfo, { id: this.id }
-    ).subscribe(response => {
-      this.loading = false;
-      if (response && response.isSuccess) {
-        this.userForm.patchValue(response.data);
+    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id }).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.userForm.patchValue(response.data);
 
-        this.imageUrl = response.data.imageUrl;
-        setTimeout(() => {
-          if (response.data.biography)
-            this.loadCkEditor(this.userForm.get('biography').value);
-        }, 500);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-        this.router.navigate(['/admin/manager-users']);
-      }
-    }, error => {
-      this.loading = false;
-    });
+          this.imageUrl = response.data.imageUrl;
+          setTimeout(() => {
+            if (response.data.biography) this.loadCkEditor(this.userForm.get('biography').value);
+          }, 500);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+          this.router.navigate(['/admin/manager-users']);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-
 
   getAttachmentId(ev) {
     this.imageUrl = ev.uploadUrl;
   }
 
-
   saveInfo() {
     if (this.userForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
       return false;
     }
@@ -155,8 +161,7 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
 
     formValue.cityId = formValue.city.key;
 
-    if (this.htmlEditor.getData())
-      formValue.biography = this.htmlEditor.getData();
+    if (this.htmlEditor.getData()) formValue.biography = this.htmlEditor.getData();
     var params = {
       Id: formValue.id,
       PersonelCode: formValue.personelCode,
@@ -183,30 +188,25 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
       IsManagementMembers: formValue.isManagementMembers ? formValue.isManagementMembers : false,
       Biography: formValue.biography ? formValue.biography : '',
       HasSpecificDisease: formValue.hasSpecificDisease ? formValue.hasSpecificDisease : false,
-      DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : ''
-    }
+      DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : '',
+    };
 
-    this.dataService.post(
-      ServerApis.addOrUpdatePersonelByAdmin, params    ).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.router.navigate(['/admin/manager-users']);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false; 
-    });
+    this.dataService.post(ServerApis.addOrUpdatePersonelByAdmin, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.router.navigate(['/admin/manager-users']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
-
-
-
-
-
-
 
   changeHasSpecificDisease() {
     if (this.userForm.get('hasSpecificDisease').value == true) {
@@ -216,44 +216,70 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
       this.userForm.get('descriptionDisease').clearValidators();
       this.userForm.get('descriptionDisease').updateValueAndValidity();
       this.userForm.get('descriptionDisease').setValue('');
-
     }
   }
 
-
-
-
   /**
- * لود کردن html editor
- * */
+   * لود کردن html editor
+   * */
   loadCkEditor(content) {
     if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = "";
+      document.querySelector('.html-editor').innerHTML = '';
       CkEditor.create(document.querySelector('.html-editor'), {
         removePlugins: ['Title'],
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', '|',
-            'indent', 'alignment', 'outdent', 'pageBreak', '|',
-            'fontBackgroundColor', 'fontColor', 'fontFamily', 'fontSize', 'highlight', 'removeFormat', '|',
-            'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'code', 'codeBlock', 'exportPdf', 'horizontalLine', 'specialCharacters', 'todoList', '|',
-            'undo', 'redo'
-          ]
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'indent',
+            'alignment',
+            'outdent',
+            'pageBreak',
+            '|',
+            'fontBackgroundColor',
+            'fontColor',
+            'fontFamily',
+            'fontSize',
+            'highlight',
+            'removeFormat',
+            '|',
+            'imageUpload',
+            'blockQuote',
+            'insertTable',
+            'mediaEmbed',
+            'code',
+            'codeBlock',
+            'exportPdf',
+            'horizontalLine',
+            'specialCharacters',
+            'todoList',
+            '|',
+            'undo',
+            'redo',
+          ],
         },
         language: 'fa',
         image: {
           // Configure the available styles.
-          styles: [
-            'alignLeft', 'alignCenter', 'alignRight', 'full', 'side'
-          ],
+          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
           // You need to configure the image toolbar, too, so it shows the new style
           // buttons as well as the resize buttons.
           toolbar: [
-            'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            'imageStyle:alignLeft',
+            'imageStyle:alignCenter',
+            'imageStyle:alignRight',
             '|',
             'imageTextAlternative',
             'imageStyle:full',
-            'imageStyle:side'
-          ]
+            'imageStyle:side',
+          ],
         },
         table: {
           contentToolbar: [
@@ -261,17 +287,16 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
             'tableRow',
             'mergeTableCells',
             'tableCellProperties',
-            'tableProperties'
-          ]
+            'tableProperties',
+          ],
         },
         licenseKey: '',
         title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید'
+          placeholder: 'عنوان را در این قسمت تایپ کنید',
         },
         placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-
       })
-        .then(editor => {
+        .then((editor) => {
           //window.editor = editor;
           this.htmlEditor = editor;
           if (content) {
@@ -281,22 +306,14 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
           //});
           //on blure
           //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused) 
+          // // if (!isFocused)
 
           //});
-
         })
-        .catch(error => {
+        .catch((error) => {
           //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
           console.error(error);
         });
     }
   }
-
-
-
-
-
-
-
 }

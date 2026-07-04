@@ -1,4 +1,4 @@
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { LayoutsModule } from '../layouts/layouts.module';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,17 +22,12 @@ import { RegisterComponent } from './register/register.component';
 import { PreregisterComponent } from './preregister/preregister.component';
 import { CoreModule } from '../core/core.module';
 import { BotDetectCaptchaModule } from '../account/bot-detect/botdetect-captcha.module';
- 
+
 @NgModule({
-  declarations: [
-    PreregisterComponent,
-    RegisterComponent,
-    TermsComponent,
-    UserRegisterComponent
-  ],
+  declarations: [PreregisterComponent, RegisterComponent, TermsComponent, UserRegisterComponent],
   imports: [
     CommonModule,
-    CoreModule, 
+    CoreModule,
     UserRegisterRoutingModule,
     MatSelectModule,
     MatFormFieldModule,

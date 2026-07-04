@@ -4,11 +4,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
- 
+
 @Component({
   selector: 'card-add-or-update-free-card',
   templateUrl: './add-or-update-free-card.component.html',
-  styleUrls: ['./add-or-update-free-card.component.scss']
+  styleUrls: ['./add-or-update-free-card.component.scss'],
 })
 export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
   isUpdate: boolean;
@@ -16,23 +16,22 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
   baseEnums: any = {};
- 
+
   isSaving: boolean;
-   
+
   loading: boolean;
- 
+
   cardTypeList: any[] = [];
- 
+
   constructor(
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private toastrService: ToastrService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
   ) {
-    this.route.params.subscribe(p => {
-      
-      if (p.id && p.id != '0') { 
+    this.route.params.subscribe((p) => {
+      if (p.id && p.id != '0') {
         this.isUpdate = true;
         this.id = p.id;
         this.getStoreInfo();
@@ -43,10 +42,9 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
     });
     this.getBaseEnums();
     this.getGroups();
-    this.getcenterList()
+    this.getcenterList();
 
-
-    this.storeForm = this.fb.group({ 
+    this.storeForm = this.fb.group({
       discountTitle: [null, [Validators.required]],
       cardTypeId: [null, [Validators.required]],
       groupId: [null, [Validators.required]],
@@ -56,35 +54,19 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
       freeCardApplicantOrganization: [null, [Validators.required]],
       letterNumber: [null, [Validators.required]],
       description: [null],
-      attachmentGroup: [null] 
-
+      attachmentGroup: [null],
     });
   }
 
+  ngOnInit(): void {}
 
-
-
-
-
-  ngOnInit(): void {
-
-   
-    
-
-  }
-
-
-  ngAfterViewInit() {
-   
-  }
-
- 
+  ngAfterViewInit() {}
 
   getBaseEnums() {
     this.dataService.getEnums().subscribe(
       (response) => {
         if (response) {
-          this.baseEnums.imagerReviewStatusFormFreeCard = response.imagerReviewStatusFormFreeCard; 
+          this.baseEnums.imagerReviewStatusFormFreeCard = response.imagerReviewStatusFormFreeCard;
           this.baseEnums.cardDeliverType = response.cardDeliverType;
 
           debugger;
@@ -92,15 +74,12 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
 
-    this.dataService.get(ServerApis.getActiveCardTypeBaseList, {}).subscribe(response => {
-      if (response.isSuccess)
-        this.baseEnums.cardTypeList = response.data ? response.data : [];
+    this.dataService.get(ServerApis.getActiveCardTypeBaseList, {}).subscribe((response) => {
+      if (response.isSuccess) this.baseEnums.cardTypeList = response.data ? response.data : [];
     });
-
-
   }
 
   getGroups() {
@@ -110,49 +89,46 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
   getcenterList() {
-
-    this.dataService.get(ServerApis.getAllCardDeliveryCenters).subscribe(response => {
-      if (response.isSuccess)
-        this.baseEnums.centerList = response.data ? response.data : [];
+    this.dataService.get(ServerApis.getAllCardDeliveryCenters).subscribe((response) => {
+      if (response.isSuccess) this.baseEnums.centerList = response.data ? response.data : [];
       else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
         this.toastrService.error(msg);
       }
-
     });
   }
-
 
   getStoreInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getCardInfo, {
-      cardInfoId: this.id,
-      forEdit: true
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        response.data.cardTypeId = response.data.cardTypeId.toString();
-        this.storeForm.patchValue(response.data);
-       
-        setTimeout(() => {
-          
-        }, 1000);
+    this.dataService
+      .get(ServerApis.getCardInfo, {
+        cardInfoId: this.id,
+        forEdit: true,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            response.data.cardTypeId = response.data.cardTypeId.toString();
+            this.storeForm.patchValue(response.data);
 
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
+            setTimeout(() => {}, 1000);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
 
   save() {
-     
     if (this.storeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.storeForm.markAllAsTouched();
@@ -162,35 +138,29 @@ export class CardAddOrUpdateFreeCardComponent implements OnInit, AfterViewInit {
     let form = this.storeForm.value;
 
     let params = form;
-   
+
     this.isSaving = true;
-    this.dataService.post(ServerApis.addRequestFreeCard, params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-        this.router.navigate(['/card/free-request-card-list']);
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
-
-
+    this.dataService.post(ServerApis.addRequestFreeCard, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.router.navigate(['/card/free-request-card-list']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
   /**
-* for bind object in select
-* @param item
-*/
+   * for bind object in select
+   * @param item
+   */
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
-
- 
-
-  
-
-
-
 }

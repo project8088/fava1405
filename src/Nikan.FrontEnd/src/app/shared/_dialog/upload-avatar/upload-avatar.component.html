@@ -3,13 +3,7 @@
     <span *ngIf="user.isCompany">آپلود لوگو</span>
     <span *ngIf="!user.isCompany"> تصویر پروفایل </span>
   </h5>
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -67,12 +61,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button mat-raised-button mat-dialog-close>بستن</button>
-  <button
-    mat-raised-button
-    color="default"
-    (click)="save()"
-    [disabled]="saving"
-  >
+  <button mat-raised-button color="default" (click)="save()" [disabled]="saving">
     <mat-spinner diameter="20" color="default" [hidden]="!saving"></mat-spinner>
     <span>ذخیره</span>
   </button>

@@ -6,9 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
- import { MatDialog } from '@angular/material/dialog';
- import { Router, ActivatedRoute } from '@angular/router';
-import { merge, of as observableOf  } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundDialogComponent } from '../dialog/change-refund/change-refund.component';
@@ -19,14 +19,24 @@ import { CitizenRefundInfoDialogComponent } from '../../../citizen/refund/dialog
 @Component({
   selector: 'adm-refund-access-search-list',
   templateUrl: './refund-access-search-list.component.html',
-  styleUrls: ['./refund-access-search-list.component.scss']
+  styleUrls: ['./refund-access-search-list.component.scss'],
 })
-export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'letterNumber', 'orderId', 'transactionCode', 'totalRefundAmount', 'ownerName',
-    'refundCardNumber', 'refundOnDate', 'refundByUser', 'isClosed', 'refundState', 'operation'];
+export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'letterNumber',
+    'orderId',
+    'transactionCode',
+    'totalRefundAmount',
+    'ownerName',
+    'refundCardNumber',
+    'refundOnDate',
+    'refundByUser',
+    'isClosed',
+    'refundState',
+    'operation',
+  ];
   importId: string;
- 
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -41,50 +51,38 @@ export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnIn
   transactionForList: any[] = [];
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],
-      toDate :[null],
+      toDate: [null],
       transactionCode: [''],
       orderId: [''],
       unitName: [''],
       name: [''],
       nationCode: [''],
-      refundState: [null]
+      refundState: [null],
     });
-   
   }
 
-
-  ngOnInit() {
-
-
-  }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.getList();
   }
 
-   
-
   getList() {
-    
     var param: any = this.searchForm.value;
-     param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-   
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
 
-   
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
+
     merge()
       .pipe(
         startWith(param),
@@ -92,35 +90,31 @@ export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnIn
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.allRefundAccessPagesList, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -133,41 +127,42 @@ export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnIn
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-  
- 
-  openChangeRefundDialog(item) {
-    this.matDialog.open(AdminChangeRefundDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
 
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+  openChangeRefundDialog(item) {
+    this.matDialog
+      .open(AdminChangeRefundDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
   openReportDialog() {
-    this.matDialog.open(AdminReportRefundDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        id: 0//all 
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminReportRefundDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          id: 0, //all
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-  getCardNumber(row) { 
+  getCardNumber(row) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -175,39 +170,42 @@ export class AdminRefundAccessSearchListComponent implements AfterViewInit, OnIn
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.getCardNumber, {
-          refundId: row.refundId,
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.getCardNumber, {
+            refundId: row.refundId,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success(response.messages);
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
-
 
   openRefundInfoDialog(item) {
-    this.matDialog.open(CitizenRefundInfoDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(CitizenRefundInfoDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-
-
 }

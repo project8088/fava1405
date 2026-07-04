@@ -1,29 +1,15 @@
-import { Component, OnInit, Input, } from '@angular/core';
-  
+import { Component, OnInit, Input } from '@angular/core';
+
 @Component({
   selector: 'main-tree-menu',
   templateUrl: './tree-menu.component.html',
-  styleUrls: ['./tree-menu.component.scss']
+  styleUrls: ['./tree-menu.component.scss'],
 })
 export class MainTreeMenuComponent implements OnInit {
   @Input('menuItems') menuItems: any[];
-  @Input('hasChild') hasChild: boolean=false;
-  
+  @Input('hasChild') hasChild: boolean = false;
 
-     
+  constructor() {}
 
-  constructor(  
-  ) {
-
-  
-
-  }
-
-  ngOnInit() { 
-  }
-
-   
- 
- 
-
+  ngOnInit() {}
 }

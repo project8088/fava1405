@@ -6,9 +6,9 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
- import { MatDialog } from '@angular/material/dialog';
- import { Router, ActivatedRoute } from '@angular/router';
-import { merge, of as observableOf  } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Router, ActivatedRoute } from '@angular/router';
+import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundDialogComponent } from '../dialog/change-refund/change-refund.component';
@@ -20,13 +20,23 @@ import { AdminAddRefundTransactionDialogComponent } from '../dialog/add-refund-t
 @Component({
   selector: 'adm-refund-access-details-list',
   templateUrl: './refund-access-details-list.component.html',
-  styleUrls: ['./refund-access-details-list.component.scss']
+  styleUrls: ['./refund-access-details-list.component.scss'],
 })
-export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'orderId', 'transactionCode', 'totalRefundAmount', 'ownerName', 'refundCardNumber', 'refundOnDate', 'refundByUser', 'isClosed', 'refundState', 'operation'];
+export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'orderId',
+    'transactionCode',
+    'totalRefundAmount',
+    'ownerName',
+    'refundCardNumber',
+    'refundOnDate',
+    'refundByUser',
+    'isClosed',
+    'refundState',
+    'operation',
+  ];
   importId: string;
- 
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -41,23 +51,22 @@ export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnI
   transactionForList: any[] = [];
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],
-      toDate :[null],
+      toDate: [null],
       transactionCode: [''],
       orderId: [''],
       nationCode: [''],
-      refundState: [null]
+      refundState: [null],
     });
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       if (p.importId) {
         this.importId = p.importId;
         this.getList();
@@ -65,22 +74,15 @@ export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnI
     });
   }
 
-
-  ngOnInit() {
-
-
-  }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.getList();
   }
 
-   
-
   getList() {
-    
     var param: any = this.searchForm.value;
-     param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 1000;
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 1000;
     param.importId = +this.importId;
 
     merge()
@@ -90,35 +92,31 @@ export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnI
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.refundAccessDetailsList, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -131,53 +129,56 @@ export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnI
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-  
-  openAddRefundDialog() {
-    this.matDialog.open(AdminAddRefundTransactionDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        importId: this.importId 
-      },
-      width: '600px'
 
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+  openAddRefundDialog() {
+    this.matDialog
+      .open(AdminAddRefundTransactionDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          importId: this.importId,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
   openChangeRefundDialog(item) {
-    this.matDialog.open(AdminChangeRefundDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminChangeRefundDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
   openReportDialog() {
-    this.matDialog.open(AdminReportRefundDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        id: this.importId
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminReportRefundDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          id: this.importId,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-  getCardNumber(row) { 
+  getCardNumber(row) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -185,39 +186,42 @@ export class AdminRefundAccessDetailsListComponent implements AfterViewInit, OnI
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.getCardNumber, {
-          refundId: row.refundId,
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.getCardNumber, {
+            refundId: row.refundId,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success(response.messages);
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
-
 
   openRefundInfoDialog(item) {
-    this.matDialog.open(CitizenRefundInfoDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(CitizenRefundInfoDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-
-
 }

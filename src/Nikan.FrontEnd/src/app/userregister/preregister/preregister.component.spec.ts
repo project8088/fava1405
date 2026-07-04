@@ -8,9 +8,8 @@ describe('PreregisterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PreregisterComponent ]
-    })
-    .compileComponents();
+      declarations: [PreregisterComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

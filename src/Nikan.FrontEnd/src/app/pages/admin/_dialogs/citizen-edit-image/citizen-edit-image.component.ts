@@ -1,10 +1,4 @@
-import {
-  Component,
-  ElementRef,
-  Inject,
-  OnInit,
-  ViewChild,
-} from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from 'src/app/core/server-apis';
 import { CropperComponent } from 'src/app/shared/cropper/cropper.component';
@@ -23,7 +17,7 @@ export class AdminCitizenEditImageDialogComponent implements OnInit {
   @ViewChild('cropper') cropper: CropperComponent;
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenEditImageDialogComponent>
+    private matDialogRef: MatDialogRef<AdminCitizenEditImageDialogComponent>,
   ) {
     this.citizen = _data;
   }

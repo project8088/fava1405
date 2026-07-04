@@ -9,72 +9,66 @@ import { AdminViewEventDetailsDialogComponent } from '../_dialogs/event-details/
 @Component({
   selector: 'adm-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
 export class AdminDashboardComponent implements OnInit {
   events: any[] = [];
   loading: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
-    
+
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
     public authService: AuthService,
     private matDialog: MatDialog,
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
   ngAfterViewInit() {
     this.getStatisticalReport();
     this.getListevents();
   }
   getStatisticalReport() {
     this.loading = true;
-    this.dataService.get(ServerApis.getStatisticalReport, {}).subscribe(response => {
-      this.loading = false;
-      if (response && response.isSuccess) {
-        this.statisticalInfo = response.data ? response.data : {};
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
+    this.dataService.get(ServerApis.getStatisticalReport, {}).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.statisticalInfo = response.data ? response.data : {};
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
 
-
-
-  getListevents() { 
-    this.dataService.get(ServerApis.getTopEvent).subscribe(response => {
-      if (response.isSuccess) {
-        this.events = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-
-    }, error => {
-
-    });
+  getListevents() {
+    this.dataService.get(ServerApis.getTopEvent).subscribe(
+      (response) => {
+        if (response.isSuccess) {
+          this.events = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {},
+    );
   }
-
-  
 
   openevents(message) {
-    console.log("id ", message.id);
+    console.log('id ', message.id);
     this.matDialog.open(AdminViewEventDetailsDialogComponent, {
       data: {
-        id: message.id
+        id: message.id,
       },
       panelClass: 'custom-dialog',
-      minWidth: '80%'
-    })
+      minWidth: '80%',
+    });
   }
-
-
-
 }

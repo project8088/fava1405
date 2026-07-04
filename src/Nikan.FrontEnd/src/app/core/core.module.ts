@@ -1,19 +1,7 @@
-import {
-  FormsModule,
-  NG_VALUE_ACCESSOR,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { FormsModule, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import {
-  Injectable,
-  ModuleWithProviders,
-  NgModule,
-  forwardRef,
-} from '@angular/core';
-import {
-  OnlyDecimalDirective,
-  OnlyNumberDirective,
-} from './directive/numbers-only';
+import { Injectable, ModuleWithProviders, NgModule, forwardRef } from '@angular/core';
+import { OnlyDecimalDirective, OnlyNumberDirective } from './directive/numbers-only';
 
 import { ArrayRandomizePipe } from './pipe/randomize.pipe';
 import { ArraySortPipe } from './pipe/array-sort.pipe';
@@ -50,7 +38,7 @@ import { InputRefundUsersAutoCompleteComponent } from './public-component/input-
     CarLicensePlateComponent,
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
-    InputRefundUsersAutoCompleteComponent
+    InputRefundUsersAutoCompleteComponent,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [
@@ -75,7 +63,7 @@ import { InputRefundUsersAutoCompleteComponent } from './public-component/input-
     CarLicensePlateComponent,
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
-    InputRefundUsersAutoCompleteComponent
+    InputRefundUsersAutoCompleteComponent,
   ],
 })
 export class CoreModule {}

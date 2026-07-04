@@ -3,23 +3,18 @@ declare var $: any;
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
-  styleUrls: ['./account.component.scss']
+  styleUrls: ['./account.component.scss'],
 })
 export class AccountComponent implements OnInit, AfterViewInit {
- 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-
-   }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
-    $("#carouselExampleIndicators").carousel({
+    $('#carouselExampleIndicators').carousel({
       wrap: true,
       pause: true,
-      interval: 20000
+      interval: 20000,
     });
   }
-
-
 }

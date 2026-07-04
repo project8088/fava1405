@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { LocalStorageService } from '../core/services/localstorage.service';
 import { ServerApis } from '../core/server-apis';
 
-
 @Injectable({
   providedIn: 'root',
 })
@@ -15,7 +14,7 @@ export class AccountService {
   }> = new BehaviorSubject(null);
   constructor(
     private dataService: DataService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
   ) {}
   setUserPreRegisterData(data: { mobileNumber: string; nationCode: string }) {
     this.localStorageService.set('UserPreRegisterData', data);

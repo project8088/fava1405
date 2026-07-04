@@ -1,62 +1,45 @@
 <div>
-    <mat-form-field
-        [appearance]="appearance"
-        class="day-form-field">
-        <mat-label>روز {{label}}</mat-label>
-        <mat-select
-            [required]="required"
-            [(ngModel)]="day"
-            name="day-picker"
-            (selectionChange)="onChange()">
-            <mat-option
-                *ngFor="let item of dayList"
-                [value]="item">
-                {{item}}
-            </mat-option>
-            <mat-option
-                [value]="30"
-                *ngIf="isLeapYear ||  month< 12">
-                30
-            </mat-option>
-            <mat-option
-                [value]="31"
-                *ngIf="month <= 6">
-                31
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field
-        [appearance]="appearance"
-        class="month-form-field">
-        <mat-label>ماه {{label}}</mat-label>
-        <mat-select
-            [required]="required"
-            [(ngModel)]="month"
-            name="month-picker"
-            (selectionChange)="onChange()">
-            <mat-option
-                *ngFor="let item of monthList;"
-                [value]="item.id">
-                {{item.title}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field
-        [appearance]="appearance"
-        class="year-form-field">
-        <mat-label>سال {{label}}</mat-label>
-        <mat-select
-            [required]="required"
-            [(ngModel)]="year"
-            name="year-picker"
-            (selectionChange)="onChange()">
-            <mat-option
-                *ngFor="let item of yearList"
-                [value]="item">
-                {{item}}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+  <mat-form-field [appearance]="appearance" class="day-form-field">
+    <mat-label>روز {{ label }}</mat-label>
+    <mat-select
+      [required]="required"
+      [(ngModel)]="day"
+      name="day-picker"
+      (selectionChange)="onChange()"
+    >
+      <mat-option *ngFor="let item of dayList" [value]="item">
+        {{ item }}
+      </mat-option>
+      <mat-option [value]="30" *ngIf="isLeapYear || month < 12"> 30 </mat-option>
+      <mat-option [value]="31" *ngIf="month <= 6"> 31 </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [appearance]="appearance" class="month-form-field">
+    <mat-label>ماه {{ label }}</mat-label>
+    <mat-select
+      [required]="required"
+      [(ngModel)]="month"
+      name="month-picker"
+      (selectionChange)="onChange()"
+    >
+      <mat-option *ngFor="let item of monthList" [value]="item.id">
+        {{ item.title }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field [appearance]="appearance" class="year-form-field">
+    <mat-label>سال {{ label }}</mat-label>
+    <mat-select
+      [required]="required"
+      [(ngModel)]="year"
+      name="year-picker"
+      (selectionChange)="onChange()"
+    >
+      <mat-option *ngFor="let item of yearList" [value]="item">
+        {{ item }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
-<small *ngIf="ngControl?.hasError('required')">تاریخ {{label}} را وارد کنید</small>
+<small *ngIf="ngControl?.hasError('required')">تاریخ {{ label }} را وارد کنید</small>
 <small *ngIf="ngControl?.hasError('invalid')">فرمت تاریخ صحیح نیست</small>

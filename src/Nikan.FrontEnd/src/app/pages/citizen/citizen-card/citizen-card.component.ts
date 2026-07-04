@@ -19,19 +19,17 @@ export class CitizenCardComponent implements OnInit {
     private breakpointObserver: BreakpointObserver,
     private toastrService: ToastrService,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
   ) {}
 
   cards;
   availableCards;
 
   loading: boolean = false;
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
 
   ngOnInit(): void {
     this.getCitizenCards();
@@ -41,35 +39,29 @@ export class CitizenCardComponent implements OnInit {
     this.dataService.get(ServerApis.getCitizenCardInfo).subscribe(
       (response) => {
         this.loading = false;
-        const cards: RegisterServiceModel[] = response.data
-          ? response.data
-          : [];
+        const cards: RegisterServiceModel[] = response.data ? response.data : [];
         this.cards = cards;
       },
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
   checkCanOrderCard(card) {
-    this.dataService
-      .get(ServerApis.checkCanOrderCard, { cardInfoId: card.cardInfoId })
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          const cards: RegisterServiceModel[] = response.data
-            ? response.data
-            : [];
-          // if (response.isSuccess)
-          //   this.router.navigateByUrl('./card-details');
-          // else this.toastrService.error(response.message);
-        },
-        (error) => {
-          this.loading = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
-      );
+    this.dataService.get(ServerApis.checkCanOrderCard, { cardInfoId: card.cardInfoId }).subscribe(
+      (response) => {
+        this.loading = false;
+        const cards: RegisterServiceModel[] = response.data ? response.data : [];
+        // if (response.isSuccess)
+        //   this.router.navigateByUrl('./card-details');
+        // else this.toastrService.error(response.message);
+      },
+      (error) => {
+        this.loading = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
 }

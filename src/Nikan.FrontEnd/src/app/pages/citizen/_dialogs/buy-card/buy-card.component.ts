@@ -1,16 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  FormControl,
-} from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import { DataService } from '../../../../core/services/data-service.service';
 import { Router } from '@angular/router';
@@ -97,7 +88,7 @@ export class BuyCardDialogComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private router: Router,
-    private helperService: HelperService
+    private helperService: HelperService,
   ) {
     this.form = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
@@ -129,7 +120,7 @@ export class BuyCardDialogComponent implements OnInit {
         (error) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -147,7 +138,7 @@ export class BuyCardDialogComponent implements OnInit {
         (error) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
   saveInfo() {
@@ -163,9 +154,7 @@ export class BuyCardDialogComponent implements OnInit {
       .post(ServerApis.addFeedbacke, {
         citizenId: +this.citizenId,
         feedbackId: formValue.feedbackId,
-        feedbackDescription: formValue.feedbackDescription
-          ? formValue.feedbackDescription
-          : '',
+        feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
       })
       .subscribe(
         (response) => {
@@ -174,24 +163,20 @@ export class BuyCardDialogComponent implements OnInit {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
             this.matDialogRef.close(true);
           } else {
-            var msg = response.messages
-              ? response.messages
-              : 'خطایی در سرور رخ داده است.';
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
-        }
+        },
       );
   }
 
   getAddresses() {
-    this.dataService
-      .get(ServerApis.getCitizenOfficeAddress)
-      .subscribe((data) => {
-        this.workAddress = data.data;
-      });
+    this.dataService.get(ServerApis.getCitizenOfficeAddress).subscribe((data) => {
+      this.workAddress = data.data;
+    });
 
     this.dataService.get(ServerApis.getCitizenHomeAddress).subscribe((data) => {
       this.homeAddress = data.data;
@@ -258,14 +243,12 @@ export class BuyCardDialogComponent implements OnInit {
                 addressId: response.data.id,
                 cardIfoId: this.card.cardInfoId,
               })
-              .subscribe(response=>{
-                this.orderDetails =  response.data;
+              .subscribe((response) => {
+                this.orderDetails = response.data;
               });
             stepper.next();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
           this.isSaving = false;
@@ -273,7 +256,7 @@ export class BuyCardDialogComponent implements OnInit {
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 }

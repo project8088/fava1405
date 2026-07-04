@@ -8,9 +8,8 @@ describe('CitizenEditMobileComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenEditMobileComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenEditMobileComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -10,11 +10,10 @@ import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';
 
-
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
-  styleUrls: ['./forgot-password.component.scss']
+  styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
   userId: string = '';
@@ -26,7 +25,7 @@ export class ForgotPasswordComponent implements OnInit {
   showChangePassword: boolean = false;
   showConfirmCode: boolean = false;
 
-  sendingSMS: boolean = false; 
+  sendingSMS: boolean = false;
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
   timerCounterString: string;
@@ -35,10 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
   checkingCode: boolean = false;
   isSaving: boolean = false;
 
-
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
-
-
 
   constructor(
     private fb: FormBuilder,
@@ -46,33 +42,31 @@ export class ForgotPasswordComponent implements OnInit {
     private toastrService: ToastrService,
     private route: ActivatedRoute,
     private dataService: DataService,
-    private router: Router
+    private router: Router,
   ) {
-    this.forgotForm = this.fb.group({
-      userEnteredCaptchaCode: [null, [Validators.required]],
-      captchaId: [''], 
-      userName: [null, [Validators.required]],
-      mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
-      verificationCode: [null, [Validators.required]],
-      password: [null, [Validators.required, Validators.minLength(6)]],
-      confirmPassword: [null, [Validators.required, Validators.minLength(6)]],
-    }, { validator: this.checkPasswords });
-
+    this.forgotForm = this.fb.group(
+      {
+        userEnteredCaptchaCode: [null, [Validators.required]],
+        captchaId: [''],
+        userName: [null, [Validators.required]],
+        mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
+        verificationCode: [null, [Validators.required]],
+        password: [null, [Validators.required, Validators.minLength(6)]],
+        confirmPassword: [null, [Validators.required, Validators.minLength(6)]],
+      },
+      { validator: this.checkPasswords },
+    );
 
     this.route.queryParams.subscribe((params) => {
       if (params['serviceId']) {
         this.serviceId = params['serviceId'];
       }
     });
-
-
   }
-
 
   ngOnInit(): void {
     //this.captchaComponent.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
   }
-
 
   /**
    * بررسی یکی بودن کلمه عبور و تائید آن
@@ -81,34 +75,24 @@ export class ForgotPasswordComponent implements OnInit {
     let pass = group.controls.password.value;
     let confirmPassword = group.controls.confirmPassword.value;
 
-    return pass === confirmPassword ? null : { notSame: true }
+    return pass === confirmPassword ? null : { notSame: true };
   }
-
-
-
-
 
   /**
    *  ارسال کد تائید شماره موبایل
-   * 
+   *
    */
   sendConfirmCode() {
-      if (this.forgotForm.get('userName').invalid) {
+    if (this.forgotForm.get('userName').invalid) {
       this.toastrService.warning('نام کاربری خود را وارد کنید.');
       this.forgotForm.get('userName').markAsTouched();
       return false;
-    }  
-
+    }
 
     //if (!this.forgotForm.get('userEnteredCaptchaCode')?.value) {
     //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
     //  return false;
     //}
-
-
-
-
-
 
     if (this.forgotForm.get('mobile').invalid) {
       this.toastrService.warning('شماره موبایل خود را وارد کنید.');
@@ -118,35 +102,38 @@ export class ForgotPasswordComponent implements OnInit {
 
     this.sendingSMS = true;
 
-    this.dataService.post(ServerApis.sendSmsForgotPassword,{
-      UserName: this.forgotForm.get('userName').value,
-      MobileNumber: this.forgotForm.get('mobile').value,
-      //CaptchaId : this.captchaComponent.captchaId 
+    this.dataService
+      .post(ServerApis.sendSmsForgotPassword, {
+        UserName: this.forgotForm.get('userName').value,
+        MobileNumber: this.forgotForm.get('mobile').value,
+        //CaptchaId : this.captchaComponent.captchaId
+      })
+      .subscribe(
+        (response) => {
+          this.sendingSMS = false;
+          if (response.isSuccess) {
+            this.userId = response.data.userId;
+            this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
+            this.lastTimerCounter = this.lastTimerCounter + 60;
+            this.timerCounter = this.lastTimerCounter;
+            this.startTimer();
 
-    }).subscribe(response => {
-      this.sendingSMS = false;
-      if (response.isSuccess) {
-        this.userId = response.data.userId;
-        this.toastrService.success("کد تائید شماره موبایل با موفقیت ارسال شد.");
-        this.lastTimerCounter = this.lastTimerCounter + 60;
-        this.timerCounter = this.lastTimerCounter;
-        this.startTimer();
-
-        this.showConfirmCode = true;
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است.";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.sendingSMS = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-    });
+            this.showConfirmCode = true;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.sendingSMS = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
 
   /**
-       * تایمر برای ارسال مجدد کد تائید
-       * */
+   * تایمر برای ارسال مجدد کد تائید
+   * */
   startTimer() {
     this.resendTimerInterval = setInterval(() => {
       this.timerCounter--;
@@ -158,7 +145,6 @@ export class ForgotPasswordComponent implements OnInit {
     }, 1000);
   }
 
-
   /**
    * convert 300s to 5:00
    * @param {any} given_seconds
@@ -169,20 +155,19 @@ export class ForgotPasswordComponent implements OnInit {
     var minutes = dateObj.getUTCMinutes();
     var seconds = dateObj.getSeconds();
 
-    var timeString = hours.toString().padStart(2, '0')
-      + ':' + minutes.toString().padStart(2, '0')
-      + ':' + seconds.toString().padStart(2, '0');
+    var timeString =
+      hours.toString().padStart(2, '0') +
+      ':' +
+      minutes.toString().padStart(2, '0') +
+      ':' +
+      seconds.toString().padStart(2, '0');
 
     return timeString;
   }
 
-
-
-
-
   /**
    * بررسی صحیح بودن کد تائید
-   * 
+   *
    */
   checkVerificationCode() {
     if (this.forgotForm.get('verificationCode').invalid) {
@@ -191,44 +176,39 @@ export class ForgotPasswordComponent implements OnInit {
       return false;
     }
 
-
     this.checkingCode = true;
-    this.dataService.post(ServerApis.checkForgotVerifyCode,{
-      VerifyCode: this.forgotForm.get('verificationCode').value,
-      MobileNumber: this.forgotForm.get('mobile').value,
-      UserId: this.userId
-    }).subscribe(response => {
-      this.checkingCode = false;
-      if (response.isSuccess) {
-        if (response.data.userId) {
-          this.toastrService.success("هم اکنون کلمه عبور جدید خود را وارد نمایید.");
-          this.showConfirmCode = false;
-          this.showChangePassword = true;
-        } else {
-          this.toastrService.error("کد تائید صحیح نیست!");
-        }
-
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.checkingCode = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-    });
-
-
-
-
-
+    this.dataService
+      .post(ServerApis.checkForgotVerifyCode, {
+        VerifyCode: this.forgotForm.get('verificationCode').value,
+        MobileNumber: this.forgotForm.get('mobile').value,
+        UserId: this.userId,
+      })
+      .subscribe(
+        (response) => {
+          this.checkingCode = false;
+          if (response.isSuccess) {
+            if (response.data.userId) {
+              this.toastrService.success('هم اکنون کلمه عبور جدید خود را وارد نمایید.');
+              this.showConfirmCode = false;
+              this.showChangePassword = true;
+            } else {
+              this.toastrService.error('کد تائید صحیح نیست!');
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.checkingCode = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
-
-
 
   /**
    *  ذخیره پسورد
-   * 
+   *
    */
   saveNewPassword() {
     if (this.forgotForm.get('password').invalid || this.forgotForm.get('confirmPassword').invalid) {
@@ -237,37 +217,35 @@ export class ForgotPasswordComponent implements OnInit {
       return false;
     }
     this.isSaving = true;
-    this.dataService.post(ServerApis.setNewPassword, {
-      VerifyCode: this.forgotForm.get('verificationCode').value,
-      MobileNumber: this.forgotForm.get('mobile').value,
-      Password: this.forgotForm.get('password').value,
-      userId: this.userId
-    }).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success("کلمه عبور شما با موفقیت تغییر یافت.");
+    this.dataService
+      .post(ServerApis.setNewPassword, {
+        VerifyCode: this.forgotForm.get('verificationCode').value,
+        MobileNumber: this.forgotForm.get('mobile').value,
+        Password: this.forgotForm.get('password').value,
+        userId: this.userId,
+      })
+      .subscribe(
+        (response) => {
+          this.isSaving = false;
+          if (response.isSuccess) {
+            this.toastrService.success('کلمه عبور شما با موفقیت تغییر یافت.');
 
-        if (this.serviceId) {
-          this.router.navigate(['/account/login'], {
-            queryParams: { serviceId: this.serviceId },
-          }); 
-        } else {
-          this.router.navigate(['/account/login']);
-        }
-
-
-         
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-        this.isSaving = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-    });
-
+            if (this.serviceId) {
+              this.router.navigate(['/account/login'], {
+                queryParams: { serviceId: this.serviceId },
+              });
+            } else {
+              this.router.navigate(['/account/login']);
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.isSaving = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
-
-
 }

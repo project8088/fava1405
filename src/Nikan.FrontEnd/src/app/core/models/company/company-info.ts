@@ -1,7 +1,12 @@
-import { ActivityLicenseEnum, ActivityLicenseTypeEnum, CompanyOwnerTypeEnum, EarthConditionEnum, FieldOfActivityEnum } from '../enums';
+import {
+  ActivityLicenseEnum,
+  ActivityLicenseTypeEnum,
+  CompanyOwnerTypeEnum,
+  EarthConditionEnum,
+  FieldOfActivityEnum,
+} from '../enums';
 
 export class CompanyInfoDto {
-   
   public companyId: number;
 
   // [StringLength(500)]
@@ -10,27 +15,21 @@ export class CompanyInfoDto {
   // [StringLength(40)]
   public englishName: string;
 
-
   // [StringLength(10)]
-  public establishedYear: string;//  سال تاسیس
-
+  public establishedYear: string; //  سال تاسیس
 
   // <summary>
   /// نوع فعالیت شرکت
   /// </summary>
   public fieldOfActivity: FieldOfActivityEnum;
 
-
   public managerName: string;
-
 
   // #region اطلاعات اصلی شرکت
   // [StringLength(40)]
   public slagUrl: string;
 
-
   public content: string;
-
 
   // [StringLength(50)]
   public cellNumber: string;
@@ -47,12 +46,8 @@ export class CompanyInfoDto {
   //  [StringLength(100)]
   public telegram: string;
 
-
-
   //  [StringLength(100)]
   public zipCode: string;
-
-
 
   //   [StringLength(100)]
   public street: string;

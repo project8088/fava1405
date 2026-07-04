@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
- 
+
 import { CoreModule } from '../../core/core.module';
 import { CardRoutingModule } from './card-routing.module';
 import { MaterialModule } from '../../core/material/material.module';
@@ -43,7 +43,6 @@ import { CardFreeRequestCardListComponent } from './free-card/free-request-list/
 import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free-card/add-or-update-free-card.component';
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';
 import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update-citizen-sabt-state-by-card/update-citizen-sabt-state-by-card.component';
- 
 
 @NgModule({
   declarations: [
@@ -82,8 +81,7 @@ import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update
     CardFreeRequestCardListComponent,
     CardAddOrUpdateFreeCardComponent,
     CardFreeCardCitizensComponent,
-    CardUpdateCitizenSabtStateByCardDialogComponent
-    
+    CardUpdateCitizenSabtStateByCardDialogComponent,
   ],
   imports: [
     CoreModule,
@@ -93,7 +91,7 @@ import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
   entryComponents: [
     CardImportCardNumberDialogComponent,
@@ -106,7 +104,7 @@ import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update
     CardAddOrUpadateQueueDialogComponent,
     CardDeliveryQueueOperatorDialogComponent,
     CardAddCardDiscountDialogComponent,
-    CardUpdateCitizenMobileNumberDialogComponent
-  ]
+    CardUpdateCitizenMobileNumberDialogComponent,
+  ],
 })
-export class CardModule { }
+export class CardModule {}

@@ -12,14 +12,13 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
- 
+
 @Component({
-    selector: 'app-citizen-event-list',
-    templateUrl: './citizen-event-list.component.html',
-    styleUrls: ['./citizen-event-list.component.scss']
+  selector: 'app-citizen-event-list',
+  templateUrl: './citizen-event-list.component.html',
+  styleUrls: ['./citizen-event-list.component.scss'],
 })
 export class AppCitizenEventListComponent implements OnInit {
-
   search: string = '';
   paging: any = {};
   userCode: string;
@@ -29,54 +28,33 @@ export class AppCitizenEventListComponent implements OnInit {
   isLoadingResults: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  searchForm: FormGroup; 
+  searchForm: FormGroup;
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
     private router: Router,
     private matDialog: MatDialog,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
-   
-    this.route.params.subscribe(p => {
-        this.userCode = p.id ? p.id : null;
-        this.getListevents();
+    this.route.params.subscribe((p) => {
+      this.userCode = p.id ? p.id : null;
+      this.getListevents();
     });
- 
-
   }
-
-
 
   ngOnInit() {}
 
-  ngAfterViewInit() {
-      
+  ngAfterViewInit() {}
+
+  getListevents() {
+    this.dataService.get(ServerApis.getCitizenTopEvent, { userCode: this.userCode }).subscribe(
+      (response) => {
+        if (response.isSuccess) {
+          this.events = response.data ? response.data : [];
+        }
+      },
+      (error) => {},
+    );
   }
-
-
-
- getListevents() {
-     this.dataService.get(ServerApis.getCitizenTopEvent, { userCode: this.userCode}).subscribe(response => {
-            if (response.isSuccess) {
-                this.events = response.data ? response.data : [];
-            }  
-        }, error => {
-
-        });
-    }
-
-
-
-
-
-  
-  
- 
-   
-
 }
-
-

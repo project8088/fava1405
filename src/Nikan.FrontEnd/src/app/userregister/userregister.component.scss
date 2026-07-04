@@ -1,5 +1,5 @@
 .page {
-  background: url("../../assets/images/bg.jpg") !important;
+  background: url('../../assets/images/bg.jpg') !important;
   background-color: #e4edf2;
 
   ::ng-deep.right {
@@ -8,8 +8,5 @@
 }
 ::ng-deep {
   .mat-form-field-wrapper {
- 
   }
 }
-
- 

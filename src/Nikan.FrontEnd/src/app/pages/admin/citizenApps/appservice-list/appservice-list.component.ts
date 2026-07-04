@@ -9,27 +9,31 @@ import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service'; 
+import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
- 
 
 @Component({
   selector: 'app-appservice-list',
   templateUrl: './appservice-list.component.html',
-  styleUrls: ['./appservice-list.component.scss']
+  styleUrls: ['./appservice-list.component.scss'],
 })
 export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
-
-  displayedColumns: string[] = ['row', 'serviceId', 'serviceName', 'isActive', 'isLinkService','isMain', 'operation'];
-
-
+  displayedColumns: string[] = [
+    'row',
+    'serviceId',
+    'serviceName',
+    'isActive',
+    'isLinkService',
+    'isMain',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
- 
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
@@ -39,31 +43,18 @@ export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-
-    this.searchForm = this.fb.group({ 
+    this.searchForm = this.fb.group({
       serviceName: [''],
     });
-
-
-
   }
 
-
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.getList();
   }
-
-
-
-
-
-  
 
   getList() {
     var param: any = this.searchForm.value;
@@ -81,21 +72,17 @@ export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -112,9 +99,6 @@ export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
     this.getList();
   }
 
-
-
-
   delete(row) {
     Swal.fire({
       title: 'حذف',
@@ -122,26 +106,26 @@ export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
       showConfirmButton: true,
       confirmButtonText: 'بله',
       showCancelButton: true,
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
-          this.dataService.get(ServerApis.removeAppService, { id: row.serviceId }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-        });
+        this.dataService.get(ServerApis.removeAppService, { id: row.serviceId }).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
+          },
+        );
       }
     });
   }
-
-
-
 }
-
-

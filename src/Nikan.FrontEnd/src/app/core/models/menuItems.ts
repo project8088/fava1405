@@ -1,5 +1,3 @@
-
-
 export class SideNavMenuItem {
   id?: number | string;
   name: string;

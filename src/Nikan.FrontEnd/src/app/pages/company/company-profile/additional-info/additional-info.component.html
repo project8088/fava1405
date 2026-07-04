@@ -1,21 +1,20 @@
- 
 <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
   <mat-spinner diameter="50" color="default"></mat-spinner>
 </div>
 <form [formGroup]="form" *ngIf="!loading">
-  <div class="row my-4"> 
-
+  <div class="row my-4">
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>شماره پرونده</mat-label>
-      <input matInput formControlName="fileCode" numbersOnly maxlength="20">
+      <input matInput formControlName="fileCode" numbersOnly maxlength="20" />
       <mat-error *ngIf="form.get('fileCode').errors?.required">شماره پرونده را وارد کنید</mat-error>
     </mat-form-field>
 
-
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>کد قرارداد</mat-label>
-      <input matInput formControlName="contractCode" numbersOnly maxlength="20">
-      <mat-error *ngIf="form.get('contractCode').errors?.required">کد قرارداد را وارد کنید</mat-error>
+      <input matInput formControlName="contractCode" numbersOnly maxlength="20" />
+      <mat-error *ngIf="form.get('contractCode').errors?.required"
+        >کد قرارداد را وارد کنید</mat-error
+      >
     </mat-form-field>
 
     <mat-form-field class="col-sm-6 col-md-4">
@@ -31,7 +30,6 @@
       </mat-error>
     </mat-form-field>
 
-
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>تاریخ قراداد آب</mat-label>
       <input matInput [matDatepicker]="wpicker" formControlName="waterContractOnDate" />
@@ -45,54 +43,53 @@
       </mat-error>
     </mat-form-field>
 
-
-
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>شناسه واریز قبض آب</mat-label>
-      <input matInput formControlName="waterDepositId" maxlength="30">
-      <mat-error *ngIf="form.get('waterDepositId').errors?.required">شناسه واریز قبض آب را وارد کنید</mat-error>
+      <input matInput formControlName="waterDepositId" maxlength="30" />
+      <mat-error *ngIf="form.get('waterDepositId').errors?.required"
+        >شناسه واریز قبض آب را وارد کنید</mat-error
+      >
     </mat-form-field>
-
-
 
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>کد تفصیلی آب</mat-label>
-      <input matInput formControlName="waterCode" maxlength="30">
-      <mat-error *ngIf="form.get('waterCode').errors?.required">کد تفصیلی آب را وارد کنید</mat-error>
+      <input matInput formControlName="waterCode" maxlength="30" />
+      <mat-error *ngIf="form.get('waterCode').errors?.required"
+        >کد تفصیلی آب را وارد کنید</mat-error
+      >
     </mat-form-field>
-
-
 
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>شناسه واریزی قبض شارژ</mat-label>
-      <input matInput formControlName="chargeDepositId" maxlength="30">
-      <mat-error *ngIf="form.get('chargeDepositId').errors?.required">شناسه واریزی قبض شارژ را وارد کنید</mat-error>
+      <input matInput formControlName="chargeDepositId" maxlength="30" />
+      <mat-error *ngIf="form.get('chargeDepositId').errors?.required"
+        >شناسه واریزی قبض شارژ را وارد کنید</mat-error
+      >
     </mat-form-field>
-
-
 
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>کد تفصیلی شارژ</mat-label>
-      <input matInput formControlName="chargeCode" maxlength="30">
-      <mat-error *ngIf="form.get('chargeCode').errors?.required">کد تفصیلی شارژ را وارد کنید</mat-error>
+      <input matInput formControlName="chargeCode" maxlength="30" />
+      <mat-error *ngIf="form.get('chargeCode').errors?.required"
+        >کد تفصیلی شارژ را وارد کنید</mat-error
+      >
     </mat-form-field>
-
-
 
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>شارژ معین کد</mat-label>
-      <input matInput formControlName="chargeMoeinCode" maxlength="30">
-      <mat-error *ngIf="form.get('chargeMoeinCode').errors?.required">شارژ معین کد را وارد کنید</mat-error>
+      <input matInput formControlName="chargeMoeinCode" maxlength="30" />
+      <mat-error *ngIf="form.get('chargeMoeinCode').errors?.required"
+        >شارژ معین کد را وارد کنید</mat-error
+      >
     </mat-form-field>
-
-
 
     <mat-form-field class="col-sm-6 col-md-4">
       <mat-label>حجم مخازن آب هوایی</mat-label>
-      <input matInput formControlName="volumeAirTanks" numbersOnly maxlength="20">
-      <mat-error *ngIf="form.get('volumeAirTanks').errors?.required">حجم مخازن آب هوایی را وارد کنید</mat-error>
+      <input matInput formControlName="volumeAirTanks" numbersOnly maxlength="20" />
+      <mat-error *ngIf="form.get('volumeAirTanks').errors?.required"
+        >حجم مخازن آب هوایی را وارد کنید</mat-error
+      >
     </mat-form-field>
-
 
     <p class="col-sm-12">
       <mat-checkbox color="default" formControlName="isBusinessUnit">
@@ -116,12 +113,6 @@
       </mat-checkbox>
     </p>
 
-
-
-
-
-
-
     <div class="col d-flex align-items-center justify-content-end">
       <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
         <span>ذخیره</span>
@@ -130,4 +121,3 @@
     </div>
   </div>
 </form>
-

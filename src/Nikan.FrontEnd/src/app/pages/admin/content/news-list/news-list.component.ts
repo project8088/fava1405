@@ -15,17 +15,22 @@ import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
 
-
 @Component({
   selector: 'adm-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  styleUrls: ['./news-list.component.scss'],
 })
 export class AdminNewsListComponent implements AfterViewInit, OnInit {
-
-  displayedColumns: string[] = ['row','imageUrl', 'title', 'description', 'onDate','clicks',   'isActive', 'operation'];
-
-
+  displayedColumns: string[] = [
+    'row',
+    'imageUrl',
+    'title',
+    'description',
+    'onDate',
+    'clicks',
+    'isActive',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -45,45 +50,32 @@ export class AdminNewsListComponent implements AfterViewInit, OnInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-
     this.searchForm = this.fb.group({
       groupId: [null],
       fromDate: [null],
       toDate: [null],
-      title: ['']
+      title: [''],
     });
-
   }
-
-
 
   ngOnInit() {
-    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe(response => {
-      if (response.isSuccess)
-        this.groupList = response.data ? response.data : [];
+    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe((response) => {
+      if (response.isSuccess) this.groupList = response.data ? response.data : [];
     });
   }
-
-
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -92,35 +84,31 @@ export class AdminNewsListComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedNewsItems, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.news ? response.data.news : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -129,25 +117,16 @@ export class AdminNewsListComponent implements AfterViewInit, OnInit {
     this.getList();
   }
 
-
-
-   
-
-
-
-
   manageAttachment(item) {
-    this.matDialog.open(ManageAttachmentDialogComponent, {
-      data: {
-        guid: item.attachmentFileGroup
-      },
-      minWidth: '80%',
-      panelClass: 'custom-dialog'
-    }).afterClosed().subscribe(response => {
-
-    });
+    this.matDialog
+      .open(ManageAttachmentDialogComponent, {
+        data: {
+          guid: item.attachmentFileGroup,
+        },
+        minWidth: '80%',
+        panelClass: 'custom-dialog',
+      })
+      .afterClosed()
+      .subscribe((response) => {});
   }
-
-
-
 }

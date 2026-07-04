@@ -11,7 +11,7 @@ declare var $: any;
 @Component({
   selector: 'app-company-info',
   templateUrl: './company-info.component.html',
-  styleUrls: ['./company-info.component.scss']
+  styleUrls: ['./company-info.component.scss'],
 })
 export class CompanyInfoComponent implements OnInit {
   companyInfo: CompanyInfoDto;
@@ -24,51 +24,46 @@ export class CompanyInfoComponent implements OnInit {
     private toastrService: ToastrService,
     private route: ActivatedRoute,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
   ) {
     this.user = this.authService.currentUserValue;
-    this.route.params.subscribe(p => {
-      if (p.id != '0' && p.id)
-        this.companyId = p.id;
+    this.route.params.subscribe((p) => {
+      if (p.id != '0' && p.id) this.companyId = p.id;
       this.getInfo();
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
   getInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getFullCompanyInfo, {
-      companyId: this.companyId
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.companyInfo = response.data;
+    this.dataService
+      .get(ServerApis.getFullCompanyInfo, {
+        companyId: this.companyId,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            this.companyInfo = response.data;
 
-
-        setTimeout(() => {
-          $('.lightGallery').lightGallery({
-            selector: 'a',
-            thumbnail: false,
-          });
-        }, 1000); 
-
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
+            setTimeout(() => {
+              $('.lightGallery').lightGallery({
+                selector: 'a',
+                thumbnail: false,
+              });
+            }, 1000);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
 
   back() {
-   
     this.router.navigate(['/admin/companies']);
-    
-
-
   }
-
-
 }

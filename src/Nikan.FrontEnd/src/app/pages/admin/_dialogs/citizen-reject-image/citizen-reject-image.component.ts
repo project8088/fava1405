@@ -26,7 +26,7 @@ export class AdminCitizenRejectImageDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private matDialogRef: MatDialogRef<AdminCitizenRejectImageDialogComponent>,
     private dataService: DataService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
   ) {
     this.citizen = _data;
   }

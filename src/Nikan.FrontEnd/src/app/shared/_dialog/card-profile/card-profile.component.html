@@ -1,21 +1,12 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-    <h5 cdkDragHandle class="title">
-       مشخصات کارت
-    </h5>
-    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+  <h5 cdkDragHandle class="title">مشخصات کارت</h5>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <mat-dialog-content>
-
-    <app-view-card-profile [cardId]="id"></app-view-card-profile>
-
-
-
+  <app-view-card-profile [cardId]="id"></app-view-card-profile>
 </mat-dialog-content>
 <mat-dialog-actions>
- 
-
-    <button mat-raised-button mat-dialog-close>بستن</button>
-
+  <button mat-raised-button mat-dialog-close>بستن</button>
 </mat-dialog-actions>

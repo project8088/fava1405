@@ -1,20 +1,23 @@
 <ul class="accordion accordion--animated">
   <ng-container *ngFor="let item of menuItems">
-
     <li class="accordion__item" *ngIf="checkPermission(item)">
-      <a [routerLink]="[item.url]" [routerLinkActive]="'active'" *ngIf="item.url" (click)="stopPagination($event)">
+      <a
+        [routerLink]="[item.url]"
+        [routerLinkActive]="'active'"
+        *ngIf="item.url"
+        (click)="stopPagination($event)"
+      >
         <label class="accordion__label">
-          <i class="{{item.icon}}" *ngIf="item.icon"></i>
-          <span>{{item.name}}</span>
+          <i class="{{ item.icon }}" *ngIf="item.icon"></i>
+          <span>{{ item.name }}</span>
         </label>
       </a>
 
+      <a *ngIf="!item.url" (click)="toggle(item, $event)">
+        <label class="accordion__label" for="{{ item.id }}">
+          <i class="{{ item.icon }}" *ngIf="item.icon"></i>
 
-      <a *ngIf="!item.url" (click)="toggle(item,$event)">
-        <label class="accordion__label" for="{{item.id}}">
-          <i class="{{item.icon}}" *ngIf="item.icon"></i>
-
-          <span>{{item.name}}</span>
+          <span>{{ item.name }}</span>
         </label>
 
         <span class="has-child" *ngIf="item.children">
@@ -26,11 +29,6 @@
           <menu-dynamic [menu]="item.children"></menu-dynamic>
         </ul>
       </a>
-
-
-
     </li>
-
   </ng-container>
-
 </ul>

@@ -8,9 +8,8 @@ describe('GuardDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardDashboardComponent ]
-    })
-    .compileComponents();
+      declarations: [CardDashboardComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -15,21 +15,9 @@ export class PlansListComponent implements OnInit {
   formStatuse: number = 0;
 
   manzelatForms: [];
- displayedColumns: string[] = [
-        'title', 
-     'registerForm',
-     'uploadFile',
-   'status','help'
+  displayedColumns: string[] = ['title', 'registerForm', 'uploadFile', 'status', 'help'];
 
-    ];
-
-  routes = [
-    'janbazan',
-    'maloulin',
-    'zanan-sarparast',
-    'bazneshaste',
-    'salmandan',
-  ];
+  routes = ['janbazan', 'maloulin', 'zanan-sarparast', 'bazneshaste', 'salmandan'];
   constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
@@ -38,17 +26,13 @@ export class PlansListComponent implements OnInit {
 
   getManzelatSetrices() {
     this.loading = true;
-    this.dataService
-      .get(ServerApis.getAllAvailableManzaltForm)
-      .subscribe((data) => {
-        this.loading = false;
-        debugger;
-        this.manzelatForms = data.data.forms;
-        this.hasAddress = data.data.hasAddress;
-        this.hasRegister = data.data.hasRegister;
-        this.formStatuse = data.data.formStatuse;
-
-
-      });
+    this.dataService.get(ServerApis.getAllAvailableManzaltForm).subscribe((data) => {
+      this.loading = false;
+      debugger;
+      this.manzelatForms = data.data.forms;
+      this.hasAddress = data.data.hasAddress;
+      this.hasRegister = data.data.hasRegister;
+      this.formStatuse = data.data.formStatuse;
+    });
   }
 }

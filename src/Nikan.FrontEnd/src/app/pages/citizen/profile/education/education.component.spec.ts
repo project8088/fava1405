@@ -8,9 +8,8 @@ describe('CitizenEducationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CitizenEducationComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenEducationComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

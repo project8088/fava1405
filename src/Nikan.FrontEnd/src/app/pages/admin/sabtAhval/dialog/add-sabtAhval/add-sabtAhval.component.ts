@@ -9,14 +9,14 @@ import { ServerApis } from '../../../../../core/server-apis';
 @Component({
   selector: 'adm-add-sabtAhval-dialog',
   templateUrl: './add-sabtAhval.component.html',
-  styleUrls: ['./add-sabtAhval.component.scss']
+  styleUrls: ['./add-sabtAhval.component.scss'],
 })
 export class AdminAddSabtAhvalDialogComponent implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   baseEnums: any = {};
   isUpdate: boolean;
-  calcChargeTypeList: any = [] = [];
+  calcChargeTypeList: any = ([] = []);
   loadingData: boolean;
   id: string;
   constructor(
@@ -26,22 +26,19 @@ export class AdminAddSabtAhvalDialogComponent implements OnInit {
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService) {
-
-    this.frm = this.fb.group({ 
+    private dataService: DataService,
+  ) {
+    this.frm = this.fb.group({
       fromDate: [null, [Validators.required]],
       exportType: [null, [Validators.required]],
       groupId: [null],
-      toDate: [null, [Validators.required]], 
+      toDate: [null, [Validators.required]],
     });
-     
-
   }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.getGroups();
   }
-
 
   getGroups() {
     this.dataService.get(ServerApis.getGroups).subscribe(
@@ -50,17 +47,13 @@ export class AdminAddSabtAhvalDialogComponent implements OnInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
-
-
-
-
   saveInfo() {
     if (this.frm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
       return false;
     }
@@ -68,31 +61,26 @@ export class AdminAddSabtAhvalDialogComponent implements OnInit {
     this.isSaving = true;
 
     var url = ServerApis.exportCitizenForSabtAhval;
-   
+
     var params = this.frm.value;
-    if (params.fromDate)
-      params.fromDate = this.dataService.formatDate(params.fromDate);
+    if (params.fromDate) params.fromDate = this.dataService.formatDate(params.fromDate);
 
-    if (params.toDate)
-      params.toDate = this.dataService.formatDate(params.toDate); 
+    if (params.toDate) params.toDate = this.dataService.formatDate(params.toDate);
 
-    this.dataService.post(url, this.frm.value).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('با موفقیت ایجاد شد.');
-        this.matDialogRef.close(true);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
+    this.dataService.post(url, this.frm.value).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response && response.isSuccess) {
+          this.toastrService.success('با موفقیت ایجاد شد.');
+          this.matDialogRef.close(true);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
-
-
-   
-
-
 }

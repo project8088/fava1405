@@ -8,9 +8,8 @@ describe('SendTicketDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SendTicketDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [SendTicketDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

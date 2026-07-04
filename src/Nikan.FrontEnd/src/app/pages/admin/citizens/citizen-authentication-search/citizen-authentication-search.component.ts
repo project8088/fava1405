@@ -3,15 +3,14 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
- 
- 
+
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
- 
+
 import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
@@ -29,16 +28,16 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
     'nationCode',
     'firstName',
     'lastName',
-    'birthDate', 
+    'birthDate',
     'fatherName',
     'registerByService',
     'creationDate',
     'sabtStatus',
     'lastUpdateOnDate',
-   
+
     'authenticationByService',
     'requestId',
-     'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -59,15 +58,14 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
       registerByService: [null],
-      nationCode: [''], 
-      sabtStatus: [null], 
-     
+      nationCode: [''],
+      sabtStatus: [null],
     });
   }
 
@@ -93,7 +91,6 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
     this.dataService.getEnums().subscribe(
       (response) => {
         if (response) {
-
           //this.baseEnums.sabtStatus = response.sabtStatus;
           this.baseEnums.maritalStatus = response.maritalStatus;
           this.baseEnums.groupIds = response.groupIds;
@@ -101,7 +98,7 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
   }
 
@@ -112,10 +109,9 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
 
   getGroups() {
     this.dataService.get(ServerApis.getGroups).subscribe(
@@ -124,24 +120,16 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
-
-
 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-
-
-  
 
     merge()
       .pipe(
@@ -154,21 +142,17 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -185,19 +169,15 @@ export class AdminCitizenAuthenticationSearchComponent implements AfterViewInit 
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
-  
-  
 }

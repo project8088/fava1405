@@ -8,9 +8,8 @@ describe('CompanyMainInfoComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CompanyMainInfoComponent ]
-    })
-    .compileComponents();
+      declarations: [CompanyMainInfoComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

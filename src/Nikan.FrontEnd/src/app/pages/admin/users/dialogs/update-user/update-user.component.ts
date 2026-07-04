@@ -1,10 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; 
-import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteTrigger,
+} from '@angular/material/autocomplete';
 import { BaseDataModel } from 'src/app/core/models/base-data-model';
-import { Observable } from 'rxjs'; 
+import { Observable } from 'rxjs';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
@@ -12,7 +15,7 @@ import { ServerApis } from '../../../../../core/server-apis';
 @Component({
   selector: 'app-adm-update-user-dialog',
   templateUrl: './update-user.component.html',
-  styleUrls: ['./update-user.component.scss']
+  styleUrls: ['./update-user.component.scss'],
 })
 export class AdminUpdateUserDialogComponent implements OnInit {
   isSaving: boolean;
@@ -21,8 +24,6 @@ export class AdminUpdateUserDialogComponent implements OnInit {
   loading: boolean = true;
   bankEnums: any[] = [];
   loadingEnums: boolean = true;
-
-
 
   loadinProvince: boolean;
   provinceList: BaseDataModel[] = [];
@@ -39,8 +40,8 @@ export class AdminUpdateUserDialogComponent implements OnInit {
   selectedOffices: any[] = [];
 
   userAccountState: any[] = [];
-  organizationList: any = [] = [];
-  unitList: any = [] = [];
+  organizationList: any = ([] = []);
+  unitList: any = ([] = []);
   periorityList: any[] = [];
   loadingUnit: boolean;
   loadingData: boolean = true;
@@ -49,14 +50,14 @@ export class AdminUpdateUserDialogComponent implements OnInit {
     private matDialogRef: MatDialogRef<AdminUpdateUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private toastrService: ToastrService,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService) {
+    private dataService: DataService,
+  ) {
     if (_data) {
       this.userId = _data.userId;
       this.getUserInfo();
     }
-
 
     this.userForm = this.fb.group({
       id: [null],
@@ -73,75 +74,68 @@ export class AdminUpdateUserDialogComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
     this.getOrganizations();
-    this.dataService.getEnums().subscribe(response => {
+    this.dataService.getEnums().subscribe((response) => {
       this.userAccountState = response.userAccountState ? response.userAccountState : [];
     });
   }
 
-  
-
   getUserInfo() {
-    this.loading = true
+    this.loading = true;
     //todo
-    this.dataService.get(ServerApis.getUserAccountInfo,{ userId: this.userId }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess) {
-         this.userForm.setValue({
-          id: response.data.userId,
-          displayName: response.data.displayName,
-          username: response.data.userName,
-          mobile: response.data.mobileNumber,
-          email: response.data.emailAddress,
-           userState: response.data.userAccountState,
-deactivationDate: response.data.deactivationDate,
-          userStateDescriptionForUser: response.data.userStateDescriptionForUser? response.data.userStateDescriptionForUser:'',
-          userStateDescriptionForAdmin: response.data.userStateDescriptionForAdmin ? response.data.userStateDescriptionForAdmin:'',
-          organization: response.data.organization,
-          organizationalUnit: response.data.organizationalUnit,
+    this.dataService.get(ServerApis.getUserAccountInfo, { userId: this.userId }).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess) {
+          this.userForm.setValue({
+            id: response.data.userId,
+            displayName: response.data.displayName,
+            username: response.data.userName,
+            mobile: response.data.mobileNumber,
+            email: response.data.emailAddress,
+            userState: response.data.userAccountState,
+            deactivationDate: response.data.deactivationDate,
+            userStateDescriptionForUser: response.data.userStateDescriptionForUser
+              ? response.data.userStateDescriptionForUser
+              : '',
+            userStateDescriptionForAdmin: response.data.userStateDescriptionForAdmin
+              ? response.data.userStateDescriptionForAdmin
+              : '',
+            organization: response.data.organization,
+            organizationalUnit: response.data.organizationalUnit,
+          });
 
-         });
-
-        this.getUnitsOfOrganization();
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است.";
-        this.toastrService.error(msg);
+          this.getUnitsOfOrganization();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+          this.matDialogRef.close(false);
+        }
+      },
+      (error) => {
+        this.loading = false;
         this.matDialogRef.close(false);
-      }
-
-    }, error => {
-      this.loading = false; 
-      this.matDialogRef.close(false);
-    });
+      },
+    );
   }
-
-
-
 
   displayFn(item): string {
     return item && item.text ? item.text : '';
   }
 
-
-
-
-
   saveInfo() {
     if (this.userForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
       return false;
     }
 
-
     var formValue = this.userForm.value;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.updateAccount,
-      {
+    this.dataService
+      .post(ServerApis.updateAccount, {
         UserId: this.userId,
         DisplayName: formValue.displayName,
         deactivationDate: formValue.deactivationDate,
@@ -150,23 +144,24 @@ deactivationDate: response.data.deactivationDate,
         UserAccountState: formValue.userState,
         OrganizationalUnitId: formValue.organizationalUnit.key,
         userStateDescriptionForUser: formValue.userStateDescriptionForUser,
-        userStateDescriptionForAdmin: formValue.userStateDescriptionForAdmin
-      }
-    ).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.matDialogRef.close(true);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false; 
-    });
+        userStateDescriptionForAdmin: formValue.userStateDescriptionForAdmin,
+      })
+      .subscribe(
+        (response) => {
+          this.isSaving = false;
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.isSaving = false;
+        },
+      );
   }
-
-
 
   changeUserState() {
     if (this.userForm.get('userState').value == 0 || this.userForm.get('userState').value == 3) {
@@ -182,16 +177,9 @@ deactivationDate: response.data.deactivationDate,
     }
   }
 
-
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
-
-
-
-
-
-
 
   /**
    * حذف از اتوکاملیت چیپ
@@ -205,9 +193,6 @@ deactivationDate: response.data.deactivationDate,
     }
   }
 
-
-
-
   /**
    * انتخاب اتوکاملیت و اضافه کردن به لیست چیپ
    * @param list
@@ -216,58 +201,62 @@ deactivationDate: response.data.deactivationDate,
    * @param event
    * @param Trigger
    */
-  selectedAutoChip(list: any[], formControl, input: any, event: MatAutocompleteSelectedEvent, Trigger: MatAutocompleteTrigger): void {
-    const index = list.findIndex(l => l.value == event.option.value.value);
+  selectedAutoChip(
+    list: any[],
+    formControl,
+    input: any,
+    event: MatAutocompleteSelectedEvent,
+    Trigger: MatAutocompleteTrigger,
+  ): void {
+    const index = list.findIndex((l) => l.value == event.option.value.value);
     if (index >= 0)
-      this.toastrService.warning(event.option.value.text + " را قبلاً انتخاب کرده اید.", "تکراری!");
-    else
-      list.push(event.option.value);
+      this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
+    else list.push(event.option.value);
     input.value = '';
     this.userForm.get(formControl).setValue(null);
-    setTimeout(_ => {
+    setTimeout((_) => {
       Trigger.openPanel();
     }, 100);
   }
 
-
-
-
-
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-        this.organizationList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingData = false;
-    });
+    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
-
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
-    this.dataService.get(ServerApis.getAllOrganizationalUnitByOrganId, {
-      organId: this.userForm.get('organization').value.key
-    }).subscribe(response => {
-      this.loadingUnit = false;
-      if (response.isSuccess) {
-        this.unitList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingUnit = false;
-    });
+    this.dataService
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.userForm.get('organization').value.key,
+      })
+      .subscribe(
+        (response) => {
+          this.loadingUnit = false;
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loadingUnit = false;
+        },
+      );
   }
-
-
-
-
 }

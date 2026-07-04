@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 
 import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from 'src/app/core/models/base-data-model';
@@ -51,7 +45,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private dataService: DataService,
-    private profileComponent: CitizenProfileComponent
+    private profileComponent: CitizenProfileComponent,
   ) {
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
@@ -59,11 +53,6 @@ export class CitizenPersonalInfoComponent implements OnInit {
     });
 
     this.personalForm = this.fb.group({
-      
-         
-     
-
-     
       educationStatues: [null, [Validators.required]],
       educationLevel: [null, [Validators.required]],
       educationTitle: [null],
@@ -84,24 +73,18 @@ export class CitizenPersonalInfoComponent implements OnInit {
       cityId: [null, []],
     });
 
-    this.personalForm
-      .get('educationStatues')
-      .valueChanges.subscribe((value) => {
-        if (+value !== 3) {
-          this.personalForm
-            .get('educationLevel')
-            .setValidators(Validators.required);
-          this.personalForm
-            .get('educationGroup')
-            .setValidators(Validators.required);
-        } else {
-          this.personalForm.get('educationLevel').clearValidators();
-          this.personalForm.get('educationGroup').clearValidators();
-        }
+    this.personalForm.get('educationStatues').valueChanges.subscribe((value) => {
+      if (+value !== 3) {
+        this.personalForm.get('educationLevel').setValidators(Validators.required);
+        this.personalForm.get('educationGroup').setValidators(Validators.required);
+      } else {
+        this.personalForm.get('educationLevel').clearValidators();
+        this.personalForm.get('educationGroup').clearValidators();
+      }
 
-        this.personalForm.get('educationLevel').updateValueAndValidity();
-        this.personalForm.get('educationGroup').updateValueAndValidity();
-      });
+      this.personalForm.get('educationLevel').updateValueAndValidity();
+      this.personalForm.get('educationGroup').updateValueAndValidity();
+    });
 
     this.helperService.getProvinces().subscribe((data) => {
       this.states = this.getListOptions(data);
@@ -123,7 +106,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
         return this.helperService
           .getCitesByParent(value)
           .pipe(map((data) => this.getListOptions(data)));
-      })
+      }),
     );
 
     this.filteredState = this.personalForm.get('state').valueChanges.pipe(
@@ -132,7 +115,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((value) => {
         return this._getStates(value);
-      })
+      }),
     );
   }
 
@@ -165,8 +148,8 @@ export class CitizenPersonalInfoComponent implements OnInit {
           (error) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
-          }
-        )
+          },
+        ),
       );
   }
 
@@ -190,7 +173,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
   getEducationGroups() {
@@ -205,7 +188,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
   getPersonalInfo() {
@@ -215,14 +198,12 @@ export class CitizenPersonalInfoComponent implements OnInit {
         this.loading = false;
         if (response && response.isSuccess) {
           this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-          this, (this.citizenInfo = response.data);
+          (this, (this.citizenInfo = response.data));
 
           this.personalForm.patchValue({
-            
             date_SabtConfirm: response.data.date_SabtConfirm
               ? new Date(response.data.date_SabtConfirm)
               : '',
-             
 
             educationTitle: response.data.educationField,
             educationGroup: String(response.data.educationGroupId),
@@ -231,7 +212,7 @@ export class CitizenPersonalInfoComponent implements OnInit {
             alley: response.data.alley,
             region: response.data.region,
             postalCode: response.data.postalCode,
-           
+
             marital: response.data.mariageStatus,
             educationStatues: response.data.educationStatues,
             educationLevel: response.data.educationLevel,
@@ -250,18 +231,15 @@ export class CitizenPersonalInfoComponent implements OnInit {
           });
 
           this.userStatus = response.data.sabtStatus;
-           
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
@@ -276,7 +254,6 @@ export class CitizenPersonalInfoComponent implements OnInit {
     this.isSaving = true;
     this.dataService
       .post(ServerApis.updteOtherBaseInfoByCitizen, {
-        
         mariageStatus: formValue.marital,
 
         educationStatues: formValue.educationStatues,
@@ -301,16 +278,14 @@ export class CitizenPersonalInfoComponent implements OnInit {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
             this.getPersonalInfo();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -335,15 +310,14 @@ export class CitizenPersonalInfoComponent implements OnInit {
     });
   }
 
-  setDisabledFields(){
-    if(this.noEditStatus())
-    {
+  setDisabledFields() {
+    if (this.noEditStatus()) {
       //this.personalForm.get('firstName').disable();
       //this.personalForm.get('lastName').disable();
       //this.personalForm.get('fatherName').disable();
       //this.personalForm.get('birthDate').disable();
       //this.personalForm.get('gender').disable();
-   }
+    }
   }
   noEditStatus() {
     return this.userStatus === 3 || this.userStatus === 1;

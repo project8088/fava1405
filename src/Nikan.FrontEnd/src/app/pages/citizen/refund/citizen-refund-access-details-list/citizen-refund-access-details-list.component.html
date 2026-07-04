@@ -2,52 +2,51 @@
   <span>لیست دسترسی</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/citizen/dashboard">داشبورد</div>
-    <div class="bread-crumb-item" routerLink="/citizen/citizen-refund-status">
-     لیست دسترسی
-    </div>
+    <div class="bread-crumb-item" routerLink="/citizen/citizen-refund-status">لیست دسترسی</div>
     <div class="bread-crumb-item active">جزئیات دسترسی</div>
   </div>
 </div>
 
-
 <mat-card class="custom-card">
-  <mat-card-header class="d-flex align-items-center justify-content-end">
- 
-  </mat-card-header>
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-
-    <div class="d-flex align-items-center justify-content-end">
-
-    </div>
-
-
+    <div class="d-flex align-items-center justify-content-end"></div>
 
     <form [formGroup]="searchForm">
       <div class="row">
         <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>کد ملی  </mat-label>
+          <mat-label>کد ملی </mat-label>
           <input matInput formControlName="nationCode" maxlength="15" />
         </mat-form-field>
 
-
         <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>  کد پیگیری</mat-label>
+          <mat-label> کد پیگیری</mat-label>
           <input matInput formControlName="orderId" maxlength="100" />
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>  شناسه تراکنش </mat-label>
+          <mat-label> شناسه تراکنش </mat-label>
           <input matInput formControlName="transactionCode" maxlength="100" />
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>از تاریخ</mat-label>
-          <input matInput [matDatepicker]="dpS" formControlName="fromDate" [max]="searchForm.get('toDate').value">
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="fromDate"
+            [max]="searchForm.get('toDate').value"
+          />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
           <mat-error *ngIf="searchForm.get('fromDate').errors?.required">
             تاریخ شروع را مشخص کنید.
           </mat-error>
-          <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerMin || searchForm.get('fromDate').errors?.matDatepickerMax">
+          <mat-error
+            *ngIf="
+              searchForm.get('fromDate').errors?.matDatepickerMin ||
+              searchForm.get('fromDate').errors?.matDatepickerMax
+            "
+          >
             تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
           </mat-error>
           <mat-error *ngIf="searchForm.get('fromDate').errors?.matDatepickerParse">
@@ -55,16 +54,25 @@
           </mat-error>
         </mat-form-field>
 
-
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>تا تاریخ</mat-label>
-          <input matInput [matDatepicker]="dpE" formControlName="toDate" [min]="searchForm.get('fromDate').value">
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="toDate"
+            [min]="searchForm.get('fromDate').value"
+          />
           <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
           <mat-datepicker #dpE></mat-datepicker>
           <mat-error *ngIf="searchForm.get('toDate').errors?.required">
             تاریخ پایان را مشخص کنید.
           </mat-error>
-          <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerMin || searchForm.get('toDate').errors?.matDatepickerMax">
+          <mat-error
+            *ngIf="
+              searchForm.get('toDate').errors?.matDatepickerMin ||
+              searchForm.get('toDate').errors?.matDatepickerMax
+            "
+          >
             تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
           </mat-error>
           <mat-error *ngIf="searchForm.get('toDate').errors?.matDatepickerParse">
@@ -72,14 +80,8 @@
           </mat-error>
         </mat-form-field>
 
-
-
-
-
-
-
         <mat-form-field class="col-sm-6 col-md-4">
-          <mat-label>وضعیت  </mat-label>
+          <mat-label>وضعیت </mat-label>
           <mat-select formControlName="refundState">
             <mat-option [value]="null">همه</mat-option>
             <mat-option [value]="0">ثبت شماره کارت</mat-option>
@@ -87,7 +89,6 @@
             <mat-option [value]="2">بدون پاسخ</mat-option>
           </mat-select>
         </mat-form-field>
-
       </div>
       <div class="d-flex justify-content-end mb-4">
         <button mat-raised-button color="default" (click)="applyFilter()">
@@ -97,113 +98,110 @@
       </div>
     </form>
     <div class="d-flex align-items-center justify-content-end mb-3">
-      <button mat-raised-button color="default" (click)="exporter.exportTable('xlsx',{fileName:'excel'})">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
         <i class="fa fa-file-excel mr-2"></i>
         خروجی اکسل
       </button>
-
     </div>
     <div class="datatable-container mat-elevation-z8">
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div class="datatable-loading-shade" *ngIf="isLoadingResults==false && listCount==0">
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-
-        <table mat-table [dataSource]="data" class="datatable-table" #exporter="matTableExporter" matTableExporter [hiddenColumns]="[displayedColumns.length-1]">
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="row">
             <th mat-header-cell *matHeaderCellDef width="40">#</th>
-            <td mat-cell *matCellDef="let row;let i=index;">
-              {{paginator.pageIndex*paginator.pageSize + i + 1 }}
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
             </td>
           </ng-container>
-
-
 
           <ng-container matColumnDef="orderId">
-            <th mat-header-cell *matHeaderCellDef>  کد پیگیری </th>
+            <th mat-header-cell *matHeaderCellDef>کد پیگیری</th>
             <td mat-cell *matCellDef="let row">
-              {{row.orderId}}
+              {{ row.orderId }}
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="transactionCode">
-            <th mat-header-cell *matHeaderCellDef> شناسه تراکنش    </th>
+            <th mat-header-cell *matHeaderCellDef>شناسه تراکنش</th>
             <td mat-cell *matCellDef="let row">
-              {{row.transactionCode}}
+              {{ row.transactionCode }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="refundCardNumber">
-            <th mat-header-cell *matHeaderCellDef> شماره کارت   </th>
+            <th mat-header-cell *matHeaderCellDef>شماره کارت</th>
             <td mat-cell *matCellDef="let row">
-              <label style="border:none ; background-color:none; text-align:left;direction:ltr;">
-                {{row.refundCardNumber}}
+              <label style="border: none; background-color: none; text-align: left; direction: ltr">
+                {{ row.refundCardNumber }}
               </label>
-
             </td>
           </ng-container>
 
           <ng-container matColumnDef="totalRefundAmount">
-            <th mat-header-cell *matHeaderCellDef> مبلغ    </th>
+            <th mat-header-cell *matHeaderCellDef>مبلغ</th>
             <td mat-cell *matCellDef="let row">
-              {{row.totalRefundAmount}}
+              {{ row.totalRefundAmount }}
             </td>
           </ng-container>
           <ng-container matColumnDef="ownerNationCode">
-            <th mat-header-cell *matHeaderCellDef>  کد ملی     </th>
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
             <td mat-cell *matCellDef="let row">
-              {{row.ownerNationCode}}
+              {{ row.ownerNationCode }}
             </td>
           </ng-container>
           <ng-container matColumnDef="ownerName">
-            <th mat-header-cell *matHeaderCellDef> شهروند     </th>
+            <th mat-header-cell *matHeaderCellDef>شهروند</th>
             <td mat-cell *matCellDef="let row">
-              {{row.ownerName}}
+              {{ row.ownerName }}
             </td>
           </ng-container>
           <ng-container matColumnDef="ownerMobileNumber">
-            <th mat-header-cell *matHeaderCellDef>  موبایل </th>
+            <th mat-header-cell *matHeaderCellDef>موبایل</th>
             <td mat-cell *matCellDef="let row">
-              {{row.ownerMobileNumber}}
+              {{ row.ownerMobileNumber }}
             </td>
           </ng-container>
-
 
           citizen-refund-info
 
           <ng-container matColumnDef="refundOnDate">
-            <th mat-header-cell *matHeaderCellDef> تاریخ  بررسی   </th>
+            <th mat-header-cell *matHeaderCellDef>تاریخ بررسی</th>
             <td mat-cell *matCellDef="let row">
-              {{row.refundOnDate|jalali  }}
+              {{ row.refundOnDate | jalali }}
             </td>
           </ng-container>
-
-
-
-
-
 
           <ng-container matColumnDef="refundState">
-            <th mat-header-cell *matHeaderCellDef> وضعیت </th>
+            <th mat-header-cell *matHeaderCellDef>وضعیت</th>
             <td mat-cell *matCellDef="let row">
-              <strong class="text-success" *ngIf="row.refundState==1">برگشت داده شده</strong>
-              <strong class="text-info" *ngIf="row.refundState==0">
-                ثبت   کارت
-                {{row.ownerBankCardNumber}}
+              <strong class="text-success" *ngIf="row.refundState == 1">برگشت داده شده</strong>
+              <strong class="text-info" *ngIf="row.refundState == 0">
+                ثبت کارت
+                {{ row.ownerBankCardNumber }}
 
-                {{row.declarationCardNumber}}
-
+                {{ row.declarationCardNumber }}
               </strong>
-              <strong class="text-danger" *ngIf="row.refundState==2"> بدون پاسخ</strong>
-              <strong class="text-warning" *ngIf="row.refundState==null"> انجام نشده</strong>
+              <strong class="text-danger" *ngIf="row.refundState == 2"> بدون پاسخ</strong>
+              <strong class="text-warning" *ngIf="row.refundState == null"> انجام نشده</strong>
             </td>
           </ng-container>
-
 
           <ng-container matColumnDef="operation">
             <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
@@ -213,7 +211,11 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button *ngIf="row.refundState==null" mat-menu-item (click)="openRefundInfoDialog(row)">
+                <button
+                  *ngIf="row.refundState == null"
+                  mat-menu-item
+                  (click)="openRefundInfoDialog(row)"
+                >
                   <i class="fa fa-eye mr-2"></i>
                   بررسی استرداد
                 </button>
@@ -226,26 +228,22 @@
                   <i class="fa fa-eye mr-2"></i>
                  بررسی استرداد
                 </button>-->
-
-
-
               </mat-menu>
             </td>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns;sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
-      <mat-paginator [length]="listCount" [pageSize]="100" [pageSizeOptions]="[100,200,250,500,1000,2000]" showFirstLastButtons (page)="pageEvent($event)"></mat-paginator>
-
-
-
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="100"
+        [pageSizeOptions]="[100, 200, 250, 500, 1000, 2000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
     </div>
-
-
-
-
   </mat-card-content>
-    <mat-card-footer></mat-card-footer>
-  </mat-card>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

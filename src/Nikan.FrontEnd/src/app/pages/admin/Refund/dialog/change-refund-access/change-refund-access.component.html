@@ -1,31 +1,27 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-    <h5 cdkDragHandle class="title" > ویرایش اطلاعات دسترسی استرداد</h5>
-    
+  <h5 cdkDragHandle class="title">ویرایش اطلاعات دسترسی استرداد</h5>
 
-    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <mat-dialog-content>
-
   <div class="box-info-dash">
     <div class="row">
       <div class="col-sm-6">
-        <span>دسترسی برای :  </span><strong>{{info.accessByCitizen}}</strong>
+        <span>دسترسی برای : </span><strong>{{ info.accessByCitizen }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>شماره نامه:  </span><strong>{{info.letterNumber}}</strong>
+        <span>شماره نامه: </span><strong>{{ info.letterNumber }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>کلاس:  </span><strong>{{info.className}}</strong>
+        <span>کلاس: </span><strong>{{ info.className }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>تاریخ دسترسی:  </span><strong>{{info.onDate|jalali:'HH:mm YYYY/MM/DD'}}</strong>
+        <span>تاریخ دسترسی: </span><strong>{{ info.onDate | jalali: 'HH:mm YYYY/MM/DD' }}</strong>
       </div>
-
     </div>
   </div>
-
 
   <form [formGroup]="frm">
     <div class="row">
@@ -39,9 +35,7 @@
       <mat-form-field class="col-md-4">
         <mat-label>نام واحد</mat-label>
         <input matInput formControlName="unitName" maxlength="50" />
-        <mat-error *ngIf="frm.get('unitName').errors?.required">
-          نام واحد را وارد کنید.
-        </mat-error>
+        <mat-error *ngIf="frm.get('unitName').errors?.required"> نام واحد را وارد کنید. </mat-error>
       </mat-form-field>
       <mat-form-field class="col-md-4">
         <mat-label>نام کلاس</mat-label>
@@ -61,14 +55,12 @@
         </mat-error>
       </mat-form-field>
 
-
       <mat-form-field class="col-sm-6 col-md-6">
         <mat-label>توضیحات</mat-label>
         <input matInput formControlName="description" maxlength="200" />
       </mat-form-field>
     </div>
     <div class="d-flex align-items-center justify-content-between">
-
       <p>
         <mat-checkbox color="default" formControlName="citizenAccess">دسترسی شهروند</mat-checkbox>
       </p>
@@ -76,13 +68,12 @@
       <p>
         <mat-checkbox color="default" formControlName="isClosed">بستن درخواست</mat-checkbox>
       </p>
-
     </div>
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>انصراف</button>
-    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()">
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
     <span>ذخیره </span>
     <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
   </button>

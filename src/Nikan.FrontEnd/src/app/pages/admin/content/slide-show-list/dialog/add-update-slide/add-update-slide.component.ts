@@ -8,7 +8,7 @@ import { ServerApis } from 'src/app/core/server-apis';
 @Component({
   selector: 'adm-add-update-slide-dialog',
   templateUrl: './add-update-slide.component.html',
-  styleUrls: ['./add-update-slide.component.scss']
+  styleUrls: ['./add-update-slide.component.scss'],
 })
 export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
   isUpdate: boolean;
@@ -25,7 +25,7 @@ export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private toastrService: ToastrService,
     private fb: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.form = this.fb.group({
       id: [null],
@@ -33,9 +33,8 @@ export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
       description: ['', []],
       url: ['', []],
       indexOrder: [0, [Validators.required]],
-      isActive: [true, []], 
-
-    }); 
+      isActive: [true, []],
+    });
     if (_data.id) {
       this.isUpdate = true;
       this.id = _data.id;
@@ -43,40 +42,32 @@ export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
     } else {
       this.isUpdate = false;
     }
-
   }
 
-
-
-
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   getInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getSlideShow, { id: this.id }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess) {
-        this.form.patchValue(response.data);
-        this.imageUrl = response.data.imageUrl;
-      }
-      else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-
-    });
+    this.dataService.get(ServerApis.getSlideShow, { id: this.id }).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess) {
+          this.form.patchValue(response.data);
+          this.imageUrl = response.data.imageUrl;
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
 
   getAttachmentId(ev) {
     this.imageUrl = ev.uploadUrl;
   }
-
 
   saveInfo() {
     if (this.form.invalid) {
@@ -96,27 +87,22 @@ export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
       url: formValue.url,
       indexOrder: formValue.indexOrder,
       isActive: formValue.isActive,
-    }
+    };
 
-    this.dataService.post(ServerApis.addOrUpdateSlideShow, params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.matDialogRef.close(true);
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
+    this.dataService.post(ServerApis.addOrUpdateSlideShow, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.matDialogRef.close(true);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
-
-
-
-
-
-
-
 }

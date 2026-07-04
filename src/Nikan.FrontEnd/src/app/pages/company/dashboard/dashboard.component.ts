@@ -1,5 +1,5 @@
-import { Component, OnInit, Sanitizer } from '@angular/core'; 
-import { ToastrService } from 'ngx-toastr'; 
+import { Component, OnInit, Sanitizer } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../core/server-apis';
 import { DataService } from '../../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -10,11 +10,10 @@ import { AuthService } from '../../../core/authentication/auth.service';
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-export class CompnayDashboardComponent implements OnInit{
-
-  loading: boolean; 
+export class CompnayDashboardComponent implements OnInit {
+  loading: boolean;
   notifications: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
   loadingStore: boolean;
@@ -22,76 +21,68 @@ export class CompnayDashboardComponent implements OnInit{
 
   user: AuthUser;
 
-  constructor( 
+  constructor(
     private toastrService: ToastrService,
     private dataService: DataService,
     private matDialog: MatDialog,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
-    this.authService.currentUser.subscribe(u => {
+    this.authService.currentUser.subscribe((u) => {
       this.user = u;
     });
-
-
   }
-  ngOnInit(): void { 
-
+  ngOnInit(): void {
     this.getNotificationList();
-   // this.getStoreList();
-  } 
-
-
+    // this.getStoreList();
+  }
 
   getNotificationList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getLastNotifications, {  }).subscribe(response => {
-      this.loading = false;
-      if (response && response.isSuccess) {
-        this.notifications = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false; 
-    });
+    this.dataService.get(ServerApis.getLastNotifications, {}).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.notifications = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-
 
   getStoreList() {
     this.loadingStore = true;
-    this.dataService.get(ServerApis.getAllStoreItemForComany, {}).subscribe(response => {
-      this.loadingStore = false;
-      if (response && response.isSuccess) {
-        this.storeItems = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
+    this.dataService.get(ServerApis.getAllStoreItemForComany, {}).subscribe(
+      (response) => {
         this.loadingStore = false;
-    });
+        if (response && response.isSuccess) {
+          this.storeItems = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingStore = false;
+      },
+    );
   }
-
-
-
 
   openNotificationDetails(item) {
     this.matDialog.open(ViewNotificationDetailsDialogComponent, {
       data: {
-        id:item.id
+        id: item.id,
       },
       panelClass: 'custom-dialog',
-      minWidth:'80%'
-    })
+      minWidth: '80%',
+    });
   }
-  
-
-
 
   buy(item) {
     this.toastrService.info('در حال حاضر امکان ارتباط با درگاه پرداخت برقرار نیست.');
   }
-  
 }

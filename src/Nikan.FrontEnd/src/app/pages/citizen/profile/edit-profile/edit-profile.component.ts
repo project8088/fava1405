@@ -15,9 +15,9 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
-  styleUrls: ['./edit-profile.component.scss']
+  styleUrls: ['./edit-profile.component.scss'],
 })
-export class CitizenEditProfileComponent implements OnInit  {
+export class CitizenEditProfileComponent implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userCode: string;
@@ -37,7 +37,7 @@ export class CitizenEditProfileComponent implements OnInit  {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private dataService: DataService,
-    private profileComponent: CitizenProfileComponent
+    private profileComponent: CitizenProfileComponent,
   ) {
     this.route.parent.params.subscribe((p) => {
       this.userCode = p.id && p.id != '0' ? p.id : '';
@@ -46,35 +46,20 @@ export class CitizenEditProfileComponent implements OnInit  {
 
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],
-      mobile: [
-        null,
-        [Validators.required, this.customValidator.checkMobileNumber],
-      ],
+      mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
       email: [null, [this.customValidator.checkEmail]],
-      nationalCode: [
-        { value: '', disabled: true },
-        [this.customValidator.checkNationalCode],
-      ],
+      nationalCode: [{ value: '', disabled: true }, [this.customValidator.checkNationalCode]],
 
-      firstName: [
-        null,
-        [Validators.required, this.customValidator.checkPersianCharacters],
-      ],
-      lastName: [
-        null,
-        [Validators.required, this.customValidator.checkPersianCharacters],
-      ],
-      fatherName: [
-        null,
-        [Validators.required, this.customValidator.checkPersianCharacters],
-      ],
+      firstName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
+      lastName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
+      fatherName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
 
       dateOfBirth: [null, [Validators.required]],
 
       marital: [null, [Validators.required]],
       phoneNumber: [null, [this.customValidator.checkPhoneNumber]],
       fullAddress: [null, []],
-      state: [null, []]
+      state: [null, []],
     });
   }
 
@@ -87,7 +72,7 @@ export class CitizenEditProfileComponent implements OnInit  {
       distinctUntilChanged(),
       switchMap((value) => {
         return this._getStates(value);
-      })
+      }),
     );
   }
 
@@ -120,8 +105,8 @@ export class CitizenEditProfileComponent implements OnInit  {
           (error) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
-          }
-        )
+          },
+        ),
       );
   }
 
@@ -142,7 +127,7 @@ export class CitizenEditProfileComponent implements OnInit  {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
 
@@ -155,7 +140,7 @@ export class CitizenEditProfileComponent implements OnInit  {
           this.loading = false;
           if (response && response.isSuccess) {
             this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-            this, (this.citizenInfo = response.data);
+            (this, (this.citizenInfo = response.data));
 
             this.personalForm.setValue({
               gender: response.data.gender,
@@ -165,15 +150,11 @@ export class CitizenEditProfileComponent implements OnInit  {
               firstName: response.data.firstName,
               lastName: response.data.lastName,
               fatherName: response.data.fatherName,
-              creationDate: response.data.creationDate
-                ? new Date(response.data.creationDate)
-                : '',
+              creationDate: response.data.creationDate ? new Date(response.data.creationDate) : '',
               date_SabtConfirm: response.data.date_SabtConfirm
                 ? new Date(response.data.date_SabtConfirm)
                 : '',
-              birthDate: response.data.date_SabtConfirm
-                ? new Date(response.data.birthDate)
-                : '',
+              birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
 
               educationField: response.data.educationField,
               educationGroup: response.data.educationGroup,
@@ -182,24 +163,22 @@ export class CitizenEditProfileComponent implements OnInit  {
               fullAddress: response.data.fullAddress,
               dateOfBirth: '',
               marital: 1,
-              phoneNumber: "09139879696",
+              phoneNumber: '09139879696',
               state: {
-               value: response.data.cityId,
-               text: response.data.city
+                value: response.data.cityId,
+                text: response.data.city,
               },
             });
             this.changeGender();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -242,16 +221,14 @@ export class CitizenEditProfileComponent implements OnInit  {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
             this.profileComponent.getPersonalInfo();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -276,9 +253,7 @@ export class CitizenEditProfileComponent implements OnInit  {
       this.personalForm.get('soldierState').clearValidators();
       this.personalForm.get('soldierState').updateValueAndValidity();
     } else {
-      this.personalForm
-        .get('soldierState')
-        .setValidators([Validators.required]);
+      this.personalForm.get('soldierState').setValidators([Validators.required]);
       this.personalForm.get('soldierState').updateValueAndValidity();
     }
   }

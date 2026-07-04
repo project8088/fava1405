@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 
 import { DataService } from 'src/app/core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -39,9 +33,8 @@ export class CitizenContactComponent implements OnInit {
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private dataService: DataService,
-    private helperService: HelperService
+    private helperService: HelperService,
   ) {
-
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
       region: [null],
@@ -64,22 +57,13 @@ export class CitizenContactComponent implements OnInit {
       postalCode: [null, [Validators.required]],
     });
 
-
     this.helperService.getIsfahanCities().subscribe((data) => {
-     
       this.isfahanCities = data;
     });
-
-
   }
   ngOnInit(): void {
-   
-
-    
-
     this.loadHomeData();
     this.loadWorkData();
-
   }
 
   toggleHomeEditMode() {
@@ -104,11 +88,10 @@ export class CitizenContactComponent implements OnInit {
   }
 
   loadHomeData() {
-    
     this.loadingHome = true;
     this.dataService.get(ServerApis.getCitizenHomeAddress).subscribe((data) => {
       this.loadingHome = false;
-     
+
       if (data.data) {
         this.homeForm.patchValue({
           id: data.data.id,
@@ -116,7 +99,7 @@ export class CitizenContactComponent implements OnInit {
           phone: data.data.phone,
           street: data.data.street,
           alley: data.data.alley,
-          plaque: data.data.plaque, 
+          plaque: data.data.plaque,
           cityId: String(data.data.cityId),
           postalCode: data.data.postalCode,
         });
@@ -129,55 +112,49 @@ export class CitizenContactComponent implements OnInit {
       this.states = data as [];
     });
 
-  
-
     this.cities = this.workForm.get('stateId').valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((value) => {
-        return this.helperService
-          .getCitesByParent(value)
-          .pipe(map((data) => data));
-      }) 
+        return this.helperService.getCitesByParent(value).pipe(map((data) => data));
+      }),
     );
 
     this.loadingWork = true;
-    this.dataService
-      .get(ServerApis.getCitizenOfficeAddress)
-      .subscribe((data) => {
-        this.loadingWork = false;
-        if (data.data) {
-          this.workForm.patchValue({
-            id: data.data.id,
-            region: data.data.region,
-            phone: data.data.phone,
-            street: data.data.street,
-            alley: data.data.alley,
-            plaque: data.data.plaque,
-            cityId: String(data.data.cityId),
-            postalCode: data.data.postalCode,
-            stateId: data.data.city.parentValue,
-          });
-        }
-
-        this.cities = this.workForm.get('stateId').valueChanges.pipe(
-          startWith(data.data.city.parentValue),
-          debounceTime(400),
-          distinctUntilChanged(),
-          switchMap((value) => {
-            return this.helperService.getCitesByParent(value);
-          })
-        );
-
-        this.cities.subscribe((data: any[]) => {
-          if (data.length) {
-            this.workCityText = data.find(
-              (el: any) => el.key === this.workForm.controls['cityId'].value
-            ).text;
-          }
+    this.dataService.get(ServerApis.getCitizenOfficeAddress).subscribe((data) => {
+      this.loadingWork = false;
+      if (data.data) {
+        this.workForm.patchValue({
+          id: data.data.id,
+          region: data.data.region,
+          phone: data.data.phone,
+          street: data.data.street,
+          alley: data.data.alley,
+          plaque: data.data.plaque,
+          cityId: String(data.data.cityId),
+          postalCode: data.data.postalCode,
+          stateId: data.data.city.parentValue,
         });
+      }
+
+      this.cities = this.workForm.get('stateId').valueChanges.pipe(
+        startWith(data.data.city.parentValue),
+        debounceTime(400),
+        distinctUntilChanged(),
+        switchMap((value) => {
+          return this.helperService.getCitesByParent(value);
+        }),
+      );
+
+      this.cities.subscribe((data: any[]) => {
+        if (data.length) {
+          this.workCityText = data.find(
+            (el: any) => el.key === this.workForm.controls['cityId'].value,
+          ).text;
+        }
       });
+    });
   }
 
   saveHomeAddress() {
@@ -204,9 +181,7 @@ export class CitizenContactComponent implements OnInit {
             this.editMode = false;
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
           this.isSavingHome = false;
@@ -216,23 +191,21 @@ export class CitizenContactComponent implements OnInit {
           this.isSavingHome = false;
           this.isSavingWork = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
   getHomeCityText() {
     if (this.isfahanCities && this.isfahanCities.length) {
       return this.isfahanCities.find(
-        (el: any) => +el.key === this.homeForm.controls['cityId'].value
+        (el: any) => +el.key === this.homeForm.controls['cityId'].value,
       ).text;
     } else return [];
   }
 
   getWorkState() {
     if (this.states?.length) {
-      return this.states.find(
-        (el: any) => el.key === this.workForm.controls['stateId'].value
-      ).text;
+      return this.states.find((el: any) => el.key === this.workForm.controls['stateId'].value).text;
     }
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'; 
+import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,13 +6,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 @Component({
   selector: 'app-jobseeker-profile-dialog',
   templateUrl: './jobseeker-profile.component.html',
-  styleUrls: ['./jobseeker-profile.component.scss']
+  styleUrls: ['./jobseeker-profile.component.scss'],
 })
 export class JobseekerProfileDialogComponent implements OnInit {
-  id: string; 
-  
-  
-
+  id: string;
 
   constructor(
     private matDialog: MatDialog,
@@ -20,22 +17,13 @@ export class JobseekerProfileDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
     if (_data) {
-      this.id = _data.id;  
-
+      this.id = _data.id;
     }
   }
 
-  ngOnInit(): void {
-  }
-
-
-
+  ngOnInit(): void {}
 
   closeDialog(result) {
     this.matDialogRef.close(result);
   }
-
-
-
-
 }

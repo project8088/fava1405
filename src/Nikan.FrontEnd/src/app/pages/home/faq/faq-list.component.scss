@@ -1,33 +1,32 @@
 ::ng-deep .mat-tab-header {
-    background: #fff;
+  background: #fff;
 }
 
 .bordered-title {
-    border-bottom: 2px #00c0ef solid;
-    font-weight: bold;
-    margin: 0 0 15px;
-    padding: 0 5px 5px;
+  border-bottom: 2px #00c0ef solid;
+  font-weight: bold;
+  margin: 0 0 15px;
+  padding: 0 5px 5px;
 }
 
 .sticky-container {
-    position: relative;
+  position: relative;
 }
 
 .groups {
-    background: #fff;
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow: auto;
-    padding: 15px 5px;
-    margin-left: 10px;
-    min-width: 270px;
+  background: #fff;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: auto;
+  padding: 15px 5px;
+  margin-left: 10px;
+  min-width: 270px;
 }
-
 
 .content {
   padding: 15px 5px;
-  flex:auto;
+  flex: auto;
 }
 
 ul.list {
@@ -64,6 +63,6 @@ ul.list {
   }
 }
 
-.tm-accordion .card-header button{
-    font-family:inherit;
+.tm-accordion .card-header button {
+  font-family: inherit;
 }

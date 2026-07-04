@@ -7,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CustomFormValidators } from '../../../core/custom-validator/form-validation'; 
+import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
@@ -15,13 +15,9 @@ import { MatTableDataSource } from '@angular/material/table';
 @Component({
   selector: 'main-news-list',
   templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss']
+  styleUrls: ['./news-list.component.scss'],
 })
 export class MainNewsListComponent implements AfterViewInit, OnInit {
-
- 
-
-
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -39,45 +35,32 @@ export class MainNewsListComponent implements AfterViewInit, OnInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-
     this.searchForm = this.fb.group({
       groupId: [null],
       fromDate: [null],
       toDate: [null],
-      title: [null]
+      title: [null],
     });
-
   }
-
-
 
   ngOnInit() {
-    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe(response => {
-      if (response.isSuccess)
-        this.groupList = response.data ? response.data : [];
+    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe((response) => {
+      if (response.isSuccess) this.groupList = response.data ? response.data : [];
     });
   }
-
-
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -86,15 +69,15 @@ export class MainNewsListComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedNewsItems, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.news ? response.data.news : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
@@ -102,20 +85,16 @@ export class MainNewsListComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = false;
           this.toastrService.error('دريافت اطلاعات از سرور با خطا مواجه شده است!');
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -124,20 +103,13 @@ export class MainNewsListComponent implements AfterViewInit, OnInit {
     this.getList();
   }
 
-
-
-
   newJob(row) {
     this.router.navigate(['/placement/new-job'], {
       queryParams: {
         id: '',
         companyId: row.id,
-        companyTitle: row.companyName
-      }
+        companyTitle: row.companyName,
+      },
     });
   }
-
-
-   
-
 }

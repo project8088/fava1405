@@ -1,7 +1,14 @@
 import { Component, forwardRef, Input, OnInit, Output, Self } from '@angular/core';
 import {
-  ControlValueAccessor, Validator, FormControl, NgControl,
-  AbstractControl, ValidationErrors, Validators, NG_VALIDATORS, NG_VALUE_ACCESSOR
+  ControlValueAccessor,
+  Validator,
+  FormControl,
+  NgControl,
+  AbstractControl,
+  ValidationErrors,
+  Validators,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import * as moment from 'jalali-moment';
@@ -30,30 +37,28 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
   @Input() disabled = false;
   @Input() appearance = 'outline';
   @Input() label = '';
-  @Output() date = new EventEmitter<{ date: string, jDate: string }>();
+  @Output() date = new EventEmitter<{ date: string; jDate: string }>();
   day = 0;
   month = 0;
   year = 0;
   dayList = [];
   monthList = [
-      { id: 1, title: 'فروردین' }
-    , { id: 2, title: 'اردیبهشت' }
-    , { id: 3, title: 'خرداد' }
-    , { id: 4, title: 'تیر' }
-    , { id: 5, title: 'مرداد' }
-    , { id: 6, title: 'شهریور' }
-    , { id: 7, title: 'مهر' }
-    , { id: 8, title: 'آبان' }
-    , { id: 9, title: 'آذر' }
-    , { id: 10, title: 'دی' }
-    , { id: 11, title: 'بهمن' }
-    , { id: 12, title: 'اسفند' }
+    { id: 1, title: 'فروردین' },
+    { id: 2, title: 'اردیبهشت' },
+    { id: 3, title: 'خرداد' },
+    { id: 4, title: 'تیر' },
+    { id: 5, title: 'مرداد' },
+    { id: 6, title: 'شهریور' },
+    { id: 7, title: 'مهر' },
+    { id: 8, title: 'آبان' },
+    { id: 9, title: 'آذر' },
+    { id: 10, title: 'دی' },
+    { id: 11, title: 'بهمن' },
+    { id: 12, title: 'اسفند' },
   ];
   yearList = [];
   isLeapYear = false;
-  constructor(
-    @Self() public ngControl: NgControl,
-  ) {
+  constructor(@Self() public ngControl: NgControl) {
     ngControl.valueAccessor = this;
     const momentLocaleData = moment.localeData('fa');
 
@@ -64,7 +69,7 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
 
     const date = new Date();
     const now = moment.jConvert.toJalali(date.getFullYear(), date.getMonth(), date.getDate());
-    for (let i = now.jy; i >= (now.jy - 99); i--) {
+    for (let i = now.jy; i >= now.jy - 99; i--) {
       this.yearList.push(i);
     }
   }
@@ -90,8 +95,7 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
       return null;
     }
   }
-  registerOnValidatorChange?(fn: () => void): void {
-  }
+  registerOnValidatorChange?(fn: () => void): void {}
   writeValue(obj: any): void {
     if (obj) {
       let jDate: any = moment.from(obj, 'en').format('jYYYY/jMM/jDD');
@@ -111,8 +115,6 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
     this.disabled = isDisabled;
   }
 
-
-
   onChange(): void {
     this.isLeapYear = moment.jIsLeapYear(this.year);
     if (this.year && this.month && this.day) {
@@ -122,14 +124,13 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
         this.ngControl.control.setValue(miladyDate);
         this.date.emit({
           date: miladyDate,
-          jDate: shamsiDate
+          jDate: shamsiDate,
         });
       } else {
         this.date.emit(null);
       }
     }
   }
-
 
   isValid(date: any): boolean {
     if (date === 'Invalid date') {

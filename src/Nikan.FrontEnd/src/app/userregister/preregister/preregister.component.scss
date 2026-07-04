@@ -1,9 +1,6 @@
 .page {
-   
-  background: url("../../../assets/images/bg.jpg") !important;
-  
+  background: url('../../../assets/images/bg.jpg') !important;
 }
-
 
 .bot-detect-container {
   display: flex;
@@ -16,7 +13,7 @@
   }
 }
 
-@media(max-width:500px) {
+@media (max-width: 500px) {
   .bot-detect-container {
     flex-direction: column-reverse;
   }

@@ -8,7 +8,7 @@ declare var $: any;
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+  styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
   lastNews: NewsDto[] = [];
@@ -17,50 +17,36 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
 
   setting: SiteSettingViewModel;
 
-  constructor(
-    private dataService: DataService
-  ) { }
+  constructor(private dataService: DataService) {}
 
   ngOnInit(): void {
     this.getLastNews();
 
-    this.dataService.getSetting().subscribe(response => {
+    this.dataService.getSetting().subscribe((response) => {
       this.setting = response;
-
     });
-
-
   }
   ngOnDestroy() {
     $(window).off('scroll');
   }
 
-
-  ngAfterViewInit() {
-     
-  }
-
-
-
-
-
+  ngAfterViewInit() {}
 
   getLastNews() {
     this.loadingNews = true;
-    this.dataService.get(ServerApis.getLastNews, {}).subscribe(response => {
-      this.loadingNews = false;
-      this.lastNews = response.data ? response.data : [];
-      setTimeout(() => {
-        this.owltopnews();
-      }, 200);
-    }, error => {
-      this.loadingNews = false;
-    });
+    this.dataService.get(ServerApis.getLastNews, {}).subscribe(
+      (response) => {
+        this.loadingNews = false;
+        this.lastNews = response.data ? response.data : [];
+        setTimeout(() => {
+          this.owltopnews();
+        }, 200);
+      },
+      (error) => {
+        this.loadingNews = false;
+      },
+    );
   }
-
-
-
-
 
   //popular doctors_index_page
   owltopnews() {
@@ -75,13 +61,13 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
       responsiveClass: true,
       responsive: {
         0: {
-            items: 1,
+          items: 1,
         },
         510: {
-            items: 2,
+          items: 2,
         },
         830: {
-            items: 3,
+          items: 3,
         },
         //600: {
         //    items: 5,
@@ -96,22 +82,12 @@ export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
         //    items: 5,
         //},
         1200: {
-            items: 4
-        }
-          , 1367: {
-              items: 5,
-          }
-    }
+          items: 4,
+        },
+        1367: {
+          items: 5,
+        },
+      },
     });
   }
-
-
-
-
-
-
-
-
-
-
 }

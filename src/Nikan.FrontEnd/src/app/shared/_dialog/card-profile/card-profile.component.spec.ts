@@ -8,9 +8,8 @@ describe('CitizenProfileDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CitizenProfileDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenProfileDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,14 +1,11 @@
-
-
 <div class="content-header">
   <span> گروههای کاربری</span>
-
 </div>
 
 <mat-card class="m-3">
   <mat-card-header class="card-header">
     <div class="d-flex col align-items-center justify-content-between">
-      گروههای کاربری 
+      گروههای کاربری
       <button mat-raised-button color="default" (click)="openAddUserDialog()">
         <i class="fa fa-plus mr-2"></i>
         ثبت گروه جدید
@@ -16,45 +13,50 @@
     </div>
   </mat-card-header>
   <mat-card-content>
-
     <div class="p-4 list-container">
       <div class="list-item" *ngFor="let item of userGroupList">
         <div class="list-content" (click)="openAddUserDialog(item)">
           <div class="row">
             <div class="col-sm-12">
-              <strong>گروه: </strong><span> {{item.name}}</span>
+              <strong>گروه: </strong><span> {{ item.name }}</span>
             </div>
           </div>
         </div>
 
         <div class="menu">
-          <button mat-icon-button (click)="openUpdateUserDialog(item)" *ngIf="!item.loading" matTooltip="ویرایش">
+          <button
+            mat-icon-button
+            (click)="openUpdateUserDialog(item)"
+            *ngIf="!item.loading"
+            matTooltip="ویرایش"
+          >
             <i class="fa fa-edit"></i>
           </button>
-          <button mat-icon-button (click)="deleteUserGroup(item)" *ngIf="!item.loading" matTooltip="حذف">
+          <button
+            mat-icon-button
+            (click)="deleteUserGroup(item)"
+            *ngIf="!item.loading"
+            matTooltip="حذف"
+          >
             <i class="fa fa-trash"></i>
           </button>
 
-          <button mat-icon-button routerLink="/admin/permissions/{{item.id}}">
-            <i class="fa fa-folder-tree mr-2"></i> 
+          <button mat-icon-button routerLink="/admin/permissions/{{ item.id }}">
+            <i class="fa fa-folder-tree mr-2"></i>
           </button>
-
 
           <mat-spinner *ngIf="item.loading" color="default" diameter="25"></mat-spinner>
         </div>
       </div>
     </div>
 
-    <div class="no-any-items" *ngIf="userGroupList.length==0 && !loading">
+    <div class="no-any-items" *ngIf="userGroupList.length == 0 && !loading">
       <i class="fa fa-info-circle"></i>
       اطلاعاتی ثبت نشده است
     </div>
     <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
-
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 </mat-card>
-
-

@@ -1,24 +1,31 @@
-
- 
-
-
 <mat-form-field>
-  <mat-label>{{label}}</mat-label>
-  <input matInput [formControl]="ngControl.control" [matAutocomplete]="autoComplete"
-         #trigger="matAutocompleteTrigger"  [required]="required" autocomplete="doNotAutoComplete">
-  <mat-autocomplete #autoComplete="matAutocomplete" [displayWith]="displayFn" (optionSelected)="onChange()">
-    <mat-option *ngIf="List.length==0 && !loading" disabled>
-      موردی وجود ندارد!
-    </mat-option>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [formControl]="ngControl.control"
+    [matAutocomplete]="autoComplete"
+    #trigger="matAutocompleteTrigger"
+    [required]="required"
+    autocomplete="doNotAutoComplete"
+  />
+  <mat-autocomplete
+    #autoComplete="matAutocomplete"
+    [displayWith]="displayFn"
+    (optionSelected)="onChange()"
+  >
+    <mat-option *ngIf="List.length == 0 && !loading" disabled> موردی وجود ندارد! </mat-option>
     <mat-option *ngFor="let option of filteredList | async" [value]="option">
-      {{option.text}}
+      {{ option.text }}
     </mat-option>
   </mat-autocomplete>
   <mat-error *ngIf="ngControl.hasError('incorrect') || ngControl.hasError('required')">
-    {{label}} مورد نظر را از لیست انتخاب کنید
+    {{ label }} مورد نظر را از لیست انتخاب کنید
   </mat-error>
   <mat-spinner matSuffix diameter="20" [hidden]="!loading"></mat-spinner>
-  <i (click)="clearItem(trigger,autoComplete)" matSuffix class="fa fa-times pointer" *ngIf="ngControl.control.value"></i>
+  <i
+    (click)="clearItem(trigger, autoComplete)"
+    matSuffix
+    class="fa fa-times pointer"
+    *ngIf="ngControl.control.value"
+  ></i>
 </mat-form-field>
-
-

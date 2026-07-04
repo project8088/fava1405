@@ -1,6 +1,6 @@
-import { Inject, InjectionToken, Optional } from "@angular/core";
-import { DateAdapter, MAT_DATE_LOCALE } from "@angular/material/core";
-import * as moment from "jalali-moment";
+import { Inject, InjectionToken, Optional } from '@angular/core';
+import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+import * as moment from 'jalali-moment';
 
 /** Configurable options for {@see MomentDateAdapter}. */
 export interface MatMomentDateAdapterOptions {
@@ -13,17 +13,18 @@ export interface MatMomentDateAdapterOptions {
 }
 
 /** InjectionToken for moment date adapter to configure options. */
-export const MAT_MOMENT_DATE_ADAPTER_OPTIONS = new InjectionToken<
-  MatMomentDateAdapterOptions
->("MAT_MOMENT_DATE_ADAPTER_OPTIONS", {
-  providedIn: "root",
-  factory: MAT_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY
-});
+export const MAT_MOMENT_DATE_ADAPTER_OPTIONS = new InjectionToken<MatMomentDateAdapterOptions>(
+  'MAT_MOMENT_DATE_ADAPTER_OPTIONS',
+  {
+    providedIn: 'root',
+    factory: MAT_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY,
+  },
+);
 
 /** @docs-private */
 export function MAT_MOMENT_DATE_ADAPTER_OPTIONS_FACTORY(): MatMomentDateAdapterOptions {
   return {
-    useUtc: false
+    useUtc: false,
   };
 }
 
@@ -58,7 +59,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     dateLocale: string,
     @Optional()
     @Inject(MAT_MOMENT_DATE_ADAPTER_OPTIONS)
-    private options?: MatMomentDateAdapterOptions
+    private options?: MatMomentDateAdapterOptions,
   ) {
     super();
     this.setLocale(dateLocale || moment.locale());
@@ -68,33 +69,31 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     super.setLocale(locale);
 
     let momentLocaleData = moment.localeData(locale);
-    if (locale === "fa") {
+    if (locale === 'fa') {
       this._localeData = {
         firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
         longMonths: momentLocaleData.jMonths(),
         shortMonths: momentLocaleData.jMonthsShort(),
-        dates: range(31, i =>
-          this.createPersianDateFrom3Numbers(2017, 0, i + 1).format("D")
-        ),
+        dates: range(31, (i) => this.createPersianDateFrom3Numbers(2017, 0, i + 1).format('D')),
         longDaysOfWeek: momentLocaleData.weekdays(),
         shortDaysOfWeek: momentLocaleData.weekdaysShort(),
-        narrowDaysOfWeek: momentLocaleData.weekdaysMin()
+        narrowDaysOfWeek: momentLocaleData.weekdaysMin(),
       };
     } else {
       this._localeData = {
         firstDayOfWeek: momentLocaleData.firstDayOfWeek(),
         longMonths: momentLocaleData.months(),
         shortMonths: momentLocaleData.monthsShort(),
-        dates: range(31, i => this.createDate(2017, 0, i + 1).format("D")),
+        dates: range(31, (i) => this.createDate(2017, 0, i + 1).format('D')),
         longDaysOfWeek: momentLocaleData.weekdays(),
         shortDaysOfWeek: momentLocaleData.weekdaysShort(),
-        narrowDaysOfWeek: momentLocaleData.weekdaysMin()
+        narrowDaysOfWeek: momentLocaleData.weekdaysMin(),
       };
     }
   }
 
   getYear(date: moment.Moment): number {
-    if (this.locale === "fa") {
+    if (this.locale === 'fa') {
       return this.clone(date).jYear();
     } else {
       return this.clone(date).year();
@@ -102,7 +101,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
   }
 
   getMonth(date: moment.Moment): number {
-    if (this.locale === "fa") {
+    if (this.locale === 'fa') {
       return this.clone(date).jMonth();
     } else {
       return this.clone(date).month();
@@ -110,7 +109,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
   }
 
   getDate(date: moment.Moment): number {
-    if (this.locale === "fa") {
+    if (this.locale === 'fa') {
       return this.clone(date).jDate();
     } else {
       return this.clone(date).date();
@@ -121,35 +120,29 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     return this.clone(date).day();
   }
 
-  getMonthNames(style: "long" | "short" | "narrow"): string[] {
-    return style == "long"
-      ? this._localeData.longMonths
-      : this._localeData.shortMonths;
+  getMonthNames(style: 'long' | 'short' | 'narrow'): string[] {
+    return style == 'long' ? this._localeData.longMonths : this._localeData.shortMonths;
   }
 
   getDateNames(): string[] {
     return this._localeData.dates;
   }
 
-  getDayOfWeekNames(style: "long" | "short" | "narrow"): string[] {
-    if (style == "long") {
+  getDayOfWeekNames(style: 'long' | 'short' | 'narrow'): string[] {
+    if (style == 'long') {
       return this._localeData.longDaysOfWeek;
     }
-    if (style == "short") {
+    if (style == 'short') {
       return this._localeData.shortDaysOfWeek;
     }
     return this._localeData.narrowDaysOfWeek;
   }
 
   getYearName(date: moment.Moment): string {
-    if (this.locale === "fa") {
-      return this.clone(date)
-        .jYear()
-        .toString();
+    if (this.locale === 'fa') {
+      return this.clone(date).jYear().toString();
     } else {
-      return this.clone(date)
-        .year()
-        .toString();
+      return this.clone(date).year().toString();
     }
   }
 
@@ -158,7 +151,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
   }
 
   getNumDaysInMonth(date: moment.Moment): number {
-    if (this.locale === "fa") {
+    if (this.locale === 'fa') {
       return this.clone(date).jDaysInMonth();
     } else {
       return this.clone(date).daysInMonth();
@@ -169,11 +162,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     return date.clone().locale(this.locale);
   }
 
-  private createPersianDateFrom3Numbers(
-    year: number,
-    month: number,
-    date: number
-  ): moment.Moment {
+  private createPersianDateFrom3Numbers(year: number, month: number, date: number): moment.Moment {
     let result: moment.Moment;
     if (this.options && this.options.useUtc) {
       result = moment().utc();
@@ -188,7 +177,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
       .minutes(0)
       .seconds(0)
       .milliseconds(0)
-      .locale("fa");
+      .locale('fa');
   }
 
   createDate(year: number, month: number, date: number): moment.Moment {
@@ -196,9 +185,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     // Moment.js will create an invalid date if any of the components are out of bounds, but we
     // explicitly check each case so we can throw more descriptive errors.
     if (month < 0 || month > 11) {
-      throw Error(
-        `Invalid month index "${month}". Month index has to be between 0 and 11.`
-      );
+      throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
     }
 
     if (date < 1) {
@@ -206,7 +193,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     }
 
     let result;
-    if (this.locale === "fa") {
+    if (this.locale === 'fa') {
       result = this.createPersianDateFrom3Numbers(year, month, date);
     } else {
       result = this._createMoment({ year, month, date }).locale(this.locale);
@@ -225,7 +212,7 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
   }
 
   parse(value: any, parseFormat: string | string[]): moment.Moment | null {
-    if (value && typeof value == "string") {
+    if (value && typeof value == 'string') {
       return this._createMoment(value, parseFormat, this.locale);
     }
     return value ? this._createMoment(value).locale(this.locale) : null;
@@ -233,32 +220,32 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
   format(date: moment.Moment, displayFormat: string): string {
     date = this.clone(date);
     if (!this.isValid(date)) {
-      throw Error("JalaliMomentDateAdapter: Cannot format invalid date.");
+      throw Error('JalaliMomentDateAdapter: Cannot format invalid date.');
     }
     return date.format(displayFormat);
   }
 
   addCalendarYears(date: moment.Moment, years: number): moment.Moment {
-    if (this.locale === "fa") {
-      return this.clone(date).add(years, "jYear");
+    if (this.locale === 'fa') {
+      return this.clone(date).add(years, 'jYear');
     } else {
-      return this.clone(date).add(years, "years");
+      return this.clone(date).add(years, 'years');
     }
   }
 
   addCalendarMonths(date: moment.Moment, months: number): moment.Moment {
-    if (this.locale === "fa") {
-      return this.clone(date).add(months, "jmonth");
+    if (this.locale === 'fa') {
+      return this.clone(date).add(months, 'jmonth');
     } else {
-      return this.clone(date).add(months, "month");
+      return this.clone(date).add(months, 'month');
     }
   }
 
   addCalendarDays(date: moment.Moment, days: number): moment.Moment {
-    if (this.locale === "fa") {
-      return this.clone(date).add(days, "jDay");
+    if (this.locale === 'fa') {
+      return this.clone(date).add(days, 'jDay');
     } else {
-      return this.clone(date).add(days, "day");
+      return this.clone(date).add(days, 'day');
     }
   }
 
@@ -308,12 +295,12 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     if (value instanceof Date) {
       date = this._createMoment(value);
     }
-    if (typeof value === "string") {
+    if (typeof value === 'string') {
       if (!value) {
         return null;
       }
-      if (this.locale === "fa") {
-        date = moment(value).locale("fa");
+      if (this.locale === 'fa') {
+        date = moment(value).locale('fa');
       } else {
         date = this._createMoment(value).locale(this.locale);
       }
@@ -323,12 +310,9 @@ export class JalaliMomentDateAdapter extends DateAdapter<moment.Moment> {
     }
     return super.deserialize(value);
   }
-  
 
   /** Creates a Moment instance while respecting the current UTC settings. */
   private _createMoment(...args: any[]): moment.Moment {
-    return this.options && this.options.useUtc
-      ? moment.utc(...args)
-      : moment(...args);
+    return this.options && this.options.useUtc ? moment.utc(...args) : moment(...args);
   }
 }

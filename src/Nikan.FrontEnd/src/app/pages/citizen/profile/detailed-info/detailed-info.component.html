@@ -7,10 +7,7 @@
           <div class="mt-3">
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>کد پرسنلی</mat-label>
-              <input matInput
-                     formControlName="personnelCode"
-                     maxlength="10"
-                     numbersOnly />
+              <input matInput formControlName="personnelCode" maxlength="10" numbersOnly />
               <mat-error *ngIf="form.get('personnelCode').errors?.required">
                 کد پرسنلی خود را وارد کنید.
               </mat-error>
@@ -23,30 +20,27 @@
             <mat-divider [inset]="true" class="mb-2"></mat-divider>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>شماره شناسنامه</mat-label>
-              <input matInput
-                     formControlName="shCode"
-                     autocomplete="doNotAutoComplete"
-                     numbersOnly />
+              <input
+                matInput
+                formControlName="shCode"
+                autocomplete="doNotAutoComplete"
+                numbersOnly
+              />
               <mat-error *ngIf="form.get('shCode').errors?.required">
                 شماره شناسنامه را وارد کنید.
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label> سریال شناسنامه</mat-label>
-              <input matInput
-                     formControlName="shSerial"
-                     autocomplete="doNotAutoComplete" />
+              <input matInput formControlName="shSerial" autocomplete="doNotAutoComplete" />
               <mat-error *ngIf="form.get('shSerial').errors?.required">
                 سریال شناسنامه خود را وارد کنید.
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>تاریخ صدور شناسنامه</mat-label>
-              <input matInput
-                     [matDatepicker]="dpicker_shDate"
-                     formControlName="shDate" />
-              <mat-datepicker-toggle matSuffix
-                                     [for]="dpicker_shDate"></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="dpicker_shDate" formControlName="shDate" />
+              <mat-datepicker-toggle matSuffix [for]="dpicker_shDate"></mat-datepicker-toggle>
               <mat-datepicker #dpicker_shDate></mat-datepicker>
               <mat-error *ngIf="form.get('shDate').errors?.required">
                 تاریخ صدور شناسنامه خود را انتخاب کنید.
@@ -56,15 +50,22 @@
               </mat-error>
             </mat-form-field>
 
-            
-            <input-auto-complete formControlName="shStateId"  [label]="'استان محل صدور شناسنامه'" [required]="true" class="col-md-6" [list]="provinceList"></input-auto-complete>
-            <input-auto-complete formControlName="shCityId" [label]="'شهرستان محل صدور شناسنامه'"  class="col-md-6" [getByParent]="true" [parentId]="form.get('shStateId').value?.key" [required]="true" ></input-auto-complete>
+            <input-auto-complete
+              formControlName="shStateId"
+              [label]="'استان محل صدور شناسنامه'"
+              [required]="true"
+              class="col-md-6"
+              [list]="provinceList"
+            ></input-auto-complete>
+            <input-auto-complete
+              formControlName="shCityId"
+              [label]="'شهرستان محل صدور شناسنامه'"
+              class="col-md-6"
+              [getByParent]="true"
+              [parentId]="form.get('shStateId').value?.key"
+              [required]="true"
+            ></input-auto-complete>
 
-
-
-
-
-        
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>بخش</mat-label>
               <input matInput formControlName="shCitySection" />
@@ -84,8 +85,10 @@
                   {{ item.text }}
                 </mat-option>
               </mat-select>
-              <mat-hint class="text-danger"
-                        *ngIf="form.controls['birthStateId'].errors && form.submitted">
+              <mat-hint
+                class="text-danger"
+                *ngIf="form.controls['birthStateId'].errors && form.submitted"
+              >
                 <span *ngIf="form.controls['birthStateId'].errors['required']">
                   استان محل تولد خود را انتخاب کنید
                 </span>
@@ -95,13 +98,14 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>شهر محل تولد</mat-label>
               <mat-select formControlName="cityOfBirthId">
-                <mat-option *ngFor="let item of birthCities | async"
-                            [value]="item.key">
+                <mat-option *ngFor="let item of birthCities | async" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
-              <mat-hint class="text-danger"
-                        *ngIf="form.controls['cityOfBirthId'].errors && form.submitted">
+              <mat-hint
+                class="text-danger"
+                *ngIf="form.controls['cityOfBirthId'].errors && form.submitted"
+              >
                 <span *ngIf="form.controls['cityOfBirthId'].errors['required']">
                   شهر محل تولد خود را انتخاب کنید
                 </span>
@@ -120,8 +124,7 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>دین</mat-label>
               <mat-select formControlName="religion">
-                <mat-option *ngFor="let item of baseEnums.religion"
-                            [value]="item.key">
+                <mat-option *ngFor="let item of baseEnums.religion" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -131,11 +134,15 @@
             <mat-divider [inset]="true" class="mb-2"></mat-divider>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>تاریخ ازدواج</mat-label>
-              <input matInput
-                     [matDatepicker]="dpicker_dateOfMarriage"
-                     formControlName="dateOfMarriage" />
-              <mat-datepicker-toggle matSuffix
-                                     [for]="dpicker_dateOfMarriage"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="dpicker_dateOfMarriage"
+                formControlName="dateOfMarriage"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dpicker_dateOfMarriage"
+              ></mat-datepicker-toggle>
               <mat-datepicker #dpicker_dateOfMarriage></mat-datepicker>
               <mat-error *ngIf="form.get('dateOfMarriage').errors?.required">
                 تاریخ ازدواج خود را انتخاب کنید.
@@ -151,8 +158,7 @@
               <mat-label>وضعیت خدمت سربازی</mat-label>
 
               <mat-select formControlName="soldierState">
-                <mat-option *ngFor="let item of baseEnums.soldierState"
-                            [value]="item.key">
+                <mat-option *ngFor="let item of baseEnums.soldierState" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -162,11 +168,15 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>تاریخ پایان خدمت</mat-label>
-              <input matInput
-                     [matDatepicker]="dpicker_endOfMilitary"
-                     formControlName="endOfMilitary" />
-              <mat-datepicker-toggle matSuffix
-                                     [for]="dpicker_endOfMilitary"></mat-datepicker-toggle>
+              <input
+                matInput
+                [matDatepicker]="dpicker_endOfMilitary"
+                formControlName="endOfMilitary"
+              />
+              <mat-datepicker-toggle
+                matSuffix
+                [for]="dpicker_endOfMilitary"
+              ></mat-datepicker-toggle>
               <mat-datepicker #dpicker_endOfMilitary></mat-datepicker>
               <mat-error *ngIf="form.get('endOfMilitary').errors?.required">
                 تاریخ پایان خدمت خود را انتخاب کنید.
@@ -187,22 +197,15 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>وضعیت تحصیل</mat-label>
               <mat-select formControlName="educationStatues">
-                <mat-option
-                  *ngFor="let item of baseEnums.educationStatues"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of baseEnums.educationStatues" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  form.controls['educationStatues'].errors && form.submitted
-                "
+                *ngIf="form.controls['educationStatues'].errors && form.submitted"
               >
-                <span
-                  *ngIf="form.controls['educationStatues'].errors['required']"
-                >
+                <span *ngIf="form.controls['educationStatues'].errors['required']">
                   وضعیت تحصیل خود را انتخاب کنید
                 </span>
               </mat-hint>
@@ -218,7 +221,7 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label> نام دانشگاه محل تحصیل /دریافت مدرک</mat-label>
               <input matInput formControlName="universityName" />
-            </mat-form-field> 
+            </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>تاریخ پایان تحصیل</mat-label>
               <input
@@ -234,9 +237,7 @@
               <mat-error *ngIf="form.get('endOfEducation').errors?.required">
                 تاریخ پایان تحصیل خود را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="form.get('endOfEducation').errors?.matDatepickerParse"
-              >
+              <mat-error *ngIf="form.get('endOfEducation').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -262,30 +263,18 @@
                 [for]="dpicker_dateOfEmployeement"
               ></mat-datepicker-toggle>
               <mat-datepicker #dpicker_dateOfEmployeement></mat-datepicker>
-              <mat-error
-                *ngIf="form.get('dateOfEmployeement').errors?.required"
-              >
+              <mat-error *ngIf="form.get('dateOfEmployeement').errors?.required">
                 تاریخ استخدام خود را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="
-                  form.get('dateOfEmployeement').errors?.matDatepickerParse
-                "
-              >
+              <mat-error *ngIf="form.get('dateOfEmployeement').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
-
-
-
           </div>
         </mat-tab>
       </mat-tab-group>
     </form>
-    <div
-      class="p-5 d-flex align-items-center justify-content-center"
-      *ngIf="loading"
-    >
+    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
   </mat-card-content>
@@ -298,11 +287,7 @@
       (click)="saveForm()"
     >
       <span>ذخیره </span>
-      <mat-spinner
-        diameter="20"
-        color="default"
-        [hidden]="!isSaving"
-      ></mat-spinner>
+      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
     </button>
   </mat-card-footer>
 </mat-card>

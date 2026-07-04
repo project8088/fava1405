@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing'; 
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { CitizenComponent } from './citizen.component';
 
 describe('CitizenComponent', () => {
@@ -7,9 +7,8 @@ describe('CitizenComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

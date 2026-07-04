@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';  
-import { CoreModule } from '../../core/core.module'; 
+import { CommonModule } from '@angular/common';
+import { CoreModule } from '../../core/core.module';
 import { MaterialModule } from '../../core/material/material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -9,14 +9,9 @@ import { WebUserDashboardComponent } from './dashboard/dashboard.component';
 import { WebUserRoutingModule } from './webuser-routing.module';
 import { WebUserComponent } from './webuser.component';
 import { WebUserHelpServiceDetailsComponent } from './help-service/help-service.component';
- 
-@NgModule({
-  declarations: [
-    WebUserComponent,
-    WebUserDashboardComponent,
-    WebUserHelpServiceDetailsComponent
 
-  ],
+@NgModule({
+  declarations: [WebUserComponent, WebUserDashboardComponent, WebUserHelpServiceDetailsComponent],
   imports: [
     CoreModule,
     CommonModule,
@@ -25,10 +20,8 @@ import { WebUserHelpServiceDetailsComponent } from './help-service/help-service.
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
   ],
-  entryComponents: [
-    
-  ]
+  entryComponents: [],
 })
-export class WebUserModule { }
+export class WebUserModule {}

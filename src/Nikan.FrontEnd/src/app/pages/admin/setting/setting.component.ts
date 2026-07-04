@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr'; 
+import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 
 @Component({
   selector: 'adm-setting',
   templateUrl: './setting.component.html',
-  styleUrls: ['./setting.component.scss']
+  styleUrls: ['./setting.component.scss'],
 })
 export class AdminSettingComponent implements OnInit {
   settingForm: FormGroup;
@@ -21,7 +21,7 @@ export class AdminSettingComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {
     this.settingForm = this.fb.group({
       siteUrl: [null, [Validators.required]],
@@ -40,48 +40,38 @@ export class AdminSettingComponent implements OnInit {
       addresss: [null, []],
       telegramChannelId: [null, []],
 
-
-
       smsNumber: [null, []],
       faxNumber: [null, []],
       emailAddress: [null, []],
       footerText: [null, []],
       businessHours: [null, []],
 
-
       isfahanProvinceId: [null, []],
       isfahanCityId: [null, []],
       regionCount: [null, []],
       manzalatGroupId: [null, []],
-     onlineAuthenticationAfterUpdateCitizenInfo: [false, []],
-     onlineAuthentication: [false, []],
-
-
-           
+      onlineAuthenticationAfterUpdateCitizenInfo: [false, []],
+      onlineAuthentication: [false, []],
     });
-
   }
-
-
-
 
   ngOnInit(): void {
     this.loading = true;
-    this.dataService.get(ServerApis.getSettings).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.settingForm.patchValue(response.data);
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false; 
-
-    })
+    this.dataService.get(ServerApis.getSettings).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.settingForm.patchValue(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-  
 
   saveSetting() {
     if (this.settingForm.invalid) {
@@ -93,18 +83,19 @@ export class AdminSettingComponent implements OnInit {
     this.isSaving = true;
     var params = this.settingForm.value;
     params.logoUrl = this.logoUrl;
-    this.dataService.post(ServerApis.updateSettings,params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.')
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false; 
-
-    })
+    this.dataService.post(ServerApis.updateSettings, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
 }
-

@@ -1,7 +1,13 @@
-import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { Observable, BehaviorSubject, throwError } from "rxjs";
-import { catchError, take, filter, switchMap } from "rxjs/operators";
-import { Injectable } from "@angular/core";
+import {
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandler,
+  HttpInterceptor,
+  HttpRequest,
+} from '@angular/common/http';
+import { Observable, BehaviorSubject, throwError } from 'rxjs';
+import { catchError, take, filter, switchMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { AuthService } from './auth.service';
 import { Router, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -9,28 +15,22 @@ import Swal from 'sweetalert2';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-
-
-
   constructor(
     private router: Router,
-    private toastrService: ToastrService
-  ) { }
+    private toastrService: ToastrService,
+  ) {}
   addCookie(req: HttpRequest<any>, Cookie: string): HttpRequest<any> {
-  
-    return req.clone(
-      {
-        withCredentials: (req.url.includes("worldtimeapi.org")==false) ?true:false,
-        // setHeaders: { 
-        //   'Cookie': Cookie
-        // }
-      })
+    return req.clone({
+      withCredentials: req.url.includes('worldtimeapi.org') == false ? true : false,
+      // setHeaders: {
+      //   'Cookie': Cookie
+      // }
+    });
   }
 
-
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    return next.handle(this.addCookie(req,'')).pipe(
-      catchError(error => {
+    return next.handle(this.addCookie(req, '')).pipe(
+      catchError((error) => {
         if (error instanceof HttpErrorResponse) {
           switch ((<HttpErrorResponse>error).status) {
             case 401:
@@ -41,14 +41,9 @@ export class ErrorInterceptor implements HttpInterceptor {
         } else {
           return throwError(error);
         }
-      })
+      }),
     );
-
   }
-
-
-
-
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler) {
     // Route to the login page (implementation up to you)
@@ -59,24 +54,10 @@ export class ErrorInterceptor implements HttpInterceptor {
       confirmButtonText: 'ورود به حساب کاربری',
       showCancelButton: false,
       allowEscapeKey: false,
-      allowOutsideClick: false
-    }).then(result => {
-      if (result.value)
-        this.router.navigate(['/account/login']); 
-
-    })
-    return throwError("");
+      allowOutsideClick: false,
+    }).then((result) => {
+      if (result.value) this.router.navigate(['/account/login']);
+    });
+    return throwError('');
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }

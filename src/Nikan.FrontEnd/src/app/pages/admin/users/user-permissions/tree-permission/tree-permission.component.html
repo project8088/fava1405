@@ -1,21 +1,23 @@
- <ul class="tree-permission">
-  <li *ngFor="let item of permissionItems|keyvalue">
-    <mat-checkbox [checked]="allComplete(item)"  [indeterminate]="someComplete(item)"
-      (change)="setAll(item,$event.checked)">
-      {{item.key}} 
+<ul class="tree-permission">
+  <li *ngFor="let item of permissionItems | keyvalue">
+    <mat-checkbox
+      [checked]="allComplete(item)"
+      [indeterminate]="someComplete(item)"
+      (change)="setAll(item, $event.checked)"
+    >
+      {{ item.key }}
     </mat-checkbox>
-
-
 
     <ul class="tree-permission">
       <li *ngFor="let child of item.value">
-        <mat-checkbox [(ngModel)]="child.selected" color="default" (ngModelChange)="updateAllComplete(item)">
-          {{child.text}}
+        <mat-checkbox
+          [(ngModel)]="child.selected"
+          color="default"
+          (ngModelChange)="updateAllComplete(item)"
+        >
+          {{ child.text }}
         </mat-checkbox>
-
-
       </li>
     </ul>
-
   </li>
 </ul>

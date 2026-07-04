@@ -1,9 +1,5 @@
 import { Component, Inject, Input, OnInit } from '@angular/core';
-import {
-  MAT_DIALOG_DATA,
-  MatDialog,
-  MatDialogRef,
-} from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../../../../core/services/data-service.service';
@@ -26,7 +22,7 @@ export class ViewJobseekerProfileComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -44,16 +40,14 @@ export class ViewJobseekerProfileComponent implements OnInit {
         if (response.isSuccess) {
           this.jobseeker = response.data ? response.data : {};
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 }

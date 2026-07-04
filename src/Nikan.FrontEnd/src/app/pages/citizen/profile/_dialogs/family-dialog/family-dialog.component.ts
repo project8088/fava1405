@@ -1,19 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
-import {
-  startWith,
-  map,
-  debounceTime,
-  distinctUntilChanged,
-  switchMap,
-} from 'rxjs/operators';
+import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
 import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
@@ -60,7 +50,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private customValidator: CustomFormValidators,
-    private helperService: HelperService
+    private helperService: HelperService,
   ) {
     this.dataService.getEnums().subscribe((data) => {
       this.baseEnums.maritalStatus = data['maritalStatus'];
@@ -86,10 +76,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
     this.getBaseEnums();
     this.getEducationGroups();
     this.firstFormGroup = this.fb.group({
-      nationCode: [
-        null,
-        [Validators.required, this.customValidator.checkNationalCode],
-      ],
+      nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
     });
 
     this.registerForm = this.fb.group({
@@ -108,7 +95,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
       region: [null],
       cityId: [null, [Validators.required]],
       street: [null, [Validators.required]],
-      alley: [null  ],
+      alley: [null],
       plaque: [null],
 
       postalCode: [null],
@@ -155,24 +142,18 @@ export class CitizenFamilyDialogComponent implements OnInit {
       }
     });
 
-    this.registerForm
-      .get('educationStatues')
-      .valueChanges.subscribe((value) => {
-        if (+value !== 3) {
-          this.registerForm
-            .get('educationLevel')
-            .setValidators(Validators.required);
-          this.registerForm
-            .get('educationGroup')
-            .setValidators(Validators.required);
-        } else {
-          this.registerForm.get('educationLevel').clearValidators();
-          this.registerForm.get('educationGroup').clearValidators();
-        }
+    this.registerForm.get('educationStatues').valueChanges.subscribe((value) => {
+      if (+value !== 3) {
+        this.registerForm.get('educationLevel').setValidators(Validators.required);
+        this.registerForm.get('educationGroup').setValidators(Validators.required);
+      } else {
+        this.registerForm.get('educationLevel').clearValidators();
+        this.registerForm.get('educationGroup').clearValidators();
+      }
 
-        this.registerForm.get('educationLevel').updateValueAndValidity();
-        this.registerForm.get('educationGroup').updateValueAndValidity();
-      });
+      this.registerForm.get('educationLevel').updateValueAndValidity();
+      this.registerForm.get('educationGroup').updateValueAndValidity();
+    });
 
     this.registerForm.get('familyRelation').valueChanges.pipe(
       startWith(''),
@@ -181,18 +162,14 @@ export class CitizenFamilyDialogComponent implements OnInit {
       switchMap((value) => {
         debugger;
         return value;
-      })
+      }),
     );
 
     if (this._data) {
       this.family = this._data;
       this.loading = true;
       this.dataService
-        .get(
-          ServerApis.getMyFamilyBaseInfo +
-            '?familyId=' +
-            this.family.familyCitizenId
-        )
+        .get(ServerApis.getMyFamilyBaseInfo + '?familyId=' + this.family.familyCitizenId)
         .subscribe((data) => {
           const family = data.data;
           this.loading = false;
@@ -255,22 +232,18 @@ export class CitizenFamilyDialogComponent implements OnInit {
         (response) => {
           this.isSaving = false;
           if (response && response.isSuccess) {
-
-
             this.familyIsRegister = response.data.isRegister;
             stepper.next();
             this.setNationCodeInfamilyForm();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -325,16 +298,14 @@ export class CitizenFamilyDialogComponent implements OnInit {
             // stepper.next();
             // this.matDialogRef.close(response.data);
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -347,7 +318,6 @@ export class CitizenFamilyDialogComponent implements OnInit {
 
     var formValue = this.familyForm.value;
     if (formValue.birthDate) formValue.birthDate = this.dataService.formatDate(formValue.birthDate);
-
 
     this.isSaving = true;
     this.dataService
@@ -368,16 +338,14 @@ export class CitizenFamilyDialogComponent implements OnInit {
             // stepper.next();
             this.matDialogRef.close(response.data);
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -392,7 +360,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
     this.isSaving = true;
     this.dataService
       .post(ServerApis.updateFamilyMemberByCitizen, {
-        familyCitizenId:this.family.familyCitizenId,
+        familyCitizenId: this.family.familyCitizenId,
         familyRelation: formValue.familyRelation,
         nationCode: formValue.nationCode,
         gender: formValue.gender,
@@ -424,16 +392,14 @@ export class CitizenFamilyDialogComponent implements OnInit {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
             this.matDialogRef.close(response.data);
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
 
     if (this.registerForm.invalid) {
@@ -453,9 +419,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
       (response) => {
         this.loadingEnums = false;
         if (response) {
-          this.baseEnums.educationLevel = response.educationLevel
-            ? response.educationLevel
-            : [];
+          this.baseEnums.educationLevel = response.educationLevel ? response.educationLevel : [];
 
           var grade = [];
           this.baseEnums.educationLevel.forEach((item, index) => {
@@ -472,7 +436,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
 
     this.helperService.getIsfahanCities().subscribe((data) => {
@@ -491,7 +455,7 @@ export class CitizenFamilyDialogComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
 

@@ -1,16 +1,16 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; 
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DataService } from '../../../../core/services/data-service.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
- 
+
 @Component({
   selector: 'app-citizen-refund-info',
   templateUrl: './citizen-refund-info.component.html',
-  styleUrls: ['./citizen-refund-info.component.scss']
+  styleUrls: ['./citizen-refund-info.component.scss'],
 })
 export class CitizenRefundFullInfoComponent implements OnInit {
   isSaving: boolean;
@@ -19,32 +19,25 @@ export class CitizenRefundFullInfoComponent implements OnInit {
   loadingData: boolean;
   info: any;
   refundId: string;
-    matDialogRef: any;
-  constructor( 
+  matDialogRef: any;
+  constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
     private customValidator: CustomFormValidators,
-    private dataService: DataService) {
-  
-     
-    
+    private dataService: DataService,
+  ) {
     this.frm = this.fb.group({
-      refundId:[null], 
+      refundId: [null],
       ownerBankCardNumber: [''],
-        
-    }); 
-    this.route.params.subscribe(p => {
+    });
+    this.route.params.subscribe((p) => {
       if (p.refundId) {
-        this.refundId = p.refundId; 
+        this.refundId = p.refundId;
       }
     });
   }
-
- 
-
-
 
   ngOnInit() {
     this.getRefundInfo();
@@ -57,56 +50,45 @@ export class CitizenRefundFullInfoComponent implements OnInit {
         if (response.isSuccess) {
           this.info = response.data ? response.data : {};
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
-
-
   }
 
-
-  
-
-  saveInfo() { 
+  saveInfo() {
     if (this.frm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
       return false;
-    } 
-    
+    }
+
     this.isSaving = true;
     var url = ServerApis.updateRefundSaveCardNmber;
     var params = this.frm.value;
     params.refundId = this.info.refundId;
     params.ownerBankCardNumber = params.ownerBankCardNumber;
 
-    this.dataService.post(url, params).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.matDialogRef.close(true);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-    });
+    this.dataService.post(url, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.matDialogRef.close(true);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
-
-
-
-  
-
-
-
 }

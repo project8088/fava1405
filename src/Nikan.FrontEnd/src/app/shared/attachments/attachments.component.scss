@@ -2,9 +2,10 @@
   display: flex;
   flex-wrap: wrap;
 
-  .img-thumbnail{
-      margin:8px;
-      }.img-container a {
+  .img-thumbnail {
+    margin: 8px;
+  }
+  .img-container a {
     width: 225px;
     height: 190px;
     display: flex;
@@ -31,8 +32,6 @@
   }
 }
 
-
-
-.f-s-42{
-    font-size:42px;
+.f-s-42 {
+  font-size: 42px;
 }

@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 
 import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from 'src/app/core/models/base-data-model';
@@ -46,7 +40,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.form = this.fb.group({
       state: [null, []],
@@ -89,15 +83,9 @@ export class AdminEditCitizenInfoComponent implements OnInit {
 
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],
-      mobile: [
-        null,
-        [Validators.required, this.customValidator.checkMobileNumber],
-      ],
+      mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
       email: [null, [this.customValidator.checkEmail]],
-      nationalCode: [
-        { value: '', disabled: true },
-        [this.customValidator.checkNationalCode],
-      ],
+      nationalCode: [{ value: '', disabled: true }, [this.customValidator.checkNationalCode]],
 
       firstName: [
         { value: '', disabled: false },
@@ -133,24 +121,18 @@ export class AdminEditCitizenInfoComponent implements OnInit {
       cityId: [null, []],
     });
 
-    this.personalForm
-      .get('educationStatues')
-      .valueChanges.subscribe((value) => {
-        if (+value !== 3) {
-          this.personalForm
-            .get('educationLevel')
-            .setValidators(Validators.required);
-          this.personalForm
-            .get('educationGroup')
-            .setValidators(Validators.required);
-        } else {
-          this.personalForm.get('educationLevel').clearValidators();
-          this.personalForm.get('educationGroup').clearValidators();
-        }
+    this.personalForm.get('educationStatues').valueChanges.subscribe((value) => {
+      if (+value !== 3) {
+        this.personalForm.get('educationLevel').setValidators(Validators.required);
+        this.personalForm.get('educationGroup').setValidators(Validators.required);
+      } else {
+        this.personalForm.get('educationLevel').clearValidators();
+        this.personalForm.get('educationGroup').clearValidators();
+      }
 
-        this.personalForm.get('educationLevel').updateValueAndValidity();
-        this.personalForm.get('educationGroup').updateValueAndValidity();
-      });
+      this.personalForm.get('educationLevel').updateValueAndValidity();
+      this.personalForm.get('educationGroup').updateValueAndValidity();
+    });
 
     this.helperService.getProvinces().subscribe((data) => {
       this.states = this.getListOptions(data);
@@ -172,7 +154,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((value) => {
         return this._getStates(value);
-      })
+      }),
     );
 
     this.getBaseEnums();
@@ -185,7 +167,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
         return this.helperService
           .getCitesByParent(value)
           .pipe(map((data) => this.getListOptions(data)));
-      })
+      }),
     );
 
     this.filteredState = this.personalForm.get('state').valueChanges.pipe(
@@ -194,7 +176,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
       distinctUntilChanged(),
       switchMap((value) => {
         return this._getStates(value);
-      })
+      }),
     );
   }
 
@@ -217,16 +199,14 @@ export class AdminEditCitizenInfoComponent implements OnInit {
           if (response && response.isSuccess) {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -246,7 +226,6 @@ export class AdminEditCitizenInfoComponent implements OnInit {
   }
 
   getListOptions(options) {
-   
     return options.map((el) => {
       return { value: +el.key, text: el.text };
     });
@@ -287,8 +266,8 @@ export class AdminEditCitizenInfoComponent implements OnInit {
           (error) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
-          }
-        )
+          },
+        ),
       );
   }
 
@@ -312,7 +291,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
   getEducationGroups() {
@@ -327,7 +306,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
   getPersonalInfo() {
@@ -337,7 +316,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
         this.loading = false;
         if (response && response.isSuccess) {
           this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-          this, (this.citizenInfo = response.data);
+          (this, (this.citizenInfo = response.data));
 
           this.personalForm.patchValue({
             gender: response.data.gender,
@@ -350,9 +329,7 @@ export class AdminEditCitizenInfoComponent implements OnInit {
             date_SabtConfirm: response.data.date_SabtConfirm
               ? new Date(response.data.date_SabtConfirm)
               : '',
-            birthDate: response.data.date_SabtConfirm
-              ? new Date(response.data.birthDate)
-              : '',
+            birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
 
             educationTitle: response.data.educationField,
             educationGroup: String(response.data.educationGroupId),
@@ -381,16 +358,14 @@ export class AdminEditCitizenInfoComponent implements OnInit {
           this.userStatus = response.data.sabtStatus;
           this.setDisabledFields();
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
@@ -436,16 +411,14 @@ export class AdminEditCitizenInfoComponent implements OnInit {
           if (response && response.isSuccess) {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 

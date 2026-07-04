@@ -8,55 +8,46 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'adm-manzalat-setting',
   templateUrl: './manzalat-setting.component.html',
-  styleUrls: ['./manzalat-setting.component.scss']
+  styleUrls: ['./manzalat-setting.component.scss'],
 })
 export class ManzalatSettingComponent implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
 
-   
-
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {
     this.settingForm = this.fb.group({
-
       minAgeSalmand: [0],
       minAgeBazneshasteh: [0],
       janbazanDescription: [''],
       bazneshastehDescription: [''],
       zanSarparastDescription: [''],
       salmandDescription: [''],
-      maloulinDescription: [''] ,
-     
-
+      maloulinDescription: [''],
     });
-
   }
-
-
-
 
   ngOnInit(): void {
     this.loading = true;
-    this.dataService.get(ServerApis.getManzalatSettings).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.settingForm.patchValue(response.data);
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-
-    })
+    this.dataService.get(ServerApis.getManzalatSettings).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.settingForm.patchValue(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-
 
   saveSetting() {
     if (this.settingForm.invalid) {
@@ -67,25 +58,19 @@ export class ManzalatSettingComponent implements OnInit {
 
     this.isSaving = true;
     var params = this.settingForm.value;
-    this.dataService.post(ServerApis.updateManzalatSettings, params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.')
-      } else {
-        let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-
-    })
+    this.dataService.post(ServerApis.updateManzalatSettings, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
-
-
-
- 
-
-
 }
-

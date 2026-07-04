@@ -1,16 +1,10 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
   <h5 cdkDragHandle class="title py-0">
-    لیست پیام های ارسال شده به شهروند {{ citizen.firstName }}
-    {{ citizen.lastName }} {{ citizen.nationCode }}
+    لیست پیام های ارسال شده به شهروند {{ citizen.firstName }} {{ citizen.lastName }}
+    {{ citizen.nationCode }}
   </h5>
 
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -19,7 +13,7 @@
   <div *ngIf="data?.length">
     <div *ngFor="let item of data">
       <div>{{ item.messageText }}</div>
-      <div>{{ item.sendOnDate|jalali }}</div>
+      <div>{{ item.sendOnDate | jalali }}</div>
     </div>
   </div>
 </mat-dialog-content>

@@ -34,7 +34,7 @@ export class CitizenMyFamilyComponent implements OnInit {
     private toastrService: ToastrService,
     private matDialog: MatDialog,
     private profileComponent: CitizenProfileComponent,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
@@ -54,16 +54,14 @@ export class CitizenMyFamilyComponent implements OnInit {
         if (response && response.isSuccess) {
           this.familyList = response.data ? response.data : [];
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
@@ -86,9 +84,7 @@ export class CitizenMyFamilyComponent implements OnInit {
             (response) => {
               row.loading = false;
               if (response.isSuccess) {
-                this.toastrService.success(
-                  'حذف عضو خانواده با موفقیت انجام شد.'
-                );
+                this.toastrService.success('حذف عضو خانواده با موفقیت انجام شد.');
                 for (var i = 0; i < this.familyList.length; i++) {
                   if (this.familyList[i].id == row.id) {
                     this.familyList.splice(i, 1);
@@ -105,7 +101,7 @@ export class CitizenMyFamilyComponent implements OnInit {
             (error) => {
               row.loading = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-            }
+            },
           );
       }
     });
@@ -138,21 +134,18 @@ export class CitizenMyFamilyComponent implements OnInit {
   }
 
   getAllCitizenFamilyByFamily() {
-
     this.dataService.get(ServerApis.getAllCitizenFamilyByFamily).subscribe(
       (response) => {
         if (response && response.isSuccess) {
           this.familyByfamilyList = response.data ? response.data.familyList : [];
         } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 }

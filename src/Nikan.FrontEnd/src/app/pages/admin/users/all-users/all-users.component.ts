@@ -19,12 +19,21 @@ import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.compon
 @Component({
   selector: 'adm-all-users',
   templateUrl: './all-users.component.html',
-  styleUrls: ['./all-users.component.scss']
+  styleUrls: ['./all-users.component.scss'],
 })
-export class AdminAllUsersComponent implements  OnInit {
- 
-  displayedColumns: string[] = ['row', 'userName', 'displayName', 'emailAddress','mobileNumber', 'roles','userAccountState', 'createdOnDate', 'lastLoggedIn', 'operation'];
- 
+export class AdminAllUsersComponent implements OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'userName',
+    'displayName',
+    'emailAddress',
+    'mobileNumber',
+    'roles',
+    'userAccountState',
+    'createdOnDate',
+    'lastLoggedIn',
+    'operation',
+  ];
 
   roleList: any[] = [];
   data: any[] = [];
@@ -46,51 +55,30 @@ export class AdminAllUsersComponent implements  OnInit {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private route: ActivatedRoute,
-
   ) {
-
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
       username: [''],
       roleId: [null],
       userAccountState: [null],
-
     });
-
-
-     
-
   }
 
-
-
   ngOnInit() {
-
-    this.dataService.get(ServerApis.getAllRols).subscribe(response => {
+    this.dataService.get(ServerApis.getAllRols).subscribe((response) => {
       this.roleList = response.data ? response.data : [];
     });
 
     this.getList();
-
   }
-
- 
-
-
-
-
-
-
 
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -99,30 +87,27 @@ export class AdminAllUsersComponent implements  OnInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchUsers, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -135,30 +120,30 @@ export class AdminAllUsersComponent implements  OnInit {
     this.getList();
   }
 
-
-
   openAddUserDialog() {
-    this.matDialog.open(AdminAddUserDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-      }
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminAddUserDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {},
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
-
   openUpdateUserDialog(row) {
-    this.matDialog.open(AdminUpdateUserDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        userId: row.userId
-      }
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(AdminUpdateUserDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          userId: row.userId,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openChangePasswordDialog(row) {
@@ -167,9 +152,8 @@ export class AdminAllUsersComponent implements  OnInit {
       data: {
         userId: row.userId,
         userName: row.userName,
-        displayName: row.displayName
-      }
+        displayName: row.displayName,
+      },
     });
   }
-
 }

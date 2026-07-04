@@ -1,21 +1,15 @@
-.tm-about-image img{
-    max-height: 320px;
+.tm-about-image img {
+  max-height: 320px;
 }
 
-.img-logo{
-    max-height: 125px;
+.img-logo {
+  max-height: 125px;
 }
 
+.img-fluid,
+.img-thumbnail {
+  height: 140px;
+  width: 100%;
 
-
-
-
-
-
-
-.img-fluid, .img-thumbnail{
-    height: 140px;
-    width: 100%;
-    
-    display: block;
+  display: block;
 }

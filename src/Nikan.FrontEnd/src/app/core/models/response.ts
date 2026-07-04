@@ -1,4 +1,3 @@
- 
 export class ApiResult<T> {
   isSuccess: boolean;
   statusCode: number;
@@ -6,4 +5,3 @@ export class ApiResult<T> {
   message: string;
   data: T;
 }
-

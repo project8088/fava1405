@@ -9,7 +9,7 @@ import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { merge, of as observableOf  } from 'rxjs';
+import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { AdminAddSabtAhvalDialogComponent } from '../dialog/add-sabtAhval/add-sabtAhval.component';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
@@ -17,59 +17,57 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
 @Component({
   selector: 'adm-sabtAhval-list',
   templateUrl: './sabtAhval-list.component.html',
-  styleUrls: ['./sabtAhval-list.component.scss']
+  styleUrls: ['./sabtAhval-list.component.scss'],
 })
 export class AdminSabtAhvalListComponent implements AfterViewInit {
-
-  displayedColumns: string[] = ['row', 'exportNumber','exportType', 'exportBy', 'countRow', 'creationDate', 'receiveBy', 'sendOnDate', 'receiveOnDate', 'acceptCount','groupName',  'operation'];
-
-   
-
+  displayedColumns: string[] = [
+    'row',
+    'exportNumber',
+    'exportType',
+    'exportBy',
+    'countRow',
+    'creationDate',
+    'receiveBy',
+    'sendOnDate',
+    'receiveOnDate',
+    'acceptCount',
+    'groupName',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  searchForm: FormGroup; 
+  searchForm: FormGroup;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
- 
- 
+
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) {
-     
     this.searchForm = this.fb.group({
       fromDate: [null],
-      toDate: [null], 
+      toDate: [null],
       exportNumber: [null],
       title: [''],
-
     });
-
   }
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-  
-
-
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -78,36 +76,30 @@ export class AdminSabtAhvalListComponent implements AfterViewInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getAllExportSabtAhval, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
- 
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -115,68 +107,66 @@ export class AdminSabtAhvalListComponent implements AfterViewInit {
     }
     this.getList();
   }
- 
-
 
   delete(row) {
-
     Swal.fire({
-      title:'حذف',
+      title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeExport, {
-          id: row.id, 
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.removeExport, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت حذف شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
 
-  
-  
   openDialog(item) {
-    this.matDialog.open(AdminAddSabtAhvalDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: { 
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(AdminAddSabtAhvalDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {},
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
-
-   
 
   openCitizenProfile(userCode) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   send(item) {
-
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',
@@ -184,30 +174,35 @@ export class AdminSabtAhvalListComponent implements AfterViewInit {
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-          item.loading = true;
-        this.dataService.get(ServerApis.sendOnlineAuthentication, {
-          exportId: item.id,
-        }).subscribe(response => {
-          item.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت به صف بررسی ارسال  شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          item.loading = false;
-        });
+        item.loading = true;
+        this.dataService
+          .get(ServerApis.sendOnlineAuthentication, {
+            exportId: item.id,
+          })
+          .subscribe(
+            (response) => {
+              item.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت به صف بررسی ارسال  شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              item.loading = false;
+            },
+          );
       }
-
     });
   }
 
   sendChekStateLife(item) {
-
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',
@@ -215,25 +210,31 @@ export class AdminSabtAhvalListComponent implements AfterViewInit {
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
         item.loading = true;
-        this.dataService.get(ServerApis.sendOnlineAuthenticationByBagRezvanService, {
-          exportId: item.id,
-        }).subscribe(response => {
-          item.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت به صف بررسی ارسال  شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          item.loading = false;
-        });
+        this.dataService
+          .get(ServerApis.sendOnlineAuthenticationByBagRezvanService, {
+            exportId: item.id,
+          })
+          .subscribe(
+            (response) => {
+              item.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت به صف بررسی ارسال  شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              item.loading = false;
+            },
+          );
       }
-
     });
   }
 }

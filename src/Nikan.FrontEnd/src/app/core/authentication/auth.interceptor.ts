@@ -22,17 +22,14 @@ export class AuthInterceptor implements HttpInterceptor {
     private authService: AuthService,
     private router: Router,
     private toastrService: ToastrService,
-    private storageService: LocalStorageService
+    private storageService: LocalStorageService,
   ) {}
 
   addToken(req: HttpRequest<any>, token: string): HttpRequest<any> {
     return req.clone({ setHeaders: { Authorization: 'Bearer ' + token } });
   }
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const accessToken = this.authService.getRawAuthToken();
     if (
       !accessToken ||
@@ -44,23 +41,18 @@ export class AuthInterceptor implements HttpInterceptor {
       return next.handle(req).pipe(
         catchError((error) => {
           return this.handleError(req, next, error);
-        })
+        }),
       );
 
     return next.handle(this.addToken(req, accessToken)).pipe(
       catchError((error) => {
         return this.handleErrorWithToken(req, next, error);
-      })
+      }),
     );
   }
 
-  handleError(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
-    if (req.url.toLowerCase().includes('worldtimeapi'))
-      return throwError(error);
+  handleError(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
+    if (req.url.toLowerCase().includes('worldtimeapi')) return throwError(error);
 
     if (error instanceof HttpErrorResponse) {
       switch ((<HttpErrorResponse>error).status) {
@@ -83,11 +75,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return throwError(error);
     }
   }
-  handleErrorWithToken(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
+  handleErrorWithToken(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     if (error instanceof HttpErrorResponse) {
       switch ((<HttpErrorResponse>error).status) {
         case 400:
@@ -111,33 +99,21 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 
-  handleErrorAccessDenied(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
+  handleErrorAccessDenied(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     this.toastrService.error('لطفا وارد حساب کاربری خود شوید!', 'دسترسی ممنوع');
     this.logoutUser();
     const eror = error.error?.message || error.statusText;
     return throwError(eror);
   }
 
-  handle404Error(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
+  handle404Error(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     this.toastrService.error('دسترسی به سرور امکان پذیر نیست!', '404');
 
     const eror = error.error?.message || error.statusText;
     return throwError(eror);
   }
 
-  handle500Error(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
+  handle500Error(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     this.toastrService.error('متاسفانه خطایی در سرور رخ داده است', 'خطا!');
     const eror = error.error?.message || error.statusText;
     //console.log(eror);
@@ -146,14 +122,8 @@ export class AuthInterceptor implements HttpInterceptor {
     return throwError(eror);
   }
 
-  handleReciveDataError(
-    req: HttpRequest<any>,
-    next: HttpHandler,
-    error: HttpErrorResponse
-  ) {
-    this.toastrService.error(
-      'متاسفانه دریافت اطلاعات از سرور با خطا مواجه شده است.'
-    );
+  handleReciveDataError(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
+    this.toastrService.error('متاسفانه دریافت اطلاعات از سرور با خطا مواجه شده است.');
     const eror = error.error?.message || error.statusText;
     //console.log(eror);
     //  this.startTimer();
@@ -186,7 +156,7 @@ export class AuthInterceptor implements HttpInterceptor {
           // If there is an exception calling 'refreshToken', bad news so logout.
           this.isRefreshingToken = false;
           return this.logoutUser();
-        })
+        }),
       );
     } else {
       return this.tokenSubject.pipe(
@@ -199,18 +169,13 @@ export class AuthInterceptor implements HttpInterceptor {
           // If there is an exception calling 'refreshToken', bad news so logout.
           this.isRefreshingToken = false;
           return this.logoutUser();
-        })
+        }),
       );
     }
   }
 
   handle400Error(error) {
-    if (
-      error &&
-      error.status === 400 &&
-      error.error &&
-      error.error.error === 'invalid_grant'
-    ) {
+    if (error && error.status === 400 && error.error && error.error.error === 'invalid_grant') {
       // If we get a 400 and the error message is 'invalid_grant', the token is no longer valid so logout.
       return this.logoutUser();
     }

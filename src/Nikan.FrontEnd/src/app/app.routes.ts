@@ -28,7 +28,8 @@ export const routes: Routes = [
 
   {
     path: 'redirect',
-    loadComponent:()=>import('./pages/redirect/redirect.component').then(c=>c.RedirectComponent)
+    loadComponent: () =>
+      import('./pages/redirect/redirect.component').then((c) => c.RedirectComponent),
   },
 
   {

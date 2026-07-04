@@ -26,12 +26,11 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private matDialogRef: MatDialogRef<AdminCitizenManzelatReviewComponent>,
     private dataService: DataService,
-    private toastService: ToastrService
+    private toastService: ToastrService,
   ) {
     this.data = _data;
 
-    if (this.data.command === 'Remove')
-      this.data.title = 'حذف فرم ' + this.data.manzelatForm.title;
+    if (this.data.command === 'Remove') this.data.title = 'حذف فرم ' + this.data.manzelatForm.title;
     else this.data.title = 'بررسی فرم ' + this.data.manzelatForm.title;
   }
 
@@ -45,10 +44,8 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
     const formValues = this.form.value;
 
     if (this.data.command === 'Remove') {
-     
       this.dataService
         .get(ServerApis.removeManzalatForm, {
-         
           id: this.data.manzelatForm.manzalatRegisterId,
         })
         .subscribe(
@@ -63,12 +60,12 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
               this.toastService.error(msg);
             }
           },
-          (error) => {}
+          (error) => {},
         );
     } else {
       this.dataService
         .post(ServerApis.confirmManzaltByAdmin, {
-          userCode:  this.data.userCode,
+          userCode: this.data.userCode,
           manzalatFormType: this.data.manzelatForm.manzalatFormType,
           ...formValues,
         })
@@ -84,7 +81,7 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
               this.toastService.error(msg);
             }
           },
-          (error) => {}
+          (error) => {},
         );
     }
   }

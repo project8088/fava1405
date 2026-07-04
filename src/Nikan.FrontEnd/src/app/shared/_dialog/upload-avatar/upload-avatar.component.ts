@@ -1,10 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import {
-  MatDialog,
-  MatDialogRef,
-  MAT_DIALOG_DATA,
-} from '@angular/material/dialog';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
 import { DataService } from '../../../core/services/data-service.service';
 import { AuthService } from '../../../core/authentication/auth.service';
@@ -36,7 +32,7 @@ export class UploadUserAvatarDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private toastrService: ToastrService,
     private dataService: DataService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.user = this.authService.currentUserValue;
     this.imageUrl = ServerApis.baseUrl + _data.imageUrl;
@@ -64,7 +60,7 @@ export class UploadUserAvatarDialogComponent implements OnInit {
     // show message
     this.toastrService.error(
       'متاسفانه برش فایل انتخابی شما امکان پذیر نیست!',
-      'لطفا فایل تصویر دیگری را انتخاب کنید'
+      'لطفا فایل تصویر دیگری را انتخاب کنید',
     );
   }
 
@@ -95,28 +91,20 @@ export class UploadUserAvatarDialogComponent implements OnInit {
         if (response.isSuccess) {
           this.toastrService.success('ذخیره تصویر با موفقیت انجام شد.');
 
-          var userImage = this.user.isCitizen
-            ? response.data.uploadUrl
-            : response.data.imageUrl;
+          var userImage = this.user.isCitizen ? response.data.uploadUrl : response.data.imageUrl;
           this.matDialogRef.close(userImage);
         } else {
-          var msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است.';
+          var msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.saving = false;
-      }
+      },
     );
   }
 
-  convertBase64ImageToBlobFile(
-    b64Data,
-    contentType = 'image/png',
-    sliceSize = 1024
-  ) {
+  convertBase64ImageToBlobFile(b64Data, contentType = 'image/png', sliceSize = 1024) {
     b64Data = b64Data.replace('data:image/png;base64,', '');
     const byteCharacters = atob(b64Data);
     const byteArrays = [];

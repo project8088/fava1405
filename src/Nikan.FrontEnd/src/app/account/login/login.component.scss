@@ -1,4 +1,3 @@
-
 .bot-detect-container {
   display: flex;
   gap: 10px;
@@ -10,12 +9,11 @@
   }
 }
 
-@media(max-width:500px) {
+@media (max-width: 500px) {
   .bot-detect-container {
     flex-direction: column-reverse;
   }
 }
-
 
 .captcha {
   width: 140px;
@@ -68,8 +66,8 @@
 }
 
 .custom-button:before {
-  content: "\f2bd";
-  font: 15px/1.2em "Font Awesome 5 Pro";
+  content: '\f2bd';
+  font: 15px/1.2em 'Font Awesome 5 Pro';
   color: #fff;
   position: absolute;
   height: 100%;

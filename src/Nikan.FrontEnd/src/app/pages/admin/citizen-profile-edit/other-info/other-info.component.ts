@@ -8,14 +8,12 @@ import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from '../../../../core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { HelperService } from '../../../../core/services/helper.service';
- 
 
 @Component({
   selector: 'citizen-other-info',
   templateUrl: './other-info.component.html',
-  styleUrls: ['./other-info.component.scss']
+  styleUrls: ['./other-info.component.scss'],
 })
-   
 export class AdminCitizenOtherInfoComponent implements OnInit {
   loading: boolean;
   provinceList: any[] = [];
@@ -38,21 +36,17 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
     private customValidators: CustomFormValidators,
     private dataService: DataService,
     private toastrService: ToastrService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-    this.form = this.fb.group({ 
-     
-      provinceShCity: [null ],
+    this.form = this.fb.group({
+      provinceShCity: [null],
       shCity: [null, []],
 
-      provinceCityOfBirth: [null ],
-      cityOfBirth : [null, []],
+      provinceCityOfBirth: [null],
+      cityOfBirth: [null, []],
 
-      
-     
       villageOfBirth: [null, []],
       birthCitySection: [null, []],
-      
 
       dateOfMarriage: [null, []],
       insuranceNumber: [null, []],
@@ -62,7 +56,7 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
       shCode: [null, []],
       shSerial: [null, []],
       shDate: [null, []],
-    
+
       shCitySection: [null, []],
       shNote: [null, []],
 
@@ -78,24 +72,16 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
 
       educationStatues: [null],
     });
-        
- 
-    
-    this.route.params.subscribe(p => {
-      if (p.id != '0' && p.id)
-        this.userCode = p.id;
+
+    this.route.params.subscribe((p) => {
+      if (p.id != '0' && p.id) this.userCode = p.id;
       this.getPersonalInfo();
     });
   }
 
-
-
-
   ngOnInit(): void {
     this.getBaseEnums();
     this.getProvinces();
-
-
   }
 
   getBaseEnums() {
@@ -103,79 +89,83 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
     this.dataService.getEnums().subscribe(
       (response) => {
         this.loadingEnums = false;
-        if (response) { 
+        if (response) {
           this.baseEnums.soldierState = response.soldierState;
-          this.baseEnums.religion = response.religion; 
+          this.baseEnums.religion = response.religion;
         }
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
-      }
+      },
     );
   }
 
-
- 
   getProvinces() {
-    this.dataService.get(ServerApis.getProvinces).subscribe(response => {
-      this.provinceList = response.data ? response.data : [];
-
-    }, error => { });
+    this.dataService.get(ServerApis.getProvinces).subscribe(
+      (response) => {
+        this.provinceList = response.data ? response.data : [];
+      },
+      (error) => {},
+    );
   }
- 
- 
 
   getPersonalInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.geCitizenProfileByAdmin, {
-      userCode: this.userCode
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.userCode = response.data.userCode;
-        this.form.setValue({
-          provinceCityOfBirth: response.data.provinceCityOfBirth ? response.data.provinceCityOfBirth : '',
-          cityOfBirth: {
-            key: response.data.cityOfBirthId,
-            text: response.data.cityOfBirth
-          }, 
-          provinceShCity: response.data.provinceShCity ? response.data.provinceShCity : '',
-          shCity: {
-            key: response.data.shCityId,
-            text: response.data.shCity
-          }, 
-          villageOfBirth: response.data.villageOfBirth,
-          birthCitySection: response.data.birthCitySection, 
-          dateOfMarriage: response.data.dateOfMarriage,
-          insuranceNumber: response.data.insuranceNumber,
-          dateOfEmployeement: response.data.dateOfEmployeement, 
-          personnelCode: response.data.personnelCode,
-          shCode: response.data.shCode,
-          shSerial: response.data.shSerial,
-          shDate: response.data.shDate,  
-          shCitySection: response.data.shCitySection,
-          shNote: response.data.shNote, 
-          militaryStatus: response.data.militaryStatus,
-          endOfMilitary: response.data.endOfMilitary,
-          religion: response.data.religion,
+    this.dataService
+      .get(ServerApis.geCitizenProfileByAdmin, {
+        userCode: this.userCode,
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            this.userCode = response.data.userCode;
+            this.form.setValue({
+              provinceCityOfBirth: response.data.provinceCityOfBirth
+                ? response.data.provinceCityOfBirth
+                : '',
+              cityOfBirth: {
+                key: response.data.cityOfBirthId,
+                text: response.data.cityOfBirth,
+              },
+              provinceShCity: response.data.provinceShCity ? response.data.provinceShCity : '',
+              shCity: {
+                key: response.data.shCityId,
+                text: response.data.shCity,
+              },
+              villageOfBirth: response.data.villageOfBirth,
+              birthCitySection: response.data.birthCitySection,
+              dateOfMarriage: response.data.dateOfMarriage,
+              insuranceNumber: response.data.insuranceNumber,
+              dateOfEmployeement: response.data.dateOfEmployeement,
+              personnelCode: response.data.personnelCode,
+              shCode: response.data.shCode,
+              shSerial: response.data.shSerial,
+              shDate: response.data.shDate,
+              shCitySection: response.data.shCitySection,
+              shNote: response.data.shNote,
+              militaryStatus: response.data.militaryStatus,
+              endOfMilitary: response.data.endOfMilitary,
+              religion: response.data.religion,
 
-          educationStatues: response.data.educationStatues,
-          baseEducation: response.data.baseEducation,
-          universityName: response.data.universityName,
-          academicGrade: response.data.academicGrade,
-          academicNote: response.data.academicNote,
-          endOfEducation: response.data.endOfEducation,
-        });
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-    });
+              educationStatues: response.data.educationStatues,
+              baseEducation: response.data.baseEducation,
+              universityName: response.data.universityName,
+              academicGrade: response.data.academicGrade,
+              academicNote: response.data.academicNote,
+              endOfEducation: response.data.endOfEducation,
+            });
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
-
 
   save() {
     if (this.form.invalid) {
@@ -186,11 +176,11 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
     var form = this.form.value;
     this.isSaving = true;
     let dataToPost = {
-      userCode:this.userCode, 
+      userCode: this.userCode,
       cityOfBirthId: +form.cityOfBirth.key,
-      shCityId: +form.shCity.key,   
-      birthCitySection: form.birthCitySection, 
-      academicNote: form.academicNote, 
+      shCityId: +form.shCity.key,
+      birthCitySection: form.birthCitySection,
+      academicNote: form.academicNote,
       religion: form.religion,
       baseEducation: form.baseEducation,
       universityName: form.universityName,
@@ -198,36 +188,35 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
       dateOfMarriage: form.dateOfMarriage ? this.dataService.formatDate(form.dateOfMarriage) : null,
       endOfMilitary: form.endOfMilitary ? this.dataService.formatDate(form.endOfMilitary) : null,
       endOfEducation: form.endOfEducation ? this.dataService.formatDate(form.endOfEducation) : null,
-      dateOfEmployeement: form.dateOfEmployeement ? this.dataService.formatDate(form.dateOfEmployeement) : null,
-      shDate: form.shDate ? this.dataService.formatDate(form.shDate) : null, 
+      dateOfEmployeement: form.dateOfEmployeement
+        ? this.dataService.formatDate(form.dateOfEmployeement)
+        : null,
+      shDate: form.shDate ? this.dataService.formatDate(form.shDate) : null,
       insuranceNumber: form.insuranceNumber,
       personnelCode: form.personnelCode,
-      shCode: form.shCode, 
+      shCode: form.shCode,
       shSerial: form.shSerial,
-      jobTitle: form.jobTitle,  
+      jobTitle: form.jobTitle,
       militaryStatus: form.militaryStatus,
-     
+
       shCitySection: form.shCitySection,
       shNote: form.shNote,
       educationStatues: form.educationStatues,
       villageOfBirth: form.villageOfBirth,
-        
-
-
-
     };
-    this.dataService.post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-      } else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
-
+    this.dataService.post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
 }

@@ -92,12 +92,14 @@ import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/updat
 import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.component';
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
- 
+
 const routes: Routes = [
   {
-    path: '', component: AdminComponent, children: [
+    path: '',
+    component: AdminComponent,
+    children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminDashboardComponent },  
+      { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'register-company', component: AdminRegisterCompanyComponent },
       { path: 'companies', component: AdminCompaniesListComponent },
       { path: 'company-profile/:id', component: CompanyProfileComponent },
@@ -105,9 +107,6 @@ const routes: Routes = [
       { path: 'addupdate-personal/:companyId/:id', component: CompanyAddOrUpdatePersonalComponent },
 
       { path: 'componay-users/:id', component: CompanyUserListComponent },
-      
-
-    
 
       { path: 'news-list', component: AdminNewsListComponent },
       { path: 'addupdate-news/:id', component: AdminAddOrUpdateNewsComponent },
@@ -115,13 +114,14 @@ const routes: Routes = [
       { path: 'news-groups', component: AdminNewsGroupsComponent },
       { path: 'pages', component: AdminPageListComponent },
       { path: 'addupdate-page/:id', component: AdminAddOrUpdatePageComponent },
-      { path:'slide-show',component:AdminSlideShowListComponent},
+      { path: 'slide-show', component: AdminSlideShowListComponent },
 
       { path: 'notifications', component: AdminNotificationListComponent },
       { path: 'addupdate-notification/:id', component: AdminAddOrUpdateNotificationComponent },
-      { path: 'citizen-notifications/:id', component: AdminAddOrUpdateCitizensNotificationComponent },
-      
-
+      {
+        path: 'citizen-notifications/:id',
+        component: AdminAddOrUpdateCitizensNotificationComponent,
+      },
 
       { path: 'ticket-subjects', component: AdminTicketSubjectsComponent },
 
@@ -131,21 +131,17 @@ const routes: Routes = [
       { path: 'manzalat-form-list', component: AdminManzalatBaseFromListComponent },
       { path: 'update-manzalat-form/:id', component: AdminUpdateManzalatBaseFormComponent },
 
-           
-
       { path: 'faq-groups', component: AdminFaqGroupsComponent },
       { path: 'faq-list', component: AdminFaqListComponent },
       { path: 'add-update-faq/:id', component: AdminAddOrUpdateFaqComponent },
 
       { path: 'citizen-in-group/:id', component: AdminCitizensInGroupsComponent },
-      { path: 'show-citizen/:id', component: AppShowCitizenComponent }, 
+      { path: 'show-citizen/:id', component: AppShowCitizenComponent },
 
       //organization
       { path: 'organization', component: AdminOrganizationListComponent },
       { path: 'units/:id', component: AdminUnitListComponent },
       { path: 'organization-unit-groups/:id', component: AdminOrganizationUnitGroupsComponent },
-
-
 
       { path: 'company-info/:id', component: CompanyInfoComponent },
       //Group
@@ -155,29 +151,22 @@ const routes: Routes = [
 
       { path: 'group-queue-citizens-list/:id', component: AdminGroupQueueCitizensListComponent },
 
-
-
-
-
-       { path: 'contact-us', component: AdminContactUsListComponent },
+      { path: 'contact-us', component: AdminContactUsListComponent },
       { path: 'setting', component: AdminSettingComponent },
       { path: 'pay-setting', component: AdminPaySettingComponent },
       { path: 'sms-setting', component: SmsSettingComponent },
 
       { path: 'manzelat-settings', component: ManzalatSettingComponent },
 
-
       { path: 'config', component: AdminConfigComponent },
 
       { path: 'card-list', component: AdminCardListComponent },
       { path: 'addupdate-card/:cardTypeId/:id', component: AdminAddOrUpdateCardComponent },
 
-
       //SabtAhval
       { path: 'sabtAhval-list', component: AdminSabtAhvalListComponent },
       { path: 'sabtAhval-citizens/:id', component: AdminSabtAhvalCitizensListComponent },
       { path: 'check-state-life-list/:id', component: AdminCheckStateLifeListComponent },
-
 
       { path: 'menu-management', component: AdminMenuManagementComponent },
 
@@ -187,75 +176,79 @@ const routes: Routes = [
       { path: 'web-api-users', component: AdminWebApiUsersComponent },
       { path: 'admin-userGroups', component: AdminUserGroupsComponent },
       { path: 'manager-users', component: AdminManagerUsersComponent },
-      { path:'addupdate-manager/:id', component: AdminAddOrUpdateManagerComponent },
+      { path: 'addupdate-manager/:id', component: AdminAddOrUpdateManagerComponent },
       { path: 'change-password', component: ChangeCurrentUserPasswordComponent },
       { path: 'permissions/:id', component: AdminUserPermissionsComponent },
       { path: 'web-api-permissions/:id', component: AdminWebApiUserPermissionsComponent },
       { path: 'user-roles/:id', component: UserRoleListComponent },
       { path: 'user-access-service/:id', component: AdminUserAppAccessServiceComponent },
-      
-      { path: 'user-group-access-permissions/:id', component: AdminUserAccessGroupPermissionsComponent },
+
+      {
+        path: 'user-group-access-permissions/:id',
+        component: AdminUserAccessGroupPermissionsComponent,
+      },
       { path: 'user-access-ip/:id', component: AdminUserAccessIpComponent },
 
-
-
       //financial
-      
+
       { path: 'transaction-list', component: AdminTransactionListComponent },
       { path: 'transaction-details/:id', component: TransactionDetailsComponent },
-
-
-   
 
       { path: 'sms-list', component: AdminSmsListComponent },
 
       { path: 'pay-test', component: AdminPayTestComponent },
-      
+
       { path: 'citizen-register-file-list', component: AdminCitizenExcelBatchFileListComponent },
-      { path: 'citizen-register-file-details/:importId', component: AdminCitizenExcelBatchFileDetailsComponent },
-     
+      {
+        path: 'citizen-register-file-details/:importId',
+        component: AdminCitizenExcelBatchFileDetailsComponent,
+      },
+
       //refund
       { path: 'refund-file-list', component: AdminRefundExcelBatchFileListComponent },
-      { path: 'refund-file-details/:importId', component: AdminRefundExcelBatchFileDetailsComponent },
+      {
+        path: 'refund-file-details/:importId',
+        component: AdminRefundExcelBatchFileDetailsComponent,
+      },
       { path: 'refund-access-list', component: AdminRefundAccessListComponent },
       { path: 'refund-access-details/:importId', component: AdminRefundAccessDetailsListComponent },
       { path: 'search-refund', component: AdminRefundAccessSearchListComponent },
 
       { path: 'refund-users', component: AdminRefundUsersComponent },
 
-
-
-
       //citizens
       { path: 'search-citizen', component: AdminCitizensComponent },
-      { path: 'advanced-search-citizen', component:  AdminCitizenAdvancedSearchComponent },
+      { path: 'advanced-search-citizen', component: AdminCitizenAdvancedSearchComponent },
       { path: 'search-citizen-family', component: AdminCitizensFamilyComponent },
       { path: 'citizen-family-details/:id', component: AdminCitizenFamilyDetailsComponent },
       { path: 'appService-list', component: AdminAppserviceListComponent },
-      { path: 'addupdate-appService/:id', component: AdminAddOrUpdateAppserviceComponent }, 
+      { path: 'addupdate-appService/:id', component: AdminAddOrUpdateAppserviceComponent },
       { path: 'citizens-pictures', component: AdminCitizensPicturesComponent },
-      { path: 'search-manzelat-citizens', component:  AdminManzelatCitizensComponent} ,
-      { path: 'citizen-manzelat-details/:id', component:  AdminManzelatCitizensDetailsComponent},
+      { path: 'search-manzelat-citizens', component: AdminManzelatCitizensComponent },
+      { path: 'citizen-manzelat-details/:id', component: AdminManzelatCitizensDetailsComponent },
       { path: 'edit-citizen-info/:id', component: AdminEditCitizenInfoComponent },
       { path: 'edit-profile/:id', component: AdminCitizenProfileComponent },
       { path: 'all-citizens-feedBacks', component: AdminAllCitizensFeedBacksComponent },
       { path: 'citizens-authentication', component: AdminCitizenAuthenticationComponent },
-      { path: 'citizens-authentication-search', component: AdminCitizenAuthenticationSearchComponent },
+      {
+        path: 'citizens-authentication-search',
+        component: AdminCitizenAuthenticationSearchComponent,
+      },
 
-      
       //citizen Card
       { path: 'advanced-search-card-citizen', component: AdminCitizenCardAdvancedSearchComponent },
       { path: 'export-search-card-citizen', component: AdminCitizenCardExportSearchComponent },
-      { path: 'export-details-citizen-card/:id', component: AdminCitizenCardExportDetailsComponent },
-
-      
-   ]
-  }
+      {
+        path: 'export-details-citizen-card/:id',
+        component: AdminCitizenCardExportDetailsComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
   declarations: [],
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AdminRoutingModule { }
+export class AdminRoutingModule {}

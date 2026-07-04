@@ -3,7 +3,7 @@ body.dark {
 }
 
 .boxed {
-  background: url("../../assets/images/backgrounds/az_subtle.png");
+  background: url('../../assets/images/backgrounds/az_subtle.png');
   background-attachment: fixed;
 }
 
@@ -15,7 +15,7 @@ body.dark {
 }
 
 .dark .part1 {
-  background-image: url("../../assets/images/1.jpg");
+  background-image: url('../../assets/images/1.jpg');
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -43,7 +43,7 @@ body.dark {
   bottom: 0;
   width: 100%;
   margin-bottom: 3px;
-  opacity: .8;
+  opacity: 0.8;
   color: #fff;
 }
 
@@ -98,17 +98,17 @@ body.dark {
 
 #carouselExampleIndicators blockquote p:before,
 #carouselExampleIndicators blockquote p:after {
-  font-family: "FontAwesome";
+  font-family: 'FontAwesome';
 }
 
 #carouselExampleIndicators blockquote p:before {
   margin-right: 20px;
-  content: "\f10d";
+  content: '\f10d';
 }
 
 #carouselExampleIndicators blockquote p:after {
   margin-left: 20px;
-  content: "\f10e";
+  content: '\f10e';
 }
 
 #carouselExampleIndicators blockquote footer {

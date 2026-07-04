@@ -36,7 +36,7 @@ export class SideNavMenuComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private matDialog: MatDialog,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
@@ -84,8 +84,7 @@ export class SideNavMenuComponent implements OnInit {
   }
 
   openUploadDialog() {
-    if (!this.user.isCompany && !this.user.isJobseeker && !this.user.isCitizen)
-      return false;
+    if (!this.user.isCompany && !this.user.isJobseeker && !this.user.isCitizen) return false;
 
     this.matDialog
       .open(UploadUserAvatarDialogComponent, {
@@ -113,12 +112,9 @@ export class SideNavMenuComponent implements OnInit {
     });
   }
   getCitizenImage() {
-    this.dataService
-      .get(ServerApis.getShortCitizenInfoByCitizen)
-      .subscribe((response) => {
-        if (response.isSuccess)
-          this.userImage =
-            response.data.personalPictureUrl + '?v=' + Math.random() * 1000;
-      });
+    this.dataService.get(ServerApis.getShortCitizenInfoByCitizen).subscribe((response) => {
+      if (response.isSuccess)
+        this.userImage = response.data.personalPictureUrl + '?v=' + Math.random() * 1000;
+    });
   }
 }

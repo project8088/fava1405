@@ -18,20 +18,18 @@ import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-cit
 })
 export class AdminManzelatCitizensDetailsComponent implements OnInit {
   userCode: string;
-  data: []; 
+  data: [];
   citizen: any = {};
   loading: boolean = true;
   imageUrl: string;
   baseUrl: string = ServerApis.baseUrl;
-
-
 
   constructor(
     private toastrService: ToastrService,
     private matDialog: MatDialog,
     private router: Router,
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
@@ -57,28 +55,24 @@ export class AdminManzelatCitizensDetailsComponent implements OnInit {
             this.data = response.data ? response.data.manzaltForms : {};
             this.citizen = response.data ? response.data.citizen : {};
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.loading = false;
-        }
+        },
       );
   }
 
   openReviewDialog(manzelatForm, command) {
-
-
     this.matDialog
       .open(AdminCitizenManzelatReviewComponent, {
         panelClass: 'custom-dialog',
         data: {
           manzelatForm,
           command,
-          citizenName: this.citizen.firstName + " " + this.citizen.lastName,
+          citizenName: this.citizen.firstName + ' ' + this.citizen.lastName,
           userCode: this.userCode,
         },
         width: '600px',
@@ -92,7 +86,7 @@ export class AdminManzelatCitizensDetailsComponent implements OnInit {
   toggleConfirmFamily(family, isAccept: boolean) {
     this.dataService
       .post(ServerApis.confirmFamilyByAdmin, {
-        userCode:  this.userCode,
+        userCode: this.userCode,
         familyId: family.familyCitizenId,
         isAccept: isAccept,
       })
@@ -102,15 +96,13 @@ export class AdminManzelatCitizensDetailsComponent implements OnInit {
           if (response.isSuccess) {
             this.toastrService.success(response.message);
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.loading = false;
-        }
+        },
       );
   }
 
@@ -132,59 +124,62 @@ export class AdminManzelatCitizensDetailsComponent implements OnInit {
       .subscribe((result) => {});
   }
   sendcitizenForAuthentication(citizenId) {
-    this.dataService.get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId }).subscribe(response => {
-      if (response.isSuccess && response.data) {
-        this.toastrService.success(response.messages);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-
-    });
+    this.dataService
+      .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.toastrService.success(response.messages);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {},
+      );
   }
 
   openCitizenProfile(userCode) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
-
   openCitizenEditMobileNumber(userCode) {
-    this.matDialog.open(AdminUpdateCitizenMobileNumberDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        userCode: userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getInfo();
-      }
-    });
+    this.matDialog
+      .open(AdminUpdateCitizenMobileNumberDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getInfo();
+        }
+      });
   }
 
   openUpdateCitizenSabtStateDialog() {
-    this.matDialog.open(AdminUpdateCitizenSabtStateDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        userCode: this.userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getInfo();
-      }
-    });
+    this.matDialog
+      .open(AdminUpdateCitizenSabtStateDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          userCode: this.userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getInfo();
+        }
+      });
   }
-
-
-
-
-
 }

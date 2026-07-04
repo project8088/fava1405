@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  map,
-  startWith,
-  switchMap,
-} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 
 import { DataService } from 'src/app/core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -42,7 +36,7 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private route: ActivatedRoute,
-    private helperService: HelperService
+    private helperService: HelperService,
   ) {
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
@@ -66,13 +60,10 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
       postalCode: [null, [Validators.required]],
     });
 
-
-
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id)
-        this.route.params.subscribe(p => {
-          if (p.id != '0' && p.id)
-            this.userCode = p.id;
+        this.route.params.subscribe((p) => {
+          if (p.id != '0' && p.id) this.userCode = p.id;
 
           this.helperService.getIsfahanCities().subscribe((data) => {
             this.isfahanCities = data;
@@ -80,19 +71,10 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
 
           this.loadHomeData();
           this.loadWorkData();
-
-
         });
-       
     });
-
-
   }
-  ngOnInit(): void {
-   
-
-   
-  }
+  ngOnInit(): void {}
 
   toggleHomeEditMode() {
     this.editMode = !this.editMode;
@@ -116,25 +98,26 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
   }
 
   loadHomeData() {
- 
     this.loadingHome = true;
-    this.dataService.get(ServerApis.getCitizenHomeAddressByAdmin, {
-      userCode: this.userCode
-    }).subscribe((data) => {
-      this.loadingHome = false;
-      if (data.data) {
-        this.homeForm.patchValue({
-          id: data.data.id,
-          region: data.data.region,
-          phone: data.data.phone,
-          street: data.data.street,
-          alley: data.data.alley,
-          plaque: data.data.plaque,
-          cityId: String(data.data.cityId),
-          postalCode: data.data.postalCode,
-        });
-      }
-    });
+    this.dataService
+      .get(ServerApis.getCitizenHomeAddressByAdmin, {
+        userCode: this.userCode,
+      })
+      .subscribe((data) => {
+        this.loadingHome = false;
+        if (data.data) {
+          this.homeForm.patchValue({
+            id: data.data.id,
+            region: data.data.region,
+            phone: data.data.phone,
+            street: data.data.street,
+            alley: data.data.alley,
+            plaque: data.data.plaque,
+            cityId: String(data.data.cityId),
+            postalCode: data.data.postalCode,
+          });
+        }
+      });
   }
 
   loadWorkData() {
@@ -142,22 +125,19 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
       this.states = data as [];
     });
 
-   
     this.cities = this.workForm.get('stateId').valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((value) => {
-        return this.helperService
-          .getCitesByParent(value)
-          .pipe(map((data) => data));
-      })
+        return this.helperService.getCitesByParent(value).pipe(map((data) => data));
+      }),
     );
 
     this.loadingWork = true;
     this.dataService
       .get(ServerApis.getCitizenOfficeAddressByAdmin, {
-        userCode: this.userCode
+        userCode: this.userCode,
       })
       .subscribe((data) => {
         this.loadingWork = false;
@@ -181,13 +161,13 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
           distinctUntilChanged(),
           switchMap((value) => {
             return this.helperService.getCitesByParent(value);
-          })
+          }),
         );
 
         this.cities.subscribe((data: any[]) => {
           if (data.length) {
             this.workCityText = data.find(
-              (el: any) => el.key === this.workForm.controls['cityId'].value
+              (el: any) => el.key === this.workForm.controls['cityId'].value,
             ).text;
           }
         });
@@ -218,9 +198,7 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
             this.editMode = false;
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
           this.isSavingHome = false;
@@ -230,23 +208,21 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
           this.isSavingHome = false;
           this.isSavingWork = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
   getHomeCityText() {
     if (this.isfahanCities && this.isfahanCities.length) {
       return this.isfahanCities.find(
-        (el: any) => +el.key === this.homeForm.controls['cityId'].value
+        (el: any) => +el.key === this.homeForm.controls['cityId'].value,
       ).text;
     } else return [];
   }
 
   getWorkState() {
     if (this.states?.length) {
-      return this.states.find(
-        (el: any) => el.key === this.workForm.controls['stateId'].value
-      ).text;
+      return this.states.find((el: any) => el.key === this.workForm.controls['stateId'].value).text;
     }
   }
 

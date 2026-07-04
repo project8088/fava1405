@@ -35,12 +35,12 @@ export class AdminCitizenCardExportSearchComponent implements AfterViewInit {
     'row',
     'export_Number',
     'creationDate',
-    'dateSend', 
+    'dateSend',
     'exporterByUser',
     'countExport',
     'dateReceive',
-    'importerByUser', 
-    'operation'
+    'importerByUser',
+    'operation',
   ];
 
   data: any[] = [];
@@ -61,33 +61,24 @@ export class AdminCitizenCardExportSearchComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
-      toDate: [null], 
-       
+      toDate: [null],
     });
   }
 
   ngAfterViewInit() {
     this.getList();
-    
   }
 
-  
-
- 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-
-
-
 
     merge()
       .pipe(
@@ -100,21 +91,17 @@ export class AdminCitizenCardExportSearchComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -131,15 +118,15 @@ export class AdminCitizenCardExportSearchComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.citizenId
+        id: row.citizenId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -147,41 +134,39 @@ export class AdminCitizenCardExportSearchComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.id
+        id: row.id,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   createZipFilePicture(item) {
     item.loading = true;
-    this.dataService.get(
-      ServerApis.getExportCardPicture, { id: item.id }).subscribe(response => {
+    this.dataService.get(ServerApis.getExportCardPicture, { id: item.id }).subscribe(
+      (response) => {
         item.loading = false;
         if (response && response.isSuccess) {
           this.toastrService.success('فایل زیپ تصاویر با موفقیت ایجاد شد.');
           this.router.navigate(['/admin/export-details-citizen-card/' + item.id]);
         } else {
-          let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      }, error => {
+      },
+      (error) => {
         item.loading = false;
-      });
+      },
+    );
   }
-
 
   openGetCardNumberDialog(item) {
     this.matDialog.open(AdminImportCardNumberDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        export: item
+        export: item,
       },
-      width: '600px'
-
-    })
+      width: '600px',
+    });
   }
-
-
 }

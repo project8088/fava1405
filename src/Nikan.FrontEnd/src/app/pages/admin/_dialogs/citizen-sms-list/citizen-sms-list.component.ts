@@ -14,7 +14,7 @@ export class AdminCitizenSmsListDialogComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.citizen = _data;
   }
@@ -25,7 +25,7 @@ export class AdminCitizenSmsListDialogComponent implements OnInit {
 
   getMessages() {
     this.dataService
-      .get(ServerApis.getCitizenRejectImageSmsList, { citizenId: this.citizen.citizenId})
+      .get(ServerApis.getCitizenRejectImageSmsList, { citizenId: this.citizen.citizenId })
       .subscribe((data) => {
         this.data = data.data;
       });

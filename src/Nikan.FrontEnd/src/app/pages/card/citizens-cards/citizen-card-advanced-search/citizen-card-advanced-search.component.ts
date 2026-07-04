@@ -21,7 +21,7 @@ import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-prof
 import { CardCancellationCitizenCardDialogComponent } from '../dialog/cancellation-citizen-card/cancellation-citizen-card.component';
 import { CardDeliveredCitizenCardDialogComponent } from '../dialog/delivered-citizen-card/delivered-citizen-card.component';
 import { CardBackCitizenCardDialogComponent } from '../dialog/back-citizen-card/back-citizen-card.component';
- 
+
 @Component({
   selector: 'card-citizen-card-advanced-search',
   templateUrl: './citizen-card-advanced-search.component.html',
@@ -34,12 +34,12 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     'citizen',
     'sabtStatus',
     'personalPicture_Confirmed',
-    'cardTitle', 
+    'cardTitle',
     'requestDate',
     'requestStatuse',
     'deliverType',
     'cardNumber',
-    'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -60,19 +60,19 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
-      toDate: [null], 
+      toDate: [null],
       name: [''],
-      nationCode: [''], 
+      nationCode: [''],
       cardNumber: [''],
       requestStatuse: [null],
       cardTypeId: [null],
-      
+
       sabtStatus: [null],
-      pictureConfirmed: [null], 
+      pictureConfirmed: [null],
       discountGroupId: [null],
       deliverType: [null],
     });
@@ -83,7 +83,6 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     this.getBaseEnums();
     this.getAppRegisterList();
     this.getDisCountGroupBaseList();
-
 
     this.helperService.getIsfahanCities().subscribe((data) => {
       this.isfahanCities = data;
@@ -102,7 +101,6 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     this.dataService.getEnums().subscribe(
       (response) => {
         if (response) {
-
           this.baseEnums.sabtStatus = response.sabtStatus;
           this.baseEnums.requestStatuse = response.cardRequestStatus;
           this.baseEnums.groupIds = response.groupIds;
@@ -110,7 +108,7 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
   }
 
@@ -121,7 +119,7 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
@@ -132,23 +130,16 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
-
-
-
 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-     
 
     merge()
       .pipe(
@@ -161,56 +152,39 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
       });
   }
 
-
   exportExcel() {
     var param: any = this.searchForm.value;
     param.offset = 0;
     param.count = 65000;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
-
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
-    this.dataService.downloadFile(ServerApis.citizencardAdvSearch_Export, param, '', 'export-citizen-cards.xls');
-
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
+    this.dataService.downloadFile(
+      ServerApis.citizencardAdvSearch_Export,
+      param,
+      '',
+      'export-citizen-cards.xls',
+    );
   }
-
-
-
-
-
-
-
-
-
-
-
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -222,15 +196,15 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -238,53 +212,55 @@ export class CardCitizenCardAdvancedSearchComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.id
+        id: row.id,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
   openBackCard(item) {
-    this.matDialog.open(CardBackCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(CardBackCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openDeliveredCard(item) {
-    this.matDialog.open(CardDeliveredCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(CardDeliveredCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
 
   openCancellationCard(item) {
-    this.matDialog.open(CardCancellationCitizenCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        info: item
-      },
-      width: '600px'
-
-    }).afterClosed().subscribe(result => {
-      if (result)
-        this.getList();
-    });
+    this.matDialog
+      .open(CardCancellationCitizenCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          info: item,
+        },
+        width: '600px',
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) this.getList();
+      });
   }
-
 }

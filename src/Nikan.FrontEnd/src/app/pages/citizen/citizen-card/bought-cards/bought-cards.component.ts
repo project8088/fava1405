@@ -28,13 +28,12 @@ export class BoughtCardsComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private matDialog: MatDialog,
-    private dataService: DataService
+    private dataService: DataService,
   ) {}
 
   ngOnInit(): void {
     this.getList();
   }
-
 
   getList() {
     this.dataService.get(ServerApis.getCitizenCardInfo).subscribe(
@@ -45,33 +44,24 @@ export class BoughtCardsComponent implements OnInit {
       (error) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
-
-
-
-
   openCardAddress(info) {
-    this.matDialog.open(ChangeCardAddressDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        info: info
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(ChangeCardAddressDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          info: info,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
-
-
-
-
-
-
-
 }

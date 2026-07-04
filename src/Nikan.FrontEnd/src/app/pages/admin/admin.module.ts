@@ -84,7 +84,7 @@ import { AdminWebApiUsersComponent } from './users/web-api-users/web-api-users.c
 import { AdminAddWebApiUserDialogComponent } from './users/dialogs/add-webapi-users/add-webapi-users.component';
 import { AdminTreeWebApiPermissionComponent } from './users/web-api-user-permissions/tree-permission/tree-user-web-api-permission.component';
 import { AdminWebApiUserPermissionsComponent } from './users/web-api-user-permissions/web-api-user-permissions.component';
-import {  AdminUserAppAccessServiceComponent } from './users/user-access-app-service/user-access-app-service.component';
+import { AdminUserAppAccessServiceComponent } from './users/user-access-app-service/user-access-app-service.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
 import { AdminRefundExcelBatchFileDetailsComponent } from './Refund/refund-excel-batch-file-details/refund-excel-batch-file-details.component';
@@ -131,7 +131,7 @@ import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.co
 import { AdminAddRefundUserDialogComponent } from './Refund/dialog/add-refund-user/add-refund-user.component';
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
- 
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -170,11 +170,11 @@ import { AdminConfigComponent } from './config/config.component';
     AdminCompanyContractDialogComponent,
     AdminSmsListComponent,
     AdminCompanyChangeStatusDialogComponent,
-     
+
     AdminPayTestComponent,
     AdminTransactionListComponent,
     AdminPaySettingComponent,
-  
+
     AdminCitizensComponent,
     AdminSlideShowListComponent,
     AdminAddOrUpdateSlideShowDialogComponent,
@@ -183,9 +183,9 @@ import { AdminConfigComponent } from './config/config.component';
     AdminUserGroupsComponent,
     AdminAddUserGrousDialogComponent,
     AdminUserPermissionsComponent,
-    AdminTreePermissionComponent, 
+    AdminTreePermissionComponent,
     AdminTreeWebApiPermissionComponent,
-    AdminWebApiUserPermissionsComponent,   
+    AdminWebApiUserPermissionsComponent,
     AdminAddFeedBackDialogComponent,
     AdminCitizensPicturesComponent,
     AdminCitizenTransactionListComponent,
@@ -260,8 +260,7 @@ import { AdminConfigComponent } from './config/config.component';
     AdminRefundUsersComponent,
     AdminAddRefundUserDialogComponent,
     AdminCitizenAuthenticationSearchComponent,
-    AdminConfigComponent
-    
+    AdminConfigComponent,
   ],
 
   imports: [
@@ -301,7 +300,7 @@ import { AdminConfigComponent } from './config/config.component';
     AdminGroupTransferDialogComponent,
     AdminUpdateCitizenMobileNumberDialogComponent,
     AdminUpdateCitizenSabtStateDialogComponent,
-    AdminAddRefundUserDialogComponent
+    AdminAddRefundUserDialogComponent,
   ],
 })
 export class AdminModule {}

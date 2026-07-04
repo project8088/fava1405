@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators'; 
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
- 
+
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../../core/services/data-service.service';
@@ -37,7 +37,6 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
   isLoadingResults: boolean = true;
   groupId: string;
 
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
@@ -48,7 +47,7 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -57,12 +56,9 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
       nationCode: [''],
       groupId: [null],
     });
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.groupId = p.id ? p.id : null;
     });
-
-
-
   }
 
   ngAfterViewInit() {
@@ -73,12 +69,10 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     param.groupId = +this.groupId;
-
 
     merge()
       .pipe(
@@ -91,21 +85,17 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -123,18 +113,14 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
     this.getList();
   }
 
-
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
-   
 }

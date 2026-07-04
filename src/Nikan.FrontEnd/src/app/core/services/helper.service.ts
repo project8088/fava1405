@@ -12,7 +12,7 @@ import { map } from 'rxjs/operators';
 export class HelperService {
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {}
 
   /**
@@ -27,7 +27,7 @@ export class HelperService {
         } else {
           return null;
         }
-      })
+      }),
     );
   }
   /**
@@ -42,7 +42,7 @@ export class HelperService {
         } else {
           return null;
         }
-      })
+      }),
     );
   }
 
@@ -51,15 +51,15 @@ export class HelperService {
    * */
   getCities() {
     return this.dataService.get(ServerApis.getAllCites).pipe(
-        map((response: ApiResult<[]>) => {
-          if (response.isSuccess) {
-            var result = response.data;
-            return result;
-          } else {
-            return null;
-          }
-        })
-      );
+      map((response: ApiResult<[]>) => {
+        if (response.isSuccess) {
+          var result = response.data;
+          return result;
+        } else {
+          return null;
+        }
+      }),
+    );
   }
 
   /**
@@ -71,7 +71,7 @@ export class HelperService {
 
     return this.dataService
       .get(ServerApis.getCitesByParent, {
-        parentId: filterValue
+        parentId: filterValue,
       })
       .pipe(
         map(
@@ -86,8 +86,8 @@ export class HelperService {
           },
           (error) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
-          }
-        )
+          },
+        ),
       );
   }
 }

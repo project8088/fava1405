@@ -21,7 +21,7 @@ import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-prof
 import { CardCancellationCitizenCardDialogComponent } from '../dialog/cancellation-citizen-card/cancellation-citizen-card.component';
 import { CardDeliveredCitizenCardDialogComponent } from '../dialog/delivered-citizen-card/delivered-citizen-card.component';
 import { CardBackCitizenCardDialogComponent } from '../dialog/back-citizen-card/back-citizen-card.component';
- 
+
 @Component({
   selector: 'card-citizen-card-in-queue',
   templateUrl: './citizen-card-in-queue.component.html',
@@ -34,13 +34,13 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
     'citizen',
     'courseNumber',
     'queueName',
-    'cardTitle', 
-    'queueOnDate', 
+    'cardTitle',
+    'queueOnDate',
     'deliverType',
     'cardNumber',
-    'operation'
+    'operation',
   ];
-  info: any; 
+  info: any;
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -60,22 +60,20 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
-
     this.route.params.subscribe((p) => {
       this.queueId = p.id;
     });
-     
-    this.searchForm = this.fb.group({ 
+
+    this.searchForm = this.fb.group({
       name: [''],
-      nationCode: [''], 
-      cardNumber: [''], 
-      cardTypeId: [null],  
+      nationCode: [''],
+      cardNumber: [''],
+      cardTypeId: [null],
       queueInputType: [null],
       courseNumber: [''],
     });
- 
   }
 
   ngAfterViewInit() {
@@ -85,32 +83,29 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(
-      ServerApis.getDistributionQueueInfo, { id: this.queueId }).subscribe(response => {
+    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.queueId }).subscribe(
+      (response) => {
         this.loadingData = false;
         if (response && response.isSuccess) {
           this.info = response.data;
           this.courseId = response.data.courseId;
           this.loadingData = false;
         } else {
-          let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
-          
         }
-      }, error => {
+      },
+      (error) => {
         this.loadingData = false;
-      });
+      },
+    );
   }
 
- 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
     param.queueId = +this.queueId;
-
-
-
 
     merge()
       .pipe(
@@ -123,21 +118,17 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -154,15 +145,15 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -170,10 +161,10 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.requestId
+        id: row.requestId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
   delete(row) {
@@ -183,24 +174,28 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
       showConfirmButton: true,
       confirmButtonText: 'بله',
       showCancelButton: true,
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeCardFromQueue, { id: row.printId }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-        });
+        this.dataService.get(ServerApis.removeCardFromQueue, { id: row.printId }).subscribe(
+          (response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
+          },
+        );
       }
     });
   }
-
 
   exportExcel() {
     var param: any = this.searchForm.value;
@@ -209,17 +204,11 @@ export class CardCitizenCardInQueueComponent implements AfterViewInit {
 
     param.queueId = +this.queueId;
 
-    this.dataService.downloadFile(ServerApis.searchCardInQueue_Export, param, '', 'citizen-card-in-queue.xls');
-
+    this.dataService.downloadFile(
+      ServerApis.searchCardInQueue_Export,
+      param,
+      '',
+      'citizen-card-in-queue.xls',
+    );
   }
-
-
-
-
-
-
-
-
-
-
 }

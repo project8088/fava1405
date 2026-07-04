@@ -1,14 +1,6 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-  <h5 cdkDragHandle class="title my-0">
-    خرید کارت {{ cardDetails?.cardType }}
-  </h5>
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <h5 cdkDragHandle class="title my-0">خرید کارت {{ cardDetails?.cardType }}</h5>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -25,9 +17,7 @@
       <div><b>عنوان کارت</b>: {{ cardDetails?.cardType }}</div>
       <div><b>توضیحات کارت</b>: {{ cardDetails?.buyCardDescription }}</div>
       <div Class="d-flex justify-content-end">
-        <button matStepperNext mat-raised-button color="default">
-          ادامه خرید
-        </button>
+        <button matStepperNext mat-raised-button color="default">ادامه خرید</button>
       </div>
     </mat-step>
 
@@ -42,14 +32,9 @@
             </mat-select>
             <mat-hint
               class="text-danger"
-              *ngIf="
-                addressForm.controls['addressType'].errors && ngForm.submitted
-              "
+              *ngIf="addressForm.controls['addressType'].errors && ngForm.submitted"
             >
-              <span
-                *ngIf="addressForm.controls['addressType'].errors['required']"
-              >
-              </span>
+              <span *ngIf="addressForm.controls['addressType'].errors['required']"> </span>
             </mat-hint>
           </mat-form-field>
           <div class="col-12 col-md-12 col-lg-6">
@@ -58,13 +43,9 @@
               <input formControlName="phoneNumber" numbersOnly matInput />
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['phoneNumber'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['phoneNumber'].errors && ngForm.submitted"
               >
-                <span
-                  *ngIf="addressForm.controls['phoneNumber'].errors['required']"
-                >
+                <span *ngIf="addressForm.controls['phoneNumber'].errors['required']">
                   تلفن ثابت خود را وارد کنید
                 </span>
               </mat-hint>
@@ -80,13 +61,9 @@
               </mat-select>
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['stateId'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['stateId'].errors && ngForm.submitted"
               >
-                <span
-                  *ngIf="addressForm.controls['stateId'].errors['required']"
-                >
+                <span *ngIf="addressForm.controls['stateId'].errors['required']">
                   استان خود را انتخاب کنید
                 </span>
               </mat-hint>
@@ -100,9 +77,7 @@
               </mat-select>
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['cityId'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['cityId'].errors && ngForm.submitted"
               >
                 <span *ngIf="addressForm.controls['cityId'].errors['required']">
                   شهر خود را انتخاب کنید
@@ -116,9 +91,7 @@
               <input formControlName="region" numbersOnly matInput />
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['region'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['region'].errors && ngForm.submitted"
               >
                 <span *ngIf="addressForm.controls['region'].errors['required']">
                   منطقه خود را انتخاب کنید
@@ -132,9 +105,7 @@
               <input formControlName="street" matInput />
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['street'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['street'].errors && ngForm.submitted"
               >
                 <span *ngIf="addressForm.controls['street'].errors['required']">
                   خیابان خود را انتخاب کنید
@@ -162,9 +133,7 @@
               <input formControlName="plaque" matInput />
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['plaque'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['plaque'].errors && ngForm.submitted"
               >
                 <span *ngIf="addressForm.controls['plaque'].errors['required']">
                   پلاک محل سکونت خود را انتخاب کنید
@@ -183,13 +152,9 @@
               />
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  addressForm.controls['postalCode'].errors && ngForm.submitted
-                "
+                *ngIf="addressForm.controls['postalCode'].errors && ngForm.submitted"
               >
-                <span
-                  *ngIf="addressForm.controls['postalCode'].errors['required']"
-                >
+                <span *ngIf="addressForm.controls['postalCode'].errors['required']">
                   کد پستی خود را وارد کنید
                 </span>
               </mat-hint>
@@ -198,11 +163,7 @@
         </div>
       </form>
       <div class="row justify-content-end">
-        <button
-          mat-raised-button
-          (click)="submitAddress(stepper)"
-          color="default"
-        >
+        <button mat-raised-button (click)="submitAddress(stepper)" color="default">
           تایید و ادامه خرید
         </button>
       </div>
@@ -212,53 +173,61 @@
       <div class="m-3">
         <p class="text-primary">
           شهروند گرامی: کارت شما از طریق پست به آدرس
-          {{
-            addressForm.controls["addressType"].value === 2 ? "منزل" : "محل کار"
-          }} 
+          {{ addressForm.controls['addressType'].value === 2 ? 'منزل' : 'محل کار' }}
           شما به نشانی اصفهان خیابان
-          {{ addressForm.controls["addressType"].value }}
-          {{ addressForm.controls["alley"].value? 'کوچه ' +addressForm.controls["alley"].value + "،" : ''  }}
-          {{ addressForm.controls["plaque"].value? 'پلاک ' +addressForm.controls["plaque"].value+ "،" : ''  }}
-          {{ addressForm.controls["postalCode"].value? 'کد پستی ' +addressForm.controls["postalCode"].value : ''  }}
+          {{ addressForm.controls['addressType'].value }}
+          {{
+            addressForm.controls['alley'].value
+              ? 'کوچه ' + addressForm.controls['alley'].value + '،'
+              : ''
+          }}
+          {{
+            addressForm.controls['plaque'].value
+              ? 'پلاک ' + addressForm.controls['plaque'].value + '،'
+              : ''
+          }}
+          {{
+            addressForm.controls['postalCode'].value
+              ? 'کد پستی ' + addressForm.controls['postalCode'].value
+              : ''
+          }}
 
           ارسال خواهد شد.
-          
         </p>
         <div>
           <table class="table">
-              <thead>
-                  <tr>
-                      <th>قیمت کارت</th>
-                      <th>تخفیف</th>
-                      <th>جمع کل</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                    </tr>
-              </tbody>
+            <thead>
+              <tr>
+                <th>قیمت کارت</th>
+                <th>تخفیف</th>
+                <th>جمع کل</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
           </table>
 
           <table class="table">
             <thead>
-                <tr>
-                    <th>هزینه ارسال</th>
-                    <th>تخفیف</th>
-                    <th>جمع کل</th>
-                </tr>
+              <tr>
+                <th>هزینه ارسال</th>
+                <th>تخفیف</th>
+                <th>جمع کل</th>
+              </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
+              <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
-        </table>
-
+          </table>
         </div>
         <div class="row justify-content-end">
           <button mat-raised-button color="default">

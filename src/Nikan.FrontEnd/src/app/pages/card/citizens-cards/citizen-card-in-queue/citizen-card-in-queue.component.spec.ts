@@ -8,9 +8,8 @@ describe('AdminCitizenAdvancedSearchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminCitizenAdvancedSearchComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminCitizenAdvancedSearchComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

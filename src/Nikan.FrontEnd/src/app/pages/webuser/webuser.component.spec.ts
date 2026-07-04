@@ -1,15 +1,14 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { WebUserComponent } from './webuser.component';
- 
+
 describe('WebUserComponent', () => {
   let component: WebUserComponent;
   let fixture: ComponentFixture<WebUserComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ WebUserComponent ]
-    })
-    .compileComponents();
+      declarations: [WebUserComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -8,9 +8,8 @@ describe('AdminCitizensPicturesComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminCitizensPicturesComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminCitizensPicturesComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

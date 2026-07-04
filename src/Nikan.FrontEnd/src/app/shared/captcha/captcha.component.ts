@@ -32,7 +32,7 @@ export class CaptchaComponent implements OnInit {
       },
       (error) => {
         this.loadingCaptcha = false;
-      }
+      },
     );
   }
 }

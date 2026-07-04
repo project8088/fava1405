@@ -1,13 +1,9 @@
 <div class="content-header">
   <span>جزئیات تراکنش</span>
-
 </div>
-
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
- 
-
     <button mat-stroked-button color="default" (click)="back()">
       <span>بازگشت </span>
     </button>
@@ -16,57 +12,49 @@
     <div class="d-flex align-items-center justify-content-center p-5" *ngIf="isLoadingResults">
       <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
     </div>
-    
-  
 
     <div *ngIf="!isLoadingResults" class="line-height-3">
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <span>شماره پیگیری: </span>
-          <strong>{{transactionInfo.orderId}}</strong>
+          <strong>{{ transactionInfo.orderId }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span>شناسه بانکی: </span>
-          <strong>{{transactionInfo.transactionBankReferenceId}}</strong>
+          <strong>{{ transactionInfo.transactionBankReferenceId }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span>مبلغ: </span>
-          <strong>{{transactionInfo.amountTransaction|number}}</strong>
+          <strong>{{ transactionInfo.amountTransaction | number }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span>تاریخ تراکنش: </span>
-          <strong>{{transactionInfo.transactionOnDate|jalali}}</strong>
+          <strong>{{ transactionInfo.transactionOnDate | jalali }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span>وضعیت تراکنش: </span>
-          <strong>{{transactionInfo.transactionState|enumString:'transactionState'}}</strong>
+          <strong>{{ transactionInfo.transactionState | enumString: 'transactionState' }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span>عنوان تراکنش: </span>
-          <strong>{{transactionInfo.transactionFor|enumString:'transactionFor'}}</strong>
+          <strong>{{ transactionInfo.transactionFor | enumString: 'transactionFor' }}</strong>
         </div>
 
         <div class="col-sm-6 col-md-4">
           <span>تاریخ تائید تراکنش: </span>
-          <strong>{{transactionInfo.acceptationTransactionOnDate|jalali}}</strong>
+          <strong>{{ transactionInfo.acceptationTransactionOnDate | jalali }}</strong>
         </div>
-
-
 
         <div class="col-sm-6 col-md-4">
           <span>انجام دهنده تراکنش: </span>
-          <strong>{{transactionInfo.transactionBy}}</strong>
+          <strong>{{ transactionInfo.transactionBy }}</strong>
         </div>
         <div class="col-sm-6 col-md-4">
           <span> توضیحات: </span>
-          <strong>{{transactionInfo.paymentDescription}}</strong>
+          <strong>{{ transactionInfo.paymentDescription }}</strong>
         </div>
       </div>
-
- 
     </div>
-
-
   </mat-card-content>
   <mat-card-footer></mat-card-footer>
 </mat-card>

@@ -20,14 +20,9 @@ export class LoginComponent implements OnInit {
   captchaImage: any;
   loadingCaptcha: boolean = true;
   returnUrl: string = '';
-  serviceId:number=0;
-
+  serviceId: number = 0;
 
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
-
-
-
-
 
   constructor(
     private fb: FormBuilder,
@@ -36,14 +31,13 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private dataService: DataService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
   ) {
-
     this.route.queryParams.subscribe((p) => {
-      if (p.returnUrl) this.returnUrl = p.returnUrl; 
+      if (p.returnUrl) this.returnUrl = p.returnUrl;
     });
 
-    authService.currentUser.subscribe(u => {
+    authService.currentUser.subscribe((u) => {
       if (u) {
         this.authService.goToDashboard();
       }
@@ -54,8 +48,8 @@ export class LoginComponent implements OnInit {
       password: ['', [Validators.required]],
       rememberMe: [true, []],
       serviceId: [null],
-       userEnteredCaptchaCode : [null, [Validators.required]],
-       captchaId : ['']
+      userEnteredCaptchaCode: [null, [Validators.required]],
+      captchaId: [''],
     });
   }
 
@@ -65,19 +59,14 @@ export class LoginComponent implements OnInit {
     this.matDialog.closeAll();
 
     this.route.queryParams.subscribe((params) => {
-        if (params['serviceId']) {
-        
-            this.serviceId = params['serviceId'];
-           
+      if (params['serviceId']) {
+        this.serviceId = params['serviceId'];
       }
     });
   }
- 
+
   login() {
-    if (
-      !this.loginForm.get('username').value ||
-      !this.loginForm.get('password').value
-    ) {
+    if (!this.loginForm.get('username').value || !this.loginForm.get('password').value) {
       this.loginForm.markAllAsTouched();
       this.toastrService.warning('نام کاربری و کلمه عبور خود را وارد کنید.');
       return false;
@@ -88,13 +77,9 @@ export class LoginComponent implements OnInit {
       return false;
     }
 
-
-  
-      var param: any = this.loginForm.value; 
+    var param: any = this.loginForm.value;
     param.serviceId = this.serviceId;
     param.CaptchaId = this.captchaComponent.captchaId;
-   
-     
 
     this.loading = true;
     this.authService.login(this.loginForm.value).subscribe(
@@ -102,29 +87,27 @@ export class LoginComponent implements OnInit {
         this.loading = false;
         if (response.isSuccess == true) {
           this.toastrService.success('احراز هویت با موفقیت انجام شد.');
-        
+
           const user = this.authService.currentUserValue;
           if (user.isCitizen && this.serviceId) {
-            this.router.navigateByUrl('/redirect?serviceId=' + this.serviceId +  '&returnUrl=' + this.returnUrl);
+            this.router.navigateByUrl(
+              '/redirect?serviceId=' + this.serviceId + '&returnUrl=' + this.returnUrl,
+            );
           } else {
             if (this.returnUrl) this.router.navigate([this.returnUrl]);
-            else
-             this.authService.goToDashboard();
+            else this.authService.goToDashboard();
           }
         } else {
-          var msg = response.messages
-            ? response.messages
-            : 'نام کاربری یا کلمه عبور صحیح نیست!';
+          var msg = response.messages ? response.messages : 'نام کاربری یا کلمه عبور صحیح نیست!';
           this.toastrService.error(msg);
           this.captchaComponent.reloadImage();
         }
       },
       (error) => {
-        if (error.status == '401')
-          this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
+        if (error.status == '401') this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
         else this.toastrService.error('خطا در ارتباط با سرور!');
         this.loading = false;
-      }
+      },
     );
   }
 }

@@ -1,22 +1,22 @@
 export class SiteSettingViewModel {
-  //[DisplayName("آدرس سایت")] 
+  //[DisplayName("آدرس سایت")]
   public siteUrl: string;
-  // [DisplayName("نام سایت")] 
+  // [DisplayName("نام سایت")]
   public siteName: string;
   public fullSiteName: string;
-    // [DisplayName("کلمات کلیدی")]  
+  // [DisplayName("کلمات کلیدی")]
   public siteKeywords: string;
-  // [DisplayName("توضیحات")]  
+  // [DisplayName("توضیحات")]
   public siteDescription: string;
-  // [Display(Name = "سرویس دهنده ایمیل")] 
+  // [Display(Name = "سرویس دهنده ایمیل")]
   public mailServerUrl: string;
-  //  [Display(Name = "درگاه")] 
+  //  [Display(Name = "درگاه")]
   public mailServerPort: string;
-  //  [Display(Name = "شناسه ورود")] 
+  //  [Display(Name = "شناسه ورود")]
   public mailServerUserName: string;
-  // [Display(Name = "کلمه عبور")] 
+  // [Display(Name = "کلمه عبور")]
   public mailServerPassword: string;
-  // [DisplayName("اطلاعات تماس")] 
+  // [DisplayName("اطلاعات تماس")]
   public cellNumber: string;
   public mobileNumber: string;
   public addresss: string;
@@ -28,5 +28,3 @@ export class SiteSettingViewModel {
   public businessHours: string;
   public logoUrl: string;
 }
-
-

@@ -32,7 +32,7 @@ export class CropperComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private dataService: DataService,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,7 @@ export class CropperComponent implements OnInit {
     // show message
     this.toastrService.error(
       'متاسفانه برش فایل انتخابی شما امکان پذیر نیست!',
-      'لطفا فایل تصویر دیگری را انتخاب کنید'
+      'لطفا فایل تصویر دیگری را انتخاب کنید',
     );
   }
 
@@ -82,11 +82,7 @@ export class CropperComponent implements OnInit {
     };
   }
 
-  convertBase64ImageToBlobFile(
-    b64Data,
-    contentType = 'image/png',
-    sliceSize = 1024
-  ) {
+  convertBase64ImageToBlobFile(b64Data, contentType = 'image/png', sliceSize = 1024) {
     b64Data = b64Data.replace('data:image/png;base64,', '');
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
@@ -133,19 +129,15 @@ export class CropperComponent implements OnInit {
         if (response.isSuccess) {
           this.toastrService.success('ذخیره تصویر با موفقیت انجام شد.');
 
-          var userImage = this.user.isCitizen
-            ? response.data.uploadUrl
-            : response.data.imageUrl;
+          var userImage = this.user.isCitizen ? response.data.uploadUrl : response.data.imageUrl;
         } else {
-          var msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است.';
+          var msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
           this.toastrService.error(msg);
         }
       },
       (error) => {
         this.saving = false;
-      }
+      },
     );
   }
 }

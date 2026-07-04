@@ -34,12 +34,12 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
     'birthDate',
     'age',
     'fatherName',
-    'mobileNumber', 
+    'mobileNumber',
     'creationDate',
     'sabtStatus',
     'groups',
     'registerByService',
-     'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -60,7 +60,7 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -107,7 +107,6 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
     this.dataService.getEnums().subscribe(
       (response) => {
         if (response) {
-
           //this.baseEnums.sabtStatus = response.sabtStatus;
           this.baseEnums.maritalStatus = response.maritalStatus;
           this.baseEnums.groupIds = response.groupIds;
@@ -115,7 +114,7 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
   }
 
@@ -126,10 +125,9 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
 
   getGroups() {
     this.dataService.get(ServerApis.getGroups).subscribe(
@@ -138,26 +136,21 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
-
-
 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
-
-    if (param.birthDateFromDate) param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
-    if (param.birthDateToDate) param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
-
+    if (param.birthDateFromDate)
+      param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
+    if (param.birthDateToDate)
+      param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
 
     merge()
       .pipe(
@@ -170,21 +163,17 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -201,68 +190,58 @@ export class AdminCitizenAdvancedSearchComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
-
   checkIsDead(item) {
     item.loading = true;
-    this.dataService.get(
-      ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(response => {
+    this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
+      (response) => {
         item.loading = false;
         if (response && response.isSuccess) {
           this.toastrService.success(response.messages);
           this.getList();
         } else {
-          let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      }, error => {
+      },
+      (error) => {
         item.loading = false;
-      });
+      },
+    );
   }
 
-
-
   exportExcel() {
-    this.isDownloadExcel =true ;
+    this.isDownloadExcel = true;
     var param: any = this.searchForm.value;
     param.offset = 0;
     param.count = 65000;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
+    if (param.birthDateFromDate)
+      param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
+    if (param.birthDateToDate)
+      param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
 
-    if (param.birthDateFromDate) param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
-    if (param.birthDateToDate) param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
-
-
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
-    this.dataService.downloadFile(ServerApis.citizenAdvancedSearch_Export, param, '', 'export-citizens.xls');
-    this.isDownloadExcel =false ;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
+    this.dataService.downloadFile(
+      ServerApis.citizenAdvancedSearch_Export,
+      param,
+      '',
+      'export-citizens.xls',
+    );
+    this.isDownloadExcel = false;
   }
-
-
-
-
-
-
-
-
-
-
-
 }

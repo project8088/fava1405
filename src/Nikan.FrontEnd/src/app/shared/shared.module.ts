@@ -47,7 +47,7 @@ import { AppCitizenManzalatRegistrationComponent } from './citizens/citizen-manz
 import { AppGroupCitizensListComponent } from './citizens/groupCitizens-list/groupCitizens-list.component';
 import { AppCitizenSmsListComponent } from './citizens/citizen-sms-list/citizen-sms-list.component';
 import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citizen-event-list.component';
- 
+
 const maskConfig: Partial<IConfig> = {
   validation: false,
 };
@@ -87,11 +87,8 @@ const maskConfig: Partial<IConfig> = {
     AppShowCitizenComponent,
     AppCitizenManzalatRegistrationComponent,
     AppGroupCitizensListComponent,
-   AppCitizenSmsListComponent,
-   AppCitizenEventListComponent
-
-
-
+    AppCitizenSmsListComponent,
+    AppCitizenEventListComponent,
   ],
   imports: [
     CoreModule,
@@ -151,7 +148,7 @@ const maskConfig: Partial<IConfig> = {
     AppCitizenManzalatRegistrationComponent,
     AppGroupCitizensListComponent,
     AppCitizenSmsListComponent,
-   AppCitizenEventListComponent
+    AppCitizenEventListComponent,
   ],
   entryComponents: [
     SendTicketDialogComponent,
@@ -166,9 +163,7 @@ export class SharedModule {
     // Forcing the whole app to use the returned providers from the AppModule only.
     return {
       ngModule: SharedModule,
-      providers: [
-        /* All of your services here. It will hold the services needed by `itself`. */
-      ],
+      providers: [/* All of your services here. It will hold the services needed by `itself`. */],
     };
   }
 }

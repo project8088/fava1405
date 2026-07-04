@@ -68,11 +68,10 @@ import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.compon
     CitizenRefundFullInfoComponent,
     CitizenMyIdentityInfoComponent,
     CitizenUpdateIdentityInfoComponent,
-   ChangeCardAddressDialogComponent,
-   CitizenUploadManzalatDocumentsComponent,
-  CitizenManzelatPlanItemComponent,
-        PlansListComponent
-    
+    ChangeCardAddressDialogComponent,
+    CitizenUploadManzalatDocumentsComponent,
+    CitizenManzelatPlanItemComponent,
+    PlansListComponent,
   ],
   imports: [
     CommonModule,
@@ -84,8 +83,11 @@ import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.compon
     ReactiveFormsModule,
     RouterModule,
     CitizenCardModule,
-   
   ],
-  entryComponents: [CitizenEducationDialogComponent, CitizenRefundInfoDialogComponent, ChangeCardAddressDialogComponent],
+  entryComponents: [
+    CitizenEducationDialogComponent,
+    CitizenRefundInfoDialogComponent,
+    ChangeCardAddressDialogComponent,
+  ],
 })
 export class CitizenModule {}

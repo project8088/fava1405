@@ -17,13 +17,19 @@ import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachmen
 @Component({
   selector: 'adm-notification-list',
   templateUrl: './notification-list.component.html',
-  styleUrls: ['./notification-list.component.scss']
+  styleUrls: ['./notification-list.component.scss'],
 })
 export class AdminNotificationListComponent implements AfterViewInit, OnInit {
-
-  displayedColumns: string[] = ['row', 'imageUrl','title', 'description', 'onDate','publishDate', 'isActive', 'operation'];
-
-
+  displayedColumns: string[] = [
+    'row',
+    'imageUrl',
+    'title',
+    'description',
+    'onDate',
+    'publishDate',
+    'isActive',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -36,48 +42,33 @@ export class AdminNotificationListComponent implements AfterViewInit, OnInit {
 
   baseUrl = ServerApis.baseUrl;
 
-
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-
-    this.searchForm = this.fb.group({ 
+    this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
-      title: ['']
+      title: [''],
     });
-
   }
 
-
-
-  ngOnInit() {
-  
-  }
-
-
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -86,35 +77,31 @@ export class AdminNotificationListComponent implements AfterViewInit, OnInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedNotificationsItems, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.news ? response.data.news : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -123,28 +110,16 @@ export class AdminNotificationListComponent implements AfterViewInit, OnInit {
     this.getList();
   }
 
-
-
-
-
-
   manageAttachment(item) {
-    this.matDialog.open(ManageAttachmentDialogComponent, {
-      data: {
-        guid: item.attachmentFileGroup
-      },
-      minWidth: '80%',
-      panelClass: 'custom-dialog'
-    }).afterClosed().subscribe(response => {
-
-    });
+    this.matDialog
+      .open(ManageAttachmentDialogComponent, {
+        data: {
+          guid: item.attachmentFileGroup,
+        },
+        minWidth: '80%',
+        panelClass: 'custom-dialog',
+      })
+      .afterClosed()
+      .subscribe((response) => {});
   }
-
-
-
-
-
-
-
-
 }

@@ -14,28 +14,39 @@ import { DataService } from '../../../../core/services/data-service.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 
- @Component({
-   selector: 'adm-citizen-excel-batch-file-details',
-   templateUrl: './citizen-excel-batch-file-details.component.html',
-   styleUrls: ['./citizen-excel-batch-file-details.component.scss']
+@Component({
+  selector: 'adm-citizen-excel-batch-file-details',
+  templateUrl: './citizen-excel-batch-file-details.component.html',
+  styleUrls: ['./citizen-excel-batch-file-details.component.scss'],
 })
 export class AdminCitizenExcelBatchFileDetailsComponent implements AfterViewInit {
-   loading: boolean;
-   isSaving: boolean;
+  loading: boolean;
+  isSaving: boolean;
 
-
-   displayedColumns: string[] = ['row', 'gender', 'nationCode', 'firstName', 'lastName', 'birthDate', 'mobile', 'serviceId', 'groupId','isValidRow','description' ];
-   showAddPanel: boolean;
-   importId: string;
-   info: any = {};
+  displayedColumns: string[] = [
+    'row',
+    'gender',
+    'nationCode',
+    'firstName',
+    'lastName',
+    'birthDate',
+    'mobile',
+    'serviceId',
+    'groupId',
+    'isValidRow',
+    'description',
+  ];
+  showAddPanel: boolean;
+  importId: string;
+  info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-   searchForm: FormGroup;
-   frm: FormGroup;
+  searchForm: FormGroup;
+  frm: FormGroup;
   events: any[] = [];
   constructor(
     private toastrService: ToastrService,
@@ -44,79 +55,65 @@ export class AdminCitizenExcelBatchFileDetailsComponent implements AfterViewInit
     private dataService: DataService,
     private fb: FormBuilder,
     private route: ActivatedRoute,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-
- 
-
     this.searchForm = this.fb.group({
       isValidRow: [null],
-    });  
+    });
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.importId = p.importId;
       this.getList();
     });
   }
 
-  ngAfterViewInit() {
-   }
+  ngAfterViewInit() {}
 
+  getList() {
+    var param: any = this.searchForm.value;
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    param.importId = this.importId;
 
-
-   getList() {
-     var param: any = this.searchForm.value;
-     param.offset = this.paginator ? this.paginator.pageIndex : 0;
-     param.count = this.paginator ? this.paginator.pageSize : 10;
-     param.importId = this.importId;
-    
-     merge()
-       .pipe(
-         startWith(param),
-         switchMap(() => {
-           this.isLoadingResults = true;
-           return this.dataService.get(ServerApis.citizenImportFileDetails, param);
-         }),
-         map(response => {
-           this.isLoadingResults = false;
-           if (response.isSuccess && response.data) {
-             var items = response.data.items ? response.data.items : [];
-             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-             // debugger; 
-             return items;
-           } else {
-             let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-             this.toastrService.error(msg);
-           }
-         }),
-         catchError((err) => {
-           this.isLoadingResults = false;
-           return observableOf([]);
-         })
-       ).subscribe(data => {
-         this.data = data;
-       });
-   }
-
- 
-
+    merge()
+      .pipe(
+        startWith(param),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.dataService.get(ServerApis.citizenImportFileDetails, param);
+        }),
+        map((response) => {
+          this.isLoadingResults = false;
+          if (response.isSuccess && response.data) {
+            var items = response.data.items ? response.data.items : [];
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+            // debugger;
+            return items;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        }),
+        catchError((err) => {
+          this.isLoadingResults = false;
+          return observableOf([]);
+        }),
+      )
+      .subscribe((data) => {
+        this.data = data;
+      });
+  }
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
 
-
-   applyFilter() {
-     if (this.paginator) {
-       this.paginator.firstPage();
-     }
-     this.getList();
-   }
-  
-
-    
-  
-
+  applyFilter() {
+    if (this.paginator) {
+      this.paginator.firstPage();
+    }
+    this.getList();
+  }
 }

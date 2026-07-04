@@ -12,11 +12,9 @@ import { ServerApis } from '../../../../core/server-apis';
 @Component({
   selector: 'app-citizen-education',
   templateUrl: './education.component.html',
-  styleUrls: ['./education.component.scss']
+  styleUrls: ['./education.component.scss'],
 })
 export class CitizenEducationComponent implements OnInit {
-
-
   educationList: karjoEducationDto[] = [];
 
   loading: boolean = true;
@@ -31,39 +29,34 @@ export class CitizenEducationComponent implements OnInit {
     private route: ActivatedRoute,
     private toastrService: ToastrService,
     private matDialog: MatDialog,
-    private profileComponent: CitizenProfileComponent
+    private profileComponent: CitizenProfileComponent,
   ) {
-    this.route.parent.params.subscribe(p => {
-      this.userId = (p.id && p.id != '0') ? p.id : '';
+    this.route.parent.params.subscribe((p) => {
+      this.userId = p.id && p.id != '0' ? p.id : '';
       this.getEducationList();
     });
   }
 
-
-
-
-  ngOnInit(): void {
-  }
-
-
+  ngOnInit(): void {}
 
   getEducationList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getAllEducationByCitizen).subscribe(response => {
-      this.loading = false;
-      if (response && response.isSuccess) {
-        this.educationList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-    });
+    this.dataService.get(ServerApis.getAllEducationByCitizen).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.educationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loading = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
-
-
 
   deleteEducation(row: karjoEducationDto) {
     Swal.fire({
@@ -72,70 +65,67 @@ export class CitizenEducationComponent implements OnInit {
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
       showConfirmButton: true,
-      showCancelButton: true
-    }).then(result => {
+      showCancelButton: true,
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.delete(ServerApis.deleteCitizenEducation,
-          {
-            id: +row.id
-          }).subscribe(response => {
-            row.loading = false;
-            if (response.isSuccess) {
-              this.toastrService.success("حذف تحصیلات با موفقیت انجام شد.");
-              for (var i = 0; i < this.educationList.length; i++) {
-                if (this.educationList[i].id == row.id) {
-                  this.educationList.splice(i, 1);
+        this.dataService
+          .delete(ServerApis.deleteCitizenEducation, {
+            id: +row.id,
+          })
+          .subscribe(
+            (response) => {
+              row.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('حذف تحصیلات با موفقیت انجام شد.');
+                for (var i = 0; i < this.educationList.length; i++) {
+                  if (this.educationList[i].id == row.id) {
+                    this.educationList.splice(i, 1);
+                  }
                 }
+                this.profileComponent.getPersonalInfo();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه سرور با خطا مواجه شده است.';
+                this.toastrService.error(msg);
               }
-              this.profileComponent.getPersonalInfo();
-
-            } else {
-              let msg = response.messages ? response.messages : 'متاسفانه سرور با خطا مواجه شده است.';
-              this.toastrService.error(msg);
-            }
-          }, error => {
-            row.loading = false;
-            this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-          });
+            },
+            (error) => {
+              row.loading = false;
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            },
+          );
       }
-
     });
   }
-
 
   openEducationDialog(item) {
-    this.matDialog.open(CitizenEducationDialogComponent, {
-      data: {
-        userId: this.userId,
-        education: item
-      },
-      panelClass: 'custom-dialog',
-      // width: '600px'
-    }).afterClosed().subscribe(result => {
+    this.matDialog
+      .open(CitizenEducationDialogComponent, {
+        data: {
+          userId: this.userId,
+          education: item,
+        },
+        panelClass: 'custom-dialog',
+        // width: '600px'
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          var isUpdate = false;
+          for (var i = 0; i < this.educationList.length; i++) {
+            if (this.educationList[i].id == result.id) {
+              this.educationList[i] = result;
+              isUpdate = true;
+            }
+          }
 
-      if (result) {
-        var isUpdate = false;
-        for (var i = 0; i < this.educationList.length; i++) {
-          if (this.educationList[i].id == result.id) {
-            this.educationList[i] = result;
-            isUpdate = true;
+          if (isUpdate == false) {
+            this.educationList.push(result);
+            this.profileComponent.getPersonalInfo();
           }
         }
-
-        if (isUpdate == false) {
-          this.educationList.push(result);
-          this.profileComponent.getPersonalInfo();
-        }
-      }
-
-    });
+      });
   }
-
-
-
-
-
-
 }

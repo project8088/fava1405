@@ -8,12 +8,15 @@ import { ServerApis } from '../../../../../core/server-apis';
 import { Observable } from 'rxjs';
 import { map, startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { MatChipInputEvent } from '@angular/material/chips';
-import { MatAutocompleteSelectedEvent, MatAutocompleteTrigger } from '@angular/material/autocomplete';
+import {
+  MatAutocompleteSelectedEvent,
+  MatAutocompleteTrigger,
+} from '@angular/material/autocomplete';
 
 @Component({
   selector: 'adm-add-update-queue-dialog',
   templateUrl: './add-update-queue.component.html',
-  styleUrls: ['./add-update-queue.component.scss']
+  styleUrls: ['./add-update-queue.component.scss'],
 })
 export class CardAddOrUpadateQueueDialogComponent implements OnInit {
   isSaving: boolean;
@@ -25,7 +28,6 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
   filteredServices: Observable<any[]>;
   selectedServices: any[] = [];
 
-
   loadingData: boolean;
   id: string;
   constructor(
@@ -35,25 +37,19 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService) {
-
+    private dataService: DataService,
+  ) {
     this.frm = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],
       cardTypeId: ['', [Validators.required]],
       indexOrder: [null, [Validators.required]],
       defaultColor: [null, [Validators.required]],
-      description: [''], 
-      groupIds: [null], 
-      isLock: [false, []], 
+      description: [''],
+      groupIds: [null],
+      isLock: [false, []],
       groups: [null],
-
-
     });
-
-
-     
-    
 
     if (_data.item) {
       this.isUpdate = true;
@@ -65,54 +61,42 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
     }
 
     this.courseId = _data.courseId;
-     
-
   }
 
   ngOnInit() {
-
-    this.filteredServices = this.frm.get('groups').valueChanges
-      .pipe(
-        startWith(''),
-        debounceTime(400),
-        distinctUntilChanged(),
-        switchMap((value) => {
-          return this._filterServices (value);
-        })
-      );
-     
+    this.filteredServices = this.frm.get('groups').valueChanges.pipe(
+      startWith(''),
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((value) => {
+        return this._filterServices(value);
+      }),
+    );
   }
-
-
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(
-      ServerApis.getDistributionQueueInfo, { id: this.id }).subscribe(response => {
+    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.id }).subscribe(
+      (response) => {
         this.loadingData = false;
         if (response && response.isSuccess) {
           this.frm.patchValue(response.data);
-          this.selectedServices = (response.data.groups) ? response.data.groups : [];
-           
+          this.selectedServices = response.data.groups ? response.data.groups : [];
         } else {
-          let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
           this.matDialogRef.close();
         }
-      }, error => {
+      },
+      (error) => {
         this.loadingData = false;
-      });
+      },
+    );
   }
-
-
-
-
-
-
 
   saveInfo() {
     if (this.frm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
       return false;
     }
@@ -120,87 +104,78 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
     this.isSaving = true;
 
     var url = ServerApis.addCardDistributionQueue;
-    if (this.isUpdate)
-      url = ServerApis.updateCardDistributionQueue;
+    if (this.isUpdate) url = ServerApis.updateCardDistributionQueue;
 
     var params = this.frm.value;
-    
 
-    
     params.cardTypeId = +params.cardTypeId;
-    params.indexOrder = +params.indexOrder; 
+    params.indexOrder = +params.indexOrder;
     params.name = params.name;
     params.defaultColor = params.defaultColor;
     params.description = params.description;
     params.iSLock = params.iSLock;
     params.isActive = params.isActive;
 
-
     params.coursesId = +this.courseId;
 
     var serviceIds = [];
-    for (let item of this.selectedServices)
-      serviceIds.push(+item.key);
+    for (let item of this.selectedServices) serviceIds.push(+item.key);
 
-    params.groupIds =  serviceIds;
+    params.groupIds = serviceIds;
 
-
-    this.dataService.post(url, this.frm.value).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.matDialogRef.close(true);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
-  }
-
-
-
- 
-
-
-
-  
-
-  /**
- * جستجوی مهارت ها
- * @param value
- */
-  private _filterServices(value: string) {
-    if (!value || typeof (value) !== "string")
-      return this.filteredServices ;
-
-    const filterValue = value.toLowerCase();
-
-    this.loadingServices  = true;
-    return this.dataService.get(ServerApis.searchBaseDataGroups, {
-      query: filterValue,
-      offset: 0,
-      count: 20
-    }).pipe(
-      map(response => {
-        this.loadingServices  = false;
-        if (response.isSuccess)
-          return response.data;
-        else {
-          let msg = response.messages ? response.messages : 'در یافت اطلاعات از سرور با خطا مواجه شده است.';
+    this.dataService.post(url, this.frm.value).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.matDialogRef.close(true);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      }, error => {
-        this.toastrService.error('خطا در ارتباط با سرور!');
-        this.loadingServices  = false;
-      })
+      },
+      (error) => {
+        this.isSaving = false;
+      },
     );
   }
 
+  /**
+   * جستجوی مهارت ها
+   * @param value
+   */
+  private _filterServices(value: string) {
+    if (!value || typeof value !== 'string') return this.filteredServices;
 
-  
- 
+    const filterValue = value.toLowerCase();
+
+    this.loadingServices = true;
+    return this.dataService
+      .get(ServerApis.searchBaseDataGroups, {
+        query: filterValue,
+        offset: 0,
+        count: 20,
+      })
+      .pipe(
+        map(
+          (response) => {
+            this.loadingServices = false;
+            if (response.isSuccess) return response.data;
+            else {
+              let msg = response.messages
+                ? response.messages
+                : 'در یافت اطلاعات از سرور با خطا مواجه شده است.';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            this.toastrService.error('خطا در ارتباط با سرور!');
+            this.loadingServices = false;
+          },
+        ),
+      );
+  }
+
   /**
    * حذف از اتوکاملیت چیپ
    * @param fruit
@@ -220,19 +195,21 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
    * @param event
    * @param Trigger
    */
-  selectedAutoChip(list: any[], formControl, input: any, event: MatAutocompleteSelectedEvent, Trigger: MatAutocompleteTrigger): void {
-    const index = list.findIndex(l => l.key == event.option.value.key);
+  selectedAutoChip(
+    list: any[],
+    formControl,
+    input: any,
+    event: MatAutocompleteSelectedEvent,
+    Trigger: MatAutocompleteTrigger,
+  ): void {
+    const index = list.findIndex((l) => l.key == event.option.value.key);
     if (index >= 0)
-      this.toastrService.warning(event.option.value.text + " را قبلاً انتخاب کرده اید.", "تکراری!");
-    else
-      list.push(event.option.value);
+      this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
+    else list.push(event.option.value);
     input.value = '';
     this.frm.get(formControl).setValue(null);
-    setTimeout(_ => {
+    setTimeout((_) => {
       Trigger.openPanel();
     }, 100);
   }
-
-
-
 }

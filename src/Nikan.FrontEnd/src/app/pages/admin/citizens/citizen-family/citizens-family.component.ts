@@ -2,12 +2,12 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators'; 
-import { AuthService } from 'src/app/core/authentication/auth.service'; 
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/authentication/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router'; 
+import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../../core/services/data-service.service';
@@ -20,7 +20,6 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
   templateUrl: './citizens-family.component.html',
   styleUrls: ['./citizens-family.component.scss'],
 })
-
 export class AdminCitizensFamilyComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
@@ -28,12 +27,12 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
     'firstName',
     'lastName',
     'fatherName',
-    'familyRelation', 
+    'familyRelation',
     'familyFirstName',
     'familyLastName',
     'familyNationCode',
     'familyBirthDate',
-    'familyGender', 
+    'familyGender',
     'creationDate',
     'sabtStatus',
   ];
@@ -53,7 +52,7 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -74,8 +73,7 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
@@ -89,21 +87,17 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -116,7 +110,7 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
   pageEvent(event: PageEvent) {
@@ -130,18 +124,14 @@ export class AdminCitizensFamilyComponent implements AfterViewInit {
     this.getList();
   }
 
-   
   openfamilyCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.familyUserCode
+        userCode: row.familyUserCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
- 
 }

@@ -8,9 +8,8 @@ describe('AddOrUpdateAppserviceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminAddOrUpdateAppserviceComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminAddOrUpdateAppserviceComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

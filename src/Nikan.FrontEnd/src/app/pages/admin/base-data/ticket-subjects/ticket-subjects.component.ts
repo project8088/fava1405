@@ -8,17 +8,21 @@ import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import * as CkEditor from '../../../../../assets/ckeditor';
- 
+
 @Component({
   selector: 'adm-ticket-subjects',
   templateUrl: './ticket-subjects.component.html',
-  styleUrls: ['./ticket-subjects.component.scss']
+  styleUrls: ['./ticket-subjects.component.scss'],
 })
-export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
-
-  displayedColumns: string[] = ['row', 'organizationalUnit','title','description','isActive', 'operation'];
-
-
+export class AdminTicketSubjectsComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'organizationalUnit',
+    'title',
+    'description',
+    'isActive',
+    'operation',
+  ];
 
   htmlEditor: any;
 
@@ -34,121 +38,116 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
   frm: FormGroup;
   showAddOrUpdatePanel: boolean;
   isSaving: boolean;
-  loadingUnit: boolean; 
+  loadingUnit: boolean;
   loadingData: boolean;
   organizationList: any[] = [];
   unitList: any[] = [];
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
-    private fb: FormBuilder, 
+    private toastrService: ToastrService,
+    private fb: FormBuilder,
   ) {
-
     this.frm = fb.group({
       id: [null],
       title: [null, [Validators.required]],
       organizationId: [null, [Validators.required]],
       organizationalUnitId: [null, [Validators.required]],
       description: [null],
-      isActive: [true], 
+      isActive: [true],
     });
-
 
     this.searchForm = this.fb.group({
-      query: [null, []]
+      query: [null, []],
     });
-
   }
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
   ngOnInit() {
     this.getOrganizations();
   }
 
-
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllTicketSubject, {}).subscribe(response => {
-      this.isLoadingResults = false;
-      if (response.isSuccess) {
-        this.data = response.data ? response.data : [];
-        for (var i of this.data) {
-  if (i.description) {
-            let d = document.createElement('div');
-            d.innerHTML = i.description;
-            i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
+    this.dataService.get(ServerApis.getAllTicketSubject, {}).subscribe(
+      (response) => {
+        this.isLoadingResults = false;
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          for (var i of this.data) {
+            if (i.description) {
+              let d = document.createElement('div');
+              d.innerHTML = i.description;
+              i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
+            }
           }
+
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-      
-        this.dataSource.data = this.data;
-        this.listCount = this.data.length;
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isLoadingResults = false;   
-
-    });
-
-
+      },
+      (error) => {
+        this.isLoadingResults = false;
+      },
+    );
   }
 
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-        this.organizationList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingData = false;
-    });
+    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
-
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
-    this.dataService.get(ServerApis.getAllOrganizationalUnitByOrganId, {
-      organId: this.frm.get('organizationId').value
-    }).subscribe(response => {
-      this.loadingUnit = false;
-      if (response.isSuccess) {
-        this.unitList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingUnit = false;
-    });
+    this.dataService
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.frm.get('organizationId').value,
+      })
+      .subscribe(
+        (response) => {
+          this.loadingUnit = false;
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loadingUnit = false;
+        },
+      );
   }
-
-
-
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
 
-
   applyFilter() {
     this.dataSource.filter = this.searchForm.get('query').value;
-
   }
 
   addnewSubject() {
@@ -156,35 +155,38 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
     setTimeout(() => {
       this.loadCkEditor('');
     }, 500);
-        window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }
 
-
   delete(row) {
-
     Swal.fire({
-      title:'حذف',
-      text: 'آیا برای حذف "'+row.title+'" اطمینان دارید؟',
+      title: 'حذف',
+      text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeTicketSubject, {
-          id: row.id, 
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.removeTicketSubject, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت حذف شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
 
@@ -195,10 +197,10 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
       description: row.description,
       organizationalUnitId: row.organizationalUnitId,
       organizationId: row.organizationId,
-      isActive: row.isActive
+      isActive: row.isActive,
     });
     this.showAddOrUpdatePanel = true;
-        window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     setTimeout(() => {
       this.loadCkEditor(row.description);
     }, 500);
@@ -219,58 +221,88 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
     var params = this.frm.value;
     params.description = description;
 
-    this.dataService.post(ServerApis.addOrUpdateTicketSubject, params).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-        this.showAddOrUpdatePanel = false;
-        this.frm.reset();
-        this.frm.get('isActive').setValue(true);
-        this.htmlEditor.setData('');
-        this.getList();
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    }, error => {
+    this.dataService.post(ServerApis.addOrUpdateTicketSubject, params).subscribe(
+      (response) => {
         this.isSaving = false;
-    });
-
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.showAddOrUpdatePanel = false;
+          this.frm.reset();
+          this.frm.get('isActive').setValue(true);
+          this.htmlEditor.setData('');
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+      },
+    );
   }
-
- 
 
   /**
    * لود کردن html editor
    * */
   loadCkEditor(content) {
     if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = "";
+      document.querySelector('.html-editor').innerHTML = '';
       CkEditor.create(document.querySelector('.html-editor'), {
         removePlugins: ['Title'],
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', '|',
-            'indent', 'alignment', 'outdent', 'pageBreak', '|',
-            'fontBackgroundColor', 'fontColor', 'fontFamily', 'fontSize', 'highlight', 'removeFormat', '|',
-            'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'code', 'codeBlock', 'exportPdf', 'horizontalLine', 'specialCharacters', 'todoList', '|',
-            'undo', 'redo'
-          ]
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'indent',
+            'alignment',
+            'outdent',
+            'pageBreak',
+            '|',
+            'fontBackgroundColor',
+            'fontColor',
+            'fontFamily',
+            'fontSize',
+            'highlight',
+            'removeFormat',
+            '|',
+            'imageUpload',
+            'blockQuote',
+            'insertTable',
+            'mediaEmbed',
+            'code',
+            'codeBlock',
+            'exportPdf',
+            'horizontalLine',
+            'specialCharacters',
+            'todoList',
+            '|',
+            'undo',
+            'redo',
+          ],
         },
         language: 'fa',
         image: {
           // Configure the available styles.
-          styles: [
-            'alignLeft', 'alignCenter', 'alignRight', 'full', 'side'
-          ],
+          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
           // You need to configure the image toolbar, too, so it shows the new style
           // buttons as well as the resize buttons.
           toolbar: [
-            'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            'imageStyle:alignLeft',
+            'imageStyle:alignCenter',
+            'imageStyle:alignRight',
             '|',
             'imageTextAlternative',
             'imageStyle:full',
-            'imageStyle:side'
-          ]
+            'imageStyle:side',
+          ],
         },
         table: {
           contentToolbar: [
@@ -278,17 +310,16 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
             'tableRow',
             'mergeTableCells',
             'tableCellProperties',
-            'tableProperties'
-          ]
+            'tableProperties',
+          ],
         },
         licenseKey: '',
         title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید'
+          placeholder: 'عنوان را در این قسمت تایپ کنید',
         },
         placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-
       })
-        .then(editor => {
+        .then((editor) => {
           //window.editor = editor;
           this.htmlEditor = editor;
           if (content) {
@@ -298,20 +329,14 @@ export class AdminTicketSubjectsComponent implements AfterViewInit,OnInit {
           //});
           //on blure
           //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused) 
+          // // if (!isFocused)
 
           //});
-
         })
-        .catch(error => {
+        .catch((error) => {
           //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
           console.error(error);
         });
     }
   }
-
-
-
-
-
 }

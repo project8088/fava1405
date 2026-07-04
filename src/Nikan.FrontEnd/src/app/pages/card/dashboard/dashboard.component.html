@@ -1,34 +1,21 @@
 <div class="content-header">
   <span>پیشخوان مدیریت کارت</span>
-
 </div>
 
-
 <div class="container">
-  
-
-
-
   <div class="row">
     <div class="col-sm-12">
       <mat-card class="custom-card">
-        <mat-card-header>
-          آمار سامانه
-        </mat-card-header>
+        <mat-card-header> آمار سامانه </mat-card-header>
         <mat-card-content>
-         
-          
-
           <div class="list-container row" *ngIf="!loading">
             <div class="col-sm-6 col-md-4">
               <div class="list-item">
                 <div>
-                  <strong>
-                    کل کارت های صادر شده
-                  </strong>
+                  <strong> کل کارت های صادر شده </strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.allCardCount}}</span>
+                  <span class="num">{{ statisticalInfo?.allCardCount }}</span>
                 </div>
               </div>
             </div>
@@ -38,7 +25,7 @@
                   <strong>درخواست های جدید</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.cardNewRequest}}</span>
+                  <span class="num">{{ statisticalInfo?.cardNewRequest }}</span>
                 </div>
               </div>
             </div>
@@ -48,7 +35,7 @@
                   <strong>تصاویر در دست بررسی</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.personelPictureCount}}</span>
+                  <span class="num">{{ statisticalInfo?.personelPictureCount }}</span>
                 </div>
               </div>
             </div>
@@ -59,7 +46,7 @@
                   <strong>کارت های تحویل داده شده</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.deliveredCards}}</span>
+                  <span class="num">{{ statisticalInfo?.deliveredCards }}</span>
                 </div>
               </div>
             </div>
@@ -69,7 +56,7 @@
                   <strong>تیکت های بسته شده</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.closedTicketCount}}</span>
+                  <span class="num">{{ statisticalInfo?.closedTicketCount }}</span>
                 </div>
               </div>
             </div>
@@ -84,18 +71,13 @@
               </div>
             </div>
 
-
-
-
             <div class="col-sm-6 col-md-4">
               <div class="list-item">
                 <div>
-                  <strong>
-                    درخواست های امروز
-                  </strong>
+                  <strong> درخواست های امروز </strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.cardNewRequestTodayCount}}</span>
+                  <span class="num">{{ statisticalInfo?.cardNewRequestTodayCount }}</span>
                 </div>
               </div>
             </div>
@@ -106,7 +88,7 @@
                   <strong>کارت های منزلت</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.manzalatCardCount|number}}</span>
+                  <span class="num">{{ statisticalInfo?.manzalatCardCount | number }}</span>
                 </div>
               </div>
             </div>
@@ -116,7 +98,7 @@
                   <strong>کارت های شهروندی</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.shahrvaniCardCount|number}}</span>
+                  <span class="num">{{ statisticalInfo?.shahrvaniCardCount | number }}</span>
                 </div>
               </div>
             </div>
@@ -129,18 +111,8 @@
           <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
             <mat-spinner diameter="50" color="default"></mat-spinner>
           </div>
-
-
         </mat-card-content>
       </mat-card>
-
     </div>
-
- 
-  
-
-
   </div>
 </div>
-
-

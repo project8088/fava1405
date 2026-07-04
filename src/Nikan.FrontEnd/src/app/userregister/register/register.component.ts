@@ -1,7 +1,7 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiResult, RegisterServiceModel } from '../../core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../core/authentication/auth.service';
 import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
 import { DataService } from 'src/app/core/services/data-service.service';
@@ -23,13 +23,11 @@ export class RegisterComponent implements OnInit {
   firstFormGroup: FormGroup;
   maritalStatus: [] = [];
 
-   
   educationStatues: [] = [];
   educationGroups;
   educationLevel: [] = [];
   jobGroup: [] = [];
 
-  
   states: [] = [];
   cities: Observable<any>;
   isfahanCities: Object[];
@@ -57,14 +55,14 @@ export class RegisterComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private customValidator: CustomFormValidators,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.dataService.getEnums().subscribe((data) => {
       this.maritalStatus = this.getListOptions(data['maritalStatus']);
       //this.educationStatues = this.getListOptions(data['educationStatues']);
       //this.educationLevel = this.getListOptions(data['educationLevel']);
       //this.jobGroup = this.getListOptions(data['jobGroup']);
-     // this.passwordQuestion = this.getListOptions(data['passwordQuestion']);
+      // this.passwordQuestion = this.getListOptions(data['passwordQuestion']);
     });
     const userPreRegisterData = this.AccountService.getUserPreRegisterData();
 
@@ -73,14 +71,13 @@ export class RegisterComponent implements OnInit {
     this.getEducationGroups();
     this.firstFormGroup = this.fb.group({
       serviceId: [null, [Validators.required]],
-      firstName: [ null,[Validators.required, this.customValidator.checkPersianCharacters],],
-      lastName: [ null,    [Validators.required, this.customValidator.checkPersianCharacters],   ],
+      firstName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
+      lastName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
       mariageStatus: [null, [Validators.required]],
-      fatherName: [  null,   [Validators.required, this.customValidator.checkPersianCharacters],    ],
+      fatherName: [null, [Validators.required, this.customValidator.checkPersianCharacters]],
       birthDate: [null, [Validators.required]],
       gender: [null, [Validators.required]],
       cityId: [null],
-
     });
 
     this.route.queryParams.subscribe((params) => {
@@ -91,14 +88,9 @@ export class RegisterComponent implements OnInit {
       } else this.router.navigate(['/']);
     });
 
-     
-
-    
-    
-
     this.forthFormGroup = this.fb.group({
-     // passwordQuestion: [null, [Validators.required]],
-    //  passwordAnswer: [null, [Validators.required]],
+      // passwordQuestion: [null, [Validators.required]],
+      //  passwordAnswer: [null, [Validators.required]],
       password: [null, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [null],
     });
@@ -138,7 +130,7 @@ export class RegisterComponent implements OnInit {
       },
       (error) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
-      }
+      },
     );
   }
 
@@ -156,18 +148,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
   finalSubmit(): void {
-    const form1= this.firstFormGroup.getRawValue(); 
+    const form1 = this.firstFormGroup.getRawValue();
     const form4 = this.forthFormGroup.getRawValue();
     const form5 = this.fifthFormGroup.getRawValue();
     const userPreRegisterData = this.AccountService.getUserPreRegisterData();
 
-    
     if (form1.birthDate) form1.birthDate = this.dataService.formatDate(form1.birthDate);
- 
 
     const finalData = {
-      ...form1, 
-      
+      ...form1,
+
       ...form4,
       ...form5,
       ...userPreRegisterData,
@@ -177,16 +167,15 @@ export class RegisterComponent implements OnInit {
       (data: ApiResult<any>) => {
         if (data.isSuccess) {
           this.toastrService.success(data.messages);
-         
+
           this.authService.storeToken(data.data.access_token, data.data.refresh_token);
           debugger;
           this.router.navigateByUrl('/redirect?serviceId=' + this.serviceId);
-           
         } else this.toastrService.error(data.messages);
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 
@@ -198,22 +187,20 @@ export class RegisterComponent implements OnInit {
 
     e.preventDefault();
     const userPreRegisterData = this.AccountService.getUserPreRegisterData();
-    this.dataService
-      .post(ServerApis.reSendVerfiyCode, userPreRegisterData)
-      .subscribe(
-        (data: ApiResult<any>) => {
-          if (data.isSuccess) {
-            this.toastrService.success(data.messages);
-          } else {
-            this.toastrService.error(data.messages);
-            this.codeSent = false;
-          }
-        },
-        (error) => {
+    this.dataService.post(ServerApis.reSendVerfiyCode, userPreRegisterData).subscribe(
+      (data: ApiResult<any>) => {
+        if (data.isSuccess) {
+          this.toastrService.success(data.messages);
+        } else {
+          this.toastrService.error(data.messages);
           this.codeSent = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         }
-      );
+      },
+      (error) => {
+        this.codeSent = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
 
   getListOptions(options) {

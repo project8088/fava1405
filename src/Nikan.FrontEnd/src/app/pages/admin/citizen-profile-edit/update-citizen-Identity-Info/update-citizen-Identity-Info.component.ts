@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'; 
-import { ActivatedRoute } from '@angular/router'; 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CustomFormValidators } from 'src/app/core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
- 
+
 import { ServerApis } from '../../../../core/server-apis';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,10 +20,10 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
-  info: any; 
- 
+  info: any;
+
   lastModifiedOnDate: string;
- 
+
   userCode: string = '';
   userStatus: number;
 
@@ -33,14 +33,11 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService 
-    
+    private dataService: DataService,
   ) {
-    
-   
     this.personalForm = this.fb.group({
-      gender: [null, [Validators.required]], 
-      nationalCode: [{ value: '' }], 
+      gender: [null, [Validators.required]],
+      nationalCode: [{ value: '' }],
       firstName: [
         { value: '', disabled: false },
         [Validators.required, this.customValidator.checkPersianCharacters],
@@ -55,64 +52,48 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
       ],
       birthDate: [{ value: '', disabled: false }, [Validators.required]],
       identityId: [{ value: '' }],
-      
     });
 
-    this.route.params.subscribe(p => {
-      if (p.id != '0' && p.id)
-        this.userCode = p.id;
+    this.route.params.subscribe((p) => {
+      if (p.id != '0' && p.id) this.userCode = p.id;
       this.getIdentityInfo();
     });
-
-
-   
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
 
- 
-
-  
-  
   getIdentityInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getIdentityInformationByAdmin, { userCode: this.userCode }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-          
-          this.info = response.data; 
-          this.personalForm.patchValue({
-            gender: response.data.gender, 
-            nationalCode: response.data.nationCode,
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            fatherName: response.data.fatherName,
-            
-            birthDate: response.data.birthDate
-              ? new Date(response.data.birthDate)
-              : '',
+    this.dataService
+      .get(ServerApis.getIdentityInformationByAdmin, { userCode: this.userCode })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response && response.isSuccess) {
+            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
 
-            identityId: response.data.identityId,
+            this.info = response.data;
+            this.personalForm.patchValue({
+              gender: response.data.gender,
+              nationalCode: response.data.nationCode,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              fatherName: response.data.fatherName,
 
-           
-          }); 
-           
-        } else {
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
-    );
+              birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
+
+              identityId: response.data.identityId,
+            });
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
 
   savePersonalInfo() {
@@ -132,9 +113,8 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
         lastName: formValue.lastName,
         fatherName: formValue.fatherName,
         nationalCode: '',
-        userCode: this.userCode ,
+        userCode: this.userCode,
         birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
-        
       })
       .subscribe(
         (response) => {
@@ -143,16 +123,14 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
             this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
             this.getIdentityInfo();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        }
+        },
       );
   }
 
@@ -176,5 +154,4 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
       return { value: String(el.key), text: el.text };
     });
   }
- 
 }

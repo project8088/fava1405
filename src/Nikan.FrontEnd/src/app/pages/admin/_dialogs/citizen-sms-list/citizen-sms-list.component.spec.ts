@@ -8,9 +8,8 @@ describe('AdminCitizenSmsListDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminCitizenSmsListDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminCitizenSmsListDialogComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

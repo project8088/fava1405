@@ -8,9 +8,8 @@ describe('AdminCitizenManzelatReviewComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminCitizenManzelatReviewComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminCitizenManzelatReviewComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

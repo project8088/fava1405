@@ -32,22 +32,21 @@ const routes: Routes = [
     component: CitizenComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-        { path: 'dashboard', component: CitizenDashboardComponent },
-        { path: 'upload-manzalat-form/:id', component: CitizenUploadManzalatDocumentsComponent }, 
-        { path: 'manzelat-plan-item/:id', component: CitizenManzelatPlanItemComponent }, 
-        { path: 'manzelat-plan', component: PlansListComponent }, 
-        { path: 'citizen-refund-status', component: CitizenRefundStatusComponent }, 
-        {
-
+      { path: 'dashboard', component: CitizenDashboardComponent },
+      { path: 'upload-manzalat-form/:id', component: CitizenUploadManzalatDocumentsComponent },
+      { path: 'manzelat-plan-item/:id', component: CitizenManzelatPlanItemComponent },
+      { path: 'manzelat-plan', component: PlansListComponent },
+      { path: 'citizen-refund-status', component: CitizenRefundStatusComponent },
+      {
         path: 'profile/:id',
         component: CitizenProfileComponent,
         children: [
           { path: '', redirectTo: 'personal-info', pathMatch: 'full' },
           { path: 'personal-info', component: CitizenPersonalInfoComponent },
-          { path: 'my-family', component: CitizenMyFamilyComponent }, 
+          { path: 'my-family', component: CitizenMyFamilyComponent },
           { path: 'educations', component: CitizenEducationComponent },
           { path: 'edit-profile', component: CitizenEditProfileComponent },
-          { path: 'creditcard', component: CreditcardComponent },  
+          { path: 'creditcard', component: CreditcardComponent },
           { path: 'contact', component: CitizenContactComponent },
           { path: 'additional-information', component: CitizenDetailedInfoComponent },
           {
@@ -59,31 +58,28 @@ const routes: Routes = [
             component: CitizenDocumentsComponent,
           },
 
-        
-
           {
             path: 'notifications',
             component: CitizenNotificationsComponent,
           },
         ],
       },
-       
+
       {
         path: 'citizen-card',
         loadChildren: () =>
-          import('./citizen-card/citizen-card.module').then(
-            (m) => m.CitizenCardModule
-          ),
+          import('./citizen-card/citizen-card.module').then((m) => m.CitizenCardModule),
       },
       { path: 'tickets', component: TicketListComponent },
-     
+
       { path: 'transaction-list', component: CitizenTransactionListComponent },
       { path: 'transaction-details/:id', component: TransactionDetailsComponent },
-      { path: 'refundAccess-details/:importId', component: CitizenRefundAccessDetailsListComponent },
+      {
+        path: 'refundAccess-details/:importId',
+        component: CitizenRefundAccessDetailsListComponent,
+      },
       { path: 'citizen-refund-info/:refundId', component: CitizenRefundFullInfoComponent },
-   
 
-      
       { path: 'ticket-details/:id', component: TicketDetailsComponent },
       {
         path: 'change-password',

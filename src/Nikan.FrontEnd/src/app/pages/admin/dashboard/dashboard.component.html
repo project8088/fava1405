@@ -1,22 +1,24 @@
 <div class="content-header">
   <span>پیشخوان مدیریت</span>
-
 </div>
-
 
 <div class="container">
   <div class="image-buttons">
-    <div class="img-btn" routerLink="/admin/search-citizen" *ngIf="authService.checkPermission('citizens')">
+    <div
+      class="img-btn"
+      routerLink="/admin/search-citizen"
+      *ngIf="authService.checkPermission('citizens')"
+    >
       <i class="fa fa-users"></i>
-      <span>
-        شهروندان
-      </span>
+      <span> شهروندان </span>
     </div>
-    <div class="img-btn" routerLink="/admin/companies" *ngIf="authService.checkPermission('companymanagement')">
+    <div
+      class="img-btn"
+      routerLink="/admin/companies"
+      *ngIf="authService.checkPermission('companymanagement')"
+    >
       <i class="fa fa-building"></i>
-      <span>
-        اشخاص حقوقی
-      </span>
+      <span> اشخاص حقوقی </span>
     </div>
 
     <div class="img-btn" routerLink="/webuser/dashboard">
@@ -24,8 +26,6 @@
       <span>راهنمای توسعه دهندگان</span>
     </div>
 
-
-   
     <div class="img-btn" routerLink="/citizen/dashboard">
       <i class="fa fa-user-graduate"></i>
       <span>پروفایل شهروندی</span>
@@ -41,21 +41,16 @@
   <div class="row">
     <div class="col-sm-6">
       <mat-card class="custom-card">
-        <mat-card-header>
-          آمار سامانه
-        </mat-card-header>
+        <mat-card-header> آمار سامانه </mat-card-header>
         <mat-card-content>
-
           <div class="list-container row" *ngIf="!loading">
             <div class="col-sm-6 col-md-4">
               <div class="list-item">
                 <div>
-                  <strong>
-                    کل شهروندان
-                  </strong>
+                  <strong> کل شهروندان </strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.allCitizenCount}}</span>
+                  <span class="num">{{ statisticalInfo?.allCitizenCount }}</span>
                 </div>
               </div>
             </div>
@@ -65,7 +60,7 @@
                   <strong>شهروندان تایید شده</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.allAcceptCitizenCount}}</span>
+                  <span class="num">{{ statisticalInfo?.allAcceptCitizenCount }}</span>
                 </div>
               </div>
             </div>
@@ -75,7 +70,7 @@
                   <strong>شهروندان فوتی</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.deathCitizen}}</span>
+                  <span class="num">{{ statisticalInfo?.deathCitizen }}</span>
                 </div>
               </div>
             </div>
@@ -86,7 +81,7 @@
                   <strong>کل تیکت ها</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.allTicketCount}}</span>
+                  <span class="num">{{ statisticalInfo?.allTicketCount }}</span>
                 </div>
               </div>
             </div>
@@ -96,7 +91,7 @@
                   <strong>تیکت های بسته شده</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.closedTicketCount}}</span>
+                  <span class="num">{{ statisticalInfo?.closedTicketCount }}</span>
                 </div>
               </div>
             </div>
@@ -106,23 +101,18 @@
                   <strong>تیکت های جدید</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.newTicketCount}}</span>
+                  <span class="num">{{ statisticalInfo?.newTicketCount }}</span>
                 </div>
               </div>
             </div>
 
-
-
-
             <div class="col-sm-6 col-md-4">
               <div class="list-item">
                 <div>
-                  <strong>
-                    ثبت نام های امروز
-                  </strong>
+                  <strong> ثبت نام های امروز </strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.citizenTodayCount}}</span>
+                  <span class="num">{{ statisticalInfo?.citizenTodayCount }}</span>
                 </div>
               </div>
             </div>
@@ -133,7 +123,7 @@
                   <strong>گروههای شهروندی</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.citizenGroupCount|number}}</span>
+                  <span class="num">{{ statisticalInfo?.citizenGroupCount | number }}</span>
                 </div>
               </div>
             </div>
@@ -143,7 +133,7 @@
                   <strong>میزان اعتبار پیامک</strong>
                 </div>
                 <div>
-                  <span class="num">{{statisticalInfo?.smsCredit|number}}</span>
+                  <span class="num">{{ statisticalInfo?.smsCredit | number }}</span>
                 </div>
               </div>
             </div>
@@ -156,51 +146,30 @@
           <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
             <mat-spinner diameter="50" color="default"></mat-spinner>
           </div>
-
-
         </mat-card-content>
       </mat-card>
-
     </div>
-
 
     <!------------------------------------------------------------------------------------->
 
-
     <div class="col-sm-6">
-
       <mat-card class="custom-card">
-        <mat-card-header>
-          آخرین رویدادها
-        </mat-card-header>
+        <mat-card-header> آخرین رویدادها </mat-card-header>
         <mat-card-content>
           <mat-list>
-            <mat-list-item matTooltip="{{message.description }}" *ngFor="let message of events">
+            <mat-list-item matTooltip="{{ message.description }}" *ngFor="let message of events">
               <div (click)="openevents(message)" matLine>
-                <p style="float:left"> {{message.eventSection }}</p>
-                <p style="float:right">
-                  {{message.createDate|jalali:'HH:mm MM/DD'}}
-                  <strong>
-                    |
-                  </strong>
-                  {{message.user}}
+                <p style="float: left">{{ message.eventSection }}</p>
+                <p style="float: right">
+                  {{ message.createDate | jalali: 'HH:mm MM/DD' }}
+                  <strong> | </strong>
+                  {{ message.user }}
                 </p>
               </div>
             </mat-list-item>
-
           </mat-list>
-
-
         </mat-card-content>
       </mat-card>
-
-
     </div>
-
-
   </div>
-
-
 </div>
-
-

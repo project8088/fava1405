@@ -1,26 +1,19 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-    <h5 cdkDragHandle class="title" > ویرایش آدرس محل تحویل کارت  </h5>
-    
+  <h5 cdkDragHandle class="title">ویرایش آدرس محل تحویل کارت</h5>
 
-    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <mat-dialog-content>
-
   <div class="box-info-dash">
     <div class="alert alert-info">
-      در صورتیکه آدرس محل سکونت شما تغییر کرده است از  
-      <a href="/citizen/profile/0/contact">
-        این قسمت
-      </a>
-  
-      اطلاعات آدرس محل سکونت و دریافت کارت خود را تغییر دهید
-      .
+      در صورتیکه آدرس محل سکونت شما تغییر کرده است از
+      <a href="/citizen/profile/0/contact"> این قسمت </a>
 
+      اطلاعات آدرس محل سکونت و دریافت کارت خود را تغییر دهید .
     </div>
   </div>
-
 
   <form [formGroup]="homeForm">
     <div class="row">
@@ -34,8 +27,7 @@
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> شهر محل سکونت</mat-label>
         <mat-select formControlName="cityId">
-          <mat-option *ngFor="let item of isfahanCities"
-                      [value]="item.key">
+          <mat-option *ngFor="let item of isfahanCities" [value]="item.key">
             {{ item.text }}
           </mat-option>
         </mat-select>
@@ -76,18 +68,15 @@
         <mat-label> کد پستی</mat-label>
         <input type="text" numbersOnly matInput formControlName="postalCode" />
         <mat-error *ngIf="homeForm.get('postalCode').errors?.required">
-          کد پستی  خود را وارد کنید.
+          کد پستی خود را وارد کنید.
         </mat-error>
       </mat-form-field>
-
-
     </div>
-    
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>انصراف</button>
-    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()">
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
     <span>ذخیره </span>
     <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
   </button>

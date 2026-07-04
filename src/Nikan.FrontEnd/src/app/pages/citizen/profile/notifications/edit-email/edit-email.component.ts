@@ -35,7 +35,7 @@ export class CitizenEditEmailComponent implements OnInit {
   constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
-    private dataService: DataService
+    private dataService: DataService,
   ) {
     this.cardForm = this.fb.group({
       email: [null, [Validators.required]],
@@ -52,7 +52,7 @@ export class CitizenEditEmailComponent implements OnInit {
   toggleEditMode() {
     this.editMode = !this.editMode;
   }
-  showForm(){
+  showForm() {
     this.formIsShowing = true;
   }
 
@@ -62,47 +62,41 @@ export class CitizenEditEmailComponent implements OnInit {
         this.loading = false;
         this.formIsShowing = data.data.Email;
         this.cardForm.patchValue({
-          citizenId:data.data.citizenId,
+          citizenId: data.data.citizenId,
           email: data.data.email,
         });
       },
       (error) => {
         this.loading = false;
-      }
+      },
     );
   }
 
   sendCode() {
     const form = this.cardForm.getRawValue();
-    this.dataService
-      .post(ServerApis.checkValidMobileNumberForCitzenRegister, form)
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.codeSent = true;
-            this.timer.startTimer().then(() => {
-              this.codeSent = false;
-            });
+    this.dataService.post(ServerApis.checkValidMobileNumberForCitzenRegister, form).subscribe(
+      (response) => {
+        if (response && response.isSuccess) {
+          this.codeSent = true;
+          this.timer.startTimer().then(() => {
+            this.codeSent = false;
+          });
 
-            this.dataService
-              .post(ServerApis.getVerfiCodeByCitizen, form)
-              .subscribe((res) => {
-                if (res.isSuccess) {
-                  this.toastrService.success('کد تایید به ایمیل شما ارسال شد');
-                }
-              });
-          } else {
-            let msg = response.messages
-              ? response.messages
-              : 'ایمیل معتبر نیست';
-            this.toastrService.error(msg);
-          }
-        },
-        (error) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+          this.dataService.post(ServerApis.getVerfiCodeByCitizen, form).subscribe((res) => {
+            if (res.isSuccess) {
+              this.toastrService.success('کد تایید به ایمیل شما ارسال شد');
+            }
+          });
+        } else {
+          let msg = response.messages ? response.messages : 'ایمیل معتبر نیست';
+          this.toastrService.error(msg);
         }
-      );
+      },
+      (error) => {
+        this.isSaving = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
 
   saveForm() {
@@ -122,7 +116,7 @@ export class CitizenEditEmailComponent implements OnInit {
       (error) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
 

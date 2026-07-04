@@ -27,7 +27,7 @@ export class CardCitizensPicturesComponent implements OnInit {
   data;
   baseUrl = ServerApis.baseUrl;
   personalPictureStatuses: [];
-  list: any; 
+  list: any;
   loading: boolean = true;
   loadingData: boolean = true;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -36,11 +36,11 @@ export class CardCitizensPicturesComponent implements OnInit {
     private fb: FormBuilder,
     private dataService: DataService,
     private toastrService: ToastrService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
-      toDate: [null], 
+      toDate: [null],
       pictureConfirmed: [false],
       nationCode: [''],
     });
@@ -67,8 +67,7 @@ export class CardCitizensPicturesComponent implements OnInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
@@ -84,16 +83,12 @@ export class CardCitizensPicturesComponent implements OnInit {
             var items = response.data.citizens ? response.data.citizens : [];
             this.list = items;
 
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             this.loadingData = false;
             return items;
           } else {
             this.loadingData = false;
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
@@ -101,7 +96,7 @@ export class CardCitizensPicturesComponent implements OnInit {
           this.loadingData = false;
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -109,13 +104,12 @@ export class CardCitizensPicturesComponent implements OnInit {
   }
   getEnums() {}
 
-
   confirmImage(citizen) {
     citizen.isConfirming = true;
     this.dataService
       .get(ServerApis.acceptCitizenPicture + '?citizenId=' + citizen.citizenId)
       .subscribe((response) => {
-        if (response.isSuccess  ) {
+        if (response.isSuccess) {
           this.toastrService.success('تصویر شهروند با موفقیت تایید شد');
           //this.getList();
           for (let user of this.list) {
@@ -124,24 +118,13 @@ export class CardCitizensPicturesComponent implements OnInit {
             }
           }
           citizen.isConfirming = false;
-        }
-        else {
+        } else {
           citizen.isConfirming = false;
-          let msg = response.messages
-            ? response.messages
-            : 'متاسفانه خطایی در سرور رخ داده است!';
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-        
-        
       });
   }
-
-
-
- 
-
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -207,10 +190,10 @@ export class CardCitizensPicturesComponent implements OnInit {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
   refreshImage(citizen) {

@@ -15,24 +15,26 @@
 <!-- Main Content -->
 
 <main class="main-content">
-
   <!-- Blogs Area -->
   <div class="">
     <div class="container p-md-5 box p-4 mt-4">
       <nav aria-label="breadcrumb ">
         <ol class="breadcrumb mb-0 rad25">
-            <li class="breadcrumb-item"><a routerLink="/home">صفحه اصلی</a></li>
-            <li class="breadcrumb-item"><a routerLink="/home/news-list">اخبار</a></li>
-            <li class="breadcrumb-item active" aria-current="page">جزئیات خبر</li>
+          <li class="breadcrumb-item"><a routerLink="/home">صفحه اصلی</a></li>
+          <li class="breadcrumb-item"><a routerLink="/home/news-list">اخبار</a></li>
+          <li class="breadcrumb-item active" aria-current="page">جزئیات خبر</li>
         </ol>
-    </nav>
+      </nav>
 
       <div class="row mt-3">
         <div class="col-lg-8 col-12">
           <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingData">
             <mat-spinner color="default"></mat-spinner>
           </div>
-          <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingData==false && !news">
+          <div
+            class="d-flex align-items-center justify-content-center py-5"
+            *ngIf="loadingData == false && !news"
+          >
             <strong>اطلاعاتی وجود ندارد!</strong>
           </div>
 
@@ -40,43 +42,47 @@
             <div *ngIf="!loadingData && news">
               <div class="tm-blog-image">
                 <a>
-                  <img [src]="baseUrl + news?.imageUrl" alt="{{news?.title}}" *ngIf="news?.imageUrl">
-                  <img src="assets/images/news-default.jpg" alt="{{news?.title}}" *ngIf="!news?.imageUrl">
+                  <img
+                    [src]="baseUrl + news?.imageUrl"
+                    alt="{{ news?.title }}"
+                    *ngIf="news?.imageUrl"
+                  />
+                  <img
+                    src="assets/images/news-default.jpg"
+                    alt="{{ news?.title }}"
+                    *ngIf="!news?.imageUrl"
+                  />
                 </a>
               </div>
               <div class="tm-blog-content">
                 <div class="tm-blog-meta">
-                  <span><i class="fa fa-calendar-o"></i>{{news?.onDate|jalali:'dddd DD MMMM YYYY'}}</span>
+                  <span
+                    ><i class="fa fa-calendar-o"></i
+                    >{{ news?.onDate | jalali: 'dddd DD MMMM YYYY' }}</span
+                  >
                 </div>
-                <h3>{{news?.title}}</h3>
+                <h3>{{ news?.title }}</h3>
 
                 <blockquote>
                   <p>
-                    {{news?.description}}
+                    {{ news?.description }}
                   </p>
                 </blockquote>
 
-
-
-
-                <div [innerHtml]="news?.body|safeHtml">
-                </div>
-
+                <div [innerHtml]="news?.body | safeHtml"></div>
 
                 <app-attachments [guid]="news?.attachmentFileGroup"></app-attachments>
-
-
-
               </div>
               <div class="tm-blog-tags">
                 <span class="tm-blog-tags-title">
                   <i class="fa fa-tags"></i>
                 </span>
                 <ul>
-                  <li *ngFor="let item of tags"><a>{{item}}</a></li>
+                  <li *ngFor="let item of tags">
+                    <a>{{ item }}</a>
+                  </li>
                 </ul>
               </div>
-
             </div>
 
             <!--<div class="tm-blog-pagination tm-pagination">
@@ -91,17 +97,16 @@
             </div>-->
             <!-- tm-blog Comments -->
             <div class="tm-blog-comments mt-50">
-              <h5 class="small-title">نظرات کاربران ({{comments.length}})</h5>
+              <h5 class="small-title">نظرات کاربران ({{ comments.length }})</h5>
 
               <div class="tm-comment-wrapper">
-
                 <!-- Comment Single -->
                 <div class="tm-comment" *ngFor="let item of comments">
                   <div class="tm-comment-thumb">
-                    <img src="assets/theme/images/authors/author-image-1.jpg" alt="author image">
+                    <img src="assets/theme/images/authors/author-image-1.jpg" alt="author image" />
                   </div>
                   <div class="tm-comment-content">
-                    <h6 class="tm-comment-authorname">{{item.fullName}}</h6>
+                    <h6 class="tm-comment-authorname">{{ item.fullName }}</h6>
                     <!--<span class="tm-comment-date">Wednesday, October 17, 2018 at 4:00PM.</span>-->
                     <!--<a class="tm-comment-replybutton">
                       <i class="fa fa-reply-all"></i>
@@ -109,20 +114,17 @@
                     </a>-->
 
                     <p>
-                      {{item.commentMessage}}
+                      {{ item.commentMessage }}
                     </p>
                   </div>
                 </div>
                 <!--// Comment Single -->
-
-
               </div>
-
             </div>
             <!--// tm-blog Comments -->
             <!-- tm-blog Commentbox -->
             <div class="tm-blog-commentbox mt-50">
-              <h5 class="small-title">ارسال نظر </h5>
+              <h5 class="small-title">ارسال نظر</h5>
               <form [formGroup]="frm" class="tm-commentbox">
                 <div class="tm-commentbox-singlefield">
                   <p>آدرس ایمیل شما منتشر نخواهد شد.</p>
@@ -130,20 +132,40 @@
                 <div class="row">
                   <div class="col-sm-6">
                     <label for="tm-comment-namefield">نام و نام خانوادگی</label>
-                    <input type="text" id="tm-comment-namefield" formControlName="fullName" class="form-control">
-                    <span class="text-danger"
-                      *ngIf="frm.get('fullName').errors?.required && frm.get('fullName').touched">نام خود را وارد
-                      کنید.</span>
+                    <input
+                      type="text"
+                      id="tm-comment-namefield"
+                      formControlName="fullName"
+                      class="form-control"
+                    />
+                    <span
+                      class="text-danger"
+                      *ngIf="frm.get('fullName').errors?.required && frm.get('fullName').touched"
+                      >نام خود را وارد کنید.</span
+                    >
                   </div>
                   <div class="col-sm-6">
                     <label for="tm-comment-email">آدرس ایمیل</label>
-                    <input type="email" id="tm-comment-email" formControlName="emailAddress" class="form-control">
-                    <span class="text-danger"
-                      *ngIf="frm.get('emailAddress').errors?.required && frm.get('emailAddress').touched">ایمیل خود را
-                      وارد کنید.</span>
-                    <span class="text-danger"
-                      *ngIf="frm.get('emailAddress').errors?.email && frm.get('emailAddress').touched">ایمیل وارد شده
-                      صحیح نیست.</span>
+                    <input
+                      type="email"
+                      id="tm-comment-email"
+                      formControlName="emailAddress"
+                      class="form-control"
+                    />
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        frm.get('emailAddress').errors?.required && frm.get('emailAddress').touched
+                      "
+                      >ایمیل خود را وارد کنید.</span
+                    >
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        frm.get('emailAddress').errors?.email && frm.get('emailAddress').touched
+                      "
+                      >ایمیل وارد شده صحیح نیست.</span
+                    >
                   </div>
                   <!--<div class="tm-commentbox-singlefield w-33">
                     <label for="tm-comment-website">Website</label>
@@ -151,84 +173,91 @@
                   </div>-->
                   <div class="tm-commentbox-singlefield col-sm-12">
                     <label for="tm-comment-textbox">متن نظر</label>
-                    <textarea class="form-control" name="tm-comment-textbox" formControlName="commentMessage"
-                      id="tm-comment-textbox" cols="30" rows="7"></textarea>
-                    <span class="text-danger"
-                      *ngIf="frm.get('commentMessage').errors?.required && frm.get('commentMessage').touched">پیام خود
-                      را وارد کنید.</span>
+                    <textarea
+                      class="form-control"
+                      name="tm-comment-textbox"
+                      formControlName="commentMessage"
+                      id="tm-comment-textbox"
+                      cols="30"
+                      rows="7"
+                    ></textarea>
+                    <span
+                      class="text-danger"
+                      *ngIf="
+                        frm.get('commentMessage').errors?.required &&
+                        frm.get('commentMessage').touched
+                      "
+                      >پیام خود را وارد کنید.</span
+                    >
                   </div>
-
-
                 </div>
 
-
-
                 <div class="tm-commentbox-singlefield">
-                  <button type="submit" class="btn btn-warning" (click)="sendComment()" *ngIf="!sendingComment">ارسال
-                    نظر <b></b></button>
+                  <button
+                    type="submit"
+                    class="btn btn-warning"
+                    (click)="sendComment()"
+                    *ngIf="!sendingComment"
+                  >
+                    ارسال نظر <b></b>
+                  </button>
                   <mat-spinner *ngIf="sendingComment" color="default" diameter="25"></mat-spinner>
                 </div>
               </form>
             </div>
             <!--// tm-blog Commentbox -->
-
           </div>
         </div>
         <div class="col-lg-4 col-12" id="category">
-
-
           <div class="mb-2 box p-3">
-            <h6 class="IRANSansWeb_Medium bt-color  bg-light py-2 px-3 mb-3 rad25">آخرین اخبار</h6>
-            <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingLastNews">
+            <h6 class="IRANSansWeb_Medium bt-color bg-light py-2 px-3 mb-3 rad25">آخرین اخبار</h6>
+            <div
+              class="d-flex align-items-center justify-content-center py-5"
+              *ngIf="loadingLastNews"
+            >
               <mat-spinner color="default"></mat-spinner>
             </div>
 
-
             <ul class="prof">
-              <li *ngFor="let item of lastNewsList" routerLink="/home/news-details/{{item.id}}">
-                <a routerLink="/home/news-details/{{item.id}}">
+              <li *ngFor="let item of lastNewsList" routerLink="/home/news-details/{{ item.id }}">
+                <a routerLink="/home/news-details/{{ item.id }}">
                   <i class="far fa-file-alt text-info ml-1"></i>
-                  {{item.title}}
+                  {{ item.title }}
                 </a>
                 <!-- <span> {{item.onDate|jalali}}</span> -->
               </li>
-
             </ul>
-
           </div>
           <!-- ---------------------------------------------- -->
           <div class="mb-2 box p-3">
-            <h6 class="IRANSansWeb_Medium bt-color  bg-light py-2 px-3 mb-3 rad25">
+            <h6 class="IRANSansWeb_Medium bt-color bg-light py-2 px-3 mb-3 rad25">
               خبرهای پر بازدید
             </h6>
-            <div class="d-flex align-items-center justify-content-center py-5" *ngIf="loadingVisited">
+            <div
+              class="d-flex align-items-center justify-content-center py-5"
+              *ngIf="loadingVisited"
+            >
               <mat-spinner color="default"></mat-spinner>
             </div>
 
-
             <ul class="prof">
-              <li *ngFor="let item of mostVisitedList" routerLink="/home/news-details/{{item.id}}">
-                <a routerLink="/home/news-details/{{item.id}}">
+              <li
+                *ngFor="let item of mostVisitedList"
+                routerLink="/home/news-details/{{ item.id }}"
+              >
+                <a routerLink="/home/news-details/{{ item.id }}">
                   <i class="far fa-file-alt text-info ml-1"></i>
-                  {{item.title}}
+                  {{ item.title }}
                 </a>
                 <!-- <span> {{item.onDate|jalali}}</span> -->
               </li>
-
             </ul>
-
           </div>
-
-
-
         </div>
       </div>
     </div>
   </div>
   <!--// Blogs Area -->
-
-
 </main>
-
 
 <!--// Main Content -->

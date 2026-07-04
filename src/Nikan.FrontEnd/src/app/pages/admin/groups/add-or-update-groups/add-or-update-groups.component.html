@@ -1,69 +1,71 @@
 <div class="content-header">
   <span *ngIf="!isUpdate">ثبت گروه شهروندی جدید</span>
   <span *ngIf="isUpdate">ویرایش گروه شهروندی</span>
-
 </div>
 
-
 <mat-card class="custom-card">
-  <mat-card-header class="d-flex align-items-center justify-content-end">
-
-  </mat-card-header>
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-
     <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
-
     <form [formGroup]="groupForm" *ngIf="!loading">
       <div class="row">
-
-
         <mat-form-field class="col-sm-6">
-          <mat-label>عنوان  گروه</mat-label>
+          <mat-label>عنوان گروه</mat-label>
           <input matInput formControlName="groupName" type="text" maxlength="500" />
-          <mat-error *ngIf="groupForm.get('groupName').errors?.required">عنوان  گروه را وارد کنید.</mat-error>
-          <mat-error *ngIf="groupForm.get('groupName').errors?.maxlength">حداکثر 500 کاراکتر</mat-error>
+          <mat-error *ngIf="groupForm.get('groupName').errors?.required"
+            >عنوان گروه را وارد کنید.</mat-error
+          >
+          <mat-error *ngIf="groupForm.get('groupName').errors?.maxlength"
+            >حداکثر 500 کاراکتر</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-6">
-          <mat-label>
-            گروه والد
-            (اختیاری)
-          </mat-label>
+          <mat-label> گروه والد (اختیاری) </mat-label>
           <mat-select formControlName="parentId" [compareWith]="compareFn">
             <mat-option [value]="">ریشه اصلی</mat-option>
-            <mat-option [value]="item.key" *ngFor="let item of parentGroups">{{item.text}}</mat-option>
+            <mat-option [value]="item.key" *ngFor="let item of parentGroups">{{
+              item.text
+            }}</mat-option>
           </mat-select>
         </mat-form-field>
 
         <mat-form-field class="col-md-2">
           <mat-label>حداکثر اعضا</mat-label>
           <input matInput formControlName="maxMembers" type="text" numbersOnly />
-          <mat-error *ngIf="groupForm.get('maxMembers').errors?.required">حداکثر اعضا را وارد کنید.</mat-error>
+          <mat-error *ngIf="groupForm.get('maxMembers').errors?.required"
+            >حداکثر اعضا را وارد کنید.</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-md-2">
-          <mat-label>کد  گروه</mat-label>
+          <mat-label>کد گروه</mat-label>
           <input matInput formControlName="code" type="text" maxlength="500" />
-          <mat-error *ngIf="groupForm.get('code').errors?.required">کد گروه را وارد کنید.</mat-error>
+          <mat-error *ngIf="groupForm.get('code').errors?.required"
+            >کد گروه را وارد کنید.</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field class="col-md-2">
           <mat-label>سن شهروند از </mat-label>
           <input matInput formControlName="law_AgeFrom" type="text" numbersOnly />
-          <mat-error *ngIf="groupForm.get('law_AgeFrom').errors?.required">سن شهروند را وارد کنید.</mat-error>
+          <mat-error *ngIf="groupForm.get('law_AgeFrom').errors?.required"
+            >سن شهروند را وارد کنید.</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field class="col-md-2">
           <mat-label>تا </mat-label>
           <input matInput formControlName="law_AgeTo" type="text" numbersOnly />
-          <mat-error *ngIf="groupForm.get('law_AgeTo').errors?.required">سن شهروند را وارد کنید.</mat-error>
+          <mat-error *ngIf="groupForm.get('law_AgeTo').errors?.required"
+            >سن شهروند را وارد کنید.</mat-error
+          >
         </mat-form-field>
-
 
         <mat-form-field class="col-md-3">
           <mat-label> تاریخ انقضاء</mat-label>
-          <input matInput [matDatepicker]="dpS" formControlName="expireDate">
+          <input matInput [matDatepicker]="dpS" formControlName="expireDate" />
           <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
           <mat-datepicker #dpS></mat-datepicker>
           <mat-error *ngIf="groupForm.get('expireDate').errors?.required">
@@ -73,9 +75,6 @@
             فرمت تاریخ صحیح نیست
           </mat-error>
         </mat-form-field>
-
-
-
       </div>
       <p>
         <mat-checkbox color="default" formControlName="showToAddCitizen">
@@ -94,9 +93,7 @@
         </mat-checkbox>
       </p>
       <p>
-        <mat-checkbox color="default" formControlName="specialRules">
-          قوانین ویژه
-        </mat-checkbox>
+        <mat-checkbox color="default" formControlName="specialRules"> قوانین ویژه </mat-checkbox>
       </p>
       <p>
         <mat-checkbox color="default" formControlName="autoAddMembers">
@@ -104,30 +101,31 @@
         </mat-checkbox>
       </p>
 
-
-
       <p>
         <mat-checkbox color="default" formControlName="municipalPersonnelGroup">
           گروه مرتبط شهرداری
-
         </mat-checkbox>
       </p>
       <p>
-        <mat-checkbox color="default" formControlName="canBuyFreeCard"> امکان صدور کارت رایگان </mat-checkbox>
+        <mat-checkbox color="default" formControlName="canBuyFreeCard">
+          امکان صدور کارت رایگان
+        </mat-checkbox>
       </p>
 
       <p>
         <mat-checkbox color="default" formControlName="isActive">فعال/غیرفعال</mat-checkbox>
       </p>
     </form>
-
-
-
-
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
-      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving" *ngIf="!loading">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="save()"
+        [disabled]="isSaving"
+        *ngIf="!loading"
+      >
         <span *ngIf="isSaving">منتظر بمانید...</span>
         <span *ngIf="!isSaving">ذخیره</span>
         <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

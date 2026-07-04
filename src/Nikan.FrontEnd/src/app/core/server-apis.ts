@@ -12,10 +12,8 @@ export class BaseUrl {
     }
   }
 }
-  
+
 const base = new BaseUrl();
-
-
 
 export const ServerApis = {
   getCurrentDateTime: 'https://worldtimeapi.org/api/timezone/Asia/Tehran',
@@ -45,36 +43,32 @@ export const ServerApis = {
   configPortal: base.mainApi + 'BaseData/ConfigPortal',
   //citizen
 
-
-  checkRegisterCitizenByNtionCode:   base.mainApi + 'Citzens/CheckRegisterCitizenByNtionCode',  
-  checkValidMobileNumberForCitzenRegister: base.mainApi + 'Citzens/CheckValidMobileNumberForCitzenRegister',
+  checkRegisterCitizenByNtionCode: base.mainApi + 'Citzens/CheckRegisterCitizenByNtionCode',
+  checkValidMobileNumberForCitzenRegister:
+    base.mainApi + 'Citzens/CheckValidMobileNumberForCitzenRegister',
   updteCitizenMobileNumber: base.mainApi + 'Citzens/UpdateCitizenMobileNumber',
   updteCitizenMobileNumberByAdmin: base.mainApi + 'Citzens/UpdateCitizenMobileNumberByAdmin',
   updateCitizenMobileNumberByCard: base.mainApi + 'Citzens/UpdateCitizenMobileNumberByCard',
   updateSabtStatus: base.mainApi + 'Citzens/UpdateSabtStatus',
   updateSabtStatusByCard: base.mainApi + 'Citzens/UpdateSabtStatusByCard',
 
-
-
   getCitizenMobileNumber: base.mainApi + 'Citzens/GetCitizenMobileNumber',
-  checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber: base.mainApi + 'Citzens/CheckValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber',
-  getVerfiCodeByCitizen: base.mainApi + 'Citzens/GetVerfiCodeByCitizen', 
+  checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber:
+    base.mainApi + 'Citzens/CheckValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber',
+  getVerfiCodeByCitizen: base.mainApi + 'Citzens/GetVerfiCodeByCitizen',
   getCitizenEmail: base.mainApi + 'Citzens/GetCitizenEmail',
-  updteCitizenEmailAddress: base.mainApi + 'Citzens/UpdateCitizenEmailAddress', 
+  updteCitizenEmailAddress: base.mainApi + 'Citzens/UpdateCitizenEmailAddress',
   getEducationGroups: base.mainApi + 'BaseData/GetEducationGroups',
   getCitizenBankCardNumber: base.mainApi + 'Citzens/GetCitizenBankCardNumber',
-  updteCitizenBankCardNumber:  base.mainApi + 'Citzens/UpdateCitizenBankCardNumber',
-  uploadPersonalPicture: base.mainApi + 'Citzens/UploadPersonalPicture', 
+  updteCitizenBankCardNumber: base.mainApi + 'Citzens/UpdateCitizenBankCardNumber',
+  uploadPersonalPicture: base.mainApi + 'Citzens/UploadPersonalPicture',
   addOrUpdateCitizenProfile: base.mainApi + 'Citzens/AddOrUpdateCitizenProfile',
   updteCitizenByAdmin: base.mainApi + 'Citzens/UpdateCitizenByAdmin',
   addOrUpdateCitizenProfileByAdmin: base.mainApi + 'Citzens/AddOrUpdateCitizenProfileByAdmin',
   geCitizenProfile: base.mainApi + 'Citzens/GeCitizenProfile',
 
-
   geCitizenProfileByCitizen: base.mainApi + 'Citzens/GetCitizenProfileByCitizen',
   geCitizenProfileByAdmin: base.mainApi + 'Citzens/GetCitizenProfileByAdmin',
-
-
 
   getCitizenFullInfo: base.mainApi + 'Citzens/GetCitizenFullInfo',
   getMyFullInfo: base.mainApi + 'Citzens/GetMyFullInfo',
@@ -90,13 +84,9 @@ export const ServerApis = {
   getIdentityInformationByCitizen: base.mainApi + 'Citzens/GetIdentityInformationByCitizen',
   getIdentityInformationByAdmin: base.mainApi + 'Citzens/GetIdentityInformationByAdmin',
 
-
   updteOtherBaseInfoByCitizen: base.mainApi + 'Citzens/UpdateOtherBaseInfoByCitizen',
   updteIdentityInformationByCitizen: base.mainApi + 'Citzens/UpdateIdentityInformationByCitizen',
   updteIdentityInformationByAdmin: base.mainApi + 'Citzens/UpdateIdentityInformationByAdmin',
-
-
-
 
   searchCitizens: base.mainApi + 'Citzens/SearchCitizens',
   searchCitizenByCardUser: base.mainApi + 'Citzens/SearchCitizenByCardUser',
@@ -106,39 +96,32 @@ export const ServerApis = {
   checkIsDead: base.mainApi + 'Citzens/CheckIsDead',
   searchCitizensAuthentication: base.mainApi + 'Citzens/SearchCitizensAuthentication',
 
-
-
-
   getCitizenHomeAddress: base.mainApi + 'Citzens/GetCitizenHomeAddress',
   getCitizenHomeAddressByAdmin: base.mainApi + 'Citzens/GetCitizenHomeAddressByAdmin',
   getCitizenOfficeAddressByAdmin: base.mainApi + 'Citzens/GetCitizenOfficeAddressByAdmin',
   getCitizenAddress: base.mainApi + 'Citzens/GetCitizenAddress',
 
-
-
-
   getCitizenOfficeAddress: base.mainApi + 'Citzens/GetCitizenOfficeAddress',
   updteCitizenAddressByCitizen: base.mainApi + 'Citzens/UpdateCitizenAddressByCitizen',
   addOrUpdteCitizenAddressByCitizen: base.mainApi + 'Citzens/AddOrUpdateCitizenAddressByCitizen',
-  addOrUpdteCitizenAddressByCitizenForCardAddress: base.mainApi + 'Citzens/AddOrUpdateCitizenAddressByCitizenForCardAddress',
+  addOrUpdteCitizenAddressByCitizenForCardAddress:
+    base.mainApi + 'Citzens/AddOrUpdateCitizenAddressByCitizenForCardAddress',
   getAllCitizenFamilyByFamily: base.mainApi + 'Citzens/GetAllCitizenFamilyByFamily',
   addOrUpdteCitizenAddress: base.mainApi + 'Citzens/AddOrUpdateCitizenAddress',
   //citizen-Family
   addFamilyMemberIfAny: base.mainApi + 'Citzens/AddFamilyMemberIfAny',
   addFamilyMemberIfNotAny: base.mainApi + 'Citzens/AddFamilyMemberIfNotAny',
-  getMyFamilyBaseInfo: base.mainApi + 'Citzens/GetMyFamilyBaseInfo', 
+  getMyFamilyBaseInfo: base.mainApi + 'Citzens/GetMyFamilyBaseInfo',
   updateFamilyMemberByCitizen: base.mainApi + 'Citzens/UpdateFamilyMemberByCitizen',
   getAllCitizenFamily: base.mainApi + 'Citzens/GetAllCitizenFamily',
 
   searchFamilyCitizens: base.mainApi + 'Citzens/SearchFamilyCitizens',
-  
+
   getAllCitizenFamilyByAdmin: base.mainApi + 'Citzens/GetAllCitizenFamilyByAdmin',
   confirmFamilyByAdmin: base.mainApi + 'Citzens/ConfirmFamilyByAdmin',
   removeFamily: base.mainApi + 'Citzens/RemoveFamily',
   removeFamilyByCitizen: base.mainApi + 'Citzens/RemoveFamilyByCitizen',
   copyPicture: base.mainApi + 'Citzens/CopyPicture',
-
-
 
   //admin citizen manzelat
   searchManzaltCitizens: base.mainApi + 'Manzalat/SearchManzaltCitizens',
@@ -148,8 +131,7 @@ export const ServerApis = {
   getCitizenInfoAndManzaltForm: base.mainApi + 'Manzalat/GetCitizenInfoAndManzaltForm',
   confirmManzaltByAdmin: base.mainApi + 'Manzalat/ConfirmManzaltByAdmin',
   removeManzalatForm: base.mainApi + 'Manzalat/Remove',
-  
-  
+
   // citizens pictures
   searchImageCardCitizens: base.mainApi + 'Citzens/SearchImageCardCitizens',
   searchImageCitizens: base.mainApi + 'Citzens/SearchImageCitizens',
@@ -158,7 +140,6 @@ export const ServerApis = {
   getCitizenRejectImageSmsList: base.mainApi + 'Citzens/GetCitizenRejectImageSmsList',
   uploadCitizenPicture: base.mainApi + 'Citzens/UploadCitizenPicture',
   uploadPersonalPictureByAdmin: base.mainApi + 'Citzens/UploadPersonalPictureByAdmin',
-  
 
   //citizen Feedback
   addFeedbacke: base.mainApi + 'Citzens/AddFeedbacke',
@@ -172,27 +153,22 @@ export const ServerApis = {
   getPagedGroupsCitizensInfo: base.mainApi + 'Citzens/GetPagedGroupsCitizensInfo',
   addCitizenToGroup: base.mainApi + 'Citzens/AddCitizenToGroup',
   removeCitizenFromGroup: base.mainApi + 'Citzens/RemoveCitizenFromGroup',
- //citizen Import From File 
+  //citizen Import From File
   citizenImportFileList: base.mainApi + 'Citzens/CitizenImportFileList',
   importCitizenListFromExcel: base.mainApi + 'Citzens/ImportCitizenListFromExcel',
   citizenImportFileDetails: base.mainApi + 'Citzens/CitizenImportFileDetails',
   removeCitizenImportFile: base.mainApi + 'Citzens/RemoveCitizenImportFile',
   confirmCitizenfileexcel: base.mainApi + 'Citzens/ConfirmCitizenFile',
 
-
-
-
   //import file
   groupImportFileDetails: base.mainApi + 'GroupsCitizens/GroupImportFileDetails',
   getAllGroupImportList: base.mainApi + 'GroupsCitizens/GetAllGroupImportList',
   importGroupNationCodeFromExcel: base.mainApi + 'GroupsCitizens/ImportGroupNationCodeFromExcel',
-  confirmNationCodeImportListToGroup: base.mainApi + 'GroupsCitizens/ConfirmNationCodeImportListToGroup',
+  confirmNationCodeImportListToGroup:
+    base.mainApi + 'GroupsCitizens/ConfirmNationCodeImportListToGroup',
   groupTransfer: base.mainApi + 'GroupsCitizens/GroupTransfer',
 
-
-
-
-  searchCitizensQueue: base.mainApi + 'GroupsCitizens/SearchCitizensQueue', 
+  searchCitizensQueue: base.mainApi + 'GroupsCitizens/SearchCitizensQueue',
   removeQueue: base.mainApi + 'GroupsCitizens/RemoveQueue',
 
   //event
@@ -200,16 +176,14 @@ export const ServerApis = {
   getEvent: base.mainApi + 'Portal/GetEvent',
   getCitizenTopEvent: base.mainApi + 'Portal/GetCitizenTopEvent',
 
-//Groups
+  //Groups
   addOrUpdateGroup: base.mainApi + 'GroupsCitizens/AddOrUpdateGroup',
   removeGroup: base.mainApi + 'GroupsCitizens/RemoveGroup',
   reviewGroups: base.mainApi + 'GroupsCitizens/ReviewGroups',
   groupInfo: base.mainApi + 'GroupsCitizens/GroupInfo',
   getAllGroups: base.mainApi + 'GroupsCitizens/GetAllGroups',
   searchGroups: base.mainApi + 'GroupsCitizens/SearchGroups',
-//refund
-
-
+  //refund
 
   refundImportFileList: base.mainApi + 'Refund/RefundImportFileList',
   importRefundListFromExcel: base.mainApi + 'Refund/ImportRefundListFromExcel',
@@ -223,11 +197,9 @@ export const ServerApis = {
   updateRefundSaveCardNmber: base.mainApi + 'Refund/UpdateRefundSaveCardNmber',
   getAllRefunAccessUsers: base.mainApi + 'Refund/GetAllRefunAccessUsers',
 
-
-
   getCardsNumber: base.mainApi + 'Refund/GetCardsNumber',
   getCardNumber: base.mainApi + 'Refund/GetCardNumber',
- 
+
   getAllRefundAccessPageList: base.mainApi + 'Refund/GetAllRefundAccessPageList',
   refundAccessDetailsList: base.mainApi + 'Refund/RefundAccessDetailsList',
   allRefundAccessPagesList: base.mainApi + 'Refund/AllRefundAccessPagesList',
@@ -237,11 +209,9 @@ export const ServerApis = {
   getRefundInfoDetailsByAdmin: base.mainApi + 'Refund/GetRefundInfoDetailsByAdmin',
   commitRefundByAdmin: base.mainApi + 'Refund/CommitRefundByAdmin',
 
-  
   searchRefundUser: base.mainApi + 'Refund/SearchRefundUser',
   deleteRefundUser: base.mainApi + 'Refund/DeleteRefundUser',
   addRefundUser: base.mainApi + 'Refund/AddRefundUser',
-
 
   //citizen app service
   addOrUpdateAppService: base.mainApi + 'AppServiceCitizen/AddOrUpdate',
@@ -250,12 +220,11 @@ export const ServerApis = {
   getAllAppService: base.mainApi + 'AppServiceCitizen/GetAllApp',
   getAppDashbordList: base.mainApi + 'AppServiceCitizen/GetAppDashbordList',
   getBaseListAppService: base.mainApi + 'AppServiceCitizen/GetBaseListAppService',
-  // Documents 
+  // Documents
   getDocGroupsBaseList: base.mainApi + 'Users/GetDocGroupsBaseList',
   getAllDocGrpupsAndUserDocuments: base.mainApi + 'Users/GetAllDocGrpupsAndUserDocuments',
-    uploadDocGroupAttachment: base.mainApi + 'Attachment/uploadDocGroupAttachment',
-    uploadManzalatAttachment: base.mainApi + 'Attachment/uploadManzalatAttachment',
-
+  uploadDocGroupAttachment: base.mainApi + 'Attachment/uploadDocGroupAttachment',
+  uploadManzalatAttachment: base.mainApi + 'Attachment/uploadManzalatAttachment',
 
   getUserDocuments: base.mainApi + 'Users/GetUserDocuments',
   removeUserDocument: base.mainApi + 'Users/RemoveUserDocument',
@@ -264,11 +233,6 @@ export const ServerApis = {
   searchAminUser: base.mainApi + 'Users/SearchAminUser',
 
   deleteCardUser: base.mainApi + 'Users/DeleteCardUser',
-
-
-
-
-
 
   //card info
 
@@ -293,36 +257,28 @@ export const ServerApis = {
   removeCardFromQueueByCourseId: base.mainApi + 'CardInfo/RemoveCardFromQueueByCourseId',
   sendCardToQueue: base.mainApi + 'CardInfo/SendCardToQueue',
 
-
-
-
-
-
-
-
   getCardTypeBaseList: base.mainApi + 'CardInfo/GetCardTypeBaseList',
   getActiveCardTypeBaseList: base.mainApi + 'CardInfo/GetActiveCardTypeBaseList',
 
-
-  addOrUpdateCard: base.mainApi + 'CardInfo/AddOrUpdateCard', 
+  addOrUpdateCard: base.mainApi + 'CardInfo/AddOrUpdateCard',
   citizencardAdvSearch: base.mainApi + 'CardInfo/CitizencardAdvSearch',
   citizencardAdvSearch_Export: base.mainApi + 'CardInfo/CitizencardAdvSearch_Export',
-
-
 
   getPagedCardInfoExport: base.mainApi + 'CardInfo/GetPagedCardInfoExport',
   newExportCard: base.mainApi + 'CardInfo/NewExportCard',
   getPagedCardInfoExportDetails: base.mainApi + 'CardInfo/GetPagedCardInfoExportDetails',
-  getPagedCardInfoExportDetails_Export: base.mainApi + 'CardInfo/GetPagedCardInfoExportDetails_Export',
+  getPagedCardInfoExportDetails_Export:
+    base.mainApi + 'CardInfo/GetPagedCardInfoExportDetails_Export',
 
-
-  getPagedShahrvandiCardInfoExportDetailsForSend: base.mainApi + 'CardInfo/GetPagedShahrvandiCardInfoExportDetailsForSend',
-  getPagedManzalatCardInfoExportDetailsForSend: base.mainApi + 'CardInfo/GetPagedManzalatCardInfoExportDetailsForSend',
+  getPagedShahrvandiCardInfoExportDetailsForSend:
+    base.mainApi + 'CardInfo/GetPagedShahrvandiCardInfoExportDetailsForSend',
+  getPagedManzalatCardInfoExportDetailsForSend:
+    base.mainApi + 'CardInfo/GetPagedManzalatCardInfoExportDetailsForSend',
   getExportCardPicture: base.mainApi + 'CardInfo/GetExportCardPicture',
   sendToPrint: base.mainApi + 'CardInfo/SendToPrint',
   removeExportCard: base.mainApi + 'CardInfo/RemoveExportCard',
   removeCardInExportList: base.mainApi + 'CardInfo/RemoveCardInExportList',
-  getCitizenCardInfoByCardId: base.mainApi + 'CardInfo/GetCitizenCardInfoByCardId', 
+  getCitizenCardInfoByCardId: base.mainApi + 'CardInfo/GetCitizenCardInfoByCardId',
   backCard: base.mainApi + 'CardInfo/BackCard',
   deliveredCard: base.mainApi + 'CardInfo/DeliveredCard',
   cardCancellation: base.mainApi + 'CardInfo/CardCancellation',
@@ -333,7 +289,6 @@ export const ServerApis = {
   addCardCourses: base.mainApi + 'CardInfo/AddCardCourses',
   closeCardCourses: base.mainApi + 'CardInfo/CloseCardCourses',
   removeCardCourses: base.mainApi + 'CardInfo/RemoveCardCourses',
-
 
   //تخفیف کارت
 
@@ -348,11 +303,7 @@ export const ServerApis = {
   pagedDiscountCardList: base.mainApi + 'CardInfo/PagedDiscountCardList',
   getCardDiscountInfo: base.mainApi + 'CardInfo/GetCardDiscountInfo',
 
-
-
   getDisCountGroupBaseList: base.mainApi + 'CardInfo/GetDisCountGroupBaseList',
-
-
 
   pagedRequestFreeCardLsit: base.mainApi + 'CardInfo/PagedRequestFreeCardLsit',
   addRequestFreeCard: base.mainApi + 'CardInfo/AddRequestFreeCard',
@@ -362,21 +313,14 @@ export const ServerApis = {
   removeRequestFreeCard: base.mainApi + 'CardInfo/RemoveRequestFreeCard',
   acceptedRequestFreeCard: base.mainApi + 'CardInfo/AcceptedRequestFreeCard',
 
-
-
-
-
-
-//Order 
+  //Order
   listAvailableCards: base.mainApi + 'Order/ListAvailableCards',
   checkCanOrderCard: base.mainApi + 'Order/CheckCanOrderCard',
- 
+
   cardPriceInfo: base.mainApi + 'Order/CardPriceInfo',
 
- 
   // AppServiceCitizen
   callCitizenService: base.mainApi + 'AppServiceCitizen/CallCitizenService',
-
 
   //slide show
 
@@ -386,11 +330,7 @@ export const ServerApis = {
   getAllSlideShow: base.mainApi + 'content/GetAllSlideShow',
   getAllMainPageSlideShow: base.mainApi + 'content/GetAllMainPageSlideShow',
 
-
-
-
-
- //Admin Users 
+  //Admin Users
   addOrUpdateUserGroups: base.mainApi + 'users/AddOrUpdateGroups',
   removeUserGroups: base.mainApi + 'users/RemoveGroups',
   getUserGroups: base.mainApi + 'users/GetGroup',
@@ -402,9 +342,6 @@ export const ServerApis = {
   getCardPermissionList: base.mainApi + 'users/GetCardPermissionList',
   addCardUserPermissions: base.mainApi + 'users/AddCardUserPermissions',
 
-
-
-
   getAllRols: base.mainApi + 'users/GetAllRols',
   getAllUserRoles: base.mainApi + 'users/GetAllUserRoles',
   deleteUserRole: base.mainApi + 'users/DeleteUserRole',
@@ -412,24 +349,17 @@ export const ServerApis = {
   getAccessGroups: base.mainApi + 'users/GetAccessGroups',
   getAllUserPermissionGroup: base.mainApi + 'users/GetAllUserPermissionGroup',
 
-
-
-
-
   //manzelat
-  getAllAvailableManzaltForm:   base.mainApi + 'Manzalat/GetAllAvailableManzaltForm',
-   
- 
-    updateManzalatBaseForm: base.mainApi + 'Manzalat/UpdateManzalatBaseForm',
-    getCitizenManzalat: base.mainApi + 'Manzalat/GetCitizenManzalat', 
-    addOrUpdateManzalat: base.mainApi + 'Manzalat/AddOrUpdateManzalat', 
+  getAllAvailableManzaltForm: base.mainApi + 'Manzalat/GetAllAvailableManzaltForm',
 
-    getManzalatBaseForm: base.mainApi + 'Manzalat/GetManzalatBaseForm',
+  updateManzalatBaseForm: base.mainApi + 'Manzalat/UpdateManzalatBaseForm',
+  getCitizenManzalat: base.mainApi + 'Manzalat/GetCitizenManzalat',
+  addOrUpdateManzalat: base.mainApi + 'Manzalat/AddOrUpdateManzalat',
+
+  getManzalatBaseForm: base.mainApi + 'Manzalat/GetManzalatBaseForm',
   getManzalatBaseForms: base.mainApi + 'Manzalat/GetManzalatBaseForms',
 
   getCitizenRegisterManzalatForm: base.mainApi + 'Manzalat/GetCitizenRegisterManzalatForm',
- 
-
 
   getJobTitles: base.mainApi + 'BaseData/GetJobTitles',
   getUserInfo: base.mainApi + 'BaseData/GetUserInfo',
@@ -440,11 +370,9 @@ export const ServerApis = {
   getExitDoorsAsync: base.mainApi + 'BaseData/GetExitDoorsAsync',
   getlistOfCarType: base.mainApi + 'BaseData/GetlistOfCarType',
   getAllOrganizational: base.mainApi + 'BaseData/GetAllOrganizational',
-  getAllOrganizationalUnitByOrganId:  base.mainApi + 'BaseData/GetAllOrganizationalUnitByOrganId',
+  getAllOrganizationalUnitByOrganId: base.mainApi + 'BaseData/GetAllOrganizationalUnitByOrganId',
   getAllCardDeliveryCenters: base.mainApi + 'BaseData/GetAllCardDeliveryCenters',
   getAllSupportCenter: base.mainApi + 'BaseData/GetAllSupportCenter',
-
-
 
   getActivitiyList: base.mainApi + 'BaseData/GetActivitiyList',
   getPositionList: base.mainApi + 'BaseData/GetPositionList',
@@ -454,7 +382,6 @@ export const ServerApis = {
   getGroups: base.mainApi + 'BaseData/GetGroups',
   getFreeCardGroups: base.mainApi + 'BaseData/GetFreeCardGroups',
   searchBaseDataGroups: base.mainApi + 'BaseData/searchBaseDataGroups',
-
 
   login: base.mainApi + 'Account/Login',
   refreshToken: base.mainApi + 'Account/RefreshToken',
@@ -479,12 +406,9 @@ export const ServerApis = {
   addUserToPermissionGroup: base.mainApi + 'Users/AddUserToPermissionGroup',
   removeUserPermissionGroup: base.mainApi + 'Users/RemoveUserPermissionGroup',
 
-
-getWebUserAccessRangeIp: base.mainApi + 'Users/GetWebUserAccessRangeIp',
-deleteUserAccessRangeIp: base.mainApi + 'Users/DeleteUserAccessRangeIp',
-addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
-
-
+  getWebUserAccessRangeIp: base.mainApi + 'Users/GetWebUserAccessRangeIp',
+  deleteUserAccessRangeIp: base.mainApi + 'Users/DeleteUserAccessRangeIp',
+  addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
 
   changeCurrentUserPassword: base.mainApi + 'Account/ChangeCurrentUserPassword',
   sendSmsForgotPassword: base.mainApi + 'Account/SendSmsForgotPassword',
@@ -502,27 +426,21 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   saveCitizenEducation: base.mainApi + 'Citzens/SaveEducation',
   deleteCitizenEducation: base.mainApi + 'Citzens/DeleteEducation',
 
-
-
   getCitizenPagedSmsList: base.mainApi + 'Citzens/GetCitizenPagedSmsList',
 
-//SabtAhval
+  //SabtAhval
   getAllExportSabtAhval: base.mainApi + 'ExportCitizen/GetAllExportSabtAhval',
   getAllCitizenExported: base.mainApi + 'ExportCitizen/GetAllCitizenExported',
   exportCitizenForSabtAhval: base.mainApi + 'ExportCitizen/ExportCitizenForSabtAhval',
   removeExport: base.mainApi + 'ExportCitizen/RemoveExport',
   sendSabtAhvalCitizensSms: base.mainApi + 'ExportCitizen/SendSabtAhvalCitizensSms',
-  sendOnlineAuthentication: base.mainApi + 'ExportCitizen/SendOnlineAuthentication', 
-  sendOnlineAuthenticationByBagRezvanService: base.mainApi + 'ExportCitizen/SendOnlineAuthenticationByBagRezvanService',
-
+  sendOnlineAuthentication: base.mainApi + 'ExportCitizen/SendOnlineAuthentication',
+  sendOnlineAuthenticationByBagRezvanService:
+    base.mainApi + 'ExportCitizen/SendOnlineAuthenticationByBagRezvanService',
 
   citizenForAuthenticationByAdmin: base.mainApi + 'ExportCitizen/CitizenForAuthenticationByAdmin',
-  citizenForAuthenticationByCitizenId: base.mainApi + 'ExportCitizen/CitizenForAuthenticationByCitizenId',
-
-
-
-
-
+  citizenForAuthenticationByCitizenId:
+    base.mainApi + 'ExportCitizen/CitizenForAuthenticationByCitizenId',
 
   //Karjo
   getJobseekerProfile: base.mainApi + 'Karjo/GetProfile',
@@ -531,12 +449,9 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   addOrUpdateJobseekerAmozeshs: base.mainApi + 'Karjo/AddOrUpdateAmozeshs',
   saveJobseekerEducation: base.mainApi + 'Karjo/SaveEducation',
 
- 
   getShortCitizenInfoByCitizen: base.mainApi + 'Citzens/GetShortCitizenInfoByCitizen',
   getShortCitizenInfoByAdmin: base.mainApi + 'Citzens/GetShortCitizenInfoByAdmin',
   getShortCitizenInfoByCard: base.mainApi + 'Citzens/GetShortCitizenInfoByCard',
-
-
 
   getjobSeekerPhoneNumbers: base.mainApi + 'Karjo/GetPhoneNumbers',
 
@@ -566,7 +481,7 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   deleteJobseekerAmozesh: base.mainApi + 'Karjo/DeleteAmozesh',
 
   getJobseekerWorkStatus: base.mainApi + 'Karjo/GetWorkStatus',
-   
+
   //companies
   getListCompany: base.mainApi + 'companies/GetListCompany',
   searchCompanies: base.mainApi + 'companies/SearchCompanies',
@@ -592,8 +507,7 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   searchAdminPersonel: base.mainApi + 'companies/SearchAdminPersonel',
   allCompanyPersonel: base.mainApi + 'companies/AllCompanyPersonel',
   removePersonel: base.mainApi + 'companies/RemovePersonel',
-  addOrUpdatePersonelByAdmin:
-    base.mainApi + 'companies/AddOrUpdatePersonelByAdmin',
+  addOrUpdatePersonelByAdmin: base.mainApi + 'companies/AddOrUpdatePersonelByAdmin',
   addOrUpdatePersonel: base.mainApi + 'companies/AddOrUpdatePersonel',
 
   getPersonelInfoForView: base.mainApi + 'companies/GetPersonelInfoForView',
@@ -612,14 +526,11 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   updateAdditionalInfo: base.mainApi + 'companies/UpdateAdditionalInfo',
   removeCompany: base.mainApi + 'companies/RemoveCompany',
 
-  
   personnelImportFileList: base.mainApi + 'companies/PersonnelImportFileList',
   importPersonnelFromExcel: base.mainApi + 'companies/ImportPersonnelFromExcel',
   removeImportFile: base.mainApi + 'companies/removeImportFile',
   personnelImportFileDetails: base.mainApi + 'companies/PersonnelImportFileDetails',
   confirmCitizenFile: base.mainApi + 'companies/PersonnelImportFileDetails',
-
-
 
   addOrUpdateJob: base.mainApi + 'jobs/AddOrUpdate',
   getJobDataForEdit: base.mainApi + 'jobs/GetForEdit',
@@ -649,7 +560,6 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
 
   getLastApiHelp: base.mainApi + 'content/GetLastApiHelp',
 
-
   getMostVisitedNews: base.mainApi + 'content/GetMostVisitedNews',
   getNews: base.mainApi + 'content/GetNews',
   addNewsComments: base.mainApi + 'content/AddComments',
@@ -672,7 +582,6 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   getFaqGroups: base.mainApi + 'content/GetFaqGroups',
   removeFaq: base.mainApi + 'content/RemoveFaq',
   addOrUpdateFaq: base.mainApi + 'content/AddOrUpdateFaq',
-  
 
   getPagedWebPageItems: base.mainApi + 'content/GetPagedWebPageItems',
   removeWebPage: base.mainApi + 'content/RemoveWebPage',
@@ -680,16 +589,13 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   getWebPage: base.mainApi + 'content/GetWebPage',
   getPageWithSlug: base.mainApi + 'content/page/',
 
-  getPagedNotificationsItems:
-    base.mainApi + 'content/GetPagedNotificationsItems',
+  getPagedNotificationsItems: base.mainApi + 'content/GetPagedNotificationsItems',
   getLastNotifications: base.mainApi + 'content/GetLastNotifications',
   getNotification: base.mainApi + 'content/GetNotification',
   addOrUpdateNotifications: base.mainApi + 'content/AddOrUpdateNotifications',
   getCitizenNotifications: base.mainApi + 'content/GetCitizenNotifications',
   addCitizensNotifactions: base.mainApi + 'content/AddCitizensNotifactions',
   removeCitizensNotifactions: base.mainApi + 'content/RemoveCitizensNotifactions',
-
-
 
   uploaderUrl: base.mainApi + 'Attachment/uploadFile',
   uploadAttachment: base.mainApi + 'Attachment/uploadAttachment',
@@ -704,8 +610,7 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   getTicketSubject: base.mainApi + 'Tickets/GetTicketSubject',
   removeTicketSubject: base.mainApi + 'Tickets/RemoveTicketSubject',
   addOrUpdateTicketSubject: base.mainApi + 'Tickets/AddOrUpdateTicketSubject',
-  getListTicketSubjectByUnitId:
-    base.mainApi + 'Tickets/GetListTicketSubjectByUnitId',
+  getListTicketSubjectByUnitId: base.mainApi + 'Tickets/GetListTicketSubjectByUnitId',
 
   sendUserTicket: base.mainApi + 'Tickets/SendUserTicket',
   getAdminTicketsList: base.mainApi + 'Tickets/GetAdminTicketsList',
@@ -735,14 +640,10 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   addOrUpdateUnit: base.mainApi + 'Organ/AddOrUpdateUnit',
   getUnitForEdit: base.mainApi + 'Organ/GetUnitForEdit',
   getAllUnit: base.mainApi + 'Organ/GetAllUnit',
- 
+
   addGroupToUnitGroup: base.mainApi + 'Organ/AddGroupToUnitGroup',
   removeUnitGroup: base.mainApi + 'Organ/RemoveUnitGroup',
   getAllUnitGroups: base.mainApi + 'Organ/GetAllUnitGroups',
-
-
-
-
 
   // / Portal
   getExitDoors: base.mainApi + 'Portal/GetExitDoors',
@@ -754,20 +655,14 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
 
   getPagedSmsList: base.mainApi + 'Portal/GetPagedSmsList',
 
-
   getFinancialSettings: base.mainApi + 'Portal/GetFinancialSettings',
   updateFinancialSettings: base.mainApi + 'Portal/UpdateFinancialSettings',
-
 
   updateSmsSettings: base.mainApi + 'Portal/UpdateSmsSettings',
   geSmsSettings: base.mainApi + 'Portal/GeSmsSettings',
 
-
-  getManzalatSettings: base.mainApi + 'Manzalat/GetManzalatSettings', 
+  getManzalatSettings: base.mainApi + 'Manzalat/GetManzalatSettings',
   updateManzalatSettings: base.mainApi + 'Manzalat/UpdateManzalatSettings',
-
-
- 
 
   //order
   getAllStoreList: base.mainApi + 'Order/GetAll',
@@ -792,8 +687,7 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   getCitizenRegisterChartReport: base.mainApi + 'report/GetCitizenRegisterChartReport',
   //Products
   getAllCompanyProductGroups: base.mainApi + 'Products/GetAllCompanyGroups',
-  getProductGroupsByParentId:
-    base.mainApi + 'Products/GetProductGroupsByParentId',
+  getProductGroupsByParentId: base.mainApi + 'Products/GetProductGroupsByParentId',
   addOrUpdateProductGroup: base.mainApi + 'Products/AddOrUpdateGroup',
   removeProductGroup: base.mainApi + 'Products/RemoveGroup',
 
@@ -805,9 +699,5 @@ addWebUserAccessRangeIp: base.mainApi + 'Users/AddWebUserAccessRangeIp',
   getAllProductForView: base.mainApi + 'Products/GetAllForView',
   buyProduct: base.mainApi + 'Store/Buy',
 
-
   prinQueueForPost: base.baseUrl + '/print/QueueForPost',
- 
- 
-
 };

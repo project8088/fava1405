@@ -4,7 +4,6 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
- 
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from 'src/app/core/services/helper.service';
@@ -18,7 +17,7 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardAddCardCoursesDialogComponent } from '../dialog/add-card-courses/add-card-courses.component';
- 
+
 @Component({
   selector: 'card-citizen-card-distribute-course-list',
   templateUrl: './citizen-card-distribute-course-list.component.html',
@@ -29,10 +28,10 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
     'row',
     'courseNumber',
     'startDate',
-    'endDate', 
+    'endDate',
     'user',
-    'cardQueueCount', 
-    'operation'
+    'cardQueueCount',
+    'operation',
   ];
 
   data: any[] = [];
@@ -53,33 +52,24 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
-      toDate: [null], 
-       
+      toDate: [null],
     });
   }
 
   ngAfterViewInit() {
     this.getList();
-    
   }
 
-  
-
- 
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-
-
-
 
     merge()
       .pipe(
@@ -92,21 +82,17 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -123,21 +109,19 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.citizenId
+        id: row.citizenId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
- 
 
   delete(row) {
-
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -145,31 +129,35 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.removeCardCourses, {
-          id: row.id,
-        }).subscribe(response => {
-          row.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          row.loading = false;
-        });
+        this.dataService
+          .get(ServerApis.removeCardCourses, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              row.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت حذف شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              row.loading = false;
+            },
+          );
       }
-
     });
   }
-   
 
   closeCourses(row) {
-
     Swal.fire({
       title: 'بستن دوره',
       text: 'آیا برای بستن دوره اطمینان دارید؟',
@@ -177,39 +165,46 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.closeCardCourses, {
-          id: row.id,
-        }).subscribe(response => {
-          row.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت بسته شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          row.loading = false;
-        });
+        this.dataService
+          .get(ServerApis.closeCardCourses, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              row.loading = false;
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت بسته شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              row.loading = false;
+            },
+          );
       }
-
     });
   }
 
-  
   openAddCardCoursesDialog() {
-    this.matDialog.open(CardAddCardCoursesDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: { }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(CardAddCardCoursesDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {},
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
 }

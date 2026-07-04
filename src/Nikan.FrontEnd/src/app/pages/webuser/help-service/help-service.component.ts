@@ -14,7 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'home-help-service',
   templateUrl: './help-service.component.html',
-  styleUrls: ['./help-service.component.scss']
+  styleUrls: ['./help-service.component.scss'],
 })
 export class WebUserHelpServiceDetailsComponent implements OnInit {
   newsId: string;
@@ -30,11 +30,8 @@ export class WebUserHelpServiceDetailsComponent implements OnInit {
   frm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
 
-
-
   lastNewsList: NewsDto[] = [];
   loadingLastNews: boolean;
-
 
   mostVisitedList: NewsDto[] = [];
   loadingVisited: boolean;
@@ -49,67 +46,41 @@ export class WebUserHelpServiceDetailsComponent implements OnInit {
     private authService: AuthService,
     private customValidator: CustomFormValidators,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
   ) {
-
-  
-
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.newsId = p.id;
-      this.getDetailsInfo(); 
+      this.getDetailsInfo();
     });
     this.user = this.authService.currentUserValue;
   }
 
-
-
-  ngOnInit() {
-  
-  }
-
-
-
+  ngOnInit() {}
 
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-
-        this.news = response.data;
-        this.tags = this.news.seoTags.split(',');
-        if (this.news.seoTags) {
-          this.titleService.setTitle(this.news.title);
-          this.metaService.addTags([
-            { name: 'keywords', content: this.news.seoTags },
-            { name: 'description', content: this.news.seoDescription },
-            { name: 'robots', content: 'index, follow' }
-          ]);
+    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.news = response.data;
+          this.tags = this.news.seoTags.split(',');
+          if (this.news.seoTags) {
+            this.titleService.setTitle(this.news.title);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.news.seoTags },
+              { name: 'description', content: this.news.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
+          }
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-
-    }, error => {
-      this.loadingData = false;
-
-    });
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
-
-
-
- 
-
-
-
-
- 
-
-
- 
-
 }
-
-

@@ -8,9 +8,8 @@ describe('AdminNotificationListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminNotificationListComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminNotificationListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

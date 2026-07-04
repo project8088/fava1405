@@ -11,52 +11,46 @@ import { AuthService } from 'src/app/core/authentication/auth.service';
 @Component({
   selector: 'app-ticket-answer',
   templateUrl: './ticket-answer.component.html',
-  styleUrls: ['./ticket-answer.component.scss']
+  styleUrls: ['./ticket-answer.component.scss'],
 })
 export class TicketAnswerComponent implements OnInit {
   ticketForm: FormGroup;
   isSaving: boolean;
-  loadingData: boolean = true; 
-  
+  loadingData: boolean = true;
+
   loadingUnit: boolean;
-   
+
   searching: boolean;
   trackingCode: string = '';
   ticketAnswer: any;
-  loadingSubject:boolean;
-  constructor(  
+  loadingSubject: boolean;
+  constructor(
     private toastrService: ToastrService,
     private fb: FormBuilder,
     private dataService: DataService,
     private customValidator: CustomFormValidators,
-    private authService: AuthService
-  ) {
-     
+    private authService: AuthService,
+  ) {}
 
-  }
+  ngOnInit(): void {}
 
-
-  ngOnInit(): void { 
-    
-  }
-   
-  
   searchTrackingCode() {
     this.searching = true;
-    this.ticketAnswer = ''; 
-    this.dataService.get(ServerApis.getAnswerTicket,{ refCode: this.trackingCode }).subscribe(response => {
-      this.searching = false;
-      if (response && response.isSuccess) {
-        this.ticketAnswer = response.data;
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.searching = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-    });
+    this.ticketAnswer = '';
+    this.dataService.get(ServerApis.getAnswerTicket, { refCode: this.trackingCode }).subscribe(
+      (response) => {
+        this.searching = false;
+        if (response && response.isSuccess) {
+          this.ticketAnswer = response.data;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.searching = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
-
 }

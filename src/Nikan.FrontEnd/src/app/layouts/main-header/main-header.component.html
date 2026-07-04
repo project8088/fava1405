@@ -1,5 +1,3 @@
- 
-
 <section id="tophead" class="container-fluid p-2 grad-bg">
   <div class="container">
     <div class="row d-flex align-items-center">
@@ -18,7 +16,7 @@
       <div class="col-md-3 col-6 mr-auto">
         <div class="d-flex flex-column">
           <span class="text-white">
-            {{ datetime | jalali: "امروز: dddd Do MMMM ماه YYYY" }}
+            {{ datetime | jalali: 'امروز: dddd Do MMMM ماه YYYY' }}
           </span>
         </div>
       </div>
@@ -26,9 +24,7 @@
   </div>
 </section>
 
-<nav
-  class="navbar navbar-expand-lg navbar-light bg-light main-nav header-bottomarea"
->
+<nav class="navbar navbar-expand-lg navbar-light bg-light main-nav header-bottomarea">
   <a class="navbar-brand" href="/">
     <!-- <img src="assets/images/home/logo.png" class="brand-logo" /> -->
   </a>
@@ -49,7 +45,6 @@
       <main-tree-menu [menuItems]="menuItems"></main-tree-menu>
     </ul>
 
-   
     <!--
       <form class="form-inline my-2 my-lg-0">
        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
@@ -59,11 +54,7 @@
     <div id="DivUserLogin">
       <ul class="navbar-nav">
         <li class="nav-item" *ngIf="isAuth">
-          <a
-            class="nav-link"
-            (click)="dashboard()"
-            [matTooltip]="user.displayName"
-          >
+          <a class="nav-link" (click)="dashboard()" [matTooltip]="user.displayName">
             {{ user.userName }}
           </a>
         </li>
@@ -89,9 +80,7 @@
           </div>
         </li>
         <li class="nav-item" *ngIf="!isAuth">
-          <a class="nav-link" routerLink="/account/login"
-            >ورود به حساب کاربری</a
-          >
+          <a class="nav-link" routerLink="/account/login">ورود به حساب کاربری</a>
         </li>
       </ul>
     </div>

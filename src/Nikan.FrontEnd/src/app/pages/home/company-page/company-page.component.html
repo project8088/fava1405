@@ -1,384 +1,292 @@
 <!-- Breadcrumb Area -->
-<div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1"
-    data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
-    <div class="container">
-        <div class="tm-breadcrumb">
-            <h2 class="tm-breadcrumb-title">
-                {{companyInfo?.companyName}}
-            </h2>
-
-        </div>
+<div
+  class="tm-breadcrumb-area tm-padding-section text-center"
+  data-overlay="1"
+  data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg"
+>
+  <div class="container">
+    <div class="tm-breadcrumb">
+      <h2 class="tm-breadcrumb-title">
+        {{ companyInfo?.companyName }}
+      </h2>
     </div>
+  </div>
 </div>
 <!--// Breadcrumb Area -->
-<div class="container   mt-4">
+<div class="container mt-4">
+  <mat-card class="custom-card">
+    <mat-card-header> </mat-card-header>
+    <mat-card-content>
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+      <div *ngIf="!loading" class="my-4 line-height-3">
+        <img
+          [src]="baseUrl + companyInfo?.imageUrl"
+          alt="{{ companyInfo?.companyName }}"
+          class="img-logo"
+        />
 
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <span>نام مدیر شرکت: </span>
+            <strong>{{ companyInfo.managerName }}</strong>
+          </div>
 
-    <mat-card class="custom-card">
-        <mat-card-header>
+          <div class="col-sm-6 col-md-4">
+            <span>نام شرکت: </span>
+            <strong>{{ companyInfo.companyName }}</strong>
+          </div>
+          <div class="col-sm-6 col-md-4">
+            <span>نام لاتین شرکت: </span>
+            <strong>{{ companyInfo.englishName }}</strong>
+          </div>
 
-        </mat-card-header>
-        <mat-card-content>
+          <div class="col-sm-6 col-md-4">
+            <span>سال تاسیس: </span>
+            <strong>{{ companyInfo.establishedYear }}</strong>
+          </div>
 
-            <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
-                <mat-spinner diameter="50" color="default"></mat-spinner>
-            </div>
-            <div *ngIf="!loading" class="my-4 line-height-3">
+          <div class="col-sm-6 col-md-4">
+            <span>نوع فعالیت شرکت: </span>
+            <strong>{{ companyInfo.fieldOfActivity | enumString: 'fieldOfActivity' }}</strong>
+          </div>
+        </div>
 
+        <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <span>شماره تلفن: </span>
+            <strong>{{ companyInfo.cellNumber }}</strong>
+            <strong *ngIf="companyInfo.cellNumber2">، {{ companyInfo.cellNumber }}</strong>
+            <strong *ngIf="companyInfo.cellNumber3">، {{ companyInfo.cellNumber }}</strong>
+          </div>
 
-                <img [src]="baseUrl + companyInfo?.imageUrl" alt="{{companyInfo?.companyName}}" class="img-logo">
+          <div class="col-sm-6 col-md-4">
+            <span>شماره فکس: </span>
+            <strong>{{ companyInfo.fax }}</strong>
+          </div>
 
-                <div class="row">
+          <div class="col-sm-6 col-md-4">
+            <span>آدرس وب سایت: </span>
+            <strong>{{ companyInfo.website }}</strong>
+          </div>
 
+          <div class="col-sm-6 col-md-4">
+            <span>ایمیل: </span>
+            <strong>{{ companyInfo.email }}</strong>
+          </div>
 
-                    <div class="col-sm-6 col-md-4">
-                        <span>نام مدیر شرکت: </span>
-                        <strong>{{companyInfo.managerName}}</strong>
+          <div class="col-sm-6 col-md-4">
+            <span>آیدی تلگرام: </span>
+            <strong>{{ companyInfo.telegram }}</strong>
+          </div>
 
+          <div class="col-sm-6 col-md-4">
+            <span>کد پستی: </span>
+            <strong>{{ companyInfo.zipCode }}</strong>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <span>خیابان: </span>
+            <strong>{{ companyInfo.street }}</strong>
+          </div>
+
+          <div class="col-sm-6 col-md-4">
+            <span>پلاک: </span>
+            <strong>{{ companyInfo.pelak }}</strong>
+          </div>
+
+          <div class="col-sm-12">
+            <span>آدرس کامل: </span>
+            <strong>{{ companyInfo.fullAddress }}</strong>
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
+
+  <mat-card class="custom-card">
+    <mat-card-header> فعالیت های شرکت: </mat-card-header>
+    <mat-card-content>
+      <div class="p-3">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="py-4 list-container">
+              <div class="list-item" *ngFor="let item of companyInfo.userCompanyActivities">
+                <div class="list-content">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <span> {{ item.activity }}</span>
                     </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>نام شرکت: </span>
-                        <strong>{{companyInfo.companyName}}</strong>
-
-                    </div>
-                    <div class="col-sm-6 col-md-4">
-                        <span>نام لاتین شرکت: </span>
-                        <strong>{{companyInfo.englishName}}</strong>
-
-
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>سال تاسیس: </span>
-                        <strong>{{companyInfo.establishedYear}}</strong>
-
-
-                    </div>
-
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>نوع فعالیت شرکت: </span>
-                        <strong>{{companyInfo.fieldOfActivity|enumString:'fieldOfActivity'}}</strong>
-
-                    </div>
-
-
+                  </div>
                 </div>
-
-
-                <div class="row">
-
-
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>شماره تلفن: </span>
-                        <strong>{{companyInfo.cellNumber}}</strong>
-                        <strong *ngIf="companyInfo.cellNumber2">، {{companyInfo.cellNumber}}</strong>
-                        <strong *ngIf="companyInfo.cellNumber3">، {{companyInfo.cellNumber}}</strong>
-
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>شماره فکس: </span>
-                        <strong>{{companyInfo.fax}}</strong>
-
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>آدرس وب سایت: </span>
-                        <strong>{{companyInfo.website}}</strong>
-
-
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>ایمیل: </span>
-                        <strong>{{companyInfo.email}}</strong>
-
-
-                    </div>
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>آیدی تلگرام: </span>
-                        <strong>{{companyInfo.telegram}}</strong>
-
-                    </div>
-
-
-
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>کد پستی: </span>
-                        <strong>{{companyInfo.zipCode}}</strong>
-                    </div>
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>خیابان: </span>
-                        <strong>{{companyInfo.street}}</strong>
-
-                    </div>
-
-                    <div class="col-sm-6 col-md-4">
-                        <span>پلاک: </span>
-                        <strong>{{companyInfo.pelak}}</strong>
-
-                    </div>
-
-
-                    <div class="col-sm-12">
-                        <span>آدرس کامل: </span>
-                        <strong>{{companyInfo.fullAddress}}</strong>
-
-                    </div>
-
-
-                </div>
-
+              </div>
             </div>
 
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
-
-
-
-
-
-    <mat-card class="custom-card">
-        <mat-card-header>
-            فعالیت های شرکت:
-        </mat-card-header>
-        <mat-card-content>
-            <div class="p-3">
-
-
-                <div class="row">
-                    <div class="col-md-6">
-
-                        <div class="py-4 list-container">
-                            <div class="list-item" *ngFor="let item of companyInfo.userCompanyActivities">
-                                <div class="list-content">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <span> {{item.activity}}</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                        <div class="no-any-items" *ngIf="companyInfo.userCompanyActivities.length==0">
-                            <i class="fa fa-info-circle"></i> اطلاعاتی ثبت نشده است
-                        </div>
-                    </div>
-                    <div class="col-md-6"></div>
-                </div>
+            <div class="no-any-items" *ngIf="companyInfo.userCompanyActivities.length == 0">
+              <i class="fa fa-info-circle"></i> اطلاعاتی ثبت نشده است
             </div>
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
+          </div>
+          <div class="col-md-6"></div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
 
-    <mat-card class="custom-card" *ngIf="companyInfo?.content">
-        <mat-card-header>
-
-        </mat-card-header>
-        <mat-card-content>
-            <div class="p-3">
-                <div class="html-editor" [innerHtml]="companyInfo?.content|safeHtml"></div>
-                <div class="row my-4  line-height-3">
-
-                    <!-- <div class="col-sm-6 col-md-4">
+  <mat-card class="custom-card" *ngIf="companyInfo?.content">
+    <mat-card-header> </mat-card-header>
+    <mat-card-content>
+      <div class="p-3">
+        <div class="html-editor" [innerHtml]="companyInfo?.content | safeHtml"></div>
+        <div class="row my-4 line-height-3">
+          <!-- <div class="col-sm-6 col-md-4">
                   <span>آدرس صفحه اختصاصی: </span>
                   <strong>{{companyInfo.slagUrl}}</strong>
               </div> -->
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
 
-                </div>
+  <mat-card class="custom-card">
+    <mat-card-header> کالا و خدمات: </mat-card-header>
+    <mat-card-content>
+      <div
+        class="d-flex align-items-center justify-content-center py-5"
+        *ngIf="companyInfo.products.length == 0"
+      >
+        <strong>اطلاعاتی وجود ندارد!</strong>
+      </div>
 
-            </div>
+      <div class="row mt-30-reverse blog-masonry-active">
+        <div class="col-sm-6 col-md-4 mt-30" *ngFor="let item of companyInfo.products">
+          <div class="card p-2 news-card">
+            <a class="relative">
+              <img
+                [src]="baseUrl + item.imageUrl"
+                alt="{{ item.title }}"
+                *ngIf="item.imageUrl"
+                class="mb-3 img-fluid rad12"
+              />
+              <img
+                src="assets/images/news-default.jpg"
+                alt="{{ item.title }}"
+                *ngIf="!item.imageUrl"
+                class="mb-3 img-fluid rad12"
+              />
+              <div class="covernews d-flex flex-row justify-content-between px-3 text-white">
+                <span class="bottom_p">
+                  <i class="fa fa-money-bill-alt"></i>{{ item.price | number }} ریال</span
+                >
+              </div>
+            </a>
 
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
+            <h5>
+              <a routerLink="/home/product-details/{{ item.id }}">{{ item.title }}</a>
+            </h5>
+            <p class="card-content">
+              {{ item.description }}
+            </p>
+            <a routerLink="/home/product-details/{{ item.id }}" class="text-danger text-center pb-3"
+              >مشاهده جزئیات...</a
+            >
+          </div>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
 
+  <mat-card class="custom-card">
+    <mat-card-header> تماس با شرکت: </mat-card-header>
+    <mat-card-content>
+      <div class="my-5 py-5 text-center" *ngIf="messageIsSended">
+        <h3>{{ sendedMessages }}</h3>
+      </div>
 
+      <div class="p-5" *ngIf="!messageIsSended">
+        <form [formGroup]="contactForm">
+          <div class="row">
+            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-label>نام و نام خانوادگی</mat-label>
+              <input matInput type="text" formControlName="name" />
+              <mat-error *ngIf="contactForm.get('name').errors?.required">
+                نام خود را وارد کنید
+              </mat-error>
+            </mat-form-field>
 
+            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-label>شماره موبایل</mat-label>
+              <input
+                matInput
+                type="text"
+                formControlName="mobileNumber"
+                maxlength="11"
+                numbersOnly
+              />
+              <mat-error *ngIf="contactForm.get('mobileNumber').errors?.invalid">
+                شماره موبایل صحیح نیست!
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
+              <mat-label>آدرس ایمیل</mat-label>
+              <input matInput type="text" formControlName="email" />
+              <mat-error *ngIf="contactForm.get('email').errors?.email">
+                آدرس ایمیل صحیح نیست!
+              </mat-error>
+            </mat-form-field>
 
-    <mat-card class="custom-card">
-        <mat-card-header>
-            کالا و خدمات:
-        </mat-card-header>
-        <mat-card-content>
+            <mat-form-field appearance="outline" class="col-sm-12">
+              <mat-label>عنوان پیام</mat-label>
+              <input matInput formControlName="subject" />
+              <mat-error *ngIf="contactForm.get('subject').errors?.required">
+                عنوان پیام را وارد کنید
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('subject').errors?.maxlength">
+                حداکثر 1000 کاراکتر
+              </mat-error>
+            </mat-form-field>
 
-            <div class="d-flex align-items-center justify-content-center py-5" *ngIf="companyInfo.products.length==0">
-                <strong>اطلاعاتی وجود ندارد!</strong>
-            </div>
+            <mat-form-field appearance="outline" class="col-sm-12">
+              <mat-label>متن پیام</mat-label>
+              <textarea matInput formControlName="message" rows="5"></textarea>
+              <mat-error *ngIf="contactForm.get('message').errors?.required">
+                متن پیام را وارد کنید
+              </mat-error>
+              <mat-error *ngIf="contactForm.get('message').errors?.maxlength">
+                حداکثر 10،000 کاراکتر
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <button mat-raised-button color="primary" [disabled]="isSaving" (click)="saveInfo()">
+              <mat-spinner color="default" diameter="20" *ngIf="isSaving"></mat-spinner>
+              <span> ارسال پیام </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
 
-            <div class="row mt-30-reverse blog-masonry-active">
-                <div class="col-sm-6 col-md-4 mt-30" *ngFor="let item of companyInfo.products">
-                    <div class="card p-2 news-card">
-                        <a class="relative">
-                            <img [src]="baseUrl + item.imageUrl" alt="{{item.title}}" *ngIf="item.imageUrl"
-                                class="mb-3 img-fluid rad12">
-                            <img src="assets/images/news-default.jpg" alt="{{item.title}}" *ngIf="!item.imageUrl"
-                                class="mb-3 img-fluid rad12">
-                            <div class="covernews d-flex flex-row justify-content-between px-3 text-white ">
-                                <span class="bottom_p">
-                                    <i class="fa fa-money-bill-alt"></i>{{item.price|number}} ریال</span>
-
-                            </div>
-                        </a>
-
-
-                        <h5><a routerLink="/home/product-details/{{item.id}}">{{item.title}}</a></h5>
-                        <p class="card-content">
-                            {{item.description}}
-                        </p>
-                        <a routerLink="/home/product-details/{{item.id}}" class="text-danger text-center pb-3">مشاهده
-                            جزئیات...</a>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
-
-
-
-
-    <mat-card class="custom-card">
-        <mat-card-header>
-            تماس با شرکت:
-        </mat-card-header>
-        <mat-card-content>
-
-
-            <div class="my-5 py-5 text-center" *ngIf="messageIsSended">
-                <h3>{{sendedMessages}}</h3>
-            </div>
-
-
-            <div class="p-5" *ngIf="!messageIsSended">
-                <form [formGroup]="contactForm">
-                    <div class="row">
-                        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                            <mat-label>نام و نام خانوادگی</mat-label>
-                            <input matInput type="text" formControlName="name" />
-                            <mat-error *ngIf="contactForm.get('name').errors?.required">
-                                نام خود را وارد کنید
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                            <mat-label>شماره موبایل</mat-label>
-                            <input matInput type="text" formControlName="mobileNumber" maxlength="11" numbersOnly />
-                            <mat-error *ngIf="contactForm.get('mobileNumber').errors?.invalid">
-                                شماره موبایل صحیح نیست!
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-                            <mat-label>آدرس ایمیل</mat-label>
-                            <input matInput type="text" formControlName="email" />
-                            <mat-error *ngIf="contactForm.get('email').errors?.email">
-                                آدرس ایمیل صحیح نیست!
-                            </mat-error>
-                        </mat-form-field>
-
-
-
-
-
-
-
-                        <mat-form-field appearance="outline" class="col-sm-12">
-                            <mat-label>عنوان پیام</mat-label>
-                            <input matInput formControlName="subject" />
-                            <mat-error *ngIf="contactForm.get('subject').errors?.required">
-                                عنوان پیام را وارد کنید
-                            </mat-error>
-                            <mat-error *ngIf="contactForm.get('subject').errors?.maxlength">
-                                حداکثر 1000 کاراکتر
-                            </mat-error>
-                        </mat-form-field>
-
-                        <mat-form-field appearance="outline" class="col-sm-12">
-                            <mat-label>متن پیام</mat-label>
-                            <textarea matInput formControlName="message" rows="5"></textarea>
-                            <mat-error *ngIf="contactForm.get('message').errors?.required">
-                                متن پیام را وارد کنید
-                            </mat-error>
-                            <mat-error *ngIf="contactForm.get('message').errors?.maxlength">
-                                حداکثر 10،000 کاراکتر
-                            </mat-error>
-                        </mat-form-field>
-
-
-
-
-
-
-                    </div>
-                    <div>
-                        <button mat-raised-button color="primary" [disabled]="isSaving" (click)="saveInfo()">
-                            <mat-spinner color="default" diameter="20" *ngIf="isSaving"></mat-spinner>
-                            <span>
-                                ارسال پیام
-                            </span>
-                        </button>
-
-                    </div>
-                </form>
-
-
-
-            </div>
-
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
-
-
-
-
-
-
-
-    <mat-card class="custom-card">
-        <mat-card-header>
-        </mat-card-header>
-        <mat-card-content>
-
-
-
-            <agm-map [latitude]="lat" [longitude]="lng">
-                <agm-marker [latitude]="lat" [longitude]="lng">
-                    <agm-info-window [isOpen]="true">
-                        <p><strong>{{companyInfo.companyName}}</strong></p>
-                        <p> {{companyInfo?.fullAddress}}</p>
-                    </agm-info-window>
-                </agm-marker>
-            </agm-map>
-
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
-    </mat-card>
-
-
-
-
-
-
+  <mat-card class="custom-card">
+    <mat-card-header> </mat-card-header>
+    <mat-card-content>
+      <agm-map [latitude]="lat" [longitude]="lng">
+        <agm-marker [latitude]="lat" [longitude]="lng">
+          <agm-info-window [isOpen]="true">
+            <p>
+              <strong>{{ companyInfo.companyName }}</strong>
+            </p>
+            <p>{{ companyInfo?.fullAddress }}</p>
+          </agm-info-window>
+        </agm-marker>
+      </agm-map>
+    </mat-card-content>
+    <mat-card-footer></mat-card-footer>
+  </mat-card>
 </div>

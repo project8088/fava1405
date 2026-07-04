@@ -17,13 +17,21 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
 @Component({
   selector: 'app-check-state-life-list',
   templateUrl: './check-state-life-list.component.html',
-  styleUrls: ['./check-state-life-list.component.scss']
+  styleUrls: ['./check-state-life-list.component.scss'],
 })
 export class AdminCheckStateLifeListComponent implements AfterViewInit, OnInit {
   id: number;
 
-  displayedColumns: string[] = ['row',   'firstName', 'lastName', 'fatherName', 'nationCode', 'birthDate', 'verifyDate','sabtStatus'];
-
+  displayedColumns: string[] = [
+    'row',
+    'firstName',
+    'lastName',
+    'fatherName',
+    'nationCode',
+    'birthDate',
+    'verifyDate',
+    'sabtStatus',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -32,9 +40,8 @@ export class AdminCheckStateLifeListComponent implements AfterViewInit, OnInit {
 
   searchForm: FormGroup;
 
-
   sendingSms: boolean = false;
-   
+
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
@@ -42,104 +49,80 @@ export class AdminCheckStateLifeListComponent implements AfterViewInit, OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.id = p.id;
     });
     this.searchForm = this.fb.group({
       title: [null],
     });
-
-
-
   }
 
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.getList();
   }
-   
-
 
   getList() {
     this.isLoadingResults = true;
     var param: any = {
       offset: 0,
       count: 10000,
-      exportId: this.id
+      exportId: this.id,
     };
 
     this.data = [];
-    this.dataService.get(ServerApis.getAllCitizenExported, param).subscribe(response => {
-      this.isLoadingResults = false;
-      if (response.isSuccess && response.data) {
-        this.data = response.data.items ? response.data.items : []; 
-        this.dataSource.data = this.data;
-        this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isLoadingResults = false;
-
-    });
-
-
+    this.dataService.get(ServerApis.getAllCitizenExported, param).subscribe(
+      (response) => {
+        this.isLoadingResults = false;
+        if (response.isSuccess && response.data) {
+          this.data = response.data.items ? response.data.items : [];
+          this.dataSource.data = this.data;
+          this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isLoadingResults = false;
+      },
+    );
   }
-
-
-
 
   applyFilter() {
     this.dataSource.filter = this.searchForm.get('title').value;
   }
 
-
-
   checkIsDead(item) {
     item.loading = true;
-    this.dataService.get(
-      ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(response => {
+    this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
+      (response) => {
         item.loading = false;
         if (response && response.isSuccess) {
           this.toastrService.success(response.messages);
           this.getList();
         } else {
-          let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      }, error => {
+      },
+      (error) => {
         item.loading = false;
-      });
+      },
+    );
   }
-
-  
-
-  
 
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
-
-
-
-
 }
-
-

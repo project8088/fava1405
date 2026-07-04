@@ -8,9 +8,8 @@ describe('CitizenCardListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenCardListComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenCardListComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

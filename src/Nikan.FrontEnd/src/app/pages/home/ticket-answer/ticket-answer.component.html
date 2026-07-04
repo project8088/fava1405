@@ -1,6 +1,9 @@
 <!-- Breadcrumb Area -->
-<div class="tm-breadcrumb-area tm-padding-section text-center" data-overlay="1"
-  data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg">
+<div
+  class="tm-breadcrumb-area tm-padding-section text-center"
+  data-overlay="1"
+  data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg"
+>
   <div class="container">
     <div class="tm-breadcrumb">
       <h2 class="tm-breadcrumb-title">ارسال تیکت</h2>
@@ -11,8 +14,8 @@
     </div>
   </div>
 </div>
- 
-<main class="main-content">  
+
+<main class="main-content">
   <div class="tm-section blogs-area bg-white tm-padding-section">
     <div class="container">
       <div class="row">
@@ -23,54 +26,60 @@
                 آیا دارای حساب کاربری می باشید ؟
                 <br />
                 <strong>
-                  در صورتیکه دارای حساب کاربری هستید ابتدا وارد حساب کاربری خود شوید
-                  و سپس از طریق پنل خود درخواست خود را پیگیری نمایید
-                  .
-
+                  در صورتیکه دارای حساب کاربری هستید ابتدا وارد حساب کاربری خود شوید و سپس از طریق
+                  پنل خود درخواست خود را پیگیری نمایید .
                 </strong>
               </div>
-              <h5 class="my-5 text-center">
-                کد رهگیری خود را برای مشاهده تیکت وارد کنید
-              </h5>
+              <h5 class="my-5 text-center">کد رهگیری خود را برای مشاهده تیکت وارد کنید</h5>
               <div class="row no-gutters">
                 <div class="col-sm-4"></div>
                 <div class="col-sm-4">
                   <div class="form-group">
                     <label>کد رهگیری</label>
-                    <input class="form-control" type="text" maxlenght="20" [(ngModel)]="trackingCode" />
+                    <input
+                      class="form-control"
+                      type="text"
+                      maxlenght="20"
+                      [(ngModel)]="trackingCode"
+                    />
                   </div>
                   <div class="d-flex justify-content-end">
-                    <button mat-raised-button color="default" [disabled]="searching" (click)="searchTrackingCode()">
+                    <button
+                      mat-raised-button
+                      color="default"
+                      [disabled]="searching"
+                      (click)="searchTrackingCode()"
+                    >
                       <mat-spinner color="default" diameter="20" *ngIf="searching"></mat-spinner>
                       <span>جستجو</span>
                     </button>
                   </div>
-
                 </div>
                 <div class="col-sm-4"></div>
               </div>
 
-
               <div *ngIf="ticketAnswer">
                 <p>
-                  <strong>موضوع: </strong> <span>{{ticketAnswer.subject}}</span>
+                  <strong>موضوع: </strong> <span>{{ ticketAnswer.subject }}</span>
                 </p>
                 <p>
-                  <strong>متن پیام: </strong> <span>{{ticketAnswer.ticketMessage}}</span>
+                  <strong>متن پیام: </strong> <span>{{ ticketAnswer.ticketMessage }}</span>
                 </p>
                 <p *ngIf="ticketAnswer.responseTextOnDate">
-                  <strong>تاریخ ثبت پاسخ: </strong> <span>
+                  <strong>تاریخ ثبت پاسخ: </strong>
+                  <span>
                     {{
-ticketAnswer.responseTextOnDate | jalali:'YYYY/MM/DD ساعت
+                      ticketAnswer.responseTextOnDate
+                        | jalali
+                          : 'YYYY/MM/DD ساعت
                     HH:mm'
                     }}
                   </span>
                 </p>
                 <p>
-                  <strong>پاسخ: </strong> <span>{{ticketAnswer.responseText}}</span>
+                  <strong>پاسخ: </strong> <span>{{ ticketAnswer.responseText }}</span>
                 </p>
               </div>
-
 
               <br />
               <br />
@@ -78,11 +87,8 @@ ticketAnswer.responseTextOnDate | jalali:'YYYY/MM/DD ساعت
               <br />
             </div>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
-  </div> 
+  </div>
 </main>
-
-
- 

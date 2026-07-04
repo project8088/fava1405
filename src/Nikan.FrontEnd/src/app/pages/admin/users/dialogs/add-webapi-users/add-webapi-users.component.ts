@@ -1,25 +1,24 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'; 
- import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 
 @Component({
   selector: 'app-adm-add-webapi-users-dialog',
   templateUrl: './add-webapi-users.component.html',
-  styleUrls: ['./add-webapi-users.component.scss']
+  styleUrls: ['./add-webapi-users.component.scss'],
 })
-
 export class AdminAddWebApiUserDialogComponent implements OnInit {
   isSaving: boolean;
   userForm: FormGroup;
   loading: boolean = true;
   appList: any[] = [];
   baseEnums: any = {};
-  organizationList: any = [] = [];
-  unitList: any = [] = [];
+  organizationList: any = ([] = []);
+  unitList: any = ([] = []);
   periorityList: any[] = [];
   loadingUnit: boolean;
   loadingData: boolean = true;
@@ -28,24 +27,28 @@ export class AdminAddWebApiUserDialogComponent implements OnInit {
     private matDialogRef: MatDialogRef<AdminAddWebApiUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
     private toastrService: ToastrService,
-    private fb: FormBuilder, 
+    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService) {
-  
-
-
-    this.userForm = this.fb.group({
-      id: [null],
-      displayName: [null, [Validators.required ]],  
-      username: [null, [Validators.required, this.customValidator.checkEnglishAndNumberCharacters]],
-      password: [null, [Validators.required]],
-      serviceId: [null, [Validators.required]],
-      confirmPassword: [null, [Validators.required]], 
-      mobile:[null,[Validators.required,this.customValidator.checkMobileNumber]],
-      email:[null,[this.customValidator.checkEmail]], 
-      organization: [null],
-      organizationalUnit: [null], 
-    }, { validator: this.checkPasswords });
+    private dataService: DataService,
+  ) {
+    this.userForm = this.fb.group(
+      {
+        id: [null],
+        displayName: [null, [Validators.required]],
+        username: [
+          null,
+          [Validators.required, this.customValidator.checkEnglishAndNumberCharacters],
+        ],
+        password: [null, [Validators.required]],
+        serviceId: [null, [Validators.required]],
+        confirmPassword: [null, [Validators.required]],
+        mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
+        email: [null, [this.customValidator.checkEmail]],
+        organization: [null],
+        organizationalUnit: [null],
+      },
+      { validator: this.checkPasswords },
+    );
   }
 
   /**
@@ -55,91 +58,90 @@ export class AdminAddWebApiUserDialogComponent implements OnInit {
     let pass = group.controls.password.value;
     let confirmPassword = group.controls.confirmPassword.value;
 
-    return pass === confirmPassword ? null : { notSame: true }
+    return pass === confirmPassword ? null : { notSame: true };
   }
-
- 
 
   ngOnInit() {
     this.getOrganizations();
-    this.dataService.get(ServerApis.getBaseListAppService).subscribe(response => {
+    this.dataService.get(ServerApis.getBaseListAppService).subscribe((response) => {
       this.appList = response.data ? response.data : [];
     });
   }
 
-   
-
-  saveInfo() { 
+  saveInfo() {
     if (this.userForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
       return false;
-    } 
-    var formValue = this.userForm.value;  
-    this.isSaving = true; 
-    this.dataService.post(
-      ServerApis.webApiUserRegister,
-      {
-        DisplayName: formValue.displayName  , 
-        Email:formValue.email,
+    }
+    var formValue = this.userForm.value;
+    this.isSaving = true;
+    this.dataService
+      .post(ServerApis.webApiUserRegister, {
+        DisplayName: formValue.displayName,
+        Email: formValue.email,
         MobileNumber: formValue.mobile,
         AccessServiceId: +formValue.serviceId,
         UserName: formValue.username,
-        Password:formValue.password, 
+        Password: formValue.password,
         OrganizationalUnitId: formValue.organizationalUnit.key,
-
-      }
-    ).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.matDialogRef.close(true);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false; 
-    });
+      })
+      .subscribe(
+        (response) => {
+          this.isSaving = false;
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.isSaving = false;
+        },
+      );
   }
-
-
-
-  
-
-
 
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-        this.organizationList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingData = false;
-    });
+    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
-    this.dataService.get(ServerApis.getAllOrganizationalUnitByOrganId, {
-      organId: this.userForm.get('organization').value.key
-    }).subscribe(response => {
-      this.loadingUnit = false;
-      if (response.isSuccess) {
-        this.unitList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingUnit = false;
-    });
+    this.dataService
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.userForm.get('organization').value.key,
+      })
+      .subscribe(
+        (response) => {
+          this.loadingUnit = false;
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loadingUnit = false;
+        },
+      );
   }
   getAppRegisterList() {
     this.dataService.get(ServerApis.getBaseListAppService).subscribe(
@@ -148,9 +150,7 @@ export class AdminAddWebApiUserDialogComponent implements OnInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
-
-
 }

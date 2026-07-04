@@ -1,87 +1,86 @@
 <div class="content-header">
   <span *ngIf="!isUpdate">ثبت کارت جدید</span>
   <span *ngIf="isUpdate">ویرایش کارت</span>
-
 </div>
 
-
 <mat-card class="custom-card">
-  <mat-card-header class="d-flex align-items-center justify-content-end">
-
-  </mat-card-header>
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
   <mat-card-content>
-
     <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
-
     <form [formGroup]="storeForm" *ngIf="!loading">
       <div class="row">
-
-
-        
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>هزینه کارت</mat-label>
           <input matInput formControlName="cardCost" type="text" numbersOnly />
-          <mat-error *ngIf="storeForm.get('cardCost').errors?.required">هزینه کارت را وارد کنید.</mat-error>
+          <mat-error *ngIf="storeForm.get('cardCost').errors?.required"
+            >هزینه کارت را وارد کنید.</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>هزینه کارت المثنی</mat-label>
           <input matInput formControlName="doubleCardCost" type="text" numbersOnly />
-          <mat-error *ngIf="storeForm.get('doubleCardCost').errors?.required">هزینه کارت را وارد کنید.</mat-error>
+          <mat-error *ngIf="storeForm.get('doubleCardCost').errors?.required"
+            >هزینه کارت را وارد کنید.</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>هزینه پستی</mat-label>
           <input matInput formControlName="postalCostInCity" type="text" numbersOnly />
-          <mat-error *ngIf="storeForm.get('postalCostInCity').errors?.required">هزینه پستی را وارد کنید.</mat-error>
+          <mat-error *ngIf="storeForm.get('postalCostInCity').errors?.required"
+            >هزینه پستی را وارد کنید.</mat-error
+          >
         </mat-form-field>
-
-        
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>درصد مالیات</mat-label>
           <input matInput formControlName="vatForCardCost" type="text" maxlength="3" numbersOnly />
-          <mat-error *ngIf="storeForm.get('vatForCardCost').errors?.required">درصد مالیات را وارد کنید.</mat-error>
-          <mat-error *ngIf="storeForm.get('vatForCardCost').errors?.max || storeForm.get('vatForCardCost').errors?.min ">بین 0 تا 100</mat-error>
+          <mat-error *ngIf="storeForm.get('vatForCardCost').errors?.required"
+            >درصد مالیات را وارد کنید.</mat-error
+          >
+          <mat-error
+            *ngIf="
+              storeForm.get('vatForCardCost').errors?.max ||
+              storeForm.get('vatForCardCost').errors?.min
+            "
+            >بین 0 تا 100</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>درصد مالیات هزینه پستی</mat-label>
           <input matInput formControlName="vatForPost" type="text" maxlength="3" numbersOnly />
-          <mat-error *ngIf="storeForm.get('vatForPost').errors?.required">درصد مالیات هزینه پستی را وارد کنید.</mat-error>
-          <mat-error *ngIf="storeForm.get('vatForPost').errors?.max || storeForm.get('vatForPost').errors?.min ">بین 0 تا 100</mat-error>
+          <mat-error *ngIf="storeForm.get('vatForPost').errors?.required"
+            >درصد مالیات هزینه پستی را وارد کنید.</mat-error
+          >
+          <mat-error
+            *ngIf="
+              storeForm.get('vatForPost').errors?.max || storeForm.get('vatForPost').errors?.min
+            "
+            >بین 0 تا 100</mat-error
+          >
         </mat-form-field>
-
-
-
       </div>
-
 
       <p>
         <mat-checkbox color="default" formControlName="cardIsActive">فعال/غیرفعال</mat-checkbox>
       </p>
-      <p>
-        توضیحات خرید کارت را در این قسمت وارد نمایید
-      </p>
-      <div class="html-editor">
-
-      </div>
-
-
-
-      
-
+      <p>توضیحات خرید کارت را در این قسمت وارد نمایید</p>
+      <div class="html-editor"></div>
     </form>
-
-
-
-
   </mat-card-content>
   <mat-card-footer>
     <div class="d-flex align-items-center justify-content-end p-3">
-      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving"  *ngIf="!loading">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="save()"
+        [disabled]="isSaving"
+        *ngIf="!loading"
+      >
         <span *ngIf="isSaving">منتظر بمانید...</span>
         <span *ngIf="!isSaving">ذخیره</span>
         <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

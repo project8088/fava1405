@@ -14,7 +14,7 @@ import { Meta, Title } from '@angular/platform-browser';
 @Component({
   selector: 'home-news-details',
   templateUrl: './news-details.component.html',
-  styleUrls: ['./news-details.component.scss']
+  styleUrls: ['./news-details.component.scss'],
 })
 export class MainNewsDetailsComponent implements OnInit {
   newsId: string;
@@ -30,11 +30,8 @@ export class MainNewsDetailsComponent implements OnInit {
   frm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
 
-
-
   lastNewsList: NewsDto[] = [];
   loadingLastNews: boolean;
-
 
   mostVisitedList: NewsDto[] = [];
   loadingVisited: boolean;
@@ -49,16 +46,15 @@ export class MainNewsDetailsComponent implements OnInit {
     private authService: AuthService,
     private customValidator: CustomFormValidators,
     private titleService: Title,
-    private metaService: Meta
+    private metaService: Meta,
   ) {
-
     this.frm = this.fb.group({
       commentMessage: [null, [Validators.required]],
       emailAddress: [null, [Validators.required, this.customValidator.checkEmail]],
       fullName: [null, [Validators.required]],
     });
 
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.newsId = p.id;
       this.getDetailsInfo();
       this.getComments();
@@ -66,64 +62,55 @@ export class MainNewsDetailsComponent implements OnInit {
     this.user = this.authService.currentUserValue;
   }
 
-
-
   ngOnInit() {
     this.getLastNews();
     this.getMostVisitedNews();
   }
 
-
-
-
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-
-        this.news = response.data;
-        this.tags = this.news.seoTags.split(',');
-        if (this.news.seoTags) {
-          this.titleService.setTitle(this.news.title);
-          this.metaService.addTags([
-            { name: 'keywords', content: this.news.seoTags },
-            { name: 'description', content: this.news.seoDescription },
-            { name: 'robots', content: 'index, follow' }
-          ]);
+    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.news = response.data;
+          this.tags = this.news.seoTags.split(',');
+          if (this.news.seoTags) {
+            this.titleService.setTitle(this.news.title);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.news.seoTags },
+              { name: 'description', content: this.news.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
+          }
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-
-    }, error => {
-      this.loadingData = false;
-
-    });
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
-
-
 
   getComments() {
     this.loadingComments = true;
-    this.dataService.get(ServerApis.getNewsPublishComments, { id: this.newsId }).subscribe(response => {
-      this.loadingComments = false;
-      if (response.isSuccess) {
-        this.comments = response.data ? response.data:[];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-
-    }, error => {
-      this.loadingComments = false;
-
-    });
+    this.dataService.get(ServerApis.getNewsPublishComments, { id: this.newsId }).subscribe(
+      (response) => {
+        this.loadingComments = false;
+        if (response.isSuccess) {
+          this.comments = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingComments = false;
+      },
+    );
   }
-
-
 
   sendComment() {
     if (this.frm.invalid) {
@@ -136,66 +123,56 @@ export class MainNewsDetailsComponent implements OnInit {
       commentMessage: form.commentMessage,
       emailAddress: form.emailAddress,
       fullName: form.fullName,
-      newsItemId: +this.newsId
+      newsItemId: +this.newsId,
     };
     this.sendingComment = true;
-    this.dataService.post(ServerApis.addNewsComments, param).subscribe(response => {
-      this.sendingComment = false;
-      if (response.isSuccess) {
-        this.frm.reset();
-        this.toastrService.success('با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.', 'پیام شما با موفقیت ارسال شد.');
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.sendingComment = false;
-    });
-
+    this.dataService.post(ServerApis.addNewsComments, param).subscribe(
+      (response) => {
+        this.sendingComment = false;
+        if (response.isSuccess) {
+          this.frm.reset();
+          this.toastrService.success(
+            'با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.',
+            'پیام شما با موفقیت ارسال شد.',
+          );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.sendingComment = false;
+      },
+    );
   }
-
-
-
 
   getLastNews() {
     this.loadingLastNews = true;
-    this.dataService.get(ServerApis.getLastNews, {top:10}).subscribe(response => {
-      this.loadingLastNews = false;
-      if (response.isSuccess) {
-
-        this.lastNewsList = response.data ? response.data:[]; 
-
-
-      }  
-
-    }, error => {
+    this.dataService.get(ServerApis.getLastNews, { top: 10 }).subscribe(
+      (response) => {
         this.loadingLastNews = false;
-
-    });
+        if (response.isSuccess) {
+          this.lastNewsList = response.data ? response.data : [];
+        }
+      },
+      (error) => {
+        this.loadingLastNews = false;
+      },
+    );
   }
-
-
-
 
   getMostVisitedNews() {
     this.loadingVisited = true;
-    this.dataService.get(ServerApis.getMostVisitedNews, { top: 10 }).subscribe(response => {
-      this.loadingVisited = false;
-      if (response.isSuccess) {
-
-        this.mostVisitedList = response.data ? response.data : [];
-
-
-      }
-
-    }, error => {
+    this.dataService.get(ServerApis.getMostVisitedNews, { top: 10 }).subscribe(
+      (response) => {
         this.loadingVisited = false;
-
-    });
+        if (response.isSuccess) {
+          this.mostVisitedList = response.data ? response.data : [];
+        }
+      },
+      (error) => {
+        this.loadingVisited = false;
+      },
+    );
   }
-
-
-
 }
-
-

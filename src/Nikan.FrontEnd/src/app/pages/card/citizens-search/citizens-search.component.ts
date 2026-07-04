@@ -48,25 +48,22 @@ export class CardCitizenSearchComponent implements AfterViewInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
-    this.searchForm = this.fb.group({ 
-      birthDate: [null], 
+    this.searchForm = this.fb.group({
+      birthDate: [null],
       nationCode: [''],
     });
   }
 
-  ngAfterViewInit() {
-    
-  }
+  ngAfterViewInit() {}
 
   getinfo() {
     this.loading = true;
 
-    var param: any = this.searchForm.value; 
-    if (param.birthDate)
-      param.birthDate = this.dataService.formatDate(param.birthDate);
-   
+    var param: any = this.searchForm.value;
+    if (param.birthDate) param.birthDate = this.dataService.formatDate(param.birthDate);
+
     merge()
       .pipe(
         startWith(param),
@@ -77,68 +74,62 @@ export class CardCitizenSearchComponent implements AfterViewInit {
         map((response) => {
           this.loading = false;
           if (response.isSuccess && response.data) {
-            this.citizen = response.data ? response.data  : {};
+            this.citizen = response.data ? response.data : {};
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.loading = false;
           return observableOf([]);
-        })
+        }),
       )
-      .subscribe((data) => {
-        
-      });
+      .subscribe((data) => {});
   }
 
   openCitizenProfile(userCode) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
-    });
-  } 
-  
-
-
-
- openCitizenEditMobileNumber(userCode) {
-   this.matDialog.open(CardUpdateCitizenMobileNumberDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        userCode: userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getinfo();
-      }
+      maxWidth: '1800px',
     });
   }
- 
+
+  openCitizenEditMobileNumber(userCode) {
+    this.matDialog
+      .open(CardUpdateCitizenMobileNumberDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getinfo();
+        }
+      });
+  }
 
   openUpdateCitizenSabtState(userCode) {
-    this.matDialog.open(CardUpdateCitizenSabtStateByCardDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        userCode: userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getinfo();
-      }
-    });
+    this.matDialog
+      .open(CardUpdateCitizenSabtStateByCardDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getinfo();
+        }
+      });
   }
-
-  
-
-  
 }

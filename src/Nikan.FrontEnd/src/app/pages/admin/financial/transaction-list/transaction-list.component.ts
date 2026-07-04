@@ -6,22 +6,30 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { DataService } from '../../../../core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../core/server-apis';
- import { MatDialog } from '@angular/material/dialog';
- import { Router } from '@angular/router';
-import { merge, of as observableOf  } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'adm-transaction-list',
   templateUrl: './transaction-list.component.html',
-  styleUrls: ['./transaction-list.component.scss']
+  styleUrls: ['./transaction-list.component.scss'],
 })
-export class AdminTransactionListComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'orderId', 'transactionBankReferenceId', 'amountTransaction', 'transactionOnDate', 'transactionState', 'transactionFor', 'acceptationTransactionOnDate', 'transactionBy','operation'];
-
- 
+export class AdminTransactionListComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = [
+    'row',
+    'orderId',
+    'transactionBankReferenceId',
+    'amountTransaction',
+    'transactionOnDate',
+    'transactionState',
+    'transactionFor',
+    'acceptationTransactionOnDate',
+    'transactionBy',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -36,27 +44,24 @@ export class AdminTransactionListComponent implements AfterViewInit, OnInit{
   transactionForList: any[] = [];
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) {
-
     this.searchForm = this.fb.group({
       nationCode: [''],
       fromDate: [null],
-      toDate :[null],
+      toDate: [null],
       orderId: [''],
       referenceId: [''],
       transactionState: [null],
-      transactionFor: [null]
+      transactionFor: [null],
     });
-
   }
 
-
   ngOnInit() {
-    this.dataService.getEnums().subscribe(resp => {
+    this.dataService.getEnums().subscribe((resp) => {
       this.transactionStateList = resp.transactionState ? resp.transactionState : [];
       this.transactionForList = resp.transactionFor ? resp.transactionFor : [];
     });
@@ -65,18 +70,10 @@ export class AdminTransactionListComponent implements AfterViewInit, OnInit{
     this.getList();
   }
 
-
-
-  
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
-     param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-   
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
 
     merge()
       .pipe(
@@ -85,35 +82,31 @@ export class AdminTransactionListComponent implements AfterViewInit, OnInit{
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getAllTransactions, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.transactions ? response.data.transactions : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -130,22 +123,27 @@ export class AdminTransactionListComponent implements AfterViewInit, OnInit{
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.checkTransaction, {
-          id: row.id,
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.checkTransaction, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success(response.messages);
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
 
@@ -157,23 +155,27 @@ export class AdminTransactionListComponent implements AfterViewInit, OnInit{
       showCancelButton: true,
       confirmButtonText: 'بله',
       cancelButtonText: 'خیر',
-    }).then(result => {
+    }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.createCardForCitizen, {
-          id: row.id,
-        }).subscribe(response => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-        });
+        this.dataService
+          .get(ServerApis.createCardForCitizen, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success(response.messages);
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {},
+          );
       }
-
     });
   }
-
 }

@@ -17,7 +17,6 @@ import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citize
 import Swal from 'sweetalert2';
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
 
-
 @Component({
   selector: 'app-manzelat-citizens',
   templateUrl: './manzelat-citizens.component.html',
@@ -37,7 +36,7 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
     'formTitle',
     'sabtStatus',
     'documentUploaded',
-    'formStatuse'
+    'formStatuse',
   ];
   isDownloadExcel: boolean = false;
   data: any[] = [];
@@ -57,7 +56,7 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -73,7 +72,6 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
       hasCard: [null],
       manzalatFormType: [''],
       nationCode: [''],
-       
     });
   }
 
@@ -86,8 +84,7 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
@@ -101,60 +98,46 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
       });
   }
 
-
-
-
-
-
   exportExcel() {
     this.isDownloadExcel = true;
     var param: any = this.searchForm.value;
     param.offset = 0;
     param.count = 65000;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
+    if (param.birthDateFromDate)
+      param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
+    if (param.birthDateToDate)
+      param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
 
-    if (param.birthDateFromDate) param.birthDateFromDate = this.dataService.formatDate(param.birthDateFromDate);
-    if (param.birthDateToDate) param.birthDateToDate = this.dataService.formatDate(param.birthDateToDate);
-
-
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
-    this.dataService.downloadFile(ServerApis.searchManzaltCitizens_Export, param, '', 'export-manzalat-citizens.xls');
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
+    this.dataService.downloadFile(
+      ServerApis.searchManzaltCitizens_Export,
+      param,
+      '',
+      'export-manzalat-citizens.xls',
+    );
     this.isDownloadExcel = false;
   }
-
-
-
-
-
-
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -173,19 +156,16 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
     });
   }
 
-
-openCitizenProfile(row) {
+  openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.citizenId
+        id: row.citizenId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
 
   sendSms() {
     var selectedIds = [];
@@ -195,55 +175,58 @@ openCitizenProfile(row) {
     }
 
     if (selectedIds.length == 0) {
-      this.toastrService.warning('رکورد هایی که می خواهید برای آن ها پیامک ارسال شود را انتخاب کنید.');
+      this.toastrService.warning(
+        'رکورد هایی که می خواهید برای آن ها پیامک ارسال شود را انتخاب کنید.',
+      );
       return;
     }
 
     Swal.fire({
       title: 'ارسال پیامک',
-      text: 'شما ' + selectedIds.length + ' مورد برای ارسال پیامک انتخاب کرده اید. برای ارسال پیامک اطمینان دارید؟',
+      text:
+        'شما ' +
+        selectedIds.length +
+        ' مورد برای ارسال پیامک انتخاب کرده اید. برای ارسال پیامک اطمینان دارید؟',
       showCancelButton: true,
       showConfirmButton: true,
       confirmButtonText: 'بله',
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.isConfirmed) {
-
-
         this.sendingSms = true;
-        this.dataService.post(ServerApis.sendSabtAhvalCitizensSms, {
-          ExportId:0,
-          Ids: selectedIds
-        }).subscribe(response => {
-          this.sendingSms = false;
-          if (response.isSuccess) {
-            Swal.fire({
-              title: 'پیامک با موفقیت ارسال شد',
-              text: response.messages
-            });
-            this.toastrService.success('پیامک با موفقیت ارسال شد.');
-          } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          this.sendingSms = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
-        });
+        this.dataService
+          .post(ServerApis.sendSabtAhvalCitizensSms, {
+            ExportId: 0,
+            Ids: selectedIds,
+          })
+          .subscribe(
+            (response) => {
+              this.sendingSms = false;
+              if (response.isSuccess) {
+                Swal.fire({
+                  title: 'پیامک با موفقیت ارسال شد',
+                  text: response.messages,
+                });
+                this.toastrService.success('پیامک با موفقیت ارسال شد.');
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error) => {
+              this.sendingSms = false;
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
+            },
+          );
       }
-    }
-    );
+    });
   }
-
 
   selectUnselectAll() {
     for (var i = 0; i < this.data.length; i++) {
       this.data[i].selected = this.selectAll;
     }
   }
-
- 
-
-
-
 }

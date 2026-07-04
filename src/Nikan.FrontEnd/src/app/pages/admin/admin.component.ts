@@ -21,7 +21,7 @@ export class AdminComponent implements OnInit, OnDestroy {
       name: 'اطلاعات پایه',
       permission: 'basedata',
       icon: 'fa fa-database',
-      children: [ 
+      children: [
         { name: 'گروههای شهروندی', url: '/admin/group-list' },
         { name: 'خدمات شهروندی', url: '/admin/appService-list' },
         { name: 'تنظیمات سامانه', url: '/admin/setting' },
@@ -33,26 +33,19 @@ export class AdminComponent implements OnInit, OnDestroy {
       name: 'مدیریت سازمان ها',
       permission: 'organ',
       icon: 'fa fa-database',
-      children: [
-        { name: 'سازمان ها', url: '/admin/organization' }, 
-      
-      ],
+      children: [{ name: 'سازمان ها', url: '/admin/organization' }],
     },
     {
       name: 'مدیریت کاربران',
       permission: 'usermanagement',
       icon: 'fa fa-database',
       children: [
-       
         { name: 'گروه های کاربری', url: '/admin/admin-userGroups' },
         { name: 'لیست کاربران', url: '/admin/all-users' },
         { name: 'مدیران سامانه', url: '/admin/admin-users' },
         { name: 'توسعه دهندگان', url: '/admin/web-api-users' },
-
       ],
     },
-
-    
 
     {
       name: 'شهروندان',
@@ -63,55 +56,50 @@ export class AdminComponent implements OnInit, OnDestroy {
         { name: 'جستجوی پیشرفته شهروند', url: '/admin/advanced-search-citizen' },
         { name: 'بازبینی تصاویر', url: '/admin/citizens-pictures' },
         { name: 'بازخوردهای ثبت شده', url: '/admin/all-citizens-feedBacks' },
-        { name: 'خانواده شهروند', url: '/admin/search-citizen-family' }, 
+        { name: 'خانواده شهروند', url: '/admin/search-citizen-family' },
         { name: 'گروههای شهروندی', url: '/admin/group-list' },
-        { name: 'پیامک های ارسال شده', url: '/admin/sms-list' }, 
+        { name: 'پیامک های ارسال شده', url: '/admin/sms-list' },
         { name: 'ثبت نام دسته ایی شهروند', url: '/admin/citizen-register-file-list' },
-      
-
-        
       ],
     },
     {
-      name: 'طرح منزلت', permission: 'manzalat', icon: 'fa fa-bars', children: [
+      name: 'طرح منزلت',
+      permission: 'manzalat',
+      icon: 'fa fa-bars',
+      children: [
         { name: 'طرح منزلت', url: '/admin/search-manzelat-citizens' },
-     /*   { name: 'تنظیمات منزلت', url: '/admin/manzelat-settings' },*/
-            { name: 'تنظیمات  ', url: '/admin/manzalat-form-list' },
+        /*   { name: 'تنظیمات منزلت', url: '/admin/manzelat-settings' },*/
+        { name: 'تنظیمات  ', url: '/admin/manzalat-form-list' },
         //ManzalatSettingComponent
-      ]
+      ],
     },
 
-
-
     {
-      name: 'مدیریت کارت شهروندی', permission: 'card', icon: 'fa fa-bars', children: [
+      name: 'مدیریت کارت شهروندی',
+      permission: 'card',
+      icon: 'fa fa-bars',
+      children: [
         { name: 'جستجوی کارت شهروندی', url: '/admin/advanced-search-card-citizen' },
         { name: 'مشخصات کارت', url: '/admin/card-list' },
         { name: 'خروجی صدور کارت', url: '/admin/export-search-card-citizen' },
-      ]
+      ],
     },
-
 
     {
       name: 'اشخاص حقوقی',
       permission: 'companymanagement',
       icon: 'fa fa-building',
-      children: [
-        { name: 'اشخاص حقوقی', url: '/admin/companies' },
-      ],
+      children: [{ name: 'اشخاص حقوقی', url: '/admin/companies' }],
     },
 
-
-
-{
-  name: 'احراز هویت',
-  permission: 'sabtahval',
+    {
+      name: 'احراز هویت',
+      permission: 'sabtahval',
       icon: 'fa fa-star',
       children: [
         { name: 'لیست ورودی و خروجی', url: '/admin/sabtAhval-list' },
         { name: 'احراز هویت شهروند', url: '/admin/citizens-authentication' },
         { name: 'جستجوی استعلام شهروند', url: '/admin/citizens-authentication-search' },
-        
       ],
     },
     {
@@ -120,30 +108,22 @@ export class AdminComponent implements OnInit, OnDestroy {
       icon: 'fa fa-coins',
       children: [
         { name: 'تنظیمات مالی', url: '/admin/pay-setting' },
-        { name: 'تراکنش های مالی', url: '/admin/transaction-list' }, 
+        { name: 'تراکنش های مالی', url: '/admin/transaction-list' },
         { name: 'تست پرداخت', url: '/admin/pay-test' },
       ],
     },
-
 
     {
       name: 'استرداد هزینه',
       permission: 'refundmanagement',
       icon: 'fa fa-coins',
       children: [
-       
         { name: 'بارگذاری فایل استرداد', url: '/admin/refund-file-list' },
         { name: 'لیست دسترسی های استرداد', url: '/admin/refund-access-list' },
         { name: 'جستجوی استرداد', url: '/admin/search-refund' },
         { name: 'کاربران استرداد', url: '/admin/refund-users' },
-
-
-        
       ],
     },
-
-
-
 
     {
       name: 'پشتیبانی',
@@ -167,9 +147,9 @@ export class AdminComponent implements OnInit, OnDestroy {
         { name: 'ثبت راهنمای جدید', url: '/admin/addupdate-news/0' },
         { name: 'گروه های پرسش و پاسخ', url: '/admin/faq-groups' },
         { name: 'لیست سوالات متداول', url: '/admin/faq-list' },
-        { name: 'لیست صفحات', url: '/admin/pages' }, 
+        { name: 'لیست صفحات', url: '/admin/pages' },
         { name: 'مدیریت منو', url: '/admin/menu-management' },
-        { name: 'اسلاید شو', url: '/admin/slide-show' }
+        { name: 'اسلاید شو', url: '/admin/slide-show' },
       ],
     },
 
@@ -180,15 +160,13 @@ export class AdminComponent implements OnInit, OnDestroy {
     },
   ];
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private authService: AuthService
+    private authService: AuthService,
   ) {}
 
   ngOnInit(): void {

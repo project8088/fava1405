@@ -1,37 +1,28 @@
- 
 <div class="content-header">
-  <span> گروههای دسترسی کاربر  </span>
+  <span> گروههای دسترسی کاربر </span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
-    <div class="bread-crumb-item" routerLink="/admin/admin-users">
-      لیست مدیران
-    </div>
-    <div class="bread-crumb-item active"> گروههای دسترسی کاربر  </div>
+    <div class="bread-crumb-item" routerLink="/admin/admin-users">لیست مدیران</div>
+    <div class="bread-crumb-item active">گروههای دسترسی کاربر</div>
   </div>
 </div>
-
-
 
 <div class="d-flex my-5 p-5 align-items-center justify-content-center" *ngIf="loading">
   <mat-spinner diameter="50" color="default"></mat-spinner>
 </div>
 
 <mat-card class="custom-card">
-
   <form [formGroup]="form" *ngIf="!loading">
     <div class="row my-4">
-
-
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> گروه دسترسی </mat-label>
         <mat-select formControlName="groupId">
           <mat-option [value]="item.key" *ngFor="let item of groupList">
-            {{item.text}}
+            {{ item.text }}
           </mat-option>
         </mat-select>
         <mat-error *ngIf="form.get('groupId').errors?.required"> گروه را مشخص کنید</mat-error>
       </mat-form-field>
-
 
       <div class="col d-flex align-items-center justify-content-start">
         <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
@@ -40,24 +31,22 @@
         </button>
       </div>
     </div>
-  </form> 
+  </form>
 
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-
         <div class="py-4 list-container">
           <div class="list-item" *ngFor="let item of userGroupAccessList">
             <div class="list-content">
-              <div class="row"> 
+              <div class="row">
                 <div class="col-md-12">
-                  <span> {{item.permissionGroup}}</span>
+                  <span> {{ item.permissionGroup }}</span>
                 </div>
               </div>
             </div>
 
             <div class="menu">
-
               <button mat-icon-button (click)="delete(item)" *ngIf="!item.loading" matTooltip="حذف">
                 <i class="fa fa-trash"></i>
               </button>
@@ -66,7 +55,7 @@
           </div>
         </div>
 
-        <div class="no-any-items" *ngIf="userGroupAccessList.length==0 && !loading">
+        <div class="no-any-items" *ngIf="userGroupAccessList.length == 0 && !loading">
           <i class="fa fa-info-circle"></i>
           اطلاعاتی ثبت نشده است
         </div>
@@ -80,6 +69,3 @@
 
   <mat-card-footer></mat-card-footer>
 </mat-card>
-
-
-

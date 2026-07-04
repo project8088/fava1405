@@ -1,7 +1,4 @@
-<div
-  *ngIf="loadingData"
-  class="d-flex align-items-center justify-content-center"
->
+<div *ngIf="loadingData" class="d-flex align-items-center justify-content-center">
   <mat-spinner diameter="50" color="default"></mat-spinner>
 </div>
 <div class="jobseeker-details" *ngIf="!loadingData">
@@ -10,16 +7,8 @@
     </div>-->
   <div class="row d-flex align-items-center box-dash">
     <div class="col-12 mb-3">
-      <img
-        class="avatar"
-        [src]="baseUrl + jobseeker.imageUrl"
-        *ngIf="jobseeker.imageUrl"
-      />
-      <img
-        class="avatar"
-        src="assets/images/avatar.png"
-        *ngIf="!jobseeker.imageUrl"
-      />
+      <img class="avatar" [src]="baseUrl + jobseeker.imageUrl" *ngIf="jobseeker.imageUrl" />
+      <img class="avatar" src="assets/images/avatar.png" *ngIf="!jobseeker.imageUrl" />
     </div>
     <div class="col-sm-6 my-1">
       <strong> شهروند: </strong>

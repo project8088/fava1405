@@ -1,4 +1,4 @@
-import { Injectable, Inject }    from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { CaptchaEndpointPipe } from './captcha-endpoint.pipe';
@@ -9,15 +9,14 @@ declare var BotDetect: any;
 
 @Injectable()
 export class CaptchaService {
-
   private _captchaStyleName: string;
   private _captchaEndpoint: string;
 
   constructor(
     private http: HttpClient,
     private captchaEndpointPipe: CaptchaEndpointPipe,
-    @Inject(CAPTCHA_SETTINGS) private config: CaptchaSettings
-  ) { }
+    @Inject(CAPTCHA_SETTINGS) private config: CaptchaSettings,
+  ) {}
 
   set captchaStyleName(captchaStyleName: string) {
     this._captchaStyleName = captchaStyleName;
@@ -70,5 +69,4 @@ export class CaptchaService {
     const url = this.botdetectInstance.validationUrl + '&i=' + captchaCode;
     return this.http.get(url);
   }
-
 }

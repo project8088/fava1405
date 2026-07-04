@@ -15,9 +15,9 @@ export class UserRegisterService {
   }> = new BehaviorSubject(null);
   constructor(
     private dataService: DataService,
-    private localStorageService: LocalStorageService
+    private localStorageService: LocalStorageService,
   ) {}
-  setUserPreRegisterData(data: { mobileNumber: string; nationCode: string; nationality: number; }) {
+  setUserPreRegisterData(data: { mobileNumber: string; nationCode: string; nationality: number }) {
     this.localStorageService.set('UserPreRegisterData', data);
     this.UserPreRegisterData.next(data);
   }

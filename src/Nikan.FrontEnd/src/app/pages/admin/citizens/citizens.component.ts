@@ -32,8 +32,8 @@ export class AdminCitizensComponent implements AfterViewInit {
     'fatherName',
     'creationDate',
     'sabtStatus',
-     'registerByService',
-    'operation'
+    'registerByService',
+    'operation',
   ];
 
   data: any[] = [];
@@ -50,7 +50,7 @@ export class AdminCitizensComponent implements AfterViewInit {
     private matDialog: MatDialog,
     private router: Router,
     private fb: FormBuilder,
-    private customValidator: CustomFormValidators
+    private customValidator: CustomFormValidators,
   ) {
     this.searchForm = this.fb.group({
       fromDate: [null],
@@ -68,8 +68,7 @@ export class AdminCitizensComponent implements AfterViewInit {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
@@ -83,21 +82,17 @@ export class AdminCitizensComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -115,23 +110,22 @@ export class AdminCitizensComponent implements AfterViewInit {
     this.getList();
   }
 
-
-
-
   openCitizenEditMobileNumber(userCode) {
-    this.matDialog.open(AdminUpdateCitizenMobileNumberDialogComponent, {
-      panelClass: 'custom-dialog',
-      minWidth: '600px',
-      data: {
-        userCode: userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(AdminUpdateCitizenMobileNumberDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
 
   openChangePasswordDialog(row) {
     this.matDialog.open(AdminChangePasswordDialogComponent, {
@@ -139,25 +133,24 @@ export class AdminCitizensComponent implements AfterViewInit {
       data: {
         userId: row.citizenId,
         userName: row.nationCode,
-        displayName: row.firstName + ' ' + row.lastName
-      }
+        displayName: row.firstName + ' ' + row.lastName,
+      },
     });
   }
-
 
   openUpdateCitizenSabtStateDialog(userCode) {
-    this.matDialog.open(AdminUpdateCitizenSabtStateDialogComponent, {
-      panelClass: 'custom-dialog',
-      data: {
-        userCode: userCode
-      }
-    }).afterClosed().subscribe(result => {
-      if (result) {
-        this.getList();
-      }
-    });
+    this.matDialog
+      .open(AdminUpdateCitizenSabtStateDialogComponent, {
+        panelClass: 'custom-dialog',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getList();
+        }
+      });
   }
-
-
-
 }

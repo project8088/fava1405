@@ -1,9 +1,18 @@
-<mat-sidenav-container class="sidenav-container dashboard {{theme}}"  [class.mini-side-bar]="miniSideBar">
-  <mat-sidenav #drawer class="sidenav" [fixedInViewport]="true"
-               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="(isHandset$ | async) === false">
+<mat-sidenav-container
+  class="sidenav-container dashboard {{ theme }}"
+  [class.mini-side-bar]="miniSideBar"
+>
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    [fixedInViewport]="true"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <div class="side-nav">
       <mat-toolbar color="purple">
-        <button mat-icon-button (click)="miniSideBar=!miniSideBar">
+        <button mat-icon-button (click)="miniSideBar = !miniSideBar">
           <i class="fa fa-arrow-left" *ngIf="miniSideBar"></i>
           <i class="fa fa-arrow-right" *ngIf="!miniSideBar"></i>
         </button>
@@ -14,11 +23,15 @@
     </div>
   </mat-sidenav>
 
-
-
   <mat-sidenav-content class="dashboard-content">
     <mat-toolbar color="purple" class="fixed-toolbar">
-      <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" *ngIf="isHandset$ | async">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span></span>
@@ -29,7 +42,6 @@
         <span>خروج</span>
       </button>
 
-
       <button mat-icon-button routerLink="/home" matTooltip="باز گشت به صفحه اصلی">
         <i class="fa fa-home"></i>
       </button>
@@ -37,7 +49,5 @@
     <!-- Add Content Here -->
 
     <router-outlet></router-outlet>
-
-
   </mat-sidenav-content>
 </mat-sidenav-container>

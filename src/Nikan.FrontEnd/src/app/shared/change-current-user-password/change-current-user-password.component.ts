@@ -11,47 +11,48 @@ import { AuthService } from '../../core/authentication/auth.service';
 @Component({
   selector: 'change-current-user-password',
   templateUrl: './change-current-user-password.component.html',
-  styleUrls: ['./change-current-user-password.component.scss']
+  styleUrls: ['./change-current-user-password.component.scss'],
 })
 export class ChangeCurrentUserPasswordComponent implements OnInit {
   isSaving: boolean;
   changePasswordForm: FormGroup;
 
-   constructor(
+  constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
-     private route: ActivatedRoute,
-     private fb: FormBuilder,
-     private customValidator: CustomFormValidators,
-     private authService: AuthService,
-     private router: Router
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private customValidator: CustomFormValidators,
+    private authService: AuthService,
+    private router: Router,
   ) {
-     this.changePasswordForm = this.fb.group({ 
-       username: [null],
-       oldPassword: [null, [Validators.required]],
-       password: [null, [Validators.required]],
-       confirmPassword: [null, [Validators.required]],
-     }, { validator: this.checkPasswords });
+    this.changePasswordForm = this.fb.group(
+      {
+        username: [null],
+        oldPassword: [null, [Validators.required]],
+        password: [null, [Validators.required]],
+        confirmPassword: [null, [Validators.required]],
+      },
+      { validator: this.checkPasswords },
+    );
 
-     this.changePasswordForm.get('username').setValue(authService.getAuthUser().userName);
+    this.changePasswordForm.get('username').setValue(authService.getAuthUser().userName);
   }
   /**
-  * بررسی یکی بودن کلمه عبور و تائید آن
-  */
+   * بررسی یکی بودن کلمه عبور و تائید آن
+   */
   checkPasswords(group: FormGroup) {
     let pass = group.controls.password.value;
     let confirmPassword = group.controls.confirmPassword.value;
 
-    return pass === confirmPassword ? null : { notSame: true }
+    return pass === confirmPassword ? null : { notSame: true };
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   saveInfo() {
     if (this.changePasswordForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.changePasswordForm.markAllAsTouched();
       return false;
     }
@@ -59,27 +60,27 @@ export class ChangeCurrentUserPasswordComponent implements OnInit {
     var formValue = this.changePasswordForm.value;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.changeCurrentUserPassword,
-      {
+    this.dataService
+      .post(ServerApis.changeCurrentUserPassword, {
         oldPassword: formValue.oldPassword,
         NewPassword: formValue.password,
-        ConfirmPassword: formValue.confirmPassword
-      }
-    ).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        this.authService.logout(false);
-        this.router.navigate(['/account/login']);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
+        ConfirmPassword: formValue.confirmPassword,
+      })
+      .subscribe(
+        (response) => {
+          this.isSaving = false;
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.authService.logout(false);
+            this.router.navigate(['/account/login']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.isSaving = false;
+        },
+      );
   }
-
-
-
 }

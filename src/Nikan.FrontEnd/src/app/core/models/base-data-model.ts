@@ -1,4 +1,3 @@
- 
 export class BaseDataModel {
   public key: string;
   public text: string;
@@ -6,9 +5,7 @@ export class BaseDataModel {
   public selected: boolean;
   public disabled: boolean;
 
-
   public parentText: string;
 
   public parentValue: string;
-
 }

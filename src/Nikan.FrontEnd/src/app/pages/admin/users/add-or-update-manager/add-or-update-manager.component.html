@@ -1,17 +1,19 @@
 <div class="content-header">
   <span *ngIf="isUpdate">ویرایش پرسنل</span>
   <span *ngIf="!isUpdate">ثبت پرسنل جدید</span>
-
 </div>
-
 
 <mat-card class="custom-card">
   <form [formGroup]="userForm">
-
     <div class="row">
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد پرسنلی</mat-label>
-        <input matInput formControlName="personelCode" autocomplete="doNotAutoComplete" maxlength="20">
+        <input
+          matInput
+          formControlName="personelCode"
+          autocomplete="doNotAutoComplete"
+          maxlength="20"
+        />
         <mat-error *ngIf="userForm.get('personelCode').errors?.required">
           کد پرسنلی را وارد کنید.
         </mat-error>
@@ -20,17 +22,18 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>پیشوند</mat-label>
         <mat-select formControlName="namePrefix">
-          <mat-option [value]="item.key" *ngFor="let item of namePrefixList">{{item.text}}</mat-option>
+          <mat-option [value]="item.key" *ngFor="let item of namePrefixList">{{
+            item.text
+          }}</mat-option>
         </mat-select>
         <mat-error *ngIf="userForm.get('namePrefix').errors?.required">
           پیشوند را مشخص کنید.
         </mat-error>
       </mat-form-field>
 
-
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام</mat-label>
-        <input matInput formControlName="firstName" autocomplete="doNotAutoComplete">
+        <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
         <mat-error *ngIf="userForm.get('firstName').errors?.required">
           نام را وارد کنید.
         </mat-error>
@@ -41,7 +44,7 @@
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام خانوادگی</mat-label>
-        <input matInput formControlName="lastName" autocomplete="doNotAutoComplete">
+        <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
         <mat-error *ngIf="userForm.get('lastName').errors?.required">
           نام خانوادگی را وارد کنید.
         </mat-error>
@@ -51,7 +54,7 @@
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام پدر</mat-label>
-        <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete">
+        <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete" />
         <mat-error *ngIf="userForm.get('fatherName').errors?.required">
           نام پدر را وارد کنید.
         </mat-error>
@@ -62,18 +65,16 @@
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد ملی</mat-label>
-        <input matInput formControlName="nationCode" autocomplete="doNotAutoComplete">
+        <input matInput formControlName="nationCode" autocomplete="doNotAutoComplete" />
         <mat-error *ngIf="userForm.get('nationCode').errors?.required">
           کد ملی را وارد کنید.
         </mat-error>
-        <mat-error *ngIf="userForm.get('nationCode').errors?.invalid">
-          کد ملی صحیح نیست
-        </mat-error>
+        <mat-error *ngIf="userForm.get('nationCode').errors?.invalid"> کد ملی صحیح نیست </mat-error>
       </mat-form-field>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل</mat-label>
-        <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly>
+        <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
         <mat-error *ngIf="userForm.get('mobileNumber').errors?.required">
           شماره موبایل را وارد کنید.
         </mat-error>
@@ -84,7 +85,7 @@
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره تلفن ثابت</mat-label>
-        <input matInput formControlName="cellNumber" maxlength="11" numbersOnly>
+        <input matInput formControlName="cellNumber" maxlength="11" numbersOnly />
         <mat-error *ngIf="userForm.get('cellNumber').errors?.required">
           شماره تلفن ثابت را وارد کنید.
         </mat-error>
@@ -95,7 +96,7 @@
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>آدرس ایمیل</mat-label>
-        <input matInput formControlName="email">
+        <input matInput formControlName="email" />
         <mat-error *ngIf="userForm.get('email').errors?.required">
           آدرس ایمیل را وارد کنید.
         </mat-error>
@@ -104,54 +105,57 @@
         </mat-error>
       </mat-form-field>
 
+      <input-auto-complete
+        formControlName="province"
+        [label]="'استان'"
+        [required]="true"
+        class="col-sm-6 col-md-4"
+        [list]="provinceList"
+      ></input-auto-complete>
 
-      <input-auto-complete formControlName="province" [label]="'استان'" [required]="true" class="col-sm-6 col-md-4"
-                           [list]="provinceList"></input-auto-complete>
-
-      <input-auto-complete formControlName="city" [label]="'شهر'"
-                           [getByParent]="true" [parentId]="userForm.get('province').value?.key"
-                           [required]="true" class="col-sm-6 col-md-4"></input-auto-complete>
-
-
-
+      <input-auto-complete
+        formControlName="city"
+        [label]="'شهر'"
+        [getByParent]="true"
+        [parentId]="userForm.get('province').value?.key"
+        [required]="true"
+        class="col-sm-6 col-md-4"
+      ></input-auto-complete>
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد پستی</mat-label>
-        <input matInput formControlName="zipCode" maxlength="10">
+        <input matInput formControlName="zipCode" maxlength="10" />
         <mat-error *ngIf="userForm.get('zipCode').errors?.required">
           کد پستی را وارد کنید.
         </mat-error>
-        <mat-error *ngIf="userForm.get('zipCode').errors?.maxlength || userForm.get('zipCode').errors?.minlength">
+        <mat-error
+          *ngIf="
+            userForm.get('zipCode').errors?.maxlength || userForm.get('zipCode').errors?.minlength
+          "
+        >
           کد پستی ده رقم می باشد
         </mat-error>
       </mat-form-field>
 
-
-
-
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>خیابان </mat-label>
-        <input matInput formControlName="street" maxlength="100">
+        <input matInput formControlName="street" maxlength="100" />
         <mat-error *ngIf="userForm.get('street').errors?.required">
           خیابان را وارد کنید.
         </mat-error>
-        <mat-error *ngIf="userForm.get('street').errors?.maxlength">
-          حداکثر 100 کاراکتر
-        </mat-error>
+        <mat-error *ngIf="userForm.get('street').errors?.maxlength"> حداکثر 100 کاراکتر </mat-error>
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> شماره پلاک</mat-label>
-        <input matInput formControlName="pelak" maxlength="100">
+        <input matInput formControlName="pelak" maxlength="100" />
         <mat-error *ngIf="userForm.get('pelak').errors?.required">
           شماره پلاک را وارد کنید.
         </mat-error>
-        <mat-error *ngIf="userForm.get('pelak').errors?.maxlength">
-          حداکثر 100 کاراکتر
-        </mat-error>
+        <mat-error *ngIf="userForm.get('pelak').errors?.maxlength"> حداکثر 100 کاراکتر </mat-error>
       </mat-form-field>
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> ادامه آدرس </mat-label>
-        <input matInput formControlName="fullAddress" maxlength="1000">
+        <input matInput formControlName="fullAddress" maxlength="1000" />
         <mat-error *ngIf="userForm.get('fullAddress').errors?.required">
           ادامه آدرس را وارد کنید.
         </mat-error>
@@ -162,19 +166,14 @@
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> دفتر</mat-label>
-        <input matInput formControlName="office" maxlength="100">
-        <mat-error *ngIf="userForm.get('office').errors?.required">
-          دفتر را وارد کنید.
-        </mat-error>
-        <mat-error *ngIf="userForm.get('office').errors?.maxlength">
-          حداکثر 100 کاراکتر
-        </mat-error>
+        <input matInput formControlName="office" maxlength="100" />
+        <mat-error *ngIf="userForm.get('office').errors?.required"> دفتر را وارد کنید. </mat-error>
+        <mat-error *ngIf="userForm.get('office').errors?.maxlength"> حداکثر 100 کاراکتر </mat-error>
       </mat-form-field>
-
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره تلفن دفتر</mat-label>
-        <input matInput formControlName="officePhoneNumber" maxlength="11" numbersOnly>
+        <input matInput formControlName="officePhoneNumber" maxlength="11" numbersOnly />
         <mat-error *ngIf="userForm.get('officePhoneNumber').errors?.required">
           شماره تلفن دفتر را وارد کنید.
         </mat-error>
@@ -183,29 +182,27 @@
         </mat-error>
       </mat-form-field>
 
-
-
       <!--<input-company  formControlName="userCompanyId"
                [required]="true" class="col-sm-6 col-md-4" ></input-company>-->
 
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>سمت</mat-label>
         <mat-select formControlName="organizationalPositionId">
-          <mat-option [value]="item.key" *ngFor="let item of organizationalPositionList">{{item.text}}</mat-option>
+          <mat-option [value]="item.key" *ngFor="let item of organizationalPositionList">{{
+            item.text
+          }}</mat-option>
         </mat-select>
         <mat-error *ngIf="userForm.get('organizationalPositionId').errors?.required">
           سمت را مشخص کنید.
         </mat-error>
       </mat-form-field>
-
-
-
     </div>
 
-
-    <app-uploader (attachmentId)="getAttachmentId($event)" [autoUpload]="true"
-                  [btnTitle]="'انتخاب تصویر'"></app-uploader>
-
+    <app-uploader
+      (attachmentId)="getAttachmentId($event)"
+      [autoUpload]="true"
+      [btnTitle]="'انتخاب تصویر'"
+    ></app-uploader>
 
     <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" *ngIf="imageUrl" />
 
@@ -216,14 +213,18 @@
     </p>
 
     <p>
-      <mat-checkbox color="default" formControlName="hasSpecificDisease" (change)="changeHasSpecificDisease()">
+      <mat-checkbox
+        color="default"
+        formControlName="hasSpecificDisease"
+        (change)="changeHasSpecificDisease()"
+      >
         آیا دارای بیماری خاصی است؟
       </mat-checkbox>
     </p>
 
-    <mat-form-field class="col-sm-12" *ngIf="userForm.get('hasSpecificDisease').value==true">
+    <mat-form-field class="col-sm-12" *ngIf="userForm.get('hasSpecificDisease').value == true">
       <mat-label> شرح بیماری </mat-label>
-      <input matInput formControlName="descriptionDisease" maxlength="1000">
+      <input matInput formControlName="descriptionDisease" maxlength="1000" />
       <mat-error *ngIf="userForm.get('descriptionDisease').errors?.required">
         شرح بیماری را وارد کنید.
       </mat-error>
@@ -232,18 +233,8 @@
       </mat-error>
     </mat-form-field>
 
-
-
-
-
-
     <strong>بیوگرافی:</strong>
-    <div class="html-editor">
-
-    </div>
-
-
-
+    <div class="html-editor"></div>
 
     <div class="d-flex align-items-center justify-content-end">
       <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
@@ -251,7 +242,5 @@
         <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
       </button>
     </div>
-
   </form>
-  </mat-card>
- 
+</mat-card>

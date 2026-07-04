@@ -14,10 +14,9 @@ import { AuthService } from '../../../../core/authentication/auth.service';
 @Component({
   selector: 'company-add-or-update-personal',
   templateUrl: './add-or-update-personal.component.html',
-  styleUrls: ['./add-or-update-personal.component.scss']
+  styleUrls: ['./add-or-update-personal.component.scss'],
 })
-
-export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewInit{
+export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   companyId: string;
@@ -25,9 +24,9 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
   userForm: FormGroup;
   loading: boolean = true;
   imageUrl: string = '';
-  namePrefixList: any = [] = [];
-  provinceList: any = [] = [];
-  organizationalPositionList: any = [] = [];
+  namePrefixList: any = ([] = []);
+  provinceList: any = ([] = []);
+  organizationalPositionList: any = ([] = []);
   loadingData: boolean = true;
   baseUrl: string = ServerApis.baseUrl;
   htmlEditor: any;
@@ -40,11 +39,11 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
     private dataService: DataService,
     private route: ActivatedRoute,
     private router: Router,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.user = this.authService.currentUserValue;
 
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.companyId = p.companyId;
       if (p.id && p.id != '0') {
         this.isUpdate = true;
@@ -61,9 +60,30 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
       personelCode: [null, [Validators.required]],
       organizationalPositionId: [null, [Validators.required]],
       namePrefix: [null, [Validators.required]],
-      firstName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
-      lastName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
-      fatherName: [null, [Validators.required, Validators.maxLength(50), this.customValidator.checkPersianCharacters]],
+      firstName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
+      lastName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
+      fatherName: [
+        null,
+        [
+          Validators.required,
+          Validators.maxLength(50),
+          this.customValidator.checkPersianCharacters,
+        ],
+      ],
       nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
       mobileNumber: [null, [Validators.required, this.customValidator.checkMobileNumber]],
       cellNumber: [null, [Validators.required, this.customValidator.checkPhoneNumber]],
@@ -79,19 +99,13 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
       officePhoneNumber: [null, [this.customValidator.checkPhoneNumber]],
       isManagementMembers: [false],
       biography: [''],
-      hasSpecificDisease:[false],
-      descriptionDisease:['']
+      hasSpecificDisease: [false],
+      descriptionDisease: [''],
     });
   }
 
-
-
-
-
   ngOnInit() {
-
     this.getBaseData();
-
   }
 
   getBaseData() {
@@ -99,63 +113,54 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
     forkJoin(
       this.dataService.get(ServerApis.getProvinces),
       this.dataService.getEnums(),
-      this.dataService.get(ServerApis.getPositionList)
+      this.dataService.get(ServerApis.getPositionList),
     ).subscribe(([provinces, enums, positions]) => {
       this.loadingData = false;
       this.provinceList = provinces.data ? provinces.data : [];
       this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
       this.organizationalPositionList = positions.data ? positions.data : [];
-
     });
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
-      if (!this.isUpdate)
-        this.loadCkEditor('');
-      else
-        this.loadCkEditor(this.userForm.get('biography').value);
+      if (!this.isUpdate) this.loadCkEditor('');
+      else this.loadCkEditor(this.userForm.get('biography').value);
     }, 500);
   }
 
   getUserInfo() {
     this.loading = true;
-    this.dataService.get(
-      ServerApis.getPersonelInfo, { id: this.id }
-    ).subscribe(response => {
-      this.loading = false;
-      if (response && response.isSuccess) {
-        this.userForm.patchValue(response.data);
-        this.imageUrl = response.data.imageUrl;
-        setTimeout(() => {
-          if (response.data.biography) 
-            this.loadCkEditor(this.userForm.get('biography').value);
-        }, 500);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-        if (this.user.isAdmin)
-          this.router.navigate(['/admin/company-personal/' + this.companyId]);
-        else
-        this.router.navigate(['/company/personal/0']);
-      }
-    }, error => {
-      this.loading = false;
-    });
+    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id }).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.userForm.patchValue(response.data);
+          this.imageUrl = response.data.imageUrl;
+          setTimeout(() => {
+            if (response.data.biography) this.loadCkEditor(this.userForm.get('biography').value);
+          }, 500);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+          if (this.user.isAdmin)
+            this.router.navigate(['/admin/company-personal/' + this.companyId]);
+          else this.router.navigate(['/company/personal/0']);
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
   }
-
-
-
 
   getAttachmentId(ev) {
     this.imageUrl = ev.uploadUrl;
   }
 
-
-
   saveInfo() {
     if (this.userForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
       return false;
     }
@@ -164,10 +169,9 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
     this.isSaving = true;
 
     formValue.cityId = formValue.city.key;
-    if (this.htmlEditor.getData())
-      formValue.biography = this.htmlEditor.getData();
+    if (this.htmlEditor.getData()) formValue.biography = this.htmlEditor.getData();
     var params = {
-      Id: formValue.id ? formValue.id:'',
+      Id: formValue.id ? formValue.id : '',
       PersonelCode: formValue.personelCode,
       UserCompanyId: this.companyId && this.companyId != '0' ? this.companyId : null,
       OrganizationalPositionId: +formValue.organizationalPositionId,
@@ -179,8 +183,8 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
       MobileNumber: formValue.mobileNumber,
       CellNumber: formValue.cellNumber,
       Email: formValue.email,
-      CityId: +formValue.city.key, 
-      ImageUrl: this.imageUrl, 
+      CityId: +formValue.city.key,
+      ImageUrl: this.imageUrl,
       ZipCode: formValue.zipCode,
       Street: formValue.street,
       FullAddress: formValue.fullAddress,
@@ -191,31 +195,28 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
       IsManagementMembers: formValue.isManagementMembers ? formValue.isManagementMembers : false,
       Biography: formValue.biography ? formValue.biography : '',
       HasSpecificDisease: formValue.hasSpecificDisease ? formValue.hasSpecificDisease : false,
-      DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease:''
-    }
+      DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : '',
+    };
 
-    this.dataService.post(
-      ServerApis.addOrUpdatePersonel, params).subscribe(response => {
-      this.isSaving = false;
-      if (response && response.isSuccess) {
-        this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        if (this.user.isAdmin)
-          this.router.navigate(['/admin/company-personal/' + this.companyId]);
-          else
-        this.router.navigate(['/company/personal/0']);
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-    });
+    this.dataService.post(ServerApis.addOrUpdatePersonel, params).subscribe(
+      (response) => {
+        this.isSaving = false;
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          if (this.user.isAdmin)
+            this.router.navigate(['/admin/company-personal/' + this.companyId]);
+          else this.router.navigate(['/company/personal/0']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.isSaving = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
-
-
-
-
 
   changeHasSpecificDisease() {
     if (this.userForm.get('hasSpecificDisease').value == true) {
@@ -225,44 +226,70 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
       this.userForm.get('descriptionDisease').clearValidators();
       this.userForm.get('descriptionDisease').updateValueAndValidity();
       this.userForm.get('descriptionDisease').setValue('');
-
     }
   }
 
-
-
-
   /**
- * لود کردن html editor
- * */
+   * لود کردن html editor
+   * */
   loadCkEditor(content) {
     if (!this.htmlEditor && document.querySelector('.html-editor')) {
-      document.querySelector('.html-editor').innerHTML = "";
+      document.querySelector('.html-editor').innerHTML = '';
       CkEditor.create(document.querySelector('.html-editor'), {
         removePlugins: ['Title'],
         toolbar: {
-          items: ['heading', '|', 'bold', 'italic', 'underline', 'link', 'bulletedList', 'numberedList', '|',
-            'indent', 'alignment', 'outdent', 'pageBreak', '|',
-            'fontBackgroundColor', 'fontColor', 'fontFamily', 'fontSize', 'highlight', 'removeFormat', '|',
-            'imageUpload', 'blockQuote', 'insertTable', 'mediaEmbed', 'code', 'codeBlock', 'exportPdf', 'horizontalLine', 'specialCharacters', 'todoList', '|',
-            'undo', 'redo'
-          ]
+          items: [
+            'heading',
+            '|',
+            'bold',
+            'italic',
+            'underline',
+            'link',
+            'bulletedList',
+            'numberedList',
+            '|',
+            'indent',
+            'alignment',
+            'outdent',
+            'pageBreak',
+            '|',
+            'fontBackgroundColor',
+            'fontColor',
+            'fontFamily',
+            'fontSize',
+            'highlight',
+            'removeFormat',
+            '|',
+            'imageUpload',
+            'blockQuote',
+            'insertTable',
+            'mediaEmbed',
+            'code',
+            'codeBlock',
+            'exportPdf',
+            'horizontalLine',
+            'specialCharacters',
+            'todoList',
+            '|',
+            'undo',
+            'redo',
+          ],
         },
         language: 'fa',
         image: {
           // Configure the available styles.
-          styles: [
-            'alignLeft', 'alignCenter', 'alignRight', 'full', 'side'
-          ],
+          styles: ['alignLeft', 'alignCenter', 'alignRight', 'full', 'side'],
           // You need to configure the image toolbar, too, so it shows the new style
           // buttons as well as the resize buttons.
           toolbar: [
-            'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+            'imageStyle:alignLeft',
+            'imageStyle:alignCenter',
+            'imageStyle:alignRight',
             '|',
             'imageTextAlternative',
             'imageStyle:full',
-            'imageStyle:side'
-          ]
+            'imageStyle:side',
+          ],
         },
         table: {
           contentToolbar: [
@@ -270,17 +297,16 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
             'tableRow',
             'mergeTableCells',
             'tableCellProperties',
-            'tableProperties'
-          ]
+            'tableProperties',
+          ],
         },
         licenseKey: '',
         title: {
-          placeholder: 'عنوان را در این قسمت تایپ کنید'
+          placeholder: 'عنوان را در این قسمت تایپ کنید',
         },
         placeholder: 'محتوای خود را در این قسمت بنویسید و یا Paste کنید.',
-
       })
-        .then(editor => {
+        .then((editor) => {
           //window.editor = editor;
           this.htmlEditor = editor;
           if (content) {
@@ -290,18 +316,14 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
           //});
           //on blure
           //editor.ui.focusTracker.on('change:isFocused', (evt, name, isFocused) => {
-          // // if (!isFocused) 
+          // // if (!isFocused)
 
           //});
-
         })
-        .catch(error => {
+        .catch((error) => {
           //console.warn('Build id: nwwk5h15tym5-uff91zgwvva9');
           console.error(error);
         });
     }
   }
-
-
-
 }

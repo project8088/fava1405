@@ -45,7 +45,6 @@ export class CitizenPersonnelImageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-
   getShortCitizenInfoByCitizen() {
     this.dataService.get(ServerApis.getShortCitizenInfoByCitizen).subscribe((data) => {
       this.loading = false;

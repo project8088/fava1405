@@ -1,18 +1,13 @@
 <div class="content-header">
-    <span>
-      توزیع کارت
-    </span>
-
+  <span> توزیع کارت </span>
 </div>
 
-
 <mat-card class="custom-card">
-    
   <mat-card-content>
     <div class="row">
       <div class="col-md-6">
         <div class="col-md-12">
-          <div   style="max-width: 100% !important;display: inline-block;" class="col-md-6">
+          <div style="max-width: 100% !important; display: inline-block" class="col-md-6">
             <form [formGroup]="searchForm">
               <mat-form-field class="col-md-6">
                 <mat-label>جستجو براساس</mat-label>
@@ -23,12 +18,10 @@
               </mat-form-field>
               <mat-form-field class="col-md-4">
                 <mat-label>کد ملی یا شماره کارت را وارد نمایید</mat-label>
-                <input #value matInput formControlName="value">
+                <input #value matInput formControlName="value" />
               </mat-form-field>
               <p>
-                <mat-checkbox formControlName="autopost">
-                   اتوماتیک 
-                </mat-checkbox>
+                <mat-checkbox formControlName="autopost"> اتوماتیک </mat-checkbox>
               </p>
 
               <div class="col d-flex align-items-center justify-content-end">
@@ -36,174 +29,131 @@
                   <i class="fa fa-search mr-2"></i>
                 </button>
               </div>
-
             </form>
           </div>
-          <div style="max-width: 100% !important;display: inline-block;" class="col-md-6">
-            <div style="width: 100% !important;display: inline-block;" class="col-md-12">
+          <div style="max-width: 100% !important; display: inline-block" class="col-md-6">
+            <div style="width: 100% !important; display: inline-block" class="col-md-12">
               <div class="list-group-item" *ngFor="let item of queuelist">
-                <span *ngIf="item.id != queueId" style="color:{{item.defaultColor}}">
+                <span *ngIf="item.id != queueId" style="color:{{ item.defaultColor }}">
                   <i class="far fa-file-alt text-info ml-1"></i>
-                  {{item.name}}({{item.cardCount}}) 
-                <a  target="_blank"  href="/card/citizen-card-in-queue/{{item.id}}">
-                  <i class="fa fa-eye mr-2"></i>
-                </a>
-                </span> 
-                <span *ngIf="item.id==queueId" style="color:{{item.defaultColor}}">
-                  <i class="fas fa-spinner fa-pulse" style="font-size:24px"></i>
-                  {{item.name}}({{item.cardCount}})
-                  <i class="fas fa-spinner fa-pulse" style="font-size:24px"></i>
-
-                  <a target="_blank" href="/card/citizen-card-in-queue/{{item.id}}">
+                  {{ item.name }}({{ item.cardCount }})
+                  <a target="_blank" href="/card/citizen-card-in-queue/{{ item.id }}">
                     <i class="fa fa-eye mr-2"></i>
                   </a>
                 </span>
+                <span *ngIf="item.id == queueId" style="color:{{ item.defaultColor }}">
+                  <i class="fas fa-spinner fa-pulse" style="font-size: 24px"></i>
+                  {{ item.name }}({{ item.cardCount }})
+                  <i class="fas fa-spinner fa-pulse" style="font-size: 24px"></i>
 
+                  <a target="_blank" href="/card/citizen-card-in-queue/{{ item.id }}">
+                    <i class="fa fa-eye mr-2"></i>
+                  </a>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-        <div style="max-width: 100% !important;display: inline-block;" class="col-md-6">
-          <div class="p-3" *ngIf="!loading && card">
-            <div class="row">
-              <div class="col-md-12">
-
-
-                <ul class="list-group list-group-unbordered">
-
-                  <li class="list-group-item">
-                    <strong>
-                      شهروند
-                      :
-                    </strong>
-                    <strong class="text-success">
-                      <a (click)="openCitizenProfile(card)">
-                        {{card.citizen}}({{card.nationCode}})
-                        <i class="fa fa-eye mr-2"></i>
-                      </a>
-                    </strong>
-                  </li>
-                  <li class="list-group-item">
-                    <strong>
-                      وضعیت احراز
-                      :
-                    </strong>
-                    <strong class="text-info">
-                      {{ card.sabtStatus | enumString: "sabtStatus" }}
-                    </strong>
-                  </li>
-
-
-
-                  <li class="list-group-item">
-                    <strong>
-                      کارت
-                      :
-                    </strong>
-                    <strong class="text-info">
-                      <a (click)="openCardProfile(card)">
-                        {{card.cardTitle}}
-                        <i class="fa fa-eye mr-2"></i>
-                      </a>
-                    </strong>
-                    <strong>
-                      |
-                    </strong>
-                    <strong>
-                      تاریخ درخواست
-                      :
-                    </strong>
-
-                    <strong class="text-info">
-                      {{card.requestDate | jalali}}
-                    </strong>
-                  </li>
-
-                 
-
-                  <li class="list-group-item">
-                    <strong>
-                      نوع تحویل کارت
-                    </strong>
-                    <strong *ngIf="card.deliverType==1" class="text-warning">
-                      پستی
-                    </strong>
-                    <strong *ngIf="card.deliverType==2" class="text-danger">
-                      تحویل در مرکز
-                    </strong>
-                    <strong *ngIf="card.deliverType==1" class="text-info">
-                      {{card.deliveringAddress}}
-                    </strong>
-                    <strong *ngIf="card.deliverType==2" class="text-info">
-                      {{card.deliveringCenter}}
-                    </strong>
-
-                  </li>
-
-                  <li class="list-group-item">
-                    <strong>
-                      وضعیت فعلی کارت
-                      :
-                    </strong>
-
-                    <strong class="text-info">
-                      {{card.requestStatuse |enumString:"cardRequestStatus"}}
-                    </strong>
-                    <strong>
-                      |
-                    </strong>
-                    <strong>
-                      شماره کارت
-                      :
-                    </strong>
-                    <strong class="text-info">
-                      {{card.cardNumber}}
-                    </strong>
-
-                  </li>
-
-                 
-                  <li class="list-group-item">
-                    <strong>
-                      کروههای عضو
-                      :
-                    </strong>
-                    <strong class="text-info">
-                      <strong *ngFor="let item of card.groups">
-                        {{item}},
-                      </strong>
-
-                    </strong>
-                  </li>
-                  <li class="list-group-item">
-                    <a class="btn btn-app" title="ارسال به صف چاپ" (click)="sendCardToQueue(card.citizenCardInfoId,card.citizenId,card.deliverType,card.cardTypeId,card.deliveringCenterId)">
-                      <i class="text-success fa fa-bars"></i>
+      <div style="max-width: 100% !important; display: inline-block" class="col-md-6">
+        <div class="p-3" *ngIf="!loading && card">
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="list-group list-group-unbordered">
+                <li class="list-group-item">
+                  <strong> شهروند : </strong>
+                  <strong class="text-success">
+                    <a (click)="openCitizenProfile(card)">
+                      {{ card.citizen }}({{ card.nationCode }})
+                      <i class="fa fa-eye mr-2"></i>
                     </a>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  <strong> وضعیت احراز : </strong>
+                  <strong class="text-info">
+                    {{ card.sabtStatus | enumString: 'sabtStatus' }}
+                  </strong>
+                </li>
 
-                    <a class="btn btn-app text-danger" title="حذف از صف" (click)="delete(card.citizenCardInfoId)">
-                      <i class="text-danger fa fa-trash"></i>
+                <li class="list-group-item">
+                  <strong> کارت : </strong>
+                  <strong class="text-info">
+                    <a (click)="openCardProfile(card)">
+                      {{ card.cardTitle }}
+                      <i class="fa fa-eye mr-2"></i>
                     </a>
-                  </li>
+                  </strong>
+                  <strong> | </strong>
+                  <strong> تاریخ درخواست : </strong>
 
+                  <strong class="text-info">
+                    {{ card.requestDate | jalali }}
+                  </strong>
+                </li>
 
+                <li class="list-group-item">
+                  <strong> نوع تحویل کارت </strong>
+                  <strong *ngIf="card.deliverType == 1" class="text-warning"> پستی </strong>
+                  <strong *ngIf="card.deliverType == 2" class="text-danger"> تحویل در مرکز </strong>
+                  <strong *ngIf="card.deliverType == 1" class="text-info">
+                    {{ card.deliveringAddress }}
+                  </strong>
+                  <strong *ngIf="card.deliverType == 2" class="text-info">
+                    {{ card.deliveringCenter }}
+                  </strong>
+                </li>
 
-                </ul>
-              </div>
-              
+                <li class="list-group-item">
+                  <strong> وضعیت فعلی کارت : </strong>
 
+                  <strong class="text-info">
+                    {{ card.requestStatuse | enumString: 'cardRequestStatus' }}
+                  </strong>
+                  <strong> | </strong>
+                  <strong> شماره کارت : </strong>
+                  <strong class="text-info">
+                    {{ card.cardNumber }}
+                  </strong>
+                </li>
+
+                <li class="list-group-item">
+                  <strong> کروههای عضو : </strong>
+                  <strong class="text-info">
+                    <strong *ngFor="let item of card.groups"> {{ item }}, </strong>
+                  </strong>
+                </li>
+                <li class="list-group-item">
+                  <a
+                    class="btn btn-app"
+                    title="ارسال به صف چاپ"
+                    (click)="
+                      sendCardToQueue(
+                        card.citizenCardInfoId,
+                        card.citizenId,
+                        card.deliverType,
+                        card.cardTypeId,
+                        card.deliveringCenterId
+                      )
+                    "
+                  >
+                    <i class="text-success fa fa-bars"></i>
+                  </a>
+
+                  <a
+                    class="btn btn-app text-danger"
+                    title="حذف از صف"
+                    (click)="delete(card.citizenCardInfoId)"
+                  >
+                    <i class="text-danger fa fa-trash"></i>
+                  </a>
+                </li>
+              </ul>
             </div>
-
           </div>
         </div>
-
       </div>
-
-
-    
-
-
-
-</mat-card-content>
-    <mat-card-footer></mat-card-footer>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
 </mat-card>

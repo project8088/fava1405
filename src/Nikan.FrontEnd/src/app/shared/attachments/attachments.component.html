@@ -1,36 +1,32 @@
 <h3 class="title mt-4">
-  <strong>  پیوست:</strong>
-  <strong  *ngIf="attachments.length==0 && !loadingData" class="text-danger"> ندارد </strong>
+  <strong> پیوست:</strong>
+  <strong *ngIf="attachments.length == 0 && !loadingData" class="text-danger"> ندارد </strong>
 </h3>
 <div class="d-flex align-items-center justify-content-center p-3" *ngIf="loadingData">
   <mat-spinner diamter="25" color="default"></mat-spinner>
 </div>
- 
 
 <div class="attachment-container">
   <div class="img-thumbnail" *ngFor="let item of attachments">
     <div class="img-container" [class.lightGallery]="item.isImage">
-      <a href="{{baseUrl+item.filePath}}" target="_blank">
-        <img [src]="baseUrl+item.filePath" *ngIf="item.isImage"/>
-        <span *ngIf="!item.isImage" class="f-s-42">{{item.extension}}</span>
+      <a href="{{ baseUrl + item.filePath }}" target="_blank">
+        <img [src]="baseUrl + item.filePath" *ngIf="item.isImage" />
+        <span *ngIf="!item.isImage" class="f-s-42">{{ item.extension }}</span>
       </a>
     </div>
     <div class="file-date">
       <i class="fa fa-calendar mr-2"></i>
-      <span> {{item.attachedOn|jalali}}</span>
+      <span> {{ item.attachedOn | jalali }}</span>
     </div>
     <div class="file-name">
-      <small>  {{item.fileName}}</small>
-
+      <small> {{ item.fileName }}</small>
     </div>
     <div class="file-size">
-      <small> {{item.size/1024|number}}Kb </small>
-
+      <small> {{ item.size / 1024 | number }}Kb </small>
     </div>
 
     <div class="caption">
-      <small>  {{item.caption}}</small>
-
+      <small> {{ item.caption }}</small>
     </div>
   </div>
 </div>

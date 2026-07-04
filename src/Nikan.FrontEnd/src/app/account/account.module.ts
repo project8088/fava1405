@@ -24,11 +24,10 @@ import { RegisterCompanyComponent } from './register-company/register-company.co
 import { SharedModule } from '../shared/shared.module';
 import { BotDetectCaptchaModule } from './bot-detect/botdetect-captcha.module';
 
-
 @NgModule({
-  declarations: [ 
+  declarations: [
     LoginComponent,
-    ForgotPasswordComponent, 
+    ForgotPasswordComponent,
     AccountComponent,
     RegisterCompanyComponent,
   ],

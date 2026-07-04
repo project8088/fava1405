@@ -1,14 +1,11 @@
 <div class="content-header">
-  <span>
-   دریافت خروجی صدور کارت
-  </span>
+  <span> دریافت خروجی صدور کارت </span>
 </div>
 
 <mat-card class="custom-card">
   <mat-card-content>
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
         <mat-form-field class="col-md-3">
           <mat-label>نام شهروند</mat-label>
           <input matInput formControlName="name" />
@@ -22,11 +19,6 @@
           <mat-label>شماره کارت</mat-label>
           <input matInput formControlName="cardNumber" />
         </mat-form-field>
-
-
-
-      
- 
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="applyFilter()">
@@ -51,25 +43,19 @@
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div
-        class="datatable-loading-shade"
-        *ngIf="isLoadingResults == false && listCount == 0"
-      >
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-        <table mat-table
-               [dataSource]="data"
-               class="datatable-table"
-               #exporter="matTableExporter"
-               matTableExporter
-               [hiddenColumns]="[displayedColumns.length - 1]">
-          
-
-          
-
-
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="nationCode">
             <th mat-header-cell *matHeaderCellDef>NationCode</th>
             <td mat-cell *matCellDef="let row">
@@ -91,14 +77,12 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="citizenFullName">
             <th mat-header-cell *matHeaderCellDef>FullName</th>
             <td mat-cell *matCellDef="let row">
               {{ row.citizenFullName }}
             </td>
           </ng-container>
-
 
           <ng-container matColumnDef="lenCitizenFullName">
             <th mat-header-cell *matHeaderCellDef>FullNameLen</th>
@@ -114,8 +98,6 @@
             </td>
           </ng-container>
 
-
-
           <ng-container matColumnDef="expaireDate">
             <th mat-header-cell *matHeaderCellDef>ExpaireDate</th>
             <td mat-cell *matCellDef="let row">
@@ -123,22 +105,19 @@
             </td>
           </ng-container>
 
-
           <ng-container matColumnDef="operation">
-            <th mat-header-cell *matHeaderCellDef width="40">.. </th>
-            <td mat-cell *matCellDef="let row">
-            </td>
+            <th mat-header-cell *matHeaderCellDef width="40">..</th>
+            <td mat-cell *matCellDef="let row"></td>
           </ng-container>
 
-          <tr mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>
       <mat-paginator
         [length]="listCount"
         [pageSize]="2000"
-        [pageSizeOptions]="[ 2000,5000,10000]"
+        [pageSizeOptions]="[2000, 5000, 10000]"
         showFirstLastButtons
         (page)="pageEvent($event)"
       ></mat-paginator>

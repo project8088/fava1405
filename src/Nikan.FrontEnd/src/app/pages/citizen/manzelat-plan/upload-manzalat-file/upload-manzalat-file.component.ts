@@ -8,9 +8,9 @@ import { ToastrService } from 'ngx-toastr';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-    selector: 'app-upload-manzalat-file',
-    templateUrl: './upload-manzalat-file.component.html',
-    styleUrls: ['./upload-manzalat-file.component.scss'],
+  selector: 'app-upload-manzalat-file',
+  templateUrl: './upload-manzalat-file.component.html',
+  styleUrls: ['./upload-manzalat-file.component.scss'],
 })
 export class CitizenUploadManzalatDocumentsComponent implements OnInit {
   loading: boolean = true;
@@ -25,62 +25,60 @@ export class CitizenUploadManzalatDocumentsComponent implements OnInit {
   baseInfo: any;
   uploadInfo: any;
   uploadUrl: string = ServerApis.uploadManzalatAttachment;
-   id: string;
+  id: string;
 
- 
   constructor(
-      private toastrService: ToastrService,
-      private route: ActivatedRoute,
-      private fb: FormBuilder,
-      private router: Router,
-      private dataService: DataService
+    private toastrService: ToastrService,
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private router: Router,
+    private dataService: DataService,
   ) {
-
-      this.route.params.subscribe(p => {
-          this.id = p.id;
-        this.baseFormInfo();
-        this.getCitizenRegisterManzalatForm();
-          
-      });
-
-   
+    this.route.params.subscribe((p) => {
+      this.id = p.id;
+      this.baseFormInfo();
+      this.getCitizenRegisterManzalatForm();
+    });
   }
 
   ngOnInit(): void {}
 
-  
-    baseFormInfo() {
-        this.loading = true;
-        this.dataService.get(ServerApis.getManzalatBaseForm, { id: this.id }).subscribe(response => {
-            this.loading = false;
-            if (response.isSuccess && response.data) { 
-                this.loading = false;
-                this.baseInfo = response.data;
-
-            } else {
-                
-            }
-        }, error => {
-            this.loading = false;
-        });
-    }
+  baseFormInfo() {
+    this.loading = true;
+    this.dataService.get(ServerApis.getManzalatBaseForm, { id: this.id }).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.loading = false;
+          this.baseInfo = response.data;
+        } else {
+        }
+      },
+      (error) => {
+        this.loading = false;
+      },
+    );
+  }
 
   getCitizenRegisterManzalatForm() {
     this.loading = true;
-    this.dataService.get(ServerApis.getCitizenRegisterManzalatForm, { formBaseId: this.id }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess && response.data) {
-        this.loading = false;
-        this.uploadInfo = response.data;
-        this.hasFiles = response.data.hasFiles;
-      } else {
-
-      }
-    }, error => {
-      this.loading = false;
-    });
+    this.dataService
+      .get(ServerApis.getCitizenRegisterManzalatForm, { formBaseId: this.id })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            this.loading = false;
+            this.uploadInfo = response.data;
+            this.hasFiles = response.data.hasFiles;
+          } else {
+          }
+        },
+        (error) => {
+          this.loading = false;
+        },
+      );
   }
-
 
   removeDocument() {
     Swal.fire({
@@ -98,24 +96,18 @@ export class CitizenUploadManzalatDocumentsComponent implements OnInit {
             if (response.isSuccess) {
               this.toastrService.success('با موفقیت حذف شد.');
               window.location.reload();
-
             } else {
               let msg = response.messages
                 ? response.messages
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-
-            
           });
       }
     });
   }
 
-
-
-
-  getImage(ev) { 
+  getImage(ev) {
     this.imageUrl = ev.uploadUrl;
   }
 }

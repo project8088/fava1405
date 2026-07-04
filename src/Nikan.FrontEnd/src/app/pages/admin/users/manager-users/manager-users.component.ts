@@ -19,13 +19,25 @@ import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.compon
 @Component({
   selector: 'adm-manager-users',
   templateUrl: './manager-users.component.html',
-  styleUrls: ['./manager-users.component.scss']
+  styleUrls: ['./manager-users.component.scss'],
 })
 export class AdminManagerUsersComponent implements OnInit, AfterViewInit {
- 
-  displayedColumns: string[] = ['row','imageUrl', 'personelCode', 'displayName', 'fatherName', 'nationCode', 'userCompany', 'organizationalPosition', 'mobileNumber', 'cellNumber','email','city','isManagementMembers', 'operation'];
- 
-
+  displayedColumns: string[] = [
+    'row',
+    'imageUrl',
+    'personelCode',
+    'displayName',
+    'fatherName',
+    'nationCode',
+    'userCompany',
+    'organizationalPosition',
+    'mobileNumber',
+    'cellNumber',
+    'email',
+    'city',
+    'isManagementMembers',
+    'operation',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -46,45 +58,26 @@ export class AdminManagerUsersComponent implements OnInit, AfterViewInit {
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private route: ActivatedRoute,
-
   ) {
-
-    this.searchForm = this.fb.group({ 
+    this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],
-      title: ['']
+      title: [''],
     });
-
-
-     
-
   }
 
-
-
-  ngOnInit() { 
-  }
-
- 
-
-
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.getList();
   }
 
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
-    if (param.toDate)
-      param.toDate = this.dataService.formatDate(param.toDate);
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
       .pipe(
@@ -93,35 +86,31 @@ export class AdminManagerUsersComponent implements OnInit, AfterViewInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchAdminPersonel, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.members ? response.data.members : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
 
   applyFilter() {
     if (this.paginator) {
@@ -130,38 +119,33 @@ export class AdminManagerUsersComponent implements OnInit, AfterViewInit {
     this.getList();
   }
 
-
-
-
- 
-
-   
   removePersonal(row) {
     Swal.fire({
       title: 'حذف',
-      text: 'آیا برای حذف "'+ row.firstName + ' ' + row.lastName +'" اطمینان دارید؟',
+      text: 'آیا برای حذف "' + row.firstName + ' ' + row.lastName + '" اطمینان دارید؟',
       showConfirmButton: true,
       showCancelButton: true,
       confirmButtonText: 'بله',
-      cancelButtonText: 'خیر'
-    }).then(result => {
+      cancelButtonText: 'خیر',
+    }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.removePersonel, { id: row.id }).subscribe(response => {
-          row.loading = false;
-          if (response.isSuccess) {
-            this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        }, error => {
-          row.loading = false;
-        })
+        this.dataService.get(ServerApis.removePersonel, { id: row.id }).subscribe(
+          (response) => {
+            row.loading = false;
+            if (response.isSuccess) {
+              this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+              this.toastrService.error(msg);
+            }
+          },
+          (error) => {
+            row.loading = false;
+          },
+        );
       }
     });
   }
- 
-
 }

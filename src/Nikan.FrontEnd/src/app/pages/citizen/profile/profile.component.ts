@@ -20,18 +20,16 @@ export class CitizenProfileComponent implements OnInit {
   personInfo: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver
-    .observe(Breakpoints.Handset)
-    .pipe(
-      map((result) => result.matches),
-      shareReplay()
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+    map((result) => result.matches),
+    shareReplay(),
+  );
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     private route: ActivatedRoute,
     private dataService: DataService,
-    private toastrService: ToastrService
+    private toastrService: ToastrService,
   ) {
     this.route.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
@@ -42,26 +40,22 @@ export class CitizenProfileComponent implements OnInit {
 
   public getPersonalInfo() {
     this.loading = true;
-    this.dataService
-      .get(ServerApis.getShortCitizenInfoByCitizen)
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          if (response && response.isSuccess) {
-            this.personInfo = response.data;
-            this.clearImageCache();
-          } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error) => {
-          this.loading = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+    this.dataService.get(ServerApis.getShortCitizenInfoByCitizen).subscribe(
+      (response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.personInfo = response.data;
+          this.clearImageCache();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-      );
+      },
+      (error) => {
+        this.loading = false;
+        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+      },
+    );
   }
 
   clearImageCache() {

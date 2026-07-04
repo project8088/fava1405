@@ -4,25 +4,23 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 
- 
 import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router, ActivatedRoute } from '@angular/router';
- 
+
 import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
- 
+
 @Component({
   selector: 'app-groupCitizens-list',
   templateUrl: './groupCitizens-list.component.html',
-  styleUrls: ['./groupCitizens-list.component.scss']
+  styleUrls: ['./groupCitizens-list.component.scss'],
 })
-export class AppGroupCitizensListComponent implements AfterViewInit, OnInit{
-
-  displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser' ];
+export class AppGroupCitizensListComponent implements AfterViewInit, OnInit {
+  displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser'];
   userCode: string;
   searchForm: FormGroup;
 
@@ -33,39 +31,30 @@ export class AppGroupCitizensListComponent implements AfterViewInit, OnInit{
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-   
+
   constructor(
     private dataService: DataService,
-    private toastrService: ToastrService,  
+    private toastrService: ToastrService,
     private fb: FormBuilder,
     private matDialog: MatDialog,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });
 
-    this.searchForm = this.fb.group({
-      
-    });
-
+    this.searchForm = this.fb.group({});
   }
 
-
-  ngOnInit() {
-    
-  }
+  ngOnInit() {}
   ngAfterViewInit() {
     this.getList();
   }
 
-
-   
   getList() {
     var param: any = this.searchForm.value;
-    param.offset = (this.paginator) ? this.paginator.pageIndex : 0;
-    param.count = (this.paginator) ? this.paginator.pageSize : 10;
+    param.offset = this.paginator ? this.paginator.pageIndex : 0;
+    param.count = this.paginator ? this.paginator.pageSize : 10;
     param.userCode = this.userCode;
 
     merge()
@@ -75,35 +64,29 @@ export class AppGroupCitizensListComponent implements AfterViewInit, OnInit{
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedGroupsCitizensInfo, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
   }
-
- 
-
 }

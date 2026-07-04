@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../core/services/data-service.service';
@@ -11,14 +11,14 @@ import { SiteSettingViewModel } from '../../../core/models/setting';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
-  styleUrls: ['./contact-us.component.scss']
+  styleUrls: ['./contact-us.component.scss'],
 })
 export class ContactUsComponent implements OnInit {
   contactForm: FormGroup;
   loadingData: boolean = true;
   periorityList: any[] = [];
-  organizationList: any = [] = [];
-  unitList: any = [] = [];
+  organizationList: any = ([] = []);
+  unitList: any = ([] = []);
   loadingUnit: boolean;
   isSaving: boolean;
 
@@ -31,7 +31,7 @@ export class ContactUsComponent implements OnInit {
     private route: ActivatedRoute,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private authService: AuthService
+    private authService: AuthService,
   ) {
     this.contactForm = this.fb.group({
       subject: [null, [Validators.required, Validators.maxLength(1000)]],
@@ -41,117 +41,112 @@ export class ContactUsComponent implements OnInit {
       name: [null, [Validators.required]],
       email: [null, [this.customValidator.checkEmail]],
       mobileNumber: [null, [this.customValidator.checkMobileNumber]],
-
     });
-
   }
 
-
   ngOnInit(): void {
-
-    this.dataService.getSetting().subscribe(response => {
+    this.dataService.getSetting().subscribe((response) => {
       this.setting = response;
     });
-
 
     this.user = this.authService.getAuthUser();
     if (this.user) {
       this.contactForm.get('name').setValue(this.user.displayName);
     }
 
-
     this.getOrganizations();
 
-    this.dataService.getEnums().subscribe(response => {
-      if (response) {
-        this.periorityList = response.ticketPriority ? response.ticketPriority : [];
-      } else {
+    this.dataService.getEnums().subscribe(
+      (response) => {
+        if (response) {
+          this.periorityList = response.ticketPriority ? response.ticketPriority : [];
+        } else {
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        }
+      },
+      (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
-    }, error => {
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-    });
-
+      },
+    );
   }
-
-
-
 
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(response => {
-      this.loadingData = false;
-      if (response.isSuccess) {
-        this.organizationList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingData = false;
-    });
+    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
+      (response) => {
+        this.loadingData = false;
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      },
+      (error) => {
+        this.loadingData = false;
+      },
+    );
   }
-
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
-    this.dataService.get(ServerApis.getAllOrganizationalUnitByOrganId, {
-      organId: this.contactForm.get('organizationId').value
-    }).subscribe(response => {
-      this.loadingUnit = false;
-      if (response.isSuccess) {
-        this.unitList = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loadingUnit = false;
-    });
+    this.dataService
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.contactForm.get('organizationId').value,
+      })
+      .subscribe(
+        (response) => {
+          this.loadingUnit = false;
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loadingUnit = false;
+        },
+      );
   }
-
-
-
 
   saveInfo() {
     if (this.contactForm.invalid) {
-      this.toastrService.warning("اطلاعات فرم را تکمیل کنید.");
+      this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.contactForm.markAllAsTouched();
       return false;
     }
     this.isSaving = true;
     let formData = this.contactForm.value;
-    this.dataService.post(ServerApis.addContact, {
-      Id: '',
-      Subject: formData.subject,
-      Message: formData.message,
-      organizationalUnitId: formData.organizationalUnitId,
-      name: formData.name ? formData.name : '',
-      mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
-      email: formData.email ? formData.email : '',
-      CompanyId:'',
-      UserId: this.user ? this.user.userId : ''
+    this.dataService
+      .post(ServerApis.addContact, {
+        Id: '',
+        Subject: formData.subject,
+        Message: formData.message,
+        organizationalUnitId: formData.organizationalUnitId,
+        name: formData.name ? formData.name : '',
+        mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
+        email: formData.email ? formData.email : '',
+        CompanyId: '',
+        UserId: this.user ? this.user.userId : '',
+      })
+      .subscribe(
+        (response) => {
+          this.isSaving = false;
+          if (response.isSuccess) {
+            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-    }).subscribe(response => {
-      this.isSaving = false;
-      if (response.isSuccess) {
-        this.toastrService.success("پیام شما با موفقیت ارسال شد.");
-
-        this.contactForm.reset();
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.isSaving = false;
-    });
+            this.contactForm.reset();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.isSaving = false;
+        },
+      );
   }
-
-
-
-
-
-
 }

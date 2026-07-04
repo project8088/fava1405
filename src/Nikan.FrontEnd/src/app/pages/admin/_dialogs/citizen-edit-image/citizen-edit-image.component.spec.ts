@@ -8,9 +8,8 @@ describe('AdminCitizenEditImageDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminCitizenEditImageDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AdminCitizenEditImageDialogComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

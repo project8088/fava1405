@@ -8,9 +8,8 @@ describe('CitizenEditEmailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CitizenEditEmailComponent ]
-    })
-    .compileComponents();
+      declarations: [CitizenEditEmailComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

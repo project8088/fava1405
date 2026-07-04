@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core'; 
+import { Component, OnInit, Inject } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -6,13 +6,10 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 @Component({
   selector: 'app-card-profile-dialog',
   templateUrl: './card-profile.component.html',
-  styleUrls: ['./card-profile.component.scss']
+  styleUrls: ['./card-profile.component.scss'],
 })
 export class CardProfileDialogComponent implements OnInit {
-  id: string; 
-  
-  
-
+  id: string;
 
   constructor(
     private matDialog: MatDialog,
@@ -21,22 +18,13 @@ export class CardProfileDialogComponent implements OnInit {
   ) {
     debugger;
     if (_data) {
-      this.id = _data.id;  
-
+      this.id = _data.id;
     }
   }
 
-  ngOnInit(): void {
-  }
-
-
-
+  ngOnInit(): void {}
 
   closeDialog(result) {
     this.matDialogRef.close(result);
   }
-
-
-
-
 }

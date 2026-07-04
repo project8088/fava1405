@@ -8,9 +8,8 @@ describe('BuyCardDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ BuyCardDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [BuyCardDialogComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

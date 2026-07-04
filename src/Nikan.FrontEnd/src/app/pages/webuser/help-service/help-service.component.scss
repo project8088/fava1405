@@ -32,7 +32,7 @@ blockquote {
 
 .docs-content pre {
   direction: ltr;
-  }
+}
 
 pre {
   display: block;
@@ -48,8 +48,6 @@ pre {
   border-radius: 4px;
 }
 
-
-
 .markdown-body pre {
   padding: 16px;
   overflow: auto;
@@ -63,9 +61,7 @@ pre {
   word-wrap: normal;
 }
 
-
-
-  #tm-comment-textbox {
-    height: auto;
-    min-height: 120px;
-  }
+#tm-comment-textbox {
+  height: auto;
+  min-height: 120px;
+}

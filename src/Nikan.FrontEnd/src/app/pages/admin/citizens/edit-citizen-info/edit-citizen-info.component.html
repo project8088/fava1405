@@ -12,39 +12,22 @@
             <div class="row">
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label>کد ملی (نام کاربری)</mat-label>
-                <input
-                  matInput
-                  formControlName="nationalCode"
-                  maxlength="10"
-                  numbersOnly
-                />
-                <mat-error
-                  *ngIf="personalForm.get('nationalCode').errors?.required"
-                >
+                <input matInput formControlName="nationalCode" maxlength="10" numbersOnly />
+                <mat-error *ngIf="personalForm.get('nationalCode').errors?.required">
                   کد ملی شهروند را وارد کنید.
                 </mat-error>
-                <mat-error
-                  *ngIf="personalForm.get('nationalCode').errors?.invalid"
-                >
+                <mat-error *ngIf="personalForm.get('nationalCode').errors?.invalid">
                   کد ملی وارد شده صحیح نیست
                 </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label>نام</mat-label>
-                <input
-                  matInput
-                  formControlName="firstName"
-                  autocomplete="doNotAutoComplete"
-                />
-                <mat-error
-                  *ngIf="personalForm.get('firstName').errors?.required"
-                >
+                <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
+                <mat-error *ngIf="personalForm.get('firstName').errors?.required">
                   نام را وارد کنید.
                 </mat-error>
-                <mat-error
-                  *ngIf="personalForm.get('firstName').errors?.pattern"
-                >
+                <mat-error *ngIf="personalForm.get('firstName').errors?.pattern">
                   فقط از حروف فارسی استفاده کنید.
                 </mat-error>
               </mat-form-field>
@@ -57,9 +40,7 @@
                   formControlName="lastName"
                   autocomplete="doNotAutoComplete"
                 />
-                <mat-error
-                  *ngIf="personalForm.get('lastName').errors?.required"
-                >
+                <mat-error *ngIf="personalForm.get('lastName').errors?.required">
                   نام خانوادگی را وارد کنید.
                 </mat-error>
                 <mat-error *ngIf="personalForm.get('lastName').errors?.pattern">
@@ -75,24 +56,17 @@
                   autocomplete="doNotAutoComplete"
                   [readonly]="noEditStatus()"
                 />
-                <mat-error
-                  *ngIf="personalForm.get('fatherName').errors?.required"
-                >
+                <mat-error *ngIf="personalForm.get('fatherName').errors?.required">
                   نام پدر را وارد کنید.
                 </mat-error>
-                <mat-error
-                  *ngIf="personalForm.get('fatherName').errors?.pattern"
-                >
+                <mat-error *ngIf="personalForm.get('fatherName').errors?.pattern">
                   فقط از حروف فارسی استفاده کنید.
                 </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label>جنسیت</mat-label>
-                <mat-select
-                  [disabled]="noEditStatus()"
-                  formControlName="gender"
-                >
+                <mat-select [disabled]="noEditStatus()" formControlName="gender">
                   <mat-option [value]="true">آقا هستم</mat-option>
                   <mat-option [value]="false">خانم هستم</mat-option>
                 </mat-select>
@@ -104,9 +78,7 @@
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label>وضعیت تاهل </mat-label>
                 <mat-select formControlName="marital">
-                  <mat-option
-                    *ngFor="let item of baseEnums.maritalStatus"
-                    [value]="item.key"
+                  <mat-option *ngFor="let item of baseEnums.maritalStatus" [value]="item.key"
                     >{{ item.text }}
                   </mat-option>
                 </mat-select>
@@ -123,33 +95,19 @@
                   [matDatepicker]="dpicker"
                   formControlName="dateOfBirth"
                 />
-                <mat-datepicker-toggle
-                  matSuffix
-                  [for]="dpicker"
-                ></mat-datepicker-toggle>
+                <mat-datepicker-toggle matSuffix [for]="dpicker"></mat-datepicker-toggle>
                 <mat-datepicker #dpicker></mat-datepicker>
-                <mat-error
-                  *ngIf="personalForm.get('dateOfBirth').errors?.required"
-                >
+                <mat-error *ngIf="personalForm.get('dateOfBirth').errors?.required">
                   تاریخ تولد را انتخاب کنید.
                 </mat-error>
-                <mat-error
-                  *ngIf="
-                    personalForm.get('dateOfBirth').errors?.matDatepickerParse
-                  "
-                >
+                <mat-error *ngIf="personalForm.get('dateOfBirth').errors?.matDatepickerParse">
                   فرمت تاریخ صحیح نیست
                 </mat-error>
               </mat-form-field>
 
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label>شماره موبایل</mat-label>
-                <input
-                  matInput
-                  formControlName="mobile"
-                  maxlength="11"
-                  numbersOnly
-                />
+                <input matInput formControlName="mobile" maxlength="11" numbersOnly />
                 <mat-error *ngIf="personalForm.get('mobile').errors?.required">
                   شماره موبایل را وارد کنید.
                 </mat-error>
@@ -160,20 +118,11 @@
 
               <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
                 <mat-label> تلفن ثابت</mat-label>
-                <input
-                  matInput
-                  numbersOnly
-                  formControlName="phoneNumber"
-                   
-                />
-                <mat-error
-                  *ngIf="personalForm.get('phoneNumber').errors?.required"
-                >
+                <input matInput numbersOnly formControlName="phoneNumber" />
+                <mat-error *ngIf="personalForm.get('phoneNumber').errors?.required">
                   شماره تلفن را وارد کنید.
                 </mat-error>
-                <mat-error
-                  *ngIf="personalForm.get('phoneNumber').errors?.pattern"
-                >
+                <mat-error *ngIf="personalForm.get('phoneNumber').errors?.pattern">
                   شماره تلفن صحیح نیست.
                 </mat-error>
               </mat-form-field>
@@ -193,23 +142,15 @@
                 <mat-form-field appearance="outline" class="w-100 mt-3">
                   <mat-label>شهر محل سکونت</mat-label>
                   <mat-select formControlName="cityId">
-                    <mat-option
-                      *ngFor="let item of isfahanCities"
-                      [value]="item.key"
-                    >
+                    <mat-option *ngFor="let item of isfahanCities" [value]="item.key">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['cityId'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['cityId'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="personalForm.controls['cityId'].errors['required']"
-                    >
+                    <span *ngIf="personalForm.controls['cityId'].errors['required']">
                       شهر محل سکونت شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -222,14 +163,9 @@
                   <input numbersOnly formControlName="region" matInput />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['region'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['region'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="personalForm.controls['region'].errors['required']"
-                    >
+                    <span *ngIf="personalForm.controls['region'].errors['required']">
                       منطقه محل سکونت شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -242,14 +178,9 @@
                   <input formControlName="street" matInput />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['street'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['street'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="personalForm.controls['street'].errors['required']"
-                    >
+                    <span *ngIf="personalForm.controls['street'].errors['required']">
                       خیابان محل سکونت شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -262,14 +193,9 @@
                   <input formControlName="alley" matInput />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['alley'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['alley'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="personalForm.controls['alley'].errors['required']"
-                    >
+                    <span *ngIf="personalForm.controls['alley'].errors['required']">
                       کوچه محل سکونت شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -282,14 +208,9 @@
                   <input numbersOnly formControlName="plaque" matInput />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['plaque'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['plaque'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="personalForm.controls['plaque'].errors['required']"
-                    >
+                    <span *ngIf="personalForm.controls['plaque'].errors['required']">
                       پلاک محل سکونت شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -307,16 +228,9 @@
                   />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['postalCode'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['postalCode'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['postalCode'].errors['required']
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['postalCode'].errors['required']">
                       کد پستی شهروند را وارد کنید
                     </span>
                   </mat-hint>
@@ -329,27 +243,17 @@
                 <mat-form-field appearance="outline" class="w-100 mt-3">
                   <mat-label>وضعیت تحصیل</mat-label>
                   <mat-select formControlName="educationStatues">
-                    <mat-option
-                      *ngFor="let item of baseEnums.educationStatues"
-                      [value]="item.key"
-                    >
+                    <mat-option *ngFor="let item of baseEnums.educationStatues" [value]="item.key">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
                   <mat-hint
                     class="text-danger"
                     *ngIf="
-                      personalForm.controls['educationStatues'].errors &&
-                      personalForm.submitted
+                      personalForm.controls['educationStatues'].errors && personalForm.submitted
                     "
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['educationStatues'].errors[
-                          'required'
-                        ]
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['educationStatues'].errors['required']">
                       وضعیت تحصیل شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -363,27 +267,17 @@
                 <mat-form-field appearance="outline" class="w-100 mt-3">
                   <mat-label>گروه تحصیلی</mat-label>
                   <mat-select formControlName="educationGroup">
-                    <mat-option
-                      *ngFor="let item of baseEnums.educationGroups"
-                      [value]="item.key"
-                    >
+                    <mat-option *ngFor="let item of baseEnums.educationGroups" [value]="item.key">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
                   <mat-hint
                     class="text-danger"
                     *ngIf="
-                      personalForm.controls['educationStatues'].errors &&
-                      personalForm.submitted
+                      personalForm.controls['educationStatues'].errors && personalForm.submitted
                     "
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['educationStatues'].errors[
-                          'required'
-                        ]
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['educationStatues'].errors['required']">
                       گروه تحصیلی شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -397,27 +291,15 @@
                 <mat-form-field appearance="outline" class="w-100 mt-3">
                   <mat-label>سطح تحصیلات</mat-label>
                   <mat-select formControlName="educationLevel">
-                    <mat-option
-                      *ngFor="let item of baseEnums.educationLevel"
-                      [value]="item.key"
-                    >
+                    <mat-option *ngFor="let item of baseEnums.educationLevel" [value]="item.key">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['educationLevel'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['educationLevel'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['educationLevel'].errors[
-                          'required'
-                        ]
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['educationLevel'].errors['required']">
                       سطح تحصیلات شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -437,18 +319,9 @@
                   />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['educationTitle'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['educationTitle'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['educationTitle'].errors[
-                          'required'
-                        ]
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['educationTitle'].errors['required']">
                       رشته تحصیلی شهروند را وارد کنید
                     </span>
                   </mat-hint>
@@ -459,25 +332,15 @@
                 <mat-form-field appearance="outline" class="w-100 mt-3">
                   <mat-label>وضعیت شغل</mat-label>
                   <mat-select formControlName="jobGroup">
-                    <mat-option
-                      *ngFor="let item of baseEnums.jobGroup"
-                      [value]="item.key"
-                    >
+                    <mat-option *ngFor="let item of baseEnums.jobGroup" [value]="item.key">
                       {{ item.text }}
                     </mat-option>
                   </mat-select>
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['jobGroup'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['jobGroup'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['jobGroup'].errors['required']
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['jobGroup'].errors['required']">
                       وضعیت شغل شهروند را انتخاب کنید
                     </span>
                   </mat-hint>
@@ -487,23 +350,12 @@
               <div class="col-12 col-md-12 col-lg-4">
                 <mat-form-field class="w-100 mt-3" appearance="outline">
                   <mat-label>عنوان شغل</mat-label>
-                  <input
-                    formControlName="jobTitle"
-                    matInput
-                    placeholder="عنوان شغل (اختیاری)"
-                  />
+                  <input formControlName="jobTitle" matInput placeholder="عنوان شغل (اختیاری)" />
                   <mat-hint
                     class="text-danger"
-                    *ngIf="
-                      personalForm.controls['jobTitle'].errors &&
-                      personalForm.submitted
-                    "
+                    *ngIf="personalForm.controls['jobTitle'].errors && personalForm.submitted"
                   >
-                    <span
-                      *ngIf="
-                        personalForm.controls['jobTitle'].errors['required']
-                      "
-                    >
+                    <span *ngIf="personalForm.controls['jobTitle'].errors['required']">
                       عنوان شغل شهروند را وارد کنید
                     </span>
                   </mat-hint>
@@ -519,12 +371,7 @@
           <div class="mt-3">
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>کد پرسنلی</mat-label>
-              <input
-                matInput
-                formControlName="personnelCode"
-                maxlength="10"
-                numbersOnly
-              />
+              <input matInput formControlName="personnelCode" maxlength="10" numbersOnly />
               <mat-error *ngIf="form.get('personnelCode').errors?.required">
                 کد پرسنلی شهروند را وارد کنید.
               </mat-error>
@@ -549,26 +396,15 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label> سریال شناسنامه</mat-label>
-              <input
-                matInput
-                formControlName="shSerial"
-                autocomplete="doNotAutoComplete"
-              />
+              <input matInput formControlName="shSerial" autocomplete="doNotAutoComplete" />
               <mat-error *ngIf="form.get('shSerial').errors?.required">
                 سریال شناسنامه شهروند را وارد کنید.
               </mat-error>
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>تاریخ صدور شناسنامه</mat-label>
-              <input
-                matInput
-                [matDatepicker]="dpicker_shDate"
-                formControlName="shDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="dpicker_shDate"
-              ></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="dpicker_shDate" formControlName="shDate" />
+              <mat-datepicker-toggle matSuffix [for]="dpicker_shDate"></mat-datepicker-toggle>
               <mat-datepicker #dpicker_shDate></mat-datepicker>
               <mat-error *ngIf="form.get('shDate').errors?.required">
                 تاریخ صدور شناسنامه شهروند را انتخاب کنید.
@@ -596,10 +432,7 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>شهر محل صدور شناسنامه </mat-label>
               <mat-select formControlName="shCityId">
-                <mat-option
-                  *ngFor="let item of shCities | async"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of shCities | async" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -617,9 +450,7 @@
               <input matInput formControlName="shCitySection" />
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-12">
-              <mat-label
-                >ملاحظات شناسنامه، در صورتی وجود ملاحظات وارد نمایید</mat-label
-              >
+              <mat-label>ملاحظات شناسنامه، در صورتی وجود ملاحظات وارد نمایید</mat-label>
               <input matInput formControlName="shNote" />
             </mat-form-field>
 
@@ -646,10 +477,7 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>شهر محل تولد</mat-label>
               <mat-select formControlName="cityOfBirthId">
-                <mat-option
-                  *ngFor="let item of birthCities | async"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of birthCities | async" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -675,10 +503,7 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>دین</mat-label>
               <mat-select formControlName="religion">
-                <mat-option
-                  *ngFor="let item of baseEnums.religion"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of baseEnums.religion" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -701,9 +526,7 @@
               <mat-error *ngIf="form.get('dateOfMarriage').errors?.required">
                 تاریخ ازدواج شهروند را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="form.get('dateOfMarriage').errors?.matDatepickerParse"
-              >
+              <mat-error *ngIf="form.get('dateOfMarriage').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -714,10 +537,7 @@
               <mat-label>وضعیت خدمت سربازی</mat-label>
 
               <mat-select formControlName="soldierState">
-                <mat-option
-                  *ngFor="let item of baseEnums.soldierState"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of baseEnums.soldierState" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
@@ -740,9 +560,7 @@
               <mat-error *ngIf="form.get('endOfMilitary').errors?.required">
                 تاریخ پایان خدمت شهروند را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="form.get('endOfMilitary').errors?.matDatepickerParse"
-              >
+              <mat-error *ngIf="form.get('endOfMilitary').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -758,22 +576,15 @@
             <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
               <mat-label>وضعیت تحصیل</mat-label>
               <mat-select formControlName="educationStatues">
-                <mat-option
-                  *ngFor="let item of baseEnums.educationStatues"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of baseEnums.educationStatues" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  form.controls['educationStatues'].errors && form.submitted
-                "
+                *ngIf="form.controls['educationStatues'].errors && form.submitted"
               >
-                <span
-                  *ngIf="form.controls['educationStatues'].errors['required']"
-                >
+                <span *ngIf="form.controls['educationStatues'].errors['required']">
                   وضعیت تحصیل شهروند را انتخاب کنید
                 </span>
               </mat-hint>
@@ -806,9 +617,7 @@
               <mat-error *ngIf="form.get('endOfEducation').errors?.required">
                 تاریخ پایان تحصیل شهروند را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="form.get('endOfEducation').errors?.matDatepickerParse"
-              >
+              <mat-error *ngIf="form.get('endOfEducation').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -834,16 +643,10 @@
                 [for]="dpicker_dateOfEmployeement"
               ></mat-datepicker-toggle>
               <mat-datepicker #dpicker_dateOfEmployeement></mat-datepicker>
-              <mat-error
-                *ngIf="form.get('dateOfEmployeement').errors?.required"
-              >
+              <mat-error *ngIf="form.get('dateOfEmployeement').errors?.required">
                 تاریخ استخدام شهروند را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="
-                  form.get('dateOfEmployeement').errors?.matDatepickerParse
-                "
-              >
+              <mat-error *ngIf="form.get('dateOfEmployeement').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -861,10 +664,7 @@
         <mat-tab label="تصویر پرسنلی"> </mat-tab>
       </mat-tab-group>
     </form>
-    <div
-      class="p-5 d-flex align-items-center justify-content-center"
-      *ngIf="loading"
-    >
+    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
   </mat-card-content>
@@ -877,11 +677,7 @@
       (click)="saveForm()"
     >
       <span>ذخیره </span>
-      <mat-spinner
-        diameter="20"
-        color="default"
-        [hidden]="!isSaving"
-      ></mat-spinner>
+      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
     </button>
   </mat-card-footer>
 </mat-card>

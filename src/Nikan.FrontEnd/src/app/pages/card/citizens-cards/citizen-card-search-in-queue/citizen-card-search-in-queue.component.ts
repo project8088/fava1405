@@ -21,7 +21,7 @@ import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-prof
 import { CardCancellationCitizenCardDialogComponent } from '../dialog/cancellation-citizen-card/cancellation-citizen-card.component';
 import { CardDeliveredCitizenCardDialogComponent } from '../dialog/delivered-citizen-card/delivered-citizen-card.component';
 import { CardBackCitizenCardDialogComponent } from '../dialog/back-citizen-card/back-citizen-card.component';
- 
+
 @Component({
   selector: 'card-citizen-card-search-in-queue',
   templateUrl: './citizen-card-search-in-queue.component.html',
@@ -34,12 +34,12 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
     'citizen',
     'courseNumber',
     'queueName',
-    'cardTitle', 
+    'cardTitle',
     'queueOnDate',
-    
+
     'deliverType',
     'cardNumber',
-    'operation'
+    'operation',
   ];
 
   data: any[] = [];
@@ -60,14 +60,13 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
     private router: Router,
     private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private helperService:HelperService
+    private helperService: HelperService,
   ) {
     this.searchForm = this.fb.group({
-     
       name: [''],
-      nationCode: [''], 
-      cardNumber: [''], 
-      cardTypeId: [null],  
+      nationCode: [''],
+      cardNumber: [''],
+      cardTypeId: [null],
       queueInputType: [null],
       courseNumber: [''],
     });
@@ -75,10 +74,7 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.getList();
-      
   }
-
- 
 
   getAppRegisterList() {
     this.dataService.get(ServerApis.getAppRegisterList).subscribe(
@@ -87,17 +83,13 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
       },
       (error) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      }
+      },
     );
   }
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
-    
-
-
-
 
     merge()
       .pipe(
@@ -110,21 +102,17 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
-            this.listCount = response.data.totalItems
-              ? response.data.totalItems
-              : 0;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
             return items;
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.isLoadingResults = false;
           return observableOf([]);
-        })
+        }),
       )
       .subscribe((data) => {
         this.data = data;
@@ -141,15 +129,15 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
     }
     this.getList();
   }
-   
+
   openCitizenProfile(row) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: row.userCode
+        userCode: row.userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
 
@@ -157,13 +145,10 @@ export class CardCitizenCardSearchInQueueComponent implements AfterViewInit {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: row.requestId
+        id: row.requestId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-   
-
 }

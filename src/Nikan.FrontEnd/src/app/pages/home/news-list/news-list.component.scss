@@ -15,14 +15,13 @@
   }
 }
 
-
 .news-card {
   height: 545px;
   width: calc(50% - 20px);
 }
 
-@media (max-width:500px){
-  .news-card { 
+@media (max-width: 500px) {
+  .news-card {
     width: 100%;
-}
+  }
 }

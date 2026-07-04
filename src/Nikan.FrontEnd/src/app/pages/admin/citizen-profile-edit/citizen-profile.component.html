@@ -1,12 +1,10 @@
 <div class="content-header">
-   
   <span>اطلاعات شهروند</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item">داشبورد</div>
-    <div class="bread-crumb-item active"> پروفایل شهروند</div>
+    <div class="bread-crumb-item active">پروفایل شهروند</div>
   </div>
 </div>
-
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
@@ -16,9 +14,7 @@
   </mat-card-header>
   <mat-tab-group>
     <mat-tab>
-      <ng-template mat-tab-label>
-        اطلاعات پایه  
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات پایه </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <citizen-base-info></citizen-base-info>
@@ -26,39 +22,24 @@
       </ng-template>
     </mat-tab>
     <mat-tab>
-      <ng-template mat-tab-label>
-        اطلاعات تکمیلی
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات تکمیلی </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <citizen-other-info></citizen-other-info>
-
         </div>
       </ng-template>
     </mat-tab>
-     
 
     <mat-tab>
-      <ng-template mat-tab-label>
-       اطلاعات آدرس
-      </ng-template>
+      <ng-template mat-tab-label> اطلاعات آدرس </ng-template>
       <ng-template matTabContent>
         <div class="p-3">
           <citizen-address-info></citizen-address-info>
-
         </div>
       </ng-template>
     </mat-tab>
-
-     
-
   </mat-tab-group>
 
-
-
-
-        <mat-card-content>
-
-        </mat-card-content>
-        <mat-card-footer></mat-card-footer>
+  <mat-card-content> </mat-card-content>
+  <mat-card-footer></mat-card-footer>
 </mat-card>

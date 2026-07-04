@@ -1,61 +1,67 @@
 <div class="card m-3">
+  <div class="p-3">
+    <form [formGroup]="reportForm">
+      <div class="row">
+        <mat-form-field class="col-sm-12 col-md-4">
+          <mat-label>تاریخ شروع </mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="startDate"
+            [max]="reportForm.get('endDate').value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          <mat-error *ngIf="reportForm.get('startDate').errors?.required">
+            تاریخ شروع را مشخص کنید.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              reportForm.get('startDate').errors?.matDatepickerMin ||
+              reportForm.get('startDate').errors?.matDatepickerMax
+            "
+          >
+            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="reportForm.get('startDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field class="col-sm-12 col-md-4">
+          <mat-label>تاریخ پایان </mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="endDate"
+            [min]="reportForm.get('startDate').value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          <mat-error *ngIf="reportForm.get('endDate').errors?.required">
+            تاریخ پایان قرار داد را مشخص کنید.
+          </mat-error>
+          <mat-error
+            *ngIf="
+              reportForm.get('endDate').errors?.matDatepickerMin ||
+              reportForm.get('endDate').errors?.matDatepickerMax
+            "
+          >
+            تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
+          </mat-error>
+          <mat-error *ngIf="reportForm.get('endDate').errors?.matDatepickerParse">
+            فرمت تاریخ صحیح نیست
+          </mat-error>
+        </mat-form-field>
 
-    <div class="p-3">
+        <div class="col-sm-12 col-md-4">
+          <button mat-raised-button color="default" (click)="getReport()">مشاهده گزارش</button>
+        </div>
+      </div>
+    </form>
+  </div>
 
-        <form [formGroup]="reportForm">
-
-            <div class="row">
-                <mat-form-field class="col-sm-12 col-md-4">
-                    <mat-label>تاریخ شروع </mat-label>
-                    <input matInput [matDatepicker]="dpS" formControlName="startDate"
-                        [max]="reportForm.get('endDate').value">
-                    <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
-                    <mat-datepicker #dpS></mat-datepicker>
-                    <mat-error *ngIf="reportForm.get('startDate').errors?.required">
-                        تاریخ شروع  را مشخص کنید.
-                    </mat-error>
-                    <mat-error
-                        *ngIf="reportForm.get('startDate').errors?.matDatepickerMin || reportForm.get('startDate').errors?.matDatepickerMax">
-                        تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-                    </mat-error>
-                    <mat-error *ngIf="reportForm.get('startDate').errors?.matDatepickerParse">
-                        فرمت تاریخ صحیح نیست
-                    </mat-error>
-                </mat-form-field>
-                <mat-form-field class="col-sm-12 col-md-4">
-                    <mat-label>تاریخ پایان </mat-label>
-                    <input matInput [matDatepicker]="dpE" formControlName="endDate"
-                        [min]="reportForm.get('startDate').value">
-                    <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
-                    <mat-datepicker #dpE></mat-datepicker>
-                    <mat-error *ngIf="reportForm.get('endDate').errors?.required">
-                        تاریخ پایان قرار داد را مشخص کنید.
-                    </mat-error>
-                    <mat-error
-                        *ngIf="reportForm.get('endDate').errors?.matDatepickerMin || reportForm.get('endDate').errors?.matDatepickerMax">
-                        تاریخ شروع نباید از تاریخ پایان بزرگتر باشد!
-                    </mat-error>
-                    <mat-error *ngIf="reportForm.get('endDate').errors?.matDatepickerParse">
-                        فرمت تاریخ صحیح نیست
-                    </mat-error>
-                </mat-form-field>
-
-
-                <div class="col-sm-12 col-md-4">
-                    <button mat-raised-button color="default" (click)="getReport()">مشاهده گزارش</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-
-
-
-
-
-    <div class="chart" [chart]="chart" *ngIf="!loading"></div>
-    <div class="d-flex align-items-center justify-content-center" *ngIf="loading">
-        <mat-spinner color="default" diameter="25"></mat-spinner>
-    </div>
+  <div class="chart" [chart]="chart" *ngIf="!loading"></div>
+  <div class="d-flex align-items-center justify-content-center" *ngIf="loading">
+    <mat-spinner color="default" diameter="25"></mat-spinner>
+  </div>
 </div>
-

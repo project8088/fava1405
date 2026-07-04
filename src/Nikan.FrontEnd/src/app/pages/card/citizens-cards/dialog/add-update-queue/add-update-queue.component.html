@@ -1,39 +1,28 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-    <h5 cdkDragHandle class="title" *ngIf="!isUpdate">تعریف صف   جدید</h5>
-    <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش صف  </h5>
+  <h5 cdkDragHandle class="title" *ngIf="!isUpdate">تعریف صف جدید</h5>
+  <h5 cdkDragHandle class="title" *ngIf="isUpdate">ویرایش صف</h5>
 
-
-    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <mat-dialog-content>
-
   <div class="d-flex align-items-center justify-content-center p-5" *ngIf="loadingData">
-    <mat-spinner diameter="50" color="default"></mat-spinner> 
+    <mat-spinner diameter="50" color="default"></mat-spinner>
   </div>
 
   <form [formGroup]="frm" *ngIf="!loadingData">
-
-
-
-
     <div class="row">
-
-
-
       <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-        <mat-label>   عنوان صف  </mat-label>
+        <mat-label> عنوان صف </mat-label>
         <input type="text" matInput formControlName="name" maxlength="40" />
-        <mat-error *ngIf="frm.get('name').errors?.required">
-          عنوان صف را وارد نمایید
-        </mat-error>
+        <mat-error *ngIf="frm.get('name').errors?.required"> عنوان صف را وارد نمایید </mat-error>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="col-md-3" >
+      <mat-form-field appearance="outline" class="col-md-3">
         <mat-label>اولویت صف</mat-label>
-        <input matInput formControlName="indexOrder" autocomplete="doNotAutoComplete" numbersOnly>
+        <input matInput formControlName="indexOrder" autocomplete="doNotAutoComplete" numbersOnly />
         <mat-error *ngIf="frm.get('indexOrder').errors?.required">
-          اولویت صف   را وارد کنید.
+          اولویت صف را وارد کنید.
         </mat-error>
       </mat-form-field>
 
@@ -46,81 +35,81 @@
         </mat-select>
       </mat-form-field>
 
-
-
-
-     
-
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>رنگ دسته بندی</mat-label>
         <input matInput type="color" formControlName="defaultColor" maxlength="40" />
         <mat-error *ngIf="frm.get('defaultColor').errors?.required">
-          رنگ پیش فرض  را وارد نمایید
+          رنگ پیش فرض را وارد نمایید
         </mat-error>
       </mat-form-field>
-
-
-
-
 
       <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
-        <mat-label>  توضیحات </mat-label>
+        <mat-label> توضیحات </mat-label>
         <input type="text" matInput formControlName="description" maxlength="400" />
         <mat-error *ngIf="frm.get('description').errors?.required">
-          توضیحات  را وارد نمایید
+          توضیحات را وارد نمایید
         </mat-error>
       </mat-form-field>
-
-
     </div>
 
-
-
-    
     <p>
-      <mat-checkbox formControlName="isLock">
-        قفل است ؟
-      </mat-checkbox>
+      <mat-checkbox formControlName="isLock"> قفل است ؟ </mat-checkbox>
     </p>
-     
-
 
     <div class="row">
       <mat-form-field appearance="outline" class="col-sm-12">
         <mat-label>گروههای شهروندی</mat-label>
         <mat-chip-list #skillChipList>
-          <mat-chip *ngFor="let item of selectedServices" [selectable]="true" [removable]="true" (removed)="removeAutoChip(selectedServices,item)">
-            {{item.text}}
+          <mat-chip
+            *ngFor="let item of selectedServices"
+            [selectable]="true"
+            [removable]="true"
+            (removed)="removeAutoChip(selectedServices, item)"
+          >
+            {{ item.text }}
             <mat-icon matChipRemove>cancel</mat-icon>
           </mat-chip>
-          <input matInput formControlName="groups" [matAutocomplete]="autoSkills" [matChipInputFor]="skillChipList" #skillInput #skillTrigger="matAutocompleteTrigger">
+          <input
+            matInput
+            formControlName="groups"
+            [matAutocomplete]="autoSkills"
+            [matChipInputFor]="skillChipList"
+            #skillInput
+            #skillTrigger="matAutocompleteTrigger"
+          />
         </mat-chip-list>
-        <mat-autocomplete #autoSkills="matAutocomplete" [displayWith]="displayFn" (optionSelected)="selectedAutoChip(selectedServices,'groups',skillInput,$event,skillTrigger)">
-          <mat-option *ngFor="let option of filteredServices | async" [value]="option"> 
-            {{option.text}}
+        <mat-autocomplete
+          #autoSkills="matAutocomplete"
+          [displayWith]="displayFn"
+          (optionSelected)="
+            selectedAutoChip(selectedServices, 'groups', skillInput, $event, skillTrigger)
+          "
+        >
+          <mat-option *ngFor="let option of filteredServices | async" [value]="option">
+            {{ option.text }}
           </mat-option>
         </mat-autocomplete>
-        <mat-error *ngIf="frm.get('groups').errors?.incorrect || frm.get('groups').errors?.required">
-          گروههای شهروندی   را از لیست انتخاب کنید
+        <mat-error
+          *ngIf="frm.get('groups').errors?.incorrect || frm.get('groups').errors?.required"
+        >
+          گروههای شهروندی را از لیست انتخاب کنید
         </mat-error>
         <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>
       </mat-form-field>
     </div>
-
-
-
-
-
-
-
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button  mat-dialog-close>انصراف</button>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
 
-    <button mat-raised-button  color="default" [disabled]="isSaving" (click)="saveInfo()" *ngIf="!loadingData">
+  <button
+    mat-raised-button
+    color="default"
+    [disabled]="isSaving"
+    (click)="saveInfo()"
+    *ngIf="!loadingData"
+  >
     <span>ذخیره </span>
     <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
   </button>
-
 </mat-dialog-actions>

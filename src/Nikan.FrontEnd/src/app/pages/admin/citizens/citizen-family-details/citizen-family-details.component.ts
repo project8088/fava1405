@@ -27,7 +27,7 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
     private matDialog: MatDialog,
     private router: Router,
     private dataService: DataService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
@@ -53,15 +53,13 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
             this.familyList = response.data ? response.data.familyList : {};
             this.citizen = response.data ? response.data.citizen : {};
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.loading = false;
-        }
+        },
       );
   }
 
@@ -84,7 +82,7 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
   toggleConfirmFamily(family, isAccept: boolean) {
     this.dataService
       .post(ServerApis.confirmFamilyByAdmin, {
-        userCode:  this.userCode ,
+        userCode: this.userCode,
         familyUserCode: family.familyUserCode,
         isAccept: isAccept,
       })
@@ -95,15 +93,13 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
             this.toastrService.success(response.messages);
             this.getInfo();
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         },
         (error) => {
           this.loading = false;
-        }
+        },
       );
   }
 
@@ -115,14 +111,10 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        userCode: userCode
+        userCode: userCode,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
   }
-
-
-
-
 }

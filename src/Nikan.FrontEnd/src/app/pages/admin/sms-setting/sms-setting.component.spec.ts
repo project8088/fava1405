@@ -8,9 +8,8 @@ describe('SmsSettingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SmsSettingComponent ]
-    })
-    .compileComponents();
+      declarations: [SmsSettingComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

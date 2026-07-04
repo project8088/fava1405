@@ -4,13 +4,7 @@
     {{ citizen.nationCode }}
   </h5>
 
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -20,9 +14,7 @@
       <mat-form-field class="col-12">
         <mat-label>دلیل رد</mat-label>
         <mat-select formControlName="reason">
-          <mat-option
-            [value]="item.text"
-            *ngFor="let item of rejectCitizenPictureList"
+          <mat-option [value]="item.text" *ngFor="let item of rejectCitizenPictureList"
             >{{ item.text }} {{ item.key }}
           </mat-option>
         </mat-select>
@@ -41,18 +33,9 @@
   </form>
 </mat-dialog-content>
 <mat-dialog-actions>
-  <button
-    mat-raised-button
-    color="default"
-    [disabled]="isSaving"
-    (click)="saveInfo()"
-  >
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
     <span>ذخیره </span>
-    <mat-spinner
-      diameter="20"
-      color="default"
-      [hidden]="!isSaving"
-    ></mat-spinner>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
   </button>
   <button mat-raised-button mat-dialog-close>انصراف</button>
 </mat-dialog-actions>

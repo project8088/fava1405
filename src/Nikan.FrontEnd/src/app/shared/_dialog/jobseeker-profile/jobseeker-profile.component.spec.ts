@@ -8,9 +8,8 @@ describe('JobseekerProfileDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JobseekerProfileDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [JobseekerProfileDialogComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {

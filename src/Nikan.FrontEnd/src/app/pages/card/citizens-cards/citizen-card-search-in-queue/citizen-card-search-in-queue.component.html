@@ -6,7 +6,6 @@
   <mat-card-content>
     <form [formGroup]="searchForm">
       <div class="row my-4">
-
         <mat-form-field class="col-md-3">
           <mat-label>نام شهروند</mat-label>
           <input matInput formControlName="name" />
@@ -21,7 +20,6 @@
           <input matInput formControlName="cardNumber" />
         </mat-form-field>
 
-
         <mat-form-field class="col-md-3">
           <mat-label>نوع کارت</mat-label>
           <mat-select formControlName="cardTypeId">
@@ -35,26 +33,16 @@
           <mat-label>شماره دوره</mat-label>
           <input matInput formControlName="courseNumber" />
         </mat-form-field>
- 
-         
-
 
         <mat-form-field class="col-md-3">
           <mat-label>نوع صف</mat-label>
           <mat-select formControlName="queueInputType">
             <mat-option [value]="null">همه</mat-option>
-            <mat-option [value]="0">پستی   </mat-option>
-            <mat-option [value]="1">مرکز تحویل  </mat-option>
+            <mat-option [value]="0">پستی </mat-option>
+            <mat-option [value]="1">مرکز تحویل </mat-option>
             <mat-option [value]="2"> موقت</mat-option>
-
           </mat-select>
         </mat-form-field>
-
-
-
-
-
-
 
         <div class="col d-flex align-items-center justify-content-end">
           <button mat-raised-button color="default" (click)="applyFilter()">
@@ -79,20 +67,19 @@
       <div class="datatable-loading-shade" *ngIf="isLoadingResults">
         <mat-spinner *ngIf="isLoadingResults" color="default"></mat-spinner>
       </div>
-      <div
-        class="datatable-loading-shade"
-        *ngIf="isLoadingResults == false && listCount == 0"
-      >
+      <div class="datatable-loading-shade" *ngIf="isLoadingResults == false && listCount == 0">
         <strong>اطلاعاتی وجود ندارد!</strong>
       </div>
 
       <div class="datatable-table-container">
-        <table mat-table
-               [dataSource]="data"
-               class="datatable-table"
-               #exporter="matTableExporter"
-               matTableExporter
-               [hiddenColumns]="[displayedColumns.length - 1]">
+        <table
+          mat-table
+          [dataSource]="data"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
           <ng-container matColumnDef="row">
             <th mat-header-cell *matHeaderCellDef width="40">#</th>
             <td mat-cell *matCellDef="let row; let i = index">
@@ -132,10 +119,6 @@
             </td>
           </ng-container>
 
-
-
-
-
           <ng-container matColumnDef="queueOnDate">
             <th mat-header-cell *matHeaderCellDef>ارسال به صف</th>
             <td mat-cell *matCellDef="let row">
@@ -143,23 +126,23 @@
             </td>
           </ng-container>
           <ng-container matColumnDef="deliverType">
-            <th mat-header-cell *matHeaderCellDef>نوع تحویل  </th>
+            <th mat-header-cell *matHeaderCellDef>نوع تحویل</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.deliverType | enumString: "cardDeliverType" }}
+              {{ row.deliverType | enumString: 'cardDeliverType' }}
             </td>
           </ng-container>
-         
+
           <ng-container matColumnDef="courseNumber">
             <th mat-header-cell *matHeaderCellDef>دوره توزیع</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.courseNumber}}
+              {{ row.courseNumber }}
             </td>
           </ng-container>
 
           <ng-container matColumnDef="queueName">
-            <th mat-header-cell *matHeaderCellDef> صف  </th>
+            <th mat-header-cell *matHeaderCellDef>صف</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.queueName}}
+              {{ row.queueName }}
             </td>
           </ng-container>
 
@@ -170,20 +153,15 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                
-
                 <button mat-menu-item (click)="openCardProfile(row)">
                   <i class="fa fa-eye mr-2"></i>
                   مشاهده اطلاعات کارت
                 </button>
-
-
               </mat-menu>
             </td>
           </ng-container>
 
-          <tr mat-header-row
-              *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
           <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
         </table>
       </div>

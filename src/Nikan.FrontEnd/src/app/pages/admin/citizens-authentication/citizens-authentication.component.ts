@@ -10,7 +10,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
-import { MatTableDataSource } from '@angular/material/table'; 
+import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
 @Component({
   selector: 'adm-citizens-authentication',
@@ -18,40 +18,34 @@ import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-p
   styleUrls: ['./citizens-authentication.component.scss'],
 })
 export class AdminCitizenAuthenticationComponent implements AfterViewInit {
-  
-
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   loading: boolean = true;
   citizen: any = {};
- 
+
   searchForm: FormGroup;
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
     private matDialog: MatDialog,
     private router: Router,
-    private fb: FormBuilder 
-     
+    private fb: FormBuilder,
   ) {
-    this.searchForm = this.fb.group({ 
-      birthDate: [null], 
+    this.searchForm = this.fb.group({
+      birthDate: [null],
       nationCode: [''],
     });
   }
 
-  ngAfterViewInit() {
-    
-  }
+  ngAfterViewInit() {}
 
   getinfo() {
     this.loading = true;
 
-    var param: any = this.searchForm.value; 
-    if (param.birthDate)
-      param.birthDate = this.dataService.formatDate(param.birthDate);
-   
+    var param: any = this.searchForm.value;
+    if (param.birthDate) param.birthDate = this.dataService.formatDate(param.birthDate);
+
     merge()
       .pipe(
         startWith(param),
@@ -62,42 +56,28 @@ export class AdminCitizenAuthenticationComponent implements AfterViewInit {
         map((response) => {
           this.loading = false;
           if (response.isSuccess && response.data) {
-            this.citizen = response.data ? response.data  : {};
+            this.citizen = response.data ? response.data : {};
           } else {
-            let msg = response.messages
-              ? response.messages
-              : 'متاسفانه خطایی در سرور رخ داده است!';
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
           this.loading = false;
           return observableOf([]);
-        })
+        }),
       )
-      .subscribe((data) => {
-        
-      });
+      .subscribe((data) => {});
   }
 
   openCitizenProfile(citizenId) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
-        id: citizenId
+        id: citizenId,
       },
       width: '85%',
-      maxWidth: '1800px'
+      maxWidth: '1800px',
     });
-  } 
-  
-
-
-
-
- 
-
-  
-
-  
+  }
 }

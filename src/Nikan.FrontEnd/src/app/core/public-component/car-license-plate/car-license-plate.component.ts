@@ -1,5 +1,20 @@
-import { Component, OnInit, Input, forwardRef, Optional, Self, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, Validators, FormControl, NgControl } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Input,
+  forwardRef,
+  Optional,
+  Self,
+  Output,
+  EventEmitter,
+} from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  Validators,
+  FormControl,
+  NgControl,
+} from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { DataService } from '../../services/data-service.service';
@@ -24,10 +39,34 @@ export class CarLicensePlateComponent implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;
   @Input('required') required: boolean = false;
   @Output('change') change: EventEmitter<any>;
-  
-  letters: string[] = ['الف', 'ب', 'پ', 'ت', 'ث', 'ج', 'د', 'ز', 'ژ', 'س', 'ش', 'ص', 'ط', 'ع', 'ف', 'ق', 'ک', 'ل', 'م', 'ن', 'و', 'ه', 'ی'];
- 
-  s2: string='';
+
+  letters: string[] = [
+    'الف',
+    'ب',
+    'پ',
+    'ت',
+    'ث',
+    'ج',
+    'د',
+    'ز',
+    'ژ',
+    'س',
+    'ش',
+    'ص',
+    'ط',
+    'ع',
+    'ف',
+    'ق',
+    'ک',
+    'ل',
+    'م',
+    'ن',
+    'و',
+    'ه',
+    'ی',
+  ];
+
+  s2: string = '';
   s1: number;
   s3: number;
   s4: number;
@@ -38,36 +77,26 @@ export class CarLicensePlateComponent implements ControlValueAccessor, OnInit {
     @Self() public ngControl: NgControl,
   ) {
     ngControl.valueAccessor = this;
-//this.ngControl = new FormControl(null, [RequireMatch]);
-     
+    //this.ngControl = new FormControl(null, [RequireMatch]);
   }
 
-
   ngOnInit() {
-   
     this.init();
-
-
   }
 
   init() {
-
     if (this.ngControl.control) {
       if (this.required) {
         this.ngControl.control.setValidators([Validators.required, RequireMatch]);
         this.ngControl.control.updateValueAndValidity();
       }
-       
     }
-
   }
 
-
-
-  private propagateChange = (_: any) => { };
+  private propagateChange = (_: any) => {};
 
   writeValue(value: any): void {
-    if (value !== undefined && value !==null) {
+    if (value !== undefined && value !== null) {
       let plateNumber = value.split(' ');
       this.s1 = plateNumber[0] ? plateNumber[0] : null;
       this.s2 = plateNumber[1] ? plateNumber[1] : null;
@@ -76,29 +105,25 @@ export class CarLicensePlateComponent implements ControlValueAccessor, OnInit {
     }
   }
   registerOnChange(fn: any): void {
-   // this.onChange = fn;
+    // this.onChange = fn;
   }
 
   registerOnTouched(fn: any): void {
-   // this.onTouched = fn;
+    // this.onTouched = fn;
   }
-
- 
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
   }
 
   onChange() {
-    if (this.change)
-      this.change.emit(this.ngControl.control.value);
+    if (this.change) this.change.emit(this.ngControl.control.value);
   }
-
-
 
   changeNum() {
     if (this.s1 && this.s2 && this.s3 && this.s4) {
-      let plateNumber = this.s1.toString() + ' ' + this.s2 + ' ' + this.s3.toString() + ' ' + this.s4.toString();
+      let plateNumber =
+        this.s1.toString() + ' ' + this.s2 + ' ' + this.s3.toString() + ' ' + this.s4.toString();
       this.ngControl.control.setValue(plateNumber);
     }
 
@@ -106,8 +131,4 @@ export class CarLicensePlateComponent implements ControlValueAccessor, OnInit {
     //  this.ngControl.control.setValue('');
     //}
   }
-
-
-
-
 }

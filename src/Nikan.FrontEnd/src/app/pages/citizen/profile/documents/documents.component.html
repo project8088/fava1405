@@ -4,10 +4,7 @@
     لیست مدارک شهروند
   </mat-card-header>
   <mat-card-content>
-    <div
-      class="p-5 d-flex align-items-center justify-content-center"
-      *ngIf="loading"
-    >
+    <div class="p-5 d-flex align-items-center justify-content-center" *ngIf="loading">
       <mat-spinner diameter="50" color="default"></mat-spinner>
     </div>
 
@@ -34,9 +31,7 @@
         <ng-container matColumnDef="attachedOnDate">
           <th mat-header-cell *matHeaderCellDef>تاریخ بارگذاری</th>
           <td mat-cell *matCellDef="let element" class="p-3">
-            <span *ngIf="element.id !== 0">{{
-              element.attachedOnDate | jalali
-            }}</span>
+            <span *ngIf="element.id !== 0">{{ element.attachedOnDate | jalali }}</span>
           </td>
         </ng-container>
 

@@ -12,19 +12,26 @@ import Swal from 'sweetalert2';
 import { ToastrService } from 'ngx-toastr';
 import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
- 
+
 @Component({
   selector: 'app-citizen-sms-list',
   templateUrl: './citizen-sms-list.component.html',
-  styleUrls: ['./citizen-sms-list.component.scss']
+  styleUrls: ['./citizen-sms-list.component.scss'],
 })
 export class AppCitizenSmsListComponent implements OnInit {
-
   search: string = '';
   paging: any = {};
   userCode: string;
-  displayedColumns: string[] = ['row', 'messageText',
-    'mobiles', 'statusText', 'sender', 'sendOnDate', 'cost', 'userName'];
+  displayedColumns: string[] = [
+    'row',
+    'messageText',
+    'mobiles',
+    'statusText',
+    'sender',
+    'sendOnDate',
+    'cost',
+    'userName',
+  ];
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -32,35 +39,25 @@ export class AppCitizenSmsListComponent implements OnInit {
   isLoadingResults: boolean = true;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  searchForm: FormGroup; 
+  searchForm: FormGroup;
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
     private router: Router,
     private matDialog: MatDialog,
     private fb: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
-   
-    this.route.params.subscribe(p => {
+    this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });
 
-
-    this.searchForm = this.fb.group({ 
-      citizenId:[null],
+    this.searchForm = this.fb.group({
+      citizenId: [null],
       fromDate: [null],
       toDate: [null],
-      
-   });
-
-       
-   
-
+    });
   }
-
-
 
   ngOnInit() {}
 
@@ -68,22 +65,15 @@ export class AppCitizenSmsListComponent implements OnInit {
     this.getList();
   }
 
-
-
-
-
   getList() {
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 10;
 
-    if (param.fromDate)
-      param.fromDate = this.dataService.formatDate(param.fromDate);
+    if (param.fromDate) param.fromDate = this.dataService.formatDate(param.fromDate);
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
-  
+
     param.userCode = this.userCode;
-
-
 
     merge()
       .pipe(
@@ -92,30 +82,27 @@ export class AppCitizenSmsListComponent implements OnInit {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getCitizenPagedSmsList, param);
         }),
-        map(response => {
+        map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
             var items = response.data.smsList ? response.data.smsList : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger; 
+            // debugger;
             return items;
           } else {
-            let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
         }),
         catchError((err) => {
-          this.isLoadingResults = false; 
+          this.isLoadingResults = false;
           return observableOf([]);
-        })
-      ).subscribe(data => {
+        }),
+      )
+      .subscribe((data) => {
         this.data = data;
       });
-
-
-
   }
-
 
   pageEvent(event: PageEvent) {
     this.getList();
@@ -127,13 +114,4 @@ export class AppCitizenSmsListComponent implements OnInit {
     }
     this.getList();
   }
-
-
-  
-  
- 
-   
-
 }
-
-

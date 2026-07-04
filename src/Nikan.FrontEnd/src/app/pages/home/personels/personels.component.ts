@@ -1,53 +1,39 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from 'src/app/core/server-apis';
 import { DataService } from 'src/app/core/services/data-service.service';
- declare var $: any;
+declare var $: any;
 
 @Component({
   selector: 'home-personels',
   templateUrl: './personels.component.html',
-  styleUrls: ['./personels.component.scss']
+  styleUrls: ['./personels.component.scss'],
 })
 export class HomePersonelsListComponent implements OnInit {
-
   loadingManagers: boolean;
   managerList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
-
-
-  constructor(
-    private dataService: DataService,
-  ) {
-
-  }
-
+  constructor(private dataService: DataService) {}
 
   ngOnInit() {
     this.getManagerList();
-
   }
-
-
-
 
   getManagerList() {
     this.loadingManagers = true;
-    this.dataService.get(ServerApis.getManagersList, {}).subscribe(response => {
-      this.loadingManagers = false;
-      this.managerList = response.data ? response.data : [];
-      setTimeout(() => {
-        this.owlService();
-      }, 200);
-    }, error => {
-      this.loadingManagers = false;
-    });
+    this.dataService.get(ServerApis.getManagersList, {}).subscribe(
+      (response) => {
+        this.loadingManagers = false;
+        this.managerList = response.data ? response.data : [];
+        setTimeout(() => {
+          this.owlService();
+        }, 200);
+      },
+      (error) => {
+        this.loadingManagers = false;
+      },
+    );
   }
-
-
-
-
-
 
   owlService() {
     $('#owl-Service2').owlCarousel({
@@ -61,13 +47,13 @@ export class HomePersonelsListComponent implements OnInit {
       responsiveClass: true,
       responsive: {
         0: {
-            items: 1,
+          items: 1,
         },
         480: {
-            items: 2,
+          items: 2,
         },
         768: {
-            items: 3,
+          items: 3,
         },
         //600: {
         //    items: 5,
@@ -82,16 +68,12 @@ export class HomePersonelsListComponent implements OnInit {
         //    items: 5,
         //},
         1200: {
-            items: 5
-        }
-        , 1367: {
-              items: 5,
-          }
-    }    });
+          items: 5,
+        },
+        1367: {
+          items: 5,
+        },
+      },
+    });
   }
-
-
-
 }
-
-

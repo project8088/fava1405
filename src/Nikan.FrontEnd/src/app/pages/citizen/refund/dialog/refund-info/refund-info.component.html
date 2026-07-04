@@ -1,63 +1,68 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
-    <h5 cdkDragHandle class="title" >  بررسی استرداد  </h5>
-    
+  <h5 cdkDragHandle class="title">بررسی استرداد</h5>
 
-    <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <mat-dialog-content>
-
   <div class="box-info-dash">
     <div class="row">
       <div class="col-sm-6">
-        <span>  شهروند :  </span><strong>{{info.ownerName}}</strong>
+        <span> شهروند : </span><strong>{{ info.ownerName }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>  کد ملی:  </span><strong>{{info.ownerNationCode}}</strong>
+        <span> کد ملی: </span><strong>{{ info.ownerNationCode }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>شماره موبایل:  </span><strong>{{info.ownerMobileNumber}}</strong>
+        <span>شماره موبایل: </span><strong>{{ info.ownerMobileNumber }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>  شماره کارت استرداد:  </span>
-        <input style="border:none ; background-color:none; text-align:left;direction:ltr;" value=" {{info.refundCardNumber}}" />
-
-       
+        <span> شماره کارت استرداد: </span>
+        <input
+          style="border: none; background-color: none; text-align: left; direction: ltr"
+          value=" {{ info.refundCardNumber }}"
+        />
       </div>
       <div class="col-sm-6">
-        <span>  مبلغ استرداد:  </span><strong>{{info.totalRefundAmount}}</strong>
+        <span> مبلغ استرداد: </span><strong>{{ info.totalRefundAmount }}</strong>
       </div>
       <div class="col-sm-6">
-        <span>  مبلغ استرداد:  </span><strong>{{info.totalRefundAmount}}</strong>
+        <span> مبلغ استرداد: </span><strong>{{ info.totalRefundAmount }}</strong>
       </div>
-
     </div>
   </div>
-  <div  class="box-info-dash bg-green">
+  <div class="box-info-dash bg-green">
     <div class="row">
       <div class="col-md-12">
         <strong>
-          در صورتیکه که شهروند به کارت اعلامی فوق دسترسی دارد و کارت بانکی فعال می باشد.
-          .
-          برروی تایید کلیک نمایید تا هزینه به شماره کارت
-          <input style="border:none ; background-color:none; text-align:left;direction:ltr;" value=" {{info.refundCardNumber}}" />
+          در صورتیکه که شهروند به کارت اعلامی فوق دسترسی دارد و کارت بانکی فعال می باشد. . برروی
+          تایید کلیک نمایید تا هزینه به شماره کارت
+          <input
+            style="border: none; background-color: none; text-align: left; direction: ltr"
+            value=" {{ info.refundCardNumber }}"
+          />
 
           واریز شود
         </strong>
         <br />
-        <button mat-raised-button class="btn btn-success" [disabled]="isSaving" (click)="commitRefundByAdmin(info.refundId)">
-          <span>تایید برگشت  </span>
+        <button
+          mat-raised-button
+          class="btn btn-success"
+          [disabled]="isSaving"
+          (click)="commitRefundByAdmin(info.refundId)"
+        >
+          <span>تایید برگشت </span>
           <mat-spinner *ngIf="refundloading" diameter="25" color="default"></mat-spinner>
         </button>
         <br />
         <strong class="text-danger">
-          توجه :
-          هزینه به شماره کارت
-          *  <input style="border:none ; background-color:none; text-align:left;direction:ltr;" value=" {{info.refundCardNumber}}" />
-          *
-          برگشت داده می شود
-          .
+          توجه : هزینه به شماره کارت *
+          <input
+            style="border: none; background-color: none; text-align: left; direction: ltr"
+            value=" {{ info.refundCardNumber }}"
+          />
+          * برگشت داده می شود .
         </strong>
       </div>
     </div>
@@ -70,16 +75,14 @@
           .
         </strong>
         <br />
-        <button mat-raised-button class="btn btn-info" (click)="showSaveCardNumberPanel=true;">
-          <span> ثبت شماره کارت  </span>
-        
+        <button mat-raised-button class="btn btn-info" (click)="showSaveCardNumberPanel = true">
+          <span> ثبت شماره کارت </span>
+
           <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
         </button>
         <br />
         <strong class="text-danger">
-          توجه :
-          در صورت ثبت شماره کارت
-          هزینه توسط واحد مالی به شماره کارت ثبت شده برگشت داده می شود
+          توجه : در صورت ثبت شماره کارت هزینه توسط واحد مالی به شماره کارت ثبت شده برگشت داده می شود
           .
         </strong>
       </div>
@@ -91,13 +94,8 @@
       <div class="col-md-12">
         <form [formGroup]="frm">
           <div class="row">
-
-
             <mat-form-field class="col-md-12">
-              <mat-label>
-                شماره کارت شهروند
-                (شماره کارت 16 رقمی )
-              </mat-label>
+              <mat-label> شماره کارت شهروند (شماره کارت 16 رقمی ) </mat-label>
               <input matInput formControlName="ownerBankCardNumber" minlength="16" maxlength="16" />
               <mat-error *ngIf="frm.get('ownerBankCardNumber').errors?.required">
                 شماره کارت شهروند را وارد کنید.
@@ -105,29 +103,26 @@
             </mat-form-field>
             <mat-form-field appearance="outline" class="col-sm-12">
               <mat-label>توضیحات</mat-label>
-              <textarea matInput formControlName="adminDescription" rows="5" autocomplete="doNotAutoComplete"></textarea>
+              <textarea
+                matInput
+                formControlName="adminDescription"
+                rows="5"
+                autocomplete="doNotAutoComplete"
+              ></textarea>
               <mat-error *ngIf="frm.get('adminDescription').errors?.required">
                 توضیحات را وارد کنید.
               </mat-error>
             </mat-form-field>
-
-
           </div>
-           
         </form>
         <button mat-raised-button class="btn btn-info" [disabled]="isSaving" (click)="saveInfo()">
-          <span> ذخیره شماره کارت  </span>
+          <span> ذخیره شماره کارت </span>
           <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
         </button>
-
       </div>
     </div>
   </div>
-
-
-
 </mat-dialog-content>
 <mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close>انصراف</button>
-    
+  <button mat-raised-button mat-dialog-close>انصراف</button>
 </mat-dialog-actions>

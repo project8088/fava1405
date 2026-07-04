@@ -7,13 +7,7 @@
   <h5 cdkDragHandle class="title py-0" *ngIf="family">ویرایش عضو خانواده</h5>
   <h5 cdkDragHandle class="title py-0" *ngIf="!family">ثبت عضو خانواده جدید</h5>
 
-  <button
-    type="button"
-    class="close-btn"
-    aria-label="Close"
-    mat-dialog-close
-    mat-icon-button
-  >
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
@@ -28,15 +22,8 @@
         <form [formGroup]="firstFormGroup">
           <mat-form-field appearance="outline" class="col-sm-6 col-md-4">
             <mat-label>کد ملی عضو خانواده</mat-label>
-            <input
-              matInput
-              formControlName="nationCode"
-              minlength="10"
-              numbersOnly
-            />
-            <mat-error
-              *ngIf="firstFormGroup.get('nationCode').errors?.required"
-            >
+            <input matInput formControlName="nationCode" minlength="10" numbersOnly />
+            <mat-error *ngIf="firstFormGroup.get('nationCode').errors?.required">
               کد ملی عضو خانواده را وارد کنید
             </mat-error>
             <mat-error *ngIf="firstFormGroup.get('nationCode').errors?.invalid">
@@ -51,7 +38,7 @@
             (click)="checkNationCode(stepper)"
             [disabled]="isSaving"
           >
-            <mat-spinner  diameter="25" [hidden]="!isSaving"></mat-spinner>
+            <mat-spinner diameter="25" [hidden]="!isSaving"></mat-spinner>
             ادامه
           </button>
         </div>
@@ -63,21 +50,13 @@
       >
         <ng-template [ngTemplateOutlet]="familyDetailForm"></ng-template>
         <div class="text-right mt-2">
-          <button
-            mat-raised-button
-            color="primary"
-            (click)="saveFamilyDetails(stepper)"
-          >
+          <button mat-raised-button color="primary" (click)="saveFamilyDetails(stepper)">
             ثبت عضو خانواده
           </button>
         </div>
       </mat-step>
 
-      <mat-step
-        *ngIf="familyIsRegister"
-        [stepControl]="familyForm"
-        label="ثبت اطلاعات عضو خانواده"
-      >
+      <mat-step *ngIf="familyIsRegister" [stepControl]="familyForm" label="ثبت اطلاعات عضو خانواده">
         <form [formGroup]="familyForm">
           <div class="row">
             <mat-form-field disabled class="col-12 col-sm-6 col-md-4 col-lg-4" appearance="outline">
@@ -87,22 +66,13 @@
 
             <mat-form-field appearance="outline" class="col-12 col-sm-6 col-md-4 col-lg-4">
               <mat-label>تاریخ تولد </mat-label>
-              <input
-                matInput
-                [matDatepicker]="dpS"
-                formControlName="birthDate"
-              />
-              <mat-datepicker-toggle
-                matSuffix
-                [for]="dpS"
-              ></mat-datepicker-toggle>
+              <input matInput [matDatepicker]="dpS" formControlName="birthDate" />
+              <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
               <mat-datepicker #dpS></mat-datepicker>
               <mat-error *ngIf="familyForm.get('birthDate').errors?.required">
                 تاریخ تولد عضو خانواده را انتخاب کنید.
               </mat-error>
-              <mat-error
-                *ngIf="familyForm.get('birthDate').errors?.matDatepickerParse"
-              >
+              <mat-error *ngIf="familyForm.get('birthDate').errors?.matDatepickerParse">
                 فرمت تاریخ صحیح نیست
               </mat-error>
             </mat-form-field>
@@ -110,25 +80,15 @@
             <mat-form-field appearance="outline" class="col-12 col-sm-6 col-md-4 col-lg-4">
               <mat-label>چه نسبتی با شما دارد</mat-label>
               <mat-select formControlName="familyRelation">
-                <mat-option
-                  *ngFor="let item of baseEnums.familyRelationships"
-                  [value]="item.key"
-                >
+                <mat-option *ngFor="let item of baseEnums.familyRelationships" [value]="item.key">
                   {{ item.text }}
                 </mat-option>
               </mat-select>
               <mat-hint
                 class="text-danger"
-                *ngIf="
-                  familyForm.controls['familyRelation'].errors &&
-                  familyForm.submitted
-                "
+                *ngIf="familyForm.controls['familyRelation'].errors && familyForm.submitted"
               >
-                <span
-                  *ngIf="
-                    familyForm.controls['familyRelation'].errors['required']
-                  "
-                >
+                <span *ngIf="familyForm.controls['familyRelation'].errors['required']">
                   نسبت عضو خانواده را انتخاب کنید
                 </span>
               </mat-hint>
@@ -143,11 +103,7 @@
               (click)="registerFamily(stepper)"
             >
               ثبت عضو خانواده
-              <mat-spinner
-                diameter="20"
-                color="default"
-                [hidden]="!isSaving"
-              ></mat-spinner>
+              <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
             </button>
           </div>
         </form>
@@ -163,36 +119,21 @@
     <div *ngIf="loading" class="d-flex justify-content-center">
       <mat-spinner diameter="40"></mat-spinner>
     </div>
-    <ng-template
-      *ngIf="!loading"
-      [ngTemplateOutlet]="familyDetailForm"
-    ></ng-template>
+    <ng-template *ngIf="!loading" [ngTemplateOutlet]="familyDetailForm"></ng-template>
   </mat-dialog-content>
 
   <mat-dialog-actions class="justify-content-end">
     <button mat-raised-button mat-dialog-close>انصراف</button>
     <div *ngIf="!loading" class="text-right mx-2">
-      <button
-        mat-raised-button
-        color="primary"
-        (click)="saveFamilyDetails(stepper)"
-      >
-        ذخیره
-      </button>
+      <button mat-raised-button color="primary" (click)="saveFamilyDetails(stepper)">ذخیره</button>
     </div>
   </mat-dialog-actions>
 </div>
 
 <ng-template #familyDetailForm>
-  <form
-    #ngForm1="ngForm"
-    [formGroup]="registerForm"
-    class="flex-grow-1 px-5 pb-5 pt-3"
-  >
+  <form #ngForm1="ngForm" [formGroup]="registerForm" class="flex-grow-1 px-5 pb-5 pt-3">
     <div *ngIf="!family">
-      <h4 class="text-primary">
-        نام و نام کاربری برای این عضو جدید، کد ملی می باشد..
-      </h4>
+      <h4 class="text-primary">نام و نام کاربری برای این عضو جدید، کد ملی می باشد..</h4>
       <hr />
     </div>
 
@@ -200,22 +141,15 @@
       <mat-form-field appearance="outline" class="col-6">
         <mat-label>چه نسبتی با شما دارد</mat-label>
         <mat-select formControlName="familyRelation">
-          <mat-option
-            *ngFor="let item of baseEnums.familyRelationships"
-            [value]="item.key"
-          >
+          <mat-option *ngFor="let item of baseEnums.familyRelationships" [value]="item.key">
             {{ item.text }}
           </mat-option>
         </mat-select>
         <mat-hint
           class="text-danger"
-          *ngIf="
-            registerForm.controls['familyRelation'].errors && ngForm1.submitted
-          "
+          *ngIf="registerForm.controls['familyRelation'].errors && ngForm1.submitted"
         >
-          <span
-            *ngIf="registerForm.controls['familyRelation'].errors['required']"
-          >
+          <span *ngIf="registerForm.controls['familyRelation'].errors['required']">
             وضعیت تاهل عضو خانواده را انتخاب کنید
           </span>
         </mat-hint>
@@ -233,9 +167,7 @@
           <input formControlName="firstName" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['firstName'].errors && ngForm1.submitted
-            "
+            *ngIf="registerForm.controls['firstName'].errors && ngForm1.submitted"
           >
             <span *ngIf="registerForm.controls['firstName'].errors['required']">
               نام عضو خانواده را وارد کنید
@@ -249,9 +181,7 @@
           <input formControlName="lastName" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['lastName'].errors && ngForm1.submitted
-            "
+            *ngIf="registerForm.controls['lastName'].errors && ngForm1.submitted"
           >
             <span *ngIf="registerForm.controls['lastName'].errors['required']">
               نام خانوادگی عضو خانواده را وارد کنید
@@ -268,13 +198,9 @@
           <input formControlName="fatherName" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['fatherName'].errors && ngForm1.submitted
-            "
+            *ngIf="registerForm.controls['fatherName'].errors && ngForm1.submitted"
           >
-            <span
-              *ngIf="registerForm.controls['fatherName'].errors['required']"
-            >
+            <span *ngIf="registerForm.controls['fatherName'].errors['required']">
               نام پدر عضو خانواده را وارد کنید
             </span>
           </mat-hint>
@@ -289,9 +215,7 @@
 
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['birthDate'].errors && ngForm1.submitted
-            "
+            *ngIf="registerForm.controls['birthDate'].errors && ngForm1.submitted"
           >
             <span *ngIf="registerForm.controls['birthDate'].errors['required']">
               تاریخ تولد عضو خانواده را وارد کنید
@@ -302,40 +226,31 @@
     </div>
     <div class="row align-items-center">
       <div *ngIf="!registerForm.controls['gender'].disabled" class="col-6">
-        <mat-form-field   appearance="outline" class="w-100" class="w-100">
+        <mat-form-field appearance="outline" class="w-100" class="w-100">
           <mat-label>جنسیت</mat-label>
           <mat-select formControlName="gender">
             <mat-option [value]="true"> آقا </mat-option>
             <mat-option [value]="false"> خانم </mat-option>
           </mat-select>
 
-          <mat-error
-            *ngIf="registerForm.controls['gender'].errors && ngForm1.submitted"
-          >
+          <mat-error *ngIf="registerForm.controls['gender'].errors && ngForm1.submitted">
             جنسیت عضو خانواده را انتخاب کنید
           </mat-error>
         </mat-form-field>
       </div>
-      <div class="col-6" *ngIf="!registerForm.controls['mariageStatus'].disabled" >
+      <div class="col-6" *ngIf="!registerForm.controls['mariageStatus'].disabled">
         <mat-form-field appearance="outline" class="w-100" class="w-100">
           <mat-label>وضعیت تاهل</mat-label>
           <mat-select formControlName="mariageStatus">
-            <mat-option
-              *ngFor="let item of baseEnums.maritalStatus"
-              [value]="item.key"
-            >
+            <mat-option *ngFor="let item of baseEnums.maritalStatus" [value]="item.key">
               {{ item.text }}
             </mat-option>
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['mariageStatus'].errors && ngForm1.submitted
-            "
+            *ngIf="registerForm.controls['mariageStatus'].errors && ngForm1.submitted"
           >
-            <span
-              *ngIf="registerForm.controls['mariageStatus'].errors['required']"
-            >
+            <span *ngIf="registerForm.controls['mariageStatus'].errors['required']">
               وضعیت تاهل عضو خانواده را انتخاب کنید
             </span>
           </mat-hint>
@@ -354,9 +269,7 @@
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['cityId'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['cityId'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['cityId'].errors['required']">
               شهر محل سکونت عضو خانواده را انتخاب کنید
@@ -371,9 +284,7 @@
           <input numbersOnly formControlName="region" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['region'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['region'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['region'].errors['required']">
               منطقه محل سکونت عضو خانواده را انتخاب کنید
@@ -388,9 +299,7 @@
           <input formControlName="street" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['street'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['street'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['street'].errors['required']">
               خیابان محل سکونت عضو خانواده را انتخاب کنید
@@ -405,9 +314,7 @@
           <input formControlName="alley" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['alley'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['alley'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['alley'].errors['required']">
               کوچه محل سکونت عضو خانواده را انتخاب کنید
@@ -422,9 +329,7 @@
           <input numbersOnly formControlName="plaque" matInput />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['plaque'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['plaque'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['plaque'].errors['required']">
               پلاک محل سکونت عضو خانواده را انتخاب کنید
@@ -444,14 +349,9 @@
           />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['postalCode'].errors &&
-              registerForm.submitted
-            "
+            *ngIf="registerForm.controls['postalCode'].errors && registerForm.submitted"
           >
-            <span
-              *ngIf="registerForm.controls['postalCode'].errors['required']"
-            >
+            <span *ngIf="registerForm.controls['postalCode'].errors['required']">
               کد پستی عضو خانواده را وارد کنید
             </span>
           </mat-hint>
@@ -512,25 +412,15 @@
         <mat-form-field appearance="outline" class="w-100 mt-3">
           <mat-label>وضعیت تحصیل</mat-label>
           <mat-select formControlName="educationStatues">
-            <mat-option
-              *ngFor="let item of baseEnums.educationStatues"
-              [value]="item.key"
-            >
+            <mat-option *ngFor="let item of baseEnums.educationStatues" [value]="item.key">
               {{ item.text }}
             </mat-option>
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['educationStatues'].errors &&
-              registerForm.submitted
-            "
+            *ngIf="registerForm.controls['educationStatues'].errors && registerForm.submitted"
           >
-            <span
-              *ngIf="
-                registerForm.controls['educationStatues'].errors['required']
-              "
-            >
+            <span *ngIf="registerForm.controls['educationStatues'].errors['required']">
               وضعیت تحصیل خود را انتخاب کنید
             </span>
           </mat-hint>
@@ -544,25 +434,15 @@
         <mat-form-field appearance="outline" class="w-100 mt-3">
           <mat-label>گروه تحصیلی</mat-label>
           <mat-select formControlName="educationGroup">
-            <mat-option
-              *ngFor="let item of baseEnums.educationGroups"
-              [value]="item.key"
-            >
+            <mat-option *ngFor="let item of baseEnums.educationGroups" [value]="item.key">
               {{ item.text }}
             </mat-option>
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['educationStatues'].errors &&
-              registerForm.submitted
-            "
+            *ngIf="registerForm.controls['educationStatues'].errors && registerForm.submitted"
           >
-            <span
-              *ngIf="
-                registerForm.controls['educationStatues'].errors['required']
-              "
-            >
+            <span *ngIf="registerForm.controls['educationStatues'].errors['required']">
               گروه تحصیلی خود را انتخاب کنید
             </span>
           </mat-hint>
@@ -576,23 +456,15 @@
         <mat-form-field appearance="outline" class="w-100 mt-3">
           <mat-label>سطح تحصیلات</mat-label>
           <mat-select formControlName="educationLevel">
-            <mat-option
-              *ngFor="let item of baseEnums.educationLevel"
-              [value]="item.key"
-            >
+            <mat-option *ngFor="let item of baseEnums.educationLevel" [value]="item.key">
               {{ item.text }}
             </mat-option>
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['educationLevel'].errors &&
-              registerForm.submitted
-            "
+            *ngIf="registerForm.controls['educationLevel'].errors && registerForm.submitted"
           >
-            <span
-              *ngIf="registerForm.controls['educationLevel'].errors['required']"
-            >
+            <span *ngIf="registerForm.controls['educationLevel'].errors['required']">
               سطح تحصیلات خود را انتخاب کنید
             </span>
           </mat-hint>
@@ -605,21 +477,12 @@
       >
         <mat-form-field class="w-100 mt-3" appearance="outline">
           <mat-label>رشته تحصیلی</mat-label>
-          <input
-            formControlName="educationTitle"
-            matInput
-            placeholder="رشته تحصیلی (اختیاری)"
-          />
+          <input formControlName="educationTitle" matInput placeholder="رشته تحصیلی (اختیاری)" />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['educationTitle'].errors &&
-              registerForm.submitted
-            "
+            *ngIf="registerForm.controls['educationTitle'].errors && registerForm.submitted"
           >
-            <span
-              *ngIf="registerForm.controls['educationTitle'].errors['required']"
-            >
+            <span *ngIf="registerForm.controls['educationTitle'].errors['required']">
               رشته تحصیلی خود را وارد کنید
             </span>
           </mat-hint>
@@ -631,18 +494,13 @@
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>وضعیت شغل</mat-label>
           <mat-select formControlName="jobGroup">
-            <mat-option
-              *ngFor="let item of baseEnums.jobGroup"
-              [value]="item.key"
-            >
+            <mat-option *ngFor="let item of baseEnums.jobGroup" [value]="item.key">
               {{ item.text }}
             </mat-option>
           </mat-select>
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['jobGroup'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['jobGroup'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['jobGroup'].errors['required']">
               وضعیت شغل عضو خانواده را انتخاب کنید
@@ -653,16 +511,10 @@
       <div class="col-6">
         <mat-form-field class="w-100" appearance="outline">
           <mat-label>عنوان شغل</mat-label>
-          <input
-            formControlName="jobTitle"
-            matInput
-            placeholder="عنوان شغل (اختیاری)"
-          />
+          <input formControlName="jobTitle" matInput placeholder="عنوان شغل (اختیاری)" />
           <mat-hint
             class="text-danger"
-            *ngIf="
-              registerForm.controls['jobTitle'].errors && registerForm.submitted
-            "
+            *ngIf="registerForm.controls['jobTitle'].errors && registerForm.submitted"
           >
             <span *ngIf="registerForm.controls['jobTitle'].errors['required']">
               عنوان شغل عضو خانواده را وارد کنید

@@ -1,2 +1,2 @@
-  export * from "./register-service.model";
-  export * from "./response";
+export * from './register-service.model';
+export * from './response';

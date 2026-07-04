@@ -9,126 +9,104 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 @Component({
   selector: 'adm-citizen-register-report-chart',
   templateUrl: './citizen-register-report-chart.component.html',
-  styleUrls: ['./citizen-register-report-chart.component.scss']
+  styleUrls: ['./citizen-register-report-chart.component.scss'],
 })
 export class AdminDashboardCitizenRegisterReportChartComponent implements OnInit, OnDestroy {
   loading: boolean;
   report: any = {};
   subscribeReport: Subscription;
 
-
   chart: Chart = new Chart();
 
   reportForm: FormGroup;
 
-
   constructor(
     private dataService: DataService,
     private toastrService: ToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
     this.reportForm = this.fb.group({
       startDate: [null, []],
-      endDate: [null, []]
+      endDate: [null, []],
     });
-
   }
-
-
-
 
   ngOnInit(): void {
     this.getReport();
-
   }
 
   ngOnDestroy(): void {
-    if (this.subscribeReport)
-      this.subscribeReport.unsubscribe();
+    if (this.subscribeReport) this.subscribeReport.unsubscribe();
   }
-
-
 
   getReport() {
     var formValue = this.reportForm.value;
     this.loading = true;
-    this.subscribeReport = this.dataService.post(ServerApis.getCitizenRegisterChartReport, {
-      StartDate: formValue.startDate ? this.dataService.formatDate(formValue.startDate) : '',
-      EndDate: formValue.endDate ? this.dataService.formatDate(formValue.endDate) : ''
-    }).subscribe(response => {
-      this.loading = false;
-      if (response.isSuccess) {
-        this.report = response.data ? response.data : [];
-        this.chart = this.createCharts(this.report.data, this.report.categories);
-
-      } else {
-        let msg = response.messages ? response.messages : "متاسفانه خطایی در سرور رخ داده است!";
-        this.toastrService.error(msg);
-      }
-    }, error => {
-      this.loading = false;
-      this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-
-    });
+    this.subscribeReport = this.dataService
+      .post(ServerApis.getCitizenRegisterChartReport, {
+        StartDate: formValue.startDate ? this.dataService.formatDate(formValue.startDate) : '',
+        EndDate: formValue.endDate ? this.dataService.formatDate(formValue.endDate) : '',
+      })
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response.isSuccess) {
+            this.report = response.data ? response.data : [];
+            this.chart = this.createCharts(this.report.data, this.report.categories);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error) => {
+          this.loading = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
 
-
-
-
-
-
-  ngAfterViewInit() {
-  }
-
+  ngAfterViewInit() {}
 
   createCharts(dataSeries: any[], category: any[]) {
     return new Chart({
       credits: {
-        enabled: false
+        enabled: false,
       },
       chart: {
-        type: 'line'
+        type: 'line',
       },
       title: {
-        text: 'آمار ثبت نام در سامانه شهروندی'
+        text: 'آمار ثبت نام در سامانه شهروندی',
       },
       subtitle: {
-        text: ''
+        text: '',
       },
       xAxis: {
-        categories: category
+        categories: category,
       },
       yAxis: {
         title: {
-          text: 'تعداد .....'
-        }
+          text: 'تعداد .....',
+        },
       },
       plotOptions: {
         line: {
           dataLabels: {
-            enabled: true
+            enabled: true,
           },
-          enableMouseTracking: false
-        }
+          enableMouseTracking: false,
+        },
       },
-      series: [{
-        type: undefined,
-        name: '.......',
-        data: dataSeries
-      }],
+      series: [
+        {
+          type: undefined,
+          name: '.......',
+          data: dataSeries,
+        },
+      ],
       legend: {
-        rtl: true
-      }, 
+        rtl: true,
+      },
     });
-
-
-
-
-
   }
-
-
-
-
-
 }

@@ -25,4 +25,3 @@ export class citizenFamilyModel {
   public jobGroup?: string;
   public jobTitle?: string;
 }
-
