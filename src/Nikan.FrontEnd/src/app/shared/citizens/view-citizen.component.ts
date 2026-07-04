@@ -1,28 +1,21 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ServerApis } from '../../core/server-apis';
-import { DataService } from '../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-view-citizen',
   templateUrl: './view-citizen.component.html',
   styleUrls: ['./view-citizen.component.scss'],
 })
-export class ViewCitizenComponent implements AfterViewInit {
+export class ViewCitizenComponent extends AppBase implements AfterViewInit {
   userCode: string;
   info: any = {};
   loading: boolean = true;
   imageUrl: string;
   baseUrl: string = ServerApis.baseUrl;
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

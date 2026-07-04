@@ -3,24 +3,21 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { AuthService } from '@core/authentication/auth.service';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CardAddCardDiscountDialogComponent } from '../dialog/add-card-discount/add-card-discount.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'card-card-discount-list',
   templateUrl: './card-discount-list.component.html',
   styleUrls: ['./card-discount-list.component.scss'],
 })
-export class CardDiscountListComponent implements OnInit, AfterViewInit {
+export class CardDiscountListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
   displayedColumns: string[] = [
     'row',
@@ -48,13 +45,8 @@ export class CardDiscountListComponent implements OnInit, AfterViewInit {
   searchForm: FormGroup;
   events: any[] = [];
   constructor(
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.id;
     });

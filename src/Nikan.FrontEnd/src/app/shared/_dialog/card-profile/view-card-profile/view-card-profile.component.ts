@@ -2,16 +2,15 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-view-card-profile',
   templateUrl: './view-card-profile.component.html',
   styleUrls: ['./view-card-profile.component.scss'],
 })
-export class ViewCardProfileComponent implements OnInit {
+export class ViewCardProfileComponent extends AppBase implements OnInit {
   @Input('cardId') cardId: string = '';
 
   card: any = {};
@@ -21,9 +20,8 @@ export class ViewCardProfileComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getCitizenInfo();

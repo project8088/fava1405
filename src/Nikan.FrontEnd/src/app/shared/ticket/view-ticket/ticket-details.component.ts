@@ -1,14 +1,15 @@
 import { OnInit, Component } from '@angular/core';
-import { AuthService } from '../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket-details',
   templateUrl: './ticket-details.component.html',
   styleUrls: ['./ticket-details.component.scss'],
 })
-export class TicketDetailsComponent implements OnInit {
+export class TicketDetailsComponent extends AppBase implements OnInit {
   isAdmin: boolean;
-  constructor(private authService: AuthService) {
+  constructor() {
+      super();
     this.isAdmin = this.authService.getAuthUser().isAdmin;
   }
   ngOnInit() {}

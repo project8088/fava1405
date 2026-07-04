@@ -1,17 +1,16 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-sabtAhval-dialog',
   templateUrl: './add-sabtAhval.component.html',
   styleUrls: ['./add-sabtAhval.component.scss'],
 })
-export class AdminAddSabtAhvalDialogComponent implements OnInit {
+export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   baseEnums: any = {};
@@ -20,14 +19,11 @@ export class AdminAddSabtAhvalDialogComponent implements OnInit {
   loadingData: boolean;
   id: string;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddSabtAhvalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.frm = this.fb.group({
       fromDate: [null, [Validators.required]],
       exportType: [null, [Validators.required]],

@@ -1,21 +1,20 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-adm-change-user-password-dialog',
   templateUrl: './change-user-password.component.html',
   styleUrls: ['./change-user-password.component.scss'],
 })
-export class AdminChangePasswordDialogComponent implements OnInit {
+export class AdminChangePasswordDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   changePasswordForm: FormGroup;
   userId: string;
@@ -23,14 +22,11 @@ export class AdminChangePasswordDialogComponent implements OnInit {
   loading: boolean = true;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminChangePasswordDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.changePasswordForm = this.fb.group(
       {
         userId: [null],

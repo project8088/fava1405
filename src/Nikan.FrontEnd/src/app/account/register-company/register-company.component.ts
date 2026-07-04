@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
@@ -10,19 +9,17 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { RequireMatch } from '@core/custom-validator/requireMatch';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { BaseDataModel } from '../../core/models/base-data-model';
-import { DataService } from '../../core/services/data-service.service';
 import { ServerApis } from '../../core/server-apis';
-import { AuthService } from '../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-register-company',
   templateUrl: './register-company.component.html',
   styleUrls: ['./register-company.component.scss'],
 })
-export class RegisterCompanyComponent implements OnInit {
+export class RegisterCompanyComponent extends AppBase implements OnInit {
   isSaving: boolean;
   registerForm: FormGroup;
   id: string;
@@ -36,13 +33,9 @@ export class RegisterCompanyComponent implements OnInit {
   filteredState: Observable<any[]>;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private customValidator: CustomFormValidators,
-    private router: Router,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.registerForm = this.fb.group(
       {
         companyName: [null, [Validators.required]],

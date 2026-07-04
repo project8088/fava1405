@@ -1,19 +1,16 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import { AdminCitizenRejectFamilyComponent } from '../../_dialogs/citizen-reject-family/citizen-reject-family.component';
-import { DataService } from '../../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-family-details',
   templateUrl: './citizen-family-details.component.html',
   styleUrls: ['./citizen-family-details.component.scss'],
 })
-export class AdminCitizenFamilyDetailsComponent implements OnInit {
+export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnInit {
   userCode: string;
   familyList: [];
 
@@ -23,12 +20,8 @@ export class AdminCitizenFamilyDetailsComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

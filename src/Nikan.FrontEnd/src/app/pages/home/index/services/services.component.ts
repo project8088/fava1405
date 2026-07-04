@@ -2,13 +2,9 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-
-import { DataService } from '../../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
-import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 declare var $: any;
 
@@ -17,7 +13,7 @@ declare var $: any;
   templateUrl: './services.component.html',
   styleUrls: ['./services.component.scss'],
 })
-export class HomeServicesListComponent implements OnInit {
+export class HomeServicesListComponent extends AppBase implements OnInit {
   data: any[] = [];
   isLoadingResults: boolean = true;
 
@@ -26,11 +22,8 @@ export class HomeServicesListComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {
     this.getList();

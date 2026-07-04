@@ -3,23 +3,20 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-personal-users',
   templateUrl: './personal-users.component.html',
   styleUrls: ['./personal-users.component.scss'],
 })
-export class CompanyPersonalUsersComponent implements OnInit, AfterViewInit {
+export class CompanyPersonalUsersComponent extends AppBase implements OnInit, AfterViewInit {
   displayedColumns: string[] = [];
 
   companyId: string = '';
@@ -38,15 +35,9 @@ export class CompanyPersonalUsersComponent implements OnInit, AfterViewInit {
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.user = this.authService.currentUserValue;
     this.displayedColumns = [
       'row',

@@ -1,21 +1,18 @@
 import { AfterViewInit, Component, EventEmitter, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { ToastrService } from 'ngx-toastr';
-
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-or-update-faq',
   templateUrl: './add-or-update-faq.component.html',
   styleUrls: ['./add-or-update-faq.component.scss'],
 })
-export class AdminAddOrUpdateFaqComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   faqId: string;
   faqForm: FormGroup;
@@ -32,12 +29,8 @@ export class AdminAddOrUpdateFaqComponent implements OnInit, AfterViewInit {
   tagNames: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private router: Router,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.faqForm = this.fb.group({
       id: [null],
       title: [null, [Validators.required, Validators.maxLength(500)]],

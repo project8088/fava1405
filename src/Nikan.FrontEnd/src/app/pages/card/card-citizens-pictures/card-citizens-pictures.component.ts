@@ -1,26 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { FormGroup } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
-
-import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
 import { isNgTemplate } from '@angular/compiler';
 import { AdminCitizenSmsListDialogComponent } from '../../admin/_dialogs/citizen-sms-list/citizen-sms-list.component';
 import { AdminCitizenImageDialogComponent } from '../../admin/_dialogs/citizen-image/citizen-image.component';
 import { AdminCitizenEditImageDialogComponent } from '../../admin/_dialogs/citizen-edit-image/citizen-edit-image.component';
 import { AdminCitizenRejectImageDialogComponent } from '../../admin/_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-card-citizens-pictures',
   templateUrl: './card-citizens-pictures.component.html',
   styleUrls: ['./card-citizens-pictures.component.scss'],
 })
-export class CardCitizensPicturesComponent implements OnInit {
+export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
   isLoadingResults: boolean = false;
   listCount: number = 10;
@@ -33,11 +31,8 @@ export class CardCitizensPicturesComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -1,8 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-
 import { ServerApis } from '../../core/server-apis';
-import { DataService } from '../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -10,7 +9,7 @@ declare var $: any;
   templateUrl: './attachments.component.html',
   styleUrls: ['./attachments.component.scss'],
 })
-export class AttachmentListComponent implements OnInit {
+export class AttachmentListComponent extends AppBase implements OnInit {
   @Input('guid') guid: string;
   attachments: any[] = [];
 
@@ -19,9 +18,8 @@ export class AttachmentListComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private toastrService: ToastrService,
-    private dataService: DataService,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {
     if (!this.guid) return false;

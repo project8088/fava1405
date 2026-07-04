@@ -1,30 +1,26 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-refund-transaction-dialog',
   templateUrl: './add-refund-transaction.component.html',
   styleUrls: ['./add-refund-transaction.component.scss'],
 })
-export class AdminAddRefundTransactionDialogComponent implements OnInit {
+export class AdminAddRefundTransactionDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   loading: boolean = true;
   importId: number = 0;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddRefundTransactionDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.frm = this.fb.group({
       orderId: [null, [Validators.required]],
       transactionCode: [null, [Validators.required]],

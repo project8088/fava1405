@@ -1,16 +1,15 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-company-change-status-dialog',
   templateUrl: './company-change-status.component.html',
   styleUrls: ['./company-change-status.component.scss'],
 })
-export class AdminCompanyChangeStatusDialogComponent implements OnInit {
+export class AdminCompanyChangeStatusDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};
   isSaving: boolean;
 
@@ -18,13 +17,10 @@ export class AdminCompanyChangeStatusDialogComponent implements OnInit {
   userCompanyAccountStatus: any[] = [];
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminCompanyChangeStatusDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.form = this.fb.group({
       rejectDesription: [''],
       userCompanyAccountStatus: [null, [Validators.required]],

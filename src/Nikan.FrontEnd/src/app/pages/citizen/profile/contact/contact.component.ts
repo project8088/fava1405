@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-
-import { DataService } from '@core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-contact',
   templateUrl: './contact.component.html',
   styleUrls: ['./contact.component.scss'],
 })
-export class CitizenContactComponent implements OnInit {
+export class CitizenContactComponent extends AppBase implements OnInit {
   editMode: boolean = false;
   editModeWork: boolean = false;
 
@@ -30,11 +28,9 @@ export class CitizenContactComponent implements OnInit {
   cities: Observable<[]>;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
     private helperService: HelperService,
   ) {
+      super();
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
       region: [null],

@@ -1,26 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
-
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizens-in-group',
   templateUrl: './citizens-in-group.component.html',
   styleUrls: ['./citizens-in-group.component.scss'],
 })
-export class AdminCitizensInGroupsComponent implements AfterViewInit {
+export class AdminCitizensInGroupsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
     'nationCode',
@@ -41,14 +37,9 @@ export class AdminCitizensInGroupsComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

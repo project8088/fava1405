@@ -1,17 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-add-or-update-product',
   templateUrl: './add-or-update-product.component.html',
   styleUrls: ['./add-or-update-product.component.scss'],
 })
-export class CompanyAddOrUpdateProductComponent implements OnInit, AfterViewInit {
+export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   productForm: FormGroup;
@@ -27,12 +25,8 @@ export class CompanyAddOrUpdateProductComponent implements OnInit, AfterViewInit
   htmlEditor: any;
   loadingProductGroup: boolean;
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

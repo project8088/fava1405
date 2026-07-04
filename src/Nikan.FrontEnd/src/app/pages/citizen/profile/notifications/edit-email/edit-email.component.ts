@@ -1,17 +1,15 @@
 import { Component, ContentChild, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-edit-email',
   templateUrl: './edit-email.component.html',
   styleUrls: ['./edit-email.component.scss'],
 })
-export class CitizenEditEmailComponent implements OnInit {
+export class CitizenEditEmailComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -33,10 +31,8 @@ export class CitizenEditEmailComponent implements OnInit {
   @ViewChild('timer', { static: false }) timer: TimerComponent;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.cardForm = this.fb.group({
       email: [null, [Validators.required]],
     });

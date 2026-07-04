@@ -3,22 +3,20 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { AuthService } from '@core/authentication/auth.service';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'app-organization-list',
   templateUrl: './organization-list.component.html',
   styleUrls: ['./organization-list.component.scss'],
 })
-export class AdminOrganizationListComponent implements AfterViewInit {
+export class AdminOrganizationListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
     'organizationName',
@@ -43,13 +41,9 @@ export class AdminOrganizationListComponent implements AfterViewInit {
   isSaving: boolean;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private customValidator: CustomFormValidators,
-    private fb: FormBuilder,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.frm = fb.group({
       id: [null],
       organizationName: [null, [Validators.required]],

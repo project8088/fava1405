@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-
-import { DataService } from '@core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-captcha',
   templateUrl: './captcha.component.html',
   styleUrls: ['./captcha.component.scss'],
 })
-export class CaptchaComponent implements OnInit {
+export class CaptchaComponent extends AppBase implements OnInit {
   loadingCaptcha: boolean = false;
   captchaImage: string = '';
 
-  constructor(private dataService: DataService) {}
+  constructor() {
+      super();}
 
   ngOnInit(): void {
     this.getCaptcha();

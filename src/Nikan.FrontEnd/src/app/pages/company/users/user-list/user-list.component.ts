@@ -1,25 +1,22 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CompanyUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
 import { CompanyChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { CompanyAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'company-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss'],
 })
-export class CompanyUserListComponent implements OnInit {
+export class CompanyUserListComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
     'row',
     'userName',
@@ -48,15 +45,9 @@ export class CompanyUserListComponent implements OnInit {
   user: AuthUser;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.user = this.authService.currentUserValue;
     this.route.params.subscribe((p) => {
       this.companyId = p.id;

@@ -3,21 +3,19 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-citizens-authentication',
   templateUrl: './citizens-authentication.component.html',
   styleUrls: ['./citizens-authentication.component.scss'],
 })
-export class AdminCitizenAuthenticationComponent implements AfterViewInit {
+export class AdminCitizenAuthenticationComponent extends AppBase implements AfterViewInit {
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -26,12 +24,8 @@ export class AdminCitizenAuthenticationComponent implements AfterViewInit {
 
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       birthDate: [null],
       nationCode: [''],

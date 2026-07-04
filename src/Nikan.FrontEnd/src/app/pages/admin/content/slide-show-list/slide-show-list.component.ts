@@ -1,21 +1,19 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './dialog/add-update-slide/add-update-slide.component';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-slide-show-list',
   templateUrl: './slide-show-list.component.html',
   styleUrls: ['./slide-show-list.component.scss'],
 })
-export class AdminSlideShowListComponent implements OnInit, AfterViewInit {
+export class AdminSlideShowListComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
   displayedColumns: string[] = [
     'row',
@@ -37,12 +35,8 @@ export class AdminSlideShowListComponent implements OnInit, AfterViewInit {
   searchForm: FormGroup;
   events: any[] = [];
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       title: [''],
     });

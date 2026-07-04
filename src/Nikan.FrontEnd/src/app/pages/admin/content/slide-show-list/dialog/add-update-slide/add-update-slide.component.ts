@@ -1,16 +1,15 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-update-slide-dialog',
   templateUrl: './add-update-slide.component.html',
   styleUrls: ['./add-update-slide.component.scss'],
 })
-export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
+export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
   isSaving: boolean;
   form: FormGroup;
@@ -20,13 +19,10 @@ export class AdminAddOrUpdateSlideShowDialogComponent implements OnInit {
   baseUrl = ServerApis.baseUrl;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddOrUpdateSlideShowDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.form = this.fb.group({
       id: [null],
       caption: ['', [Validators.required]],

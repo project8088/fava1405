@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-
-import { DataService } from '@core/services/data-service.service';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
 import { ChangeCardAddressDialogComponent } from '../../_dialogs/change-card-address/change-card-address.component';
-import { MatDialog } from '@angular/material/dialog';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-bought-cards',
   templateUrl: './bought-cards.component.html',
   styleUrls: ['./bought-cards.component.scss'],
 })
-export class BoughtCardsComponent implements OnInit {
+export class BoughtCardsComponent extends AppBase implements OnInit {
   loading: boolean = true;
   cards;
 
@@ -26,10 +23,8 @@ export class BoughtCardsComponent implements OnInit {
   ];
 
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private dataService: DataService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getList();

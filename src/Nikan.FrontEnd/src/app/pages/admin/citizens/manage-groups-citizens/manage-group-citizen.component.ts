@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 import { RequireMatch } from '../../../../core/custom-validator/requireMatch';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'manage-group-citizen',
   templateUrl: './manage-group-citizen.component.html',
   styleUrls: ['./manage-group-citizen.component.scss'],
 })
-export class AdminManageGroupsCitizenComponent implements OnInit {
+export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit {
   loading: boolean;
   citizengroupList: any[] = [];
   groupList: any[] = [];
@@ -22,12 +20,9 @@ export class AdminManageGroupsCitizenComponent implements OnInit {
   isSaving: boolean;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidators: CustomFormValidators,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
+    private customValidators: CustomFormValidators
   ) {
+      super();
     this.form = this.fb.group({
       groupId: [null, [Validators.required]],
       expireDate: [null],

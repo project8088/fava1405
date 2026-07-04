@@ -1,22 +1,17 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
 import { userGroupsDto } from '@core/models/users/userGroups';
 import Swal from 'sweetalert2';
-
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { FormBuilder } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-manzalat-base-list',
   templateUrl: './manzalat-base-list.component.html',
   styleUrls: ['./manzalat-base-list.component.scss'],
 })
-export class AdminManzalatBaseFromListComponent implements OnInit {
+export class AdminManzalatBaseFromListComponent extends AppBase implements OnInit {
   userGroupList: userGroupsDto[] = [];
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -27,14 +22,9 @@ export class AdminManzalatBaseFromListComponent implements OnInit {
   groupList: any[] = [];
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
-  ) {}
+    private customValidator: CustomFormValidators
+  ) {
+      super();}
 
   ngOnInit() {
     this.getList();

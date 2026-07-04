@@ -1,12 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss'],
 })
-export class AccountComponent implements OnInit, AfterViewInit {
-  constructor() {}
+export class AccountComponent extends AppBase implements OnInit, AfterViewInit {
+  constructor() {
+      super();}
 
   ngOnInit(): void {}
 

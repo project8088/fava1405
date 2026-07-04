@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-update-citizen-Identity-Info',
   templateUrl: './update-citizen-Identity-Info.component.html',
   styleUrls: ['./update-citizen-Identity-Info.component.scss'],
 })
-export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
+export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -29,12 +27,9 @@ export class AdminUpdateCitizenIdentityInfoComponent implements OnInit {
 
   constructor(
     private helperService: HelperService,
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],
       nationalCode: [{ value: '' }],

@@ -3,22 +3,19 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-appservice-list',
   templateUrl: './appservice-list.component.html',
   styleUrls: ['./appservice-list.component.scss'],
 })
-export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
+export class AdminAppserviceListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'serviceId',
@@ -38,13 +35,9 @@ export class AdminAppserviceListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.searchForm = this.fb.group({
       serviceName: [''],
     });

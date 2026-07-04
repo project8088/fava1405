@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-upload-manzalat-file',
   templateUrl: './upload-manzalat-file.component.html',
   styleUrls: ['./upload-manzalat-file.component.scss'],
 })
-export class CitizenUploadManzalatDocumentsComponent implements OnInit {
+export class CitizenUploadManzalatDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   hasFiles: boolean = false;
@@ -28,12 +25,8 @@ export class CitizenUploadManzalatDocumentsComponent implements OnInit {
   id: string;
 
   constructor(
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private router: Router,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.baseFormInfo();

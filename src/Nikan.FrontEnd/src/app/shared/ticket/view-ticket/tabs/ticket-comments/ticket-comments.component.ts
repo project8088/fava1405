@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../../core/server-apis';
-import { DataService } from '../../../../../core/services/data-service.service';
 import Swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
 import { AuthUser } from '../../../../../core/authentication/user.model';
-import { AuthService } from '../../../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket-comments',
   templateUrl: './ticket-comments.component.html',
   styleUrls: ['./ticket-comments.component.scss'],
 })
-export class TicketCommentsComponent implements OnInit {
+export class TicketCommentsComponent extends AppBase implements OnInit {
   frm: FormGroup;
   isSaving: boolean;
   id: string = '';
@@ -21,12 +18,8 @@ export class TicketCommentsComponent implements OnInit {
   list: any[] = [];
   user: AuthUser;
   constructor(
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-  ) {
+) {
+      super();
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {

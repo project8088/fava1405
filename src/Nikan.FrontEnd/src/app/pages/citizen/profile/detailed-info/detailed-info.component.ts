@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-
-import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-personal-info',
   templateUrl: './detailed-info.component.html',
   styleUrls: ['./detailed-info.component.scss'],
 })
-export class CitizenDetailedInfoComponent implements OnInit {
+export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -39,13 +36,10 @@ export class CitizenDetailedInfoComponent implements OnInit {
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService,
     private profileComponent: CitizenProfileComponent,
   ) {
+      super();
     this.form = this.fb.group({
       state: [null, []],
       stateId: [null, []],

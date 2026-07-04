@@ -1,28 +1,25 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 import { AuthService } from '@core/authentication/auth.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import Swal from 'sweetalert2';
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-manzelat-citizens',
   templateUrl: './manzelat-citizens.component.html',
   styleUrls: ['./manzelat-citizens.component.scss'],
 })
-export class AdminManzelatCitizensComponent implements AfterViewInit {
+export class AdminManzelatCitizensComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
     'checkbox',
@@ -51,13 +48,9 @@ export class AdminManzelatCitizensComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

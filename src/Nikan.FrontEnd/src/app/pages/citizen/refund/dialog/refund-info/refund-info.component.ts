@@ -1,18 +1,17 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-refund-info-dialog',
   templateUrl: './refund-info.component.html',
   styleUrls: ['./refund-info.component.scss'],
 })
-export class CitizenRefundInfoDialogComponent implements OnInit {
+export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   showSaveCardNumberPanel: boolean;
@@ -20,14 +19,11 @@ export class CitizenRefundInfoDialogComponent implements OnInit {
   info: any;
   refundloading: boolean = false;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CitizenRefundInfoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.info = _data.info;
 
     this.frm = this.fb.group({

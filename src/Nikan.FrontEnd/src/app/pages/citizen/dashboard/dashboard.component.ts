@@ -1,16 +1,14 @@
 import { Component, OnInit, Sanitizer } from '@angular/core';
-
-import { DataService } from '@core/services/data-service.service';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class CitizenDashboardComponent implements OnInit {
+export class CitizenDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
   registerTypes;
   loadingData: boolean;
@@ -18,9 +16,8 @@ export class CitizenDashboardComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private toastrService: ToastrService,
-    private dataService: DataService,
-  ) {}
+) {
+      super();}
   ngOnInit(): void {
     this.dataService.get(ServerApis.getAppDashbordList).subscribe(
       (response) => {

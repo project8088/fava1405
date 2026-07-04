@@ -1,8 +1,9 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { NewsDto } from '../../../core/models/news';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 import { SiteSettingViewModel } from '../../../core/models/setting';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -10,14 +11,15 @@ declare var $: any;
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent implements OnInit, AfterViewInit, OnDestroy {
+export class IndexComponent extends AppBase implements OnInit, AfterViewInit, OnDestroy {
   lastNews: NewsDto[] = [];
   loadingNews: boolean;
   baseUrl: string = ServerApis.baseUrl;
 
   setting: SiteSettingViewModel;
 
-  constructor(private dataService: DataService) {}
+  constructor() {
+      super();}
 
   ngOnInit(): void {
     this.getLastNews();

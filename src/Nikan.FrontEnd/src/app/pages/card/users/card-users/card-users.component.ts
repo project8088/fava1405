@@ -3,22 +3,20 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CardAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-card-users',
   templateUrl: './card-users.component.html',
   styleUrls: ['./card-users.component.scss'],
 })
-export class CardUsersComponent implements OnInit {
+export class CardUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
     'row',
     'userName',
@@ -43,14 +41,9 @@ export class CardUsersComponent implements OnInit {
   groupList: any[] = [];
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

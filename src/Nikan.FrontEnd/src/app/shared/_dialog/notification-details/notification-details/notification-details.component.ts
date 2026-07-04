@@ -1,15 +1,14 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import * as moment from 'jalali-moment';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-view-notification-details',
   templateUrl: './notification-details.component.html',
   styleUrls: ['./notification-details.component.scss'],
 })
-export class ViewNotificationDetailsComponent implements OnInit {
+export class ViewNotificationDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';
 
   loadingData: boolean = true;
@@ -19,9 +18,8 @@ export class ViewNotificationDetailsComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getInfo();

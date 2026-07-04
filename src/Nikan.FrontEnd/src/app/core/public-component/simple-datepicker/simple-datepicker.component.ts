@@ -14,6 +14,8 @@ import { RequireMatch } from '../../custom-validator/requireMatch';
 import * as moment from 'jalali-moment';
 import { JalaliMomentDateAdapter } from '../../jalali/jalali-moment-date-adapter';
 import { EventEmitter } from '@angular/core';
+import { AppBase } from "@app/app.base";
+
 @Component({
   // tslint:disable-next-line: component-selector
   selector: 'simple-jalali-datepicker',
@@ -32,7 +34,7 @@ import { EventEmitter } from '@angular/core';
   //   }
   // ]
 })
-export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAccessor, Validator {
+export class SimpleJalaliDatepickerComponent extends AppBase implements OnInit, ControlValueAccessor, Validator {
   @Input() required = false;
   @Input() disabled = false;
   @Input() appearance = 'outline';
@@ -59,6 +61,7 @@ export class SimpleJalaliDatepickerComponent implements OnInit, ControlValueAcce
   yearList = [];
   isLeapYear = false;
   constructor(@Self() public ngControl: NgControl) {
+      super();
     ngControl.valueAccessor = this;
     const momentLocaleData = moment.localeData('fa');
 

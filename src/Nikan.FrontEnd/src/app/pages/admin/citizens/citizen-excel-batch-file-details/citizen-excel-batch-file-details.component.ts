@@ -1,25 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { AuthService } from '@core/authentication/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-citizen-excel-batch-file-details',
   templateUrl: './citizen-excel-batch-file-details.component.html',
   styleUrls: ['./citizen-excel-batch-file-details.component.scss'],
 })
-export class AdminCitizenExcelBatchFileDetailsComponent implements AfterViewInit {
+export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;
   isSaving: boolean;
 
@@ -49,14 +46,9 @@ export class AdminCitizenExcelBatchFileDetailsComponent implements AfterViewInit
   frm: FormGroup;
   events: any[] = [];
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.searchForm = this.fb.group({
       isValidRow: [null],
     });

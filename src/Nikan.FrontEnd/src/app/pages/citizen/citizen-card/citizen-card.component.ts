@@ -1,26 +1,21 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
-
-import { DataService } from '@core/services/data-service.service';
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
-import { Router } from '@angular/router';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-card',
   templateUrl: './citizen-card.component.html',
   styleUrls: ['./citizen-card.component.scss'],
 })
-export class CitizenCardComponent implements OnInit {
+export class CitizenCardComponent extends AppBase implements OnInit {
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   cards;
   availableCards;

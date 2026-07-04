@@ -1,17 +1,16 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-adm-add-user-dialog',
   templateUrl: './add-user.component.html',
   styleUrls: ['./add-user.component.scss'],
 })
-export class AdminAddUserDialogComponent implements OnInit {
+export class AdminAddUserDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   userForm: FormGroup;
   loading: boolean = true;
@@ -22,14 +21,11 @@ export class AdminAddUserDialogComponent implements OnInit {
   loadingUnit: boolean;
   loadingData: boolean = true;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.userForm = this.fb.group(
       {
         id: [null],

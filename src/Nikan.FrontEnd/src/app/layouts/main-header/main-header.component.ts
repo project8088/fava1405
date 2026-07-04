@@ -1,21 +1,17 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-
-import { AuthService } from '../../core/authentication/auth.service';
 import { AuthUser } from '../../core/authentication/user.model';
-import { DataService } from '../../core/services/data-service.service';
 import { RegisterServiceModel } from '@core/models/register-service.model';
 import { ServerApis } from '../../core/server-apis';
 import { SiteSettingViewModel } from '../../core/models/setting';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-main-header',
   templateUrl: './main-header.component.html',
   styleUrls: ['./main-header.component.scss'],
 })
-export class MainHeaderComponent implements OnInit {
+export class MainHeaderComponent extends AppBase implements OnInit {
   isAuth: boolean;
   user: AuthUser;
   datetime: any;
@@ -29,14 +25,10 @@ export class MainHeaderComponent implements OnInit {
   registerTypes;
 
   constructor(
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private dataService: DataService,
     private title: Title,
-    private router: Router,
     private meta: Meta,
   ) {
+      super();
     this.authService.currentUser.subscribe((u) => {
       if (u) {
         this.user = u;

@@ -1,15 +1,13 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
-
-import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '@core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-terms',
   templateUrl: './terms.component.html',
   styleUrls: ['./terms.component.scss'],
 })
-export class TermsComponent implements OnInit {
+export class TermsComponent extends AppBase implements OnInit {
   regLink: string = '';
   service = { serviceName: null };
   serviceId;
@@ -17,11 +15,9 @@ export class TermsComponent implements OnInit {
   toastrService: any;
 
   constructor(
-    private activeRoute: ActivatedRoute,
-    private dataService: DataService,
-    private router: Router,
-  ) {
-    this.activeRoute.queryParams.subscribe((params) => {
+) {
+      super();
+    this.route.queryParams.subscribe((params) => {
       this.serviceId = params.serviceId;
     });
   }

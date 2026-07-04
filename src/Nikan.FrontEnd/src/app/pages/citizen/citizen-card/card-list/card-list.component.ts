@@ -3,27 +3,21 @@ import { Component, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 
 import { BuyCardDialogComponent } from '../../_dialogs/buy-card/buy-card.component';
-import { DataService } from '@core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
-import { Router } from '@angular/router';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-card-list',
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
 })
-export class CitizenCardListComponent implements OnInit {
+export class CitizenCardListComponent extends AppBase implements OnInit {
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-    private matDialog: MatDialog,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   cards;
   availableCards;

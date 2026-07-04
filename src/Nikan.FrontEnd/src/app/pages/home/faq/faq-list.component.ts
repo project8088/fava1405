@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-faq-list',
   templateUrl: './faq-list.component.html',
   styleUrls: ['./faq-list.component.scss'],
 })
-export class FaqListComponent implements OnInit {
+export class FaqListComponent extends AppBase implements OnInit {
   loadingGroup: boolean;
   loadingList: boolean;
 
@@ -20,9 +19,8 @@ export class FaqListComponent implements OnInit {
   selectedFaqGroupId: number;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {
+) {
+      super();
     this.getFaqGroup();
   }
 

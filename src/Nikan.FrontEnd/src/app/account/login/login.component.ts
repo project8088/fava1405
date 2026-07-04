@@ -1,20 +1,15 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { AuthService } from '@core/authentication/auth.service';
-import { DataService } from '../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends AppBase implements OnInit {
   loginForm: FormGroup;
   loading: boolean = false;
   captchaImage: any;
@@ -25,14 +20,8 @@ export class LoginComponent implements OnInit {
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
   constructor(
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private authService: AuthService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private matDialog: MatDialog,
-  ) {
+) {
+      super();
     this.route.queryParams.subscribe((p) => {
       if (p.returnUrl) this.returnUrl = p.returnUrl;
     });

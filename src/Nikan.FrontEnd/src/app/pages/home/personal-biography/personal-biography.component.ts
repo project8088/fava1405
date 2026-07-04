@@ -1,37 +1,27 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DataService } from '../../../core/services/data-service.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'home-personal-biography',
   templateUrl: './personal-biography.component.html',
   styleUrls: ['./personal-biography.component.scss'],
 })
-export class PersonalBiographyComponent implements OnInit {
+export class PersonalBiographyComponent extends AppBase implements OnInit {
   id: string;
   loading: boolean;
   userInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private router: Router,
-    private matDialog: MatDialog,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private authService: AuthService,
     private titleService: Title,
     private metaService: Meta,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.getUserInfo();

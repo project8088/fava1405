@@ -1,18 +1,17 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { userGroupsDto } from '../../../../../core/models/users/usergroups';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-adm-add-usergroups-dialog',
   templateUrl: './add-usergroups.component.html',
   styleUrls: ['./add-usergroups.component.scss'],
 })
-export class AdminAddUserGrousDialogComponent implements OnInit {
+export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   isUpdate: boolean;
   userGroupsForm: FormGroup;
@@ -21,14 +20,11 @@ export class AdminAddUserGrousDialogComponent implements OnInit {
   userGroups: userGroupsDto;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddUserGrousDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     if (_data) {
       this.userGroups = _data.userGroups ? _data.userGroups : '';
       this.isUpdate = true;

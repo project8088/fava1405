@@ -1,29 +1,25 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from '../../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-add-update-product-group-dialog',
   templateUrl: './add-update-product-group.component.html',
   styleUrls: ['./add-update-product-group.component.scss'],
 })
-export class CompanyAddUpdateProductGroupDialogComponent implements OnInit {
+export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   isUpdate: boolean;
   form: FormGroup;
   parentProductList: any[] = [];
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CompanyAddUpdateProductGroupDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.form = this.fb.group({
       id: [null, []],
       name: [null, [Validators.required]],

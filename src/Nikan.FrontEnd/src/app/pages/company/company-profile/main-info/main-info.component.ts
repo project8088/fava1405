@@ -1,18 +1,16 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-main-info',
   templateUrl: './main-info.component.html',
   styleUrls: ['./main-info.component.scss'],
 })
-export class CompanyMainInfoComponent implements OnInit, AfterViewInit {
+export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
   companyId: string = '';
   mainForm: FormGroup;
@@ -21,12 +19,9 @@ export class CompanyMainInfoComponent implements OnInit, AfterViewInit {
   htmlEditor: any;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidators: CustomFormValidators,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
+    private customValidators: CustomFormValidators
   ) {
+      super();
     this.mainForm = this.fb.group({
       slagUrl: [
         null,

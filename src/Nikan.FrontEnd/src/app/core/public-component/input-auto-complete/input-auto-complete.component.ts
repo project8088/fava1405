@@ -17,11 +17,10 @@ import {
 } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
-import { DataService } from '../../services/data-service.service';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'input-auto-complete',
@@ -35,7 +34,7 @@ import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autoc
   //  }
   //]
 })
-export class InputAutoCompleteComponent implements ControlValueAccessor, OnInit {
+export class InputAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
   @Input() disabled: boolean;
 
   @Input('label') label: string = 'استان';
@@ -56,10 +55,9 @@ export class InputAutoCompleteComponent implements ControlValueAccessor, OnInit 
   filteredList: Observable<any[]>;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
     @Self() public ngControl: NgControl,
   ) {
+      super();
     ngControl.valueAccessor = this;
     //this.ngControl = new FormControl(null, [RequireMatch]);
   }

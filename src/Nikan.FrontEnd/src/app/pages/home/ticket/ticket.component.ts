@@ -1,20 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { DataService } from '../../../core/services/data-service.service';
-import { AuthService } from '../../../core/authentication/auth.service';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket',
   templateUrl: './ticket.component.html',
   styleUrls: ['./ticket.component.scss'],
 })
-export class TicketComponent implements OnInit {
+export class TicketComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
   isSaving: boolean;
   loadingData: boolean = true;
@@ -25,12 +23,9 @@ export class TicketComponent implements OnInit {
   loadingUnit: boolean;
   user: AuthUser;
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private customValidator: CustomFormValidators,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.ticketForm = this.fb.group({
       subject: [null, [Validators.required]],
       ticketMessage: [null, [Validators.required, Validators.maxLength(10000)]],

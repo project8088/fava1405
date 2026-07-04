@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from '../../../../core/services/data-service.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -11,7 +11,7 @@ declare var $: any;
   templateUrl: './manage-attachment.component.html',
   styleUrls: ['./manage-attachment.component.scss'],
 })
-export class ManageAttachmentDialogComponent implements OnInit {
+export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
   attachments: any[] = [];
 
   loadingData: boolean;
@@ -24,12 +24,10 @@ export class ManageAttachmentDialogComponent implements OnInit {
   };
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<ManageAttachmentDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     if (_data.guid) {
       this.data.guid = _data.guid;
     } else {

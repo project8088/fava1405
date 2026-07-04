@@ -1,22 +1,19 @@
 import { Component, OnInit, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
-import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import * as CkEditor from '../../../../../assets/ckeditor';
 import { AuthUser } from '../../../../core/authentication/user.model';
-import { AuthService } from '../../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-add-or-update-personal',
   templateUrl: './add-or-update-personal.component.html',
   styleUrls: ['./add-or-update-personal.component.scss'],
 })
-export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewInit {
+export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   companyId: string;
@@ -32,15 +29,9 @@ export class CompanyAddOrUpdatePersonalComponent implements OnInit, AfterViewIni
   htmlEditor: any;
   user: AuthUser;
   constructor(
-    private matDialog: MatDialog,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {

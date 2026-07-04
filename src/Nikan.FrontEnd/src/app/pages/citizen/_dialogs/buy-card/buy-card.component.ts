@@ -1,12 +1,10 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { Router } from '@angular/router';
 import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
+import { AppBase } from "@app/app.base";
 
 interface ICard {
   attachmentGroup: string;
@@ -52,7 +50,7 @@ interface ICardDetails {
   templateUrl: './buy-card.component.html',
   styleUrls: ['./buy-card.component.scss'],
 })
-export class BuyCardDialogComponent implements OnInit {
+export class BuyCardDialogComponent extends AppBase implements OnInit {
   citizenId: number;
   states;
   loading: boolean = true;
@@ -81,15 +79,11 @@ export class BuyCardDialogComponent implements OnInit {
   orderDetails;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<BuyCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private router: Router,
     private helperService: HelperService,
   ) {
+      super();
     this.form = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
       feedbackId: [null, [Validators.required]],

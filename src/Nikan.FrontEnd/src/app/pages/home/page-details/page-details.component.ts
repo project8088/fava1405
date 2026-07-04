@@ -1,18 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../core/services/data-service.service';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
 import { ServerApis } from '../../../core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'home-page-details',
   templateUrl: './page-details.component.html',
   styleUrls: ['./page-details.component.scss'],
 })
-export class MainPageDetailsComponent implements OnInit {
+export class MainPageDetailsComponent extends AppBase implements OnInit {
   slug: string;
   user: AuthUser;
   loadingData: boolean;
@@ -22,13 +19,10 @@ export class MainPageDetailsComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private authService: AuthService,
     private titleService: Title,
     private metaService: Meta,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.slug = p.slug;
       this.getDetailsInfo();

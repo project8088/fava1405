@@ -1,24 +1,21 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { AuthService } from '@core/authentication/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-event-list',
   templateUrl: './citizen-event-list.component.html',
   styleUrls: ['./citizen-event-list.component.scss'],
 })
-export class AppCitizenEventListComponent implements OnInit {
+export class AppCitizenEventListComponent extends AppBase implements OnInit {
   search: string = '';
   paging: any = {};
   userCode: string;
@@ -30,13 +27,8 @@ export class AppCitizenEventListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private router: Router,
-    private matDialog: MatDialog,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
       this.getListevents();

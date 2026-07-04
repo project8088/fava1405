@@ -2,29 +2,24 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { MatDialog } from '@angular/material/dialog';
 import { AdminAddOrUpdateMenuDialogComponent } from './dialog/add-update-menu/add-update-menu.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-menu-management',
   templateUrl: './menu-management.component.html',
   styleUrls: ['./menu-management.component.scss'],
 })
-export class AdminMenuManagementComponent implements OnInit {
+export class AdminMenuManagementComponent extends AppBase implements OnInit {
   data: any[] = [];
   isLoadingResults: boolean = true;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {
     this.getList();

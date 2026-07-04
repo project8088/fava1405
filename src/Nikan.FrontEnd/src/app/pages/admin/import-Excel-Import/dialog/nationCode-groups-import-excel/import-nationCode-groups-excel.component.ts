@@ -1,27 +1,24 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../../core/server-apis';
-import { Router } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-import-nationCode-groups-excel-dialog',
   templateUrl: './import-nationCode-groups-excel.component.html',
   styleUrls: ['./import-nationCode-groups-excel.component.scss'],
 })
-export class AdminImportNationCodeGroupsExcelDialogComponent implements OnInit {
+export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase implements OnInit {
   uploadUrl: string = ServerApis.importGroupNationCodeFromExcel;
   data: any = {
     groupId: 0,
   };
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminImportNationCodeGroupsExcelDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     if (_data.groupId) {
       this.data.groupId = _data.groupId;
     } else {

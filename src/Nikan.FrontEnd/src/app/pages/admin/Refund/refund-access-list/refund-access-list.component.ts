@@ -2,25 +2,22 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-access/change-refund-access.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-refund-access-list',
   templateUrl: './refund-access-list.component.html',
   styleUrls: ['./refund-access-list.component.scss'],
 })
-export class AdminRefundAccessListComponent implements AfterViewInit, OnInit {
+export class AdminRefundAccessListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'letterNumber',
@@ -47,12 +44,8 @@ export class AdminRefundAccessListComponent implements AfterViewInit, OnInit {
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private router: Router,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

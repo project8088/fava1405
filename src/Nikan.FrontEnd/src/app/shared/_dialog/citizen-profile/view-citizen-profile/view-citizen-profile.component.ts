@@ -2,17 +2,16 @@ import { Component, Inject, Input, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-view-citizen-profile',
   templateUrl: './view-citizen-profile.component.html',
   styleUrls: ['./view-citizen-profile.component.scss'],
 })
-export class ViewCitizenProfileComponent implements OnInit {
+export class ViewCitizenProfileComponent extends AppBase implements OnInit {
   @Input('userCode') userCode: string = '';
 
   feedbackfrm: FormGroup;
@@ -25,10 +24,8 @@ export class ViewCitizenProfileComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getCitizenInfo();

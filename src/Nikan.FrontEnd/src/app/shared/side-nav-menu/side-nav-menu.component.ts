@@ -1,22 +1,18 @@
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-
-import { AuthService } from '@core/authentication/auth.service';
 import { AuthUser } from '../../core/authentication/user.model';
-import { DataService } from '../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../core/server-apis';
 import { SideNavMenuItem } from '../../core/models/menuItems';
-import { ToastrService } from 'ngx-toastr';
 import { UploadUserAvatarDialogComponent } from '../_dialog/upload-avatar/upload-avatar.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'side-nav-menu',
   templateUrl: './side-nav-menu.component.html',
   styleUrls: ['./side-nav-menu.component.scss'],
 })
-export class SideNavMenuComponent implements OnInit {
+export class SideNavMenuComponent extends AppBase implements OnInit {
   @Input('menu') menuItems: SideNavMenuItem[];
   @Input('showLogout') showLogout: boolean = true;
 
@@ -30,14 +26,10 @@ export class SideNavMenuComponent implements OnInit {
   userImage: string;
 
   constructor(
-    private toastrService: ToastrService,
     private elementRef: ElementRef,
-    private sanitizer: DomSanitizer,
-    private authService: AuthService,
-    private router: Router,
-    private matDialog: MatDialog,
-    private dataService: DataService,
+    private sanitizer: DomSanitizer
   ) {
+      super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
     });

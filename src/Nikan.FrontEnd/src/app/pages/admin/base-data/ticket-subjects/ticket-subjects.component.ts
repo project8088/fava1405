@@ -2,19 +2,18 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-ticket-subjects',
   templateUrl: './ticket-subjects.component.html',
   styleUrls: ['./ticket-subjects.component.scss'],
 })
-export class AdminTicketSubjectsComponent implements AfterViewInit, OnInit {
+export class AdminTicketSubjectsComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'organizationalUnit',
@@ -43,10 +42,8 @@ export class AdminTicketSubjectsComponent implements AfterViewInit, OnInit {
   organizationList: any[] = [];
   unitList: any[] = [];
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.frm = fb.group({
       id: [null],
       title: [null, [Validators.required]],

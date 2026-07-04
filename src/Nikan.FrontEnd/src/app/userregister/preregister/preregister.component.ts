@@ -1,21 +1,19 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { ApiResult, RegisterServiceModel } from '../../core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
 import { UserRegisterService } from '../userregister.service';
 import { CaptchaComponent } from 'src/app/account/bot-detect/captcha.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-preregister',
   templateUrl: './preregister.component.html',
   styleUrls: ['./preregister.component.scss'],
 })
-export class PreregisterComponent implements OnInit {
+export class PreregisterComponent extends AppBase implements OnInit {
   form: FormGroup;
   loading: boolean;
   isSaving: boolean = false;
@@ -24,14 +22,10 @@ export class PreregisterComponent implements OnInit {
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
   constructor(
-    private dataService: DataService,
     private accounService: UserRegisterService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private router: Router,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.form = this.fb.group({
       serviceId: [null, [Validators.required]],
       nationality: ['0', [Validators.required]],

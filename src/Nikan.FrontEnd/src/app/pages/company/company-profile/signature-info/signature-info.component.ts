@@ -1,18 +1,16 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-signature-info',
   templateUrl: './signature-info.component.html',
   styleUrls: ['./signature-info.component.scss'],
 })
-export class CompanySignatureInfoComponent implements OnInit, AfterViewInit {
+export class CompanySignatureInfoComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
   companyId: string = '';
 
@@ -24,12 +22,9 @@ export class CompanySignatureInfoComponent implements OnInit, AfterViewInit {
   data: any;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidators: CustomFormValidators,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
+    private customValidators: CustomFormValidators
   ) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id) this.companyId = p.id;
       this.data = {

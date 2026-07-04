@@ -1,24 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-pay-setting',
   templateUrl: './pay-setting.component.html',
   styleUrls: ['./pay-setting.component.scss'],
 })
-export class AdminPaySettingComponent implements OnInit {
+export class AdminPaySettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
 
   constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {
+) {
+      super();
     this.settingForm = this.fb.group({
       bankCustomerId: [null, [Validators.required]],
       bankPassword: [null, [Validators.required]],

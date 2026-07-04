@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
 import { SiteSettingViewModel } from '../../../core/models/setting';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.scss'],
 })
-export class ContactUsComponent implements OnInit {
+export class ContactUsComponent extends AppBase implements OnInit {
   contactForm: FormGroup;
   loadingData: boolean = true;
   periorityList: any[] = [];
@@ -26,13 +24,9 @@ export class ContactUsComponent implements OnInit {
   setting: SiteSettingViewModel;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.contactForm = this.fb.group({
       subject: [null, [Validators.required, Validators.maxLength(1000)]],
       message: [null, [Validators.required, Validators.maxLength(10000)]],

@@ -1,23 +1,21 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import * as moment from 'jalali-moment';
 import { ServerApis } from '../../../../../core/server-apis';
-import { DataService } from '../../../../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'admin-view-event-details',
   templateUrl: './event-details.component.html',
   styleUrls: ['./event-details.component.scss'],
 })
-export class AdminViewEventDetailsComponent implements OnInit {
+export class AdminViewEventDetailsComponent extends AppBase implements OnInit {
   @Input('id') id: string = '';
   loadingData: boolean = true;
   event: any = {};
   baseUrl: string = ServerApis.baseUrl;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getInfo();

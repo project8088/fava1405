@@ -1,24 +1,22 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../core/server-apis';
-import { DataService } from '../../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-pay-test',
   templateUrl: './pay-test.component.html',
   styleUrls: ['./pay-test.component.scss'],
 })
-export class AdminPayTestComponent implements OnInit {
+export class AdminPayTestComponent extends AppBase implements OnInit {
   loading: boolean;
   form: FormGroup;
   RefId: string;
   waitForRedirectToBank: boolean;
   constructor(
-    private dataService: DataService,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-  ) {
+) {
+      super();
     this.form = this.fb.group({
       amount: [0, [Validators.required]],
       orderId: [0, [Validators.required]],

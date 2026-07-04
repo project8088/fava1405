@@ -1,21 +1,18 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog';
-import { DataService } from '../../../core/services/data-service.service';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
 import { ServerApis } from '../../../core/server-apis';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 
 import { Title, Meta } from '@angular/platform-browser';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'home-product-details',
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class MainProductDetailsComponent implements OnInit {
+export class MainProductDetailsComponent extends AppBase implements OnInit {
   id: string;
   user: AuthUser;
   loadingData: boolean;
@@ -27,17 +24,11 @@ export class MainProductDetailsComponent implements OnInit {
   loadingPay: boolean;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private router: Router,
-    private matDialog: MatDialog,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-    private authService: AuthService,
     private customValidator: CustomFormValidators,
     private titleService: Title,
     private metaService: Meta,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
       this.getDetailsInfo();

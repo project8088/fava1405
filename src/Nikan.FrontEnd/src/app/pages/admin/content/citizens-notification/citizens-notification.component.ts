@@ -1,16 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-citizens-notification',
   templateUrl: './citizens-notification.component.html',
   styleUrls: ['./citizens-notification.component.scss'],
 })
-export class AdminAddOrUpdateCitizensNotificationComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateCitizensNotificationComponent extends AppBase implements OnInit, AfterViewInit {
   notificationId: string;
   notyForm: FormGroup;
 
@@ -21,12 +19,8 @@ export class AdminAddOrUpdateCitizensNotificationComponent implements OnInit, Af
   loading: boolean;
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.notificationId = p.id;

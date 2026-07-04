@@ -1,12 +1,9 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 interface ICard {
   attachmentGroup: string;
@@ -59,7 +56,7 @@ interface ICardDetails {
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss'],
 })
-export class CardDetailComponent implements OnInit {
+export class CardDetailComponent extends AppBase implements OnInit {
   citizenId: number;
   addressId: number;
 
@@ -91,13 +88,9 @@ export class CardDetailComponent implements OnInit {
   orderDetails;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private router: Router,
-    private route: ActivatedRoute,
     private helperService: HelperService,
   ) {
+      super();
     this.route.queryParams.subscribe((params) => {
       if (params['id']) {
         this.cardInfoId = params['id'];

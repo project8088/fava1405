@@ -7,27 +7,23 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { DataService } from '../../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../../core/server-apis';
-import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-tree-user-web-api-permission',
   templateUrl: './tree-user-web-api-permission.component.html',
   styleUrls: ['./tree-user-web-api-permission.component.scss'],
 })
-export class AdminTreeWebApiPermissionComponent implements OnInit {
+export class AdminTreeWebApiPermissionComponent extends AppBase implements OnInit {
   @Input('permissionItems') permissionItems: any;
 
   @Output() onUpdate = new EventEmitter<boolean>();
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {}
 

@@ -1,22 +1,19 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 
 import { AdminCitizenManzelatReviewComponent } from '../../_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
-import { DataService } from '../../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import { ShowImageDialogComponent } from 'src/app/shared/_dialog/show-image/show-image.component';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-manzelat-citizens-details',
   templateUrl: './manzelat-citizens-details.component.html',
   styleUrls: ['./manzelat-citizens-details.component.scss'],
 })
-export class AdminManzelatCitizensDetailsComponent implements OnInit {
+export class AdminManzelatCitizensDetailsComponent extends AppBase implements OnInit {
   userCode: string;
   data: [];
   citizen: any = {};
@@ -25,12 +22,8 @@ export class AdminManzelatCitizensDetailsComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id;
     });

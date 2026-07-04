@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 
 import { CitizenProfileComponent } from '../profile.component';
-import { DataService } from '@core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import { SideNavMenuComponent } from 'src/app/shared/side-nav-menu/side-nav-menu.component';
-import { ToastrService } from 'ngx-toastr';
 import { UploadUserAvatarDialogComponent } from 'src/app/shared/_dialog/upload-avatar/upload-avatar.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-personnel-image',
   templateUrl: './personnel-image.component.html',
   styleUrls: ['./personnel-image.component.scss'],
 })
-export class CitizenPersonnelImageComponent implements OnInit {
+export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   personalPictureIsUploaded: boolean = false;
@@ -29,13 +27,10 @@ export class CitizenPersonnelImageComponent implements OnInit {
   imageStates = ['عدم تایید', 'تایید شده', 'در حال بررسی'];
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private matDialog: MatDialog,
     private profileComponent: CitizenProfileComponent,
     // private navBar: SideNavMenuComponent
   ) {
+      super();
     this.cardForm = this.fb.group({
       personnelImage: [null, [Validators.required]],
     });

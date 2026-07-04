@@ -1,17 +1,16 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'jalali-moment';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-view-job-details',
   templateUrl: './view-job-details.component.html',
   styleUrls: ['./view-job-details.component.scss'],
 })
-export class ViewJobDetailsComponent implements OnInit {
+export class ViewJobDetailsComponent extends AppBase implements OnInit {
   @Input('jobId') jobId: string = '';
 
   loadingData: boolean = true;
@@ -20,9 +19,8 @@ export class ViewJobDetailsComponent implements OnInit {
   jobOpportunity: any = {};
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getJobInfo();

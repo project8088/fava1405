@@ -2,26 +2,22 @@ import { Component, OnInit, AfterViewInit, ViewChild, Input } from '@angular/cor
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
 import * as moment from 'jalali-moment';
 import { SendTicketDialogComponent } from '../_dialogs/send-ticket/send-ticket.component';
-import { AuthService } from '@core/authentication/auth.service';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 import { merge, of } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket-list',
   templateUrl: './ticket-list.component.html',
   styleUrls: ['./ticket-list.component.scss'],
 })
-export class TicketListComponent implements OnInit, AfterViewInit {
+export class TicketListComponent extends AppBase implements OnInit, AfterViewInit {
   introductionInfo: any = {};
   displayedColumns: string[];
   data: any[] = [];
@@ -38,14 +34,8 @@ export class TicketListComponent implements OnInit, AfterViewInit {
   ticketStatus: any[] = [];
 
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private authService: AuthService,
-    private dataService: DataService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       ticketStatus: [null],
       iscolsed: [null],

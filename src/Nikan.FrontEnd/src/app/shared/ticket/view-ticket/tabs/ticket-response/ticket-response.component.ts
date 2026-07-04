@@ -1,22 +1,18 @@
 import { Component, OnInit, AfterViewInit, ViewChild, Input, ElementRef } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { AuthService } from '@core/authentication/auth.service';
+import { Validators, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { AuthUser } from '../../../../../core/authentication/user.model';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { UploaderComponent } from '../../../../uploader/uploader.component';
 import { CitizenProfileDialogComponent } from '../../../../_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket-response',
   templateUrl: './ticket-response.component.html',
   styleUrls: ['./ticket-response.component.scss'],
 })
-export class TicketResponseComponent implements OnInit, AfterViewInit {
+export class TicketResponseComponent extends AppBase implements OnInit, AfterViewInit {
   id: string = '';
   loading: boolean = true;
   ticket: any;
@@ -34,14 +30,8 @@ export class TicketResponseComponent implements OnInit, AfterViewInit {
   @ViewChild(UploaderComponent) uploader;
 
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private authService: AuthService,
-    private route: ActivatedRoute,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.uploadData.Guid = this.newGuid();
 
     this.answerForm = this.fb.group({

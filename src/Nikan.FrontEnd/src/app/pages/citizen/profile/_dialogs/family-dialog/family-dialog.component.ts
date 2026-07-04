@@ -1,22 +1,21 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { MatStepper } from '@angular/material/stepper';
 import { HelperService } from '@core/services/helper.service';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-family-dialog',
   templateUrl: './family-dialog.component.html',
   styleUrls: ['./family-dialog.component.scss'],
 })
-export class CitizenFamilyDialogComponent implements OnInit {
+export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
 
   id: string;
@@ -43,15 +42,12 @@ export class CitizenFamilyDialogComponent implements OnInit {
   isfahanCities;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CitizenFamilyDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
+      super();
     this.dataService.getEnums().subscribe((data) => {
       this.baseEnums.maritalStatus = data['maritalStatus'];
       this.baseEnums.educationStatues = data['educationStatues'];

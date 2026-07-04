@@ -1,16 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '@core/server-apis';
-import { DataService } from '@core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-reject-family',
   templateUrl: './citizen-reject-family.component.html',
   styleUrls: ['./citizen-reject-family.component.scss'],
 })
-export class AdminCitizenRejectFamilyComponent implements OnInit {
+export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({
     reason: new FormControl(''),
     description: new FormControl(''),
@@ -24,10 +23,9 @@ export class AdminCitizenRejectFamilyComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenRejectFamilyComponent>,
-    private dataService: DataService,
-    private toastService: ToastrService,
+    private matDialogRef: MatDialogRef<AdminCitizenRejectFamilyComponent>
   ) {
+      super();
     this.citizen = _data;
   }
 
@@ -49,11 +47,11 @@ export class AdminCitizenRejectFamilyComponent implements OnInit {
       .subscribe(
         (response) => {
           if (response.isSuccess) {
-            this.toastService.success(response.messages);
+            this.toastrService.success(response.messages);
             this.matDialogRef.close(true);
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastService.error(msg);
+            this.toastrService.error(msg);
           }
         },
         (error) => {},

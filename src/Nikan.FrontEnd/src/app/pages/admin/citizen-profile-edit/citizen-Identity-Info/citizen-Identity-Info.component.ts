@@ -1,20 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ActivatedRoute } from '@angular/router';
-
-import { DataService } from '../../../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-citizen-Identity-Info',
   templateUrl: './citizen-Identity-Info.component.html',
   styleUrls: ['./citizen-Identity-Info.component.scss'],
 })
-export class AdminCitizenIdentityInfoComponent implements OnInit {
+export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -22,10 +18,8 @@ export class AdminCitizenIdentityInfoComponent implements OnInit {
   userStatus: number;
   userCode: string = '';
   constructor(
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id != '0' && p.id) this.userCode = p.id;
       this.getPersonalInfo();

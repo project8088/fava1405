@@ -2,12 +2,8 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
@@ -15,13 +11,14 @@ import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';
 import { AdminAddRefundUserDialogComponent } from '../dialog/add-refund-user/add-refund-user.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-refund-users',
   templateUrl: './refund-users.component.html',
   styleUrls: ['./refund-users.component.scss'],
 })
-export class AdminRefundUsersComponent implements AfterViewInit, OnInit {
+export class AdminRefundUsersComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'citizen',
@@ -43,12 +40,8 @@ export class AdminRefundUsersComponent implements AfterViewInit, OnInit {
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private router: Router,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       name: [''],
       nationCode: [''],

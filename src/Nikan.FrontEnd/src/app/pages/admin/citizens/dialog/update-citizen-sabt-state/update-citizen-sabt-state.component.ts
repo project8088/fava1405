@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
@@ -9,15 +8,15 @@ import {
 import { BaseDataModel } from '@core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-adm-update-citizen-sabt-state-dialog',
   templateUrl: './update-citizen-sabt-state.component.html',
   styleUrls: ['./update-citizen-sabt-state.component.scss'],
 })
-export class AdminUpdateCitizenSabtStateDialogComponent implements OnInit {
+export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   userForm: FormGroup;
   userCode: string;
@@ -26,14 +25,11 @@ export class AdminUpdateCitizenSabtStateDialogComponent implements OnInit {
 
   loadingData: boolean = true;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminUpdateCitizenSabtStateDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     if (_data) {
       this.userCode = _data.userCode;
       this.getUserInfo();

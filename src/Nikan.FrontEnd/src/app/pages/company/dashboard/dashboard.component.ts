@@ -1,18 +1,15 @@
 import { Component, OnInit, Sanitizer } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../core/server-apis';
-import { DataService } from '../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ViewNotificationDetailsDialogComponent } from '../../../shared/_dialog/notification-details/notification-details.component';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-company-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class CompnayDashboardComponent implements OnInit {
+export class CompnayDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
   notifications: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
@@ -22,11 +19,8 @@ export class CompnayDashboardComponent implements OnInit {
   user: AuthUser;
 
   constructor(
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private matDialog: MatDialog,
-    private authService: AuthService,
-  ) {
+) {
+      super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
     });

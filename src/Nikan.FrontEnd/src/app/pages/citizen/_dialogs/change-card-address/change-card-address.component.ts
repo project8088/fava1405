@@ -1,19 +1,17 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
-import { Router, ActivatedRoute } from '@angular/router';
 import { HelperService } from '../../../../core/services/helper.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-change-card-address-dialog',
   templateUrl: './change-card-address.component.html',
   styleUrls: ['./change-card-address.component.scss'],
 })
-export class ChangeCardAddressDialogComponent implements OnInit {
+export class ChangeCardAddressDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   id: string;
   isfahanCities: any[];
@@ -21,17 +19,12 @@ export class ChangeCardAddressDialogComponent implements OnInit {
   loading: boolean = true;
   info: any;
   constructor(
-    private matDialog: MatDialog,
-    private route: ActivatedRoute,
     private matDialogRef: MatDialogRef<ChangeCardAddressDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
     private helperService: HelperService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private router: Router,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.info = _data.info;
     debugger;
 

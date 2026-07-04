@@ -1,22 +1,21 @@
 import { OnInit, Component } from '@angular/core';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'webuser-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class WebUserDashboardComponent implements OnInit {
+export class WebUserDashboardComponent extends AppBase implements OnInit {
   loading: boolean;
   activeWaterMeter: any;
   errorMessage: string = '';
   loadingActiveWaterMeter: boolean = false;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
   ngOnInit() {
     this.getActiveWaterMeterPeriod();
   }

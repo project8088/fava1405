@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-
-import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '@core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-plans-list',
   templateUrl: './plans-list.component.html',
   styleUrls: ['./plans-list.component.scss'],
 })
-export class PlansListComponent implements OnInit {
+export class PlansListComponent extends AppBase implements OnInit {
   loading: boolean = true;
   hasAddress: boolean = false;
   hasRegister: boolean = false;
@@ -18,7 +17,8 @@ export class PlansListComponent implements OnInit {
   displayedColumns: string[] = ['title', 'registerForm', 'uploadFile', 'status', 'help'];
 
   routes = ['janbazan', 'maloulin', 'zanan-sarparast', 'bazneshaste', 'salmandan'];
-  constructor(private dataService: DataService) {}
+  constructor() {
+      super();}
 
   ngOnInit(): void {
     this.getManzelatSetrices();

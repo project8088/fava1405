@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { Observable } from 'rxjs';
 import { map, startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -12,13 +10,14 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-card-discount-dialog',
   templateUrl: './add-card-discount.component.html',
   styleUrls: ['./add-card-discount.component.scss'],
 })
-export class CardAddCardDiscountDialogComponent implements OnInit {
+export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   isUpdate: boolean;
@@ -31,14 +30,11 @@ export class CardAddCardDiscountDialogComponent implements OnInit {
   id: string;
   cardTypeId: string;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CardAddCardDiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.frm = this.fb.group({
       cardTypeId: [null],
       discountPercent: [null, [Validators.required]],

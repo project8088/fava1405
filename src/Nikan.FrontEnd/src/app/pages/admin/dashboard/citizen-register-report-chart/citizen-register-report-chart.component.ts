@@ -2,16 +2,15 @@ import { Component, OnInit, OnDestroy, AfterViewInit, Injector } from '@angular/
 import { Subscription } from 'rxjs';
 import { Chart } from 'angular-highcharts';
 import { ServerApis } from '@core/server-apis';
-import { DataService } from '@core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-citizen-register-report-chart',
   templateUrl: './citizen-register-report-chart.component.html',
   styleUrls: ['./citizen-register-report-chart.component.scss'],
 })
-export class AdminDashboardCitizenRegisterReportChartComponent implements OnInit, OnDestroy {
+export class AdminDashboardCitizenRegisterReportChartComponent extends AppBase implements OnInit, OnDestroy {
   loading: boolean;
   report: any = {};
   subscribeReport: Subscription;
@@ -21,10 +20,8 @@ export class AdminDashboardCitizenRegisterReportChartComponent implements OnInit
   reportForm: FormGroup;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.reportForm = this.fb.group({
       startDate: [null, []],
       endDate: [null, []],

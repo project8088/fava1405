@@ -3,21 +3,19 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'main-news-list',
   templateUrl: './news-list.component.html',
   styleUrls: ['./news-list.component.scss'],
 })
-export class MainNewsListComponent implements AfterViewInit, OnInit {
+export class MainNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -30,13 +28,9 @@ export class MainNewsListComponent implements AfterViewInit, OnInit {
   groupList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.searchForm = this.fb.group({
       groupId: [null],
       fromDate: [null],

@@ -1,23 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators } from '@angular/forms';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-update-Identity-Info',
   templateUrl: './update-Identity-Info.component.html',
   styleUrls: ['./update-Identity-Info.component.scss'],
 })
-export class CitizenUpdateIdentityInfoComponent implements OnInit {
+export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -33,13 +30,10 @@ export class CitizenUpdateIdentityInfoComponent implements OnInit {
 
   constructor(
     private helperService: HelperService,
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService,
     private profileComponent: CitizenProfileComponent,
   ) {
+      super();
     this.getIdentityInfo();
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],

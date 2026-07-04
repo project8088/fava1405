@@ -1,19 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '@core/authentication/auth.service';
-import { DataService } from '../../../../core/services/data-service.service';
+import { ActivatedRoute } from '@angular/router';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { AuthUser } from '../../../../core/authentication/user.model';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-send-ticket-dialog',
   templateUrl: './send-ticket.component.html',
   styleUrls: ['./send-ticket.component.scss'],
 })
-export class SendTicketDialogComponent implements OnInit {
+export class SendTicketDialogComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
   isSaving: boolean;
   loadingData: boolean = true;
@@ -25,15 +23,10 @@ export class SendTicketDialogComponent implements OnInit {
 
   user: AuthUser;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<SendTicketDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private router: Router,
-    private authService: AuthService,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.user = this.authService.currentUserValue;
     this.ticketForm = this.fb.group({
       subject: [null, []],

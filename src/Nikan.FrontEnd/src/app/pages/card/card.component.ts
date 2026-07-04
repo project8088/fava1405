@@ -3,14 +3,14 @@ import { SideNavMenuItem } from '../../core/models/menuItems';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'crd-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
 
   miniSideBar: boolean;
@@ -82,9 +82,9 @@ export class CardComponent implements OnInit, OnDestroy {
     shareReplay(),
   );
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

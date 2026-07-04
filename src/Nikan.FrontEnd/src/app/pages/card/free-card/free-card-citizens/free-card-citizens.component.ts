@@ -3,21 +3,18 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'free-card-citizens',
   templateUrl: './free-card-citizens.component.html',
   styleUrls: ['./free-card-citizens.component.scss'],
 })
-export class CardFreeCardCitizensComponent implements OnInit, AfterViewInit {
+export class CardFreeCardCitizensComponent extends AppBase implements OnInit, AfterViewInit {
   loading: boolean;
   displayedColumns: string[] = ['row', 'imageUrl', 'citizen', 'nationCode', 'sabtStatus'];
 
@@ -33,13 +30,8 @@ export class CardFreeCardCitizensComponent implements OnInit, AfterViewInit {
   searchForm: FormGroup;
   events: any[] = [];
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private fb: FormBuilder,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.requestId = p.id;
     });

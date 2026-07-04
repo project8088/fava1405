@@ -1,19 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '../../../core/authentication/auth.service';
-import { Router } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-profile',
   templateUrl: './citizen-profile.component.html',
   styleUrls: ['./citizen-profile.component.scss'],
 })
-export class AdminCitizenProfileComponent implements OnInit {
+export class AdminCitizenProfileComponent extends AppBase implements OnInit {
   user: AuthUser;
   constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.user = this.authService.currentUserValue;
   }
 

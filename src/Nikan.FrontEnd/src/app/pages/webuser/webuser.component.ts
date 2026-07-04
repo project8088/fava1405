@@ -3,16 +3,15 @@ import { SideNavMenuItem } from '../../core/models/menuItems';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map, shareReplay } from 'rxjs/operators';
-import { AuthService } from '../../core/authentication/auth.service';
 import { ServerApis } from '../../core/server-apis';
-import { DataService } from '../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'webuser-webuserpanel',
   templateUrl: './webuser.component.html',
   styleUrls: ['./webuser.component.scss'],
 })
-export class WebUserComponent implements OnInit, OnDestroy {
+export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
 
   miniSideBar: boolean;
@@ -25,10 +24,9 @@ export class WebUserComponent implements OnInit, OnDestroy {
     shareReplay(),
   );
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private dataService: DataService,
-    private authService: AuthService,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

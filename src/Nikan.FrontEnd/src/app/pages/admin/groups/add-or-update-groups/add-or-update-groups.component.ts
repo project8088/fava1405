@@ -1,16 +1,14 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-add-or-update-groups',
   templateUrl: './add-or-update-groups.component.html',
   styleUrls: ['./add-or-update-groups.component.scss'],
 })
-export class AdminAddOrUpdateGroupsComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   groupForm: FormGroup;
@@ -22,12 +20,8 @@ export class AdminAddOrUpdateGroupsComponent implements OnInit, AfterViewInit {
   parentGroups: any[] = [];
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

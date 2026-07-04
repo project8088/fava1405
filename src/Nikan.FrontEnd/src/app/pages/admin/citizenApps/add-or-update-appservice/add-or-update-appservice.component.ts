@@ -1,17 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-add-or-update-appservice',
   templateUrl: './add-or-update-appservice.component.html',
   styleUrls: ['./add-or-update-appservice.component.scss'],
 })
-export class AdminAddOrUpdateAppserviceComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   serviceId: string;
   storeForm: FormGroup;
@@ -24,12 +22,8 @@ export class AdminAddOrUpdateAppserviceComponent implements OnInit, AfterViewIni
   htmlEditor: any;
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

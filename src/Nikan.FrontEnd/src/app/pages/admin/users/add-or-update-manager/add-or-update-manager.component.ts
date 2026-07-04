@@ -1,20 +1,18 @@
 import { Component, OnInit, Inject, ViewChild, AfterViewInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
-import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-or-update-manager',
   templateUrl: './add-or-update-manager.component.html',
   styleUrls: ['./add-or-update-manager.component.scss'],
 })
-export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   isSaving: boolean;
@@ -28,14 +26,9 @@ export class AdminAddOrUpdateManagerComponent implements OnInit, AfterViewInit {
   loadingData: boolean = true;
   htmlEditor: any;
   constructor(
-    private matDialog: MatDialog,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private router: Router,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

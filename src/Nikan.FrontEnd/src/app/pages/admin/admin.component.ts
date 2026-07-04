@@ -1,17 +1,16 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
-
-import { AuthService } from '../../core/authentication/auth.service';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '../../core/models/menuItems';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.scss'],
 })
-export class AdminComponent implements OnInit, OnDestroy {
+export class AdminComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'default';
 
   miniSideBar: boolean;
@@ -165,9 +164,9 @@ export class AdminComponent implements OnInit, OnDestroy {
     shareReplay(),
   );
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

@@ -1,16 +1,17 @@
 import { Component, OnInit, Input, ElementRef, OnDestroy } from '@angular/core';
-import { AuthService } from '@core/authentication/auth.service';
 import { SideNavMenuItem } from '../../../core/models/menuItems';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'menu-dynamic',
   templateUrl: './menu-dynamic.component.html',
   styleUrls: ['./menu-dynamic.component.scss'],
 })
-export class MenuDynamicComponent implements OnInit, OnDestroy {
+export class MenuDynamicComponent extends AppBase implements OnInit, OnDestroy {
   @Input('menu') menuItems: SideNavMenuItem[];
 
-  constructor(private authService: AuthService) {}
+  constructor() {
+      super();}
 
   ngOnInit(): void {}
 

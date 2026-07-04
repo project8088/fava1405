@@ -1,10 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -12,7 +10,7 @@ declare var $: any;
   templateUrl: './top-companies.component.html',
   styleUrls: ['./top-companies.component.scss'],
 })
-export class HomeTopCompaniesListComponent implements OnInit {
+export class HomeTopCompaniesListComponent extends AppBase implements OnInit {
   data: any[] = [];
   isLoadingResults: boolean = true;
 
@@ -21,11 +19,8 @@ export class HomeTopCompaniesListComponent implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {
     this.getList();

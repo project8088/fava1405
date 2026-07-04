@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-
-import { DataService } from '@core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'citizen-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
 })
-export class AdminCitizenAddressInfoComponent implements OnInit {
+export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit {
   editMode: boolean = false;
   editModeWork: boolean = false;
   loading: boolean;
@@ -32,12 +29,9 @@ export class AdminCitizenAddressInfoComponent implements OnInit {
   cities: Observable<[]>;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private route: ActivatedRoute,
     private helperService: HelperService,
   ) {
+      super();
     this.homeForm = this.fb.group({
       phone: ['', [Validators.required]],
       region: [null],

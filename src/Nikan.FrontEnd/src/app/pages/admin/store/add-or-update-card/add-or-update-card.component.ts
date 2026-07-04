@@ -1,17 +1,15 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import * as CkEditor from '../../../../../assets/ckeditor';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-or-update-card',
   templateUrl: './add-or-update-card.component.html',
   styleUrls: ['./add-or-update-card.component.scss'],
 })
-export class AdminAddOrUpdateCardComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   storeForm: FormGroup;
@@ -25,12 +23,8 @@ export class AdminAddOrUpdateCardComponent implements OnInit, AfterViewInit {
   htmlEditor: any;
 
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.cardTypeId = p.cardTypeId;
 

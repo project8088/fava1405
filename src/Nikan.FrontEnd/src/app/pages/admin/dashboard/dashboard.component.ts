@@ -1,28 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { DataService } from '../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { AuthService } from '@core/authentication/auth.service';
-import { MatDialog } from '@angular/material/dialog';
 import { AdminViewEventDetailsDialogComponent } from '../_dialogs/event-details/event-details.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class AdminDashboardComponent implements OnInit {
+export class AdminDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
   loading: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    public authService: AuthService,
-    private matDialog: MatDialog,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {}
   ngAfterViewInit() {

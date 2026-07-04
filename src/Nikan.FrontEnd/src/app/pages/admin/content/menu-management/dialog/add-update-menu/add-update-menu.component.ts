@@ -1,12 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../../../core/services/data-service.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../../../core/server-apis';
 import { forkJoin } from 'rxjs';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -14,7 +14,7 @@ declare var $: any;
   templateUrl: './add-update-menu.component.html',
   styleUrls: ['./add-update-menu.component.scss'],
 })
-export class AdminAddOrUpdateMenuDialogComponent implements OnInit {
+export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
   isUpdate: boolean;
   isSaving: boolean;
 
@@ -34,13 +34,10 @@ export class AdminAddOrUpdateMenuDialogComponent implements OnInit {
     { menuName: 'محصولات', menuPath: '/home/products' },
   ];
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddOrUpdateMenuDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private fb: FormBuilder,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.menuForm = this.fb.group({
       id: [null],
       menuName: [null, [Validators.required, Validators.maxLength(50)]],

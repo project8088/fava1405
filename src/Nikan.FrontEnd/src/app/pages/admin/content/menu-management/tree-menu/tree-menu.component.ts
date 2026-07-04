@@ -7,28 +7,24 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
-import { DataService } from '../../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '../../../../../core/server-apis';
 import { AdminAddOrUpdateMenuDialogComponent } from '../dialog/add-update-menu/add-update-menu.component';
-import { MatDialog } from '@angular/material/dialog';
 import Swal from 'sweetalert2';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-tree-menu',
   templateUrl: './tree-menu.component.html',
   styleUrls: ['./tree-menu.component.scss'],
 })
-export class AdminTreeMenuComponent implements OnInit {
+export class AdminTreeMenuComponent extends AppBase implements OnInit {
   @Input('menuItems') menuItems: any[];
 
   @Output() onUpdate = new EventEmitter<boolean>();
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {}
 

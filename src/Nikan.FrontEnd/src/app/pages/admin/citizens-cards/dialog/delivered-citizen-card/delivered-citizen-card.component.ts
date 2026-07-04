@@ -1,31 +1,27 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-delivered-citizen-card-dialog',
   templateUrl: './delivered-citizen-card.component.html',
   styleUrls: ['./delivered-citizen-card.component.scss'],
 })
-export class AdminDeliveredCitizenCardDialogComponent implements OnInit {
+export class AdminDeliveredCitizenCardDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   centerList: any[] = [];
   loading: boolean = true;
   info: any;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminDeliveredCitizenCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.info = _data.info;
 
     this.frm = this.fb.group({

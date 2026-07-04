@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-creditcard',
   templateUrl: './creditcard.component.html',
   styleUrls: ['./creditcard.component.scss'],
 })
-export class CreditcardComponent implements OnInit {
+export class CreditcardComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -18,10 +16,8 @@ export class CreditcardComponent implements OnInit {
   loadingState: boolean;
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.cardForm = this.fb.group({
       cardNumber: [null, [Validators.required]],
       shabaNumber: [null, [Validators.required]],

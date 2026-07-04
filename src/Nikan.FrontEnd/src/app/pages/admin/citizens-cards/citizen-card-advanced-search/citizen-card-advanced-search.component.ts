@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
@@ -8,28 +8,25 @@ import { AdminCompanyChangeStatusDialogComponent } from '../../_dialogs/company-
 import { AdminCompanyContractDialogComponent } from '../../_dialogs/company-contract/company-contract.component';
 import { AuthService } from '@core/authentication/auth.service';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterServiceModel } from '@core/models/register-service.model';
-import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
 import { AdminBackCitizenCardDialogComponent } from '../dialog/back-citizen-card/back-citizen-card.component';
 import { AdminDeliveredCitizenCardDialogComponent } from '../dialog/delivered-citizen-card/delivered-citizen-card.component';
 import { AdminCancellationCitizenCardDialogComponent } from '../dialog/cancellation-citizen-card/cancellation-citizen-card.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-citizen-card-advanced-search',
   templateUrl: './citizen-card-advanced-search.component.html',
   styleUrls: ['./citizen-card-advanced-search.component.scss'],
 })
-export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
+export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
     'nationCode',
@@ -55,14 +52,10 @@ export class AdminCitizenCardAdvancedSearchComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

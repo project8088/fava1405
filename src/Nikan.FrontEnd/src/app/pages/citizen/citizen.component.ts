@@ -1,17 +1,16 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
-
-import { AuthService } from '../../core/authentication/auth.service';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '../../core/models/menuItems';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen',
   templateUrl: './citizen.component.html',
   styleUrls: ['./citizen.component.scss'],
 })
-export class CitizenComponent implements OnInit, OnDestroy {
+export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
   miniSideBar: boolean;
   theme: string = 'purple-bliss';
   menuItems: SideNavMenuItem[] = [
@@ -35,9 +34,9 @@ export class CitizenComponent implements OnInit, OnDestroy {
     shareReplay(),
   );
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private authService: AuthService,
-  ) {}
+    private breakpointObserver: BreakpointObserver
+  ) {
+      super();}
 
   ngOnInit(): void {
     document.body.classList.add(this.theme);

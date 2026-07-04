@@ -1,17 +1,15 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { Router } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-feedback-dialog',
   templateUrl: './add-feedback.component.html',
   styleUrls: ['./add-feedback.component.scss'],
 })
-export class AdminAddFeedBackDialogComponent implements OnInit {
+export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
   userCode: string = '';
 
   isSaving: boolean;
@@ -19,14 +17,10 @@ export class AdminAddFeedBackDialogComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminAddFeedBackDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private router: Router,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.form = this.fb.group({
       feedbackDescription: [null, [Validators.required]],
       feedbackId: [null, [Validators.required]],

@@ -1,29 +1,26 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterServiceModel } from '@core/models/register-service.model';
-import { Router } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardAddCardCoursesDialogComponent } from '../dialog/add-card-courses/add-card-courses.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'card-citizen-card-distribute-course-list',
   templateUrl: './citizen-card-distribute-course-list.component.html',
   styleUrls: ['./citizen-card-distribute-course-list.component.scss'],
 })
-export class CardCitizenCardDistributeCourseListComponent implements AfterViewInit {
+export class CardCitizenCardDistributeCourseListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
     'courseNumber',
@@ -46,14 +43,10 @@ export class CardCitizenCardDistributeCourseListComponent implements AfterViewIn
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
     private helperService: HelperService,
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

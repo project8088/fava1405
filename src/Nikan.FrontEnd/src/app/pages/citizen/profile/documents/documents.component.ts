@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-documents',
   templateUrl: './documents.component.html',
   styleUrls: ['./documents.component.scss'],
 })
-export class CitizenDocumentsComponent implements OnInit {
+export class CitizenDocumentsComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -26,10 +24,8 @@ export class CitizenDocumentsComponent implements OnInit {
   displayedColumns: string[] = ['documentGroup', 'description', 'attachedOnDate', 'id'];
 
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.cardForm = this.fb.group({
       personnelImage: [null, [Validators.required]],
     });

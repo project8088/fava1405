@@ -1,24 +1,20 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
-
-import { DataService } from '../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { ServerApis } from '../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'citizen-transaction-list',
   templateUrl: './transaction-list.component.html',
   styleUrls: ['./transaction-list.component.scss'],
 })
-export class CitizenTransactionListComponent implements AfterViewInit, OnInit {
+export class CitizenTransactionListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'orderId',
@@ -44,12 +40,8 @@ export class CitizenTransactionListComponent implements AfterViewInit, OnInit {
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private router: Router,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

@@ -1,23 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
-
-import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.component.html',
   styleUrls: ['./edit-profile.component.scss'],
 })
-export class CitizenEditProfileComponent implements OnInit {
+export class CitizenEditProfileComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userCode: string;
@@ -32,13 +29,10 @@ export class CitizenEditProfileComponent implements OnInit {
   lastModifiedOnDate: string;
   citizenInfo: KarjoGlobalInformationDto;
   constructor(
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private dataService: DataService,
     private profileComponent: CitizenProfileComponent,
   ) {
+      super();
     this.route.parent.params.subscribe((p) => {
       this.userCode = p.id && p.id != '0' ? p.id : '';
       this.getPersonalInfo();

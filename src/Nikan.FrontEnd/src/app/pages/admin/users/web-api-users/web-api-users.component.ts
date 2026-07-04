@@ -3,26 +3,24 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { AuthService } from '@core/authentication/auth.service';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
 import { AdminChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AdminAddWebApiUserDialogComponent } from '../dialogs/add-webapi-users/add-webapi-users.component';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-web-api-users',
   templateUrl: './web-api-users.component.html',
   styleUrls: ['./web-api-users.component.scss'],
 })
-export class AdminWebApiUsersComponent implements OnInit {
+export class AdminWebApiUsersComponent extends AppBase implements OnInit {
   displayedColumns: string[] = [
     'row',
     'userName',
@@ -49,14 +47,9 @@ export class AdminWebApiUsersComponent implements OnInit {
   groupList: any[] = [];
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.searchForm = this.fb.group({
       fromDate: [null],
       toDate: [null],

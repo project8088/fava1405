@@ -1,27 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../../core/server-apis';
-import { DataService } from '../../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'home-bank-call-back',
   templateUrl: './bank-call-back.component.html',
   styleUrls: ['./bank-call-back.component.scss'],
 })
-export class BankCallBackComponent implements OnInit {
+export class BankCallBackComponent extends AppBase implements OnInit {
   loading: boolean;
   id: string;
 
   response: any;
 
   constructor(
-    private dataService: DataService,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.queryParams.subscribe((p) => {
       if (p.id) {
         this.id = p.id;

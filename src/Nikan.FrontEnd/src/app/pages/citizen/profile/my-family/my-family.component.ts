@@ -1,23 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ActivatedRoute } from '@angular/router';
+import { FormGroup, Validators } from '@angular/forms';
 import { CitizenFamilyDialogComponent } from '../_dialogs/family-dialog/family-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
-import { DataService } from '../../../../core/services/data-service.service';
-import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
 import { karjoEducationDto } from '@core/models/citizen/education';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-my-family',
   templateUrl: './my-family.component.html',
   styleUrls: ['./my-family.component.scss'],
 })
-export class CitizenMyFamilyComponent implements OnInit {
+export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   familyList: any[] = [];
   familyByfamilyList: any[] = [];
 
@@ -29,13 +25,9 @@ export class CitizenMyFamilyComponent implements OnInit {
   loadingEnums: boolean = true;
 
   constructor(
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private profileComponent: CitizenProfileComponent,
-    private fb: FormBuilder,
+    private profileComponent: CitizenProfileComponent
   ) {
+      super();
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getFamilyList();

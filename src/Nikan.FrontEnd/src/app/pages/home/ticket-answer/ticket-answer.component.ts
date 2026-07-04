@@ -1,19 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
 import { AuthUser } from '../../../core/authentication/user.model';
-import { AuthService } from '@core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-ticket-answer',
   templateUrl: './ticket-answer.component.html',
   styleUrls: ['./ticket-answer.component.scss'],
 })
-export class TicketAnswerComponent implements OnInit {
+export class TicketAnswerComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
   isSaving: boolean;
   loadingData: boolean = true;
@@ -25,12 +23,9 @@ export class TicketAnswerComponent implements OnInit {
   ticketAnswer: any;
   loadingSubject: boolean;
   constructor(
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private customValidator: CustomFormValidators,
-    private authService: AuthService,
-  ) {}
+    private customValidator: CustomFormValidators
+  ) {
+      super();}
 
   ngOnInit(): void {}
 

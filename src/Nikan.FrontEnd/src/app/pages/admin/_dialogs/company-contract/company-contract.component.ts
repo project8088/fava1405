@@ -1,16 +1,15 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-company-contract-dialog',
   templateUrl: './company-contract.component.html',
   styleUrls: ['./company-contract.component.scss'],
 })
-export class AdminCompanyContractDialogComponent implements OnInit {
+export class AdminCompanyContractDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};
   loading: boolean = true;
   baseUrl: string = ServerApis.baseUrl;
@@ -21,13 +20,10 @@ export class AdminCompanyContractDialogComponent implements OnInit {
   contractUrl: string = ServerApis.companyUploadContract;
 
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<AdminCompanyContractDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private dataService: DataService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.companyInfo = _data.company;
     this.uploadData = {
       CompanyId: this.companyInfo.companyId,

@@ -8,17 +8,16 @@ import {
   UploaderOptions,
   UploadStatus,
 } from 'ngx-uploader';
-import { ToastrService } from 'ngx-toastr';
 import Swal from 'sweetalert2';
 import { ServerApis } from '../../core/server-apis';
-import { AuthService } from '../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-uploader',
   templateUrl: './uploader.component.html',
   styleUrls: ['./uploader.component.scss'],
 })
-export class UploaderComponent implements OnInit {
+export class UploaderComponent extends AppBase implements OnInit {
   @Input('autoUpload') autoUpload: boolean = true;
   @Input('removeAfterUpload') removeAfterUpload: boolean = false;
   @Input('data') data: any = {};
@@ -44,9 +43,8 @@ export class UploaderComponent implements OnInit {
 
   errorInUpload: boolean = false;
   constructor(
-    private toastrService: ToastrService,
-    private authService: AuthService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.options = {

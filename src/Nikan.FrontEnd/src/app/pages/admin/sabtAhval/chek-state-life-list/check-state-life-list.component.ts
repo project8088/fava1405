@@ -3,23 +3,21 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { AuthService } from '@core/authentication/auth.service';
 import Swal from 'sweetalert2';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'app-check-state-life-list',
   templateUrl: './check-state-life-list.component.html',
   styleUrls: ['./check-state-life-list.component.scss'],
 })
-export class AdminCheckStateLifeListComponent implements AfterViewInit, OnInit {
+export class AdminCheckStateLifeListComponent extends AppBase implements AfterViewInit, OnInit {
   id: number;
 
   displayedColumns: string[] = [
@@ -43,14 +41,9 @@ export class AdminCheckStateLifeListComponent implements AfterViewInit, OnInit {
   sendingSms: boolean = false;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
     });

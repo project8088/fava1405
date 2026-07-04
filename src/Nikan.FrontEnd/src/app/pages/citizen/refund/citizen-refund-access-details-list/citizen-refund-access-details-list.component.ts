@@ -2,23 +2,20 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
-import { MatDialog } from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CitizenRefundInfoDialogComponent } from '../dialog/refund-info/refund-info.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-refund-access-details-list',
   templateUrl: './citizen-refund-access-details-list.component.html',
   styleUrls: ['./citizen-refund-access-details-list.component.scss'],
 })
-export class CitizenRefundAccessDetailsListComponent implements AfterViewInit, OnInit {
+export class CitizenRefundAccessDetailsListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'orderId',
@@ -46,13 +43,8 @@ export class CitizenRefundAccessDetailsListComponent implements AfterViewInit, O
   transactionStateList: any[] = [];
   transactionForList: any[] = [];
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private router: Router,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       importId: [0],
       fromDate: [null],

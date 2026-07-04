@@ -2,19 +2,17 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'adm-nationCode-groups-excel-batch-file-details',
   templateUrl: './nationCode-groups-excel-batch-file-details.component.html',
   styleUrls: ['./nationCode-groups-excel-batch-file-details.component.scss'],
 })
-export class AdminNationCodeGroupsExcelBatchFileDetailsComponent implements AfterViewInit {
+export class AdminNationCodeGroupsExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
   loading: boolean;
   displayedColumns: string[] = [
     'row',
@@ -38,13 +36,8 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent implements Afte
   searchForm: FormGroup;
   events: any[] = [];
   constructor(
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private dataService: DataService,
-    private fb: FormBuilder,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.searchForm = this.fb.group({
       title: [''],
     });

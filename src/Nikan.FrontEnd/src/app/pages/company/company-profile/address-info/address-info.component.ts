@@ -1,17 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'company-address-info',
   templateUrl: './address-info.component.html',
   styleUrls: ['./address-info.component.scss'],
 })
-export class CompanyAddressInfoComponent implements OnInit {
+export class CompanyAddressInfoComponent extends AppBase implements OnInit {
   loading: boolean;
   provinceList: any[] = [];
   companyId: string = '';
@@ -19,12 +17,9 @@ export class CompanyAddressInfoComponent implements OnInit {
   isSaving: boolean;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidators: CustomFormValidators,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
+    private customValidators: CustomFormValidators
   ) {
+      super();
     this.addressForm = this.fb.group({
       mobileNumber: [null, [Validators.required, this.customValidators.checkMobileNumber]],
       mobileNumber2: [null, [this.customValidators.checkMobileNumber]],

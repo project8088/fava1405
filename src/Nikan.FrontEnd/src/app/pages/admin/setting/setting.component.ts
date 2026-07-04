@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-setting',
   templateUrl: './setting.component.html',
   styleUrls: ['./setting.component.scss'],
 })
-export class AdminSettingComponent implements OnInit {
+export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
@@ -19,10 +18,8 @@ export class AdminSettingComponent implements OnInit {
   uploadUrl: string = ServerApis.uploadSiteLogo;
 
   constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {
+) {
+      super();
     this.settingForm = this.fb.group({
       siteUrl: [null, [Validators.required]],
       siteName: [null, [Validators.required]],

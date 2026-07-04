@@ -1,31 +1,27 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'card-delivery-queue-operator',
   templateUrl: './delivery-queue-operator.component.html',
   styleUrls: ['./delivery-queue-operator.component.scss'],
 })
-export class CardDeliveryQueueOperatorDialogComponent implements OnInit {
+export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   queueId: string;
   loading: boolean = true;
   info: any;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CardDeliveryQueueOperatorDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.info = _data.info;
 
     this.frm = this.fb.group({

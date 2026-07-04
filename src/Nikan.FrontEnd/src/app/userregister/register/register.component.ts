@@ -1,23 +1,20 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { ApiResult, RegisterServiceModel } from '../../core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../core/authentication/auth.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { DataService } from '@core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
-import { ToastrService } from 'ngx-toastr';
 import { UserRegisterService } from '../userregister.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent extends AppBase implements OnInit {
   serviceId: number = 0;
   //form 1
   firstFormGroup: FormGroup;
@@ -47,16 +44,11 @@ export class RegisterComponent implements OnInit {
   mobileNumber;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
     private AccountService: UserRegisterService,
     private helperService: HelperService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private customValidator: CustomFormValidators,
-    private authService: AuthService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.dataService.getEnums().subscribe((data) => {
       this.maritalStatus = this.getListOptions(data['maritalStatus']);
       //this.educationStatues = this.getListOptions(data['educationStatues']);

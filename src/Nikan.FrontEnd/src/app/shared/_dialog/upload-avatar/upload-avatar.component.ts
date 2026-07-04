@@ -1,18 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ImageCroppedEvent, ImageTransform } from 'ngx-image-cropper';
-import { DataService } from '../../../core/services/data-service.service';
-import { AuthService } from '../../../core/authentication/auth.service';
 import { AuthUser } from '../../../core/authentication/user.model';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-upload-avatar-dialog',
   templateUrl: './upload-avatar.component.html',
   styleUrls: ['./upload-avatar.component.scss'],
 })
-export class UploadUserAvatarDialogComponent implements OnInit {
+export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
@@ -27,13 +25,10 @@ export class UploadUserAvatarDialogComponent implements OnInit {
 
   user: AuthUser;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<UploadUserAvatarDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private authService: AuthService,
+    @Inject(MAT_DIALOG_DATA) private _data: any
   ) {
+      super();
     this.user = this.authService.currentUserValue;
     this.imageUrl = ServerApis.baseUrl + _data.imageUrl;
     this.setCropperImage(this.imageUrl);

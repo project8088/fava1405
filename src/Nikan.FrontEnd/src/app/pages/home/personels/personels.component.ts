@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
-import { DataService } from '@core/services/data-service.service';
+import { AppBase } from "@app/app.base";
+
 declare var $: any;
 
 @Component({
@@ -8,12 +9,13 @@ declare var $: any;
   templateUrl: './personels.component.html',
   styleUrls: ['./personels.component.scss'],
 })
-export class HomePersonelsListComponent implements OnInit {
+export class HomePersonelsListComponent extends AppBase implements OnInit {
   loadingManagers: boolean;
   managerList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(private dataService: DataService) {}
+  constructor() {
+      super();}
 
   ngOnInit() {
     this.getManagerList();

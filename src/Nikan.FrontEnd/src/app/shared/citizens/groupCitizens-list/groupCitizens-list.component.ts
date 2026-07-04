@@ -1,25 +1,22 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
-
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../core/services/data-service.service';
 import { ServerApis } from '../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-groupCitizens-list',
   templateUrl: './groupCitizens-list.component.html',
   styleUrls: ['./groupCitizens-list.component.scss'],
 })
-export class AppGroupCitizensListComponent implements AfterViewInit, OnInit {
+export class AppGroupCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser'];
   userCode: string;
   searchForm: FormGroup;
@@ -33,12 +30,8 @@ export class AppGroupCitizensListComponent implements AfterViewInit, OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private matDialog: MatDialog,
-    private route: ActivatedRoute,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.userCode = p.id ? p.id : null;
     });

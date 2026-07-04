@@ -1,13 +1,13 @@
 import { OnInit, Component } from '@angular/core';
 import { ServerApis } from '../../../core/server-apis';
-import { DataService } from '../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
+
 @Component({
   selector: 'crd-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class CardDashboardComponent implements OnInit {
+export class CardDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
   loading: boolean;
   statisticalInfo: any;
@@ -15,9 +15,8 @@ export class CardDashboardComponent implements OnInit {
   matDialog: any;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.getStatisticalReport();

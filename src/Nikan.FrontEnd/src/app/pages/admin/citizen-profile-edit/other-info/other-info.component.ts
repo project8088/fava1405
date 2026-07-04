@@ -1,20 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
 import { ServerApis } from '../../../../core/server-apis';
-import { DataService } from '../../../../core/services/data-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 import { BaseDataModel } from '../../../../core/models/base-data-model';
 import { Observable } from 'rxjs';
 import { HelperService } from '../../../../core/services/helper.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'citizen-other-info',
   templateUrl: './other-info.component.html',
   styleUrls: ['./other-info.component.scss'],
 })
-export class AdminCitizenOtherInfoComponent implements OnInit {
+export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
   loading: boolean;
   provinceList: any[] = [];
   userCode: string = '';
@@ -31,13 +29,10 @@ export class AdminCitizenOtherInfoComponent implements OnInit {
   loadingState: boolean;
 
   constructor(
-    private fb: FormBuilder,
     private helperService: HelperService,
-    private customValidators: CustomFormValidators,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
+    private customValidators: CustomFormValidators
   ) {
+      super();
     this.form = this.fb.group({
       provinceShCity: [null],
       shCity: [null, []],

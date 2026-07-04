@@ -1,20 +1,17 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
-
-import { ActivatedRoute } from '@angular/router';
-import { DataService } from '../../../core/services/data-service.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../../core/server-apis';
 import { ShortKarjoProfile } from '@core/models/citizen/global-information';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss'],
 })
-export class CitizenProfileComponent implements OnInit {
+export class CitizenProfileComponent extends AppBase implements OnInit {
   userId: string;
   loading: boolean;
   personInfo: ShortKarjoProfile;
@@ -26,11 +23,9 @@ export class CitizenProfileComponent implements OnInit {
   );
 
   constructor(
-    private breakpointObserver: BreakpointObserver,
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private toastrService: ToastrService,
+    private breakpointObserver: BreakpointObserver
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getPersonalInfo();

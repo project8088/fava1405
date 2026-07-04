@@ -1,21 +1,19 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from '@core/authentication/auth.service';
-import { DataService } from '../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '../../core/server-apis';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-forgot-password',
   templateUrl: './forgot-password.component.html',
   styleUrls: ['./forgot-password.component.scss'],
 })
-export class ForgotPasswordComponent implements OnInit {
+export class ForgotPasswordComponent extends AppBase implements OnInit {
   userId: string = '';
   serviceId: number = 0;
   captchaImage: any;
@@ -37,13 +35,9 @@ export class ForgotPasswordComponent implements OnInit {
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent: CaptchaComponent;
 
   constructor(
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private router: Router,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.forgotForm = this.fb.group(
       {
         userEnteredCaptchaCode: [null, [Validators.required]],

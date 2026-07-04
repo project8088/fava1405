@@ -1,16 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ToastrService } from 'ngx-toastr';
 import { ServerApis } from '@core/server-apis';
-import { DataService } from '@core/services/data-service.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-manzelat-review',
   templateUrl: './citizen-manzelat-review.component.html',
   styleUrls: ['./citizen-manzelat-review.component.scss'],
 })
-export class AdminCitizenManzelatReviewComponent implements OnInit {
+export class AdminCitizenManzelatReviewComponent extends AppBase implements OnInit {
   form: FormGroup = new FormGroup({
     formResult: new FormControl(true),
     formResultDescription: new FormControl(''),
@@ -24,10 +23,9 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private matDialogRef: MatDialogRef<AdminCitizenManzelatReviewComponent>,
-    private dataService: DataService,
-    private toastService: ToastrService,
+    private matDialogRef: MatDialogRef<AdminCitizenManzelatReviewComponent>
   ) {
+      super();
     this.data = _data;
 
     if (this.data.command === 'Remove') this.data.title = 'حذف فرم ' + this.data.manzelatForm.title;
@@ -51,13 +49,13 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
         .subscribe(
           (response) => {
             if (response.isSuccess) {
-              this.toastService.success(response.messages);
+              this.toastrService.success(response.messages);
               this.matDialogRef.close(true);
             } else {
               let msg = response.messages
                 ? response.messages
                 : 'متاسفانه خطایی در سرور رخ داده است!';
-              this.toastService.error(msg);
+              this.toastrService.error(msg);
             }
           },
           (error) => {},
@@ -72,13 +70,13 @@ export class AdminCitizenManzelatReviewComponent implements OnInit {
         .subscribe(
           (response) => {
             if (response.isSuccess) {
-              this.toastService.success(response.message);
+              this.toastrService.success(response.message);
               this.matDialogRef.close(true);
             } else {
               let msg = response.messages
                 ? response.messages
                 : 'متاسفانه خطایی در سرور رخ داده است!';
-              this.toastService.error(msg);
+              this.toastrService.error(msg);
             }
           },
           (error) => {},

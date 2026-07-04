@@ -1,28 +1,25 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Observable, merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../core/services/data-service.service';
 import { HelperService } from '@core/services/helper.service';
-import { MatDialog } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { RegisterServiceModel } from '@core/models/register-service.model';
-import { Router, ActivatedRoute } from '@angular/router';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'card-citizen-manzalat-card-export-details',
   templateUrl: './citizen-manzalat-card-export-details.component.html',
   styleUrls: ['./citizen-manzalat-card-export-details.component.scss'],
 })
-export class CardManzalatCitizenCardExportDetailsComponent implements AfterViewInit {
+export class CardManzalatCitizenCardExportDetailsComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'nationCode',
     'citizenFirstName',
@@ -55,15 +52,10 @@ export class CardManzalatCitizenCardExportDetailsComponent implements AfterViewI
   @ViewChild(MatSort) sort: MatSort;
   searchForm: FormGroup;
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
-    private router: Router,
-    private fb: FormBuilder,
     private customValidator: CustomFormValidators,
-    private route: ActivatedRoute,
     private helperService: HelperService,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       this.exportId = p.id;
     });

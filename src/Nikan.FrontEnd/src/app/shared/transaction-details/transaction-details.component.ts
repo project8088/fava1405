@@ -1,34 +1,27 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../core/services/data-service.service';
 import { ServerApis } from '../../core/server-apis';
 import { AuthUser } from '../../core/authentication/user.model';
-import { AuthService } from '../../core/authentication/auth.service';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-transaction-details',
   templateUrl: './transaction-details.component.html',
   styleUrls: ['./transaction-details.component.scss'],
 })
-export class TransactionDetailsComponent implements OnInit, AfterViewInit {
+export class TransactionDetailsComponent extends AppBase implements OnInit, AfterViewInit {
   id: string;
   transactionInfo: any;
   user: AuthUser;
   isLoadingResults: boolean = true;
 
   constructor(
-    private route: ActivatedRoute,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private router: Router,
-    private authService: AuthService,
-  ) {
+) {
+      super();
     this.user = this.authService.currentUserValue;
   }
 

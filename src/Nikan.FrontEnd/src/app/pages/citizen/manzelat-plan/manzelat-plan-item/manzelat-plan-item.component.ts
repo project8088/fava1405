@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '@core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute, Router } from '@angular/router';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-manzelat-plan-item',
   templateUrl: './manzelat-plan-item.component.html',
   styleUrls: ['./manzelat-plan-item.component.scss'],
 })
-export class CitizenManzelatPlanItemComponent implements OnInit {
+export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -24,12 +21,8 @@ export class CitizenManzelatPlanItemComponent implements OnInit {
   id: number = 0;
 
   constructor(
-    private toastrService: ToastrService,
-    private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private dataService: DataService,
-  ) {
+) {
+      super();
     this.route.params.subscribe((p) => {
       this.id = p.id;
     });

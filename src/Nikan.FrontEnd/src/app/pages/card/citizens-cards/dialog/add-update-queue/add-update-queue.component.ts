@@ -1,9 +1,7 @@
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { DataService } from '../../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../../core/server-apis';
 import { Observable } from 'rxjs';
 import { map, startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -12,13 +10,14 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-update-queue-dialog',
   templateUrl: './add-update-queue.component.html',
   styleUrls: ['./add-update-queue.component.scss'],
 })
-export class CardAddOrUpadateQueueDialogComponent implements OnInit {
+export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnInit {
   isSaving: boolean;
   frm: FormGroup;
   isUpdate: boolean;
@@ -31,14 +30,11 @@ export class CardAddOrUpadateQueueDialogComponent implements OnInit {
   loadingData: boolean;
   id: string;
   constructor(
-    private matDialog: MatDialog,
     private matDialogRef: MatDialogRef<CardAddOrUpadateQueueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
-    private toastrService: ToastrService,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private dataService: DataService,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.frm = this.fb.group({
       id: [null],
       name: ['', [Validators.required]],

@@ -1,22 +1,20 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { BaseDataModel } from '../../../../core/models/base-data-model';
 
 import * as CkEditor from '../../../../../assets/ckeditor';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
 import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-add-or-update-page',
   templateUrl: './add-or-update-page.component.html',
   styleUrls: ['./add-or-update-page.component.scss'],
 })
-export class AdminAddOrUpdatePageComponent implements OnInit, AfterViewInit {
+export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate: boolean;
   id: string;
   form: FormGroup;
@@ -29,13 +27,9 @@ export class AdminAddOrUpdatePageComponent implements OnInit, AfterViewInit {
   loading: boolean;
   siteName: string;
   constructor(
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-    private router: Router,
     private customValidator: CustomFormValidators,
   ) {
+      super();
     this.route.params.subscribe((p) => {
       if (p.id && p.id != '0') {
         this.isUpdate = true;

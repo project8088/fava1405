@@ -1,25 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { DataService } from '../../../core/services/data-service.service';
+import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '../../../core/server-apis';
-import { ToastrService } from 'ngx-toastr';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'adm-sms-setting',
   templateUrl: './sms-setting.component.html',
   styleUrls: ['./sms-setting.component.scss'],
 })
-export class SmsSettingComponent implements OnInit {
+export class SmsSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
   isSaving: boolean;
   loading: boolean;
 
   constructor(
-    private fb: FormBuilder,
-    private dataService: DataService,
-    private toastrService: ToastrService,
-  ) {
+) {
+      super();
     this.settingForm = this.fb.group({
       smsUserName: [null],
       smsPassword: [null],

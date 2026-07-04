@@ -1,12 +1,9 @@
-import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { ApiResult } from '@core/models/response';
-import { DataService } from '@core/services/data-service.service';
 import { ServerApis } from '@core/server-apis';
-import { ToastrService } from 'ngx-toastr';
-
 import { MatCardModule } from '@angular/material/card';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-redirect',
@@ -14,17 +11,14 @@ import { MatCardModule } from '@angular/material/card';
   styleUrls: ['./redirect.component.scss'],
   imports: [MatCardModule],
 })
-export class RedirectComponent implements OnInit {
+export class RedirectComponent extends AppBase implements OnInit {
   serviceId;
   loading: boolean = true;
   url: string;
   returnUrl: string = '';
   constructor(
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private router: Router,
-    private toastrService: ToastrService,
-  ) {}
+) {
+      super();}
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((p) => {

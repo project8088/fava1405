@@ -1,23 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { ActivatedRoute } from '@angular/router';
 import { CitizenFamilyDialogComponent } from '../_dialogs/family-dialog/family-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
-import { DataService } from '../../../../core/services/data-service.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ServerApis } from '../../../../core/server-apis';
 import Swal from 'sweetalert2';
-import { ToastrService } from 'ngx-toastr';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
 import { karjoEducationDto } from '@core/models/citizen/education';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-my-Identity-Info',
   templateUrl: './my-Identity-Info.component.html',
   styleUrls: ['./my-Identity-Info.component.scss'],
 })
-export class CitizenMyIdentityInfoComponent implements OnInit {
+export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   userId: string;
@@ -25,10 +22,8 @@ export class CitizenMyIdentityInfoComponent implements OnInit {
   userStatus: number;
 
   constructor(
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private dataService: DataService,
-  ) {}
+) {
+      super();}
 
   ngOnInit() {
     this.getPersonalInfo();

@@ -1,20 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { karjoEducationDto } from '@core/models/citizen/education';
-import { ToastrService } from 'ngx-toastr';
-import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
-import { MatDialog } from '@angular/material/dialog';
 import { CitizenEducationDialogComponent } from '../_dialogs/education-dialog/education-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
-import { DataService } from '../../../../core/services/data-service.service';
 import { ServerApis } from '../../../../core/server-apis';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'app-citizen-education',
   templateUrl: './education.component.html',
   styleUrls: ['./education.component.scss'],
 })
-export class CitizenEducationComponent implements OnInit {
+export class CitizenEducationComponent extends AppBase implements OnInit {
   educationList: karjoEducationDto[] = [];
 
   loading: boolean = true;
@@ -25,12 +22,9 @@ export class CitizenEducationComponent implements OnInit {
   loadingEnums: boolean = true;
 
   constructor(
-    private dataService: DataService,
-    private route: ActivatedRoute,
-    private toastrService: ToastrService,
-    private matDialog: MatDialog,
     private profileComponent: CitizenProfileComponent,
   ) {
+      super();
     this.route.parent.params.subscribe((p) => {
       this.userId = p.id && p.id != '0' ? p.id : '';
       this.getEducationList();

@@ -1,31 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { CompanyInfoDto } from '../../core/models/company/company-info';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { DataService } from '../../core/services/data-service.service';
 import { ServerApis } from '../../core/server-apis';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '../../core/custom-validator/form-validation';
-import { AuthService } from '../../core/authentication/auth.service';
+import { AppBase } from "@app/app.base";
 
 @Component({
   selector: 'change-current-user-password',
   templateUrl: './change-current-user-password.component.html',
   styleUrls: ['./change-current-user-password.component.scss'],
 })
-export class ChangeCurrentUserPasswordComponent implements OnInit {
+export class ChangeCurrentUserPasswordComponent extends AppBase implements OnInit {
   isSaving: boolean;
   changePasswordForm: FormGroup;
 
   constructor(
-    private dataService: DataService,
-    private toastrService: ToastrService,
-    private route: ActivatedRoute,
-    private fb: FormBuilder,
-    private customValidator: CustomFormValidators,
-    private authService: AuthService,
-    private router: Router,
+    private customValidator: CustomFormValidators
   ) {
+      super();
     this.changePasswordForm = this.fb.group(
       {
         username: [null],
