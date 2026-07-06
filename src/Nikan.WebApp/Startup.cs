@@ -9,12 +9,17 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 using Nikan.Common.WebToolkit;
 using Nikan.IoCConfig;
 using Nikan.Services;
+using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
+using System.Threading.RateLimiting;
 
 namespace Nikan.WebApp
 {
@@ -65,9 +70,20 @@ namespace Nikan.WebApp
             services.AddHangfireServer();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddRateLimiter(options =>
+            {
+                options.AddPolicy("ContactLimit", httpContext =>
+                    RateLimitPartition.GetFixedWindowLimiter(
+                        partitionKey: httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown",
+                        factory: _ => new FixedWindowRateLimiterOptions
+                        {
+                            PermitLimit = 2,
+                            Window = TimeSpan.FromMinutes(1),
+                            QueueLimit = 0,
+                            QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+                        }));
+            });
 
-
-            /*
             services.AddSwaggerGen(setupAction =>
             {
                 setupAction.SwaggerDoc(
@@ -76,12 +92,12 @@ namespace Nikan.WebApp
                    {
                        Title = "سامانه پروفایل شهروندی",
                        Version = "1",
-                       Description = "گروه مهندسی  نرم افزارسازان نیکان سپاهان",
+                       Description = "گروه  مهندسی نیکان",
                        Contact = new Microsoft.OpenApi.Models.OpenApiContact()
                        {
-                           Email = "info@nikan-co.ir",
-                           Name = "Profile",
-                           Url = new Uri("http://www.nikan-co.ir")
+                           Email = "info@nikanit-co.ir",
+                           Name = "nikanit",
+                           Url = new Uri("https://nikanit-co.ir/")
                        },
                        License = new Microsoft.OpenApi.Models.OpenApiLicense()
                        {
@@ -89,12 +105,12 @@ namespace Nikan.WebApp
                            Url = new Uri("https://opensource.org/licenses/MIT")
                        }
 
-                   }); 
+                   });
+                setupAction.SchemaFilter<AddEnumNamesSchemaFilter>();
                 var xmlFiles = Directory.GetFiles(AppContext.BaseDirectory, "*.xml", SearchOption.TopDirectoryOnly).ToList();
                 xmlFiles.ForEach(xmlFile => setupAction.IncludeXmlComments(xmlFile));
                 setupAction.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             });
-           */
 
             services.Configure<IISServerOptions>(options =>
             {
@@ -167,7 +183,7 @@ namespace Nikan.WebApp
           
             app.UseSession();
             app.UseRouting();
-
+            app.UseRateLimiter();  // قبل از auth
             app.UseAuthentication();
 
             app.UseCors("CorsPolicy");
@@ -202,16 +218,17 @@ namespace Nikan.WebApp
                 // HangFire Dashboard endpoint
                 endpoints.MapHangfireDashboard();
             });
-            /*
-            app.UseSwagger();
-            app.UseSwaggerUI(setupAction =>
+            if (env.IsDevelopment())
             {
-                setupAction.SwaggerEndpoint(
-                    url: "/swagger/nikan/swagger.json",
-                    name: "nikan");
-                //setupAction.RoutePrefix = "";
-            });
-            */
+                app.UseSwagger();
+                app.UseSwaggerUI(setupAction =>
+                {
+                    setupAction.SwaggerEndpoint(
+                        url: "/swagger/nikan/swagger.json",
+                        name: "nikan");
+                    //setupAction.RoutePrefix = "";
+                });
+            }
 
             app.UseStaticFiles();
 
@@ -267,4 +284,27 @@ namespace Nikan.WebApp
 
 
 
+}
+
+
+public class AddEnumNamesSchemaFilter : ISchemaFilter
+{
+    public void Apply(OpenApiSchema schema, SchemaFilterContext context)
+    {
+        var type = context.Type;
+
+        if (type.IsEnum)
+        {
+            var enumNames = Enum.GetNames(type);
+
+            // پشتیبانی از مقدارهای فارسی
+            var enumNamesArray = new OpenApiArray();
+            foreach (var name in enumNames)
+            {
+                enumNamesArray.Add(new OpenApiString(name));
+            }
+
+            schema.Extensions.Add("x-enumNames", enumNamesArray);
+        }
+    }
 }

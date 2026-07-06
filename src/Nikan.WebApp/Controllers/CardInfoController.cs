@@ -31,7 +31,7 @@ namespace Nikan.WebApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("CorsPolicy")]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class CardInfoController : Controller
     {
 

@@ -469,6 +469,7 @@ namespace Nikan.Services.Citizens
 
         }
 
+
         public async Task<ApiResult<PreRegisterResult>> CheckCitizenRegister(PreRegisterDto model)
         {
             //چک کردن کد ملی
