@@ -19,10 +19,10 @@ export const routes: Routes = [
   //   // canActivate: [AuthGuard],
   // },
 
-  // {
-  //   path: 'account',
-  //   loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
-  // },
+  {
+    path: 'account',
+    loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
+  },
   // {
   //   path: 'userregister',
   //   loadChildren: () =>

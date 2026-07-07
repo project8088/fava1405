@@ -42,7 +42,7 @@ export class CaptchaHelperService {
     let backendUrl = this.getBackendBaseUrl(captchaEndpoint, captchaEndpointHandler);
 
     originCaptchaHtml = originCaptchaHtml.replace(/<script.*<\/script>/g, '');
-    let relativeUrls = originCaptchaHtml.match(/(src|href)=\"([^"]+)\"/g);
+    let relativeUrls = originCaptchaHtml.match(/(src|href)=\"([^"]+)\"/g) || '';
 
     let relativeUrl,
       relativeUrlPrefixPattern,

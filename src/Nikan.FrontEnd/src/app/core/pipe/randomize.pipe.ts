@@ -5,14 +5,14 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 export class ArrayRandomizePipe implements PipeTransform {
   transform(array: any, Randomize: boolean = true): any[] {
     if (!Array.isArray(array)) {
-      return;
+      return [];
     }
     if (Randomize) {
       return this.shuffle(array);
     } else return array;
   }
 
-  shuffle(array) {
+  shuffle(array: any[]) {
     var currentIndex = array.length,
       temporaryValue,
       randomIndex;
