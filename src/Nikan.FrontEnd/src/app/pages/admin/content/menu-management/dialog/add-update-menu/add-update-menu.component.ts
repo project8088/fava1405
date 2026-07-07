@@ -111,11 +111,11 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
   changeMenuType() {
     if (this.menuForm.get('isSystem')?.value == true) {
       this.menuForm.get('innerMenu')?.setValidators([Validators.required]);
-      this.menuForm.get('innerMenu').updateValueAndValidity();
+      this.menuForm.get('innerMenu')?.updateValueAndValidity();
     } else {
       this.menuForm.get('innerMenu')?.setValue(null);
-      this.menuForm.get('innerMenu').clearValidators();
-      this.menuForm.get('innerMenu').updateValueAndValidity();
+      this.menuForm.get('innerMenu')?.clearValidators();
+      this.menuForm.get('innerMenu')?.updateValueAndValidity();
     }
   }
 

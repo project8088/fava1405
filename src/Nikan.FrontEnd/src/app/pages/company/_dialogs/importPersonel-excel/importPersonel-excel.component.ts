@@ -21,7 +21,7 @@ export class CompanyImportExcelDialogComponent extends AppBase implements OnInit
 
   ngOnInit() {}
 
-  attachmentId(ev) {
+  attachmentId(ev: any) {
     if (ev.importId) this.router.navigate(['/company/citizen-excel-files-details/' + ev.importId]);
     this.matDialogRef.close();
   }

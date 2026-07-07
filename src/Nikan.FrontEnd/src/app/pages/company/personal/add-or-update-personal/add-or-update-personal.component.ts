@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
   id: string ='';
-  companyid: string ='';
+  companyId: string ='';
   isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
@@ -25,13 +25,13 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   organizationalPositionList: any = ([] = []);
   loadingData: boolean = true;
   baseUrl: string = ServerApis.baseUrl;
-  user: AuthUser | null;
+  user?: AuthUser | null;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.user = this.authService.currentUserValue;
 
     this.route.params.subscribe((p) => {
-      this.companyId = p.companyId;
+      this.companyId = p['companyId'];
       if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
         this.id = p['id'];
@@ -124,7 +124,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
-          if (this.user.isAdmin)
+          if (this.user?.isAdmin)
             this.router.navigate(['/admin/company-personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         }
@@ -183,7 +183,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         this.isSaving = false;
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          if (this.user.isAdmin)
+          if (this.user?.isAdmin)
             this.router.navigate(['/admin/company-personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         } else {
@@ -201,10 +201,10 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   changeHasSpecificDisease() {
     if (this.userForm.get('hasSpecificDisease')?.value == true) {
       this.userForm.get('descriptionDisease')?.setValidators([Validators.required]);
-      this.userForm.get('descriptionDisease').updateValueAndValidity();
+      this.userForm.get('descriptionDisease')?.updateValueAndValidity();
     } else {
-      this.userForm.get('descriptionDisease').clearValidators();
-      this.userForm.get('descriptionDisease').updateValueAndValidity();
+      this.userForm.get('descriptionDisease')?.clearValidators();
+      this.userForm.get('descriptionDisease')?.updateValueAndValidity();
       this.userForm.get('descriptionDisease')?.setValue('');
     }
   }

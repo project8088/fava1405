@@ -21,7 +21,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
   periorityList: any[] = [];
   loadingUnit: boolean=false;
 
-  user: AuthUser | null;
+  user?: AuthUser | null;
   constructor(
     private matDialogRef: MatDialogRef<SendTicketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

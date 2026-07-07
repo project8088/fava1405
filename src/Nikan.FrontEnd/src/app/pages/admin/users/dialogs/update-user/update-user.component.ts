@@ -164,13 +164,13 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.get('userState')?.value == 0 || this.userForm.get('userState')?.value == 3) {
       this.userForm.get('userStateDescriptionForUser')?.setValidators([Validators.required]);
       this.userForm.get('userStateDescriptionForAdmin')?.setValidators([Validators.required]);
-      this.userForm.get('userStateDescriptionForUser').updateValueAndValidity();
-      this.userForm.get('userStateDescriptionForAdmin').updateValueAndValidity();
+      this.userForm.get('userStateDescriptionForUser')?.updateValueAndValidity();
+      this.userForm.get('userStateDescriptionForAdmin')?.updateValueAndValidity();
     } else {
-      this.userForm.get('userStateDescriptionForUser').clearValidators();
-      this.userForm.get('userStateDescriptionForAdmin').clearValidators();
-      this.userForm.get('userStateDescriptionForUser').updateValueAndValidity();
-      this.userForm.get('userStateDescriptionForAdmin').updateValueAndValidity();
+      this.userForm.get('userStateDescriptionForUser')?.clearValidators();
+      this.userForm.get('userStateDescriptionForAdmin')?.clearValidators();
+      this.userForm.get('userStateDescriptionForUser')?.updateValueAndValidity();
+      this.userForm.get('userStateDescriptionForAdmin')?.updateValueAndValidity();
     }
   }
 

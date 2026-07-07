@@ -18,7 +18,7 @@ export class CompanyChangePasswordDialogComponent extends AppBase implements OnI
 
   loading: boolean = true;
 
-  companyid: string ='';
+  companyId: string ='';
 
   constructor(
     private matDialogRef: MatDialogRef<CompanyChangePasswordDialogComponent>,

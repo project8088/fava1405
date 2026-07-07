@@ -153,11 +153,11 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   changeGrade() {
     if (this.educationForm.get('grade')?.value.key > 0) {
       this.educationForm.get('major')?.setValidators([Validators.required]);
-      this.educationForm.get('major').updateValueAndValidity();
+      this.educationForm.get('major')?.updateValueAndValidity();
     } else {
-      this.educationForm.get('major').clearValidators();
+      this.educationForm.get('major')?.clearValidators();
       this.educationForm.get('major')?.setValue(null);
-      this.educationForm.get('major').updateValueAndValidity();
+      this.educationForm.get('major')?.updateValueAndValidity();
 
       this.educationForm.get('university')?.setValue(null);
     }

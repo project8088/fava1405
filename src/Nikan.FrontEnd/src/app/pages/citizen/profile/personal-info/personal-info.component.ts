@@ -73,12 +73,12 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
         this.personalForm.get('educationLevel')?.setValidators(Validators.required);
         this.personalForm.get('educationGroup')?.setValidators(Validators.required);
       } else {
-        this.personalForm.get('educationLevel').clearValidators();
-        this.personalForm.get('educationGroup').clearValidators();
+        this.personalForm.get('educationLevel')?.clearValidators();
+        this.personalForm.get('educationGroup')?.clearValidators();
       }
 
-      this.personalForm.get('educationLevel').updateValueAndValidity();
-      this.personalForm.get('educationGroup').updateValueAndValidity();
+      this.personalForm.get('educationLevel')?.updateValueAndValidity();
+      this.personalForm.get('educationGroup')?.updateValueAndValidity();
     });
 
     this.helperService.getProvinces().subscribe((data) => {

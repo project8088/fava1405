@@ -28,7 +28,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
     'address',
   ];
 
-  importid: string ='';
+  importId: string ='';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();

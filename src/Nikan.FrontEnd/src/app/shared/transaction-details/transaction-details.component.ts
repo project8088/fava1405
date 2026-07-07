@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 export class TransactionDetailsComponent extends AppBase implements OnInit, AfterViewInit {
   id: string = '';
   transactionInfo: any;
-  user: AuthUser | null;
+  user?: AuthUser | null;
   isLoadingResults: boolean = true;
 
   constructor() {

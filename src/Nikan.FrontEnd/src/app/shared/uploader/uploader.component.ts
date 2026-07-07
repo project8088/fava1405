@@ -31,13 +31,13 @@ export class UploaderComponent extends AppBase implements OnInit {
     'image/jpeg',
     'image/bmp',
   ];
-  @Output('attachmentId') attachmentId = new EventEmitter<string>();
+  @Output('attachmentId') attachmentId = new EventEmitter<any>();
 
   files: UploadFile[] = [];
   uploaderInput = new EventEmitter<UploadInput>();
 
   humanizeBytes?: Function;
-  dragOver: boolean=false;
+  dragOver: boolean = false;
   options: UploaderOptions;
   acceptedInputFile: string;
 
@@ -94,12 +94,12 @@ export class UploaderComponent extends AppBase implements OnInit {
         break;
       case 'dragOut':
       case 'rejected':
-        if ((this.options.allowedContentTypes??[]).indexOf(output.file?.type??'') < 0) {
+        if ((this.options.allowedContentTypes ?? []).indexOf(output.file?.type ?? '') < 0) {
           this.toastrService.error('نوع فایل مجاز نیست!');
-        } else if ((output.file?.size??0) > (this.options.maxFileSize??0)) {
+        } else if ((output.file?.size ?? 0) > (this.options.maxFileSize ?? 0)) {
           this.toastrService.error('حداکثر 5 مگابایت', 'حجم فایل بیش از حد مجاز است.');
         }
-        break
+        break;
       case 'drop':
         this.dragOver = false;
         break;

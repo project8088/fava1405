@@ -193,10 +193,10 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
   changeHasSpecificDisease() {
     if (this.userForm.get('hasSpecificDisease')?.value == true) {
       this.userForm.get('descriptionDisease')?.setValidators([Validators.required]);
-      this.userForm.get('descriptionDisease').updateValueAndValidity();
+      this.userForm.get('descriptionDisease')?.updateValueAndValidity();
     } else {
-      this.userForm.get('descriptionDisease').clearValidators();
-      this.userForm.get('descriptionDisease').updateValueAndValidity();
+      this.userForm.get('descriptionDisease')?.clearValidators();
+      this.userForm.get('descriptionDisease')?.updateValueAndValidity();
       this.userForm.get('descriptionDisease')?.setValue('');
     }
   }

@@ -15,7 +15,7 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
   companyInfo?: any;
   loading?: boolean;
   companyId: string = '';
-  user: AuthUser | null;
+  user?: AuthUser | null;
   baseUrl = ServerApis.baseUrl;
   constructor() {
     super();

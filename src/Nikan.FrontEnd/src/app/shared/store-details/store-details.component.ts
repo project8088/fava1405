@@ -13,7 +13,7 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
   id: string ='';
     loading?: boolean;
   info: any;
-  user: AuthUser | null;
+  user?: AuthUser | null;
 
   constructor() {
     super();

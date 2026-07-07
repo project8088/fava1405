@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class MainPageDetailsComponent extends AppBase implements OnInit {
   slug: string='';
-  user: AuthUser | null;
+  user?: AuthUser | null;
   loadingData?: boolean;
   page: any;
   tags: string[] = [];

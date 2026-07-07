@@ -10,19 +10,19 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   productForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving=false;
+  isSaving = false;
   imageUrl: string = '';
-    loading?: boolean;
+  loading?: boolean;
 
   parentProductList: any[] = [];
 
   productGroupList: any[] = [];
-  loadingProductGroup: boolean;
+  loadingProductGroup: boolean = false;
   constructor() {
     super();
     this.route.params.subscribe((p) => {
@@ -81,8 +81,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
       );
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   getInfo() {
     this.loading = true;
@@ -100,7 +99,6 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
             if (response.data.productParentId) this.getProductByParent();
 
             this.imageUrl = response.data.imageUrl;
-          
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
@@ -120,9 +118,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-
-
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -130,7 +126,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
     if (this.productForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.productForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     let form = this.productForm.value;

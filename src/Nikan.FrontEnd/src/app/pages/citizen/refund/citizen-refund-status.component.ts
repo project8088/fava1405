@@ -12,11 +12,11 @@ import { AppBase } from '@app/app.base';
 })
 export class CitizenRefundStatusComponent extends AppBase implements OnInit {
   userId?: string;
-    loading?: boolean;
-  personInfo: ShortKarjoProfile;
+  loading?: boolean;
+  personInfo?: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
   }
   ngOnInit(): void {}

@@ -144,12 +144,12 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
         this.registerForm.get('educationLevel')?.setValidators(Validators.required);
         this.registerForm.get('educationGroup')?.setValidators(Validators.required);
       } else {
-        this.registerForm.get('educationLevel').clearValidators();
-        this.registerForm.get('educationGroup').clearValidators();
+        this.registerForm.get('educationLevel')?.clearValidators();
+        this.registerForm.get('educationGroup')?.clearValidators();
       }
 
-      this.registerForm.get('educationLevel').updateValueAndValidity();
-      this.registerForm.get('educationGroup').updateValueAndValidity();
+      this.registerForm.get('educationLevel')?.updateValueAndValidity();
+      this.registerForm.get('educationGroup')?.updateValueAndValidity();
     });
 
     this.registerForm.get('familyRelation')?.valueChanges.pipe(

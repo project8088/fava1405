@@ -17,7 +17,7 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
   @Input('showLogout') showLogout: boolean = true;
 
   isLoading: boolean = true;
-  //user: AuthUser | null;
+  //user?: AuthUser | null;
 
   menuIsOpen: string = '';
   countofElements: number = 0;

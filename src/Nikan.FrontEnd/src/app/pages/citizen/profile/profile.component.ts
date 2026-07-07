@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
@@ -14,16 +14,17 @@ import { AppBase } from '@app/app.base';
 })
 export class CitizenProfileComponent extends AppBase implements OnInit {
   userId?: string;
-    loading?: boolean;
-  personInfo: ShortKarjoProfile;
+  loading?: boolean;
+  personInfo?: ShortKarjoProfile;
   baseUrl: string = ServerApis.baseUrl;
+  protected breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
 
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
     this.route.params.subscribe((p) => {
       this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
@@ -53,6 +54,7 @@ export class CitizenProfileComponent extends AppBase implements OnInit {
   }
 
   clearImageCache() {
+    if (!this.personInfo) return;
     this.personInfo.personalPictureUrl =
       this.personInfo.personalPictureUrl + '?v=' + Math.random() * 100;
   }

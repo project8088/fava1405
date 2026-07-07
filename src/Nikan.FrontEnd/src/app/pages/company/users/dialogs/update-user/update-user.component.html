@@ -16,7 +16,7 @@
       <div class="row">
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام کاربری</mat-label>
-          <input matInput formControlName="userName" disabled readonly />
+          <input matInput formControlName="userName" [disabled]="true" readonly />
           @if (userForm.get('userName')?.hasError('required')) {
             <mat-error> نام کاربری را وارد کنید. </mat-error>
           }

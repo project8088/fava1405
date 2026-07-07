@@ -148,12 +148,12 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   changePenaltyForPeriodDebt() {
     if (this.frm.get('penaltyForPeriodDebt')?.value) {
       this.frm.get('penaltyPercentage')?.setValidators([Validators.required]);
-      this.frm.get('penaltyPercentage').updateValueAndValidity();
+      this.frm.get('penaltyPercentage')?.updateValueAndValidity();
     } else {
       this.frm.get('penaltyForPeriodDebt')?.setValue(false);
       this.frm.get('penaltyPercentage')?.setValue(0);
-      this.frm.get('penaltyPercentage').clearValidators();
-      this.frm.get('penaltyPercentage').updateValueAndValidity();
+      this.frm.get('penaltyPercentage')?.clearValidators();
+      this.frm.get('penaltyPercentage')?.updateValueAndValidity();
     }
   }
 

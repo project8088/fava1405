@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
 })
 export class WebUserHelpServiceDetailsComponent extends AppBase implements OnInit {
   newsid: string ='';
-  user: AuthUser | null;
+  user?: AuthUser | null;
   loadingData?: boolean;
   news: NewsDto;
   tags: string[] = [];

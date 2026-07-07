@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
@@ -13,12 +13,12 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenCardComponent extends AppBase implements OnInit {
-  constructor(private breakpointObserver: BreakpointObserver) {
+  cards: RegisterServiceModel[] = [];
+  protected breakpointObserver = inject(BreakpointObserver);
+
+  constructor() {
     super();
   }
-
-  cards;
-  availableCards;
 
   loading: boolean = false;
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -44,7 +44,7 @@ export class CitizenCardComponent extends AppBase implements OnInit {
     );
   }
 
-  checkCanOrderCard(card) {
+  checkCanOrderCard(card: any) {
     this.dataService.get(ServerApis.checkCanOrderCard, { cardInfoId: card.cardInfoId }).subscribe(
       (response) => {
         this.loading = false;

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -14,18 +14,19 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
-  user: AuthUser | null;
-  miniSideBar: boolean;
+  user?: AuthUser | null;
+  miniSideBar: boolean = false;
   menuItems: SideNavMenuItem[] = [];
+  protected breakpointObserver = inject(BreakpointObserver);
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
-      if (!this.user) return false;
+      if (!this.user) return;
 
       if (this.user.userCompanyStatus == 1) {
         this.menuItems = [

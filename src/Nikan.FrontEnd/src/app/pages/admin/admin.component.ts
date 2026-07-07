@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '@core/models/menuItems';
@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class AdminComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'default';
 
-  miniSideBar: boolean;
+  miniSideBar: boolean = false;
   menuItems: SideNavMenuItem[] = [
     { name: 'پیشخوان', icon: 'fa fa-chart-network', url: '/admin/dashboard' },
     {
@@ -159,12 +159,13 @@ export class AdminComponent extends AppBase implements OnInit, OnDestroy {
       url: '/admin/change-password',
     },
   ];
+  protected breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
   }
 

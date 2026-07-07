@@ -1,5 +1,5 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SideNavMenuItem } from '@core/models/menuItems';
@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
-  miniSideBar: boolean;
+  miniSideBar: boolean = false;
   theme: string = 'purple-bliss';
   menuItems: SideNavMenuItem[] = [
     { name: 'پیشخوان', icon: 'fa fa-bar-chart', url: '/citizen/dashboard' },
@@ -29,12 +29,13 @@ export class CitizenComponent extends AppBase implements OnInit, OnDestroy {
       icon: 'fa fa-envelope',
     },
   ];
+  protected breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
   }
 

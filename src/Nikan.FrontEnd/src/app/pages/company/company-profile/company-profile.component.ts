@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyProfileComponent extends AppBase implements OnInit {
-  user: AuthUser | null;
+  user?: AuthUser | null;
   constructor() {
     super();
     this.user = this.authService.currentUserValue;

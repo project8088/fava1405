@@ -32,7 +32,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
   searchForm: FormGroup;
 
   groupList: any[] = [];
-  user: AuthUser | null;
+  user?: AuthUser | null;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   constructor(private customValidator: CustomFormValidators) {
@@ -86,7 +86,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     else param.companyId = null;
 
     var url = ServerApis.searchCompanyPersonel;
-    if (this.user.isAdmin) url = ServerApis.allCompanyPersonel;
+    if (this.user?.isAdmin) url = ServerApis.allCompanyPersonel;
 
     merge()
       .pipe(

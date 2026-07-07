@@ -11,13 +11,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompnayDashboardComponent extends AppBase implements OnInit {
-    loading?: boolean;
+  loading?: boolean;
   notifications: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
-  loadingStore: boolean;
+  loadingStore: boolean = false;
   storeItems: any[] = [];
 
-  user: AuthUser | null;
+  user?: AuthUser | null;
 
   constructor() {
     super();
@@ -66,7 +66,7 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
     );
   }
 
-  openNotificationDetails(item:any) {
+  openNotificationDetails(item: any) {
     this.matDialog.open(ViewNotificationDetailsDialogComponent, {
       data: {
         id: item.id,
@@ -76,7 +76,7 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
     });
   }
 
-  buy(item:any) {
+  buy(item: any) {
     this.toastrService.info('در حال حاضر امکان ارتباط با درگاه پرداخت برقرار نیست.');
   }
 }

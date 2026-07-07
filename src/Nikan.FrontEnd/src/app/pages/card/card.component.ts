@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { SideNavMenuItem } from '@core/models/menuItems';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class CardComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
 
-  miniSideBar: boolean;
+  miniSideBar: boolean = false;
   menuItems: SideNavMenuItem[] = [
     { name: 'پروفایل شهروندی', icon: 'fa fa-reply', url: '/citizen/dashboard' },
     { name: 'پیشخوان', icon: 'fa fa-chart-network', url: '/card/dashboard' },
@@ -78,11 +78,13 @@ export class CardComponent extends AppBase implements OnInit, OnDestroy {
     { name: 'تغییر کلمه عبور', icon: 'fa fa-key', url: '/card/change-password' },
   ];
 
+  protected breakpointObserver = inject(BreakpointObserver);
+
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
   }
 

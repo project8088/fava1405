@@ -16,7 +16,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
   userForm: FormGroup;
   userId?: string;
   loading: boolean = true;
-  companyid: string ='';
+  companyId: string ='';
 
   userAccountStateList: any[] = [];
   constructor(

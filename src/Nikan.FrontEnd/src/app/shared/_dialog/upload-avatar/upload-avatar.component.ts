@@ -24,7 +24,7 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   imageUrl: string = '';
   imageBase64: string = '';
 
-  user: AuthUser | null;
+  user?: AuthUser | null;
   constructor(
     private matDialogRef: MatDialogRef<UploadUserAvatarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

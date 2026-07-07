@@ -245,11 +245,11 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   changeGender() {
     if (this.personalForm.get('gender')?.value == false) {
       this.personalForm.get('soldierState')?.setValue(null);
-      this.personalForm.get('soldierState').clearValidators();
-      this.personalForm.get('soldierState').updateValueAndValidity();
+      this.personalForm.get('soldierState')?.clearValidators();
+      this.personalForm.get('soldierState')?.updateValueAndValidity();
     } else {
       this.personalForm.get('soldierState')?.setValidators([Validators.required]);
-      this.personalForm.get('soldierState').updateValueAndValidity();
+      this.personalForm.get('soldierState')?.updateValueAndValidity();
     }
   }
 }
