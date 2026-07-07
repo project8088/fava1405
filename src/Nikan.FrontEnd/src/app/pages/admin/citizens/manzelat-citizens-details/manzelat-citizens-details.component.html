@@ -99,11 +99,11 @@
                 <strong>{{ citizen.fullAddress }}</strong>
               </div>
               <hr />
-              <mat-chip-list aria-label="citizen groups">
+              <mat-chip-listbox aria-label="citizen groups">
                 @for (grp of citizen.citizenGroups; track grp) {
                   <mat-chip>{{ grp }} </mat-chip>
                 }
-              </mat-chip-list>
+              </mat-chip-listbox>
             </div>
           </div>
         </div>

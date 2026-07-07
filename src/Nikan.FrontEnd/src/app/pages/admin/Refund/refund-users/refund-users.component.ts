@@ -31,8 +31,8 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -80,7 +80,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -108,7 +108,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
       });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.citizen + '" را حذف کنید؟',

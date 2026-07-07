@@ -9,8 +9,8 @@ declare var BotDetect: any;
 
 @Injectable()
 export class CaptchaService {
-  private _captchaStyleName: string;
-  private _captchaEndpoint: string;
+  private _captchaStyleName: string='';
+  private _captchaEndpoint: string='';
 
   constructor(
     private http: HttpClient,

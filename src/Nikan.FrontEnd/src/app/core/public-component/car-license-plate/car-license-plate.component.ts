@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { AppBase } from '@app/app.base';
 
@@ -17,9 +17,9 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CarLicensePlateComponent extends AppBase implements ControlValueAccessor, OnInit {
-  @Input() disabled: boolean;
+  @Input() disabled: boolean = false;
   @Input('required') required: boolean = false;
-  @Output('change') change: EventEmitter<any>;
+  @Output('change') change = new EventEmitter<any>();
 
   letters: string[] = [
     'الف',
@@ -48,14 +48,12 @@ export class CarLicensePlateComponent extends AppBase implements ControlValueAcc
   ];
 
   s2: string = '';
-  s1: number;
-  s3: number;
-  s4: number;
-
-  constructor(@Self() public ngControl: NgControl) {
+  s1: number = 0;
+  s3: number = 0;
+  s4: number = 0;
+  myControl = new FormControl();
+  constructor() {
     super();
-    ngControl.valueAccessor = this;
-    //this.ngControl = new FormControl(null, [RequireMatch]);
   }
 
   ngOnInit() {
@@ -63,10 +61,10 @@ export class CarLicensePlateComponent extends AppBase implements ControlValueAcc
   }
 
   init() {
-    if (this.ngControl.control) {
+    if (this.myControl) {
       if (this.required) {
-        this.ngControl.control.setValidators([Validators.required, RequireMatch]);
-        this.ngControl.control.updateValueAndValidity();
+        this.myControl.setValidators([Validators.required, RequireMatch]);
+        this.myControl.updateValueAndValidity();
       }
     }
   }
@@ -95,18 +93,18 @@ export class CarLicensePlateComponent extends AppBase implements ControlValueAcc
   }
 
   onChange() {
-    if (this.change) this.change.emit(this.ngControl.control.value);
+    if (this.change) this.change.emit(this.myControl?.value);
   }
 
   changeNum() {
     if (this.s1 && this.s2 && this.s3 && this.s4) {
       let plateNumber =
         this.s1.toString() + ' ' + this.s2 + ' ' + this.s3.toString() + ' ' + this.s4.toString();
-      this.ngControl.control.setValue(plateNumber);
+      this.myControl?.setValue(plateNumber);
     }
 
     //else {
-    //  this.ngControl.control.setValue('');
+    //  this.myControl.setValue('');
     //}
   }
 }

@@ -8,28 +8,26 @@ import { AuthUser } from './user.model';
 import { LocalStorageService } from '../services/localstorage.service';
 import { Router } from '@angular/router';
 import { ServerApis } from '../server-apis';
-import { ToastrService } from 'ngx-toastr';
-import jwt_decode from 'jwt-decode';
+import * as jwt_decode from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private currentUserSubject: BehaviorSubject<AuthUser>;
-  public currentUser: Observable<AuthUser>;
+  private currentUserSubject: BehaviorSubject<AuthUser | null>;
+  public currentUser: Observable<AuthUser | null>;
 
   constructor(
     private http: HttpClient,
     private router: Router,
-    private toastrService: ToastrService,
     private storageService: LocalStorageService,
   ) {
     var user = this.getAuthUser();
-    this.currentUserSubject = new BehaviorSubject<AuthUser>(user);
+    this.currentUserSubject = new BehaviorSubject<AuthUser | null>(user);
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  public get currentUserValue(): AuthUser {
+  public get currentUserValue(): AuthUser | null {
     return this.currentUserSubject.value;
   }
 
@@ -77,7 +75,7 @@ export class AuthService {
     else return false;
   }
 
-  storeToken(access_token, refresh_token) {
+  storeToken(access_token: string, refresh_token: string) {
     this.storageService.set('access_token', access_token);
     this.storageService.set('refresh_token', refresh_token);
 
@@ -131,7 +129,7 @@ export class AuthService {
     if (!token) {
       return null;
     }
-    const decodedToken = jwt_decode(token);
+    const decodedToken = jwt_decode.jwtDecode<any>(token);
     const roles = this.getDecodedTokenRoles(decodedToken);
     let rootModule = '';
     let admin = false;
@@ -200,10 +198,10 @@ export class AuthService {
     return this.storageService.get('access_token');
   }
 
-  getDecodedTokenRoles(decodedToken): string[] | null {
+  getDecodedTokenRoles(decodedToken: any): string[] {
     const roles = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
     if (!roles) {
-      return null;
+      return [];
     }
 
     if (Array.isArray(roles)) {
@@ -219,7 +217,10 @@ export class AuthService {
 
   goToDashboard() {
     let user = this.getAuthUser();
-
+    if (!user || !user.roles) {
+      this.router.navigate(['/']);
+      return;
+    }
     if (user.roles.indexOf('admin') > -1) this.router.navigate(['/admin']);
     else if (user.roles.indexOf('company') > -1) this.router.navigate(['/company']);
     else if (user.roles.indexOf('card') > -1) this.router.navigate(['/card']);

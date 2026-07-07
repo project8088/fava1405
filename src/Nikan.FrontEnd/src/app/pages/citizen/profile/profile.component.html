@@ -21,16 +21,16 @@
         >
         </mat-progress-spinner>
         @if (!personInfo.personalPictureUrl) {
-          <img class="object-fit-cover mb-2" src="../../../../assets/images/avatar.png" />
+          <img class="object-fit-cover mb-2" src="images/avatar.png" />
         }
         @if (personInfo.personalPictureUrl) {
           <img class="object-fit-cover mb-2" [src]="baseUrl + personInfo.personalPictureUrl" />
         }
         <span class="d-block my-2">تکمیل اطلاعات: {{ personInfo.percentageResume }}%</span>
         <div class="namefamily">
-          <div class="text-center">{{ personInfo.nationCode }}</div>
+          <div class="text-center">{{ personInfo.nationalCode }}</div>
           <strong class="mb-2">
-            {{ personInfo.gender == true ? 'آقای' : 'خانم' }}
+            {{ personInfo.gender == 'مرد' ? 'آقای' : 'خانم' }}
             {{ personInfo.firstName }} {{ personInfo.lastName }}</strong
           >
         </div>

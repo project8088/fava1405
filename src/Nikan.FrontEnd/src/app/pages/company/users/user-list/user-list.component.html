@@ -60,7 +60,7 @@
       <div class="datatable-table-container">
         <table
           mat-table
-          [dataSource]="data"
+          [dataSource]="dataSource"
           class="datatable-table"
           #exporter="matTableExporter"
           matTableExporter
@@ -126,7 +126,7 @@
           <ng-container matColumnDef="roles">
             <th mat-header-cell *matHeaderCellDef>نقش کاربر</th>
             <td mat-cell *matCellDef="let row">
-              <mat-chip-list aria-label="Fish selection">
+              <mat-chip-listbox aria-label="Fish selection">
                 @for (item of row.roles; track item) {
                   <mat-chip>
                     @if (item.toLowerCase() == 'admin') {
@@ -146,7 +146,7 @@
                     }
                   </mat-chip>
                 }
-              </mat-chip-list>
+              </mat-chip-listbox>
             </td>
           </ng-container>
           <ng-container matColumnDef="userAccountState">

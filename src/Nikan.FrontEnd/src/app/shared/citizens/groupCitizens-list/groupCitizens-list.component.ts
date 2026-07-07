@@ -24,8 +24,8 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     super();
@@ -72,7 +72,7 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

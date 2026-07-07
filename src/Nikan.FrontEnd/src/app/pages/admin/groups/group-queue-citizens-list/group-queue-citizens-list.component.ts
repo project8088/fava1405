@@ -32,8 +32,8 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     super();
@@ -55,7 +55,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
     this.getList();
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.nationCode + '" را حذف کنید؟',
@@ -119,7 +119,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

@@ -34,8 +34,8 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -88,7 +88,7 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

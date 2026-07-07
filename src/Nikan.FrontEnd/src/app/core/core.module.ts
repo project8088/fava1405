@@ -22,6 +22,7 @@ import { SimpleJalaliDatepickerComponent } from './public-component/simple-datep
 import { InputRefundUsersAutoCompleteComponent } from './public-component/input-refund-users/input-refund-users.component';
 import { LuxonFormatPipe } from './pipe/luxon-format.pipe';
 import { LuxonFromNowPipe } from './pipe/luxon-from-now.pipe';
+import { ExportToExcelDirective } from './directive/export-to-excel.directive';
 
 @NgModule({
   declarations: [
@@ -40,12 +41,12 @@ import { LuxonFromNowPipe } from './pipe/luxon-from-now.pipe';
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
+    ExportToExcelDirective
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [
     CustomFormValidators,
     CustomModelValidators,
-
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
   ],
@@ -66,6 +67,7 @@ import { LuxonFromNowPipe } from './pipe/luxon-from-now.pipe';
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
+    ExportToExcelDirective
   ],
 })
 export class CoreModule {}

@@ -143,7 +143,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
     );
   }
 
-  delete(item) {
+  delete(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.removeCitizensNotifactions, { id: item.id }).subscribe(
       (response) => {

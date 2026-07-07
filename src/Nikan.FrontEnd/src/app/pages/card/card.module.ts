@@ -93,18 +93,5 @@ import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update
     ReactiveFormsModule,
     RouterModule,
   ],
-  entryComponents: [
-    CardImportCardNumberDialogComponent,
-    CardDeliveredCitizenCardDialogComponent,
-    CardCancellationCitizenCardDialogComponent,
-    CardBackCitizenCardDialogComponent,
-    CardAddUserDialogComponent,
-    CardNewExportCardDialogComponent,
-    CardAddCardCoursesDialogComponent,
-    CardAddOrUpadateQueueDialogComponent,
-    CardDeliveryQueueOperatorDialogComponent,
-    CardAddCardDiscountDialogComponent,
-    CardUpdateCitizenMobileNumberDialogComponent,
-  ],
 })
 export class CardModule {}

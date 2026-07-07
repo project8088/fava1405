@@ -56,7 +56,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.description + '" اطمینان دارید؟',

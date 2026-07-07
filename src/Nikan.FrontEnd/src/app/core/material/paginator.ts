@@ -3,12 +3,12 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class getFarsiPaginatorIntl extends MatPaginatorIntl {
-  itemsPerPageLabel = 'در هر صفحه';
-  nextPageLabel = 'بعدی';
-  previousPageLabel = 'قبلی';
-  firstPageLabel = 'اولین صفحه';
-  lastPageLabel = 'آخرین صفحه';
-  getRangeLabel = (page: number, pageSize: number, length: number): string => {
+  override itemsPerPageLabel = 'در هر صفحه';
+  override nextPageLabel = 'بعدی';
+  override previousPageLabel = 'قبلی';
+  override firstPageLabel = 'اولین صفحه';
+  override lastPageLabel = 'آخرین صفحه';
+  override getRangeLabel = (page: number, pageSize: number, length: number): string => {
     if (length === 0 || pageSize === 0) {
       return ' 0 از ' + length;
     }

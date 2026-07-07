@@ -34,8 +34,8 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
   listCount: number = 0;
   loading: boolean = true;
   card: any = {};
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -162,7 +162,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     );
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -173,7 +173,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

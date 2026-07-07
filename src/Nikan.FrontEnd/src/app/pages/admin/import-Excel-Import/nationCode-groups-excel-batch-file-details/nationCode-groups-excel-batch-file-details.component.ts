@@ -35,8 +35,8 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {

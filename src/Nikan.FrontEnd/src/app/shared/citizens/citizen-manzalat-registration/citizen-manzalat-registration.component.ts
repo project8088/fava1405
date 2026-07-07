@@ -20,8 +20,8 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     super();

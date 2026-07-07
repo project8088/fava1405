@@ -1,8 +1,7 @@
-import { Component, Input, OnInit, Output, Self, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import {
   ControlValueAccessor,
   Validator,
-  NgControl,
   AbstractControl,
   ValidationErrors,
   Validators,
@@ -22,7 +21,7 @@ const persianFormatter = new Intl.DateTimeFormat('en', {
   year: 'numeric',
   month: '2-digit',
   day: '2-digit',
-  numberingSystem: 'latn'
+  numberingSystem: 'latn',
 });
 
 interface PersianDate {
@@ -36,7 +35,7 @@ function extractPersianParts(date: DateTime | Date): PersianDate {
   const jsDate = date instanceof DateTime ? date.toJSDate() : date;
   const parts = persianFormatter.formatToParts(jsDate);
   const get = (type: string): number =>
-    parseInt(parts.find(p => p.type === type)?.value || '0', 10);
+    parseInt(parts.find((p) => p.type === type)?.value || '0', 10);
   return { jy: get('year'), jm: get('month'), jd: get('day') };
 }
 
@@ -118,7 +117,7 @@ export class SimpleJalaliDatepickerComponent
   @Input() required = false;
   @Input() disabled = false;
   @Input() label = '';
-  @Output() date = new EventEmitter<{ date: string; jDate: string }|null>();
+  @Output() date = new EventEmitter<{ date: string; jDate: string } | null>();
 
   day = 0;
   month = 0;
@@ -142,13 +141,13 @@ export class SimpleJalaliDatepickerComponent
   isLeapYear = false;
 
   // tslint:disable-next-line: variable-name
-  private _onChange= (val: string) => {};
+  private _onChange = (val: string) => {};
   // tslint:disable-next-line: variable-name
-  private _onTouched= () => {};
+  private _onTouched = () => {};
   myControl = new FormControl();
 
   constructor() {
-    super(); 
+    super();
 
     this.updateDayList();
 
@@ -171,7 +170,7 @@ export class SimpleJalaliDatepickerComponent
   }
 
   // ---------- Validator ----------
-  validate(control: AbstractControl): ValidationErrors |null{
+  validate(control: AbstractControl): ValidationErrors | null {
     const valueObj = control.value;
     if (valueObj && !this.isValidGregorianString(valueObj)) {
       return { invalid: true };

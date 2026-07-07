@@ -36,8 +36,8 @@ export class OrderCardListComponent extends AppBase implements OnInit, AfterView
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {
@@ -87,7 +87,7 @@ export class OrderCardListComponent extends AppBase implements OnInit, AfterView
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {

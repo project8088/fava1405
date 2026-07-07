@@ -32,8 +32,8 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -88,7 +88,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
-  newJob(row) {
+  newJob(row:any) {
     this.router.navigate(['/placement/new-job'], {
       queryParams: {
         id: '',
@@ -98,7 +98,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     });
   }
 
-  publishComment(row) {
+  publishComment(row:any) {
     Swal.fire({
       title: 'تغییر وضعیت',
       html:

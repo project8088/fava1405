@@ -38,8 +38,8 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -94,7 +94,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -120,7 +120,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
     });
   }
 
-  openChangeRefundAccessDialog(item) {
+  openChangeRefundAccessDialog(item:any) {
     this.matDialog
       .open(AdminChangeRefundAccessDialogComponent, {
         panelClass: 'custom-dialog',
@@ -135,7 +135,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       });
   }
 
-  getCardNumbers(item) {
+  getCardNumbers(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.getCardsNumber, { importId: item.id }).subscribe(
       (response) => {
@@ -154,7 +154,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
     );
   }
 
-  openReportDialog(item) {
+  openReportDialog(item:any) {
     this.matDialog
       .open(AdminReportRefundDialogComponent, {
         panelClass: 'custom-dialog',
@@ -169,7 +169,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.letterNumber + '" را حذف کنید؟',

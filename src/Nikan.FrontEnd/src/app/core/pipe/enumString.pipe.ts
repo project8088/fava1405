@@ -15,11 +15,11 @@ export class EnumStringPipe implements PipeTransform {
     });
   }
 
-  transform(val: string, object: string = '') {
+  transform(val: any, object: string = '') {
     if (val != undefined && val != null) {
       for (let property in this.enums) {
         if (property == object) {
-          var txt = this.enums[property].find((v) => v.key == val);
+          var txt = this.enums[property].find((v: any) => v.key == val);
           if (txt) return txt.text.replace(/_/g, ' ');
           else return '';
         }

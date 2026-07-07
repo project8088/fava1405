@@ -34,8 +34,8 @@ export class CardTransactionListComponent extends AppBase implements AfterViewIn
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -93,7 +93,7 @@ export class CardTransactionListComponent extends AppBase implements AfterViewIn
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

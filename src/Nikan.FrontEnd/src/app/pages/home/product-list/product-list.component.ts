@@ -21,8 +21,8 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -76,7 +76,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -91,7 +91,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
     this.getList();
   }
 
-  openProductByParent(item) {
+  openProductByParent(item:any) {
     if (this.paginator) {
       this.paginator.firstPage();
     }

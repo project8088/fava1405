@@ -15,7 +15,7 @@ export class HomeServicesListComponent extends AppBase implements OnInit {
   data: any[] = [];
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   baseUrl: string = ServerApis.baseUrl;
 

@@ -4,38 +4,38 @@ export class karjoAmozeshDto {
   /// <summary>
   /// عنوان دوره آموزشی
   /// </summary>
-  public title: string;
+  public title!: string;
 
   /// <summary>
   /// طول دوره به ساعت
   /// </summary>
-  public timeDure: string;
+  public timeDure!: string;
   //------------------------------------------------------------------
   /// <summary>
   /// چه سالی
   /// </summary>
-  public year: string;
+  public year!: string;
 
   /// <summary>
   /// مرکز صادرکننده مدرک
   /// </summary>
-  public amozeshOrganzation: AmozeshOrganzationEnum;
+  public amozeshOrganzation!: AmozeshOrganzationEnum;
 
   /// <summary>
   /// نوع مدرک
   /// </summary>
-  public typeOfDocument: TypeOfDocumentEnum;
+  public typeOfDocument!: TypeOfDocumentEnum;
 
   /// <summary>
   /// آموزشگاه صادر کننده مدرک
   /// </summary>
-  public location: string;
+  public location!: string;
 
   /// <summary>
   /// شهر صادر کننده مدرک تحصیلی
   /// </summary>
-  public city: string;
-  public cityId: number;
+  public city!: string;
+  public cityId!: number;
 
   public userId?: string;
   public loading?: boolean;

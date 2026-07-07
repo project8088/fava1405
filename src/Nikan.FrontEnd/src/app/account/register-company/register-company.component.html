@@ -117,7 +117,7 @@
         @if (registerForm.get('password')?.hasError('required')) {
           <mat-error> کلمه عبور را وارد کنید. </mat-error>
         }
-        @if (registerForm.get('password').errors?.weakPassword) {
+        @if (registerForm.get('password')?.hasError('weakPassword')) {
           <mat-error>
             کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
           </mat-error>
@@ -130,7 +130,7 @@
         @if (registerForm.get('confirmPassword')?.hasError('required')) {
           <mat-error> تکرار کلمه عبور را وارد کنید. </mat-error>
         }
-        @if (registerForm.get('confirmPassword').errors?.weakPassword) {
+        @if (registerForm.get('confirmPassword')?.hasError('weakPassword')) {
           <mat-error>
             کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
           </mat-error>

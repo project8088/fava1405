@@ -14,17 +14,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class RegisterCompanyComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   registerForm: FormGroup;
-  id: string;
+  id: string = '';
   loading: boolean = true;
 
   captchaImage: any;
   loadingCaptcha: boolean = true;
 
-  loadingState: boolean;
+  loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState = new Observable<any[]>();
 
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -79,7 +79,7 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
     );
   }
 
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -87,7 +87,7 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-        return ;
+      return;
     }
     //if (!this.registerForm.get('captchaCode')?.value) {
     //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');

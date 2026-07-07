@@ -32,8 +32,8 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -77,7 +77,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -91,7 +91,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
     this.getList();
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.serviceName + '" را حذف کنید؟',

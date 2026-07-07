@@ -21,8 +21,8 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   frm: FormGroup;
@@ -79,7 +79,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
     this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
@@ -111,7 +111,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
     });
   }
 
-  update(row) {
+  update(row:any) {
     this.frm.setValue({
       id: row.id,
       title: row.title,
@@ -154,7 +154,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
   /**
    *  افزودن کارفرمای جدید
    * */
-  //openNewEmployementDialog(item) {
+  //openNewEmployementDialog(item:any) {
   //  this.matDialog.open(PlacementAddNewEmployerDialogComponent, {
   //    panelClass: 'custom-dialog',
   //    minWidth: '600px',

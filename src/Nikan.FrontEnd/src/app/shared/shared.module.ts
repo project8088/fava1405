@@ -45,7 +45,6 @@ import { AppGroupCitizensListComponent } from './citizens/groupCitizens-list/gro
 import { AppCitizenSmsListComponent } from './citizens/citizen-sms-list/citizen-sms-list.component';
 import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citizen-event-list.component';
 
-
 @NgModule({
   declarations: [
     SideNavMenuComponent,
@@ -97,7 +96,6 @@ import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citi
     NgxMaterialTimepickerModule,
     //MatTableExporterModule,
     MatIconModule,
-    
   ],
   exports: [
     ImageCropperComponent,
@@ -125,7 +123,7 @@ import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citi
     UploadUserAvatarDialogComponent,
     StoreDetailsComponent,
     TransactionDetailsComponent,
-   // MatTableExporterModule,
+    // MatTableExporterModule,
     AttachmentListComponent,
     CaptchaComponent,
     TimerComponent,
@@ -137,13 +135,6 @@ import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citi
     AppGroupCitizensListComponent,
     AppCitizenSmsListComponent,
     AppCitizenEventListComponent,
-  ],
-  entryComponents: [
-    SendTicketDialogComponent,
-    ViewJobDetailsDialogComponent,
-    JobseekerProfileDialogComponent,
-    ViewNotificationDetailsDialogComponent,
-    UploadUserAvatarDialogComponent,
   ],
 })
 export class SharedModule {

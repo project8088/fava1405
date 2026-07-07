@@ -16,7 +16,7 @@ import { LocalStorageService } from '../services/localstorage.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
   isRefreshingToken: boolean = false;
-  tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+  tokenSubject = new BehaviorSubject<string | null>(null);
 
   constructor(
     private authService: AuthService,
@@ -174,7 +174,7 @@ export class AuthInterceptor implements HttpInterceptor {
     }
   }
 
-  handle400Error(error) {
+  handle400Error(error: HttpErrorResponse) {
     if (error && error.status === 400 && error.error && error.error.error === 'invalid_grant') {
       // If we get a 400 and the error message is 'invalid_grant', the token is no longer valid so logout.
       return this.logoutUser();

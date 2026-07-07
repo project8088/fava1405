@@ -68,7 +68,7 @@
       <div class="row">
         <mat-form-field  class="col-sm-12">
           <mat-label>گروههای شهروندی</mat-label>
-          <mat-chip-list #skillChipList>
+          <mat-chip-listbox #skillChipList>
             @for (item of selectedServices; track item) {
               <mat-chip
                 [selectable]="true"
@@ -87,7 +87,7 @@
               #skillInput
               #skillTrigger="matAutocompleteTrigger"
             />
-          </mat-chip-list>
+          </mat-chip-listbox>
           <mat-autocomplete
             #autoSkills="matAutocomplete"
             [displayWith]="displayFn"

@@ -27,8 +27,8 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -113,7 +113,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -128,7 +128,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  removePersonal(row) {
+  removePersonal(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.firstName + ' ' + row.lastName + '" اطمینان دارید؟',

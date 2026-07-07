@@ -35,8 +35,8 @@ export class CardUsersComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -87,7 +87,7 @@ export class CardUsersComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -114,7 +114,7 @@ export class CardUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.displayName + '" را حذف کنید؟',

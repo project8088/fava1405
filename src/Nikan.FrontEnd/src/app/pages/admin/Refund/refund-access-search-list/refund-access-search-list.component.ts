@@ -41,8 +41,8 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -100,7 +100,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -126,7 +126,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
     });
   }
 
-  openChangeRefundDialog(item) {
+  openChangeRefundDialog(item:any) {
     this.matDialog
       .open(AdminChangeRefundDialogComponent, {
         panelClass: 'custom-dialog',
@@ -154,7 +154,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
         if (result) this.getList();
       });
   }
-  getCardNumber(row) {
+  getCardNumber(row:any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -186,7 +186,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
     });
   }
 
-  openRefundInfoDialog(item) {
+  openRefundInfoDialog(item:any) {
     this.matDialog
       .open(CitizenRefundInfoDialogComponent, {
         panelClass: 'custom-dialog',

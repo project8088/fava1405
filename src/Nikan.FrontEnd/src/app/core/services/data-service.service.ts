@@ -164,7 +164,7 @@ export class DataService {
    * تبدیل تاریخ به فرمت
    * YYYY/MM/DD
    */
-  formatDate(date) {
+  formatDate(date: string) {
     var d = new Date(date),
       month = '' + (d.getMonth() + 1),
       day = '' + d.getDate(),
@@ -177,7 +177,7 @@ export class DataService {
   }
 
   downloadPlacementRegisterRequestFile() {
-    var url = 'assets/register-request.pdf';
+    var url = 'register-request.pdf';
     if (ServerApis.baseUrl == '/') url = '/ui/' + url;
 
     return this.http.get(url, { responseType: 'blob' }).pipe(
@@ -209,13 +209,13 @@ export class DataService {
     else return this.getBaseEnums();
   }
 
-  getTextOfEnum(objectName, key): Observable<string> {
+  getTextOfEnum(objectName: string, key: string): Observable<string> {
     return this.getEnums().pipe(
       map((response) => {
         let enums = response;
         for (let property in enums) {
           if (property == objectName) {
-            return enums[property].find((v) => v.key == key).text;
+            return enums[property].find((v: any) => v.key == key).text;
           }
         }
       }),
@@ -225,9 +225,9 @@ export class DataService {
   /**
    * دریافت تنظیمات سایت از سمت سرور
    * */
-  protected getSiteSettingFromServer(): Observable<SiteSettingViewModel> {
-    return this.http.get(ServerApis.getSiteInfo).pipe(
-      map((response: ApiResult<SiteSettingViewModel>) => {
+  protected getSiteSettingFromServer() {
+    return this.http.get<ApiResult<SiteSettingViewModel>>(ServerApis.getSiteInfo).pipe(
+      map((response) => {
         if (response.isSuccess) {
           var result = response.data;
           this.localStorageService.set('setting', result);
@@ -242,7 +242,7 @@ export class DataService {
   /**
    * دریافت تنظیمات سایت
    * */
-  getSetting(): Observable<SiteSettingViewModel> {
+  getSetting(): Observable<SiteSettingViewModel | null> {
     let setting = this.localStorageService.get('setting');
     if (setting) return of(setting);
     else return this.getSiteSettingFromServer();
@@ -253,7 +253,7 @@ export class DataService {
    *
    * @param objects
    */
-  convertKeyToInt(objects) {
+  convertKeyToInt(objects: any) {
     for (let property in objects) {
       if (objects[property] instanceof Array) {
         objects[property].forEach((item) => {
@@ -265,7 +265,7 @@ export class DataService {
     return objects;
   }
 
-  toCamelCase(o) {
+  toCamelCase(o: any) {
     var newO, origKey, newKey, value;
     if (o instanceof Array) {
       return o.map((value) => {
@@ -275,7 +275,7 @@ export class DataService {
         return value;
       });
     } else {
-      newO = {};
+      newO = {} as any;
       for (origKey in o) {
         if (o.hasOwnProperty(origKey)) {
           newKey = (origKey.charAt(0).toLowerCase() + origKey.slice(1) || origKey).toString();

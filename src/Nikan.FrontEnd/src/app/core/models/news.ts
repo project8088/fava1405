@@ -9,17 +9,17 @@ export class NewsDto {
   /// </summary>
   // [Required]
   // [StringLength(2000)]
-  public title: string;
+  public title!: string;
 
   /// <summary>
   /// توضیحات کوتاه
   /// </summary>
-  public description: string;
+  public description!: string;
   /// <summary>
   ///شرح کامل
   ///Html Editor
   /// </summary>
-  public body: string;
+  public body!: string;
 
   /// <summary>
   /// تعداد مشاهده خبر
@@ -39,17 +39,17 @@ export class NewsDto {
   /// <summary>
   /// توضیحات سئو
   /// </summary>
-  public seoDescription: string;
+  public seoDescription!: string;
 
   /// <summary>
   /// تگهای سئو
   /// </summary>
-  public seoTags: string;
+  public seoTags!: string;
 
   /// <summary>
   /// آیا امکان ارسال دیدگاه وجود دارد ؟
   /// </summary>
-  public commentIsActive: boolean;
+  public commentIsActive!: boolean;
 
   public attachmentFileGroup?: string;
   public attachmentImageGroup?: string;
@@ -76,7 +76,7 @@ export class NewsDto {
   /// <summary>
   /// آیا خبر ویژه است ؟
   /// </summary>
-  public isSpecial: boolean;
+  public isSpecial!: boolean;
 
   public organizationId?: string;
   public isDeleted?: boolean;
@@ -88,13 +88,13 @@ export class NewsCommentDto {
 
   public userIP?: string;
 
-  public commentMessage: string;
-  public emailAddress: string;
+  public commentMessage!: string;
+  public emailAddress!: string;
 
-  public fullName: string;
+  public fullName!: string;
 
   public replyId?: boolean;
 
   public isPublish?: boolean;
-  public newsItemId: number;
+  public newsItemId!: number;
 }

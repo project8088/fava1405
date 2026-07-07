@@ -1,23 +1,23 @@
 export class KarjoGlobalInformationDto {
   public userId?: string;
 
-  public userCode: string;
+  public userCode!: string;
 
   public gender?: boolean;
 
-  public mobileNumber: string;
-  public nationalCode: string;
-  public cellNumber: string;
+  public mobileNumber!: string;
+  public nationalCode!: string;
+  public cellNumber!: string;
 
-  public email: string;
-  public firstName: string;
-  public lastName: string;
-  public fatherName: string;
+  public email!: string;
+  public firstName!: string;
+  public lastName!: string;
+  public fatherName!: string;
 
-  public address: string;
+  public address!: string;
 
   public cityId?: number;
-  public city: string;
+  public city!: string;
 
   public dateOfBirth?: string;
 
@@ -27,36 +27,36 @@ export class KarjoGlobalInformationDto {
 
   public numberOfChildren?: number;
 
-  public familiarName: string;
+  public familiarName!: string;
 
-  public familiarCellNumber: string;
+  public familiarCellNumber!: string;
 
-  public familiarMobile: string;
+  public familiarMobile!: string;
 
-  public familiarOfficeCellNumber: string;
+  public familiarOfficeCellNumber!: string;
 
-  public familiarRelationship: string;
+  public familiarRelationship!: string;
 
-  public familiarCode: string;
+  public familiarCode!: string;
 
   public lastModifiedOnDate?: string;
 }
 
 export class ShortKarjoProfile {
-  public nationalCode: string;
+  public nationalCode!: string;
   public personalPictureUrl?: string;
 
-  public userName: string;
+  public userName!: string;
 
-  public userCode: string;
+  public userCode!: string;
 
-  public gender: string;
+  public gender!: string;
 
-  public firstName: string;
+  public firstName!: string;
 
-  public lastName: string;
+  public lastName!: string;
 
-  public percentageResume: number;
+  public percentageResume!: number;
 
-  public isMadadjo: boolean;
+  public isMadadjo!: boolean;
 }

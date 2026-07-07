@@ -26,8 +26,8 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {
@@ -48,7 +48,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -91,7 +91,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {

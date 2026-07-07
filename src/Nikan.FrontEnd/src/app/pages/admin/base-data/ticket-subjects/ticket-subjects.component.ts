@@ -29,8 +29,8 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   frm: FormGroup;
@@ -150,7 +150,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     window.scrollTo(0, 0);
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
@@ -182,7 +182,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     });
   }
 
-  update(row) {
+  update(row:any) {
     this.frm.setValue({
       id: row.id,
       title: row.title,

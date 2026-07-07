@@ -42,8 +42,8 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
   baseEnums: any = {};
   isfahanCities;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -164,7 +164,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -179,7 +179,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -190,7 +190,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
     });
   }
 
-  checkIsDead(item) {
+  checkIsDead(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
       (response) => {

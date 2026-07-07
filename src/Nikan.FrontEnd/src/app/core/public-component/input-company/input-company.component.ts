@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../server-apis';
@@ -24,31 +24,30 @@ export class InputCompanyAutoCompleteComponent
   extends AppBase
   implements ControlValueAccessor, OnInit
 {
-  @Input() disabled: boolean;
+  @Input() disabled: boolean = false;
 
   @Input('label') label: string = 'شرکت';
   @Input('required') required: boolean = false;
 
   List: any[] = [];
 
-  @Output('optionSelected') optionSelected: EventEmitter<any>;
+  @Output('optionSelected') optionSelected = new EventEmitter<any>();
 
-    loading?: boolean;
-  filteredList: Observable<any[]>;
+  loading?: boolean;
+  filteredList = new Observable<any[]>();
+  myControl = new FormControl();
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor() {
     super();
-    ngControl.valueAccessor = this;
-    //this.ngControl = new FormControl(null, [RequireMatch]);
   }
 
   ngOnInit() {
     this.getCompanyList();
 
-    if (this.ngControl.control) {
+    if (this.myControl) {
       if (this.required) {
-        this.ngControl.control.setValidators([Validators.required, RequireMatch]);
-        this.ngControl.control.updateValueAndValidity();
+        this.myControl.setValidators([Validators.required, RequireMatch]);
+        this.myControl.updateValueAndValidity();
       }
     }
   }
@@ -57,7 +56,7 @@ export class InputCompanyAutoCompleteComponent
 
   writeValue(value: any): void {
     //if (value !== undefined) {
-    //  this.ngControl.control.setValue(value.toString());
+    //  this.myControl.setValue(value.toString());
     //}
   }
   registerOnChange(fn: any): void {
@@ -73,8 +72,8 @@ export class InputCompanyAutoCompleteComponent
   }
 
   getCompanyList() {
-    if (this.ngControl.control) {
-      this.ngControl.control.reset('');
+    if (this.myControl) {
+      this.myControl.reset('');
       this.List = [];
     }
 
@@ -83,7 +82,7 @@ export class InputCompanyAutoCompleteComponent
       (response) => {
         this.loading = false;
         this.List = response.data ? response.data : [];
-        this.filteredList = this.ngControl.control.valueChanges.pipe(
+        this.filteredList = this.myControl.valueChanges.pipe(
           startWith(''),
           map((value) => {
             if (value === null || value === undefined) return '';
@@ -106,17 +105,17 @@ export class InputCompanyAutoCompleteComponent
    * @param name  عبارت جستجو
    * @param list   لیست
    */
-  private _filter(name: string, list): any[] {
+  private _filter(name: string, list: any[]): any[] {
     const filterValue = name.toLowerCase();
     return list.filter((option) => option.text.toLowerCase().indexOf(filterValue) === 0);
   }
 
   clearItem(trigger: MatAutocompleteTrigger, auto: MatAutocomplete) {
-    setTimeout((_) => {
+    setTimeout(() => {
       auto.options.forEach((item) => {
         item.deselect();
       });
-      this.ngControl.control.reset('');
+      this.myControl.reset('');
       trigger.openPanel();
     }, 100);
   }
@@ -125,11 +124,11 @@ export class InputCompanyAutoCompleteComponent
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
   onChange() {
-    if (this.optionSelected) this.optionSelected.emit(this.ngControl.control.value);
+    if (this.optionSelected) this.optionSelected.emit(this.myControl.value);
   }
 }

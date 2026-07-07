@@ -33,8 +33,8 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
   isLoadingResults: boolean = true;
   groupId: string;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -87,7 +87,7 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -102,7 +102,7 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

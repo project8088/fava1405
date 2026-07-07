@@ -13,19 +13,19 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyPageComponent extends AppBase implements OnInit {
-  companyInfo: CompanyInfoDto;
-    loading?: boolean;
+  companyInfo?: CompanyInfoDto;
+  loading?: boolean;
   companyId: string = '';
 
-  messageIsSended: boolean;
-  sendedMessages: string;
+  messageIsSended: boolean = false;
+  sendedMessages: string = '';
   contactForm: FormGroup;
   periorityList: any[] = [];
   unitList: any = ([] = []);
-  loadingUnit: boolean;
-  isSaving=false;
+  loadingUnit: boolean = false;
+  isSaving = false;
 
-  user: AuthUser;
+  user?: AuthUser | null;
 
   baseUrl: string = ServerApis.baseUrl;
 
@@ -52,7 +52,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.contactForm.get('name')?.setvalue(this.user.displayName);
+      this.contactForm.get('name')?.setValue(this.user.displayName);
     }
 
     this.dataService.getEnums().subscribe(
@@ -80,7 +80,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
           this.loading = false;
           if (response.isSuccess && response.data) {
             this.companyInfo = response.data ? response.data : {};
-            if (this.companyInfo.lat && this.companyInfo.lng) {
+            if (this.companyInfo && this.companyInfo.lat && this.companyInfo.lng) {
               this.lat = +this.companyInfo.lat;
               this.lng = +this.companyInfo.lng;
             }
@@ -99,7 +99,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
     if (this.contactForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.contactForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     let formData = this.contactForm.value;

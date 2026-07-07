@@ -23,8 +23,8 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   frm: FormGroup;
@@ -116,7 +116,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.name + '" اطمینان دارید؟',
@@ -148,7 +148,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
     });
   }
 
-  update(row) {
+  update(row:any) {
     this.frm.setValue({
       id: row.id,
       name: row.name,

@@ -44,8 +44,8 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
   baseEnums: any = {};
   isfahanCities;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -155,7 +155,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -187,7 +187,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -198,7 +198,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -209,7 +209,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     });
   }
 
-  openBackCard(item) {
+  openBackCard(item:any) {
     this.matDialog
       .open(CardBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -224,7 +224,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       });
   }
 
-  openDeliveredCard(item) {
+  openDeliveredCard(item:any) {
     this.matDialog
       .open(CardDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -239,7 +239,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       });
   }
 
-  openCancellationCard(item) {
+  openCancellationCard(item:any) {
     this.matDialog
       .open(CardCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',

@@ -33,8 +33,8 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   baseUrl = ServerApis.baseUrl;
@@ -86,7 +86,7 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -101,7 +101,7 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
     this.getList();
   }
 
-  manageAttachment(item) {
+  manageAttachment(item:any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

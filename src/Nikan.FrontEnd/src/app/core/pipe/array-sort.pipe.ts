@@ -5,7 +5,7 @@ import { Pipe, PipeTransform, Injectable } from '@angular/core';
 export class ArraySortPipe implements PipeTransform {
   transform(array: any, field: string): any[] {
     if (!Array.isArray(array)) {
-      return;
+      return [];
     }
     array.sort((a: any, b: any) => {
       if (a[field] < b[field]) {

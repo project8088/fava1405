@@ -39,8 +39,8 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   frm: FormGroup;
   events: any[] = [];
@@ -91,7 +91,7 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

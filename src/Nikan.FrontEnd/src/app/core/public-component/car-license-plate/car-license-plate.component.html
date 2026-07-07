@@ -52,7 +52,7 @@
   </div>
 </div>
 
-<input type="hidden" [formControl]="ngControl.control" [required]="required" dir="ltr" />
-@if (ngControl?.hasError('required') && !disabled) {
+<input type="hidden" [formControl]="myControl" [required]="required" dir="ltr" />
+@if (myControl?.hasError('required') && !disabled) {
   <small class="text-danger"> شماره پلاک خودرو را وارد کنید </small>
 }

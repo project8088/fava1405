@@ -14,7 +14,7 @@
           <img class="avatar" [src]="baseUrl + jobseeker.imageUrl" />
         }
         @if (!jobseeker.imageUrl) {
-          <img class="avatar" src="assets/images/avatar.png" />
+          <img class="avatar" src="images/avatar.png" />
         }
       </div>
       <div class="col row">
@@ -249,13 +249,13 @@
         <span>اطلاعات مهارتی ثبت نشده است!</span>
       </div>
     }
-    <mat-chip-list aria-label="karjoSkills">
+    <mat-chip-listbox aria-label="karjoSkills">
       @for (item of jobseeker.karjoSkills; track item) {
         <mat-chip>
           <span>{{ item.skill }}</span>
         </mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <!--------------------------------------------------------------------------------------------------->
     <div class="box-header">
       <h3 class="box-title">مهارت های کامپیوتری</h3>
@@ -266,13 +266,13 @@
         <span>اطلاعات مهارت های کامپیوتری ثبت نشده است!</span>
       </div>
     }
-    <mat-chip-list aria-label="UserComputerSkills">
+    <mat-chip-listbox aria-label="UserComputerSkills">
       @for (item of jobseeker.userComputerSkills; track item) {
         <mat-chip>
           <span>{{ item.skill }}</span>
         </mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <!--------------------------------------------------------------------------------------------------->
     <div class="box-header">
       <h3 class="box-title">دوره های آموزشی</h3>
@@ -283,7 +283,7 @@
         <span>اطلاعات دوره های آموزشی ثبت نشده است!</span>
       </div>
     }
-    <mat-chip-list aria-label="karjoAmozesh">
+    <mat-chip-listbox aria-label="karjoAmozesh">
       @for (item of jobseeker.karjoAmozesh; track item) {
         <mat-chip>
           <span>{{ item.title }}</span> &nbsp;&nbsp;
@@ -291,7 +291,7 @@
           <span> سال: {{ item.title }}</span>
         </mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <!--------------------------------------------------------------------------------------------------->
     <div class="box-header">
       <h3 class="box-title">زبان های خارجی</h3>
@@ -302,13 +302,13 @@
         <span>اطلاعات زبان های خارجی ثبت نشده است!</span>
       </div>
     }
-    <mat-chip-list aria-label="karjoLanguage">
+    <mat-chip-listbox aria-label="karjoLanguage">
       @for (item of jobseeker.karjoLanguage; track item) {
         <mat-chip>
           <span>{{ item.languageTitle }}</span>
         </mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <!--------------------------------------------------------------------------------------------------->
     @if (jobseeker.userWorkStatus) {
       <div>
@@ -399,29 +399,29 @@
         @if (jobseeker.userWorkStatus.jobs?.length > 0) {
           <strong>مشاغل درخواستی: </strong>
         }
-        <mat-chip-list aria-label="مشاغل درخواستی">
+        <mat-chip-listbox aria-label="مشاغل درخواستی">
           @for (item of jobseeker.userWorkStatus.jobs; track item) {
             <mat-chip>{{ item.text }}</mat-chip>
           }
-        </mat-chip-list>
+        </mat-chip-listbox>
         @if (jobseeker.userWorkStatus.cites?.length > 0) {
           <strong>شهرهایی تمایل به همکاری: </strong>
         }
-        <mat-chip-list aria-label="شهرهایی تمایل به همکاری">
+        <mat-chip-listbox aria-label="شهرهایی تمایل به همکاری">
           @for (item of jobseeker.userWorkStatus.cites; track item) {
             <mat-chip>{{ item.text }}</mat-chip>
           }
-        </mat-chip-list>
+        </mat-chip-listbox>
       </div>
     }
     <!--------------------------------------------------------------------------------------------------->
     @if (jobseeker.karjoGroup?.length > 0) {
       <strong>گروه های کارجو: </strong>
     }
-    <mat-chip-list aria-label="jobseeker karjoGroup">
+    <mat-chip-listbox aria-label="jobseeker karjoGroup">
       @for (item of jobseeker.karjoGroup; track item) {
         <mat-chip>{{ item.group }} تاریخ عضویت:{{ item.createdOnDate }}</mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
   </div>
 }

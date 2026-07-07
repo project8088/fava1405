@@ -66,7 +66,7 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
     );
   }
 
-  openNotificationDetails(item) {
+  openNotificationDetails(item:any) {
     this.matDialog.open(ViewNotificationDetailsDialogComponent, {
       data: {
         id: item.id,
@@ -76,7 +76,7 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
     });
   }
 
-  buy(item) {
+  buy(item:any) {
     this.toastrService.info('در حال حاضر امکان ارتباط با درگاه پرداخت برقرار نیست.');
   }
 }

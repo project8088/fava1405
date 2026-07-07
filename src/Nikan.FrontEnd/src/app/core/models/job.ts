@@ -2,21 +2,21 @@ import { BaseDataModel } from './base-data-model';
 export class QuickEmploymentInfoDto {
   public id?: number;
 
-  public title: string;
+  public title!: string;
 
   // public source?: string;
   public sex?: boolean;
 
-  public number: number;
+  public number!: number;
 
-  public note: string;
+  public note!: string;
 
-  public jobRowCode: string;
+  public jobRowCode!: string;
 
   public isRetired?: boolean;
-  public meal: boolean;
-  public workService: boolean;
-  public workServicePath: string;
+  public meal!: boolean;
+  public workService!: boolean;
+  public workServicePath!: string;
 
   /// <summary>
   /// نوع حقوق پیشنهادی
@@ -26,22 +26,22 @@ export class QuickEmploymentInfoDto {
 
   public workInsurance?: boolean;
 
-  public workExperienceMin: number;
-  public workExperienceMax: number;
+  public workExperienceMin!: number;
+  public workExperienceMax!: number;
 
-  public skillIDs: number[];
+  public skillIDs!: number[];
 
-  public majorIDs: number[];
+  public majorIDs!: number[];
 
-  public cityIDs: number[];
+  public cityIDs!: number[];
 
   // public jobInfoIDs: number[];
-  public jobTitleId: number;
+  public jobTitleId!: number;
   //public jobTitle: JobViewModel;
 
   public jobWorkTimeId?: number;
 
-  public jobGrade: number;
+  public jobGrade!: number;
 
   //public jobAge: number;
 
@@ -52,16 +52,16 @@ export class QuickEmploymentInfoDto {
 
   // public  IsSpecial:boolean;
 
-  public userCompanyId: number;
-  public applicant: string;
-  public applicantPost: string;
-  public employerDescription: string;
-  public applicantPhoneNumber: string;
+  public userCompanyId!: number;
+  public applicant!: string;
+  public applicantPost!: string;
+  public employerDescription!: string;
+  public applicantPhoneNumber!: string;
 
-  public similarJobTitles: string[];
-  public similarJobTitle: string;
+  public similarJobTitles!: string[];
+  public similarJobTitle!: string;
 
-  public expireDay: number;
+  public expireDay!: number;
 
   public maritalStatus?: boolean;
 
@@ -71,7 +71,7 @@ export class QuickEmploymentInfoDto {
 
   //public hasEducation: boolean;
 
-  public workTime: number;
+  public workTime!: number;
 
   public salaryRangeFrom?: number;
   public salaryRangeTo?: number;
@@ -80,8 +80,8 @@ export class QuickEmploymentInfoDto {
 
   public locationId?: number;
   public location?: string;
-  public jobFullAddress: string;
-  public jobArea: number;
+  public jobFullAddress!: string;
+  public jobArea!: number;
   public locationInfo?: BaseDataModel;
 
   public jobTitleStr?: string;

@@ -24,8 +24,8 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
   dataSource = new MatTableDataSource();
   resultsLength: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   currentUser: AuthUser;
   rootModule: string;
@@ -126,7 +126,7 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -141,7 +141,7 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
     this.getList();
   }
 
-  viewTicket(row) {
+  viewTicket(row:any) {
     this.router.navigate(['/' + this.currentUser.rootModule + '/ticket-details/' + row.id]);
   }
 

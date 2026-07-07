@@ -43,8 +43,8 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
   baseEnums: any = {};
   isfahanCities;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -92,7 +92,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -107,7 +107,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -118,7 +118,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -129,7 +129,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     });
   }
 
-  createZipFilePicture(item) {
+  createZipFilePicture(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.getExportCardPicture, { id: item.id }).subscribe(
       (response) => {
@@ -148,7 +148,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     );
   }
 
-  sendToPrint(item) {
+  sendToPrint(item:any) {
     Swal.fire({
       title: 'آیا برای ارسال به چاپ اطمینان دارید؟',
       text: 'در صورت تائید وضعیت کارتهای این خروجی به حالت ارسال برای چاپ تبدیل خواهند شد. ',
@@ -184,7 +184,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -220,7 +220,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
     });
   }
 
-  openGetCardNumberDialog(item) {
+  openGetCardNumberDialog(item:any) {
     this.matDialog.open(CardImportCardNumberDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

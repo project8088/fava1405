@@ -8,22 +8,22 @@ export class CustomFormValidators {
    * use invalid
    * @param control  string
    */
-  checkNationalCode(control) {
+  checkNationalCode(control: AbstractControl) {
     if (!control.value) return null;
     var number = control.value;
-    var returnModel = '',
-      symbolMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0',
-      };
+    var returnModel = '';
+    var symbolMap: any = {
+      '۱': '1',
+      '۲': '2',
+      '۳': '3',
+      '۴': '4',
+      '۵': '5',
+      '۶': '6',
+      '۷': '7',
+      '۸': '8',
+      '۹': '9',
+      '۰': '0',
+    };
     number = number.toString();
     for (var i = 0; i < number.length; i++)
       if (symbolMap[number[i]]) returnModel += symbolMap[number[i]];
@@ -81,19 +81,19 @@ export class CustomFormValidators {
   checkMobileNumber(control: AbstractControl) {
     if (!control.value) return null;
     var number = control.value;
-    var returnModel = '',
-      symbolMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0',
-      };
+    var returnModel = '';
+    var symbolMap: any = {
+      '۱': '1',
+      '۲': '2',
+      '۳': '3',
+      '۴': '4',
+      '۵': '5',
+      '۶': '6',
+      '۷': '7',
+      '۸': '8',
+      '۹': '9',
+      '۰': '0',
+    };
     number = number.toString();
     for (var i = 0; i < number.length; i++)
       if (symbolMap[number[i]]) returnModel += symbolMap[number[i]];
@@ -226,19 +226,19 @@ export class CustomFormValidators {
   checkPhoneNumber(control: AbstractControl) {
     if (!control.value) return null;
     var number = control.value;
-    var returnModel = '',
-      symbolMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0',
-      };
+    var returnModel = '';
+    var symbolMap: any = {
+      '۱': '1',
+      '۲': '2',
+      '۳': '3',
+      '۴': '4',
+      '۵': '5',
+      '۶': '6',
+      '۷': '7',
+      '۸': '8',
+      '۹': '9',
+      '۰': '0',
+    };
     number = number.toString();
     for (var i = 0; i < number.length; i++)
       if (symbolMap[number[i]]) returnModel += symbolMap[number[i]];
@@ -272,7 +272,7 @@ export class CustomFormValidators {
    *
    * use range
    * */
-  checkAgeRangeValidator: ValidatorFn = (fg: FormGroup) => {
+  checkAgeRangeValidator = (fg: FormGroup) => {
     const start = fg.get('ageRangeFrom')?.value;
     const end = fg.get('ageRangeTo')?.value;
     if (!start && !end) return null;
@@ -287,19 +287,19 @@ export class CustomFormValidators {
   checkNumberCharacters(control: AbstractControl) {
     if (!control.value) return null;
     var number = control.value;
-    var returnModel = '',
-      symbolMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0',
-      };
+    var returnModel = '';
+    var symbolMap: any = {
+      '۱': '1',
+      '۲': '2',
+      '۳': '3',
+      '۴': '4',
+      '۵': '5',
+      '۶': '6',
+      '۷': '7',
+      '۸': '8',
+      '۹': '9',
+      '۰': '0',
+    };
     number = number.toString();
     for (var i = 0; i < number.length; i++)
       if (symbolMap[number[i]]) returnModel += symbolMap[number[i]];

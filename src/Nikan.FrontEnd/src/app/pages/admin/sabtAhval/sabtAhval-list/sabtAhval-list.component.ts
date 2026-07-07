@@ -38,8 +38,8 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
   listCount: number = 0;
   isLoadingResults: boolean = true;
   searchForm: FormGroup;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   constructor() {
     super();
@@ -86,7 +86,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -101,7 +101,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     this.getList();
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -133,7 +133,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  openDialog(item) {
+  openDialog(item:any) {
     this.matDialog
       .open(AdminAddSabtAhvalDialogComponent, {
         panelClass: 'custom-dialog',
@@ -159,7 +159,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  send(item) {
+  send(item:any) {
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',
@@ -195,7 +195,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  sendChekStateLife(item) {
+  sendChekStateLife(item:any) {
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',

@@ -42,8 +42,8 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -97,7 +97,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -128,7 +128,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -139,7 +139,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -150,7 +150,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',

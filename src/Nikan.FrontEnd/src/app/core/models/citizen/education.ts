@@ -1,5 +1,5 @@
 export class karjoEducationDto {
-  public gradeId: Grade;
+  public gradeId!: Grade;
 
   public grade?: string;
 

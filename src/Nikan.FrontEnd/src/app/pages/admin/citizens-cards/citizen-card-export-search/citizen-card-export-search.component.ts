@@ -40,8 +40,8 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
   baseEnums: any = {};
   isfahanCities;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -89,7 +89,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -104,7 +104,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -115,7 +115,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -126,7 +126,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
     });
   }
 
-  createZipFilePicture(item) {
+  createZipFilePicture(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.getExportCardPicture, { id: item.id }).subscribe(
       (response) => {
@@ -145,7 +145,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
     );
   }
 
-  openGetCardNumberDialog(item) {
+  openGetCardNumberDialog(item:any) {
     this.matDialog.open(AdminImportCardNumberDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

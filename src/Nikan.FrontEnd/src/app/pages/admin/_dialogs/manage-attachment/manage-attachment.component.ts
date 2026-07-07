@@ -85,7 +85,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
     });
   }
 
-  deleteAttachment(row) {
+  deleteAttachment(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف فایل اطمینان دارید؟',

@@ -21,8 +21,8 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -80,7 +80,7 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -95,7 +95,7 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
     this.getList();
   }
 
-  newJob(row) {
+  newJob(row:any) {
     this.router.navigate(['/placement/new-job'], {
       queryParams: {
         id: '',

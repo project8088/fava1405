@@ -55,7 +55,7 @@
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
-            <mat-chip-list #chipList aria-label="seoTags" formControlName="seoTags">
+            <mat-chip-listbox #chipList aria-label="seoTags" formControlName="seoTags">
               @for (item of seoTags; track item) {
                 <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
                   {{ item }}
@@ -69,7 +69,7 @@
                 [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="add($event)"
               />
-            </mat-chip-list>
+            </mat-chip-listbox>
           </mat-form-field>
           <p class="col-sm-12 text-info">
             شما می توانید آدرسی دلخواه را برای این صفحه وارد نمائید.

@@ -218,7 +218,7 @@ class GregorianJalaliHelperClass {
         let leap;
         let n;
         let i;
-        if (jalaliYear < jp || luxonFormatYear >= breaks[breaksLength - 1]) {
+        if (jalaliYear < jp || jalaliYear >= breaks[breaksLength - 1]) {
             throw new Error(`Invalid Jalali year ${jalaliYear}`);
         }
         // Find the limiting years for the Jalali year jalaliYear.

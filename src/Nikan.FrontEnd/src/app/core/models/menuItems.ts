@@ -1,6 +1,6 @@
 export class SideNavMenuItem {
   id?: number | string;
-  name: string;
+  name!: string;
   url?: string;
   icon?: string;
   children?: SideNavMenuItem[];

@@ -1,0 +1,334 @@
+.dashboard {
+  min-height: 100vh;
+
+  .mat-toolbar {
+    height: 52px;
+  }
+
+  .mat-drawer-side {
+    border: none;
+  }
+
+  .side-nav {
+    /*    background: #222d32;*/
+    color: #fff;
+    height: 100%;
+    width: 240px;
+
+    .sidebar-background {
+      background-image: url(../images/sidebar/01.jpg);
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: block;
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-position: 50%;
+
+      &:after {
+        content: " ";
+        background-image: linear-gradient(135deg, #1750a5, #40c057);
+        opacity: 0.94;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+    }
+
+    .user-info {
+      background: hsla(0, 0%, 87.8%, 0.2);
+      z-index: 1;
+
+      .avatar-container {
+        background: rgb(255 255 255 / 59%);
+        border-radius: 100% 100% 100% 13px;
+        margin: 8px;
+        width: 60px;
+        height: 60px;
+        overflow: hidden;
+        border: 3px #fff solid;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .username {
+        font-weight: bold;
+      }
+
+      .displayName {
+        font-size: 10px;
+        width: 155px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .mat-drawer-container {
+    min-height: 100vh;
+  }
+
+  .mat-drawer-content.dashboard-content {
+    padding-top: 52px;
+    background: #f5f5f5;
+    height: 100vh;
+
+    .mat-toolbar.fixed-toolbar {
+      position: fixed;
+      z-index: 300;
+      top: 0;
+      left: 0;
+    }
+  }
+
+  .spacer {
+    flex: 1 1 auto;
+  }
+  /**********minimum************/
+  &.mini-side-bar {
+    .mat-drawer,
+    .mat-drawer-inner-container {
+      overflow: visible;
+    }
+
+    .dashboard-content {
+      margin-right: 50px !important;
+    }
+
+    .side-nav {
+      width: 50px;
+    }
+
+    .user-info,
+    .exit {
+      display: none;
+    }
+
+    .daynamic-menu {
+      overflow: visible;
+    }
+
+    .accordion__item {
+      position: relative;
+
+      span {
+        position: absolute;
+        width: 220px;
+        background: #ffffff;
+        box-shadow: -2px 3px 5px hsl(0deg 0% 0% / 28%);
+        color: #000;
+        padding: 8px 15px;
+        right: 50px;
+        top: 0;
+        display: none;
+      }
+
+      &:hover span,
+      &:hover .accordion__sub {
+        display: block !important;
+      }
+    }
+
+    .accordion__sub {
+      position: absolute;
+      width: 220px;
+      background: #ffffff;
+      box-shadow: -2px 3px 5px rgba(0, 0, 0, 0.28);
+      color: #000;
+      right: 50px;
+      top: 0;
+      display: none !important;
+
+      li {
+        padding-right: 0 !important;
+        span {
+          right: 0;
+        }
+      }
+    }
+  }
+}
+
+/******/
+//قرمز - نارنجی
+.sunset .sidebar-background:after {
+  background-image: linear-gradient(135deg, #8e1a38, #faa750) !important;
+}
+//آبی - سبز
+.mint .sidebar-background:after {
+  background-image: linear-gradient(135deg, #1750a5, #40c057) !important;
+}
+//آبی - صورتی
+.king-yna .sidebar-background:after {
+  background-image: linear-gradient(135deg, #562db7, #f55252) !important;
+}
+//نارنجی - آبی
+.flicker .sidebar-background:after {
+  background-image: linear-gradient(135deg, #d46010, #226cc5) !important;
+}
+//آبی پر رنگ و آبی کم رنگ
+.purple-bliss .sidebar-background:after {
+  background-image: linear-gradient(135deg, #3b1c93, #2f8be6) !important;
+}
+//آبی - قرمز
+.man-of-steel .sidebar-background:after {
+  background-image: linear-gradient(135deg, #2f3ea0, #ae342d) !important;
+}
+//آبی - بنفش
+.purple-love .sidebar-background:after {
+  background-image: linear-gradient(135deg, #562db7, #c89cff) !important;
+}
+/*----------------------------------------------------------------------------------------------------------*/
+/*******************************/
+.mat-pink {
+  background: #d4004e;
+  color: #fff;
+}
+
+.mat-orange {
+  background: #e79652;
+  color: #fff;
+}
+
+.mat-green {
+  background: #40c057;
+  color: #fff;
+}
+
+.mat-purple {
+  background: #7859be;
+  color: #fff;
+}
+/********************************/
+.content-header {
+  padding: 7px 20px;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e1dcdc;
+  margin: 20px;
+
+  .bread-crumbs {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    font-size: 12px;
+    .bread-crumb-item {
+      position: relative;
+      padding: 0 8px;
+      &:after {
+        content: "/";
+        position: absolute;
+        right: -4px;
+        color: #1c1c1c !important;
+      }
+      &:nth-last-child(1):after {
+        content: "";
+      }
+      &:hover {
+        cursor: pointer;
+        color: rgb(0, 162, 255);
+      }
+      &.active {
+        color: #828282;
+        &:hover {
+          cursor: auto;
+          color: #828282;
+        }
+      }
+    }
+  }
+}
+
+.custom-card {
+  margin: 0 20px 20px;
+  border-top: #3f51b5 3px solid;
+}
+/************************************************************************************/
+.color-card {
+  position: relative;
+  min-height: 178px;
+  border-radius: 5px;
+  box-shadow: 0 0 15px #00000042;
+  overflow: hidden;
+  margin: 10px 5px;
+
+  &:after,
+  &:before {
+    content: " ";
+    border-radius: 100%;
+    background: rgba(255, 225, 255, 0.18);
+    width: 115px;
+    height: 115px;
+    position: absolute;
+    left: -16px;
+    top: -3px;
+  }
+
+  &:before {
+    left: 12px;
+    top: unset;
+    bottom: -2px;
+  }
+
+  &.blue {
+    background: linear-gradient(90deg, #6d9ed9, #6565c9);
+  }
+
+  &.orange {
+    background: linear-gradient(90deg, #fdb988, #fd9096);
+  }
+
+  &.purple {
+    background: linear-gradient(90deg, #bd96e9, #a06bd7);
+  }
+
+  .content {
+    color: #fff;
+    padding: 20px;
+
+    .title {
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .description {
+      font-weight: normal;
+      font-size: 10px;
+    }
+
+    .count {
+      font-size: 46px;
+      margin: 26px 5px 30px;
+    }
+  }
+}
+
+/*+++++++++++++++++++theme++++++++++++++++++++*/
+
+body.sunset {
+  .custom-card {
+    border-top: var(--sunset) 3px solid;
+  }
+}
+
+body.purple-love {
+  .custom-card {
+    border-top: var(--purple-love) 3px solid;
+  }
+}
+
+@media (max-width: 500px) {
+  .content-header {
+    flex-direction: column;
+  }
+}

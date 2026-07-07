@@ -83,10 +83,5 @@ import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.compon
     RouterModule,
     CitizenCardModule,
   ],
-  entryComponents: [
-    CitizenEducationDialogComponent,
-    CitizenRefundInfoDialogComponent,
-    ChangeCardAddressDialogComponent,
-  ],
 })
 export class CitizenModule {}

@@ -42,8 +42,8 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
   sendingSms: boolean = false;
   selectAll: boolean = false;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -100,7 +100,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -145,7 +145,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
     });
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

@@ -93,7 +93,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
     });
   }
 
-  openEducationDialog(item) {
+  openEducationDialog(item:any) {
     this.matDialog
       .open(CitizenEducationDialogComponent, {
         data: {

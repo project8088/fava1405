@@ -22,8 +22,8 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   feedbackfrm: FormGroup;
   constructor() {
     super();

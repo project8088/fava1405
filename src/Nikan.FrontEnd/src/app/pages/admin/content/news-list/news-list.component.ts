@@ -33,8 +33,8 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -92,7 +92,7 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -107,7 +107,7 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
     this.getList();
   }
 
-  manageAttachment(item) {
+  manageAttachment(item:any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

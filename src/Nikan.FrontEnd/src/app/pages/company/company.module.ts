@@ -74,14 +74,6 @@ import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-ba
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-  ],
-  entryComponents: [
-    ViewMessageDialogComponent,
-    CompanyAddUserDialogComponent,
-    CompanyUpdateUserDialogComponent,
-    CompanyChangePasswordDialogComponent,
-    CompanyAddUpdateProductGroupDialogComponent,
-    CompanyImportExcelDialogComponent,
-  ],
+  ]
 })
 export class CompanyModule {}

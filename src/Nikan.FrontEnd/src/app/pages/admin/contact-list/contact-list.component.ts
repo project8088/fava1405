@@ -33,8 +33,8 @@ export class AdminContactUsListComponent extends AppBase implements AfterViewIni
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -80,7 +80,7 @@ export class AdminContactUsListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

@@ -24,6 +24,10 @@ import { SliderComponent } from './index/slider/slider.component';
 import { TicketComponent } from './ticket/ticket.component';
 import { TicketAnswerComponent } from './ticket-answer/ticket-answer.component';
 import { FaqListComponent } from './faq/faq-list.component';
+import { MaterialModule } from '@core/material/material.module';
+import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,14 @@ import { FaqListComponent } from './faq/faq-list.component';
     BankCallBackComponent,
     HomePersonelsListComponent,
   ],
-  imports: [CommonModule, HomeRoutingModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HomeRoutingModule,
+    MaterialModule,
+    SharedModule,
+    CoreModule,
+  ],
 })
 export class HomeModule {}

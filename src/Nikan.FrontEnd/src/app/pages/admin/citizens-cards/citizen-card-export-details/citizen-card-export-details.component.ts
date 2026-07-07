@@ -42,8 +42,8 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
   exportId: string;
   baseEnums: any = {};
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -97,7 +97,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -112,7 +112,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -123,7 +123,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -134,7 +134,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     });
   }
 
-  openBackCard(item) {
+  openBackCard(item:any) {
     this.matDialog
       .open(AdminBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -149,7 +149,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
       });
   }
 
-  openDeliveredCard(item) {
+  openDeliveredCard(item:any) {
     this.matDialog
       .open(AdminDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -164,7 +164,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
       });
   }
 
-  openCancellationCard(item) {
+  openCancellationCard(item:any) {
     this.matDialog
       .open(AdminCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',

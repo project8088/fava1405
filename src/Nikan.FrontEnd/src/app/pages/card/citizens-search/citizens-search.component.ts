@@ -34,8 +34,8 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
   listCount: number = 0;
   loading: boolean = true;
   citizen: any = {};
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();

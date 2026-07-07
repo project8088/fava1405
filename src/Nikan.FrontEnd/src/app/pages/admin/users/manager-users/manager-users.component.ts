@@ -39,8 +39,8 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
   groupList: any[] = [];
@@ -92,7 +92,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -107,7 +107,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
     this.getList();
   }
 
-  removePersonal(row) {
+  removePersonal(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.firstName + ' ' + row.lastName + '" اطمینان دارید؟',

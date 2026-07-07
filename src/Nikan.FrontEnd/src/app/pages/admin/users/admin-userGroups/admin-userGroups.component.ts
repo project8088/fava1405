@@ -64,7 +64,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(item) {
+  openUpdateUserDialog(item:any) {
     this.matDialog
       .open(AdminAddUserGrousDialogComponent, {
         panelClass: 'custom-dialog',
@@ -78,7 +78,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
       });
   }
 
-  deleteUserGroup(row) {
+  deleteUserGroup(row:any) {
     Swal.fire({
       title: 'حذف گروه کاربری',
       text: 'آیا برای حذف گروه اطمینان دارید؟',

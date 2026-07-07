@@ -4,6 +4,7 @@ import { NG_ASYNC_VALIDATORS, AbstractControl, Validator } from '@angular/forms'
 import { CaptchaService } from './captcha.service';
 
 @Directive({
+  standalone: false,
   selector:
     '[correctCaptcha][formControlName],[correctCaptcha][formControl],[correctCaptcha][ngModel]',
   providers: [
@@ -16,11 +17,11 @@ import { CaptchaService } from './captcha.service';
 })
 export class CorrectCaptchaDirective implements Validator {
   // cached captcha input control.
-  control: AbstractControl;
+  control: AbstractControl|null=null;
 
   constructor(private captchaService: CaptchaService) {}
 
-  validate(c: AbstractControl, onBlur?: boolean) {
+  validate(c?: AbstractControl, onBlur?: boolean) {
     if (c) {
       // cache the control for using on blur
       this.control = c;
@@ -43,7 +44,7 @@ export class CorrectCaptchaDirective implements Validator {
                 this.control = null;
               } else {
                 // ui captcha validation passed
-                this.control.setErrors(null);
+                this.control!.setErrors(null);
               }
             },
             (error: any) => {

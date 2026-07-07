@@ -18,7 +18,7 @@ export class AdminTreeWebApiPermissionComponent extends AppBase implements OnIni
 
   ngOnInit() {}
 
-  updateAllComplete(item) {
+  updateAllComplete(item:any) {
     item.allComplete = item.value != null && item.value.every((t) => t.selected);
   }
 

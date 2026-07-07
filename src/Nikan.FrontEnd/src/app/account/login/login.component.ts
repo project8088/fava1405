@@ -23,10 +23,10 @@ export class LoginComponent extends AppBase implements OnInit {
   constructor() {
     super();
     this.route.queryParams.subscribe((p) => {
-      if (p.returnUrl) this.returnUrl = p.returnUrl;
+       this.returnUrl = p['returnUrl']??'';
     });
 
-    authService.currentUser.subscribe((u) => {
+    this.authService.currentUser.subscribe((u) => {
       if (u) {
         this.authService.goToDashboard();
       }
@@ -78,7 +78,7 @@ export class LoginComponent extends AppBase implements OnInit {
           this.toastrService.success('احراز هویت با موفقیت انجام شد.');
 
           const user = this.authService.currentUserValue;
-          if (user.isCitizen && this.serviceId) {
+          if (user && user.isCitizen && this.serviceId) {
             this.router.navigateByUrl(
               '/redirect?serviceId=' + this.serviceId + '&returnUrl=' + this.returnUrl,
             );

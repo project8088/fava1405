@@ -36,8 +36,8 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   frm: FormGroup;
   events: any[] = [];
@@ -196,7 +196,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     });
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

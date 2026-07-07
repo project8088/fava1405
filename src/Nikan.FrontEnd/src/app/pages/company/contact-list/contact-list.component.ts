@@ -33,8 +33,8 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -80,7 +80,7 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -95,7 +95,7 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
     this.getList();
   }
 
-  viewMessage(row) {
+  viewMessage(row:any) {
     this.matDialog.open(ViewMessageDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

@@ -102,19 +102,19 @@
     @if (jobOpportunity.cites?.length > 0) {
       <strong>شهر ها: </strong>
     }
-    <mat-chip-list aria-label="selectedCities">
+    <mat-chip-listbox aria-label="selectedCities">
       @for (item of jobOpportunity.cites; track item) {
         <mat-chip>{{ item }}</mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     @if (similarJabs?.length > 0) {
       <strong>عناوین شغلی مشابه: </strong>
     }
-    <mat-chip-list aria-label="similar jobs">
+    <mat-chip-listbox aria-label="similar jobs">
       @for (item of similarJabs; track item) {
         <mat-chip>{{ item }}</mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <div class="box-header">
       <h3 class="box-title">شرایط کارجو</h3>
     </div>
@@ -166,19 +166,19 @@
     @if (jobOpportunity.majors?.length > 0) {
       <strong>رشته های تحصیلی: </strong>
     }
-    <mat-chip-list aria-label="selectedFieldStudies">
+    <mat-chip-listbox aria-label="selectedFieldStudies">
       @for (item of jobOpportunity.majors; track item) {
         <mat-chip>{{ item }}</mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     @if (jobOpportunity.skills?.length > 0) {
       <strong>مهارت ها: </strong>
     }
-    <mat-chip-list aria-label="selectedSkills">
+    <mat-chip-listbox aria-label="selectedSkills">
       @for (item of jobOpportunity.skills; track item) {
         <mat-chip>{{ item }}</mat-chip>
       }
-    </mat-chip-list>
+    </mat-chip-listbox>
     <div class="box-header">
       <h3 class="box-title">مزایای شغل</h3>
     </div>

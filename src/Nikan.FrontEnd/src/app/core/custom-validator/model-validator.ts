@@ -6,7 +6,7 @@ export class CustomModelValidators {
    * بررسی صحت کد ملی
    * @param nationalCode  string
    */
-  checkNationalCode(nationalCode) {
+  checkNationalCode(nationalCode: string) {
     if (!nationalCode) return null;
     var isNumber = /^\d{10}$/.test(nationalCode);
 
@@ -53,7 +53,7 @@ export class CustomModelValidators {
    *  بررسی صحت شماره موبایل
    * @param mobileNumber
    */
-  checkMobileNumber(mobileNumber) {
+  checkMobileNumber(mobileNumber: string) {
     if (!mobileNumber) return null;
     var isNumber = /^\d{11}$/.test(mobileNumber);
     if (!isNumber) return false;
@@ -104,21 +104,21 @@ export class CustomModelValidators {
    * بررسی صحت کد ملی
    * @param nationalCode  string
    */
-  checkPersianNumber(number) {
+  checkPersianNumber(number: string) {
     if (!number) return null;
-    var returnModel = '',
-      symbolMap = {
-        '۱': '1',
-        '۲': '2',
-        '۳': '3',
-        '۴': '4',
-        '۵': '5',
-        '۶': '6',
-        '۷': '7',
-        '۸': '8',
-        '۹': '9',
-        '۰': '0',
-      };
+    var returnModel = '';
+    var symbolMap: any = {
+      '۱': '1',
+      '۲': '2',
+      '۳': '3',
+      '۴': '4',
+      '۵': '5',
+      '۶': '6',
+      '۷': '7',
+      '۸': '8',
+      '۹': '9',
+      '۰': '0',
+    };
     number = number.toString();
     for (var i = 0; i < number.length; i++)
       if (symbolMap[number[i]]) returnModel += symbolMap[number[i]];
@@ -131,7 +131,7 @@ export class CustomModelValidators {
    * بررسی حروف فارسی
    * @param word
    */
-  checkPersianCharacters(word) {
+  checkPersianCharacters(word: string) {
     if (!word) return null;
     var isValid = /^([\u0600-\u06FF]+\s*)+$/.test(word);
     return isValid;
@@ -142,7 +142,7 @@ export class CustomModelValidators {
    * 0xxxxxxxxxx
    * @param phoneNumber
    */
-  checkPhoneNumber(phoneNumber) {
+  checkPhoneNumber(phoneNumber: string) {
     if (!phoneNumber) return null;
     var isValid = /^((?:0)[0-9]{10})$/.test(phoneNumber);
     return isValid;
@@ -153,7 +153,7 @@ export class CustomModelValidators {
    * a@b.c
    * @param email
    */
-  checkEmail(email) {
+  checkEmail(email: string) {
     if (!email) return null;
     var isValid = /^[\w-.]+@([\w-]+\.)+[\w-]+$/.test(email); // /^.+@.+\..+$/.test(word);
     return isValid;

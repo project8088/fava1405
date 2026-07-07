@@ -37,8 +37,8 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {
@@ -86,7 +86,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -100,7 +100,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
     this.getList();
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.discountTitle + '" را حذف کنید؟',
@@ -130,7 +130,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
     });
   }
 
-  acceptedRequest(item) {
+  acceptedRequest(item:any) {
     Swal.fire({
       title: 'آیا برای تائید و صدور کارت رایگان اطمینان دارید؟',
       text: 'در صورت تائید صدور، دیگر امکان ویرایش و حذف وجود نخواهد داشت. و کارت ها برای شهروندان این درخواست صادر  خواهد شد. ',

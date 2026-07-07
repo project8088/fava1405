@@ -82,7 +82,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  checkIsDead(item) {
+  checkIsDead(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
       (response) => {
@@ -101,7 +101,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
     );
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

@@ -33,7 +33,7 @@ export class AppCitizenSmsListComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   searchForm: FormGroup;
   constructor() {
     super();
@@ -89,7 +89,7 @@ export class AppCitizenSmsListComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

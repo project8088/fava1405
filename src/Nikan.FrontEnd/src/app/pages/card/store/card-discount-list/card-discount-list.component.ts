@@ -38,8 +38,8 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {
@@ -87,7 +87,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -101,7 +101,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
     this.getList();
   }
 
-  openDialog(item) {
+  openDialog(item:any) {
     this.matDialog
       .open(CardAddCardDiscountDialogComponent, {
         panelClass: 'custom-dialog',

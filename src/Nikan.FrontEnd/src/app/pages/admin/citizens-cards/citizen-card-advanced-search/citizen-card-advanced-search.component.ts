@@ -43,8 +43,8 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
   baseEnums: any = {};
   isfahanCities;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -157,7 +157,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -172,7 +172,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -183,7 +183,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -194,7 +194,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     });
   }
 
-  openBackCard(item) {
+  openBackCard(item:any) {
     this.matDialog
       .open(AdminBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -209,7 +209,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       });
   }
 
-  openDeliveredCard(item) {
+  openDeliveredCard(item:any) {
     this.matDialog
       .open(AdminDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -224,7 +224,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       });
   }
 
-  openCancellationCard(item) {
+  openCancellationCard(item:any) {
     this.matDialog
       .open(AdminCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',

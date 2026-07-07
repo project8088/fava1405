@@ -89,7 +89,7 @@ export class AdminUserAppAccessServiceComponent extends AppBase implements OnIni
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',

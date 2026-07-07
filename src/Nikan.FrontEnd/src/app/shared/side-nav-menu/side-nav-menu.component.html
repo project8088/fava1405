@@ -8,7 +8,7 @@
         (click)="openUploadDialog()"
       >
         @if (!userImage) {
-          <img class="object-fit-cover" src="assets/images/avatar.png" />
+          <img class="object-fit-cover" src="images/avatar.png" />
         }
         @if (userImage) {
           <img class="object-fit-cover" [src]="baseUrl + userImage" />

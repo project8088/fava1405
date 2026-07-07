@@ -30,7 +30,7 @@
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
-            <mat-chip-list #chipList aria-label="tagNames" formControlName="tagNames">
+            <mat-chip-listbox #chipList aria-label="tagNames" formControlName="tagNames">
               @for (item of tagNames; track item) {
                 <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
                   {{ item }}
@@ -44,7 +44,7 @@
                 [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="add($event)"
               />
-            </mat-chip-list>
+            </mat-chip-listbox>
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>گروه پرسش و پاسخی</mat-label>

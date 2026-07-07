@@ -38,8 +38,8 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -109,7 +109,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(row) {
+  openUpdateUserDialog(row:any) {
     this.matDialog
       .open(CompanyUpdateUserDialogComponent, {
         panelClass: 'custom-dialog',
@@ -124,7 +124,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
       });
   }
 
-  openChangePasswordDialog(row) {
+  openChangePasswordDialog(row:any) {
     this.matDialog.open(CompanyChangePasswordDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

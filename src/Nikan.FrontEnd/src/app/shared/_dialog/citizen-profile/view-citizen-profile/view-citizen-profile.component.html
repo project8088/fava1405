@@ -18,7 +18,7 @@
                       <img class="avatar" [src]="baseUrl + citizen.personalPictureUrl" />
                     }
                     @if (!citizen.personalPictureUrl) {
-                      <img class="avatar" src="assets/images/avatar.png" />
+                      <img class="avatar" src="images/avatar.png" />
                     }
                   </div>
                   <div class="col row">
@@ -188,11 +188,11 @@
                   <h3 class="box-title">گروه های شهروندی</h3>
                 </div>
                 <div class="row">
-                  <mat-chip-list aria-label="citizen groups">
+                  <mat-chip-listbox aria-label="citizen groups">
                     @for (item of citizen.groups; track item) {
                       <mat-chip>{{ item.group }} ({{ item.creationDate | luxonFormat}})</mat-chip>
                     }
-                  </mat-chip-list>
+                  </mat-chip-listbox>
                 </div>
               </div>
             }

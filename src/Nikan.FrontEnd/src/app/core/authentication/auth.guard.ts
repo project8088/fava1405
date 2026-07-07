@@ -30,7 +30,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   chechGuard(rootUrl: string, state: RouterStateSnapshot) {
     var user = this.authService.getAuthUser();
-
+    if (!user) return false;
     if (user.rootModule == rootUrl || user.isAdmin) {
       return true;
     }
@@ -43,6 +43,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   chechGuardChild(state: RouterStateSnapshot, route: ActivatedRouteSnapshot) {
     var user = this.authService.getAuthUser();
+    if (!user) return false;
     if (user.isCompany && user.userCompanyStatus != 1) {
       var accessUrls = [
         'dashboard',

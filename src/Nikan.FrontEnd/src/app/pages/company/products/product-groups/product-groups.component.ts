@@ -22,8 +22,8 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
   constructor() {
@@ -70,7 +70,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.name + '" را حذف کنید؟',
@@ -100,7 +100,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
     });
   }
 
-  openProductGroupDialog(row) {
+  openProductGroupDialog(row:any) {
     this.matDialog
       .open(CompanyAddUpdateProductGroupDialogComponent, {
         panelClass: 'custom-dialog',

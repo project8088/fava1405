@@ -1,11 +1,11 @@
 export class BaseDataModel {
-  public key: string;
-  public text: string;
+  public key!: string;
+  public text!: string;
 
-  public selected: boolean;
-  public disabled: boolean;
+  public selected!: boolean;
+  public disabled!: boolean;
 
-  public parentText: string;
+  public parentText!: string;
 
-  public parentValue: string;
+  public parentValue!: string;
 }

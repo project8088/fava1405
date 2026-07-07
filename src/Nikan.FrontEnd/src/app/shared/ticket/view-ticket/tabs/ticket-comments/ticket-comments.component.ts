@@ -54,7 +54,7 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.commentText + '" اطمینان دارید؟',

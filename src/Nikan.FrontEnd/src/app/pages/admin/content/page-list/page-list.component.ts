@@ -32,8 +32,8 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -79,7 +79,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -94,7 +94,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
     this.getList();
   }
 
-  deletePage(row) {
+  deletePage(row:any) {
     var text = 'آیا برای حذف کردن صفحه "' + row.title + '" اطمینان دارید؟';
 
     Swal.fire({
@@ -128,7 +128,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
     });
   }
 
-  manageAttachment(item) {
+  manageAttachment(item:any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

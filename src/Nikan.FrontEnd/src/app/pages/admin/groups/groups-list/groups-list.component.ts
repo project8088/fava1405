@@ -36,8 +36,8 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -82,7 +82,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -97,7 +97,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
     this.getList();
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.groupName + '" را حذف کنید؟',
@@ -127,7 +127,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
     });
   }
 
-  manageAttachment(item) {
+  manageAttachment(item:any) {
     this.matDialog
       .open(AdminImportNationCodeGroupsExcelDialogComponent, {
         data: {
@@ -142,7 +142,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
       });
   }
 
-  transfergroups(item) {
+  transfergroups(item:any) {
     this.matDialog
       .open(AdminGroupTransferDialogComponent, {
         data: {
@@ -157,7 +157,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
       });
   }
 
-  reviewgroups(item) {
+  reviewgroups(item:any) {
     item.loading = true;
     this.dataService.get(ServerApis.reviewGroups, { id: item.id }).subscribe(
       (response) => {

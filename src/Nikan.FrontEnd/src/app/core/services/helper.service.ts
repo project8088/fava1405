@@ -18,9 +18,9 @@ export class HelperService {
   /**
    *دریافت لیست استان ها
    * */
-  getProvinces(): Observable<Object> {
+  getProvinces(): Observable<any> {
     return this.dataService.get(ServerApis.getProvinces).pipe(
-      map((response: ApiResult<Object>) => {
+      map((response) => {
         if (response.isSuccess) {
           var result = response.data;
           return result;
@@ -33,9 +33,9 @@ export class HelperService {
   /**
    *دریافت لیست شهرهای اصفهان
    * */
-  getIsfahanCities(): Observable<Array<Object>> {
+  getIsfahanCities(): Observable<Array<any>> {
     return this.dataService.get(ServerApis.getIsFahanCites).pipe(
-      map((response: ApiResult<Array<Object>>) => {
+      map((response) => {
         if (response.isSuccess) {
           var result = response.data;
           return result;
@@ -84,7 +84,7 @@ export class HelperService {
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
           },
         ),

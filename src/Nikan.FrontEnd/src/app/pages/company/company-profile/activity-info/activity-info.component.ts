@@ -89,7 +89,7 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',

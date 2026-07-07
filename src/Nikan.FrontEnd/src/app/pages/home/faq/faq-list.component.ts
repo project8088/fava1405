@@ -46,7 +46,7 @@ export class FaqListComponent extends AppBase implements OnInit {
     );
   }
 
-  getFaqList(item) {
+  getFaqList(item:any) {
     this.selectedFaqGroupId = item.key;
 
     this.faqList = [];

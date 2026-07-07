@@ -22,11 +22,12 @@ export class TomanPipe implements PipeTransform {
 
   transform(val: number): string {
     if (val) return this.convert(val.toString());
+    return '';
   }
 
   /*------------------------------------------------------------------------------------------------*/
-  convert(z) {
-    z = z.replace(/[^a-zA-Z0-9 ]/g, '');
+  convert(z: string | number) {
+    z = z.toString().replace(/[^a-zA-Z0-9 ]/g, '');
 
     z = parseInt(z);
     if (z == 0) {
@@ -44,7 +45,7 @@ export class TomanPipe implements PipeTransform {
     }
   }
 
-  convert2(y) {
+  convert2(y: number) {
     if (y > 999999999 && y < 1000000000000) {
       var bghb = y % 1000000000;
       var temp = y - bghb;
@@ -79,7 +80,7 @@ export class TomanPipe implements PipeTransform {
     else this.result = 'Error';
   }
 
-  convert3r(x) {
+  convert3r(x: number) {
     var bgh = x % 100;
     var temp = x - bgh;
     var sad = temp / 100;
@@ -105,7 +106,7 @@ export class TomanPipe implements PipeTransform {
     }
   }
 
-  itpro(Number) {
+  itpro(Number: string) {
     Number += '';
     Number = Number.replace(',', '');
     Number = Number.replace(',', '');

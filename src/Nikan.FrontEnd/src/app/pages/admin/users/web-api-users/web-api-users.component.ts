@@ -38,8 +38,8 @@ export class AdminWebApiUsersComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   groupList: any[] = [];
@@ -90,7 +90,7 @@ export class AdminWebApiUsersComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -117,7 +117,7 @@ export class AdminWebApiUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(row) {
+  openUpdateUserDialog(row:any) {
     this.matDialog
       .open(AdminUpdateUserDialogComponent, {
         panelClass: 'custom-dialog',
@@ -131,7 +131,7 @@ export class AdminWebApiUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  openChangePasswordDialog(row) {
+  openChangePasswordDialog(row:any) {
     this.matDialog.open(AdminChangePasswordDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

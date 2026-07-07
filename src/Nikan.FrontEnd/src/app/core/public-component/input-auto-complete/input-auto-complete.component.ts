@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Self, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, NgControl } from '@angular/forms';
+import { Component, OnInit, Input,  Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators,  FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../server-apis';
@@ -21,7 +21,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class InputAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {
-  @Input() disabled: boolean;
+  @Input() disabled: boolean = false;
 
   @Input('label') label: string = 'استان';
   @Input('required') required: boolean = false;
@@ -31,19 +31,18 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
     this.init();
   }
   @Input('getByParent') getByParent: boolean = false;
-  @Input('parentId') set parentId(parent) {
+  @Input('parentId') set parentId(parent: any) {
     this.getListByParent(parent);
   }
 
-  @Output('optionSelected') optionSelected: EventEmitter<any>;
+  @Output('optionSelected') optionSelected = new EventEmitter<any>();
 
-    loading?: boolean;
-  filteredList: Observable<any[]>;
+  loading?: boolean;
+  filteredList = new Observable<any[]>();
+  myControl = new FormControl();
 
-  constructor(@Self() public ngControl: NgControl) {
+  constructor() {
     super();
-    ngControl.valueAccessor = this;
-    //this.ngControl = new FormControl(null, [RequireMatch]);
   }
 
   ngOnInit() {
@@ -51,13 +50,13 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
   }
 
   init() {
-    if (this.ngControl.control) {
+    if (this.myControl) {
       if (this.required) {
-        this.ngControl.control.setValidators([Validators.required, RequireMatch]);
-        this.ngControl.control.updateValueAndValidity();
+        this.myControl.setValidators([Validators.required, RequireMatch]);
+        this.myControl.updateValueAndValidity();
       }
 
-      this.filteredList = this.ngControl.control.valueChanges.pipe(
+      this.filteredList = this.myControl.valueChanges.pipe(
         startWith(''),
         map((value) => {
           if (value === null || value === undefined) return '';
@@ -74,7 +73,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
 
   writeValue(value: any): void {
     //if (value !== undefined) {
-    //  this.ngControl.control.setValue(value.toString());
+    //  this.myControl.setValue(value.toString());
     //}
   }
   registerOnChange(fn: any): void {
@@ -89,23 +88,23 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
     this.disabled = isDisabled;
   }
 
-  getListByParent(parent) {
-    if (this.ngControl.control) {
-      //this.ngControl.control.reset('');
+  getListByParent(parent: number) {
+    if (this.myControl) {
+      //this.myControl.reset('');
       this.List = [];
       this.init();
     }
-    if (!parent) return false;
+    if (!parent) return ;
     this.loading = true;
     this.dataService.get(ServerApis.getCitesByParent, { parentId: parent }).subscribe(
       (response) => {
         this.loading = false;
         this.List = response.data ? response.data : [];
-        var previewValue = this.ngControl.control.value;
+        var previewValue = this.myControl.value;
         if (previewValue) {
           var finded = false;
           for (var i of this.List) if (i.key == previewValue.key) finded = true;
-          if (finded == false) this.ngControl.control.reset();
+          if (finded == false) this.myControl.reset();
         }
 
         this.init();
@@ -122,17 +121,17 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
    * @param name  عبارت جستجو
    * @param list   لیست
    */
-  private _filter(name: string, list): any[] {
+  private _filter(name: string, list: any[]): any[] {
     const filterValue = name.toLowerCase();
     return list.filter((option) => option.text.toLowerCase().indexOf(filterValue) === 0);
   }
 
   clearItem(trigger: MatAutocompleteTrigger, auto: MatAutocomplete) {
-    setTimeout((_) => {
+    setTimeout(() => {
       auto.options.forEach((item) => {
         item.deselect();
       });
-      this.ngControl.control.reset('');
+      this.myControl.reset('');
       trigger.openPanel();
     }, 100);
   }
@@ -141,11 +140,11 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
   onChange() {
-    if (this.optionSelected) this.optionSelected.emit(this.ngControl.control.value);
+    if (this.optionSelected) this.optionSelected.emit(this.myControl.value);
   }
 }

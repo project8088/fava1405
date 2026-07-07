@@ -37,8 +37,8 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -85,7 +85,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -100,7 +100,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
     this.getList();
   }
 
-  openCompanyContractDialog(item) {
+  openCompanyContractDialog(item:any) {
     this.matDialog.open(AdminCompanyContractDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -110,7 +110,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  openCompanyChangeStatusDialog(item) {
+  openCompanyChangeStatusDialog(item:any) {
     this.matDialog
       .open(AdminCompanyChangeStatusDialogComponent, {
         panelClass: 'custom-dialog',
@@ -125,7 +125,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
       });
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.companyName + '" را حذف کنید؟',

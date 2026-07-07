@@ -41,8 +41,8 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
   baseEnums: any = {};
   loadingData: boolean = true;
   courseId: string;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   constructor(
     private customValidator: CustomFormValidators,
@@ -118,7 +118,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -133,7 +133,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
     this.getList();
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -144,7 +144,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
     });
   }
 
-  openCardProfile(row) {
+  openCardProfile(row:any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -154,7 +154,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
       maxWidth: '1800px',
     });
   }
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.cardNumber + '" را حذف کنید؟',

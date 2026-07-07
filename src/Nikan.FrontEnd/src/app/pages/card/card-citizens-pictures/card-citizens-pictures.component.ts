@@ -27,7 +27,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   list: any;
   loading: boolean = true;
   loadingData: boolean = true;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
     super();
@@ -92,7 +92,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
   getEnums() {}

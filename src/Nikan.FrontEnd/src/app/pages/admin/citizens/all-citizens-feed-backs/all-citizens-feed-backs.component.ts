@@ -31,7 +31,7 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   searchForm: FormGroup;
   constructor() {
     super();
@@ -82,7 +82,7 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

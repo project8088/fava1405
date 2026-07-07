@@ -30,8 +30,8 @@ export class HomeCompaniesListComponent extends AppBase implements AfterViewInit
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
   constructor() {
@@ -78,7 +78,7 @@ export class HomeCompaniesListComponent extends AppBase implements AfterViewInit
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 

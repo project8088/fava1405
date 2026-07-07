@@ -20,7 +20,7 @@ export class AppCitizenEventListComponent extends AppBase implements OnInit {
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
   searchForm: FormGroup;
   constructor() {
     super();

@@ -163,7 +163,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
     });
   }
 
-  openCitizenProfile(row) {
+  openCitizenProfile(row:any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

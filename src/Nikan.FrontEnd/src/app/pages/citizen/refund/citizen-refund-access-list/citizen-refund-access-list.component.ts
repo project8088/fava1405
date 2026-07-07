@@ -35,8 +35,8 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -83,7 +83,7 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -98,7 +98,7 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
     this.getList();
   }
 
-  openReportDialog(item) {
+  openReportDialog(item:any) {
     this.matDialog
       .open(AdminReportRefundDialogComponent, {
         panelClass: 'custom-dialog',

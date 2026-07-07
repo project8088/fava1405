@@ -1,5 +1,3 @@
-import { environment } from 'src/environments/environment';
-
 export class BaseUrl {
   public baseUrl = '';
   public mainApi = '/api/';
@@ -7,8 +5,8 @@ export class BaseUrl {
   constructor() {
     let host = document.location.host;
     if (host.includes('localhost')) {
-      this.baseUrl = environment.baseUrl;
-      this.mainApi = environment.mainApi;
+      this.baseUrl = 'https://profile.isfahan.ir';
+      this.mainApi = 'https://profile.isfahan.ir/api/';
     }
   }
 }

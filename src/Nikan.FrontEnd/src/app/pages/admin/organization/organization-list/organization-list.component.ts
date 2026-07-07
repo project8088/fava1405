@@ -30,8 +30,8 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
   frm: FormGroup;
@@ -119,7 +119,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.organizationName + '" اطمینان دارید؟',
@@ -151,7 +151,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
     });
   }
 
-  update(row) {
+  update(row:any) {
     this.frm.setValue({
       id: row.id,
       organizationName: row.organizationName,

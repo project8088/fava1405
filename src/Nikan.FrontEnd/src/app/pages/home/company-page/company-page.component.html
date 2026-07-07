@@ -2,7 +2,7 @@
 <div
   class="tm-breadcrumb-area tm-padding-section text-center"
   data-overlay="1"
-  data-bgimage="assets/theme/images/bg/bg-breadcrumb.jpg"
+  data-bgimage="theme/images/bg/bg-breadcrumb.jpg"
 >
   <div class="container">
     <div class="tm-breadcrumb">
@@ -22,7 +22,7 @@
           <mat-spinner diameter="50" color="default"></mat-spinner>
         </div>
       }
-      @if (!loading) {
+      @if (!loading && companyInfo) {
         <div class="my-4 line-height-3">
           <img
             [src]="baseUrl + companyInfo?.imageUrl"
@@ -108,7 +108,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="py-4 list-container">
-              @for (item of companyInfo.userCompanyActivities; track item) {
+              @for (item of companyInfo?.userCompanyActivities; track item) {
                 <div class="list-item">
                   <div class="list-content">
                     <div class="row">
@@ -121,7 +121,7 @@
               }
             </div>
 
-            @if (companyInfo.userCompanyActivities.length == 0) {
+            @if (companyInfo?.userCompanyActivities?.length == 0) {
               <div class="no-any-items">
                 <i class="fa fa-info-circle"></i> اطلاعاتی ثبت نشده است
               </div>
@@ -155,14 +155,14 @@
   <mat-card class="custom-card">
     <mat-card-header> کالا و خدمات: </mat-card-header>
     <mat-card-content>
-      @if (companyInfo.products.length == 0) {
+      @if (companyInfo?.products?.length == 0) {
         <div class="d-flex align-items-center justify-content-center py-5">
           <strong>اطلاعاتی وجود ندارد!</strong>
         </div>
       }
 
       <div class="row mt-30-reverse blog-masonry-active">
-        @for (item of companyInfo.products; track item) {
+        @for (item of companyInfo?.products; track item) {
           <div class="col-sm-6 col-md-4 mt-30">
             <div class="card p-2 news-card">
               <a class="relative">
@@ -175,7 +175,7 @@
                 }
                 @if (!item.imageUrl) {
                   <img
-                    src="assets/images/news-default.jpg"
+                    src="images/news-default.jpg"
                     alt="{{ item.title }}"
                     class="mb-3 img-fluid rad12"
                   />
@@ -218,14 +218,14 @@
         <div class="p-5">
           <form [formGroup]="contactForm">
             <div class="row">
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>نام و نام خانوادگی</mat-label>
                 <input matInput type="text" formControlName="name" />
                 @if (contactForm.get('name')?.hasError('required')) {
                   <mat-error> نام خود را وارد کنید </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>شماره موبایل</mat-label>
                 <input
                   matInput
@@ -238,14 +238,14 @@
                   <mat-error> شماره موبایل صحیح نیست! </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>آدرس ایمیل</mat-label>
                 <input matInput type="text" formControlName="email" />
                 @if (contactForm.get('email')?.hasError('email')) {
                   <mat-error> آدرس ایمیل صحیح نیست! </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-12">
+              <mat-form-field class="col-sm-12">
                 <mat-label>عنوان پیام</mat-label>
                 <input matInput formControlName="subject" />
                 @if (contactForm.get('subject')?.hasError('required')) {
@@ -255,7 +255,7 @@
                   <mat-error> حداکثر 1000 کاراکتر </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-12">
+              <mat-form-field class="col-sm-12">
                 <mat-label>متن پیام</mat-label>
                 <textarea matInput formControlName="message" rows="5"></textarea>
                 @if (contactForm.get('message')?.hasError('required')) {
@@ -284,7 +284,8 @@
   <mat-card class="custom-card">
     <mat-card-header> </mat-card-header>
     <mat-card-content>
-      <agm-map [latitude]="lat" [longitude]="lng">
+      <!-- todo:map -->
+      <!-- <agm-map [latitude]="lat" [longitude]="lng">
         <agm-marker [latitude]="lat" [longitude]="lng">
           <agm-info-window [isOpen]="true">
             <p>
@@ -293,7 +294,7 @@
             <p>{{ companyInfo?.fullAddress }}</p>
           </agm-info-window>
         </agm-marker>
-      </agm-map>
+      </agm-map> -->
     </mat-card-content>
     <mat-card-footer></mat-card-footer>
   </mat-card>

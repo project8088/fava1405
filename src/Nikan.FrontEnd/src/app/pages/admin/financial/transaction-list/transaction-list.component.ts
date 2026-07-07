@@ -34,8 +34,8 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
 
   searchForm: FormGroup;
   transactionStateList: any[] = [];
@@ -93,7 +93,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-        this.data = data;
+       this.dataSource.data = data;
       });
   }
 
@@ -108,7 +108,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
     this.getList();
   }
 
-  checkTransaction(row) {
+  checkTransaction(row:any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -140,7 +140,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
     });
   }
 
-  createCardForCitizen(row) {
+  createCardForCitizen(row:any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای بازبینی تراکنش بابت صدور کارت مطمئن هستید؟',

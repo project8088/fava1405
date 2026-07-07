@@ -92,7 +92,7 @@
         @if (userForm.get('password')?.hasError('required')) {
           <mat-error> کلمه عبور را وارد کنید. </mat-error>
         }
-        @if (userForm.get('password').errors?.weakPassword) {
+        @if (userForm.get('password')?.hasError('weakPassword')) {
           <mat-error>
             کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
           </mat-error>
@@ -105,7 +105,7 @@
         @if (userForm.get('confirmPassword')?.hasError('required')) {
           <mat-error> تکرار کلمه عبور را وارد کنید. </mat-error>
         }
-        @if (userForm.get('confirmPassword').errors?.weakPassword) {
+        @if (userForm.get('confirmPassword')?.hasError('weakPassword')) {
           <mat-error>
             کلمه عبور باید حداقل 6 کاراکتر و شامل حروف لاتین بزرگ، کوچک و علائم خاص باشد.
           </mat-error>

@@ -4,16 +4,16 @@ export class karjoWorkDto {
   /// <summary>
   /// عنوان شرکت
   /// </summary>
-  public titleCompany: string;
+  public titleCompany!: string;
   //------------------------------------------------------------------
 
   /// <summary>
   /// سمت
   /// </summary>
-  public post: string;
+  public post!: string;
 
-  public city: string;
-  public cityId: number;
+  public city!: string;
+  public cityId!: number;
 
   /// <summary>
   /// تاریخ شروع
@@ -35,12 +35,12 @@ export class karjoWorkDto {
   /// <summary>
   /// دلیل قطع همکاری
   /// </summary>
-  public cutCooperation: string;
+  public cutCooperation!: string;
 
   /// <summary>
   /// آیا بیمه رد میکرده ؟
   /// </summary>
-  public isBimeh: boolean;
+  public isBimeh!: boolean;
 
   /// <summary>
   /// شماره تماس شرکت

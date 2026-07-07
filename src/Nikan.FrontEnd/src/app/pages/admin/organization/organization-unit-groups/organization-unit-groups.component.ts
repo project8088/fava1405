@@ -89,7 +89,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
     );
   }
 
-  delete(row) {
+  delete(row:any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
