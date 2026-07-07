@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
-declare var $: any;
-
 @Component({
   selector: 'home-managers',
   templateUrl: './managers.component.html',
@@ -40,7 +38,7 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
   }
 
   owlService() {
-    $('#owl-Service2').owlCarousel({
+    this.doc.querySelector('#owl-Service2')!.owlCarousel({
       rtl: true,
       loop: true,
       nav: true,

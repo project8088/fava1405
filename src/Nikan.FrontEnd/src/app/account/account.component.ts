@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { AppBase } from '@app/app.base';
 
-declare var $: any;
+declare var bootstrap: any;
 @Component({
   selector: 'app-account',
   templateUrl: './account.component.html',
@@ -16,7 +16,8 @@ export class AccountComponent extends AppBase implements OnInit, AfterViewInit {
   ngOnInit(): void {}
 
   ngAfterViewInit() {
-    $('#carouselExampleIndicators').carousel({
+    var myCarousel = this.doc.querySelector('#carouselExampleIndicators');
+    var carousel = new bootstrap.Carousel(myCarousel, {
       wrap: true,
       pause: true,
       interval: 20000,

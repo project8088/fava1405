@@ -14,7 +14,7 @@
       <div class="card p-2 news-card" *ngFor="let item of lastNews">
         <a href="#" class="relative">
           <img [src]="baseUrl + item.imageUrl" alt="{{item.title}}" *ngIf="item.imageUrl" class="mb-3 img-fluid rad12">
-          <img src="images/news-default.jpg" alt="{{item.title}}" *ngIf="!item.imageUrl"
+          <img src="/images/news-default.jpg" alt="{{item.title}}" *ngIf="!item.imageUrl"
             class="mb-3 img-fluid rad12"> 
           <div class="covernews d-flex flex-row justify-content-between px-3 text-white ">
             <span class="bottom_p"><i class="fas fa-clock ml-1"></i>

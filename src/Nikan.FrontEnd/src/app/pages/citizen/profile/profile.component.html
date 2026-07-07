@@ -21,7 +21,7 @@
         >
         </mat-progress-spinner>
         @if (!personInfo.personalPictureUrl) {
-          <img class="object-fit-cover mb-2" src="images/avatar.png" />
+          <img class="object-fit-cover mb-2" src="/images/avatar.png" />
         }
         @if (personInfo.personalPictureUrl) {
           <img class="object-fit-cover mb-2" [src]="baseUrl + personInfo.personalPictureUrl" />

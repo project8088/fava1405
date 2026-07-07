@@ -5,7 +5,7 @@
 @import "assets/scss/list.scss";
 
 //theme
-@import "assets/theme/Style.css";
+@import "../public/theme/Style.css";
 @import "assets/theme/animate.css";
 @import "assets/theme/sina-nav.min.css";
 @import "assets/theme/owl.carousel.min.css";
@@ -107,24 +107,6 @@ a {
   font-weight: 100;
 }
 
-@import "~@angular/material/theming";
-$custom-typography: mat-typography-config(
-  $font-family: "iranSans,Arial",
-  $headline: mat-typography-level(32px, 48px, 700),
-  $body-1: mat-typography-level(14px, 24px, 500),
-);
-// Override typography CSS classes (e.g., mat-h1, mat-display-1, mat-typography, etc.).
-@include mat-base-typography($custom-typography);
-// Override typography for a specific Angular Material components.
-@include mat-checkbox-typography($custom-typography);
-// Override typography for all Angular Material, including mat-base-typography and all components.
-@include angular-material-typography($custom-typography);
-// Override the typography in the core CSS.
-@include mat-core($custom-typography);
-
-.mat-form-field {
-  margin-bottom: 20px;
-}
 
 .pull-left {
   float: left;

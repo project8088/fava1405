@@ -4,7 +4,6 @@ import { ServerApis } from '@core/server-apis';
 import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
 
-declare var $: any;
 
 @Component({
   selector: 'app-index',
@@ -54,7 +53,7 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
 
   //popular doctors_index_page
   owltopnews() {
-    $('#owl-topnews').owlCarousel({
+    this.doc.querySelector('#owl-topnews').owlCarousel({
       rtl: true,
       loop: true,
       nav: true,

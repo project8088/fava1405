@@ -194,7 +194,7 @@ a.fixed-linkedin {
     background-color: #b7223e;
   }
 
-.fixed-linkedin a:hover > {
+.fixed-linkedin a:hover {
   background-color: #00AF54;
 }
 
@@ -683,14 +683,14 @@ footer ul li {
   /*z-index: 9;*/
   color: #fff;
   padding-top: 10px;
-  background: #154358 url('../images/pttern2.png') repeat-x top;
+  background: #154358 url('/images/pttern2.png') repeat-x top;
 }
 
 #footer-copyright {
   width: 100%;
   /*height: 120px;*/
   padding: 20px;
-  background: #063048 url("../images/pttern.html") repeat-x center;
+  background: #063048 url("/images/pttern.html") repeat-x center;
   font-size: 13px;
   /*position: absolute;*/
   /*bottom: 0;

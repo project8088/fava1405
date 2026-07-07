@@ -1,0 +1,31 @@
+@font-face {
+  font-family: 'iranSans';
+  src:
+    url('./fonts/farsiNum/eot/IRANSansWeb(FaNum).eot') format('embedded-opentype'),
+    url('./fonts/farsiNum/ttf/IRANSansWeb(FaNum).ttf') format('truetype'),
+    url('./fonts/farsiNum/woff/IRANSansWeb(FaNum).woff') format('woff'),
+    url('./fonts/farsiNum/woff2/IRANSansWeb(FaNum).woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'iranSansDN';
+  src:
+    url('./fonts/iransans-dn/eot/iransansdn.eot') format('embedded-opentype'),
+    url('./fonts/iransans-dn/ttf/iransansdn.ttf') format('truetype'),
+    url('./fonts/iransans-dn/woff/iransansdn.woff') format('woff'),
+    url('./fonts/iransans-dn/woff2/iransansdn.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'barcode';
+  src: url('./fonts/barcode/fre3of9x.eot'); /* IE9 Compat Modes */
+  src:
+    url('./fonts/barcode/fre3of9x.eot?#iefix') format('embedded-opentype'),
+    /* IE6-IE8 */ url('./fonts/barcode/fre3of9x.otf') format('opentype'),
+    /* Open Type Font */ url('./fonts/barcode/fre3of9x.svg') format('svg'),
+    /* Legacy iOS */ url('./fonts/barcode/fre3of9x.ttf') format('truetype'),
+    /* Safari, Android, iOS */ url('./fonts/barcode/fre3of9x.woff') format('woff'),
+    /* Modern Browsers */ url('./fonts/barcode/fre3of9x.woff2') format('woff2'); /* Modern Browsers */
+  font-weight: normal;
+  font-style: normal;
+}

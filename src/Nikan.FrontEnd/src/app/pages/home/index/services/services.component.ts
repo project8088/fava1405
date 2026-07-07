@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
-declare var $: any;
 
 @Component({
   selector: 'home-services',
@@ -49,7 +48,7 @@ export class HomeServicesListComponent extends AppBase implements OnInit {
   }
 
   owlService() {
-    $('#owl-Service3').owlCarousel({
+    this.doc.querySelector('#owl-Service3').owlCarousel({
       rtl: true,
       loop: true,
       nav: true,
