@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
-import { MaterialModule } from '../core/material/material.module';
+import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { TermsComponent } from './terms/terms.component';
@@ -19,7 +19,7 @@ import { UserRegisterComponent } from './userregister.component';
 import { UserRegisterRoutingModule } from './userregister-routing.module';
 import { RegisterComponent } from './register/register.component';
 import { PreregisterComponent } from './preregister/preregister.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '@core/core.module';
 import { BotDetectCaptchaModule } from '../account/bot-detect/botdetect-captcha.module';
 
 @NgModule({

@@ -4,9 +4,9 @@ import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppBase } from '@app/app.base';
 

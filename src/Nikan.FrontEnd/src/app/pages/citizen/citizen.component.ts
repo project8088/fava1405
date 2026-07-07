@@ -2,7 +2,7 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { SideNavMenuItem } from '../../core/models/menuItems';
+import { SideNavMenuItem } from '@core/models/menuItems';
 import { AppBase } from '@app/app.base';
 
 @Component({

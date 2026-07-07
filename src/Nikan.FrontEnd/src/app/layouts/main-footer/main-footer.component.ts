@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from '../../core/server-apis';
-import { SiteSettingViewModel } from '../../core/models/setting';
+import { ServerApis } from '@core/server-apis';
+import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
 
 @Component({

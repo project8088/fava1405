@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../core/server-apis';
-import { BaseDataModel } from '../../../../core/models/base-data-model';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
+import { BaseDataModel } from '@core/models/base-data-model';
 import { Observable } from 'rxjs';
-import { HelperService } from '../../../../core/services/helper.service';
+import { HelperService } from '@core/services/helper.service';
 import { AppBase } from '@app/app.base';
 
 @Component({

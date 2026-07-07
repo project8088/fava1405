@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

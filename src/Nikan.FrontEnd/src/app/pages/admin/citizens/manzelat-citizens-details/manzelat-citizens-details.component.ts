@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AdminCitizenManzelatReviewComponent } from '../../_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { ShowImageDialogComponent } from 'src/app/shared/_dialog/show-image/show-image.component';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';

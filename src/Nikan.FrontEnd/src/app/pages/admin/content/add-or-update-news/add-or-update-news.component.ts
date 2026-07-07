@@ -2,8 +2,8 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER } from '@angular/cdk/keycodes';
-import { ServerApis } from '../../../../core/server-apis';
-import { NewsDto } from '../../../../core/models/news';
+import { ServerApis } from '@core/server-apis';
+import { NewsDto } from '@core/models/news';
 import { AppBase } from '@app/app.base';
 
 @Component({

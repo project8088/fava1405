@@ -1,9 +1,9 @@
-import { ApiResult } from '../../core/models/models';
+import { ApiResult } from '@core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { ServerApis } from '../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { UserRegisterService } from '../userregister.service';
 import { CaptchaComponent } from 'src/app/account/bot-detect/captcha.component';
 import { AppBase } from '@app/app.base';

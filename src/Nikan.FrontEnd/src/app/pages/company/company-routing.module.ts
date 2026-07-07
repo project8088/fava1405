@@ -17,7 +17,7 @@ import { CompanyAddOrUpdatePersonalComponent } from './personal/add-or-update-pe
 import { CompanyUserListComponent } from './users/user-list/user-list.component';
 
 import { StoreDetailsComponent } from '../../shared/store-details/store-details.component';
-import { AuthGuard } from '../../core/authentication/auth.guard';
+import { AuthGuard } from '@core/authentication/auth.guard';
 import { CompanyProductGroupsListComponent } from './products/product-groups/product-groups.component';
 import { CompanyProductListComponent } from './products/product-list/product-list.component';
 import { CompanyAddOrUpdateProductComponent } from './products/add-or-update-product/add-or-update-product.component';

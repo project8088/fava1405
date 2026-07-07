@@ -2,13 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CompanyUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
 import { CompanyChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { CompanyAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
-import { AuthUser } from '../../../../core/authentication/user.model';
+import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 
 @Component({

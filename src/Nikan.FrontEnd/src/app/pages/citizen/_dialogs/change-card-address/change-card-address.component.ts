@@ -1,9 +1,9 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../core/server-apis';
-import { HelperService } from '../../../../core/services/helper.service';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
+import { HelperService } from '@core/services/helper.service';
 import { AppBase } from '@app/app.base';
 
 @Component({

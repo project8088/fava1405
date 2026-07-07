@@ -7,8 +7,8 @@ import {
 } from '@angular/material/autocomplete';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { Observable } from 'rxjs';
-import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../../core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

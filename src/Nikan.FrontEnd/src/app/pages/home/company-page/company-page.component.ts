@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyInfoDto } from '../../../core/models/company/company-info';
-import { ServerApis } from '../../../core/server-apis';
+import { CompanyInfoDto } from '@core/models/company/company-info';
+import { ServerApis } from '@core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
-import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
-import { AuthUser } from '../../../core/authentication/user.model';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 
 @Component({

@@ -3,7 +3,7 @@ import { karjoEducationDto } from '@core/models/citizen/education';
 import Swal from 'sweetalert2';
 import { CitizenEducationDialogComponent } from '../_dialogs/education-dialog/education-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

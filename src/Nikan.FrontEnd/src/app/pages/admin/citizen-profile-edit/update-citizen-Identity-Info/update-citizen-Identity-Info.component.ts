@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

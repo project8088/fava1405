@@ -5,8 +5,8 @@ import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
-import { CustomFormValidators } from '../../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../../core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

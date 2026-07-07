@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
-import { ServerApis } from '../../../../core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
 import { forkJoin } from 'rxjs';
-import { AuthUser } from '../../../../core/authentication/user.model';
+import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 
 @Component({

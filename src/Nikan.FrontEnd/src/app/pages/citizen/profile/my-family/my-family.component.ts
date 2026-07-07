@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CitizenFamilyDialogComponent } from '../_dialogs/family-dialog/family-dialog.component';
 import { CitizenProfileComponent } from '../profile.component';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
 import { AppBase } from '@app/app.base';

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { karjoEducationDto } from '@core/models/citizen/education';
-import { ServerApis } from '../../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

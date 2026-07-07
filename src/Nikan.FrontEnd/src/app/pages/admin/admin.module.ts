@@ -66,9 +66,9 @@ import { AdminUserGroupsComponent } from './users/admin-userGroups/admin-userGro
 import { AdminUserPermissionsComponent } from './users/user-permissions/user-permissions.component';
 import { AdminUsersComponent } from './users/admin-users/admin-users.component';
 import { CommonModule } from '@angular/common';
-import { CoreModule } from '../../core/core.module';
+import { CoreModule } from '@core/core.module';
 import { ManageAttachmentDialogComponent } from './_dialogs/manage-attachment/manage-attachment.component';
-import { MaterialModule } from '../../core/material/material.module';
+import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../../shared/shared.module';

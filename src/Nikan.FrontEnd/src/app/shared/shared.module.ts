@@ -6,13 +6,13 @@ import { ChangeCurrentUserPasswordComponent } from './change-current-user-passwo
 import { CitizenProfileDialogComponent } from './_dialog/citizen-profile/citizen-profile.component';
 import { CommonModule } from '@angular/common';
 import { CompanyInfoComponent } from './company-info/company-info.component';
-import { CoreModule } from '../core/core.module';
+import { CoreModule } from '@core/core.module';
 import { CropperComponent } from './cropper/cropper.component';
 import { ImageCropperComponent } from 'ngx-image-cropper';
 import { JobseekerProfileDialogComponent } from './_dialog/jobseeker-profile/jobseeker-profile.component';
 import { MatIconModule } from '@angular/material/icon';
 // import { MatTableExporterModule } from 'mat-table-exporter';
-import { MaterialModule } from '../core/material/material.module';
+import { MaterialModule } from '@core/material/material.module';
 import { MenuDynamicComponent } from './side-nav-menu/menu-dynamic/menu-dynamic.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgxUploaderModule } from 'ngx-uploader';

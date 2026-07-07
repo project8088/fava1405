@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from '../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
-import { CustomFormValidators } from '../../core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
 
 @Component({

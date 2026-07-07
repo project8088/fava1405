@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 
-import { CoreModule } from '../../core/core.module';
+import { CoreModule } from '@core/core.module';
 import { CardRoutingModule } from './card-routing.module';
-import { MaterialModule } from '../../core/material/material.module';
+import { MaterialModule } from '@core/material/material.module';
 import { SharedModule } from '../../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';

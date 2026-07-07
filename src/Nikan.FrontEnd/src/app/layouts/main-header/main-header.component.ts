@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Meta, Title } from '@angular/platform-browser';
-import { AuthUser } from '../../core/authentication/user.model';
+import { AuthUser } from '@core/authentication/user.model';
 import { RegisterServiceModel } from '@core/models/register-service.model';
-import { ServerApis } from '../../core/server-apis';
-import { SiteSettingViewModel } from '../../core/models/setting';
+import { ServerApis } from '@core/server-apis';
+import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
 
 @Component({

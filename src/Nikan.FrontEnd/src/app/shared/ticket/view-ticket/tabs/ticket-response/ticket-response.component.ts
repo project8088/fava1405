@@ -1,8 +1,8 @@
 import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { Validators, FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
-import { AuthUser } from '../../../../../core/authentication/user.model';
-import { ServerApis } from '../../../../../core/server-apis';
+import { AuthUser } from '@core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
 import { UploaderComponent } from '../../../../uploader/uploader.component';
 import { CitizenProfileDialogComponent } from '../../../../_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';

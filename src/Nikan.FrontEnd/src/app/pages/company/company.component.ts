@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { shareReplay, map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
-import { SideNavMenuItem } from '../../core/models/menuItems';
-import { AuthUser } from '../../core/authentication/user.model';
+import { SideNavMenuItem } from '@core/models/menuItems';
+import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 
 @Component({

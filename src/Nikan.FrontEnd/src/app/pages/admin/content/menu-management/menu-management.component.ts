@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AdminAddOrUpdateMenuDialogComponent } from './dialog/add-update-menu/add-update-menu.component';
 import { AppBase } from '@app/app.base';
 

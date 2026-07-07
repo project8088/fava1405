@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ServerApis } from '../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 declare var $: any;

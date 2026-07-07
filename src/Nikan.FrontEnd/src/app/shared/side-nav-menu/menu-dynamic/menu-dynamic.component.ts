@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { SideNavMenuItem } from '../../../core/models/menuItems';
+import { SideNavMenuItem } from '@core/models/menuItems';
 import { AppBase } from '@app/app.base';
 
 @Component({

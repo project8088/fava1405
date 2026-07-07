@@ -3,8 +3,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
-import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
-import { ServerApis } from '../../../../core/server-apis';
+import { KarjoGlobalInformationDto } from '@core/models/citizen/global-information';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

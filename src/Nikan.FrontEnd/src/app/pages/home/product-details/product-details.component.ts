@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthUser } from '../../../core/authentication/user.model';
-import { ServerApis } from '../../../core/server-apis';
-import { CustomFormValidators } from '../../../core/custom-validator/form-validation';
+import { AuthUser } from '@core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 
 import { Title, Meta } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';

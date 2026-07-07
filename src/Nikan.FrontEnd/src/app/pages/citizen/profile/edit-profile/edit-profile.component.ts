@@ -4,9 +4,9 @@ import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'r
 import { BaseDataModel } from '@core/models/base-data-model';
 import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { KarjoGlobalInformationDto } from '../../../../core/models/citizen/global-information';
+import { KarjoGlobalInformationDto } from '@core/models/citizen/global-information';
 import { Observable } from 'rxjs';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

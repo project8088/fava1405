@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ServerApis } from '../../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { AdminAddOrUpdateMenuDialogComponent } from '../dialog/add-update-menu/add-update-menu.component';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';

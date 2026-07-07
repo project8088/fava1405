@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { BaseDataModel } from '../../../../core/models/base-data-model';
-import { ServerApis } from '../../../../core/server-apis';
+import { BaseDataModel } from '@core/models/base-data-model';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

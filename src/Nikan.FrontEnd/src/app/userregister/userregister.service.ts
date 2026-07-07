@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
-import { DataService } from '../core/services/data-service.service';
+import { DataService } from '@core/services/data-service.service';
 import { Injectable } from '@angular/core';
-import { LocalStorageService } from '../core/services/localstorage.service';
+import { LocalStorageService } from '@core/services/localstorage.service';
 
 @Injectable({
   providedIn: 'root',

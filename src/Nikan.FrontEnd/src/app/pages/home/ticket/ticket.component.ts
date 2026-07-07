@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
-import { AuthUser } from '../../../core/authentication/user.model';
-import { ServerApis } from '../../../core/server-apis';
+import { AuthUser } from '@core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({

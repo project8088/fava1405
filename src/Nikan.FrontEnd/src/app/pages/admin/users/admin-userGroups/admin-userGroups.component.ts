@@ -4,9 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { userGroupsDto } from '@core/models/users/userGroups';
 import Swal from 'sweetalert2';
 import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-usergroups.component';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
 
 @Component({

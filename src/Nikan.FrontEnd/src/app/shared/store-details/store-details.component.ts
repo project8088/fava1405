@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from '../../core/server-apis';
-import { AuthUser } from '../../core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
+import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 
 @Component({

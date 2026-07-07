@@ -1,8 +1,8 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthUser } from '../../core/authentication/user.model';
-import { ServerApis } from '../../core/server-apis';
-import { SideNavMenuItem } from '../../core/models/menuItems';
+import { AuthUser } from '@core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
+import { SideNavMenuItem } from '@core/models/menuItems';
 import { UploadUserAvatarDialogComponent } from '../_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from '@app/app.base';
 

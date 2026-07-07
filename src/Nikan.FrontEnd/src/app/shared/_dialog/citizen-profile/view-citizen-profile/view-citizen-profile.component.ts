@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { FormGroup } from '@angular/forms';
 import { AppBase } from '@app/app.base';
 

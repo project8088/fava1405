@@ -1,10 +1,10 @@
-import { ApiResult } from '../../core/models/models';
+import { ApiResult } from '@core/models/models';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
-import { ServerApis } from '../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from 'src/app/shared/timer/timer.component';
 import { UserRegisterService } from '../userregister.service';
 import { AppBase } from '@app/app.base';

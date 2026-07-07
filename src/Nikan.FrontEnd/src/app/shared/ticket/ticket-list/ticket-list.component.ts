@@ -3,8 +3,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { SendTicketDialogComponent } from '../_dialogs/send-ticket/send-ticket.component';
-import { AuthUser } from '../../../core/authentication/user.model';
-import { ServerApis } from '../../../core/server-apis';
+import { AuthUser } from '@core/authentication/user.model';
+import { ServerApis } from '@core/server-apis';
 import { FormGroup } from '@angular/forms';
 
 import { merge, of } from 'rxjs';

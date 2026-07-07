@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ServerApis } from '../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';
 

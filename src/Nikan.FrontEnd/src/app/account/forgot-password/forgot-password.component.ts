@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
-import { ServerApis } from '../../core/server-apis';
-import { CustomFormValidators } from '../../core/custom-validator/form-validation';
+import { ServerApis } from '@core/server-apis';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
 
 @Component({

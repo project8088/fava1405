@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { userGroupsDto } from '@core/models/users/userGroups';
-import { ServerApis } from '../../../../core/server-apis';
+import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomFormValidators } from '../../../../core/custom-validator/form-validation';
+import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
 
 @Component({
