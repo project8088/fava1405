@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 export class AdminPayTestComponent extends AppBase implements OnInit {
     loading?: boolean;
   form: FormGroup;
-  RefId: string;
+  Refid: string ='';
   waitForRedirectToBank: boolean;
   constructor() {
     super();

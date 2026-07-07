@@ -5,8 +5,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { UserRegisterService } from '../userregister.service';
-import { CaptchaComponent } from 'src/app/account/bot-detect/captcha.component';
 import { AppBase } from '@app/app.base';
+import { CaptchaComponent } from '@app/account/bot-detect/captcha.component';
 
 @Component({
   selector: 'app-preregister',
@@ -16,10 +16,10 @@ import { AppBase } from '@app/app.base';
 })
 export class PreregisterComponent extends AppBase implements OnInit {
   form: FormGroup;
-    loading?: boolean;
+  loading?: boolean;
   isSaving: boolean = false;
-  nationalityList;
-  serviceId: number;
+  nationalityList: any[] = [];
+  serviceId?: number;
   @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor(
@@ -44,11 +44,11 @@ export class PreregisterComponent extends AppBase implements OnInit {
       if (+value === 0) {
         this.form
           .get('nationCode')
-          .setValidators([this.customValidator.checkNationalCode, Validators.required]);
+          ?.setValidators([this.customValidator.checkNationalCode, Validators.required]);
       } else {
         this.form.get('nationCode')?.setValidators([Validators.required]);
       }
-      this.form.get('nationCode').updateValueAndValidity();
+      this.form.get('nationCode')?.updateValueAndValidity();
     });
 
     this.route.queryParams.subscribe((params) => {
@@ -64,7 +64,7 @@ export class PreregisterComponent extends AppBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.captchaComponent.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
+    this.captchaComponent!.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
   }
   submitForm(): void {
     if (this.form.valid) {

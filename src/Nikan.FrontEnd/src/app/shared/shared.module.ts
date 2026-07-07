@@ -44,6 +44,8 @@ import { AppCitizenManzalatRegistrationComponent } from './citizens/citizen-manz
 import { AppGroupCitizensListComponent } from './citizens/groupCitizens-list/groupCitizens-list.component';
 import { AppCitizenSmsListComponent } from './citizens/citizen-sms-list/citizen-sms-list.component';
 import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citizen-event-list.component';
+import { AdminCitizenTransactionListComponent } from './citizens/transaction-list/citizen-transaction-list.component';
+import { ViewCitizenComponent } from './citizens/view-citizen.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,9 @@ import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citi
     StoreDetailsComponent,
     TransactionDetailsComponent,
     CaptchaComponent,
+    ViewCitizenComponent,
     CitizenProfileDialogComponent,
+    AdminCitizenTransactionListComponent,
     ViewCitizenProfileComponent,
     TimerComponent,
     CropperComponent,
@@ -111,6 +115,8 @@ import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citi
     ViewJobDetailsComponent,
     JobseekerProfileDialogComponent,
     CitizenProfileDialogComponent,
+    AdminCitizenTransactionListComponent,
+    ViewCitizenComponent,
     CardProfileDialogComponent,
     ViewCitizenProfileComponent,
     ViewCardProfileComponent,

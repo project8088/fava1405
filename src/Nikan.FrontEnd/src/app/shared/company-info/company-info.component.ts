@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { CompanyInfoDto } from '@core/models/company/company-info';
 import { ServerApis } from '@core/server-apis';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
@@ -13,10 +12,10 @@ declare var $: any;
   standalone: false,
 })
 export class CompanyInfoComponent extends AppBase implements OnInit {
-  companyInfo: CompanyInfoDto;
-    loading?: boolean;
+  companyInfo?: any;
+  loading?: boolean;
   companyId: string = '';
-  user: AuthUser;
+  user: AuthUser | null;
   baseUrl = ServerApis.baseUrl;
   constructor() {
     super();

@@ -38,7 +38,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportId: string;
+  exportid: string ='';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 

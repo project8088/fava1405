@@ -30,7 +30,7 @@ interface ICardDetails {
   attachmentGroup: string;
   buyCardDescription: string;
   cardCost: number;
-  cardInfoId: string;
+  cardInfoid: string ='';
   cardIsActive: boolean;
   cardType: string;
   cardTypeId: number;

@@ -27,8 +27,8 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   selectedGroups: any[] = [];
 
   loadingData?: boolean;
-  id: string;
-  cardTypeId: string;
+  id: string ='';
+  cardTypeid: string ='';
   constructor(
     private matDialogRef: MatDialogRef<CardAddCardDiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -150,8 +150,8 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
       this.frm.get('penaltyPercentage')?.setValidators([Validators.required]);
       this.frm.get('penaltyPercentage').updateValueAndValidity();
     } else {
-      this.frm.get('penaltyForPeriodDebt')?.setvalue(false);
-      this.frm.get('penaltyPercentage')?.setvalue(0);
+      this.frm.get('penaltyForPeriodDebt')?.setValue(false);
+      this.frm.get('penaltyPercentage')?.setValue(0);
       this.frm.get('penaltyPercentage').clearValidators();
       this.frm.get('penaltyPercentage').updateValueAndValidity();
     }

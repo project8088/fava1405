@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AppCitizenManzalatRegistrationComponent extends AppBase implements AfterViewInit {
-  userCode: string;
+  userCode: string='';
   baseUrl: string = ServerApis.baseUrl;
 
     loading?: boolean;

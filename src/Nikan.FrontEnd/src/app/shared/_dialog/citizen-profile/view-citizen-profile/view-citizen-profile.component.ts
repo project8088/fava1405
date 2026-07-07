@@ -12,12 +12,12 @@ import { AppBase } from '@app/app.base';
 export class ViewCitizenProfileComponent extends AppBase implements OnInit {
   @Input('userCode') userCode: string = '';
 
-  feedbackfrm: FormGroup;
+  feedbackfrm!: FormGroup;
   citizen: any = {};
-  manzalatdata: [];
-    loading?: boolean;
+  manzalatdata: any[] = [];
+  loading?: boolean;
   loadingData?: boolean;
-  maritalStatus: boolean;
+  maritalStatus: any;
 
   baseUrl: string = ServerApis.baseUrl;
 

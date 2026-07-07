@@ -32,7 +32,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
   ];
 
   baseUrl: string = ServerApis.baseUrl;
-  cardTypeId: string;
+  cardTypeid: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

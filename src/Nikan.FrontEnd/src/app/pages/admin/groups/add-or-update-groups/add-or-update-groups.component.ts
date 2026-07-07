@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   groupForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 

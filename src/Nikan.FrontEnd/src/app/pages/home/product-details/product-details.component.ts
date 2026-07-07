@@ -13,8 +13,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainProductDetailsComponent extends AppBase implements OnInit {
-  id: string;
-  user: AuthUser;
+  id: string ='';
+  user: AuthUser | null;
   loadingData?: boolean;
   product: any;
 

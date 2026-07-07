@@ -26,7 +26,7 @@ export class ChangeCurrentUserPasswordComponent extends AppBase implements OnIni
       { validator: this.checkPasswords },
     );
 
-    this.changePasswordForm.get('username')?.setvalue(authService.getAuthUser().userName);
+    this.changePasswordForm.get('username')?.setValue(this.authService.getAuthUser()?.userName);
   }
   /**
    * بررسی یکی بودن کلمه عبور و تائید آن

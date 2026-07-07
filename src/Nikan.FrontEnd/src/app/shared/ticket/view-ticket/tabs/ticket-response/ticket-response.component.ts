@@ -17,18 +17,18 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
   id: string = '';
   loading: boolean = true;
   ticket: any;
-  resultsLength: number;
+  resultsLength: number = 0;
 
   attachmentGuid: any;
   uploadUrl: string = ServerApis.uploadAttachment;
   uploadData: any = { Caption: '' };
   answerForm: FormGroup;
-  isSending: boolean;
+  isSending: boolean = false;
 
-  currentUser: AuthUser;
+  currentUser?: AuthUser | null;
 
-  rootModule: string;
-  @ViewChild(UploaderComponent) uploader;
+  rootModule: string = '';
+  @ViewChild(UploaderComponent) uploader!: UploaderComponent;
 
   constructor() {
     super();
@@ -45,7 +45,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
   ngOnInit(): void {
     if (this.authService.currentUserValue) {
       this.currentUser = this.authService.currentUserValue;
-      this.rootModule = this.authService.currentUserValue.rootModule;
+      this.rootModule = this.authService.currentUserValue.rootModule ?? '';
     }
   }
 
@@ -73,7 +73,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           //   ownerId:this.ticket.ownerId
           // });
 
-          this.answerForm.get('resolved')?.setvalue(this.ticket.isSolved);
+          this.answerForm.get('resolved')?.setValue(this.ticket.isSolved);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
@@ -85,7 +85,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
     );
   }
 
-  closeTicket(isClosed) {
+  closeTicket(isClosed: boolean) {
     Swal.fire({
       text: isClosed
         ? 'آیا برای بستن تیکت اطمینان دارید؟'
@@ -108,7 +108,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
               this.loading = false;
               if (response.isSuccess) {
                 if (isClosed) {
-                  this.ticket.colsedById = this.currentUser.userId;
+                  this.ticket.colsedById = this.currentUser?.userId;
                   this.toastrService.success('تیکت با موفقیت بسته شد.');
                 } else {
                   this.ticket.colsedById = null;
@@ -138,7 +138,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
     }
   }
 
-  openCitizenProfile(ownerId) {
+  openCitizenProfile(ownerId: number) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -153,7 +153,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
     if (this.answerForm.invalid) {
       this.toastrService.warning('متن پیام را وارد کنید.');
       this.answerForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSending = true;
     this.dataService
@@ -173,7 +173,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           if (response.isSuccess) {
             this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-            this.answerForm.get('responseText')?.setvalue('');
+            this.answerForm.get('responseText')?.setValue('');
             this.getTicketInfo();
             if (this.attachmentGuid) {
               this.uploader.removeAllFiles(this.uploader.uploaderInput);
@@ -199,7 +199,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
       return v.toString(16);
     });
   }
-  getAttachmentId(ev:{uploadUrl:string}) {
-    this.attachmentGuid = ev.attachmentGroup;
+  getAttachmentId(ev: string) {
+    this.attachmentGuid = ev;
   }
 }

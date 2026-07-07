@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class ChangeCardAddressDialogComponent extends AppBase implements OnInit {
   isSaving=false;
-  id: string;
+  id: string ='';
   isfahanCities: any[];
   homeForm: FormGroup;
   loading: boolean = true;

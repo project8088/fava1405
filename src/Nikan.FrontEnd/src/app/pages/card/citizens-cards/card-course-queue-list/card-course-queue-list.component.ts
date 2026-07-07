@@ -39,7 +39,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  courseId: string;
+  courseid: string ='';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   printUrl: string = ServerApis.prinQueueForPost;

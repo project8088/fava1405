@@ -31,7 +31,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
   ];
 
   baseUrl: string = ServerApis.baseUrl;
-  cardTypeId: string;
+  cardTypeid: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

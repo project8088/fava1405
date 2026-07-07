@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
   baseEnums: any = {};

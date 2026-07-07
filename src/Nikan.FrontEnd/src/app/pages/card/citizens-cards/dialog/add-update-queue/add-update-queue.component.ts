@@ -22,13 +22,13 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
   frm: FormGroup;
   isUpdate=false;
 
-  courseId: string;
+  courseid: string ='';
   loadingServices: boolean;
   filteredServices: Observable<any[]>;
   selectedServices: any[] = [];
 
   loadingData?: boolean;
-  id: string;
+  id: string ='';
   constructor(
     private matDialogRef: MatDialogRef<CardAddOrUpadateQueueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

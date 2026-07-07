@@ -13,7 +13,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
   extends AppBase
   implements OnInit, AfterViewInit
 {
-  notificationId: string;
+  notificationid: string ='';
   notyForm: FormGroup;
 
   notification: any = {};

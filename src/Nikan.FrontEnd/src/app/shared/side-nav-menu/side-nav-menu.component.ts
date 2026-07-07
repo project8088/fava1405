@@ -13,17 +13,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class SideNavMenuComponent extends AppBase implements OnInit {
-  @Input('menu') menuItems: SideNavMenuItem[];
+  @Input('menu') menuItems: SideNavMenuItem[] = [];
   @Input('showLogout') showLogout: boolean = true;
 
   isLoading: boolean = true;
-  //user: AuthUser;
+  //user: AuthUser | null;
 
-  menuIsOpen: string;
+  menuIsOpen: string = '';
   countofElements: number = 0;
-  user: AuthUser;
+  user: AuthUser | null = null;
   baseUrl: string = ServerApis.baseUrl;
-  userImage: string;
+  userImage: string = '';
 
   constructor(
     private elementRef: ElementRef,
@@ -43,9 +43,9 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
       parent = this.getParent(this.menuItems, parent.id, '');
     }
 
-    if (this.user.isJobseeker) this.getJobseekerImage();
-    if (this.user.isCompany) this.getCompanyLogo();
-    if (this.user.isCitizen) this.getCitizenImage();
+    if (this.user?.isJobseeker) this.getJobseekerImage();
+    if (this.user?.isCompany) this.getCompanyLogo();
+    if (this.user?.isCitizen) this.getCitizenImage();
   }
 
   setId(menu: SideNavMenuItem[]) {
@@ -57,15 +57,16 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
     }
   }
 
-  getParent(root, id, parent) {
-    var finded = '';
+  getParent(root: any, id: string, parent: any) {
+    var finded;
     for (var n of root) {
       if (n.id === id) {
-        return (finded = parent);
+        finded = parent;
+        break;
       }
       if (n.children) {
         parent = n;
-        return this.getParent(n.children, id, parent);
+        this.getParent(n.children, id, parent);
       }
     }
     return finded;
@@ -76,7 +77,7 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
   }
 
   openUploadDialog() {
-    if (!this.user.isCompany && !this.user.isJobseeker && !this.user.isCitizen) return false;
+    if (!this.user?.isCompany && !this.user?.isJobseeker && !this.user?.isCitizen) return;
 
     this.matDialog
       .open(UploadUserAvatarDialogComponent, {

@@ -14,10 +14,10 @@ import { AppBase } from '@app/app.base';
 })
 export class AppCitizenFeedBackListComponent extends AppBase implements AfterViewInit {
   listfeedback: any[] = [];
-  isSavingfeedback: boolean;
+  isSavingfeedback: boolean = false;
   groupfeedbackList: any[] = [];
-  userCode: string;
-  loadingfeedback: boolean;
+  userCode: string = '';
+  loadingfeedback: boolean = false;
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -67,7 +67,7 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
     if (this.feedbackfrm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.feedbackfrm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.feedbackfrm.value;

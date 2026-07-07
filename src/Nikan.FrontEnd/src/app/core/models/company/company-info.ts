@@ -18,6 +18,7 @@ export class CompanyInfoDto {
   public fieldOfActivity!: FieldOfActivityEnum;
 
   public managerName!: string;
+  managerNationlCode!: string;
 
   // #region اطلاعات اصلی شرکت
   // [StringLength(40)]
@@ -57,6 +58,6 @@ export class CompanyInfoDto {
   public lat!: string;
   public lng!: string;
 
-  public userCompanyActivities: any[]=[];
+  public userCompanyActivities: any[] = [];
   public products: any[] = [];
 }

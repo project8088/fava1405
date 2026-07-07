@@ -33,7 +33,7 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
     'description',
   ];
   showAddPanel: boolean;
-  importId: string;
+  importid: string ='';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();

@@ -32,7 +32,7 @@ export class CitizenRefundAccessDetailsListComponent
     'refundState',
     'operation',
   ];
-  importId: string;
+  importid: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

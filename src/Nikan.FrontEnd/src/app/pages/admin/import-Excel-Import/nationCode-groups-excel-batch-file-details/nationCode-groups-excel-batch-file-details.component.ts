@@ -29,7 +29,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
     'waterConsumptionLimit',
   ];
 
-  importId: string;
+  importid: string ='';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();

@@ -29,7 +29,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   filteredState: Observable<any[]>;
   states: any[] = [];
   c: ities = new Observable<any>();
-  isfahanCities: Object[];
+  isfahanCities: any[]=[];
 
   lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;

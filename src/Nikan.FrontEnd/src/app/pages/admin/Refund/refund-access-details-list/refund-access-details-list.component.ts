@@ -37,7 +37,7 @@ export class AdminRefundAccessDetailsListComponent
     'refundState',
     'operation',
   ];
-  importId: string;
+  importid: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

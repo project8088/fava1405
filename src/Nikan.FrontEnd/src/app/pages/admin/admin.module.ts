@@ -22,7 +22,6 @@ import { AdminCitizenManzelatReviewComponent } from './_dialogs/citizen-manzelat
 import { AdminCitizenRejectFamilyComponent } from './_dialogs/citizen-reject-family/citizen-reject-family.component';
 import { AdminCitizenRejectImageDialogComponent } from './_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { AdminCitizenSmsListDialogComponent } from './_dialogs/citizen-sms-list/citizen-sms-list.component';
-import { AdminCitizenTransactionListComponent } from './citizens/transaction-list/transaction-list.component';
 import { AdminCitizensComponent } from './citizens/citizens.component';
 import { AdminCitizensFamilyComponent } from './citizens/citizen-family/citizens-family.component';
 import { AdminCitizensPicturesComponent } from './citizens/citizens-pictures/citizens-pictures.component';
@@ -189,7 +188,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminWebApiUserPermissionsComponent,
     AdminAddFeedBackDialogComponent,
     AdminCitizensPicturesComponent,
-    AdminCitizenTransactionListComponent,
     AdminCitizenImageDialogComponent,
     AdminCitizenSmsListDialogComponent,
     AdminCitizenRejectImageDialogComponent,

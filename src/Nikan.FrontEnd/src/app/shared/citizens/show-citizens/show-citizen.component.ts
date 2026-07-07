@@ -9,10 +9,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
-  userCode: string;
+  userCode: string = '';
   info: any = {};
   loading: boolean = true;
-  imageUrl: string;
+  imageUrl: string = '';
   baseUrl: string = ServerApis.baseUrl;
 
   constructor() {
@@ -54,7 +54,7 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
     window.history.back();
   }
 
-  sendcitizenForAuthentication(citizenId) {
+  sendcitizenForAuthentication(citizenId: number) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
       .subscribe(

@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  newsId: string;
+  newsid: string ='';
   newsForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 

@@ -95,7 +95,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
     if (this.paginator) {
       this.paginator.firstPage();
     }
-    this.searchForm.get('parentId')?.setvalue(item.key);
+    this.searchForm.get('parentId')?.setValue(item.key);
     this.getList();
   }
 }

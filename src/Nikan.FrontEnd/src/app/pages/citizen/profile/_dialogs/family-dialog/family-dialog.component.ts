@@ -19,7 +19,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   isSaving=false;
 
-  id: string;
+  id: string ='';
   userId?: string;
   loading: boolean = true;
 
@@ -113,27 +113,27 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
 
       switch (value) {
         case 0: // father
-          this.registerForm.get('gender')?.setvalue(true);
+          this.registerForm.get('gender')?.setValue(true);
           this.registerForm.get('gender').disable();
           break;
 
         case 1: // mother
-          this.registerForm.get('gender')?.setvalue(false);
+          this.registerForm.get('gender')?.setValue(false);
           this.registerForm.get('gender').disable();
           break;
 
         case 2: // wife/husband
-          this.registerForm.get('mariageStatus')?.setvalue(1);
+          this.registerForm.get('mariageStatus')?.setValue(1);
           this.registerForm.get('mariageStatus').disable();
           break;
 
         case 4: // brother
-          this.registerForm.get('gender')?.setvalue(true);
+          this.registerForm.get('gender')?.setValue(true);
           this.registerForm.get('gender').disable();
           break;
 
         case 5: // sister
-          this.registerForm.get('gender')?.setvalue(false);
+          this.registerForm.get('gender')?.setValue(false);
           this.registerForm.get('gender').disable();
           break;
       }

@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
-  user: AuthUser;
+  user: AuthUser | null;
   miniSideBar: boolean;
   menuItems: SideNavMenuItem[] = [];
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(

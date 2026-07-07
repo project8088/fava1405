@@ -100,11 +100,11 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
 
   setInnerSite() {
     if (this.menuForm.get('innerMenu')?.value) {
-      this.menuForm.get('menuName')?.setvalue(this.menuForm.get('innerMenu')?.value.menuName);
-      this.menuForm.get('menuPath')?.setvalue(this.menuForm.get('innerMenu')?.value.menuPath);
+      this.menuForm.get('menuName')?.setValue(this.menuForm.get('innerMenu')?.value.menuName);
+      this.menuForm.get('menuPath')?.setValue(this.menuForm.get('innerMenu')?.value.menuPath);
     } else {
-      this.menuForm.get('menuName')?.setvalue(null);
-      this.menuForm.get('menuPath')?.setvalue(null);
+      this.menuForm.get('menuName')?.setValue(null);
+      this.menuForm.get('menuPath')?.setValue(null);
     }
   }
 
@@ -113,7 +113,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
       this.menuForm.get('innerMenu')?.setValidators([Validators.required]);
       this.menuForm.get('innerMenu').updateValueAndValidity();
     } else {
-      this.menuForm.get('innerMenu')?.setvalue(null);
+      this.menuForm.get('innerMenu')?.setValue(null);
       this.menuForm.get('innerMenu').clearValidators();
       this.menuForm.get('innerMenu').updateValueAndValidity();
     }

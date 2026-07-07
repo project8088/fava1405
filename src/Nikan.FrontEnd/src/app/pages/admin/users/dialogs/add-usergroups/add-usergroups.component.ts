@@ -16,7 +16,7 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
   isSaving=false;
   isUpdate=false;
   userGroupsForm: FormGroup;
-  id: string;
+  id: string ='';
   loading: boolean = true;
   userGroups: userGroupsDto;
 

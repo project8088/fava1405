@@ -23,7 +23,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   baseInfo: any;
   uploadInfo: any;
   uploadUrl: string = ServerApis.uploadManzalatAttachment;
-  id: string;
+  id: string ='';
 
   constructor() {
     super();

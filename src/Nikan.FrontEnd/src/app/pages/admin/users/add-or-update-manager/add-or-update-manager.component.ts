@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
@@ -197,7 +197,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
     } else {
       this.userForm.get('descriptionDisease').clearValidators();
       this.userForm.get('descriptionDisease').updateValueAndValidity();
-      this.userForm.get('descriptionDisease')?.setvalue('');
+      this.userForm.get('descriptionDisease')?.setValue('');
     }
   }
 

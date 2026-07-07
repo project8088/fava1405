@@ -4,7 +4,7 @@
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
-    @if (user.isAdmin) {
+    @if (user?.isAdmin) {
       <button mat-stroked-button color="default" (click)="back()">
         <span>بازگشت </span>
       </button>
@@ -17,17 +17,17 @@
     </div>
   }
 
-  @if (!loading) {
+  @if (!loading && companyInfo) {
     <mat-tab-group>
       <mat-tab>
         <ng-template mat-tab-label> اطلاعات اصلی شرکت </ng-template>
         <ng-template matTabContent>
           <div class="p-3">
             <div class="row my-4 line-height-3">
-              @if (user.isAdmin) {
+              @if (user?.isAdmin) {
                 <div class="col-sm-6 col-md-4">
                   <span>کدملی مدیر شرکت: </span>
-                  <strong>{{ companyInfo.managerNationCode }}</strong>
+                  <strong>{{ companyInfo.managerNationlCode }}</strong>
                 </div>
               }
               <div class="col-sm-6 col-md-4">
@@ -80,7 +80,7 @@
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>تاریخ ثبت/پروانه کسب/تاسیس: </span>
-                <strong>{{ companyInfo.activityLicenseDate | luxonFormat}}</strong>
+                <strong>{{ companyInfo.activityLicenseDate | luxonFormat }}</strong>
               </div>
               <div class="col-sm-6 col-md-4">
                 <span>مساحت زمین شرکت: </span>
@@ -107,7 +107,7 @@
         <ng-template matTabContent>
           <div class="p-3">
             <div class="row my-4 line-height-3">
-              @if (user.isAdmin) {
+              @if (user?.isAdmin) {
                 <div class="col-sm-6 col-md-4">
                   <span>وضعیت: </span>
                   <strong>{{
@@ -115,7 +115,7 @@
                   }}</strong>
                 </div>
               }
-              @if (user.isAdmin && companyInfo.userCompanyAccountStatus == 2) {
+              @if (user?.isAdmin && companyInfo.userCompanyAccountStatus == 2) {
                 <div class="col-sm-6 col-md-8">
                   <span>دلیل رد: </span>
                   <strong>{{ companyInfo.rejectDesription }}</strong>
@@ -123,19 +123,19 @@
               }
             </div>
             <div class="row my-4 line-height-3">
-              @if (user.isAdmin) {
+              @if (user?.isAdmin) {
                 <div class="col-sm-6 col-md-4">
                   <span>شماره موبایل: </span>
                   <strong>{{ companyInfo.mobileNumber }}</strong>
                 </div>
               }
-              @if (companyInfo.mobileNumber2 && user.isAdmin) {
+              @if (companyInfo.mobileNumber2 && user?.isAdmin) {
                 <div class="col-sm-6 col-md-4">
                   <span>شماره موبایل دوم: </span>
                   <strong>{{ companyInfo.mobileNumber2 }}</strong>
                 </div>
               }
-              @if (companyInfo.mobileNumber3 && user.isAdmin) {
+              @if (companyInfo.mobileNumber3 && user?.isAdmin) {
                 <div class="col-sm-6 col-md-4">
                   <span>شماره موبایل سوم: </span>
                   <strong>{{ companyInfo.mobileNumber3 }}</strong>
@@ -259,12 +259,12 @@
                   </a>
                 }
               </div>
-              <div  [innerHtml]="companyInfo.content | safeHtml"></div>
+              <div [innerHtml]="companyInfo.content | safeHtml"></div>
             </div>
           </div>
         </ng-template>
       </mat-tab>
-      @if (user.isAdmin) {
+      @if (user?.isAdmin) {
         <mat-tab>
           <ng-template mat-tab-label> اطلاعات تکمیلی </ng-template>
           <ng-template matTabContent>
@@ -282,11 +282,11 @@
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>تاریخ قراداد: </span>
-                  <strong>{{ companyInfo.contractOnDate | luxonFormat}}</strong>
+                  <strong>{{ companyInfo.contractOnDate | luxonFormat }}</strong>
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>تاریخ قراداد آب: </span>
-                  <strong>{{ companyInfo.waterContractOnDate | luxonFormat}}</strong>
+                  <strong>{{ companyInfo.waterContractOnDate | luxonFormat }}</strong>
                 </div>
                 <div class="col-sm-6 col-md-4">
                   <span>شناسه واریز قبض آب: </span>

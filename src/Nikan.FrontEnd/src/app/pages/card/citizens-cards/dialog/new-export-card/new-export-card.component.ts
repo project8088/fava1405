@@ -27,7 +27,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
   selectedGroups: any[] = [];
 
   loadingData?: boolean;
-  id: string;
+  id: string ='';
   constructor(
     private matDialogRef: MatDialogRef<CardNewExportCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

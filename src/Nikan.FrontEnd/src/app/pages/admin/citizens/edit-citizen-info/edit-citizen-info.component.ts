@@ -228,7 +228,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
   personalForm: FormGroup;
   c: ities = new Observable<any>();
-  isfahanCities: Object[];
+  isfahanCities: any[]=[];
 
   userStatus?: number;
 

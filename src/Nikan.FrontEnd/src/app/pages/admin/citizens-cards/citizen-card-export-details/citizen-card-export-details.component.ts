@@ -39,7 +39,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportId: string;
+  exportid: string ='';
   baseEnums: any = {};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;

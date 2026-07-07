@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
 export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
   isSaving=false;
   registerForm: FormGroup;
-  id: string;
+  id: string ='';
   loading: boolean = true;
 
   captchaImage: any;

@@ -36,7 +36,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   frm: FormGroup;
   showAddOrUpdatePanel: boolean;
   isSaving=false;
-  loadingUnit: boolean;
+  loadingUnit: boolean=false;
   loadingData?: boolean;
   organizationList: any[] = [];
   unitList: any[] = [];
@@ -211,7 +211,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive')?.setvalue(true);
+          this.frm.get('isActive')?.setValue(true);
           this.getList();
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

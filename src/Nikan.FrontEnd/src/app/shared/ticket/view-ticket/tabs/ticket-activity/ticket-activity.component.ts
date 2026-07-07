@@ -17,7 +17,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
   id: string = '';
     loading?: boolean;
   list: any[] = [];
-  user: AuthUser;
+  user: AuthUser | null;
   constructor() {
     super();
     this.user = this.authService.currentUserValue;

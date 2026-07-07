@@ -11,14 +11,14 @@ import { AppBase } from '@app/app.base';
 })
 export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   isSaving=false;
 
     loading?: boolean;
-  cardTypeId: string;
+  cardTypeid: string ='';
   cardTypeList: any[] = [];
 
   constructor() {

@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUserPermissionsComponent extends AppBase implements OnInit {
-  groupId: string;
+  groupid: string ='';
   data: any[] = [];
   isLoadingResults: boolean = true;
   isSaving=false;

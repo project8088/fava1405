@@ -15,16 +15,16 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
   imageChangedEvent: any = '';
   croppedImage: any = '';
 
-    loading?: boolean;
-  saving=false;
+  loading?: boolean;
+  saving = false;
   canvasRotation = 0;
   rotation = 0;
   transform: ImageTransform = {};
 
   imageUrl: string = '';
-  imageBase64;
+  imageBase64: string = '';
 
-  user: AuthUser;
+  user: AuthUser | null;
   constructor(
     private matDialogRef: MatDialogRef<UploadUserAvatarDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -67,18 +67,20 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
     reader.readAsDataURL(blob);
     reader.onload = () => {
       console.log(reader.result);
-      this.imageBase64 = reader.result;
+      this.imageBase64 = (reader.result as any) ?? '';
     };
   }
 
   save() {
-    this.saving = true;
+    if (!this.user) return;
     var url = '';
     if (this.user.isJobseeker) url = ServerApis.uploadJobseekerImage;
     else if (this.user.isCompany) url = ServerApis.uploadCompanyImage;
     else if (this.user.isCitizen) url = ServerApis.uploadPersonalPicture;
 
-    if (!url) return false;
+    if (!url) return;
+
+    this.saving = true;
     var b64toBlob = this.convertBase64ImageToBlobFile(this.croppedImage);
 
     this.dataService.postFormData(url, { file: b64toBlob }).subscribe(
@@ -87,7 +89,7 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
         if (response.isSuccess) {
           this.toastrService.success('ذخیره تصویر با موفقیت انجام شد.');
 
-          var userImage = this.user.isCitizen ? response.data.uploadUrl : response.data.imageUrl;
+          var userImage = this.user?.isCitizen ? response.data.uploadUrl : response.data.imageUrl;
           this.matDialogRef.close(userImage);
         } else {
           var msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
@@ -100,7 +102,7 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
     );
   }
 
-  convertBase64ImageToBlobFile(b64Data, contentType = 'image/png', sliceSize = 1024) {
+  convertBase64ImageToBlobFile(b64Data: string, contentType = 'image/png', sliceSize = 1024) {
     b64Data = b64Data.replace('data:image/png;base64,', '');
     const byteCharacters = atob(b64Data);
     const byteArrays = [];

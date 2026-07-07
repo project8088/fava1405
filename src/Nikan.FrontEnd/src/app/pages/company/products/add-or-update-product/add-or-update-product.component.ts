@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyAddOrUpdateProductComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   productForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 

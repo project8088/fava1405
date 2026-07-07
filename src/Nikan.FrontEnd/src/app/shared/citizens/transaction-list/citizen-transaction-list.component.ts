@@ -27,7 +27,7 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
     'transactionBy',
     'operation',
   ];
-  citizenId: string;
+  citizenId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -88,7 +88,7 @@ export class AdminCitizenTransactionListComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

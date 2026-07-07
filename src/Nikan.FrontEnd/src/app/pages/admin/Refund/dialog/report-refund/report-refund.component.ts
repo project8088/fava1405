@@ -15,7 +15,7 @@ export class AdminReportRefundDialogComponent extends AppBase implements OnInit 
   isSaving=false;
   frm: FormGroup;
   loading: boolean = true;
-  importId: string;
+  importid: string ='';
   infoReport: any;
   constructor(
     private matDialogRef: MatDialogRef<AdminReportRefundDialogComponent>,

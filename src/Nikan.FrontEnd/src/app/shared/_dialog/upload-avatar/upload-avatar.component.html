@@ -1,9 +1,8 @@
 <div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
   <h5 cdkDragHandle class="title">
-    @if (user.isCompany) {
+    @if (user?.isCompany) {
       <span>آپلود لوگو</span>
-    }
-    @if (!user.isCompany) {
+    } @else {
       <span> تصویر پروفایل </span>
     }
   </h5>

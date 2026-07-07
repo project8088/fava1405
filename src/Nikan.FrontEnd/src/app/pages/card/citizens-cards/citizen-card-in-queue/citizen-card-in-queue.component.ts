@@ -37,10 +37,10 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  queueId: string;
+  queueid: string ='';
   baseEnums: any = {};
   loadingData: boolean = true;
-  courseId: string;
+  courseid: string ='';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;

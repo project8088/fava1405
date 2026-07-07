@@ -15,7 +15,7 @@ export class TicketAnswerComponent extends AppBase implements OnInit {
   isSaving=false;
   loadingData: boolean = true;
 
-  loadingUnit: boolean;
+  loadingUnit: boolean=false;
 
   searching: boolean;
   trackingCode: string = '';

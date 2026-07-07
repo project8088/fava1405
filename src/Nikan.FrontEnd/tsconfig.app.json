@@ -1,11 +1,16 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
+    "rootDir": ".",
     "outDir": "./out-tsc/app",
     "types": []
   },
-  "files": [
-    "src/main.ts"
+  "angularCompilerOptions": {
+    "strictTemplates": true
+  },
+  "include": [
+    //"./src/main.ts",
+    "src/**/*.ts"
   ],
-  "include": []
+  "exclude": ["src/**/*.spec.ts"]
 }

@@ -68,10 +68,10 @@ export class AuthService {
     } else return [];
   }
 
-  checkPermission(permission: string) {
-    var userPermissions = this.getPermissions();
+  checkPermission(permission?: string) {
     if (!permission) return true;
-    else if (userPermissions.indexOf(permission) > -1) return true;
+    var userPermissions = this.getPermissions();
+    if (userPermissions.indexOf(permission) > -1) return true;
     else return false;
   }
 

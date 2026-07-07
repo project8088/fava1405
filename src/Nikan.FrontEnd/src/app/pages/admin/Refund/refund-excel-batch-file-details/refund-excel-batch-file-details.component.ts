@@ -30,7 +30,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     'refundCardNumber',
   ];
   showAddPanel: boolean;
-  importId: string;
+  importid: string ='';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -139,7 +139,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
         return ;
     }
 
-    this.frm.get('importId')?.setvalue(+this.importId);
+    this.frm.get('importId')?.setValue(+this.importId);
     let form = this.frm.value;
 
     form.citizenId = +form.citizenId.key;

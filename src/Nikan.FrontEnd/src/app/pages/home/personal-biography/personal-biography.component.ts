@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class PersonalBiographyComponent extends AppBase implements OnInit {
-  id: string;
+  id: string ='';
     loading?: boolean;
   userInfo: any;
   baseUrl: string = ServerApis.baseUrl;

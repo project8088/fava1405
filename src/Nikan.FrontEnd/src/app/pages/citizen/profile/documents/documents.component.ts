@@ -21,7 +21,7 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
   data: any;
   uploadUrl: string = ServerApis.uploadDocGroupAttachment;
 
-  baseDocuments: Object[];
+  baseDocuments: any[]=[];
   displayedColumns: string[] = ['documentGroup', 'description', 'attachedOnDate', 'id'];
 
   constructor() {

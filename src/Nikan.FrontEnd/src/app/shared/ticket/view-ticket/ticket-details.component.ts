@@ -11,7 +11,7 @@ export class TicketDetailsComponent extends AppBase implements OnInit {
   isAdmin: boolean;
   constructor() {
     super();
-    this.isAdmin = this.authService.getAuthUser().isAdmin;
+    this.isAdmin = this.authService.getAuthUser()?.isAdmin == true;
   }
   ngOnInit() {}
 }

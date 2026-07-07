@@ -13,7 +13,7 @@ export class ViewCardProfileComponent extends AppBase implements OnInit {
 
   card: any = {};
   loadingData?: boolean;
-  maritalStatus: boolean;
+  maritalStatus: any;
 
   baseUrl: string = ServerApis.baseUrl;
 

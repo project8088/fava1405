@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUnitListComponent extends AppBase implements AfterViewInit {
-  organizationId: string;
+  organizationid: string ='';
   displayedColumns: string[] = ['row', 'name', 'description', 'isActive', 'operation'];
 
   data: any[] = [];
@@ -93,7 +93,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
         return ;
     }
     this.isSaving = true;
-    this.frm.get('organizationId')?.setvalue(this.organizationId);
+    this.frm.get('organizationId')?.setValue(this.organizationId);
 
     this.dataService.post(ServerApis.addOrUpdateUnit, this.frm.value).subscribe(
       (response) => {
@@ -102,7 +102,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive')?.setvalue(false);
+          this.frm.get('isActive')?.setValue(false);
 
           this.getList();
         } else {

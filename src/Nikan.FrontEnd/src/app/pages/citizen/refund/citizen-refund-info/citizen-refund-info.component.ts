@@ -16,7 +16,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
   showSaveCardNumberPanel: boolean;
   loadingData?: boolean;
   info: any;
-  refundId: string;
+  refundid: string ='';
   matDialogRef: any;
   constructor(private customValidator: CustomFormValidators) {
     super();

@@ -20,8 +20,8 @@ export class TicketComponent extends AppBase implements OnInit {
 
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
-  loadingUnit: boolean;
-  user: AuthUser;
+  loadingUnit: boolean=false;
+  user: AuthUser | null;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.ticketForm = this.fb.group({
@@ -39,7 +39,7 @@ export class TicketComponent extends AppBase implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.ticketForm.get('name')?.setvalue(this.user.displayName);
+      this.ticketForm.get('name')?.setValue(this.user?.displayName);
     }
 
     this.getOrganizations();

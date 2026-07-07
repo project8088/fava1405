@@ -19,9 +19,9 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   periorityList: any[] = [];
-  loadingUnit: boolean;
+  loadingUnit: boolean=false;
 
-  user: AuthUser;
+  user: AuthUser | null;
   constructor(
     private matDialogRef: MatDialogRef<SendTicketDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -113,7 +113,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
         Priority: formData.priority,
         organizationalUnitId: formData.organizationalUnitId,
         fileUrl: '',
-        name: this.user.displayName,
+        name: this.user?.displayName,
         email: null,
         mobileNumber: null,
       })
@@ -124,7 +124,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
             this.toastrService.success('پیام شما با موفقیت ارسال شد.');
             if (this.authService.currentUserValue)
               this.router.navigate([
-                '/' + this.user.rootModule + '/ticket-details/' + response.data.ticketId,
+                '/' + this.user?.rootModule + '/ticket-details/' + response.data.ticketId,
               ]);
 
             this.matDialogRef.close(true);

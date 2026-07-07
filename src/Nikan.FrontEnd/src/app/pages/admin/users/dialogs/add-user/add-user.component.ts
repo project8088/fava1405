@@ -19,7 +19,7 @@ export class AdminAddUserDialogComponent extends AppBase implements OnInit {
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   periorityList: any[] = [];
-  loadingUnit: boolean;
+  loadingUnit: boolean=false;
   loadingData: boolean = true;
   constructor(
     private matDialogRef: MatDialogRef<AdminAddUserDialogComponent>,

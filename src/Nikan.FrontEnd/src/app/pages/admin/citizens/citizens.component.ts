@@ -99,7 +99,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
     this.getList();
   }
 
-  openCitizenEditMobileNumber(userCode) {
+  openCitizenEditMobileNumber(userCode:string) {
     this.matDialog
       .open(AdminUpdateCitizenMobileNumberDialogComponent, {
         panelClass: 'custom-dialog',

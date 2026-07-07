@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
 })
 export class BankCallBackComponent extends AppBase implements OnInit {
     loading?: boolean;
-  id: string;
+  id: string ='';
 
   response: any;
 

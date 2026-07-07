@@ -104,9 +104,9 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive')?.setvalue(false);
-          this.frm.get('cardDistributionCenters')?.setvalue(false);
-          this.frm.get('supportCenters')?.setvalue(false);
+          this.frm.get('isActive')?.setValue(false);
+          this.frm.get('cardDistributionCenters')?.setValue(false);
+          this.frm.get('supportCenters')?.setValue(false);
           this.getList();
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

@@ -52,7 +52,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   ngOnInit(): void {
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.contactForm.get('name')?.setValue(this.user.displayName);
+      this.contactForm.get('name')?.setValue(this.user?.displayName);
     }
 
     this.dataService.getEnums().subscribe(

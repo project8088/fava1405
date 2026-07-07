@@ -19,7 +19,7 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketListComponent extends AppBase implements OnInit, AfterViewInit {
   introductionInfo: any = {};
-  displayedColumns: string[];
+  displayedColumns: string[] = [];
   data: any[] = [];
   dataSource = new MatTableDataSource();
   resultsLength: number = 0;
@@ -27,8 +27,8 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  currentUser: AuthUser;
-  rootModule: string;
+  currentUser?: AuthUser | null;
+  rootModule: string = '';
 
   searchForm: FormGroup;
   ticketStatus: any[] = [];
@@ -55,9 +55,9 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
       this.ticketStatus = response.ticketStatus;
     });
 
-    this.rootModule = this.authService.currentUserValue.rootModule;
+    this.rootModule = this.authService.currentUserValue?.rootModule ?? '';
 
-    if (this.currentUser.isAdmin)
+    if (this.currentUser?.isAdmin)
       this.displayedColumns = [
         'row',
         'code',
@@ -96,9 +96,9 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
     console.log('CONSOLOG: M:paginateVar & O: this.var : ', this.currentUser);
     let ticketUrl = ServerApis.getUserTicketsList;
-    if (this.currentUser.isAdmin) ticketUrl = ServerApis.getAdminTicketsList;
-    else if (this.currentUser.isCompany) ticketUrl = ServerApis.getCompanyTicketsList;
-    else if (this.currentUser.isCardUser) ticketUrl = ServerApis.getCardTicketsList;
+    if (this.currentUser?.isAdmin) ticketUrl = ServerApis.getAdminTicketsList;
+    else if (this.currentUser?.isCompany) ticketUrl = ServerApis.getCompanyTicketsList;
+    else if (this.currentUser?.isCardUser) ticketUrl = ServerApis.getCardTicketsList;
 
     merge()
       .pipe(
@@ -126,7 +126,7 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -141,8 +141,8 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
     this.getList();
   }
 
-  viewTicket(row:any) {
-    this.router.navigate(['/' + this.currentUser.rootModule + '/ticket-details/' + row.id]);
+  viewTicket(row: any) {
+    this.router.navigate(['/' + this.currentUser?.rootModule + '/ticket-details/' + row.id]);
   }
 
   openNewTicketDialog() {

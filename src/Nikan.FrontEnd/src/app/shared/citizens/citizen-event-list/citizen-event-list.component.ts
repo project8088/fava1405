@@ -14,14 +14,13 @@ import { AppBase } from '@app/app.base';
 export class AppCitizenEventListComponent extends AppBase implements OnInit {
   search: string = '';
   paging: any = {};
-  userCode: string;
+  userCode: string='';
   events: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
-  searchForm: FormGroup;
   constructor() {
     super();
     this.route.params.subscribe((p) => {

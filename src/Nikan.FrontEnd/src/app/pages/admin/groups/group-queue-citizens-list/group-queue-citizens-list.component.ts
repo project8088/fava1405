@@ -24,7 +24,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
     'addByUser',
     'operation',
   ];
-  groupId: string;
+  groupid: string ='';
   searchForm: FormGroup;
 
   data: any[] = [];

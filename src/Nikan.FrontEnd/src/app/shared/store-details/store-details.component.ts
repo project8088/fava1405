@@ -10,10 +10,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class StoreDetailsComponent extends AppBase implements OnInit {
-  id: string;
+  id: string ='';
     loading?: boolean;
   info: any;
-  user: AuthUser;
+  user: AuthUser | null;
 
   constructor() {
     super();

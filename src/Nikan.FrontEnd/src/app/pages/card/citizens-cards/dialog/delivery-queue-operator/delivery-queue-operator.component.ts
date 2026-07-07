@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  queueId: string;
+  queueid: string ='';
   loading: boolean = true;
   info: any;
   constructor(

@@ -41,7 +41,7 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
       this.form.get('rejectDesription')?.setValidators([Validators.required]);
       this.form.get('rejectDesription').updateValueAndValidity();
     } else {
-      this.form.get('rejectDesription')?.setvalue('');
+      this.form.get('rejectDesription')?.setValue('');
       this.form.get('rejectDesription').clearValidators();
       this.form.get('rejectDesription').updateValueAndValidity();
     }

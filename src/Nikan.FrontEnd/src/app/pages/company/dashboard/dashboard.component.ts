@@ -17,7 +17,7 @@ export class CompnayDashboardComponent extends AppBase implements OnInit {
   loadingStore: boolean;
   storeItems: any[] = [];
 
-  user: AuthUser;
+  user: AuthUser | null;
 
   constructor() {
     super();

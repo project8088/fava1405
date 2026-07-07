@@ -32,7 +32,7 @@
       <div nowrap dir="ltr">{{ f.size / 1024 | number: '.2' }} KB</div>
       <div nowrap class="d-flex align-items-center justify-content-between">
         <div>
-          <strong>سرعت آپلود: </strong><span dir="ltr"> {{ f.progress.data.speedHuman }}</span>
+          <strong>سرعت آپلود: </strong><span dir="ltr"> {{ f.progress.data?.speedHuman }}</span>
         </div>
         <div>
           @if (f.progress.status == 0 && !errorInUpload) {
@@ -57,9 +57,9 @@
           <div
             class="progress-bar"
             role="progressbar"
-            [ngStyle]="{ width: f.progress.data.percentage + '%' }"
+            [ngStyle]="{ width: f.progress.data?.percentage + '%' }"
           >
-            {{ f.progress.data.percentage }}
+            {{ f.progress.data?.percentage }}
           </div>
         </div>
       </div>

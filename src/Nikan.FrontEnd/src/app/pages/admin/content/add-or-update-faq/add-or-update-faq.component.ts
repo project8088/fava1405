@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  faqId: string;
+  faqid: string ='';
   faqForm: FormGroup;
 
   isSaving=false;

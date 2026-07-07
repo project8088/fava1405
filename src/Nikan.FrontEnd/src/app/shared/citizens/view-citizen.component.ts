@@ -1,6 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { AdminChangePasswordDialogComponent } from '@app/pages/admin/users/dialogs/change-user-password/change-user-password.component';
+import { CardUpdateCitizenMobileNumberDialogComponent } from '@app/pages/card/dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 
 @Component({
   selector: 'app-view-citizen',
@@ -9,15 +11,15 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class ViewCitizenComponent extends AppBase implements AfterViewInit {
-  userCode: string;
+  citizenId: string = '';
   info: any = {};
   loading: boolean = true;
-  imageUrl: string;
+  imageUrl: string = '';
   baseUrl: string = ServerApis.baseUrl;
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.userCode = p['id'];
+      this.citizenId = p['id'] ? p['id'] : null;
     });
   }
 
@@ -31,7 +33,7 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
     this.loading = true;
     this.dataService
       .get(ServerApis.getCitizenFullInfo, {
-        id: this.userCode,
+        id: this.citizenId,
       })
       .subscribe(
         (response) => {
@@ -49,6 +51,32 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
       );
   }
 
+  openChangePasswordDialog(row: any) {
+    this.matDialog.open(AdminChangePasswordDialogComponent, {
+      panelClass: 'custom-dialog',
+      data: {
+        userId: row.citizenId,
+        userName: row.nationCode,
+        displayName: row.firstName + ' ' + row.lastName,
+      },
+    });
+  }
+  openCitizenEditMobileNumber(userCode: string) {
+    this.matDialog
+      .open(CardUpdateCitizenMobileNumberDialogComponent, {
+        panelClass: 'custom-dialog',
+        minWidth: '600px',
+        data: {
+          userCode: userCode,
+        },
+      })
+      .afterClosed()
+      .subscribe((result) => {
+        if (result) {
+          this.getInfo();
+        }
+      });
+  }
   back() {
     window.history.back();
   }

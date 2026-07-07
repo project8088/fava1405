@@ -18,10 +18,10 @@ export class ContactUsComponent extends AppBase implements OnInit {
   periorityList: any[] = [];
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
-  loadingUnit: boolean;
+  loadingUnit: boolean=false;
   isSaving=false;
 
-  user: AuthUser;
+  user: AuthUser | null;
   setting: SiteSettingViewModel;
 
   constructor(private customValidator: CustomFormValidators) {
@@ -44,7 +44,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
 
     this.user = this.authService.getAuthUser();
     if (this.user) {
-      this.contactForm.get('name')?.setvalue(this.user.displayName);
+      this.contactForm.get('name')?.setValue(this.user?.displayName);
     }
 
     this.getOrganizations();

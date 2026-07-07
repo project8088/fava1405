@@ -14,8 +14,8 @@ import { AppBase } from '@app/app.base';
 })
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
-  companyId: string;
+  id: string ='';
+  companyid: string ='';
   isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
@@ -25,7 +25,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   organizationalPositionList: any = ([] = []);
   loadingData: boolean = true;
   baseUrl: string = ServerApis.baseUrl;
-  user: AuthUser;
+  user: AuthUser | null;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.user = this.authService.currentUserValue;
@@ -205,7 +205,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
     } else {
       this.userForm.get('descriptionDisease').clearValidators();
       this.userForm.get('descriptionDisease').updateValueAndValidity();
-      this.userForm.get('descriptionDisease')?.setvalue('');
+      this.userForm.get('descriptionDisease')?.setValue('');
     }
   }
 

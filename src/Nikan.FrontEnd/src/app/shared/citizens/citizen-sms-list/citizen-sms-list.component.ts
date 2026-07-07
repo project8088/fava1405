@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
 export class AppCitizenSmsListComponent extends AppBase implements OnInit {
   search: string = '';
   paging: any = {};
-  userCode: string;
+  userCode: string='';
   displayedColumns: string[] = [
     'row',
     'messageText',

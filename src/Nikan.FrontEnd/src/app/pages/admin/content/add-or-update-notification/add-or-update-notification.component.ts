@@ -14,7 +14,7 @@ export class AdminAddOrUpdateNotificationComponent
   implements OnInit, AfterViewInit
 {
   isUpdate=false;
-  notificationId: string;
+  notificationid: string ='';
   notyForm: FormGroup;
 
   isSaving=false;

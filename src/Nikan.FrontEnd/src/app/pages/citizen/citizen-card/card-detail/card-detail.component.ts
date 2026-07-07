@@ -9,7 +9,7 @@ interface ICard {
   attachmentGroup: string;
   buyCardDescription: string;
   cardCost: number;
-  cardInfoId: string;
+  cardInfoid: string ='';
   cardIsActive: boolean;
   cardType: number;
   cardTypeId: number;
@@ -26,7 +26,7 @@ interface ICard {
 }
 
 interface ICardDetails {
-  cardInfoId: string;
+  cardInfoid: string ='';
   cardTypeId: number;
   cardType: string;
   buyCardDescription: string;
@@ -64,7 +64,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
   states;
   loading: boolean = true;
   cardInfoId: ICard;
-  RefId: string;
+  Refid: string ='';
   waitForRedirectToBank: boolean;
   isSaving=false;
   groupList: any[] = [];

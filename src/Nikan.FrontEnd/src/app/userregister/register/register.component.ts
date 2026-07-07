@@ -5,9 +5,9 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { Observable } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { TimerComponent } from 'src/app/shared/timer/timer.component';
 import { UserRegisterService } from '../userregister.service';
 import { AppBase } from '@app/app.base';
+import { TimerComponent } from '@app/shared/timer/timer.component';
 
 @Component({
   selector: 'app-register',
@@ -22,13 +22,13 @@ export class RegisterComponent extends AppBase implements OnInit {
   maritalStatus: any[] = [];
 
   educationStatues: any[] = [];
-  educationGroups;
+  educationGroups: any[] = [];
   educationLevel: any[] = [];
   jobGroup: any[] = [];
 
   states: any[] = [];
   cities = new Observable<any>();
-  isfahanCities: Object[];
+  isfahanCities: any[] = [];
 
   // form4
   forthFormGroup: FormGroup;
@@ -37,11 +37,11 @@ export class RegisterComponent extends AppBase implements OnInit {
   // form 5
   fifthFormGroup: FormGroup;
 
-    loading?: boolean;
+  loading?: boolean;
 
   today = new Date();
   codeSent: boolean = false;
-  @ViewChild('codeTimer', { static: false }) codeTimer: TimerComponent;
+  @ViewChild('codeTimer', { static: false }) codeTimer!: TimerComponent;
   mobileNumber;
 
   constructor(
@@ -118,7 +118,7 @@ export class RegisterComponent extends AppBase implements OnInit {
     this.dataService.get(ServerApis.getEducationGroups).subscribe(
       (response) => {
         if (response) {
-          this.educationGroups = response;
+          this.educationGroups = response.data ?? [];
         }
       },
       (error) => {
@@ -127,8 +127,8 @@ export class RegisterComponent extends AppBase implements OnInit {
     );
   }
 
-  confirmPassValidator(predicate) {
-    return (formControl) => {
+  confirmPassValidator(predicate: any) {
+    return (formControl: any) => {
       if (!formControl.parent) {
         return null;
       }
@@ -172,7 +172,7 @@ export class RegisterComponent extends AppBase implements OnInit {
     );
   }
 
-  sendVerificationCode(e) {
+  sendVerificationCode(e: any) {
     this.codeSent = true;
     this.codeTimer.startTimer().then(() => {
       this.codeSent = false;
@@ -196,8 +196,8 @@ export class RegisterComponent extends AppBase implements OnInit {
     );
   }
 
-  getListOptions(options:{key:number,text:string}[]){
-    return options.map((el:{key:number,text:string}) => {
+  getListOptions(options: { key: number; text: string }[]) {
+    return options.map((el: { key: number; text: string }) => {
       return { value: String(el.key), text: el.text };
     });
   }

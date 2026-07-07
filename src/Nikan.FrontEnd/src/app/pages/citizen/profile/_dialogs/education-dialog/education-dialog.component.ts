@@ -17,7 +17,7 @@ import { AppBase } from '@app/app.base';
 export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   educationForm: FormGroup;
-  id: string;
+  id: string ='';
   userId?: string;
   loading: boolean = true;
 
@@ -156,10 +156,10 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
       this.educationForm.get('major').updateValueAndValidity();
     } else {
       this.educationForm.get('major').clearValidators();
-      this.educationForm.get('major')?.setvalue(null);
+      this.educationForm.get('major')?.setValue(null);
       this.educationForm.get('major').updateValueAndValidity();
 
-      this.educationForm.get('university')?.setvalue(null);
+      this.educationForm.get('university')?.setValue(null);
     }
   }
 

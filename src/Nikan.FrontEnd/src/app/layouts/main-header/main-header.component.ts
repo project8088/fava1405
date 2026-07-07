@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class MainHeaderComponent extends AppBase implements OnInit {
   isAuth: boolean;
-  user: AuthUser;
+  user: AuthUser | null;
   datetime: any;
     loading?: boolean;
   slag: string;

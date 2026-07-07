@@ -11,7 +11,7 @@ declare var $: any;
   standalone: false,
 })
 export class AttachmentListComponent extends AppBase implements OnInit {
-  @Input('guid') guid: string;
+  @Input('guid') guid: string ='';
   attachments: any[] = [];
 
   loadingData?: boolean;
@@ -23,7 +23,7 @@ export class AttachmentListComponent extends AppBase implements OnInit {
   }
 
   ngOnInit() {
-    if (!this.guid) return false;
+    if (!this.guid) return;
 
     this.loadingData = true;
     this.dataService.get(ServerApis.getAttachmentsForUser, { guid: this.guid }).subscribe(

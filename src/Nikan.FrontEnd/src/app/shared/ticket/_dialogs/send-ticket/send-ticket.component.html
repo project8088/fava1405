@@ -33,10 +33,7 @@
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>واحد</mat-label>
-            <mat-select
-              formControlName="organizationalUnitId"
-              (selectionChange)="getTicketSubjects()"
-            >
+            <mat-select formControlName="organizationalUnitId">
               @for (item of unitList; track item) {
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }

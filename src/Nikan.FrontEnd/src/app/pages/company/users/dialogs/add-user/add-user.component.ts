@@ -15,7 +15,7 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   userForm: FormGroup;
   loading: boolean = true;
-  companyId: string;
+  companyid: string ='';
   constructor(
     private matDialogRef: MatDialogRef<CompanyAddUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

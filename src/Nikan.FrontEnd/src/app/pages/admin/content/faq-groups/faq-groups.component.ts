@@ -137,7 +137,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
           this.showAddOrUpdatePanel = false;
           this.frm.reset();
-          this.frm.get('isActive')?.setvalue(true);
+          this.frm.get('isActive')?.setValue(true);
 
           this.getList();
         } else {

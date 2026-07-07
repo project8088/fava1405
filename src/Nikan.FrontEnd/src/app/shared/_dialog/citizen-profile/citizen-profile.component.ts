@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenProfileDialogComponent extends AppBase implements OnInit {
-  userCode: string;
+  userCode: string='';
 
   constructor(
     private matDialogRef: MatDialogRef<CitizenProfileDialogComponent>,
@@ -24,7 +24,7 @@ export class CitizenProfileDialogComponent extends AppBase implements OnInit {
 
   ngOnInit(): void {}
 
-  closeDialog(result) {
+  closeDialog(result:boolean) {
     this.matDialogRef.close(result);
   }
 }

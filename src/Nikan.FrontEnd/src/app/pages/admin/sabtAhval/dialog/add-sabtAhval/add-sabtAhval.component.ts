@@ -18,7 +18,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
   isUpdate=false;
   calcChargeTypeList: any = ([] = []);
   loadingData?: boolean;
-  id: string;
+  id: string ='';
   constructor(
     private matDialogRef: MatDialogRef<AdminAddSabtAhvalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,

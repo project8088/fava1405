@@ -43,7 +43,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
 
   groupList: any[] = [];
-  user: AuthUser;
+  user: AuthUser | null;
 
   constructor(private customValidator: CustomFormValidators) {
     super();

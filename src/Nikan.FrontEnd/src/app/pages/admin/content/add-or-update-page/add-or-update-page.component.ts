@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
   isUpdate=false;
-  id: string;
+  id: string ='';
   form: FormGroup;
 
   readonly separatorKeysCodes: number[] = [ENTER];
