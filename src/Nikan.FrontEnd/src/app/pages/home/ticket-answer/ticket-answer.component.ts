@@ -11,16 +11,15 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class TicketAnswerComponent extends AppBase implements OnInit {
-  ticketForm: FormGroup;
-  isSaving=false;
+  isSaving = false;
   loadingData: boolean = true;
 
-  loadingUnit: boolean=false;
+  loadingUnit: boolean = false;
 
-  searching: boolean;
+  searching: boolean = false;
   trackingCode: string = '';
   ticketAnswer: any;
-  loadingSubject: boolean;
+  loadingSubject: boolean = false;
   constructor(private customValidator: CustomFormValidators) {
     super();
   }

@@ -28,6 +28,7 @@ import { MaterialModule } from '@core/material/material.module';
 import { SharedModule } from '@app/shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LayoutsModule } from '@app/layouts/layouts.module';
 
 @NgModule({
   declarations: [
@@ -63,6 +64,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MaterialModule,
     SharedModule,
     CoreModule,
+    LayoutsModule,
   ],
 })
 export class HomeModule {}

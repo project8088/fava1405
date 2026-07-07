@@ -65,7 +65,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
   loading: boolean = true;
   cardInfoId: ICard;
   Refid: string ='';
-  waitForRedirectToBank: boolean;
+  waitForRedirectToBank: boolean = false;
   isSaving=false;
   groupList: any[] = [];
   form: FormGroup;

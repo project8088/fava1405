@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject } from '@angular/core';
 import { SideNavMenuItem } from '@core/models/menuItems';
 import { Observable } from 'rxjs';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
@@ -15,16 +15,16 @@ import { AppBase } from '@app/app.base';
 export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'purple-love';
 
-  miniSideBar: boolean;
+  miniSideBar: boolean = false;
   menuItems: SideNavMenuItem[] = [
     { name: 'داشبورد', icon: 'fa fa-chart-network', url: '/webuser/dashboard' },
   ];
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
+  breakpointObserver = inject(BreakpointObserver);
+  isHandset$: Observable<boolean> = this.breakpointObserver?.observe(Breakpoints.Handset).pipe(
     map((result) => result.matches),
     shareReplay(),
   );
-  constructor(private breakpointObserver: BreakpointObserver) {
+  constructor() {
     super();
   }
 

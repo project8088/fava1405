@@ -13,7 +13,7 @@ export class AdminPayTestComponent extends AppBase implements OnInit {
     loading?: boolean;
   form: FormGroup;
   Refid: string ='';
-  waitForRedirectToBank: boolean;
+  waitForRedirectToBank: boolean = false;
   constructor() {
     super();
     this.form = this.fb.group({

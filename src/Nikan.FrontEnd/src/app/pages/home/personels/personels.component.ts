@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
-
 @Component({
   selector: 'home-personels',
   templateUrl: './personels.component.html',
@@ -10,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class HomePersonelsListComponent extends AppBase implements OnInit {
-  loadingManagers: boolean;
+  loadingManagers: boolean = false;
   managerList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
@@ -39,7 +38,7 @@ export class HomePersonelsListComponent extends AppBase implements OnInit {
   }
 
   owlService() {
-    this.doc.querySelector('#owl-Service2').owlCarousel({
+    (this.doc.querySelector('#owl-Service2') as any)?.owlCarousel({
       rtl: true,
       loop: true,
       nav: true,

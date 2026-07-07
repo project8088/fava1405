@@ -21,7 +21,7 @@ export class TicketComponent extends AppBase implements OnInit {
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   loadingUnit: boolean=false;
-  user: AuthUser | null;
+  user?: AuthUser | null;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.ticketForm = this.fb.group({

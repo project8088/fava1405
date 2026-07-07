@@ -19,9 +19,9 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
   product: any;
 
   baseUrl: string = ServerApis.baseUrl;
-  waitForRedirectToBank: boolean;
+  waitForRedirectToBank: boolean = false;
   RefId: string = '';
-  loadingPay: boolean;
+  loadingPay: boolean= false;
 
   constructor(
     private customValidator: CustomFormValidators,

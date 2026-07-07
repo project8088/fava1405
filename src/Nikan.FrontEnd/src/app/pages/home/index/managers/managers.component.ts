@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class HomeManagersListComponent extends AppBase implements OnInit {
-  loadingManagers: boolean;
+  loadingManagers: boolean = false;
   managerList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
@@ -38,7 +38,7 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
   }
 
   owlService() {
-    this.doc.querySelector('#owl-Service2')!.owlCarousel({
+    (this.doc.querySelector('#owl-Service2') as any)?.owlCarousel({
       rtl: true,
       loop: true,
       nav: true,

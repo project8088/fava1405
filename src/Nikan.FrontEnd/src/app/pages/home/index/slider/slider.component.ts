@@ -2,7 +2,6 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
-
 @Component({
   selector: 'home-slider',
   templateUrl: './slider.component.html',
@@ -22,7 +21,7 @@ export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
     this.dataService.get(ServerApis.getAllMainPageSlideShow, {}).subscribe((response) => {
       if (response.data) this.slideShow = response.data ?? [];
       setTimeout(() => {
-        this.doc.querySelector('#owl-slider').owlCarousel({
+        (this.doc.querySelector('#owl-slider') as any)?.owlCarousel({
           items: 1,
           loop: true,
           autoplay: true,

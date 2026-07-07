@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainPageDetailsComponent extends AppBase implements OnInit {
-  slug: string;
+  slug: string='';
   user: AuthUser | null;
   loadingData?: boolean;
   page: any;
@@ -25,7 +25,7 @@ export class MainPageDetailsComponent extends AppBase implements OnInit {
   ) {
     super();
     this.route.params.subscribe((p) => {
-      this.slug = p.slug;
+      this.slug = p['slug'];
       this.getDetailsInfo();
     });
     this.user = this.authService.currentUserValue;

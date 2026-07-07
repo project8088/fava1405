@@ -3,7 +3,6 @@ import { MatPaginator } from '@angular/material/paginator';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
-
 @Component({
   selector: 'home-top-companies',
   templateUrl: './top-companies.component.html',
@@ -49,7 +48,7 @@ export class HomeTopCompaniesListComponent extends AppBase implements OnInit {
 
   //popular doctors_index_page
   owlprovince() {
-    this.doc.querySelector('#owl-province').owlCarousel({
+    (this.doc.querySelector('#owl-province') as any)?.owlCarousel({
       rtl: true,
       loop: true,
       nav: true,

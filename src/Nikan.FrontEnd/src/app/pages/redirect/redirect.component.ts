@@ -12,9 +12,9 @@ import { AppBase } from '@app/app.base';
   imports: [MatCardModule],
 })
 export class RedirectComponent extends AppBase implements OnInit {
-  serviceId;
+  serviceId = '';
   loading: boolean = true;
-  url: string;
+  url: string = '';
   returnUrl: string = '';
   constructor() {
     super();
@@ -22,7 +22,7 @@ export class RedirectComponent extends AppBase implements OnInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((p) => {
-      if (p.returnUrl) this.returnUrl = p.returnUrl;
+      this.returnUrl = p['returnUrl'] ?? '';
     });
 
     this.route.queryParams.subscribe((params) => {

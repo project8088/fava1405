@@ -9,15 +9,15 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class FaqListComponent extends AppBase implements OnInit {
-  loadingGroup: boolean;
-  loadingList: boolean;
+  loadingGroup: boolean=false;
+  loadingList: boolean=false;
 
   faqGroups: any[] = [];
   selectedFaq: any;
 
   faqList: any[] = [];
 
-  selectedFaqGroupId: number;
+  selectedFaqGroupId?: number;
 
   constructor() {
     super();
@@ -76,7 +76,7 @@ export class FaqListComponent extends AppBase implements OnInit {
         return ;
     } else if (item.showDetails === false) {
       item.showDetails = true;
-      return true;
+      return ;
     } else {
       item.showDetails = true;
       item.loading = true;

@@ -14,25 +14,25 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainNewsDetailsComponent extends AppBase implements OnInit {
-  newsid: string ='';
+  newsid: string = '';
   user: AuthUser | null;
   loadingData?: boolean;
-  news: NewsDto;
+  news?: NewsDto;
   tags: string[] = [];
 
   comments: NewsCommentDto[] = [];
-  loadingComments: boolean;
-  sendingComment: boolean;
+  loadingComments: boolean = false;
+  sendingComment: boolean = false;
 
   frm: FormGroup;
   baseUrl: string = ServerApis.baseUrl;
 
   lastNewsList: NewsDto[] = [];
-  loadingLastNews: boolean;
+  loadingLastNews: boolean = false;
 
   mostVisitedList: NewsDto[] = [];
-  loadingVisited: boolean;
-
+  loadingVisited: boolean = false;
+  newsId: string='';
   constructor(
     private customValidator: CustomFormValidators,
     private titleService: Title,
@@ -65,8 +65,8 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
         this.loadingData = false;
         if (response.isSuccess) {
           this.news = response.data;
-          this.tags = this.news.seoTags.split(',');
-          if (this.news.seoTags) {
+          this.tags = this.news?.seoTags?.split(',') ?? [];
+          if (this.news?.seoTags) {
             this.titleService.setTitle(this.news.title);
             this.metaService.addTags([
               { name: 'keywords', content: this.news.seoTags },
@@ -107,7 +107,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
     let form = this.frm.value;
     let param: NewsCommentDto = {

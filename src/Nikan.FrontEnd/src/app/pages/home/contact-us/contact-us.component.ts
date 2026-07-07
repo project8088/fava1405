@@ -18,11 +18,11 @@ export class ContactUsComponent extends AppBase implements OnInit {
   periorityList: any[] = [];
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
-  loadingUnit: boolean=false;
-  isSaving=false;
+  loadingUnit: boolean = false;
+  isSaving = false;
 
-  user: AuthUser | null;
-  setting: SiteSettingViewModel;
+  user?: AuthUser | null;
+  setting?: SiteSettingViewModel | null;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -109,7 +109,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
     if (this.contactForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.contactForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     let formData = this.contactForm.value;

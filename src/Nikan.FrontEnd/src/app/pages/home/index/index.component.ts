@@ -4,7 +4,6 @@ import { ServerApis } from '@core/server-apis';
 import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
 
-
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -13,10 +12,10 @@ import { AppBase } from '@app/app.base';
 })
 export class IndexComponent extends AppBase implements OnInit, AfterViewInit, OnDestroy {
   lastNews: NewsDto[] = [];
-  loadingNews: boolean;
+  loadingNews: boolean = false;
   baseUrl: string = ServerApis.baseUrl;
 
-  setting: SiteSettingViewModel;
+  setting: SiteSettingViewModel | null = null;
 
   constructor() {
     super();
@@ -30,7 +29,6 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
     });
   }
   ngOnDestroy() {
-    $(window).off('scroll');
   }
 
   ngAfterViewInit() {}
@@ -53,7 +51,7 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
 
   //popular doctors_index_page
   owltopnews() {
-    this.doc.querySelector('#owl-topnews').owlCarousel({
+    (this.doc.querySelector('#owl-topnews') as any)?.owlCarousel({
       rtl: true,
       loop: true,
       nav: true,
