@@ -15,7 +15,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> گروه </mat-label>
           <mat-select formControlName="groupId">
-            @for (item of groupList; track item) {
+            @for (item of groupList; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -51,7 +51,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="py-4 list-container">
-          @for (item of citizengroupList; track item) {
+          @for (item of citizengroupList; track $index) {
             <div class="list-item">
               <div class="list-content">
                 <div class="row">

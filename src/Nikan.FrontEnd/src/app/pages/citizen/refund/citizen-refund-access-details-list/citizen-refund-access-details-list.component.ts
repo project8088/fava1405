@@ -6,8 +6,8 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
-import { CitizenRefundInfoDialogComponent } from '../dialog/refund-info/refund-info.component';
 import { AppBase } from '@app/app.base';
+import { CitizenRefundInfoDialogComponent } from '@app/shared/_dialog/refund-info/refund-info.component';
 
 @Component({
   selector: 'app-citizen-refund-access-details-list',

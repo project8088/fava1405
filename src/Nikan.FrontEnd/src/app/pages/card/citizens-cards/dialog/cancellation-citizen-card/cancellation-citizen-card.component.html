@@ -29,7 +29,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>دلیل ابطال کارت</mat-label>
         <mat-select formControlName="cardCancellationItemId">
-          @for (item of baseInfo.cardCancellationItem; track item) {
+          @for (item of baseInfo.cardCancellationItem; track $index) {
             <mat-option [value]="'item.key'">
               {{ item.text }}
             </mat-option>

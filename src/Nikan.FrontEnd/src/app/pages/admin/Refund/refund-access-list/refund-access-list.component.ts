@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-access/change-refund-access.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';

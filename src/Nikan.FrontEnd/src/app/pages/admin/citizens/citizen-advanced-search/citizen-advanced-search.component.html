@@ -151,7 +151,7 @@
           <mat-label>ملیت</mat-label>
           <mat-select formControlName="nationality">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of baseEnums.nationalityList; track item) {
+            @for (item of baseEnums.nationalityList; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -163,7 +163,7 @@
           <mat-label>شهر محل سکونت</mat-label>
           <mat-select formControlName="cityId">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of isfahanCities; track item) {
+            @for (item of isfahanCities; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -212,7 +212,7 @@
           <mat-label> ثبت نام در سرویس</mat-label>
           <mat-select formControlName="registerByService">
             <mat-option [value]="null">همه </mat-option>
-            @for (item of baseEnums.registerTypes; track item) {
+            @for (item of baseEnums.registerTypes; track $index) {
               <mat-option [value]="item.serviceId">
                 {{ item.serviceName }}
               </mat-option>
@@ -223,7 +223,7 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            @for (item of baseEnums.citizenGroups; track item) {
+            @for (item of baseEnums.citizenGroups; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -361,7 +361,7 @@
           <ng-container matColumnDef="groups">
             <th mat-header-cell *matHeaderCellDef>گروه</th>
             <td mat-cell *matCellDef="let row">
-              @for (item of row.groups; track item) {
+              @for (item of row.groups; track $index) {
                 <small>{{ item }} ,</small>
               }
             </td>

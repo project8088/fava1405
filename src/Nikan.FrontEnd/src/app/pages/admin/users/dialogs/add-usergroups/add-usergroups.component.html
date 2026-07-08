@@ -16,7 +16,7 @@
       <mat-form-field class="col-sm-12 col-md-12">
         <mat-label>نام گروه</mat-label>
         <input matInput formControlName="name" />
-        @if (userGroupsForm.get('name').errors?.name) {
+        @if (userGroupsForm.get('name')?.hasError('required')) {
           <mat-error> نام گروه را وارد نمایید </mat-error>
         }
       </mat-form-field>

@@ -8,9 +8,9 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AdminUpdateUserDialogComponent } from '../dialogs/update-user/update-user.component';
-import { AdminChangePasswordDialogComponent } from '../dialogs/change-user-password/change-user-password.component';
 import { AdminAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AppBase } from '@app/app.base';
+import { AdminChangePasswordDialogComponent } from '@app/shared/_dialog/change-user-password/change-user-password.component';
 
 @Component({
   selector: 'adm-all-users',

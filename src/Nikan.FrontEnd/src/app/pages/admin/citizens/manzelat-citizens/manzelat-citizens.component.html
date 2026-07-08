@@ -146,7 +146,7 @@
           <mat-select matInput formControlName="formStatuse">
             <mat-option [value]="null">همه</mat-option>
 
-            @for (item of manzalatFormStatuse; track item) {
+            @for (item of manzalatFormStatuse; track $index) {
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>

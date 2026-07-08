@@ -127,7 +127,7 @@
             <th mat-header-cell *matHeaderCellDef>نقش کاربر</th>
             <td mat-cell *matCellDef="let row">
               <mat-chip-listbox aria-label="Fish selection">
-                @for (item of row.roles; track item) {
+                @for (item of row.roles; track $index) {
                   <mat-chip>
                     @if (item.toLowerCase() == 'admin') {
                       <span>ادمین</span>

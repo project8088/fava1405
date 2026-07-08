@@ -29,7 +29,7 @@
       <mat-form-field class="col-md-6">
         <mat-label>مرکز تحویل کارت</mat-label>
         <mat-select formControlName="centerId">
-          @for (item of centerList; track item) {
+          @for (item of centerList; track $index) {
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>

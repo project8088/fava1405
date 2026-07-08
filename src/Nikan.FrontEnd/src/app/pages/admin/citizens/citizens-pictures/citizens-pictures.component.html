@@ -15,7 +15,7 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            @for (item of baseEnums.citizenGroups; track item) {
+            @for (item of baseEnums.citizenGroups; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -121,7 +121,7 @@
       <mat-spinner class="d-inline-block" diameter="30" color="default"></mat-spinner>
     </div>
 
-    @for (item of data; track item) {
+    @for (item of data; track $index) {
       <div class="citizen-image-box col-11 col-md-6 col-lg-3 my-2 text-center">
         <mat-card>
           <mat-card-content>
@@ -195,7 +195,7 @@
                   mat-raised-button
                   color="accent"
                   (click)="openRejectImageDialog(item)"
-                  [disabled]="isSaving"
+                  [disabled]="item.isSaving"
                 >
                   @if (!item.isSaving) {
                     <span>
@@ -216,7 +216,7 @@
                 mat-raised-button
                 color="default"
                 (click)="openMessagesDialog(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span><mat-icon>email</mat-icon></span>
@@ -234,7 +234,7 @@
                 mat-raised-button
                 color="default"
                 (click)="openEditImageDialog(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span>
@@ -254,7 +254,7 @@
                 mat-raised-button
                 color="default"
                 (click)="refreshImage(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span><mat-icon>sync</mat-icon></span>

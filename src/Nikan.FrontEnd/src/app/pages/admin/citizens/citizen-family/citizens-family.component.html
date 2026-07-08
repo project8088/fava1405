@@ -86,7 +86,7 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            @for (item of baseEnums.citizenGroups; track item) {
+            @for (item of baseEnums.citizenGroups; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -237,15 +237,15 @@
                   <i class="fa fa-eye mr-2"></i>
                   <span>مشاهده اطلاعات شهروند</span>
                 </button>
-                <button mat-menu-item routerLink="/admin/company-profile/{{ row.companyId }}">
+                <button mat-menu-item routerLink="/company/company-profile/{{ row.companyId }}">
                   <i class="fa fa-edit mr-2"></i>
                   <span>ویرایش اطلاعات شهروند</span>
                 </button>
-                <button mat-menu-item routerLink="/admin/company-personal/{{ row.companyId }}">
+                <button mat-menu-item routerLink="/company/personal/{{ row.companyId }}">
                   <i class="fa fa-users mr-2"></i>
                   <span>لیست پرسنل شهروند</span>
                 </button>
-                <button mat-menu-item routerLink="/admin/componay-users/{{ row.companyId }}">
+                <button mat-menu-item routerLink="/company/users/{{ row.companyId }}">
                   <i class="fa fa-users mr-2"></i>
                   <span>لیست کاربران شهروند</span>
                 </button>
@@ -258,18 +258,18 @@
                   <span>قبض های پرداخت نشده</span>
                 </button>
 
-                <button mat-menu-item (click)="openCompanyContractDialog(row)">
+                <!-- <button mat-menu-item (click)="openCompanyContractDialog(row)">
                   <i class="fa fa-file mr-2"></i>
                   <span>ثبت نام شهروند</span>
                 </button>
                 <button mat-menu-item (click)="openCompanyChangeStatusDialog(row)">
                   <i class="fa fa-bolt mr-2"></i>
                   <span>تغییر وضعیت شهروند</span>
-                </button>
+                </button> 
                 <button mat-menu-item (click)="delete(row)">
                   <i class="fa fa-trash mr-2"></i>
                   <span>حذف</span>
-                </button>
+                </button>-->
               </mat-menu>
             </td>
           </ng-container>

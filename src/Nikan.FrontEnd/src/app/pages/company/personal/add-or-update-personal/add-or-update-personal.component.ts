@@ -125,7 +125,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
           if (this.user?.isAdmin)
-            this.router.navigate(['/admin/company-personal/' + this.companyId]);
+            this.router.navigate(['/company/personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         }
       },
@@ -184,7 +184,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
           if (this.user?.isAdmin)
-            this.router.navigate(['/admin/company-personal/' + this.companyId]);
+            this.router.navigate(['/company/personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

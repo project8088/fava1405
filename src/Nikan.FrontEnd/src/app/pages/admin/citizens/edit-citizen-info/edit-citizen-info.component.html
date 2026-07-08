@@ -74,7 +74,7 @@
                   <mat-form-field  class="col-sm-6 col-md-4">
                     <mat-label>وضعیت تاهل </mat-label>
                     <mat-select formControlName="marital">
-                      @for (item of baseEnums.maritalStatus; track item) {
+                      @for (item of baseEnums.maritalStatus; track $index) {
                         <mat-option [value]="item.key">{{ item.text }} </mat-option>
                       }
                     </mat-select>
@@ -132,13 +132,13 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>شهر محل سکونت</mat-label>
                       <mat-select formControlName="cityId">
-                        @for (item of isfahanCities; track item) {
+                        @for (item of isfahanCities; track $index) {
                           <mat-option [value]="item.key">
                             {{ item.text }}
                           </mat-option>
                         }
                       </mat-select>
-                      @if (personalForm.controls['cityId'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['cityId'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['cityId'].errors['required']) {
                             <span> شهر محل سکونت شهروند را انتخاب کنید </span>
@@ -151,7 +151,7 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>منطقه</mat-label>
                       <input numbersOnly formControlName="region" matInput />
-                      @if (personalForm.controls['region'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['region'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['region'].errors['required']) {
                             <span> منطقه محل سکونت شهروند را انتخاب کنید </span>
@@ -164,7 +164,7 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>خیابان</mat-label>
                       <input formControlName="street" matInput />
-                      @if (personalForm.controls['street'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['street'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['street'].errors['required']) {
                             <span> خیابان محل سکونت شهروند را انتخاب کنید </span>
@@ -177,7 +177,7 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>کوچه</mat-label>
                       <input formControlName="alley" matInput />
-                      @if (personalForm.controls['alley'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['alley'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['alley'].errors['required']) {
                             <span> کوچه محل سکونت شهروند را انتخاب کنید </span>
@@ -190,7 +190,7 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>پلاک</mat-label>
                       <input numbersOnly formControlName="plaque" matInput />
-                      @if (personalForm.controls['plaque'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['plaque'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['plaque'].errors['required']) {
                             <span> پلاک محل سکونت شهروند را انتخاب کنید </span>
@@ -208,7 +208,7 @@
                         numbersOnly
                         placeholder="کد پستی  شهروند را وارد کنید"
                       />
-                      @if (personalForm.controls['postalCode'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['postalCode'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['postalCode'].errors['required']) {
                             <span> کد پستی شهروند را وارد کنید </span>
@@ -223,14 +223,14 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>وضعیت تحصیل</mat-label>
                       <mat-select formControlName="educationStatues">
-                        @for (item of baseEnums.educationStatues; track item) {
+                        @for (item of baseEnums.educationStatues; track $index) {
                           <mat-option [value]="item.key">
                             {{ item.text }}
                           </mat-option>
                         }
                       </mat-select>
                       @if (
-                        personalForm.controls['educationStatues'].errors && personalForm.submitted
+                        personalForm.controls['educationStatues'].errors
                       ) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['educationStatues'].errors['required']) {
@@ -245,14 +245,14 @@
                       <mat-form-field  class="w-100 mt-3">
                         <mat-label>گروه تحصیلی</mat-label>
                         <mat-select formControlName="educationGroup">
-                          @for (item of baseEnums.educationGroups; track item) {
+                          @for (item of baseEnums.educationGroups; track $index) {
                             <mat-option [value]="item.key">
                               {{ item.text }}
                             </mat-option>
                           }
                         </mat-select>
                         @if (
-                          personalForm.controls['educationStatues'].errors && personalForm.submitted
+                          personalForm.controls['educationStatues'].errors
                         ) {
                           <mat-hint class="text-danger">
                             @if (personalForm.controls['educationStatues'].errors['required']) {
@@ -268,14 +268,14 @@
                       <mat-form-field  class="w-100 mt-3">
                         <mat-label>سطح تحصیلات</mat-label>
                         <mat-select formControlName="educationLevel">
-                          @for (item of baseEnums.educationLevel; track item) {
+                          @for (item of baseEnums.educationLevel; track $index) {
                             <mat-option [value]="item.key">
                               {{ item.text }}
                             </mat-option>
                           }
                         </mat-select>
                         @if (
-                          personalForm.controls['educationLevel'].errors && personalForm.submitted
+                          personalForm.controls['educationLevel'].errors
                         ) {
                           <mat-hint class="text-danger">
                             @if (personalForm.controls['educationLevel'].errors['required']) {
@@ -296,7 +296,7 @@
                           placeholder="رشته تحصیلی (اختیاری)"
                         />
                         @if (
-                          personalForm.controls['educationTitle'].errors && personalForm.submitted
+                          personalForm.controls['educationTitle'].errors
                         ) {
                           <mat-hint class="text-danger">
                             @if (personalForm.controls['educationTitle'].errors['required']) {
@@ -311,13 +311,13 @@
                     <mat-form-field  class="w-100 mt-3">
                       <mat-label>وضعیت شغل</mat-label>
                       <mat-select formControlName="jobGroup">
-                        @for (item of baseEnums.jobGroup; track item) {
+                        @for (item of baseEnums.jobGroup; track $index) {
                           <mat-option [value]="item.key">
                             {{ item.text }}
                           </mat-option>
                         }
                       </mat-select>
-                      @if (personalForm.controls['jobGroup'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['jobGroup'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['jobGroup'].errors['required']) {
                             <span> وضعیت شغل شهروند را انتخاب کنید </span>
@@ -334,7 +334,7 @@
                         matInput
                         placeholder="عنوان شغل (اختیاری)"
                       />
-                      @if (personalForm.controls['jobTitle'].errors && personalForm.submitted) {
+                      @if (personalForm.controls['jobTitle'].errors) {
                         <mat-hint class="text-danger">
                           @if (personalForm.controls['jobTitle'].errors['required']) {
                             <span> عنوان شغل شهروند را وارد کنید </span>
@@ -398,7 +398,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>استان محل صدور شناسنامه</mat-label>
                 <mat-select formControlName="shStateId">
-                  @for (item of states; track item) {
+                  @for (item of states; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -415,7 +415,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>شهر محل صدور شناسنامه </mat-label>
                 <mat-select formControlName="shCityId">
-                  @for (item of shCities | async; track item) {
+                  @for (item of shCities | async; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -442,7 +442,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>استان محل تولد</mat-label>
                 <mat-select formControlName="birthStateId">
-                  @for (item of states; track item) {
+                  @for (item of states; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -459,7 +459,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>شهر محل تولد</mat-label>
                 <mat-select formControlName="cityOfBirthId">
-                  @for (item of birthCities | async; track item) {
+                  @for (item of birthCities | async; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -484,7 +484,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>دین</mat-label>
                 <mat-select formControlName="religion">
-                  @for (item of baseEnums.religion; track item) {
+                  @for (item of baseEnums.religion; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -517,7 +517,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>وضعیت خدمت سربازی</mat-label>
                 <mat-select formControlName="soldierState">
-                  @for (item of baseEnums.soldierState; track item) {
+                  @for (item of baseEnums.soldierState; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -557,7 +557,7 @@
               <mat-form-field  class="col-sm-6 col-md-4">
                 <mat-label>وضعیت تحصیل</mat-label>
                 <mat-select formControlName="educationStatues">
-                  @for (item of baseEnums.educationStatues; track item) {
+                  @for (item of baseEnums.educationStatues; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>

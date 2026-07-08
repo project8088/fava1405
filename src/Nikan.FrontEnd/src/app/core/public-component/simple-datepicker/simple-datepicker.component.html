@@ -7,7 +7,7 @@
       name="day-picker"
       (selectionChange)="onChange()"
     >
-      @for (item of dayList; track item) {
+      @for (item of dayList; track $index) {
         <mat-option [value]="item">
           {{ item }}
         </mat-option>
@@ -28,7 +28,7 @@
       name="month-picker"
       (selectionChange)="onChange()"
     >
-      @for (item of monthList; track item) {
+      @for (item of monthList; track $index) {
         <mat-option [value]="item.id">
           {{ item.title }}
         </mat-option>
@@ -43,7 +43,7 @@
       name="year-picker"
       (selectionChange)="onChange()"
     >
-      @for (item of yearList; track item) {
+      @for (item of yearList; track $index) {
         <mat-option [value]="item">
           {{ item }}
         </mat-option>

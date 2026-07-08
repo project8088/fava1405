@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminCitizenManzelatReviewComponent } from '../../_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
 import { ServerApis } from '@core/server-apis';
 import { ShowImageDialogComponent } from '@app/shared/_dialog/show-image/show-image.component';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
 import { AppBase } from '@app/app.base';
@@ -15,11 +15,11 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminManzelatCitizensDetailsComponent extends AppBase implements OnInit {
-  userCode: string='';
-  data: [];
+  userCode: string = '';
+  data: any[] = [];
   citizen: any = {};
   loading: boolean = true;
-  imageUrl: string;
+  imageUrl: string = '';
   baseUrl: string = ServerApis.baseUrl;
 
   constructor() {
@@ -52,13 +52,13 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
   }
 
-  openReviewDialog(manzelatForm, command) {
+  openReviewDialog(manzelatForm: any, command: any) {
     this.matDialog
       .open(AdminCitizenManzelatReviewComponent, {
         panelClass: 'custom-dialog',
@@ -76,7 +76,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
       });
   }
 
-  toggleConfirmFamily(family, isAccept: boolean) {
+  toggleConfirmFamily(family: any, isAccept: boolean) {
     this.dataService
       .post(ServerApis.confirmFamilyByAdmin, {
         userCode: this.userCode,
@@ -93,7 +93,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -103,7 +103,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
     window.history.back();
   }
 
-  showImageDialog(data) {
+  showImageDialog(data: any) {
     this.matDialog
       .open(ShowImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -116,7 +116,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
       .afterClosed()
       .subscribe((result) => {});
   }
-  sendcitizenForAuthentication(citizenId) {
+  sendcitizenForAuthentication(citizenId: string) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
       .subscribe(
@@ -128,11 +128,11 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {},
+        (error: any) => {},
       );
   }
 
-  openCitizenProfile(userCode:string) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -143,7 +143,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
     });
   }
 
-  openCitizenEditMobileNumber(userCode:string) {
+  openCitizenEditMobileNumber(userCode: string) {
     this.matDialog
       .open(AdminUpdateCitizenMobileNumberDialogComponent, {
         panelClass: 'custom-dialog',

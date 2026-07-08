@@ -24,7 +24,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>وضعیت تاهل </mat-label>
             <mat-select formControlName="marital">
-              @for (item of baseEnums.maritalStatus; track item) {
+              @for (item of baseEnums.maritalStatus; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>
@@ -47,7 +47,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>شهر محل سکونت</mat-label>
             <mat-select formControlName="cityId">
-              @for (item of isfahanCities; track item) {
+              @for (item of isfahanCities; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>
@@ -128,7 +128,7 @@
             <mat-form-field class="w-100 mt-3">
               <mat-label>وضعیت تحصیل</mat-label>
               <mat-select formControlName="educationStatues">
-                @for (item of baseEnums.educationStatues; track item) {
+                @for (item of baseEnums.educationStatues; track $index) {
                   <mat-option [value]="item.key">
                     {{ item.text }}
                   </mat-option>
@@ -149,7 +149,7 @@
                 <mat-label>گروه تحصیلی</mat-label>
                 <mat-select formControlName="educationGroup">
                   <mat-option [value]="null"> ------- </mat-option>
-                  @for (item of baseEnums.educationGroups; track item) {
+                  @for (item of baseEnums.educationGroups; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -170,7 +170,7 @@
               <mat-form-field class="w-100 mt-3">
                 <mat-label>سطح تحصیلات</mat-label>
                 <mat-select formControlName="educationLevel">
-                  @for (item of baseEnums.educationLevel; track item) {
+                  @for (item of baseEnums.educationLevel; track $index) {
                     <mat-option [value]="item.key">
                       {{ item.text }}
                     </mat-option>
@@ -209,7 +209,7 @@
             <mat-form-field class="w-100 mt-3">
               <mat-label>وضعیت شغل</mat-label>
               <mat-select formControlName="jobGroup">
-                @for (item of baseEnums.jobGroup; track item) {
+                @for (item of baseEnums.jobGroup; track $index) {
                   <mat-option [value]="item.key">
                     {{ item.text }}
                   </mat-option>

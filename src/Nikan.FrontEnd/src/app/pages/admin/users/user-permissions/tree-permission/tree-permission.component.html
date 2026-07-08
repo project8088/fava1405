@@ -1,5 +1,5 @@
 <ul class="tree-permission">
-  @for (item of permissionItems | keyvalue; track item) {
+  @for (item of permissionItems | keyvalue; track $index) {
     <li>
       <mat-checkbox
         [checked]="allComplete(item)"

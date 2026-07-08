@@ -16,7 +16,7 @@
       <div class="row">
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>نام کاربری</mat-label>
-          <input matInput formControlName="username" disabled readonly />
+          <input matInput formControlName="username" [disabled]="true" readonly />
           @if (userForm.get('username')?.hasError('required')) {
             <mat-error> نام کاربری را وارد کنید. </mat-error>
           }
@@ -58,7 +58,7 @@
             (selectionChange)="getUnitsOfOrganization()"
             [compareWith]="compareFn"
           >
-            @for (item of organizationList; track item) {
+            @for (item of organizationList; track $index) {
               <mat-option [value]="item">{{ item.text }}</mat-option>
             }
           </mat-select>
@@ -69,7 +69,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>واحد</mat-label>
           <mat-select formControlName="organizationalUnit" [compareWith]="compareFn">
-            @for (item of unitList; track item) {
+            @for (item of unitList; track $index) {
               <mat-option [value]="item">{{ item.text }}</mat-option>
             }
           </mat-select>
@@ -81,7 +81,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>وضعیت کاربر</mat-label>
           <mat-select formControlName="userState" (selectionChange)="changeUserState()">
-            @for (item of userAccountState; track item) {
+            @for (item of userAccountState; track $index) {
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>

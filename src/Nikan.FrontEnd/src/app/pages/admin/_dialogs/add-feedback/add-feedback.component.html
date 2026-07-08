@@ -11,7 +11,7 @@
       <mat-form-field class="col-sm-12">
         <mat-label>موضوع بازخورد</mat-label>
         <mat-select formControlName="feedbackId" [compareWith]="compareFn">
-          @for (item of groupList; track item) {
+          @for (item of groupList; track $index) {
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>

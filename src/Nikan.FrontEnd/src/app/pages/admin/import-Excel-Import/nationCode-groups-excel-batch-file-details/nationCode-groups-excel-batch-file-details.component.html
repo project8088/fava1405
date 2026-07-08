@@ -91,7 +91,7 @@
           <ng-container matColumnDef="companyName">
             <th mat-header-cell *matHeaderCellDef>شرکت</th>
             <td mat-cell *matCellDef="let row">
-              <a routerLink="/admin/company-profile/{{ row.userCompanyId }}" target="_blank">
+              <a routerLink="/company/company-profile/{{ row.userCompanyId }}" target="_blank">
                 {{ row.companyName }}
               </a>
             </td>

@@ -56,7 +56,7 @@ export class AdminCompanyContractDialogComponent extends AppBase implements OnIn
       );
   }
 
-  getContract(ev) {
+  getContract(ev:any) {
     this.imageContractUrl = ev.contractUrl;
   }
 }

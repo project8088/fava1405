@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { AdminCitizenRejectFamilyComponent } from '../../_dialogs/citizen-reject-family/citizen-reject-family.component';
 import { ServerApis } from '@core/server-apis';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -12,12 +12,12 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnInit {
-  userCode: string='';
-  familyList: [];
+  userCode: string = '';
+  familyList: any[] = [];
 
   citizen: any = {};
   loading: boolean = true;
-  imageUrl: string;
+  imageUrl: string = '';
   baseUrl: string = ServerApis.baseUrl;
 
   constructor() {
@@ -50,13 +50,13 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
   }
 
-  openRejectFamilyeDialog(family) {
+  openRejectFamilyeDialog(family: any) {
     this.matDialog
       .open(AdminCitizenRejectFamilyComponent, {
         panelClass: 'custom-dialog',
@@ -72,7 +72,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
       });
   }
 
-  toggleConfirmFamily(family, isAccept: boolean) {
+  toggleConfirmFamily(family: any, isAccept: boolean) {
     this.dataService
       .post(ServerApis.confirmFamilyByAdmin, {
         userCode: this.userCode,
@@ -90,7 +90,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -100,7 +100,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
     window.history.back();
   }
 
-  openCitizenProfile(userCode:string) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

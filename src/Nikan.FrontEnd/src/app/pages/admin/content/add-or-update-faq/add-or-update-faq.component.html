@@ -30,8 +30,9 @@
             }
           </mat-form-field>
           <mat-form-field class="col-sm-12">
-            <mat-chip-listbox #chipList aria-label="tagNames" formControlName="tagNames">
-              @for (item of tagNames; track item) {
+            <!-- todo:chips -->
+            <!-- <mat-chip-listbox #chipList aria-label="tagNames" formControlName="tagNames">
+              @for (item of tagNames; track $index) {
                 <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
                   {{ item }}
                   <mat-icon matChipRemove>cancel</mat-icon>
@@ -44,12 +45,12 @@
                 [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="add($event)"
               />
-            </mat-chip-listbox>
+            </mat-chip-listbox> -->
           </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>گروه پرسش و پاسخی</mat-label>
             <mat-select formControlName="questionGroupTypeId" [compareWith]="compareFn">
-              @for (item of groupList; track item) {
+              @for (item of groupList; track $index) {
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>

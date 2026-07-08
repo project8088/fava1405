@@ -32,7 +32,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>دین</mat-label>
         <mat-select formControlName="religion">
-          @for (item of baseEnums.religion; track item) {
+          @for (item of baseEnums.religion; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>
@@ -112,7 +112,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>وضعیت خدمت سربازی</mat-label>
         <mat-select formControlName="militaryStatus">
-          @for (item of baseEnums.soldierState; track item) {
+          @for (item of baseEnums.soldierState; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>

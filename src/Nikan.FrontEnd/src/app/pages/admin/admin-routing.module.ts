@@ -1,12 +1,12 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { AdminAddOrUpdateAppserviceComponent } from './citizenApps/add-or-update-appservice/add-or-update-appservice.component';
+import { AdminAddOrUpdateAppserviceComponent } from './citizen-apps/add-or-update-appservice/add-or-update-appservice.component';
 import { AdminAddOrUpdateFaqComponent } from './content/add-or-update-faq/add-or-update-faq.component';
 import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/add-or-update-groups.component';
 import { AdminAddOrUpdateManagerComponent } from './users/add-or-update-manager/add-or-update-manager.component';
 import { AdminAddOrUpdateNewsComponent } from './content/add-or-update-news/add-or-update-news.component';
 import { AdminAddOrUpdateNotificationComponent } from './content/add-or-update-notification/add-or-update-notification.component';
-import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component'; 
+import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component';
 import { AdminCitizenAdvancedSearchComponent } from './citizens/citizen-advanced-search/citizen-advanced-search.component';
 import { AdminCitizenFamilyDetailsComponent } from './citizens/citizen-family-details/citizen-family-details.component';
 import { AdminCitizensComponent } from './citizens/citizens.component';
@@ -45,17 +45,13 @@ import { AdminUnitListComponent } from './organization/unit-list/unit-list.compo
 import { AdminUserGroupsComponent } from './users/admin-userGroups/admin-userGroups.component';
 import { AdminUserPermissionsComponent } from './users/user-permissions/user-permissions.component';
 import { AdminUsersComponent } from './users/admin-users/admin-users.component';
-import { ChangeCurrentUserPasswordComponent } from '../../shared/change-current-user-password/change-current-user-password.component';
-import { CompanyAddOrUpdatePersonalComponent } from '../company/personal/add-or-update-personal/add-or-update-personal.component';
-import { CompanyInfoComponent } from '../../shared/company-info/company-info.component';
-import { CompanyPersonalUsersComponent } from '../company/personal/personal-users/personal-users.component';
-import { CompanyProfileComponent } from '../company/company-profile/company-profile.component';
-import { CompanyUserListComponent } from '../company/users/user-list/user-list.component';
+import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
+import { CompanyInfoComponent } from '@app/shared/company-info/company-info.component';
 import { NgModule } from '@angular/core';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
-import { TicketDetailsComponent } from '../../shared/ticket/view-ticket/ticket-details.component';
-import { TicketListComponent } from '../../shared/ticket/ticket-list/ticket-list.component';
-import { TransactionDetailsComponent } from '../../shared/transaction-details/transaction-details.component';
+import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
+import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
+import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { UserRoleListComponent } from './users/user-role/user-role.component';
 import { AdminCitizenProfileComponent } from './citizen-profile-edit/citizen-profile.component';
 import { AdminWebApiUsersComponent } from './users/web-api-users/web-api-users.component';
@@ -84,13 +80,13 @@ import { AdminOrganizationUnitGroupsComponent } from './organization/organizatio
 import { AdminUserAccessIpComponent } from './users/user-access-ip/user-access-ip.component';
 import { AdminCitizenAuthenticationComponent } from './citizens-authentication/citizens-authentication.component';
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
-import { AppShowCitizenComponent } from '../../shared/citizens/show-citizens/show-citizen.component';
+import { AppShowCitizenComponent } from '@app/shared/citizens/show-citizens/show-citizen.component';
 import { AdminManzalatBaseFromListComponent } from './manzalat-base-form/manzalat-base-list/manzalat-base-list.component';
 import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/update-manzalat-base-form/update-manzalat-base-form.component';
 import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.component';
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
-import { AdminAppserviceListComponent } from './citizenapps/appservice-list/appservice-list.component';
+import { AdminAppserviceListComponent } from './citizen-apps/appservice-list/appservice-list.component';
 
 const routes: Routes = [
   {
@@ -101,11 +97,6 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'register-company', component: AdminRegisterCompanyComponent },
       { path: 'companies', component: AdminCompaniesListComponent },
-      { path: 'company-profile/:id', component: CompanyProfileComponent },
-      { path: 'company-personal/:id', component: CompanyPersonalUsersComponent },
-      { path: 'addupdate-personal/:companyId/:id', component: CompanyAddOrUpdatePersonalComponent },
-
-      { path: 'componay-users/:id', component: CompanyUserListComponent },
 
       { path: 'news-list', component: AdminNewsListComponent },
       { path: 'addupdate-news/:id', component: AdminAddOrUpdateNewsComponent },

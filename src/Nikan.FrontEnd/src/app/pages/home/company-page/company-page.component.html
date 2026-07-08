@@ -108,7 +108,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="py-4 list-container">
-              @for (item of companyInfo?.userCompanyActivities; track item) {
+              @for (item of companyInfo?.userCompanyActivities; track $index) {
                 <div class="list-item">
                   <div class="list-content">
                     <div class="row">
@@ -162,7 +162,7 @@
       }
 
       <div class="row mt-30-reverse blog-masonry-active">
-        @for (item of companyInfo?.products; track item) {
+        @for (item of companyInfo?.products; track $index) {
           <div class="col-sm-6 col-md-4 mt-30">
             <div class="card p-2 news-card">
               <a class="relative">

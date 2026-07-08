@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUnitListComponent extends AppBase implements AfterViewInit {
-  organizationid: string ='';
+  organizationId: string ='';
   displayedColumns: string[] = ['row', 'name', 'description', 'isActive', 'operation'];
 
   data: any[] = [];
@@ -28,12 +28,12 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean;
+  showAddOrUpdatePanel: boolean=false;
   isSaving=false;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
-    this.frm = fb.group({
+    this.frm = this.fb.group({
       id: [''],
       organizationId: [null],
       name: [null, [Validators.required]],

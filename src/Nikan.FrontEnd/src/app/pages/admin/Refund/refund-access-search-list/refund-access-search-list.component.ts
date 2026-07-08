@@ -6,12 +6,12 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundDialogComponent } from '../dialog/change-refund/change-refund.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
 import Swal from 'sweetalert2';
-import { CitizenRefundInfoDialogComponent } from '../../../citizen/refund/dialog/refund-info/refund-info.component';
 import { AppBase } from '@app/app.base';
+import { CitizenRefundInfoDialogComponent } from '@app/shared/_dialog/refund-info/refund-info.component';
 
 @Component({
   selector: 'adm-refund-access-search-list',

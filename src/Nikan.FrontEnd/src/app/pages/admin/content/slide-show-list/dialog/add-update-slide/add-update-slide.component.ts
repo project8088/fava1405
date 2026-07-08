@@ -14,7 +14,7 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
   isUpdate=false;
   isSaving=false;
   form: FormGroup;
-  id: number;
+  id?: number;
   loading = true;
   imageUrl: string = '';
   baseUrl = ServerApis.baseUrl;

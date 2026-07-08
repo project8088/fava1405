@@ -7,7 +7,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
 
@@ -38,7 +38,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  manzalatFormStatuse: [];
+  manzalatFormStatuse: any[] = [];
   sendingSms: boolean = false;
   selectAll: boolean = false;
 
@@ -100,7 +100,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -145,7 +145,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
     });
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -157,7 +157,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
   }
 
   sendSms() {
-    var selectedIds = [];
+    var selectedIds: any[] = [];
     for (var i = 0; i < this.data.length; i++) {
       if (this.data[i].selected && this.data[i].sabtStatus == 0)
         selectedIds.push(this.data[i].citizenId);
@@ -204,7 +204,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               this.sendingSms = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
             },

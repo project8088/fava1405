@@ -67,7 +67,7 @@
             <!-- Faq Area -->
             <div class="tm-section faq-area mt-4">
               <div id="tm-accordion2" class="tm-accordion">
-                @for (item of faqList; track item) {
+                @for (item of faqList; track $index) {
                   <div class="card">
                     <div class="card-header" id="tm-accordion2-heading1">
                       <h5 class="mb-0">

@@ -26,7 +26,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>پیشوند</mat-label>
         <mat-select formControlName="namePrefix">
-          @for (item of namePrefixList; track item) {
+          @for (item of namePrefixList; track $index) {
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>
@@ -200,7 +200,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>سمت</mat-label>
         <mat-select formControlName="organizationalPositionId">
-          @for (item of organizationalPositionList; track item) {
+          @for (item of organizationalPositionList; track $index) {
             <mat-option [value]="item.key">{{ item.text }}</mat-option>
           }
         </mat-select>

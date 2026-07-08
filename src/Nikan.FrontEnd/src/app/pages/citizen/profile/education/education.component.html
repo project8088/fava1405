@@ -10,7 +10,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="p-4 list-container">
-      @for (item of educationList; track item) {
+      @for (item of educationList; track $index) {
         <div class="list-item">
           <div class="list-content" (click)="openEducationDialog(item)">
             <div class="row">

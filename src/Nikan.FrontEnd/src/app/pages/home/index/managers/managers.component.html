@@ -9,7 +9,7 @@
       </div>
     }
     <div id="owl-Service2" class="owl-carousel">
-      @for (item of managerList; track item) {
+      @for (item of managerList; track $index) {
         <div class="card mx-1">
           <div class="card-body">
             <a class="d-flex align-items-center text-center justify-content-center">

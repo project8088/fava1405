@@ -15,7 +15,7 @@
       </div>
     }
 
-    @for (item of configList; track item) {
+    @for (item of configList; track $index) {
       <div>
         @if (item.isSuccess) {
           <p class="alert alert-success">

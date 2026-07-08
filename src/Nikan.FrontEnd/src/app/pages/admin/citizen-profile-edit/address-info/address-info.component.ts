@@ -15,9 +15,9 @@ import { AppBase } from '@app/app.base';
 export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit {
   editMode: boolean = false;
   editModeWork: boolean = false;
-    loading?: boolean;
+  loading?: boolean;
 
-  isfahanCities: any[];
+  isfahanCities: any[]=[];
   userCode: string = '';
   homeForm: FormGroup;
   isSavingHome: boolean = false;
@@ -27,7 +27,8 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
   isSavingWork: boolean = false;
   loadingWork: boolean = false;
   states: any[] = [];
-  cities=new Observable<any[]>();
+  cities = new Observable<any[]>();
+  workCityText: string = '';
 
   constructor(private helperService: HelperService) {
     super();
@@ -176,7 +177,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
     this.saveAddress(form, 1);
   }
 
-  saveAddress(form, addressType) {
+  saveAddress(form: any, addressType: number) {
     if (addressType === 1) this.isSavingHome = true;
     else this.isSavingWork = true;
     form.userCode = this.userCode;
@@ -197,7 +198,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
           this.isSavingHome = false;
           this.isSavingWork = false;
         },
-        (error:any) => {
+        (error: any) => {
           this.isSavingHome = false;
           this.isSavingWork = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
@@ -219,7 +220,6 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
     }
   }
 
-  workCityText: string;
   getWorkCity() {
     return this.workCityText;
   }

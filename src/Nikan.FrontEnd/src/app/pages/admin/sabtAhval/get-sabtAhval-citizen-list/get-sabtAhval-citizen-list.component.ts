@@ -4,7 +4,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminSabtAhvalCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
-  id: number;
+  id!: number;
 
   displayedColumns: string[] = [
     'row',
@@ -84,7 +84,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  sendcitizenForAuthentication(citizenId) {
+  sendcitizenForAuthentication(citizenId:string) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
       .subscribe(
@@ -107,7 +107,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
   }
 
   sendSms() {
-    var selectedIds = [];
+    var selectedIds:any[] = [];
     for (var i = 0; i < this.data.length; i++) {
       if (this.data[i].selected && this.data[i].sabtStatus == 0)
         selectedIds.push(this.data[i].citizenId);

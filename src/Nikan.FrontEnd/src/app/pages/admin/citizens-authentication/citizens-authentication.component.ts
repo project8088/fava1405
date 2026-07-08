@@ -4,7 +4,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -61,7 +61,7 @@ export class AdminCitizenAuthenticationComponent extends AppBase implements Afte
       .subscribe((data) => {});
   }
 
-  openCitizenProfile(citizenId) {
+  openCitizenProfile(citizenId: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

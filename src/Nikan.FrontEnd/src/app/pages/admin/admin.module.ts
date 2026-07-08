@@ -1,6 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminAddFeedBackDialogComponent } from './_dialogs/add-feedback/add-feedback.component';
-import { AdminAddOrUpdateAppserviceComponent } from './citizenApps/add-or-update-appservice/add-or-update-appservice.component';
+import { AdminAddOrUpdateAppserviceComponent } from './citizen-apps/add-or-update-appservice/add-or-update-appservice.component';
 import { AdminAddOrUpdateFaqComponent } from './content/add-or-update-faq/add-or-update-faq.component';
 import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/add-or-update-groups.component';
 import { AdminAddOrUpdateManagerComponent } from './users/add-or-update-manager/add-or-update-manager.component';
@@ -12,14 +12,10 @@ import { AdminAddOrUpdateSlideShowDialogComponent } from './content/slide-show-l
 import { AdminAddSabtAhvalDialogComponent } from './sabtAhval/dialog/add-sabtAhval/add-sabtAhval.component';
 import { AdminAddUserDialogComponent } from './users/dialogs/add-user/add-user.component';
 import { AdminAddUserGrousDialogComponent } from './users/dialogs/add-usergroups/add-usergroups.component';
-import { AdminAppserviceListComponent } from './citizenapps/appservice-list/appservice-list.component';
-import { AdminChangePasswordDialogComponent } from './users/dialogs/change-user-password/change-user-password.component';
 import { AdminCitizenAdvancedSearchComponent } from './citizens/citizen-advanced-search/citizen-advanced-search.component';
-import { AdminCitizenEditImageDialogComponent } from './_dialogs/citizen-edit-image/citizen-edit-image.component';
 import { AdminCitizenFamilyDetailsComponent } from './citizens/citizen-family-details/citizen-family-details.component';
 import { AdminCitizenManzelatReviewComponent } from './_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
 import { AdminCitizenRejectFamilyComponent } from './_dialogs/citizen-reject-family/citizen-reject-family.component';
-import { AdminCitizenRejectImageDialogComponent } from './_dialogs/citizen-reject-image/citizen-reject-image.component';
 import { AdminCitizensComponent } from './citizens/citizens.component';
 import { AdminCitizensFamilyComponent } from './citizens/citizen-family/citizens-family.component';
 import { AdminCitizensPicturesComponent } from './citizens/citizens-pictures/citizens-pictures.component';
@@ -68,7 +64,7 @@ import { ManageAttachmentDialogComponent } from './_dialogs/manage-attachment/ma
 import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
 import { UserRoleListComponent } from './users/user-role/user-role.component';
 import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/event-details.component';
@@ -129,6 +125,7 @@ import { AdminAddRefundUserDialogComponent } from './Refund/dialog/add-refund-us
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
 import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor.module';
+import { AdminAppserviceListComponent } from './citizen-apps/appservice-list/appservice-list.component';
 
 @NgModule({
   declarations: [
@@ -144,7 +141,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminNewsCommentsComponent,
     AdminUsersComponent,
     AdminAddUserDialogComponent,
-    AdminChangePasswordDialogComponent,
     AdminUpdateUserDialogComponent,
     AdminFaqListComponent,
     AdminAddOrUpdateFaqComponent,
@@ -168,7 +164,7 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminCompanyContractDialogComponent,
     AdminSmsListComponent,
     AdminCompanyChangeStatusDialogComponent,
-
+    AdminAppserviceListComponent,
     AdminPayTestComponent,
     AdminTransactionListComponent,
     AdminPaySettingComponent,
@@ -177,7 +173,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminSlideShowListComponent,
     AdminAddOrUpdateSlideShowDialogComponent,
     AdminAddOrUpdateAppserviceComponent,
-    AdminAppserviceListComponent,
     AdminUserGroupsComponent,
     AdminAddUserGrousDialogComponent,
     AdminUserPermissionsComponent,
@@ -186,8 +181,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminWebApiUserPermissionsComponent,
     AdminAddFeedBackDialogComponent,
     AdminCitizensPicturesComponent,
-    AdminCitizenRejectImageDialogComponent,
-    AdminCitizenEditImageDialogComponent,
     AdminCitizensFamilyComponent,
     AdminCitizenFamilyDetailsComponent,
     AdminCitizenRejectFamilyComponent,

@@ -20,7 +20,7 @@
       <button
         mat-raised-button
         color="default"
-        routerLink="/admin/addupdate-personal/{{ companyId }}/0"
+        routerLink="/company/addupdate-personal/{{ companyId }}/0"
       >
         <i class="fa fa-plus mr-2"></i>
         <span>ثبت پرسنل جدید</span>
@@ -234,7 +234,7 @@
                 @if (user?.isAdmin) {
                   <button
                     mat-menu-item
-                    routerLink="/admin/addupdate-personal/{{ companyId }}/{{ row.id }}"
+                    routerLink="/company/addupdate-personal/{{ companyId }}/{{ row.id }}"
                   >
                     <i class="fa fa-edit mr-2"></i>
                     <span>ویرایش اطلاعات</span>

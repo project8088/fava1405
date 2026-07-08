@@ -15,7 +15,7 @@ export class AdminSettingComponent extends AppBase implements OnInit {
     loading?: boolean;
 
   baseUrl: string = ServerApis.baseUrl;
-  logoUrl: string;
+  logoUrl: string='';
   uploadUrl: string = ServerApis.uploadSiteLogo;
 
   constructor() {

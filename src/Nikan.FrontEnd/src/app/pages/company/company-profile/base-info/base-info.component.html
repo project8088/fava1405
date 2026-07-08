@@ -71,7 +71,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نوع/اتحادیه صنفی</mat-label>
         <mat-select formControlName="companyOwnerType">
-          @for (item of baseInfo.companyOwnerType; track item) {
+          @for (item of baseInfo.companyOwnerType; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>
@@ -84,7 +84,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نوع پروانه فعالیت</mat-label>
         <mat-select formControlName="activityLicenseType">
-          @for (item of baseInfo.activityLicenseType; track item) {
+          @for (item of baseInfo.activityLicenseType; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>
@@ -97,7 +97,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نوع مجوز</mat-label>
         <mat-select formControlName="activityLicense">
-          @for (item of baseInfo.activityLicense; track item) {
+          @for (item of baseInfo.activityLicense; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>
@@ -110,7 +110,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نوع فعالیت شرکت</mat-label>
         <mat-select formControlName="fieldOfActivity">
-          @for (item of baseInfo.companyFieldOfActivity; track item) {
+          @for (item of baseInfo.companyFieldOfActivity; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>
@@ -123,7 +123,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> نوع زمین کارگاه</mat-label>
         <mat-select formControlName="earthCondition">
-          @for (item of baseInfo.earthCondition; track item) {
+          @for (item of baseInfo.earthCondition; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>

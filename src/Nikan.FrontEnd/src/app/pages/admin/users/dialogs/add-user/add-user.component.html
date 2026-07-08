@@ -42,7 +42,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>سازمان</mat-label>
         <mat-select formControlName="organization" (selectionChange)="getUnitsOfOrganization()">
-          @for (item of organizationList; track item) {
+          @for (item of organizationList; track $index) {
             <mat-option [value]="item">{{ item.text }}</mat-option>
           }
         </mat-select>
@@ -54,7 +54,7 @@
       <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>واحد</mat-label>
         <mat-select formControlName="organizationalUnit">
-          @for (item of unitList; track item) {
+          @for (item of unitList; track $index) {
             <mat-option [value]="item">{{ item.text }}</mat-option>
           }
         </mat-select>

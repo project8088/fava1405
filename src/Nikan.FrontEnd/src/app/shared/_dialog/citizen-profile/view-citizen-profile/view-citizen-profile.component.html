@@ -189,7 +189,7 @@
                 </div>
                 <div class="row">
                   <mat-chip-listbox aria-label="citizen groups">
-                    @for (item of citizen.groups; track item) {
+                    @for (item of citizen.groups; track $index) {
                       <mat-chip>{{ item.group }} ({{ item.creationDate | luxonFormat}})</mat-chip>
                     }
                   </mat-chip-listbox>

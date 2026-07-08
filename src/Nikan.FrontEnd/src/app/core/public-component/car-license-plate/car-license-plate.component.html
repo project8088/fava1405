@@ -32,7 +32,7 @@
       [attr.readonly]="disabled"
       [disabled]="disabled"
     >
-      @for (item of letters; track item) {
+      @for (item of letters; track $index) {
         <mat-option [value]="item">{{ item }}</mat-option>
       }
     </mat-select>

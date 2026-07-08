@@ -26,12 +26,12 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean;
-  isSaving=false;
+  showAddOrUpdatePanel: boolean = false;
+  isSaving = false;
 
   constructor() {
     super();
-    this.frm = fb.group({
+    this.frm = this.fb.group({
       id: [null],
       title: [null, [Validators.required]],
       description: [null],
@@ -64,7 +64,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -78,7 +78,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
     this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
@@ -104,13 +104,13 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  update(row:any) {
+  update(row: any) {
     this.frm.setValue({
       id: row.id,
       title: row.title,
@@ -125,7 +125,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateNewsGroup, this.frm.value).subscribe(
@@ -143,7 +143,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

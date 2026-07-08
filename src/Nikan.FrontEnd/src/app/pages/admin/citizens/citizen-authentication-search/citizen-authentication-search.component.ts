@@ -9,7 +9,7 @@ import { HelperService } from '@core/services/helper.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -19,6 +19,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenAuthenticationSearchComponent extends AppBase implements AfterViewInit {
+  
   displayedColumns: string[] = [
     'row',
     'nationCode',

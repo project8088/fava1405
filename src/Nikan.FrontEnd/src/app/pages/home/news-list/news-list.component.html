@@ -31,7 +31,7 @@
           }
 
           <div class="row mt-30-reverse blog-masonry-active">
-            @for (item of data; track item) {
+            @for (item of data; track $index) {
               <div class="card p-2 news-card">
                 <a class="relative">
                   @if (item.imageUrl) {

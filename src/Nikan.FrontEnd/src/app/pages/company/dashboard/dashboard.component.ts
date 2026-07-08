@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
-import { ViewNotificationDetailsDialogComponent } from '../../../shared/_dialog/notification-details/notification-details.component';
+import { ViewNotificationDetailsDialogComponent } from '@app/shared/_dialog/notification-details/notification-details.component';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 

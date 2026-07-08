@@ -48,7 +48,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
-      this.importId = p.importId;
+      this.importId = p['importId'];
       this.getList();
     });
   }

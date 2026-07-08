@@ -126,7 +126,7 @@
   </div>
 }
 
-@for (item of ticket?.responseTickets; track item) {
+@for (item of ticket?.responseTickets; track $index) {
   <mat-card class="mt-3">
     <div
       class="card-title d-flex align-items-center justify-content-between"

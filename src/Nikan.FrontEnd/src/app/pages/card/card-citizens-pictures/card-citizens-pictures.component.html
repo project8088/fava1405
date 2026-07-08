@@ -96,7 +96,7 @@
       <mat-spinner class="d-inline-block" diameter="30" color="default"></mat-spinner>
     </div>
 
-    @for (item of data; track item) {
+    @for (item of data; track $index) {
       <div class="citizen-image-box col-11 col-md-6 col-lg-3 my-2 text-center">
         <mat-card>
           <mat-card-content>

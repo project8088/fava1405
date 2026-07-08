@@ -50,6 +50,7 @@ import { AdminCitizenImageDialogComponent } from './_dialog/citizen-image/citize
 import { AdminCitizenEditImageDialogComponent } from './_dialog/citizen-edit-image/citizen-edit-image.component';
 import { AdminCitizenRejectImageDialogComponent } from './_dialog/citizen-reject-image/citizen-reject-image.component';
 import { AdminChangePasswordDialogComponent } from './_dialog/change-user-password/change-user-password.component';
+import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-info.component';
 @NgModule({
   declarations: [
     SideNavMenuComponent,
@@ -94,6 +95,7 @@ import { AdminChangePasswordDialogComponent } from './_dialog/change-user-passwo
     AdminCitizenEditImageDialogComponent,
     AdminCitizenRejectImageDialogComponent,
     AdminChangePasswordDialogComponent,
+    CitizenRefundInfoDialogComponent,
   ],
   imports: [
     CoreModule,

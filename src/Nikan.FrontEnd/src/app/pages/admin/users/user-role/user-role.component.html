@@ -15,7 +15,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> نقش </mat-label>
           <mat-select formControlName="roleId">
-            @for (item of roleList; track item) {
+            @for (item of roleList; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="py-4 list-container">
-          @for (item of userRoleList; track item) {
+          @for (item of userRoleList; track $index) {
             <div class="list-item">
               <div class="list-content">
                 <div class="row">

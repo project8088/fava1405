@@ -112,7 +112,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>وضعیت تاهل </mat-label>
             <mat-select formControlName="marital">
-              @for (item of baseEnums.maritalStatus; track item) {
+              @for (item of baseEnums.maritalStatus; track $index) {
                 <mat-option [value]="item.key">{{ item.text }} </mat-option>
               }
             </mat-select>

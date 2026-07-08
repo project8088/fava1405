@@ -25,7 +25,7 @@
           <mat-label>منو والد</mat-label>
           <mat-select formControlName="parentId">
             <mat-option [value]="0">ریشه اصلی</mat-option>
-            @for (item of parentMenus; track item) {
+            @for (item of parentMenus; track $index) {
               <mat-option [value]="item.id">{{ item.menuName }}</mat-option>
             }
           </mat-select>
@@ -44,7 +44,7 @@
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>صفحات داخلی سایت</mat-label>
             <mat-select formControlName="innerMenu" (selectionChange)="setInnerSite()">
-              @for (item of innerMenuItems; track item) {
+              @for (item of innerMenuItems; track $index) {
                 <mat-option [value]="item">{{ item.menuName }}</mat-option>
               }
             </mat-select>

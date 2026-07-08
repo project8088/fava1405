@@ -33,7 +33,7 @@
             <mat-label> گروه والد (اختیاری) </mat-label>
             <mat-select formControlName="parentId" [compareWith]="compareFn">
               <mat-option [value]="">ریشه اصلی</mat-option>
-              @for (item of parentGroups; track item) {
+              @for (item of parentGroups; track $index) {
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>

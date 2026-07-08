@@ -1,6 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChangeCurrentUserPasswordComponent } from '../../shared/change-current-user-password/change-current-user-password.component';
+import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
 import { CitizenComponent } from './citizen.component';
 import { CitizenContactComponent } from './profile/contact/contact.component';
 import { CitizenDashboardComponent } from './dashboard/dashboard.component';
@@ -16,9 +16,9 @@ import { CitizenProfileComponent } from './profile/profile.component';
 import { CitizenTransactionListComponent } from './transaction-list/transaction-list.component';
 import { CreditcardComponent } from './profile/creditcard/creditcard.component';
 import { NgModule } from '@angular/core';
-import { TicketDetailsComponent } from '../../shared/ticket/view-ticket/ticket-details.component';
-import { TicketListComponent } from '../../shared/ticket/ticket-list/ticket-list.component';
-import { TransactionDetailsComponent } from '../../shared/transaction-details/transaction-details.component';
+import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
+import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
+import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CitizenRefundStatusComponent } from './refund/citizen-refund-status.component';
 import { CitizenRefundAccessDetailsListComponent } from './refund/citizen-refund-access-details-list/citizen-refund-access-details-list.component';
 import { CitizenRefundFullInfoComponent } from './refund/citizen-refund-info/citizen-refund-info.component';

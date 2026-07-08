@@ -8,8 +8,8 @@ import { HelperService } from '@core/services/helper.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { CardProfileDialogComponent } from '../../../../shared/_dialog/card-profile/card-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
+import { CardProfileDialogComponent } from '@app/shared/_dialog/card-profile/card-profile.component';
 import { AdminImportCardNumberDialogComponent } from '../dialog/import-card-number/import-card-number.component';
 import { AppBase } from '@app/app.base';
 

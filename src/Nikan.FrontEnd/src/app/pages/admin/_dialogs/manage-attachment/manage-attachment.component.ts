@@ -32,7 +32,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
     if (_data.guid) {
       this.data.guid = _data.guid;
     } else {
-      toastrService.error('guid  وجود ندارد!');
+      this.toastrService.error('guid  وجود ندارد!');
       matDialogRef.close();
       // this.data.guid = this.newGuid();
     }
@@ -72,7 +72,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
     );
   }
 
-  completeUpload(ev) {
+  completeUpload(ev:any) {
     this.data.caption = '';
     this.ngOnInit();
   }

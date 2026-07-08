@@ -75,7 +75,7 @@
           <mat-label>وضعیت تراکنش</mat-label>
           <mat-select formControlName="transactionState">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of transactionStateList; track item) {
+            @for (item of transactionStateList; track $index) {
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>
@@ -85,7 +85,7 @@
           <mat-label>عنوان تراکنش</mat-label>
           <mat-select formControlName="transactionFor">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of transactionForList; track item) {
+            @for (item of transactionForList; track $index) {
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>

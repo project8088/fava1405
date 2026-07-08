@@ -33,7 +33,7 @@
           </div>
           <div style="max-width: 100% !important; display: inline-block" class="col-md-6">
             <div style="width: 100% !important; display: inline-block" class="col-md-12">
-              @for (item of queuelist; track item) {
+              @for (item of queuelist; track $index) {
                 <div class="list-group-item">
                   @if (item.id != queueId) {
                     <span style="color:{{ item.defaultColor }}">
@@ -128,7 +128,7 @@
                   <li class="list-group-item">
                     <strong> کروههای عضو : </strong>
                     <strong class="text-info">
-                      @for (item of card.groups; track item) {
+                      @for (item of card.groups; track $index) {
                         <strong> {{ item }}, </strong>
                       }
                     </strong>

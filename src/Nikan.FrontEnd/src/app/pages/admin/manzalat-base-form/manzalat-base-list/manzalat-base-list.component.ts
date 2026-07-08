@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { userGroupsDto } from '@core/models/users/userGroups';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
@@ -12,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminManzalatBaseFromListComponent extends AppBase implements OnInit {
-  userGroupList: userGroupsDto[] = [];
+  userGroupList: any[] = [];
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;

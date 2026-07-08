@@ -103,7 +103,7 @@
       <strong>شهر ها: </strong>
     }
     <mat-chip-listbox aria-label="selectedCities">
-      @for (item of jobOpportunity.cites; track item) {
+      @for (item of jobOpportunity.cites; track $index) {
         <mat-chip>{{ item }}</mat-chip>
       }
     </mat-chip-listbox>
@@ -111,7 +111,7 @@
       <strong>عناوین شغلی مشابه: </strong>
     }
     <mat-chip-listbox aria-label="similar jobs">
-      @for (item of similarJabs; track item) {
+      @for (item of similarJabs; track $index) {
         <mat-chip>{{ item }}</mat-chip>
       }
     </mat-chip-listbox>
@@ -167,7 +167,7 @@
       <strong>رشته های تحصیلی: </strong>
     }
     <mat-chip-listbox aria-label="selectedFieldStudies">
-      @for (item of jobOpportunity.majors; track item) {
+      @for (item of jobOpportunity.majors; track $index) {
         <mat-chip>{{ item }}</mat-chip>
       }
     </mat-chip-listbox>
@@ -175,7 +175,7 @@
       <strong>مهارت ها: </strong>
     }
     <mat-chip-listbox aria-label="selectedSkills">
-      @for (item of jobOpportunity.skills; track item) {
+      @for (item of jobOpportunity.skills; track $index) {
         <mat-chip>{{ item }}</mat-chip>
       }
     </mat-chip-listbox>

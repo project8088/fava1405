@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="image-buttons">
-    @for (item of registerTypes; track item) {
+    @for (item of registerTypes; track $index) {
       <div class="img-btn" routerLink="/redirect" [queryParams]="{ serviceId: item.serviceId }">
         <i class="fa fa-building"></i>
         <span>{{ item.serviceName }}</span>

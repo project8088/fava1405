@@ -42,7 +42,7 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
   events: any[] = [];
-  constructor(private fb: FormBuilder) {
+  constructor() {
     super();
     this.searchForm = this.fb.group({
       isValidRow: [null],
@@ -51,7 +51,7 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
-      this.importId = p.importId;
+      this.importId = p['importId'];
       this.getList();
     });
   }

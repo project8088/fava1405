@@ -49,7 +49,7 @@
                     <i class="fa fa-tags"></i>
                   </span>
                   <ul>
-                    @for (item of tags; track item) {
+                    @for (item of tags; track $index) {
                       <li>
                         <a>{{ item }}</a>
                       </li>

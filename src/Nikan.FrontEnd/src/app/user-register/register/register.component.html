@@ -98,7 +98,7 @@
                     <mat-form-field  class="w-100">
                       <mat-label>وضعیت تاهل</mat-label>
                       <mat-select formControlName="mariageStatus">
-                        @for (item of maritalStatus; track item) {
+                        @for (item of maritalStatus; track $index) {
                           <mat-option [value]="item.value">
                             {{ item.text }}
                           </mat-option>

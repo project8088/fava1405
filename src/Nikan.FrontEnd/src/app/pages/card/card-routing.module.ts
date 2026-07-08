@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ChangeCurrentUserPasswordComponent } from '../../shared/change-current-user-password/change-current-user-password.component';
-import { TicketListComponent } from '../../shared/ticket/ticket-list/ticket-list.component';
-import { TicketDetailsComponent } from '../../shared/ticket/view-ticket/ticket-details.component';
+import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
+import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
+import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
 import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 import { CardCitizenCardAdvancedSearchComponent } from './citizens-cards/citizen-card-advanced-search/citizen-card-advanced-search.component';
 import { CardTransactionListComponent } from './financial/transaction-list/transaction-list.component';
-import { TransactionDetailsComponent } from '../../shared/transaction-details/transaction-details.component';
+import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CardCitizenCardExportSearchComponent } from './citizens-cards/citizen-card-export-search/citizen-card-export-search.component';
 import { CardCitizenCardExportDetailsComponent } from './citizens-cards/citizen-card-export-details/citizen-card-export-details.component';
 import { CardUsersComponent } from './users/card-users/card-users.component';
@@ -25,7 +25,7 @@ import { CardUserPermissionsComponent } from './users/card-user-permissions/card
 import { OrderCardListComponent } from './store/card-list/card-list.component';
 import { OrderAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
 import { CardDiscountListComponent } from './store/card-discount-list/card-discount-list.component';
-import { AppShowCitizenComponent } from '../../shared/citizens/show-citizens/show-citizen.component';
+import { AppShowCitizenComponent } from '@app/shared/citizens/show-citizens/show-citizen.component';
 import { CardFreeRequestCardListComponent } from './free-card/free-request-list/free-request-list.component';
 import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free-card/add-or-update-free-card.component';
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';

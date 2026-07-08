@@ -23,7 +23,7 @@ export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase imp
     if (_data.groupId) {
       this.data.groupId = _data.groupId;
     } else {
-      toastrService.error('groupId  وجود ندارد!');
+      this.toastrService.error('groupId  وجود ندارد!');
       matDialogRef.close();
     }
   }
@@ -35,7 +35,7 @@ export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase imp
     this.matDialogRef.close();
   }
 
-  completeUpload(ev) {
+  completeUpload(ev:any) {
     this.data.groupId = 0;
     this.ngOnInit();
   }

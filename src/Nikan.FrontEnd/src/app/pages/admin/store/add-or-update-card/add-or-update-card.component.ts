@@ -24,7 +24,7 @@ export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.cardTypeId = p.cardTypeId;
+      this.cardTypeId = p['cardTypeId'];
 
       if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;

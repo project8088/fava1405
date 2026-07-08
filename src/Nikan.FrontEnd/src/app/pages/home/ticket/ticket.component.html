@@ -249,7 +249,7 @@
                         formControlName="organizationId"
                         (selectionChange)="getUnitsOfOrganization()"
                       >
-                        @for (item of organizationList; track item) {
+                        @for (item of organizationList; track $index) {
                           <mat-option [value]="item.key">{{ item.text }}</mat-option>
                         }
                       </mat-select>
@@ -260,7 +260,7 @@
                     <mat-form-field class="col-sm-6 col-md-4">
                       <mat-label>واحد</mat-label>
                       <mat-select formControlName="organizationalUnitId">
-                        @for (item of unitList; track item) {
+                        @for (item of unitList; track $index) {
                           <mat-option [value]="item.key">{{ item.text }}</mat-option>
                         }
                       </mat-select>
@@ -272,7 +272,7 @@
                     <mat-form-field class="col-sm-6 col-md-4">
                       <mat-label>اولویت پیام</mat-label>
                       <mat-select formControlName="priority">
-                        @for (item of periorityList; track item) {
+                        @for (item of periorityList; track $index) {
                           <mat-option [value]="item.key">{{ item.text }}</mat-option>
                         }
                       </mat-select>

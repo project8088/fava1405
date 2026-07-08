@@ -20,7 +20,7 @@
           [compareWith]="compareFn"
           (selectionChange)="changeGrade()"
         >
-          @for (item of baseEnums.educationLevel; track item) {
+          @for (item of baseEnums.educationLevel; track $index) {
             <mat-option [value]="item">
               {{ item.text }}
             </mat-option>

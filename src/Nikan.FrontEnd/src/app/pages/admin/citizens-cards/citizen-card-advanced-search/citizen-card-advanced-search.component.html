@@ -89,7 +89,7 @@
           <mat-label>وضعیت کارت</mat-label>
           <mat-select formControlName="requestStatuse">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of baseEnums.requestStatuse; track item) {
+            @for (item of baseEnums.requestStatuse; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -130,7 +130,7 @@
           <mat-label> عنوان تخفیف</mat-label>
           <mat-select formControlName="discountGroupId">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of baseEnums.discountList; track item) {
+            @for (item of baseEnums.discountList; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -151,7 +151,7 @@
           <mat-label> گروه شهروندی</mat-label>
           <mat-select formControlName="groupId">
             <mat-option [value]="null">همه </mat-option>
-            @for (item of baseEnums.citizenGroups; track item) {
+            @for (item of baseEnums.citizenGroups; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>

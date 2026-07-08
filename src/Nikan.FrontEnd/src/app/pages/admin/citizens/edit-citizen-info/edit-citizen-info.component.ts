@@ -35,7 +35,6 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   constructor(
     private helperService: HelperService,
     private customValidator: CustomFormValidators,
-    private fb: FormBuilder,
   ) {
     super();
     this.form = this.fb.group({

@@ -35,12 +35,12 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean;
+  showAddOrUpdatePanel: boolean=false;
   isSaving=false;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
-    this.frm = fb.group({
+    this.frm = this.fb.group({
       id: [null],
       organizationName: [null, [Validators.required]],
       description: [null],

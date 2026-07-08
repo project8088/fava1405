@@ -38,7 +38,7 @@
         <mat-card-header> آخرین اطلاعیه ها </mat-card-header>
         <mat-card-content>
           <div class="list-container">
-            @for (item of notifications; track item) {
+            @for (item of notifications; track $index) {
               <div class="list-item" (click)="openNotificationDetails(item)">
                 <div class="list-content">
                   <div class="d-flex align-items-center justify-content-between">

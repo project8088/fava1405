@@ -14,8 +14,8 @@ declare var $: any;
   standalone: false,
 })
 export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnInit {
-  isUpdate=false;
-  isSaving=false;
+  isUpdate = false;
+  isSaving = false;
 
   loadingData?: boolean;
 
@@ -81,7 +81,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
         //pages
         if (pages.isSuccess) {
           var webPages = pages.data ? pages.data : [];
-          webPages.forEach((item) => {
+          webPages.forEach((item: any) => {
             this.innerMenuItems.push({
               menuName: item.text,
               menuPath: '/home/page/' + item.description,
@@ -92,7 +92,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.matDialogRef.close(false);
       },
     );
@@ -123,7 +123,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
     if (this.menuForm.invalid) {
       this.toastrService.error('اطلاعات فرم را تکمیل کنید.');
       this.menuForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateMenuItem, this.menuForm.value).subscribe(
@@ -137,7 +137,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

@@ -8,7 +8,7 @@
           <mat-form-field class="col-sm-12">
             <mat-label>موضوع بازخورد</mat-label>
             <mat-select formControlName="feedbackId">
-              @for (item of groupfeedbackList; track item) {
+              @for (item of groupfeedbackList; track $index) {
                 <mat-option [value]="item.key">{{ item.text }}</mat-option>
               }
             </mat-select>
@@ -42,7 +42,7 @@
         </div>
       </form>
     </div>
-    @for (item of listfeedback; track item) {
+    @for (item of listfeedback; track $index) {
       <mat-card class="mt-3">
         <div class="card-title d-flex align-items-center justify-content-between">
           <div>

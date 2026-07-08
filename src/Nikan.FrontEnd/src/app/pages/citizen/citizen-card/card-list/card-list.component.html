@@ -14,7 +14,7 @@
     </div>
 
     <div class="image-buttons">
-      @for (item of availableCards; track item) {
+      @for (item of availableCards; track $index) {
         <div (click)="checkCanOrderCard(item)" class="img-btn">
           <i class="fa fa-cart-arrow-down"></i>
           <span>{{ item.cardType }}</span>

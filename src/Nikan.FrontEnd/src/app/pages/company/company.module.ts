@@ -4,7 +4,7 @@ import { CompanyComponent } from './company.component';
 import { CompanyRoutingModule } from './company-routing.module';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material/material.module';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 import { CompnayDashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';

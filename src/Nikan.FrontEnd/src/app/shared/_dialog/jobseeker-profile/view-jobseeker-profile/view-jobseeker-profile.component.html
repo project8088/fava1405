@@ -197,7 +197,7 @@
         <span>اطلاعات تحصیلی ثبت نشده است!</span>
       </div>
     }
-    @for (item of jobseeker.karjoEducation; track item) {
+    @for (item of jobseeker.karjoEducation; track $index) {
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <strong> مقطع تحصیلی: </strong>
@@ -219,7 +219,7 @@
         <span>اطلاعات سوابق کاری ثبت نشده است!</span>
       </div>
     }
-    @for (item of jobseeker.karjoWork; track item) {
+    @for (item of jobseeker.karjoWork; track $index) {
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <strong> عنوان شرکت: </strong>
@@ -250,7 +250,7 @@
       </div>
     }
     <mat-chip-listbox aria-label="karjoSkills">
-      @for (item of jobseeker.karjoSkills; track item) {
+      @for (item of jobseeker.karjoSkills; track $index) {
         <mat-chip>
           <span>{{ item.skill }}</span>
         </mat-chip>
@@ -267,7 +267,7 @@
       </div>
     }
     <mat-chip-listbox aria-label="UserComputerSkills">
-      @for (item of jobseeker.userComputerSkills; track item) {
+      @for (item of jobseeker.userComputerSkills; track $index) {
         <mat-chip>
           <span>{{ item.skill }}</span>
         </mat-chip>
@@ -284,7 +284,7 @@
       </div>
     }
     <mat-chip-listbox aria-label="karjoAmozesh">
-      @for (item of jobseeker.karjoAmozesh; track item) {
+      @for (item of jobseeker.karjoAmozesh; track $index) {
         <mat-chip>
           <span>{{ item.title }}</span> &nbsp;&nbsp;
           <span>{{ item.timeDure }} ساعت</span> &nbsp;&nbsp;
@@ -303,7 +303,7 @@
       </div>
     }
     <mat-chip-listbox aria-label="karjoLanguage">
-      @for (item of jobseeker.karjoLanguage; track item) {
+      @for (item of jobseeker.karjoLanguage; track $index) {
         <mat-chip>
           <span>{{ item.languageTitle }}</span>
         </mat-chip>
@@ -400,7 +400,7 @@
           <strong>مشاغل درخواستی: </strong>
         }
         <mat-chip-listbox aria-label="مشاغل درخواستی">
-          @for (item of jobseeker.userWorkStatus.jobs; track item) {
+          @for (item of jobseeker.userWorkStatus.jobs; track $index) {
             <mat-chip>{{ item.text }}</mat-chip>
           }
         </mat-chip-listbox>
@@ -408,7 +408,7 @@
           <strong>شهرهایی تمایل به همکاری: </strong>
         }
         <mat-chip-listbox aria-label="شهرهایی تمایل به همکاری">
-          @for (item of jobseeker.userWorkStatus.cites; track item) {
+          @for (item of jobseeker.userWorkStatus.cites; track $index) {
             <mat-chip>{{ item.text }}</mat-chip>
           }
         </mat-chip-listbox>
@@ -419,7 +419,7 @@
       <strong>گروه های کارجو: </strong>
     }
     <mat-chip-listbox aria-label="jobseeker karjoGroup">
-      @for (item of jobseeker.karjoGroup; track item) {
+      @for (item of jobseeker.karjoGroup; track $index) {
         <mat-chip>{{ item.group }} تاریخ عضویت:{{ item.createdOnDate }}</mat-chip>
       }
     </mat-chip-listbox>

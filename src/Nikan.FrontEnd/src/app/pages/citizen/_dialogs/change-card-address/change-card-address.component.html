@@ -27,7 +27,7 @@
       <mat-form-field class="col-sm-4 col-md-3">
         <mat-label> شهر محل سکونت</mat-label>
         <mat-select formControlName="cityId">
-          @for (item of isfahanCities; track item) {
+          @for (item of isfahanCities; track $index) {
             <mat-option [value]="item.key">
               {{ item.text }}
             </mat-option>

@@ -3,15 +3,13 @@ import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
-
-import { AdminCitizenEditImageDialogComponent } from '../../_dialogs/citizen-edit-image/citizen-edit-image.component';
-import { AdminCitizenImageDialogComponent } from '../../_dialogs/citizen-image/citizen-image.component';
-import { AdminCitizenRejectImageDialogComponent } from '../../_dialogs/citizen-reject-image/citizen-reject-image.component';
-import { AdminCitizenSmsListDialogComponent } from '../../_dialogs/citizen-sms-list/citizen-sms-list.component';
 import { ServerApis } from '@core/server-apis';
-import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
-import { MatTableDataSource } from '@angular/material/table';
+import { AdminCitizenImageDialogComponent } from '@app/shared/_dialog/citizen-image/citizen-image.component';
+import { AdminCitizenSmsListDialogComponent } from '@app/shared/_dialog/citizen-sms-list/citizen-sms-list.component';
+import { AdminCitizenEditImageDialogComponent } from '@app/shared/_dialog/citizen-edit-image/citizen-edit-image.component';
+import { AdminCitizenRejectImageDialogComponent } from '@app/shared/_dialog/citizen-reject-image/citizen-reject-image.component';
 
 @Component({
   selector: 'app-citizens-pictures',
@@ -23,13 +21,13 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
   isLoadingResults: boolean = false;
   listCount: number = 10;
-  dataSource = new MatTableDataSource();
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   personalPictureStatuses: any[] = [];
   list: any;
   loading: boolean = true;
   loadingData: boolean = true;
+  data: any;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor() {
@@ -66,7 +64,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
 
   getList() {
     this.loadingData = true;
-    this.dataSource.data = [];
+    this.data = [];
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 50;
@@ -102,7 +100,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        this.dataSource.data = data;
+        this.data = data;
       });
   }
   getEnums() {}

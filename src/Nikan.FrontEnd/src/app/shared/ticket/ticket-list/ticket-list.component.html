@@ -89,7 +89,7 @@
           <mat-label>وضعیت</mat-label>
           <mat-select formControlName="ticketStatus">
             <mat-option [value]="null">همه</mat-option>
-            @for (item of ticketStatus; track item) {
+            @for (item of ticketStatus; track $index) {
               <mat-option [value]="item.key">{{ item.text }}</mat-option>
             }
           </mat-select>

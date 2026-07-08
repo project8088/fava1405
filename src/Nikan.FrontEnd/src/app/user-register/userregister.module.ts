@@ -13,7 +13,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { TermsComponent } from './terms/terms.component';
 import { UserRegisterComponent } from './userregister.component';
 import { UserRegisterRoutingModule } from './userregister-routing.module';

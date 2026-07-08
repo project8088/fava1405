@@ -17,7 +17,7 @@
           }
 
           <div class="row mt-30-reverse blog-masonry-active">
-            @for (item of managerList; track item) {
+            @for (item of managerList; track $index) {
               <div class="card p-2 col-sm-6 col-md-4">
                 <a routerLink="/home/personal/{{ item.id }}" class="relative">
                   <img class="mb-3 img-fluid rad12" [src]="baseUrl + item.imageUrl" alt="" />

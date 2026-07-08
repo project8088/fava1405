@@ -16,8 +16,7 @@
       <div class="d-flex align-items-center justify-content-center p-5">
         <mat-spinner diameter="35" color="default"></mat-spinner>
       </div>
-    }
-    @else {
+    } @else {
       <div class="p-3">
         <div class="row">
           <div class="col-12 col-md-4 col-lg-4">
@@ -25,9 +24,6 @@
           </div>
           <div class="col-12 col-md-8 col-lg-8">
             <div class="row">
-              <div class="col-lg-6">
-                <img class="user-avatar" [src]="baseUrl + familyPictureUrl" />
-              </div>
               <div class="col-12 col-md-6 col-lg-6">
                 <span>کدملی : </span>
                 <strong>
@@ -52,7 +48,7 @@
               </div>
               <div class="col-12 col-md-6 col-lg-6">
                 <span>تاریخ تولد: </span>
-                <strong>{{ citizen.birthDate | luxonFormat}}</strong>
+                <strong>{{ citizen.birthDate | luxonFormat }}</strong>
               </div>
             </div>
           </div>
@@ -66,7 +62,7 @@
 </mat-card>
 
 <div class="col-12">
-  @for (item of familyList; track item) {
+  @for (item of familyList; track $index) {
     <div class="row my-2 justify-content-center">
       <div class="col-12 col-md-10 col-lg-10">
         <mat-card>
@@ -87,14 +83,14 @@
                   {{ item.familyRelation | enumString: 'familyRelationships' }}
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
-                  تاریخ تولد : {{ item.familyBirthDate | luxonFormat}}
+                  تاریخ تولد : {{ item.familyBirthDate | luxonFormat }}
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                   وضعیت تاهل: {{ item.familyMariageStatus | enumString: 'maritalStatus' }}
                 </div>
                 <div class="col-12 col-md-6 col-lg-6">
                   <span>تاریخ ثبت نام: </span>
-                  <strong>{{ item.creationDate | luxonFormat}}</strong>
+                  <strong>{{ item.creationDate | luxonFormat }}</strong>
                 </div>
                 <div class="col-md-12">
                   <span>وضعیت تایید: </span>
@@ -103,7 +99,7 @@
                       تایید شده توسط
                       {{ item.confirmerUser }}
                       در تاریخ
-                      {{ item.confirmDate | luxonFormat}}
+                      {{ item.confirmDate | luxonFormat }}
                     </strong>
                   }
                   @if (item.confirm == false) {
@@ -111,7 +107,7 @@
                       عدم تایید توسط
                       {{ item.confirmerUser }}
                       در تاریخ
-                      {{ item.confirmDate | luxonFormat}}
+                      {{ item.confirmDate | luxonFormat }}
                     </strong>
                   }
                   @if (item.confirm == null) {

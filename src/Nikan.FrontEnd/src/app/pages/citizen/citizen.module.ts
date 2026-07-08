@@ -26,11 +26,10 @@ import { CreditcardComponent } from './profile/creditcard/creditcard.component';
 import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { CitizenRefundStatusComponent } from './refund/citizen-refund-status.component';
 import { CitizenRefundAccessListComponent } from './refund/citizen-refund-access-list/citizen-refund-access-list.component';
 import { CitizenRefundAccessDetailsListComponent } from './refund/citizen-refund-access-details-list/citizen-refund-access-details-list.component';
-import { CitizenRefundInfoDialogComponent } from './refund/dialog/refund-info/refund-info.component';
 import { CitizenRefundFullInfoComponent } from './refund/citizen-refund-info/citizen-refund-info.component';
 import { CitizenMyIdentityInfoComponent } from './profile/my-Identity-Info/my-Identity-Info.component';
 import { CitizenUpdateIdentityInfoComponent } from './profile/update-Identity-Info/update-Identity-Info.component';
@@ -63,7 +62,6 @@ import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.compon
     CitizenRefundStatusComponent,
     CitizenRefundAccessListComponent,
     CitizenRefundAccessDetailsListComponent,
-    CitizenRefundInfoDialogComponent,
     CitizenRefundFullInfoComponent,
     CitizenMyIdentityInfoComponent,
     CitizenUpdateIdentityInfoComponent,

@@ -15,7 +15,7 @@
         <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> خدمات </mat-label>
           <mat-select formControlName="serviceId">
-            @for (item of appList; track item) {
+            @for (item of appList; track $index) {
               <mat-option [value]="item.key">
                 {{ item.text }}
               </mat-option>
@@ -39,7 +39,7 @@
     <div class="row">
       <div class="col-md-6">
         <div class="py-4 list-container">
-          @for (item of userAppAccessList; track item) {
+          @for (item of userAppAccessList; track $index) {
             <div class="list-item">
               <div class="list-content">
                 <div class="row">

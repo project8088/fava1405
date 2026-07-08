@@ -73,7 +73,7 @@
                     <i class="fa fa-tags"></i>
                   </span>
                   <ul>
-                    @for (item of tags; track item) {
+                    @for (item of tags; track $index) {
                       <li>
                         <a>{{ item }}</a>
                       </li>
@@ -99,7 +99,7 @@
 
               <div class="tm-comment-wrapper">
                 <!-- Comment Single -->
-                @for (item of comments; track item) {
+                @for (item of comments; track $index) {
                   <div class="tm-comment">
                     <div class="tm-comment-thumb">
                       <img src="theme/images/authors/author-image-1.jpg" alt="author image" />
@@ -211,7 +211,7 @@
             }
 
             <ul class="prof">
-              @for (item of lastNewsList; track item) {
+              @for (item of lastNewsList; track $index) {
                 <li routerLink="/home/news-details/{{ item.id }}">
                   <a routerLink="/home/news-details/{{ item.id }}">
                     <i class="far fa-file-alt text-info ml-1"></i>
@@ -234,7 +234,7 @@
             }
 
             <ul class="prof">
-              @for (item of mostVisitedList; track item) {
+              @for (item of mostVisitedList; track $index) {
                 <li routerLink="/home/news-details/{{ item.id }}">
                   <a routerLink="/home/news-details/{{ item.id }}">
                     <i class="far fa-file-alt text-info ml-1"></i>

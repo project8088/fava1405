@@ -10,7 +10,7 @@
   </mat-card-header>
   <mat-card-content>
     <div class="p-4 list-container">
-      @for (item of familyList; track item) {
+      @for (item of familyList; track $index) {
         <div class="list-item">
           <div class="list-content" (click)="openFamilyDialog(item)">
             <div class="row">
@@ -68,7 +68,7 @@
       شما بوسیله افراد زیر بعنوان عضو خانوده اضافه شده اید
     </div>
     <div class="col-12">
-      @for (item of familyByfamilyList; track item) {
+      @for (item of familyByfamilyList; track $index) {
         <div class="row my-2 justify-content-center">
           <div class="col-12 col-md-10 col-lg-10">
             <mat-card>

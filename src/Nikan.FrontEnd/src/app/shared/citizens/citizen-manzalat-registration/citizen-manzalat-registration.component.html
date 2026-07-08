@@ -5,7 +5,7 @@
       <label class="field-set-title">شهروند در فرم های زیر ثبت نام نموده است</label>
     </div>
     <div class="col-12">
-      @for (item of data; track item) {
+      @for (item of data; track $index) {
         <div class="row my-2 justify-content-center">
           @if (item.citizenIsRegisterThisForm) {
             <div class="col-12 col-md-10 col-lg-10">

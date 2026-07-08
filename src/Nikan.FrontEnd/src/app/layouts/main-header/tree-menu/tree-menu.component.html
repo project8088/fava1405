@@ -1,4 +1,4 @@
-@for (item of menuItems; track item) {
+@for (item of menuItems; track $index) {
   <li class="nav-item" [routerLinkActive]="'active'" [class.dropdown]="item.children.length > 0">
     @if (item.children.length == 0 && item.isSystem) {
       <a

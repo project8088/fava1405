@@ -39,7 +39,7 @@
           <mat-form-field class="col-md-3">
             <mat-label> نوع کارت</mat-label>
             <mat-select formControlName="cardTypeId">
-              @for (item of baseEnums.cardTypeList; track item) {
+              @for (item of baseEnums.cardTypeList; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>
@@ -52,7 +52,7 @@
           <mat-form-field class="col-md-3">
             <mat-label>نوع تحویل</mat-label>
             <mat-select formControlName="deliverType">
-              @for (item of baseEnums.cardDeliverType; track item) {
+              @for (item of baseEnums.cardDeliverType; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>
@@ -66,7 +66,7 @@
             <mat-form-field class="col-md-3">
               <mat-label>مرکز تحویل</mat-label>
               <mat-select formControlName="centerID">
-                @for (item of baseEnums.centerList; track item) {
+                @for (item of baseEnums.centerList; track $index) {
                   <mat-option [value]="item.key">
                     {{ item.text }}
                   </mat-option>
@@ -80,7 +80,7 @@
           <mat-form-field class="col-md-3">
             <mat-label>وضعیت تصویر پرسنلی </mat-label>
             <mat-select formControlName="imagerReviewStatusFormFreeCard">
-              @for (item of baseEnums.imagerReviewStatusFormFreeCard; track item) {
+              @for (item of baseEnums.imagerReviewStatusFormFreeCard; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>
@@ -93,7 +93,7 @@
           <mat-form-field class="col-md-3">
             <mat-label> گروه شهروندی</mat-label>
             <mat-select formControlName="groupId">
-              @for (item of baseEnums.citizenGroups; track item) {
+              @for (item of baseEnums.citizenGroups; track $index) {
                 <mat-option [value]="item.key">
                   {{ item.text }}
                 </mat-option>

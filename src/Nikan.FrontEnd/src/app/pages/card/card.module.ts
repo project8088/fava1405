@@ -6,7 +6,7 @@ import { CardDashboardComponent } from './dashboard/dashboard.component';
 import { CoreModule } from '@core/core.module';
 import { CardRoutingModule } from './card-routing.module';
 import { MaterialModule } from '@core/material/material.module';
-import { SharedModule } from '../../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { CardCitizenCardAdvancedSearchComponent } from './citizens-cards/citizen-card-advanced-search/citizen-card-advanced-search.component';

@@ -24,7 +24,7 @@ export class AdminTreeWebApiPermissionComponent extends AppBase implements OnIni
 
   someComplete(item:any): boolean {
     if (!item.value) {
-        return ;
+        return false ;
     }
     return item.value.filter((t:any) => t.selected).length > 0 && !item.allComplete;
   }

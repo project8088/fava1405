@@ -29,7 +29,7 @@ export class AdminMenuManagementComponent extends AppBase implements OnInit {
         this.isLoadingResults = false;
         if (response.isSuccess) {
           var data = response.data ? response.data : [];
-          data.sort((a, b) => {
+          data.sort((a: any, b: any) => {
             if (a.tabOrder > b.tabOrder) return 1;
             else if (a.tabOrder < b.tabOrder) return -1;
             else return 0;
@@ -41,13 +41,13 @@ export class AdminMenuManagementComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
   }
 
-  getNestedChildren(arr, parentId = null) {
+  getNestedChildren(arr: any[], parentId = null) {
     var out = [];
     for (var i in arr) {
       if (arr[i].parentId == parentId) {
@@ -61,7 +61,7 @@ export class AdminMenuManagementComponent extends AppBase implements OnInit {
     return out;
   }
 
-  openMenuDialog(menu) {
+  openMenuDialog(menu: any) {
     this.matDialog
       .open(AdminAddOrUpdateMenuDialogComponent, {
         data: menu,

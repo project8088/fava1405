@@ -22,7 +22,7 @@
         </tr>
       </thead>
       <tbody>
-        @for (item of attachments; track item) {
+        @for (item of attachments; track $index) {
           <tr>
             @if (item.isImage) {
               <td class="lightGallery">

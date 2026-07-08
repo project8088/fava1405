@@ -32,7 +32,7 @@
                   <mat-form-field class="col-sm-4 col-md-3">
                     <mat-label> شهر محل سکونت</mat-label>
                     <mat-select formControlName="cityId">
-                      @for (item of isfahanCities; track item) {
+                      @for (item of isfahanCities; track $index) {
                         <mat-option [value]="item.key">
                           {{ item.text }}
                         </mat-option>
@@ -149,7 +149,7 @@
                     <mat-form-field class="col-sm-4 col-md-3">
                       <mat-label> استان محل کار</mat-label>
                       <mat-select formControlName="stateId">
-                        @for (item of states; track item) {
+                        @for (item of states; track $index) {
                           <mat-option [value]="item.key">
                             {{ item.text }}
                           </mat-option>
@@ -162,7 +162,7 @@
                     <mat-form-field class="col-sm-4 col-md-3">
                       <mat-label> شهر محل کار</mat-label>
                       <mat-select formControlName="cityId">
-                        @for (item of cities | async; track item) {
+                        @for (item of cities | async; track $index) {
                           <mat-option [value]="item.key">
                             {{ item.text }}
                           </mat-option>
