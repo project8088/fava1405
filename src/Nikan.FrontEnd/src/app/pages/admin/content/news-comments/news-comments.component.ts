@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminNewsCommentsComponent extends AppBase implements OnInit {
-  newsid: string ='';
+  newsId: string ='';
 
   displayedColumns: string[] = [
     'row',

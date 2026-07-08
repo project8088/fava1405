@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainNewsDetailsComponent extends AppBase implements OnInit {
-  newsid: string = '';
+  newsId: string = '';
   user?: AuthUser | null;
   loadingData?: boolean;
   news?: NewsDto;
@@ -32,7 +32,6 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
 
   mostVisitedList: NewsDto[] = [];
   loadingVisited: boolean = false;
-  newsId: string='';
   constructor(
     private customValidator: CustomFormValidators,
     private titleService: Title,
