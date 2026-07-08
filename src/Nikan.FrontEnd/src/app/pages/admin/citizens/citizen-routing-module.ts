@@ -22,6 +22,7 @@ import { AdminEditCitizenInfoComponent } from './edit-citizen-info/edit-citizen-
 import { AdminManageGroupsCitizenComponent } from './manage-groups-citizens/manage-group-citizen.component';
 import { AdminManzelatCitizensDetailsComponent } from './manzelat-citizens-details/manzelat-citizens-details.component';
 import { AdminManzelatCitizensComponent } from './manzelat-citizens/manzelat-citizens.component';
+import { AdminGroupQueueCitizensListComponent } from './group-queue-citizens-list/group-queue-citizens-list.component';
 
 const routes: Routes = [
   { path: 'citizen-in-group/:id', component: AdminCitizensInGroupsComponent },
@@ -49,6 +50,7 @@ const routes: Routes = [
     path: 'citizens-authentication-search',
     component: AdminCitizenAuthenticationSearchComponent,
   },
+  { path: 'group-queue-citizens-list/:id', component: AdminGroupQueueCitizensListComponent },
 
   //citizen Card
   { path: 'advanced-search-card-citizen', component: AdminCitizenCardAdvancedSearchComponent },

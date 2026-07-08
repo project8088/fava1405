@@ -42,6 +42,7 @@ import { AdminCitizenAddressInfoComponent } from './citizen-profile-edit/address
 import { AdminAddOrUpdateAppserviceComponent } from './citizen-apps/add-or-update-appservice/add-or-update-appservice.component';
 import { AdminCitizenRejectFamilyComponent } from './_dialog/citizen-reject-family/citizen-reject-family.component';
 import { AdminCitizenManzelatReviewComponent } from './_dialog/citizen-manzelat-review/citizen-manzelat-review.component';
+import { AdminGroupQueueCitizensListComponent } from './group-queue-citizens-list/group-queue-citizens-list.component';
 
 @NgModule({
   declarations: [
@@ -80,6 +81,7 @@ import { AdminCitizenManzelatReviewComponent } from './_dialog/citizen-manzelat-
     AdminUpdateCitizenIdentityInfoComponent,
     AdminCitizenRejectFamilyComponent,
     AdminCitizenManzelatReviewComponent,
+    AdminGroupQueueCitizensListComponent
   ],
   imports: [
     CommonModule,

@@ -43,7 +43,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
   events: any[] = [];
   constructor(private customValidator: CustomFormValidators) {
     super();
-    this.frm = fb.group({
+    this.frm = this.fb.group({
       unitName: [null, [Validators.required]],
       className: ['', [Validators.required]],
       /* nationalCode: [null,   this.customValidator.checkNationalCode],*/
@@ -61,7 +61,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
 
   ngOnInit(): void {
     this.route.params.subscribe((p) => {
-      this.importId = p.importId;
+      this.importId = p['importId'];
       this.getList();
     });
   }

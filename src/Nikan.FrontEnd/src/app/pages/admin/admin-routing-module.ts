@@ -10,6 +10,10 @@ const routes: Routes = [
     path: 'citizen',
     loadChildren: () => import('./citizens/citizen-module').then((m) => m.CitizenModule),
   },
+  {
+    path: 'refund',
+    loadChildren: () => import('./refund/refund-module').then((m) => m.RefundModule),
+  },
 ];
 
 @NgModule({
