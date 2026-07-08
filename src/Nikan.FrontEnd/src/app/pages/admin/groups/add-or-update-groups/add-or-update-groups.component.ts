@@ -75,7 +75,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -86,7 +86,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
       (response) => {
         this.parentGroups = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -126,7 +126,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

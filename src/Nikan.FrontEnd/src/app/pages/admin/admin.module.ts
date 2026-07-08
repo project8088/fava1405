@@ -17,11 +17,9 @@ import { AdminChangePasswordDialogComponent } from './users/dialogs/change-user-
 import { AdminCitizenAdvancedSearchComponent } from './citizens/citizen-advanced-search/citizen-advanced-search.component';
 import { AdminCitizenEditImageDialogComponent } from './_dialogs/citizen-edit-image/citizen-edit-image.component';
 import { AdminCitizenFamilyDetailsComponent } from './citizens/citizen-family-details/citizen-family-details.component';
-import { AdminCitizenImageDialogComponent } from './_dialogs/citizen-image/citizen-image.component';
 import { AdminCitizenManzelatReviewComponent } from './_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
 import { AdminCitizenRejectFamilyComponent } from './_dialogs/citizen-reject-family/citizen-reject-family.component';
 import { AdminCitizenRejectImageDialogComponent } from './_dialogs/citizen-reject-image/citizen-reject-image.component';
-import { AdminCitizenSmsListDialogComponent } from './_dialogs/citizen-sms-list/citizen-sms-list.component';
 import { AdminCitizensComponent } from './citizens/citizens.component';
 import { AdminCitizensFamilyComponent } from './citizens/citizen-family/citizens-family.component';
 import { AdminCitizensPicturesComponent } from './citizens/citizens-pictures/citizens-pictures.component';
@@ -188,8 +186,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
     AdminWebApiUserPermissionsComponent,
     AdminAddFeedBackDialogComponent,
     AdminCitizensPicturesComponent,
-    AdminCitizenImageDialogComponent,
-    AdminCitizenSmsListDialogComponent,
     AdminCitizenRejectImageDialogComponent,
     AdminCitizenEditImageDialogComponent,
     AdminCitizensFamilyComponent,

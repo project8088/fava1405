@@ -39,7 +39,7 @@ export class FaqListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingGroup = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -63,7 +63,7 @@ export class FaqListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingList = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -90,7 +90,7 @@ export class FaqListComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           item.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

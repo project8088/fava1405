@@ -17,7 +17,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
   cardForm: FormGroup;
 
   confirmForm: FormGroup;
-  loadingState: boolean;
+  loadingState: boolean=false;
   codeSent: boolean;
 
   emailForm: FormGroup;
@@ -62,7 +62,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           email: data.data.email,
         });
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );
@@ -88,7 +88,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -109,7 +109,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

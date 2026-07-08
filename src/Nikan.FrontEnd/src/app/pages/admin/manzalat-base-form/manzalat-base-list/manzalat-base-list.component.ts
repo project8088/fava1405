@@ -41,7 +41,7 @@ export class AdminManzalatBaseFromListComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

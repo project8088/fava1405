@@ -40,7 +40,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
   isLoadingResults: boolean = true;
   isDownloadExcel: boolean = false;
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -100,7 +100,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
           this.baseEnums.groupIds = response.groupIds;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -111,7 +111,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -122,7 +122,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -203,7 +203,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );

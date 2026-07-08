@@ -31,7 +31,7 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
           this.owlService();
         }, 200);
       },
-      (error) => {
+      (error:any) => {
         this.loadingManagers = false;
       },
     );

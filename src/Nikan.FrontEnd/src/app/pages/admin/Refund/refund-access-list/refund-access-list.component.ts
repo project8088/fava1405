@@ -109,7 +109,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
     this.getList();
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -148,7 +148,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );
@@ -191,7 +191,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

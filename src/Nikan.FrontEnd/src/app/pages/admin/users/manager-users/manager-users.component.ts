@@ -129,7 +129,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             row.loading = false;
           },
         );

@@ -118,7 +118,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
       this.states = data as [];
     });
 
-    this.cities = this.workForm.get('stateId')?.valueChanges.pipe(
+    this.cities = this.workForm.get('stateId')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -148,7 +148,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
           });
         }
 
-        this.cities = this.workForm.get('stateId')?.valueChanges.pipe(
+        this.cities = this.workForm.get('stateId')!.valueChanges.pipe(
           startWith(data.data.city.parentValue),
           debounceTime(400),
           distinctUntilChanged(),
@@ -197,7 +197,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
           this.isSavingHome = false;
           this.isSavingWork = false;
         },
-        (error) => {
+        (error:any) => {
           this.isSavingHome = false;
           this.isSavingWork = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');

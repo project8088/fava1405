@@ -147,7 +147,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

@@ -134,7 +134,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -166,7 +166,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

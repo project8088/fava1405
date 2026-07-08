@@ -24,7 +24,7 @@ export class ViewCardProfileComponent extends AppBase implements OnInit {
   ngOnInit(): void {
     this.getCitizenInfo();
     this.dataService.getEnums().subscribe((data) => {
-      this.maritalStatus = data.maritalStatus.map((el) => el.text);
+      this.maritalStatus = data.maritalStatus.map((el: any) => el.text);
     });
   }
 
@@ -40,7 +40,7 @@ export class ViewCardProfileComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

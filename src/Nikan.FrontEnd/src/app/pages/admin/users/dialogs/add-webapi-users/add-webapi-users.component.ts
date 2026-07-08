@@ -94,7 +94,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );
@@ -113,7 +113,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -135,7 +135,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingUnit = false;
         },
       );
@@ -145,7 +145,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

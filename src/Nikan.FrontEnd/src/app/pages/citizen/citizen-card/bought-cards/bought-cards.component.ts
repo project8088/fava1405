@@ -36,7 +36,7 @@ export class BoughtCardsComponent extends AppBase implements OnInit {
         this.loading = false;
         this.cards = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

@@ -24,14 +24,14 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean;
+  loadingState: boolean=false;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState=new Observable<any[]>();
   states: any[] = [];
   provinceList: any[] = [];
 
-  birthC: ities = new Observable<any>();
-  shC: ities = new Observable<any>();
+  birthCities = new Observable<any>();
+  shCities = new Observable<any>();
 
   lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
@@ -88,7 +88,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
 
     this.getPersonalInfo();
 
-    this.birthCities = this.form.get('birthStateId')?.valueChanges.pipe(
+    this.birthCities = this.form.get('birthStateId')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -103,7 +103,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
       (response) => {
         this.provinceList = response.data ? response.data : [];
       },
-      (error) => {},
+      (error:any) => {},
     );
   }
 
@@ -122,7 +122,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.baseEnums.religion = response.religion;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -137,7 +137,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -185,7 +185,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             endOfEducation: response.data.endOfEducation,
           });
 
-          this.shCities = this.form.get('shStateId')?.valueChanges.pipe(
+          this.shCities = this.form.get('shStateId')!.valueChanges.pipe(
             startWith(response.data.shCity?.parentValue),
             debounceTime(400),
             distinctUntilChanged(),
@@ -194,7 +194,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             }),
           );
 
-          this.birthCities = this.form.get('birthStateId')?.valueChanges.pipe(
+          this.birthCities = this.form.get('birthStateId')!.valueChanges.pipe(
             startWith(response.data.cityOfBirth?.parentValue),
             debounceTime(400),
             distinctUntilChanged(),
@@ -207,7 +207,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -238,7 +238,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

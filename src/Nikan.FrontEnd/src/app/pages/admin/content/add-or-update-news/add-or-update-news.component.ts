@@ -99,7 +99,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -116,7 +116,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
     }
   }
 
-  remove(item): void {
+  remove(item:any): void {
     const index = this.seoTags.indexOf(item);
 
     if (index >= 0) {
@@ -172,7 +172,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

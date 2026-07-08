@@ -53,7 +53,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -83,7 +83,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -114,7 +114,7 @@ export class AdminOrganizationUnitGroupsComponent extends AppBase implements OnI
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

@@ -92,7 +92,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.matDialogRef.close(false);
       },
     );
@@ -137,7 +137,7 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

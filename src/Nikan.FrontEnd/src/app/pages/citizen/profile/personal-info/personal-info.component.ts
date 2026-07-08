@@ -24,11 +24,11 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean;
+  loadingState: boolean=false;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState=new Observable<any[]>();
   states: any[] = [];
-  c: ities = new Observable<any>();
+  cities = new Observable<any>();
   isfahanCities: any[]=[];
 
   lastModifiedOnDate?: string;
@@ -93,7 +93,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   ngOnInit() {
     this.getBaseEnums();
     this.getEducationGroups();
-    this.cities = this.personalForm.get('stateId')?.valueChanges.pipe(
+    this.cities = this.personalForm.get('stateId')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -104,7 +104,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
       }),
     );
 
-    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -140,7 +140,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
               }
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
           },
@@ -165,7 +165,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
           this.baseEnums.jobGroup = response.jobGroup;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -180,7 +180,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -231,7 +231,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -277,7 +277,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -307,11 +307,11 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
 
   setDisabledFields() {
     if (this.noEditStatus()) {
-      //this.personalForm.get('firstName').disable();
-      //this.personalForm.get('lastName').disable();
-      //this.personalForm.get('fatherName').disable();
-      //this.personalForm.get('birthDate').disable();
-      //this.personalForm.get('gender').disable();
+      //this.personalForm.get('firstName')?.disable();
+      //this.personalForm.get('lastName')?.disable();
+      //this.personalForm.get('fatherName')?.disable();
+      //this.personalForm.get('birthDate')?.disable();
+      //this.personalForm.get('gender')?.disable();
     }
   }
   noEditStatus() {

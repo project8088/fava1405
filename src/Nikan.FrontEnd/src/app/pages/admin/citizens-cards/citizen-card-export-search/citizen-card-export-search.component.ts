@@ -38,7 +38,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -139,7 +139,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );

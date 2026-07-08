@@ -38,7 +38,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportid: string ='';
+  exportId: string ='';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 
@@ -178,7 +178,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

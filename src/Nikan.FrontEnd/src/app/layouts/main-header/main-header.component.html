@@ -55,8 +55,8 @@
       <ul class="navbar-nav">
         @if (isAuth) {
           <li class="nav-item">
-            <a class="nav-link" (click)="dashboard()" [matTooltip]="user.displayName">
-              {{ user.userName }}
+            <a class="nav-link" (click)="dashboard()" [matTooltip]="user?.displayName">
+              {{ user?.userName }}
             </a>
           </li>
         }
@@ -79,7 +79,7 @@
                 <a
                   class="dropdown-item font-08 w-100 overflow"
                   (click)="registerWithService(type)"
-                  >{{ type.text }}</a
+                  >{{ type.terms }}</a
                 >
               }
             </div>

@@ -81,7 +81,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );

@@ -122,7 +122,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

@@ -50,7 +50,7 @@ export class AdminCompanyContractDialogComponent extends AppBase implements OnIn
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

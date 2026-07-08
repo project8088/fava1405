@@ -50,7 +50,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -72,7 +72,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -94,7 +94,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -137,7 +137,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -156,7 +156,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );

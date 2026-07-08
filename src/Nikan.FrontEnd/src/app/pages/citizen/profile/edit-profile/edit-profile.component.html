@@ -140,7 +140,7 @@
               }
             </mat-autocomplete>
             @if (
-              personalForm.get('state').errors?.incorrect ||
+              personalForm.get('state')?.hasError('incorrect') ||
               personalForm.get('state')?.hasError('required')
             ) {
               <mat-error> شهر مورد نظر را از لیست انتخاب کنید </mat-error>

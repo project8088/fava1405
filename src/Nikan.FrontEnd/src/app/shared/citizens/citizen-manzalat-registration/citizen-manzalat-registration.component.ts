@@ -49,7 +49,7 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
             this.data = response.data ? response.data.manzaltForms : {};
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

@@ -129,7 +129,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
           else this.router.navigate(['/company/personal/0']);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );
@@ -191,7 +191,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

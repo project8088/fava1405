@@ -62,7 +62,7 @@ export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewI
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -98,7 +98,7 @@ export class AdminFaqListComponent extends AppBase implements OnInit, AfterViewI
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

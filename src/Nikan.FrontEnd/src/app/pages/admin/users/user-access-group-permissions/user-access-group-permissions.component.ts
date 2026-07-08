@@ -53,7 +53,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -83,7 +83,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -117,7 +117,7 @@ export class AdminUserAccessGroupPermissionsComponent extends AppBase implements
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

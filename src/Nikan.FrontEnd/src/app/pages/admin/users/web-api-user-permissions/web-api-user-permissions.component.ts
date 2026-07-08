@@ -41,7 +41,7 @@ export class AdminWebApiUserPermissionsComponent extends AppBase implements OnIn
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isLoadingResults = false;
         },
       );
@@ -70,7 +70,7 @@ export class AdminWebApiUserPermissionsComponent extends AppBase implements OnIn
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

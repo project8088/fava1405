@@ -16,7 +16,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   hasFiles: boolean = false;
   userId?: string;
   cardForm: FormGroup;
-  loadingState: boolean;
+  loadingState: boolean=false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   data: any;
@@ -47,7 +47,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
         } else {
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );
@@ -67,7 +67,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
           } else {
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

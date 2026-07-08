@@ -4,12 +4,12 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { AdminCitizenSmsListDialogComponent } from '../../admin/_dialogs/citizen-sms-list/citizen-sms-list.component';
-import { AdminCitizenImageDialogComponent } from '../../admin/_dialogs/citizen-image/citizen-image.component';
-import { AdminCitizenEditImageDialogComponent } from '../../admin/_dialogs/citizen-edit-image/citizen-edit-image.component';
-import { AdminCitizenRejectImageDialogComponent } from '../../admin/_dialogs/citizen-reject-image/citizen-reject-image.component';
-import { CitizenProfileDialogComponent } from '../../../shared/_dialog/citizen-profile/citizen-profile.component';
-import { AppBase } from '@app/app.base';
+import { AppBase } from '@app/app.base'; 
+import { AdminCitizenSmsListDialogComponent } from '@app/shared/_dialog/citizen-sms-list/citizen-sms-list.component';
+import { AdminCitizenImageDialogComponent } from '@app/shared/_dialog/citizen-image/citizen-image.component';
+import { AdminCitizenEditImageDialogComponent } from '@app/shared/_dialog/citizen-edit-image/citizen-edit-image.component';
+import { AdminCitizenRejectImageDialogComponent } from '@app/shared/_dialog/citizen-reject-image/citizen-reject-image.component';
+import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 
 @Component({
   selector: 'app-card-citizens-pictures',
@@ -21,9 +21,9 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
   isLoadingResults: boolean = false;
   listCount: number = 10;
-  data;
+  data: any[] = [];
   baseUrl = ServerApis.baseUrl;
-  personalPictureStatuses: [];
+  personalPictureStatuses: any[] = [];
   list: any;
   loading: boolean = true;
   loadingData: boolean = true;
@@ -92,12 +92,12 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.data = data;
       });
   }
   getEnums() {}
 
-  confirmImage(citizen) {
+  confirmImage(citizen: any) {
     citizen.isConfirming = true;
     this.dataService
       .get(ServerApis.acceptCitizenPicture + '?citizenId=' + citizen.citizenId)
@@ -123,7 +123,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
     this.getList();
   }
 
-  openImageDialog(citizen) {
+  openImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -135,7 +135,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         if (result) this.getList();
       });
   }
-  openMessagesDialog(citizen) {
+  openMessagesDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenSmsListDialogComponent, {
         panelClass: 'custom-dialog',
@@ -148,7 +148,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
       });
   }
 
-  openEditImageDialog(citizen) {
+  openEditImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenEditImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -160,7 +160,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         if (result) this.getList();
       });
   }
-  openRejectImageDialog(citizen) {
+  openRejectImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenRejectImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -179,7 +179,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         }
       });
   }
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -189,7 +189,7 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
       maxWidth: '1800px',
     });
   }
-  refreshImage(citizen) {
+  refreshImage(citizen: any) {
     citizen.imageVersion = Math.random() * 1000;
   }
 }

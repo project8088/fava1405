@@ -122,7 +122,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.router.navigate(['/admin/manager-users']);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );
@@ -184,7 +184,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

@@ -22,9 +22,9 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
   frm: FormGroup;
   isUpdate=false;
 
-  courseid: string ='';
-  loadingServices: boolean;
-  filteredServices: Observable<any[]>;
+  courseId: string ='';
+  loadingServices: boolean=false;
+  filteredServices=new Observable<any[]>();
   selectedServices: any[] = [];
 
   loadingData?: boolean;
@@ -60,7 +60,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
   }
 
   ngOnInit() {
-    this.filteredServices = this.frm.get('groups')?.valueChanges.pipe(
+    this.filteredServices = this.frm.get('groups')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -84,7 +84,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
           this.matDialogRef.close();
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -130,7 +130,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -164,7 +164,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingServices = false;
           },
@@ -193,7 +193,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
    */
   selectedAutoChip(
     list: any[],
-    formControl,
+    formControl:string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,
@@ -203,8 +203,8 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
       this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
     else list.push(event.option.value);
     input.value = '';
-    this.frm.get(formControl).setValue(null);
-    setTimeout((_) => {
+    this.frm.get(formControl)?.setValue(null);
+    setTimeout(() => {
       Trigger.openPanel();
     }, 100);
   }

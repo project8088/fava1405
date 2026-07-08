@@ -97,7 +97,7 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
     this.getList();
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

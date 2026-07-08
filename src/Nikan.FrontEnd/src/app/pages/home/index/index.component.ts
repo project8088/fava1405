@@ -43,7 +43,7 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
           this.owltopnews();
         }, 200);
       },
-      (error) => {
+      (error:any) => {
         this.loadingNews = false;
       },
     );

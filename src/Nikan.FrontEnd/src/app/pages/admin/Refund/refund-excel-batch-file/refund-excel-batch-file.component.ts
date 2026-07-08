@@ -64,7 +64,7 @@ export class AdminRefundExcelBatchFileListComponent extends AppBase implements A
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -102,7 +102,7 @@ export class AdminRefundExcelBatchFileListComponent extends AppBase implements A
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
             },
           );

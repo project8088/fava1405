@@ -29,7 +29,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   family: citizenFamilyModel;
 
   loadingFieldStudies: boolean;
-  filteredFieldStudies: Observable<any[]>;
+  filteredFieldStudies=new Observable<any[]>();
   selectedFieldStudies: any[] = [];
 
   firstFormGroup: FormGroup;
@@ -40,7 +40,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   familyIsRegister: boolean = true;
 
   states: any[] = [];
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   constructor(
     private matDialogRef: MatDialogRef<CitizenFamilyDialogComponent>,
@@ -108,33 +108,33 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     });
 
     this.registerForm.get('familyRelation')?.valueChanges.subscribe((value) => {
-      this.registerForm.get('gender').enable();
-      this.registerForm.get('mariageStatus').enable();
+      this.registerForm.get('gender')?.enable();
+      this.registerForm.get('mariageStatus')?.enable();
 
       switch (value) {
         case 0: // father
           this.registerForm.get('gender')?.setValue(true);
-          this.registerForm.get('gender').disable();
+          this.registerForm.get('gender')?.disable();
           break;
 
         case 1: // mother
           this.registerForm.get('gender')?.setValue(false);
-          this.registerForm.get('gender').disable();
+          this.registerForm.get('gender')?.disable();
           break;
 
         case 2: // wife/husband
           this.registerForm.get('mariageStatus')?.setValue(1);
-          this.registerForm.get('mariageStatus').disable();
+          this.registerForm.get('mariageStatus')?.disable();
           break;
 
         case 4: // brother
           this.registerForm.get('gender')?.setValue(true);
-          this.registerForm.get('gender').disable();
+          this.registerForm.get('gender')?.disable();
           break;
 
         case 5: // sister
           this.registerForm.get('gender')?.setValue(false);
-          this.registerForm.get('gender').disable();
+          this.registerForm.get('gender')?.disable();
           break;
       }
     });
@@ -152,7 +152,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       this.registerForm.get('educationGroup')?.updateValueAndValidity();
     });
 
-    this.registerForm.get('familyRelation')?.valueChanges.pipe(
+    this.registerForm.get('familyRelation')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -208,7 +208,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     this.familyForm.patchValue({
       nationCode: this.firstFormGroup.value.nationCode,
     });
-    this.familyForm.get('nationCode').disable();
+    this.familyForm.get('nationCode')?.disable();
   }
   checkNationCode(stepper: MatStepper) {
     if (this.firstFormGroup.invalid) {
@@ -237,7 +237,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -299,7 +299,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -339,7 +339,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -393,7 +393,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -419,7 +419,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.baseEnums.educationLevel = response.educationLevel ? response.educationLevel : [];
 
           var grade = [];
-          this.baseEnums.educationLevel.forEach((item, index) => {
+          this.baseEnums.educationLevel.forEach((item:any, index) => {
             if (+item.key > 19) grade.push(item);
           });
           this.baseEnums.educationLevel = grade;
@@ -430,7 +430,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -449,7 +449,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },

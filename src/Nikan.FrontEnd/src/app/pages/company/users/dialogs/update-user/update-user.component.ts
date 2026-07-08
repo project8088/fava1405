@@ -61,7 +61,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
           this.matDialogRef.close(false);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.matDialogRef.close(false);
       },
@@ -103,7 +103,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  queueid: string ='';
+  queueId: string ='';
   loading: boolean = true;
   info: any;
   constructor(
@@ -60,7 +60,7 @@ export class CardDeliveryQueueOperatorDialogComponent extends AppBase implements
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

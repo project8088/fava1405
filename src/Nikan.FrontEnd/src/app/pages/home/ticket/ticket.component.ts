@@ -52,7 +52,7 @@ export class TicketComponent extends AppBase implements OnInit {
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -71,7 +71,7 @@ export class TicketComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -94,7 +94,7 @@ export class TicketComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingUnit = false;
         },
       );
@@ -137,7 +137,7 @@ export class TicketComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

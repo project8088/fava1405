@@ -85,7 +85,7 @@ export class AdminAddOrUpdateNotificationComponent
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -137,7 +137,7 @@ export class AdminAddOrUpdateNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

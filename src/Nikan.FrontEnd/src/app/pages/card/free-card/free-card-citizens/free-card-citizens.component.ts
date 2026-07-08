@@ -20,7 +20,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
   displayedColumns: string[] = ['row', 'imageUrl', 'citizen', 'nationCode', 'sabtStatus'];
 
   baseUrl: string = ServerApis.baseUrl;
-  requestid: string ='';
+  requestId: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

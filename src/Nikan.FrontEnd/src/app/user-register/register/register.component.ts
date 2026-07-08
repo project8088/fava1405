@@ -121,7 +121,7 @@ export class RegisterComponent extends AppBase implements OnInit {
           this.educationGroups = response.data ?? [];
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -166,7 +166,7 @@ export class RegisterComponent extends AppBase implements OnInit {
           this.router.navigateByUrl('/redirect?serviceId=' + this.serviceId);
         } else this.toastrService.error(data.messages);
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -189,7 +189,7 @@ export class RegisterComponent extends AppBase implements OnInit {
           this.codeSent = false;
         }
       },
-      (error) => {
+      (error:any) => {
         this.codeSent = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

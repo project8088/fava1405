@@ -115,7 +115,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
     this.getList();
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -180,7 +180,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

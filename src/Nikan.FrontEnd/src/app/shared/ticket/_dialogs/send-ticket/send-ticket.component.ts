@@ -49,7 +49,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
           this.matDialogRef.close();
         }
       },
-      (error) => {
+      (error:any) => {
         this.matDialogRef.close();
       },
     );
@@ -68,7 +68,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -91,7 +91,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingUnit = false;
         },
       );
@@ -133,7 +133,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

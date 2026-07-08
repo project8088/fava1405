@@ -74,7 +74,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -132,7 +132,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {},
+        (error:any) => {},
       );
   }
 }

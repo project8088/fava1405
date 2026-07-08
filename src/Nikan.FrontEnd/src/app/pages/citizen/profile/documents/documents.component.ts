@@ -15,7 +15,7 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
   isSaving: boolean = false;
   userId?: string;
   cardForm: FormGroup;
-  loadingState: boolean;
+  loadingState: boolean=false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   data: any;
@@ -77,7 +77,7 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

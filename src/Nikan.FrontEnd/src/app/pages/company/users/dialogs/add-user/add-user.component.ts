@@ -85,7 +85,7 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

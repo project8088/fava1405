@@ -113,7 +113,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

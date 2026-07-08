@@ -64,7 +64,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -100,7 +100,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

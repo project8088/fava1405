@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminTreeMenuComponent extends AppBase implements OnInit {
-  @Input('menuItems') menuItems: any[];
+  @Input('menuItems') menuItems: any[] = [];
 
   @Output() onUpdate = new EventEmitter<boolean>();
 
@@ -21,7 +21,7 @@ export class AdminTreeMenuComponent extends AppBase implements OnInit {
 
   ngOnInit() {}
 
-  delete(row, ev: Event) {
+  delete(row: any, ev: Event) {
     ev.preventDefault();
     ev.stopPropagation();
     Swal.fire({
@@ -41,7 +41,7 @@ export class AdminTreeMenuComponent extends AppBase implements OnInit {
             (response) => {
               if (response.isSuccess) {
                 this.toastrService.success('با موفقیت حذف شد.');
-                //this.menuItems.forEach((item, index) => {
+                //this.menuItems.forEach((item:any, index) => {
                 //  if (item.id == row.id)
                 //    this.menuItems.splice(index, 1);
                 //});
@@ -53,7 +53,7 @@ export class AdminTreeMenuComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error: any) => {},
           );
       }
     });

@@ -13,17 +13,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainHeaderComponent extends AppBase implements OnInit {
-  isAuth: boolean;
+  isAuth: boolean = false;
   user?: AuthUser | null;
   datetime: any;
-    loading?: boolean;
-  slag: string;
-  setting: SiteSettingViewModel;
+  loading?: boolean;
+  slag: string = '';
+  setting?: SiteSettingViewModel | null;
 
   loadingMenu: boolean = true;
   menuItems: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
-  registerTypes;
+  registerTypes: RegisterServiceModel[] = [];
 
   constructor(
     private title: Title,
@@ -60,7 +60,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
         this.loadingMenu = false;
         if (response.isSuccess) {
           var data = response.data ? response.data : [];
-          data.sort((a, b) => {
+          data.sort((a: any, b: any) => {
             if (a.tabOrder > b.tabOrder) return 1;
             else if (a.tabOrder < b.tabOrder) return -1;
             else return 0;
@@ -74,7 +74,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingMenu = false;
       },
     );
@@ -87,7 +87,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
           return { value: String(el.serviceId), text: el.serviceName, ...el };
         });
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -107,7 +107,7 @@ export class MainHeaderComponent extends AppBase implements OnInit {
     this.authService.logout();
   }
 
-  getNestedChildren(arr, parentId = null) {
+  getNestedChildren(arr: any, parentId = null) {
     var out = [];
     for (var i in arr) {
       if (arr[i].parentId == parentId) {

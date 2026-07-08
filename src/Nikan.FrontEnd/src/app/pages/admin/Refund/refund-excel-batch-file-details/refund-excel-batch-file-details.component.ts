@@ -86,7 +86,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -126,7 +126,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -158,7 +158,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -188,7 +188,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
             },
           );

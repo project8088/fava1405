@@ -72,7 +72,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -110,7 +110,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -142,7 +142,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

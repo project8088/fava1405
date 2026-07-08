@@ -27,7 +27,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
   education: karjoEducationDto;
 
   loadingFieldStudies: boolean;
-  filteredFieldStudies: Observable<any[]>;
+  filteredFieldStudies=new Observable<any[]>();
   selectedFieldStudies: any[] = [];
 
   constructor(
@@ -69,7 +69,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
       });
     }
     //رشته های تحصیلی
-    this.filteredFieldStudies = this.educationForm.get('major')?.valueChanges.pipe(
+    this.filteredFieldStudies = this.educationForm.get('major')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -92,7 +92,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
           this.baseEnums.educationLevel = response.educationLevel ? response.educationLevel : [];
 
           var grade = [];
-          this.baseEnums.educationLevel.forEach((item, index) => {
+          this.baseEnums.educationLevel.forEach((item:any, index) => {
             if (+item.key > 19) grade.push(item);
           });
           this.baseEnums.educationLevel = grade;
@@ -103,7 +103,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -138,7 +138,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingFieldStudies = false;
           },
@@ -199,7 +199,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

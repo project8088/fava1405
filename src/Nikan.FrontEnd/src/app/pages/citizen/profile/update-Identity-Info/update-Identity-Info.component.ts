@@ -83,7 +83,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -120,7 +120,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -150,11 +150,11 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
 
   setDisabledFields() {
     if (this.noEditStatus()) {
-      //this.personalForm.get('firstName').disable();
-      //this.personalForm.get('lastName').disable();
-      //this.personalForm.get('fatherName').disable();
-      //this.personalForm.get('birthDate').disable();
-      //this.personalForm.get('gender').disable();
+      //this.personalForm.get('firstName')?.disable();
+      //this.personalForm.get('lastName')?.disable();
+      //this.personalForm.get('fatherName')?.disable();
+      //this.personalForm.get('birthDate')?.disable();
+      //this.personalForm.get('gender')?.disable();
     }
   }
   noEditStatus() {

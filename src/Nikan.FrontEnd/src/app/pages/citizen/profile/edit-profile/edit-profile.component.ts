@@ -18,14 +18,14 @@ import { AppBase } from '@app/app.base';
 export class CitizenEditProfileComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userCode: string;
+  userCode: string='';
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean;
+  loadingState: boolean=false;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState=new Observable<any[]>();
 
   lastModifiedOnDate?: string;
   citizenInfo: KarjoGlobalInformationDto;
@@ -61,7 +61,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   ngOnInit() {
     this.getBaseEnums();
 
-    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -97,7 +97,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
               }
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
           },
@@ -119,7 +119,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
           this.baseEnums.maritalStatus = response.maritalStatus;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -170,7 +170,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -220,7 +220,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

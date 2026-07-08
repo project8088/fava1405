@@ -73,7 +73,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -113,7 +113,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -141,7 +141,7 @@ export class AdminNationCodeGroupsExcelBatchFileDetailsComponent
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

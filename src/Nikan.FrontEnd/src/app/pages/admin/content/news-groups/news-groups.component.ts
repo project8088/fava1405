@@ -64,7 +64,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -104,7 +104,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -143,7 +143,7 @@ export class AdminNewsGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

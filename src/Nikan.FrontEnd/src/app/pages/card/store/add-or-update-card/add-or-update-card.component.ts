@@ -18,13 +18,13 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   isSaving=false;
 
     loading?: boolean;
-  cardTypeid: string ='';
+  cardTypeId: string ='';
   cardTypeList: any[] = [];
 
   constructor() {
     super();
     this.route.params.subscribe((p) => {
-      this.cardTypeId = p.cardTypeId;
+      this.cardTypeId = p['cardTypeId'];
 
       if (p['id'] && p['id'] != '0') {
         this.isUpdate = true;
@@ -78,7 +78,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -107,7 +107,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

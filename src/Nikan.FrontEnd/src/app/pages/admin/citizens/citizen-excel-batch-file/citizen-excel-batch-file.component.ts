@@ -65,7 +65,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -103,7 +103,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
             },
           );
@@ -146,7 +146,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               item.loading = false;
             },
           );

@@ -66,7 +66,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -107,7 +107,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             row.loading = false;
           },
         );

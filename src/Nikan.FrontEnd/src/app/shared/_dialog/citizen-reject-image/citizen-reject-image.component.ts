@@ -20,7 +20,7 @@ export class AdminCitizenRejectImageDialogComponent extends AppBase implements O
   isSaving=false;
   citizen: any;
 
-  rejectCitizenPictureList: [];
+  rejectCitizenPictureList: any[]=[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,

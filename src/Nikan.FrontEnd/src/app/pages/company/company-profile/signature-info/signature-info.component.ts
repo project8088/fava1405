@@ -54,7 +54,7 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

@@ -124,7 +124,7 @@
               }
             </b>
             <div>
-              [{{ item.creationDate | luxonFormat}}] [300 * 200]
+              [{{ item.creationDate | luxonFormat }}] [300 * 200]
               <a (click)="openCitizenProfile(item.userCode)">
                 <i
                   title="نمایش پروفایل شهروند"
@@ -170,7 +170,7 @@
                   mat-raised-button
                   color="accent"
                   (click)="openRejectImageDialog(item)"
-                  [disabled]="isSaving"
+                  [disabled]="item.isSaving"
                 >
                   @if (!item.isSaving) {
                     <span>
@@ -191,7 +191,7 @@
                 mat-raised-button
                 color="default"
                 (click)="openMessagesDialog(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span><mat-icon>email</mat-icon></span>
@@ -209,7 +209,7 @@
                 mat-raised-button
                 color="default"
                 (click)="openEditImageDialog(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span>
@@ -229,7 +229,7 @@
                 mat-raised-button
                 color="default"
                 (click)="refreshImage(item)"
-                [disabled]="isSaving"
+                [disabled]="item.isSaving"
               >
                 @if (!item.isSaving) {
                   <span><mat-icon>sync</mat-icon></span>

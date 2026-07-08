@@ -50,7 +50,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );
@@ -82,7 +82,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -117,7 +117,7 @@ export class TicketActivityComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

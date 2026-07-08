@@ -37,10 +37,10 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  queueid: string ='';
+  queueId: string ='';
   baseEnums: any = {};
   loadingData: boolean = true;
-  courseid: string ='';
+  courseId: string ='';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
@@ -82,7 +82,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -176,7 +176,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

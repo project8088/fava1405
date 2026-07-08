@@ -39,7 +39,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  courseid: string ='';
+  courseId: string ='';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   printUrl: string = ServerApis.prinQueueForPost;
@@ -168,7 +168,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

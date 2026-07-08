@@ -74,7 +74,7 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

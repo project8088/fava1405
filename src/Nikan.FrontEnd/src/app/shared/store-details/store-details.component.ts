@@ -38,7 +38,7 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );

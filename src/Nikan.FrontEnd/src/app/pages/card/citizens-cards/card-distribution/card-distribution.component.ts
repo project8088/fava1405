@@ -18,16 +18,16 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardCarddistributionComponent extends AppBase implements AfterViewInit {
-  @ViewChild('value') searchElement: ElementRef;
+  @ViewChild('value') searchElement!: ElementRef;
 
-  isSend: boolean;
+  isSend: boolean = false;
 
-  loadingqueue: boolean;
+  loadingqueue: boolean = false;
   queuelist: any[] = [];
   frm: FormGroup;
 
-  courseid: string ='';
-  queueid: string ='';
+  courseId: string = '';
+  queueId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -68,7 +68,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     this.loading = true;
 
     var param: any = this.searchForm.value;
-    this.searchForm.get('value').disable();
+    this.searchForm.get('value')?.disable();
     merge()
       .pipe(
         startWith(param),
@@ -78,7 +78,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
         map((response) => {
           if (response.isSuccess && response.data) {
             this.card = response.data ? response.data : {};
-            this.searchForm.get('value').enable();
+            this.searchForm.get('value')?.enable();
             this.searchForm.get('value')?.setValue('');
             this.searchElement.nativeElement.focus();
             this.loading = false;
@@ -96,7 +96,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
             this.loading = true;
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
-            this.searchForm.get('value').enable();
+            this.searchForm.get('value')?.enable();
             this.searchForm.get('value')?.setValue('');
             this.searchElement.nativeElement.focus();
             this.loading = false;
@@ -104,7 +104,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
         }),
         catchError((err) => {
           this.loading = false;
-          this.searchForm.get('value').enable();
+          this.searchForm.get('value')?.enable();
           this.searchForm.get('value')?.setValue('');
           this.searchElement.nativeElement.focus();
           return observableOf([]);
@@ -113,7 +113,13 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
       .subscribe((data) => {});
   }
 
-  sendCardToQueue(cardId, citizenId, deliverType, cardTypeId, deliveringCenterId) {
+  sendCardToQueue(
+    cardId: number,
+    citizenId: number,
+    deliverType: string,
+    cardTypeId: number,
+    deliveringCenterId: number,
+  ) {
     this.queueId = '';
     this.isSend = true;
     var url = ServerApis.sendCardToQueue;
@@ -137,7 +143,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error: any) => {
         this.isSend = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -156,13 +162,13 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error: any) => {
         this.loadingqueue = false;
       },
     );
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -173,7 +179,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -184,7 +190,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     });
   }
 
-  delete(cardId) {
+  delete(cardId: number) {
     this.dataService
       .get(ServerApis.removeCardFromQueueByCourseId, { courseId: this.courseId, cardId: cardId })
       .subscribe(
@@ -197,7 +203,7 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error: any) => {
           this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
         },
       );

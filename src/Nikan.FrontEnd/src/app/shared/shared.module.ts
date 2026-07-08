@@ -14,7 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
 // import { MatTableExporterModule } from 'mat-table-exporter';
 import { MaterialModule } from '@core/material/material.module';
 import { MenuDynamicComponent } from './side-nav-menu/menu-dynamic/menu-dynamic.component';
-import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { RouterModule } from '@angular/router';
 import { SendTicketDialogComponent } from './ticket/_dialogs/send-ticket/send-ticket.component';
@@ -46,7 +45,11 @@ import { AppCitizenSmsListComponent } from './citizens/citizen-sms-list/citizen-
 import { AppCitizenEventListComponent } from './citizens/citizen-event-list/citizen-event-list.component';
 import { AdminCitizenTransactionListComponent } from './citizens/transaction-list/citizen-transaction-list.component';
 import { ViewCitizenComponent } from './citizens/view-citizen.component';
-
+import { AdminCitizenSmsListDialogComponent } from './_dialog/citizen-sms-list/citizen-sms-list.component';
+import { AdminCitizenImageDialogComponent } from './_dialog/citizen-image/citizen-image.component';
+import { AdminCitizenEditImageDialogComponent } from './_dialog/citizen-edit-image/citizen-edit-image.component';
+import { AdminCitizenRejectImageDialogComponent } from './_dialog/citizen-reject-image/citizen-reject-image.component';
+import { AdminChangePasswordDialogComponent } from './_dialog/change-user-password/change-user-password.component';
 @NgModule({
   declarations: [
     SideNavMenuComponent,
@@ -86,6 +89,11 @@ import { ViewCitizenComponent } from './citizens/view-citizen.component';
     AppGroupCitizensListComponent,
     AppCitizenSmsListComponent,
     AppCitizenEventListComponent,
+    AdminCitizenSmsListDialogComponent,
+    AdminCitizenImageDialogComponent,
+    AdminCitizenEditImageDialogComponent,
+    AdminCitizenRejectImageDialogComponent,
+    AdminChangePasswordDialogComponent,
   ],
   imports: [
     CoreModule,
@@ -97,7 +105,6 @@ import { ViewCitizenComponent } from './citizens/view-citizen.component';
     RouterModule,
     NgxUploaderModule,
     ImageCropperComponent,
-    NgxMaterialTimepickerModule,
     //MatTableExporterModule,
     MatIconModule,
   ],
@@ -122,7 +129,6 @@ import { ViewCitizenComponent } from './citizens/view-citizen.component';
     ViewCardProfileComponent,
     ViewJobseekerProfileComponent,
     CompanyInfoComponent,
-    NgxMaterialTimepickerModule,
     ChangeCurrentUserPasswordComponent,
     ViewNotificationDetailsComponent,
     ViewNotificationDetailsDialogComponent,

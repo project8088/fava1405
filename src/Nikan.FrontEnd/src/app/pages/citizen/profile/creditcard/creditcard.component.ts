@@ -14,7 +14,7 @@ export class CreditcardComponent extends AppBase implements OnInit {
   isSaving: boolean = false;
   userId?: string;
   cardForm: FormGroup;
-  loadingState: boolean;
+  loadingState: boolean=false;
 
   constructor() {
     super();
@@ -49,7 +49,7 @@ export class CreditcardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

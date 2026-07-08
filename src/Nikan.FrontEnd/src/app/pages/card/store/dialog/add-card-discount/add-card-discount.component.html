@@ -101,7 +101,7 @@
       <div class="row">
         <mat-form-field  class="col-sm-12">
           <mat-label>گروههای تخفیف</mat-label>
-          <mat-chip-listbox #skillChipList>
+           <!--<mat-chip-listbox #skillChipList>
             @for (item of selectedGroups; track item) {
               <mat-chip
                 [selectable]="true"
@@ -111,8 +111,9 @@
                 {{ item.text }}
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
-            }
-            <input
+            } -->
+            <!-- TODO:chips -->
+            <!-- <input
               matInput
               formControlName="groups"
               [matAutocomplete]="autoSkills"
@@ -127,14 +128,14 @@
             (optionSelected)="
               selectedAutoChip(selectedGroups, 'groups', skillInput, $event, skillTrigger)
             "
-          >
+          > 
             @for (option of filteredGroups | async; track option) {
               <mat-option [value]="option">
                 {{ option.text }}
               </mat-option>
             }
-          </mat-autocomplete>
-          @if (frm.get('groups').errors?.incorrect || frm.get('groups')?.hasError('required')) {
+          </mat-autocomplete>-->
+          @if (frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')) {
             <mat-error> گروههای تخفیف را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingGroups"></mat-spinner>

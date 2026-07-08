@@ -127,7 +127,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
     });
   }
 
-  openUpdateCitizenSabtStateDialog(userCode) {
+  openUpdateCitizenSabtStateDialog(userCode:string) {
     this.matDialog
       .open(AdminUpdateCitizenSabtStateDialogComponent, {
         panelClass: 'custom-dialog',

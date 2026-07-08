@@ -89,7 +89,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -108,7 +108,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -131,7 +131,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingUnit = false;
         },
       );
@@ -176,7 +176,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -218,7 +218,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

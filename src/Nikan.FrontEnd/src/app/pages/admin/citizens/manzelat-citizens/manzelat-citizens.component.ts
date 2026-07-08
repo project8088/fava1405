@@ -204,7 +204,7 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               this.sendingSms = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
             },

@@ -65,7 +65,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -105,7 +105,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -145,7 +145,7 @@ export class AdminFaqGroupsComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

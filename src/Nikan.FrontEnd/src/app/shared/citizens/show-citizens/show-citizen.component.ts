@@ -44,7 +44,7 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -66,7 +66,7 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {},
+        (error:any) => {},
       );
   }
 }

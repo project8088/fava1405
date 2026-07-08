@@ -1,10 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { Observable } from 'rxjs';
-import { map, startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {
+  map,
+  startWith,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  finalize,
+} from 'rxjs/operators';
 import {
   MatAutocompleteSelectedEvent,
   MatAutocompleteTrigger,
@@ -18,17 +25,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardAddCardDiscountDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
-  isUpdate=false;
+  isUpdate = false;
 
-  loadingGroups: boolean;
-  filteredGroups: Observable<any[]>;
+  loadingGroups: boolean = false;
+  filteredGroups = new Observable<any[]>();
   selectedGroups: any[] = [];
 
   loadingData?: boolean;
-  id: string ='';
-  cardTypeid: string ='';
+  id: string = '';
+  cardTypeId: string = '';
   constructor(
     private matDialogRef: MatDialogRef<CardAddCardDiscountDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -63,7 +70,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
   }
 
   ngOnInit() {
-    this.filteredGroups = this.frm.get('groups')?.valueChanges.pipe(
+    this.filteredGroups = this.frm.get('groups')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -87,7 +94,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
           this.matDialogRef.close();
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -97,7 +104,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -139,7 +146,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -157,7 +164,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
     }
   }
 
-  private _filterGroups(value: string) {
+  private _filterGroups(value: string): Observable<any> {
     if (!value || typeof value !== 'string') return this.filteredGroups;
 
     const filterValue = value.toLowerCase();
@@ -170,22 +177,18 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
         count: 20,
       })
       .pipe(
-        map(
-          (response) => {
-            this.loadingGroups = false;
-            if (response.isSuccess) return response.data;
-            else {
-              let msg = response.messages
-                ? response.messages
-                : 'در یافت اطلاعات از سرور با خطا مواجه شده است.';
-              this.toastrService.error(msg);
-            }
-          },
-          (error) => {
-            this.toastrService.error('خطا در ارتباط با سرور!');
-            this.loadingGroups = false;
-          },
-        ),
+        finalize(() => (this.loadingGroups = false)),
+        map((response) => {
+          this.loadingGroups = false;
+          if (response.isSuccess) return response.data;
+          else {
+            let msg = response.messages
+              ? response.messages
+              : 'در یافت اطلاعات از سرور با خطا مواجه شده است.';
+            this.toastrService.error(msg);
+            return [];
+          }
+        }),
       );
   }
 
@@ -210,7 +213,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
    */
   selectedAutoChip(
     list: any[],
-    formControl,
+    formControl: string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,
@@ -220,8 +223,8 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
       this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
     else list.push(event.option.value);
     input.value = '';
-    this.frm.get(formControl).setValue(null);
-    setTimeout((_) => {
+    this.frm.get(formControl)?.setValue(null);
+    setTimeout(() => {
       Trigger.openPanel();
     }, 100);
   }

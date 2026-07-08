@@ -90,7 +90,7 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );
@@ -122,7 +122,7 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
    */
   selectedAutoChip(
     list: any[],
-    formControl,
+    formControl:string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,
@@ -132,8 +132,8 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
       this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
     else list.push(event.option.value);
     input.value = '';
-    this.changePasswordForm.get(formControl).setValue(null);
-    setTimeout((_) => {
+    this.changePasswordForm.get(formControl)?.setValue(null);
+    setTimeout(() => {
       Trigger.openPanel();
     }, 100);
   }

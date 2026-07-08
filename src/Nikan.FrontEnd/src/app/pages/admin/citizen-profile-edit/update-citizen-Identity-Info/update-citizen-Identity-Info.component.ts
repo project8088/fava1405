@@ -84,7 +84,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -122,7 +122,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

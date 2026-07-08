@@ -89,7 +89,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -106,7 +106,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
     }
   }
 
-  remove(item): void {
+  remove(item:any): void {
     const index = this.tagNames.indexOf(item);
 
     if (index >= 0) {
@@ -156,7 +156,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
       },

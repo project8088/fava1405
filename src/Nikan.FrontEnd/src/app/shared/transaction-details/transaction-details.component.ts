@@ -41,7 +41,7 @@ export class TransactionDetailsComponent extends AppBase implements OnInit, Afte
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );

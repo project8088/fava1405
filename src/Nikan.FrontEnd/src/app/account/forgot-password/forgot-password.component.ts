@@ -114,7 +114,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.sendingSMS = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -189,7 +189,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.checkingCode = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -235,7 +235,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

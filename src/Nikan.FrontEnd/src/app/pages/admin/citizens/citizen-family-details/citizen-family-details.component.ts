@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnInit {
-  userCode: string;
+  userCode: string='';
   familyList: [];
 
   citizen: any = {};
@@ -50,7 +50,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -90,7 +90,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -100,7 +100,7 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
     window.history.back();
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

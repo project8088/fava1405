@@ -100,7 +100,7 @@ export class PreregisterComponent extends AppBase implements OnInit {
               this.captchaComponent.reloadImage();
             }
           },
-          (error) => {
+          (error:any) => {
             this.isSaving = false;
             this.captchaComponent.reloadImage();
             this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');

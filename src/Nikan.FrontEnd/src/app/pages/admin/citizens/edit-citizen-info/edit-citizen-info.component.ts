@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, map, startWith, switchMap } from 'rxjs/operators';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
@@ -18,23 +18,24 @@ import { AppBase } from '@app/app.base';
 export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userCode: string;
+  userCode: string = '';
   form: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean;
+  loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState = new Observable<any[]>();
   states: any[] = [];
-  birthC: ities = new Observable<any>();
-  shC: ities = new Observable<any>();
+  birthCities = new Observable<any>();
+  shCities = new Observable<any>();
 
   lastModifiedOnDate?: string;
-  citizenInfo: KarjoGlobalInformationDto;
+  citizenInfo?: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
     private customValidator: CustomFormValidators,
+    private fb: FormBuilder,
   ) {
     super();
     this.form = this.fb.group({
@@ -143,7 +144,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     this.getEducationGroups();
     this.getPersonalInfo();
 
-    this.filteredState = this.form.get('state')?.valueChanges.pipe(
+    this.filteredState = this.form.get('state')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -154,7 +155,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.getBaseEnums();
     this.getEducationGroups();
-    this.cities = this.personalForm.get('stateId')?.valueChanges.pipe(
+    this.cities = this.personalForm.get('stateId')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -165,7 +166,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
       }),
     );
 
-    this.filteredState = this.personalForm.get('state')?.valueChanges.pipe(
+    this.filteredState = this.personalForm.get('state')!.valueChanges.pipe(
       startWith(''),
       debounceTime(400),
       distinctUntilChanged(),
@@ -179,7 +180,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.form.value;
 
@@ -198,7 +199,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -209,7 +210,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -220,15 +221,15 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options:{key:number,text:string}[]){
-    return options.map((el:{key:number,text:string}) => {
+  getListOptions(options: { key: number; text: string }[]) {
+    return options.map((el: { key: number; text: string }) => {
       return { value: +el.key, text: el.text };
     });
   }
 
   personalForm: FormGroup;
-  c: ities = new Observable<any>();
-  isfahanCities: any[]=[];
+  cities = new Observable<any>();
+  isfahanCities: any[] = [];
 
   userStatus?: number;
 
@@ -258,7 +259,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
               }
             }
           },
-          (error) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
           },
@@ -283,7 +284,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.baseEnums.jobGroup = response.jobGroup;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -298,7 +299,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -357,7 +358,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -368,7 +369,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.personalForm.value;
 
@@ -379,7 +380,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
         firstName: formValue.firstName,
         lastName: formValue.lastName,
         fatherName: formValue.fatherName,
-        nationalCode: this.citizenInfo.nationalCode,
+        nationalCode: this.citizenInfo?.nationalCode,
         mobile: formValue.mobile,
         eMail: formValue.email || '',
         birthDate: formValue.dateOfBirth ? formValue.dateOfBirth : '',
@@ -410,7 +411,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -419,11 +420,11 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
   setDisabledFields() {
     if (this.noEditStatus()) {
-      this.personalForm.get('firstName').disable();
-      this.personalForm.get('lastName').disable();
-      this.personalForm.get('fatherName').disable();
-      this.personalForm.get('dateOfBirth').disable();
-      this.personalForm.get('gender').disable();
+      this.personalForm.get('firstName')?.disable();
+      this.personalForm.get('lastName')?.disable();
+      this.personalForm.get('fatherName')?.disable();
+      this.personalForm.get('dateOfBirth')?.disable();
+      this.personalForm.get('gender')?.disable();
     }
   }
   noEditStatus() {

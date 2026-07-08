@@ -69,7 +69,7 @@ export class WebUserHelpServiceDetailsComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );

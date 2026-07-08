@@ -32,7 +32,7 @@ export class CaptchaComponent extends AppBase implements OnInit {
           this.captchaImage = event.target.result;
         };
       },
-      (error) => {
+      (error:any) => {
         this.loadingCaptcha = false;
       },
     );

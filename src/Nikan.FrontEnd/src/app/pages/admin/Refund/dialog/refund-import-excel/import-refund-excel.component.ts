@@ -21,7 +21,7 @@ export class AdminImportRefundExcelDialogComponent extends AppBase implements On
 
   ngOnInit() {}
 
-  attachmentId(ev) {
+  attachmentId(ev:any) {
     if (ev.importId) this.router.navigate(['/admin/refund-file-details/' + ev.importId]);
     this.matDialogRef.close();
   }

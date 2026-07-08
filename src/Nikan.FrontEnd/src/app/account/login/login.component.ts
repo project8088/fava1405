@@ -92,7 +92,7 @@ export class LoginComponent extends AppBase implements OnInit {
           this.captchaComponent.reloadImage();
         }
       },
-      (error) => {
+      (error:any) => {
         if (error.status == '401') this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
         else this.toastrService.error('خطا در ارتباط با سرور!');
         this.loading = false;

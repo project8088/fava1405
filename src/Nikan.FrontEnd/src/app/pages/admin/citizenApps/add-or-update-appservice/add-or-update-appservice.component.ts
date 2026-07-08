@@ -81,7 +81,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -121,7 +121,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

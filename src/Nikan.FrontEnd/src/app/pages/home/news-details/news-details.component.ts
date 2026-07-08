@@ -79,7 +79,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -97,7 +97,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingComments = false;
       },
     );
@@ -131,7 +131,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.sendingComment = false;
       },
     );
@@ -146,7 +146,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.lastNewsList = response.data ? response.data : [];
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingLastNews = false;
       },
     );
@@ -161,7 +161,7 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.mostVisitedList = response.data ? response.data : [];
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingVisited = false;
       },
     );

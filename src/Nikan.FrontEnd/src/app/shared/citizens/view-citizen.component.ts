@@ -1,8 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { AdminChangePasswordDialogComponent } from '@app/pages/admin/users/dialogs/change-user-password/change-user-password.component';
 import { CardUpdateCitizenMobileNumberDialogComponent } from '@app/pages/card/dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
+import { AdminChangePasswordDialogComponent } from '../_dialog/change-user-password/change-user-password.component';
 
 @Component({
   selector: 'app-view-citizen',
@@ -45,7 +45,7 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

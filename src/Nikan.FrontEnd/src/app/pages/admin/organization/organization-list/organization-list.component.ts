@@ -76,7 +76,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -113,7 +113,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
@@ -145,7 +145,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

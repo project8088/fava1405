@@ -66,7 +66,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           debugger;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -81,7 +81,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -116,7 +116,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -145,7 +145,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

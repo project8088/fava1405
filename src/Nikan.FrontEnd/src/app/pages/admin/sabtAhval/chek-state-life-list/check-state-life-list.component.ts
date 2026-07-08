@@ -72,7 +72,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -95,7 +95,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );

@@ -91,7 +91,7 @@ export class CompanyChangePasswordDialogComponent extends AppBase implements OnI
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

@@ -20,7 +20,7 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
   isSaving=false;
   citizen: any;
 
-  rejectCitizenPictureList: [];
+  rejectCitizenPictureList: any[]=[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -55,7 +55,7 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error) => {},
+        (error:any) => {},
       );
   }
 }

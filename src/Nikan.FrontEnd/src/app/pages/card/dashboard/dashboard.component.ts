@@ -13,7 +13,6 @@ export class CardDashboardComponent extends AppBase implements OnInit {
     loading?: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
-  matDialog: any;
 
   constructor() {
     super();
@@ -35,7 +34,7 @@ export class CardDashboardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );

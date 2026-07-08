@@ -130,7 +130,7 @@ export class CropperComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.saving = false;
       },
     );

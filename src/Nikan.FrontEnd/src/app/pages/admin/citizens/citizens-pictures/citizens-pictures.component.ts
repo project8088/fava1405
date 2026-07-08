@@ -11,6 +11,7 @@ import { AdminCitizenSmsListDialogComponent } from '../../_dialogs/citizen-sms-l
 import { ServerApis } from '@core/server-apis';
 import { CitizenProfileDialogComponent } from '../../../../shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-citizens-pictures',
@@ -22,10 +23,10 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
   searchForm: FormGroup;
   isLoadingResults: boolean = false;
   listCount: number = 10;
-  data;
+  dataSource = new MatTableDataSource();
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
-  personalPictureStatuses: [];
+  personalPictureStatuses: any[] = [];
   list: any;
   loading: boolean = true;
   loadingData: boolean = true;
@@ -57,7 +58,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -65,7 +66,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
 
   getList() {
     this.loadingData = true;
-    this.data = [];
+    this.dataSource.data = [];
     var param: any = this.searchForm.value;
     param.offset = this.paginator ? this.paginator.pageIndex : 0;
     param.count = this.paginator ? this.paginator.pageSize : 50;
@@ -101,12 +102,12 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   getEnums() {}
 
-  confirmImage(citizen) {
+  confirmImage(citizen: any) {
     citizen.isConfirming = true;
     this.dataService
       .get(ServerApis.acceptCitizenPicture + '?citizenId=' + citizen.citizenId)
@@ -148,7 +149,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
     });
   }
 
-  openImageDialog(citizen) {
+  openImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -160,7 +161,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
         if (result) this.getList();
       });
   }
-  openMessagesDialog(citizen) {
+  openMessagesDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenSmsListDialogComponent, {
         panelClass: 'custom-dialog',
@@ -173,7 +174,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
       });
   }
 
-  openEditImageDialog(citizen) {
+  openEditImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenEditImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -187,7 +188,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
         }
       });
   }
-  openRejectImageDialog(citizen) {
+  openRejectImageDialog(citizen: any) {
     this.matDialog
       .open(AdminCitizenRejectImageDialogComponent, {
         panelClass: 'custom-dialog',
@@ -206,7 +207,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
         }
       });
   }
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -216,7 +217,7 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
       maxWidth: '1800px',
     });
   }
-  refreshImage(citizen) {
+  refreshImage(citizen: any) {
     citizen.imageVersion = Math.random() * 1000;
   }
 }

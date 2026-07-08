@@ -69,7 +69,7 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

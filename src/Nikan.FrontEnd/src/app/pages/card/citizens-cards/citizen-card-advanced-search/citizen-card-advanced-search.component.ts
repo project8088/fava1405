@@ -42,7 +42,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -96,7 +96,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
           this.baseEnums.groupIds = response.groupIds;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -107,7 +107,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -118,7 +118,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.discountList = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

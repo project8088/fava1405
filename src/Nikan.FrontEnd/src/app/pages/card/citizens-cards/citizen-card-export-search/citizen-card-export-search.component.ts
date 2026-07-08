@@ -41,7 +41,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -142,7 +142,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         item.loading = false;
       },
     );
@@ -176,7 +176,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               item.loading = false;
             },
           );
@@ -212,7 +212,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

@@ -6,8 +6,7 @@ import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/a
 import { AdminAddOrUpdateManagerComponent } from './users/add-or-update-manager/add-or-update-manager.component';
 import { AdminAddOrUpdateNewsComponent } from './content/add-or-update-news/add-or-update-news.component';
 import { AdminAddOrUpdateNotificationComponent } from './content/add-or-update-notification/add-or-update-notification.component';
-import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component';
-import { AdminAppserviceListComponent } from './citizenapps/appservice-list/appservice-list.component';
+import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component'; 
 import { AdminCitizenAdvancedSearchComponent } from './citizens/citizen-advanced-search/citizen-advanced-search.component';
 import { AdminCitizenFamilyDetailsComponent } from './citizens/citizen-family-details/citizen-family-details.component';
 import { AdminCitizensComponent } from './citizens/citizens.component';
@@ -91,6 +90,7 @@ import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/updat
 import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.component';
 import { AdminCitizenAuthenticationSearchComponent } from './citizens/citizen-authentication-search/citizen-authentication-search.component';
 import { AdminConfigComponent } from './config/config.component';
+import { AdminAppserviceListComponent } from './citizenapps/appservice-list/appservice-list.component';
 
 const routes: Routes = [
   {

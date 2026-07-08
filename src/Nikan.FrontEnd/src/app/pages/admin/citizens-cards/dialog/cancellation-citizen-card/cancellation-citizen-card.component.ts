@@ -70,7 +70,7 @@ export class AdminCancellationCitizenCardDialogComponent extends AppBase impleme
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

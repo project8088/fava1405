@@ -46,7 +46,7 @@ export class CardManzalatCitizenCardExportDetailsComponent
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportid: string ='';
+  exportId: string ='';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 

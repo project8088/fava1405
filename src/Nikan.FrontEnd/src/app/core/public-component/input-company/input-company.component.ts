@@ -93,7 +93,7 @@ export class InputCompanyAutoCompleteComponent
           map((value) => (value ? this._filter(value, this.List) : this.List)),
         );
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

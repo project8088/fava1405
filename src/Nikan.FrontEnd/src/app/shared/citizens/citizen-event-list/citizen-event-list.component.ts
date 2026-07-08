@@ -40,7 +40,7 @@ export class AppCitizenEventListComponent extends AppBase implements OnInit {
           this.events = response.data ? response.data : [];
         }
       },
-      (error) => {},
+      (error:any) => {},
     );
   }
 }

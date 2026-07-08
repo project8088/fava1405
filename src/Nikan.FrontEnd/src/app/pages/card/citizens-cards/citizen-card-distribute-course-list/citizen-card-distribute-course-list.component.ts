@@ -37,7 +37,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -142,7 +142,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );
@@ -178,7 +178,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               row.loading = false;
             },
           );

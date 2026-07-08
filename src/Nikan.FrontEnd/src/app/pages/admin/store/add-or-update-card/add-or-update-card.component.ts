@@ -18,7 +18,7 @@ export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   isSaving=false;
 
     loading?: boolean;
-  cardTypeid: string ='';
+  cardTypeId: string ='';
   cardTypeList: any[] = [];
 
   constructor() {
@@ -77,7 +77,7 @@ export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, Af
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -106,7 +106,7 @@ export class AdminAddOrUpdateCardComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

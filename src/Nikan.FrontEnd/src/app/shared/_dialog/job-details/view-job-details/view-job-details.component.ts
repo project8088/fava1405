@@ -46,7 +46,7 @@ export class ViewJobDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

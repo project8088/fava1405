@@ -120,7 +120,7 @@ export class AdminRefundAccessDetailsListComponent
     this.getList();
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -199,7 +199,7 @@ export class AdminRefundAccessDetailsListComponent
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });

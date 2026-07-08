@@ -64,7 +64,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -96,7 +96,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

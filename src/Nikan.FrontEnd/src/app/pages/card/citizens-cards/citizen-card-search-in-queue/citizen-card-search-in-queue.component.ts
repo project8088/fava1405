@@ -39,7 +39,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities;
+  isfahanCities:any[]=[];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -68,7 +68,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

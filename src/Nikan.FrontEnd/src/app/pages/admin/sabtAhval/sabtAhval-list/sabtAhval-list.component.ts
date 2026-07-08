@@ -127,7 +127,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error) => {},
+            (error:any) => {},
           );
       }
     });
@@ -148,7 +148,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
       });
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -187,7 +187,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               item.loading = false;
             },
           );
@@ -223,7 +223,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               item.loading = false;
             },
           );

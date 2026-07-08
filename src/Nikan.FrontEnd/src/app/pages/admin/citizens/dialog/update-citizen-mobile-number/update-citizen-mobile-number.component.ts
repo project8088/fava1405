@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
 export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase implements OnInit {
   isSaving=false;
   userForm: FormGroup;
-  userCode: string;
+  userCode: string='';
   loading: boolean = true;
   info: any;
 
@@ -53,7 +53,7 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
             this.matDialogRef.close(false);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
           this.matDialogRef.close(false);
         },
@@ -90,7 +90,7 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

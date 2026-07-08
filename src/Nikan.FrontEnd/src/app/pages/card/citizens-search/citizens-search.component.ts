@@ -77,7 +77,7 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
       .subscribe((data) => {});
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -88,7 +88,7 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
     });
   }
 
-  openCitizenEditMobileNumber(userCode) {
+  openCitizenEditMobileNumber(userCode:string) {
     this.matDialog
       .open(CardUpdateCitizenMobileNumberDialogComponent, {
         panelClass: 'custom-dialog',
@@ -105,7 +105,7 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
       });
   }
 
-  openUpdateCitizenSabtState(userCode) {
+  openUpdateCitizenSabtState(userCode:string) {
     this.matDialog
       .open(CardUpdateCitizenSabtStateByCardDialogComponent, {
         panelClass: 'custom-dialog',

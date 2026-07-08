@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class ShowImageDialogComponent extends AppBase implements OnInit {
-  data;
+  data: any;
   baseUrl = ServerApis.baseUrl;
 
   constructor(@Inject(MAT_DIALOG_DATA) private _data: any) {

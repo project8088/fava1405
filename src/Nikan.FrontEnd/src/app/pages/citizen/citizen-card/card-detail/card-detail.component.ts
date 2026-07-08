@@ -117,7 +117,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
           this.loading = false;
           this.cardDetails = response.data ? response.data : [];
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -209,7 +209,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
           }
           this.isSaving = false;
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -246,7 +246,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );

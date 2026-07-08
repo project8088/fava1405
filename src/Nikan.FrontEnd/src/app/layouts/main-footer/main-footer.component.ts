@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class MainFooterComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
-  setting: SiteSettingViewModel;
+  setting: SiteSettingViewModel | null = null;
   constructor() {
     super();
     this.dataService.getSetting().subscribe((response) => {

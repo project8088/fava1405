@@ -34,7 +34,7 @@ export class WebUserDashboardComponent extends AppBase implements OnInit {
           this.errorMessage = msg;
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );

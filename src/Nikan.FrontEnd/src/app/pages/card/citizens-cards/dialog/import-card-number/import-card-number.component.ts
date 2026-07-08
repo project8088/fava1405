@@ -29,7 +29,7 @@ export class CardImportCardNumberDialogComponent extends AppBase implements OnIn
 
   ngOnInit() {}
 
-  attachmentId(ev) {
+  attachmentId(ev:any) {
     if (ev.importId) this.router.navigate(['/card/export-details-citizen-card/' + ev.importId]);
     this.matDialogRef.close();
   }

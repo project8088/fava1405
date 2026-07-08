@@ -27,15 +27,15 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
 
   loadinProvince: boolean;
   provinceList: BaseDataModel[] = [];
-  filteredProvince: Observable<any[]>;
+  filteredProvince=new Observable<any[]>();
 
   loadinState: boolean;
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState=new Observable<any[]>();
 
   loadinPlacement: boolean;
   placementList: BaseDataModel[] = [];
-  filteredPlacement: Observable<any[]>;
+  filteredPlacement=new Observable<any[]>();
 
   selectedOffices: any[] = [];
 
@@ -110,7 +110,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
           this.matDialogRef.close(false);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.matDialogRef.close(false);
       },
@@ -154,7 +154,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );
@@ -200,7 +200,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
    */
   selectedAutoChip(
     list: any[],
-    formControl,
+    formControl:string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,
@@ -210,8 +210,8 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
       this.toastrService.warning(event.option.value.text + ' را قبلاً انتخاب کرده اید.', 'تکراری!');
     else list.push(event.option.value);
     input.value = '';
-    this.userForm.get(formControl).setValue(null);
-    setTimeout((_) => {
+    this.userForm.get(formControl)?.setValue(null);
+    setTimeout(() => {
       Trigger.openPanel();
     }, 100);
   }
@@ -229,7 +229,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loadingData = false;
       },
     );
@@ -251,7 +251,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingUnit = false;
         },
       );

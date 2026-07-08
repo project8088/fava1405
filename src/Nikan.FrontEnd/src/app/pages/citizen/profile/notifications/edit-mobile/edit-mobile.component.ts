@@ -17,7 +17,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   editForm: FormGroup;
 
   confirmForm: FormGroup;
-  loadingState: boolean;
+  loadingState: boolean=false;
 
   emailForm: FormGroup;
 
@@ -84,7 +84,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.sendingSMS = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -121,7 +121,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

@@ -31,7 +31,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
   ];
 
   baseUrl: string = ServerApis.baseUrl;
-  cardTypeid: string ='';
+  cardTypeId: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -122,7 +122,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
@@ -158,7 +158,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               item.loading = false;
             },
           );

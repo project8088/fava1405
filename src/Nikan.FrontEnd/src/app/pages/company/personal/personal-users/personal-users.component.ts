@@ -150,7 +150,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
               this.toastrService.error(msg);
             }
           },
-          (error) => {
+          (error:any) => {
             row.loading = false;
           },
         );

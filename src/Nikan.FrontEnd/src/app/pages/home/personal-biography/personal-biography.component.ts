@@ -50,7 +50,7 @@ export class PersonalBiographyComponent extends AppBase implements OnInit {
           this.router.navigate(['/home']);
         }
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
       },
     );

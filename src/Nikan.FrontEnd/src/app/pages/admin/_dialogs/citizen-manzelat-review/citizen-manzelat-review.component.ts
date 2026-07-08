@@ -20,7 +20,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
   isSaving=false;
   data: any;
 
-  rejectCitizenPictureList: [];
+  rejectCitizenPictureList: any[]=[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -59,7 +59,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
               this.toastrService.error(msg);
             }
           },
-          (error) => {},
+          (error:any) => {},
         );
     } else {
       this.dataService
@@ -80,7 +80,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
               this.toastrService.error(msg);
             }
           },
-          (error) => {},
+          (error:any) => {},
         );
     }
   }

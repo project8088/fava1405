@@ -49,7 +49,7 @@
             }
           </mat-autocomplete>
           @if (
-            educationForm.get('major').errors?.incorrect ||
+            educationForm.get('major')?.hasError('incorrect') ||
             educationForm.get('major')?.hasError('required')
           ) {
             <mat-error> رشته تحصیلی را از لیست انتخاب کنید </mat-error>

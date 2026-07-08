@@ -19,24 +19,24 @@ export class AdminTreePermissionComponent extends AppBase implements OnInit {
   ngOnInit() {}
 
   updateAllComplete(item:any) {
-    item.allComplete = item.value != null && item.value.every((t) => t.selected);
+    item.allComplete = item.value != null && item.value.every((t:any) => t.selected);
   }
 
-  someComplete(item): boolean {
+  someComplete(item:any): boolean {
     if (!item.value) {
         return ;
     }
-    return item.value.filter((t) => t.selected).length > 0 && !item.allComplete;
+    return item.value.filter((t:any) => t.selected).length > 0 && !item.allComplete;
   }
 
-  allComplete(item): boolean {
-    return (item.allComplete = item.value != null && item.value.every((t) => t.selected));
+  allComplete(item:any): boolean {
+    return (item.allComplete = item.value != null && item.value.every((t:any) => t.selected));
   }
 
-  setAll(item, selected: boolean) {
+  setAll(item:any, selected: boolean) {
     if (!item.value) {
       return;
     }
-    item.value.forEach((t) => (t.selected = selected));
+    item.value.forEach((t:any) => (t.selected = selected));
   }
 }

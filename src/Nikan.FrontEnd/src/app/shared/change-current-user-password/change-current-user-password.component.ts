@@ -68,7 +68,7 @@ export class ChangeCurrentUserPasswordComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.isSaving = false;
         },
       );

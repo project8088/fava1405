@@ -74,7 +74,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isLoadingResults = false;
       },
     );
@@ -96,7 +96,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
             this.toastrService.error(msg);
           }
         },
-        (error) => {},
+        (error:any) => {},
       );
   }
 
@@ -154,7 +154,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
                 this.toastrService.error(msg);
               }
             },
-            (error) => {
+            (error:any) => {
               this.sendingSms = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
             },

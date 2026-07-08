@@ -63,7 +63,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
       (response) => {
         this.provinceList = response.data ? response.data : [];
       },
-      (error) => {},
+      (error:any) => {},
     );
   }
 
@@ -105,7 +105,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -150,7 +150,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

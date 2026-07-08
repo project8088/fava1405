@@ -68,7 +68,9 @@
       <div class="row">
         <mat-form-field  class="col-sm-12">
           <mat-label>گروههای شهروندی</mat-label>
-          <mat-chip-listbox #skillChipList>
+          <!-- todo:chips -->
+
+          <!-- <mat-chip-listbox #skillChipList>
             @for (item of selectedServices; track item) {
               <mat-chip
                 [selectable]="true"
@@ -100,8 +102,8 @@
                 {{ option.text }}
               </mat-option>
             }
-          </mat-autocomplete>
-          @if (frm.get('groups').errors?.incorrect || frm.get('groups')?.hasError('required')) {
+          </mat-autocomplete> -->
+          @if (frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')) {
             <mat-error> گروههای شهروندی را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>

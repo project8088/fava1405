@@ -105,7 +105,7 @@ export class DataService {
         (response) => {
           this.downLoadFile(response, type, fileName);
         },
-        (error) => this.handleError(error),
+        (error:any) => this.handleError(error),
       );
   }
 

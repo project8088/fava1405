@@ -109,7 +109,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
 
         this.init();
       },
-      (error) => {
+      (error:any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

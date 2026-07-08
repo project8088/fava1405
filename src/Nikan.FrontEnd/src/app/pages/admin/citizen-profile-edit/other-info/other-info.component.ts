@@ -23,11 +23,11 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
   loadingEnums: boolean = true;
   baseEnums: any = {};
   stateList: BaseDataModel[] = [];
-  filteredState: Observable<any[]>;
+  filteredState=new Observable<any[]>();
   states: any[] = [];
-  birthC: ities = new Observable<any>();
-  shC: ities = new Observable<any>();
-  loadingState: boolean;
+  birthCities = new Observable<any>();
+  shCities = new Observable<any>();
+  loadingState: boolean=false;
 
   constructor(
     private helperService: HelperService,
@@ -90,7 +90,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
           this.baseEnums.religion = response.religion;
         }
       },
-      (error) => {
+      (error:any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -102,7 +102,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
       (response) => {
         this.provinceList = response.data ? response.data : [];
       },
-      (error) => {},
+      (error:any) => {},
     );
   }
 
@@ -157,7 +157,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -210,7 +210,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

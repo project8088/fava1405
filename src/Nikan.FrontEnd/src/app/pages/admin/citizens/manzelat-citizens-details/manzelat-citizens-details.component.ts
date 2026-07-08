@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminManzelatCitizensDetailsComponent extends AppBase implements OnInit {
-  userCode: string;
+  userCode: string='';
   data: [];
   citizen: any = {};
   loading: boolean = true;
@@ -52,7 +52,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -93,7 +93,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -128,11 +128,11 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
             this.toastrService.error(msg);
           }
         },
-        (error) => {},
+        (error:any) => {},
       );
   }
 
-  openCitizenProfile(userCode) {
+  openCitizenProfile(userCode:string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -143,7 +143,7 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
     });
   }
 
-  openCitizenEditMobileNumber(userCode) {
+  openCitizenEditMobileNumber(userCode:string) {
     this.matDialog
       .open(AdminUpdateCitizenMobileNumberDialogComponent, {
         panelClass: 'custom-dialog',

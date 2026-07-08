@@ -39,7 +39,7 @@ export class TicketAnswerComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.searching = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

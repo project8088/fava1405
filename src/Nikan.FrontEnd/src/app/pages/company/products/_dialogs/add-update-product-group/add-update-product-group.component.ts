@@ -66,7 +66,7 @@ export class CompanyAddUpdateProductGroupDialogComponent extends AppBase impleme
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );

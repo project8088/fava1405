@@ -75,7 +75,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loadingProductGroup = false;
         },
       );
@@ -104,7 +104,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
             this.toastrService.error(msg);
           }
         },
-        (error) => {
+        (error:any) => {
           this.loading = false;
         },
       );
@@ -144,7 +144,7 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error) => {
+      (error:any) => {
         this.isSaving = false;
       },
     );
