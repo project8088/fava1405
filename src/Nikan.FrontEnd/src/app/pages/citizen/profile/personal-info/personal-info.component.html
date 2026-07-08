@@ -21,7 +21,7 @@
     @if (!loading) {
       <form [formGroup]="personalForm" class="p-4">
         <div class="row">
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>وضعیت تاهل </mat-label>
             <mat-select formControlName="marital">
               @for (item of baseEnums.maritalStatus; track item) {
@@ -34,7 +34,7 @@
               <mat-error> وضعیت تاهل را وارد کنید. </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label> تلفن ثابت</mat-label>
             <input formControlName="phoneNumber" maxlength="8" numbersOnly matInput />
             @if (personalForm.get('phoneNumber')?.hasError('required')) {
@@ -44,7 +44,7 @@
               <mat-error> شماره تلفن صحیح نیست. </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>شهر محل سکونت</mat-label>
             <mat-select formControlName="cityId">
               @for (item of isfahanCities; track item) {
@@ -53,7 +53,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (personalForm.controls['cityId'].errors && personalForm.submitted) {
+            @if (personalForm.controls['cityId'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['cityId'].errors['required']) {
                   <span> شهر محل سکونت خود را انتخاب کنید </span>
@@ -61,10 +61,10 @@
               </mat-hint>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>منطقه</mat-label>
             <input numbersOnly maxlength="2" formControlName="region" matInput />
-            @if (personalForm.controls['region'].errors && personalForm.submitted) {
+            @if (personalForm.controls['region'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['region'].errors['required']) {
                   <span> منطقه محل سکونت خود را انتخاب کنید </span>
@@ -72,10 +72,10 @@
               </mat-hint>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>خیابان</mat-label>
             <input maxlength="20" formControlName="street" matInput />
-            @if (personalForm.controls['street'].errors && personalForm.submitted) {
+            @if (personalForm.controls['street'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['street'].errors['required']) {
                   <span> خیابان محل سکونت خود را انتخاب کنید </span>
@@ -83,10 +83,10 @@
               </mat-hint>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>کوچه</mat-label>
             <input maxlength="20" formControlName="alley" matInput />
-            @if (personalForm.controls['alley'].errors && personalForm.submitted) {
+            @if (personalForm.controls['alley'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['alley'].errors['required']) {
                   <span> کوچه محل سکونت خود را انتخاب کنید </span>
@@ -94,10 +94,10 @@
               </mat-hint>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>پلاک</mat-label>
             <input maxlength="20" formControlName="plaque" matInput />
-            @if (personalForm.controls['plaque'].errors && personalForm.submitted) {
+            @if (personalForm.controls['plaque'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['plaque'].errors['required']) {
                   <span> پلاک محل سکونت خود را انتخاب کنید </span>
@@ -105,7 +105,7 @@
               </mat-hint>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>کد پستی </mat-label>
             <input
               formControlName="postalCode"
@@ -114,7 +114,7 @@
               numbersOnly
               placeholder="کد پستی  خود را وارد کنید"
             />
-            @if (personalForm.controls['postalCode'].errors && personalForm.submitted) {
+            @if (personalForm.controls['postalCode'].errors) {
               <mat-hint class="text-danger">
                 @if (personalForm.controls['postalCode'].errors['required']) {
                   <span> کد پستی خود را وارد کنید </span>
@@ -125,7 +125,7 @@
         </div>
         <div class="row">
           <div class="col-12 col-md-12 col-lg-4">
-            <mat-form-field  class="w-100 mt-3">
+            <mat-form-field class="w-100 mt-3">
               <mat-label>وضعیت تحصیل</mat-label>
               <mat-select formControlName="educationStatues">
                 @for (item of baseEnums.educationStatues; track item) {
@@ -134,7 +134,7 @@
                   </mat-option>
                 }
               </mat-select>
-              @if (personalForm.controls['educationStatues'].errors && personalForm.submitted) {
+              @if (personalForm.controls['educationStatues'].errors) {
                 <mat-hint class="text-danger">
                   @if (personalForm.controls['educationStatues'].errors['required']) {
                     <span> وضعیت تحصیل خود را انتخاب کنید </span>
@@ -145,7 +145,7 @@
           </div>
           @if (+personalForm.controls['educationStatues'].value !== 3) {
             <div class="col-12 col-md-12 col-lg-4">
-              <mat-form-field  class="w-100 mt-3">
+              <mat-form-field class="w-100 mt-3">
                 <mat-label>گروه تحصیلی</mat-label>
                 <mat-select formControlName="educationGroup">
                   <mat-option [value]="null"> ------- </mat-option>
@@ -155,7 +155,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (personalForm.controls['educationStatues'].errors && personalForm.submitted) {
+                @if (personalForm.controls['educationStatues'].errors) {
                   <mat-hint class="text-danger">
                     @if (personalForm.controls['educationStatues'].errors['required']) {
                       <span> گروه تحصیلی خود را انتخاب کنید </span>
@@ -167,7 +167,7 @@
           }
           @if (+personalForm.controls['educationStatues'].value !== 3) {
             <div class="col-12 col-md-12 col-lg-4">
-              <mat-form-field  class="w-100 mt-3">
+              <mat-form-field class="w-100 mt-3">
                 <mat-label>سطح تحصیلات</mat-label>
                 <mat-select formControlName="educationLevel">
                   @for (item of baseEnums.educationLevel; track item) {
@@ -176,7 +176,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (personalForm.controls['educationLevel'].errors && personalForm.submitted) {
+                @if (personalForm.controls['educationLevel'].errors) {
                   <mat-hint class="text-danger">
                     @if (personalForm.controls['educationLevel'].errors['required']) {
                       <span> سطح تحصیلات خود را انتخاب کنید </span>
@@ -188,14 +188,14 @@
           }
           @if (+personalForm.controls['educationStatues'].value !== 3) {
             <div class="col-12 col-md-12 col-lg-4">
-              <mat-form-field class="w-100 mt-3" >
+              <mat-form-field class="w-100 mt-3">
                 <mat-label>رشته تحصیلی</mat-label>
                 <input
                   formControlName="educationTitle"
                   matInput
                   placeholder="رشته تحصیلی (اختیاری)"
                 />
-                @if (personalForm.controls['educationTitle'].errors && personalForm.submitted) {
+                @if (personalForm.controls['educationTitle'].errors) {
                   <mat-hint class="text-danger">
                     @if (personalForm.controls['educationTitle'].errors['required']) {
                       <span> رشته تحصیلی خود را وارد کنید </span>
@@ -206,7 +206,7 @@
             </div>
           }
           <div class="col-12 col-md-12 col-lg-4">
-            <mat-form-field  class="w-100 mt-3">
+            <mat-form-field class="w-100 mt-3">
               <mat-label>وضعیت شغل</mat-label>
               <mat-select formControlName="jobGroup">
                 @for (item of baseEnums.jobGroup; track item) {
@@ -215,7 +215,7 @@
                   </mat-option>
                 }
               </mat-select>
-              @if (personalForm.controls['jobGroup'].errors && personalForm.submitted) {
+              @if (personalForm.controls['jobGroup'].errors) {
                 <mat-hint class="text-danger">
                   @if (personalForm.controls['jobGroup'].errors['required']) {
                     <span> وضعیت شغل خود را انتخاب کنید </span>
@@ -225,10 +225,10 @@
             </mat-form-field>
           </div>
           <div class="col-12 col-md-12 col-lg-4">
-            <mat-form-field class="w-100 mt-3" >
+            <mat-form-field class="w-100 mt-3">
               <mat-label>عنوان شغل</mat-label>
               <input formControlName="jobTitle" matInput placeholder="عنوان شغل (اختیاری)" />
-              @if (personalForm.controls['jobTitle'].errors && personalForm.submitted) {
+              @if (personalForm.controls['jobTitle'].errors) {
                 <mat-hint class="text-danger">
                   @if (personalForm.controls['jobTitle'].errors['required']) {
                     <span> عنوان شغل خود را وارد کنید </span>

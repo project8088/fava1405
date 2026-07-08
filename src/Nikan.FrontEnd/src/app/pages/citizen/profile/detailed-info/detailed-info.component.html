@@ -83,7 +83,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['birthStateId'].errors && form.submitted) {
+                @if (form.controls['birthStateId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['birthStateId'].errors['required']) {
                       <span> استان محل تولد خود را انتخاب کنید </span>
@@ -100,7 +100,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['cityOfBirthId'].errors && form.submitted) {
+                @if (form.controls['cityOfBirthId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['cityOfBirthId'].errors['required']) {
                       <span> شهر محل تولد خود را انتخاب کنید </span>
@@ -198,7 +198,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['educationStatues'].errors && form.submitted) {
+                @if (form.controls['educationStatues'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['educationStatues'].errors['required']) {
                       <span> وضعیت تحصیل خود را انتخاب کنید </span>

@@ -17,30 +17,30 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
 
-  id: string ='';
+  id: string = '';
   userId?: string;
   loading: boolean = true;
 
   loadingEnums: boolean = true;
   baseEnums: any = {};
 
-  family: citizenFamilyModel;
+  family?: citizenFamilyModel;
 
-  loadingFieldStudies: boolean;
-  filteredFieldStudies=new Observable<any[]>();
+  loadingFieldStudies: boolean = false;
+  filteredFieldStudies = new Observable<any[]>();
   selectedFieldStudies: any[] = [];
 
   firstFormGroup: FormGroup;
   registerForm: FormGroup;
-  secoundFormGroup: FormGroup;
+
   familyForm: FormGroup;
 
   familyIsRegister: boolean = true;
 
   states: any[] = [];
-  isfahanCities:any[]=[];
+  isfahanCities: any[] = [];
 
   constructor(
     private matDialogRef: MatDialogRef<CitizenFamilyDialogComponent>,
@@ -63,19 +63,9 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       familyRelation: [null, [Validators.required]],
       birthDate: [null, [Validators.required]],
     });
-
-    this.helperService.getProvinces().subscribe((data) => {
-      this.states = data as [];
-    });
-  }
-
-  ngOnInit() {
-    this.getBaseEnums();
-    this.getEducationGroups();
     this.firstFormGroup = this.fb.group({
       nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
     });
-
     this.registerForm = this.fb.group({
       familyRelation: [null, [Validators.required]],
       nationCode: [{ value: null, disabled: true }, [Validators.required]],
@@ -106,6 +96,15 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       jobGroup: [null, [Validators.required]],
       jobTitle: [null],
     });
+
+    this.helperService.getProvinces().subscribe((data) => {
+      this.states = data as [];
+    });
+  }
+
+  ngOnInit() {
+    this.getBaseEnums();
+    this.getEducationGroups();
 
     this.registerForm.get('familyRelation')?.valueChanges.subscribe((value) => {
       this.registerForm.get('gender')?.enable();
@@ -166,12 +165,12 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       this.family = this._data;
       this.loading = true;
       this.dataService
-        .get(ServerApis.getMyFamilyBaseInfo + '?familyId=' + this.family.familyCitizenId)
+        .get(ServerApis.getMyFamilyBaseInfo + '?familyId=' + this.family?.familyCitizenId)
         .subscribe((data) => {
           const family = data.data;
           this.loading = false;
           this.registerForm.patchValue({
-            familyRelation: this.family.familyRelation,
+            familyRelation: this.family?.familyRelation,
             nationCode: family.nationCode,
 
             firstName: family.firstName,
@@ -214,7 +213,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.firstFormGroup.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.firstFormGroup.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.firstFormGroup.value;
@@ -237,22 +236,22 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
       );
   }
 
-  saveFamilyDetails(stepper: MatStepper) {
+  saveFamilyDetails() {
     if (this._data) this.updateFamilyDetails();
-    else this.registerFamilyAsNewUser(stepper);
+    else this.registerFamilyAsNewUser();
   }
-  registerFamilyAsNewUser(stepper: MatStepper) {
+  registerFamilyAsNewUser() {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.registerForm.value;
@@ -299,7 +298,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -310,7 +309,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.familyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.familyForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.familyForm.value;
@@ -339,7 +338,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -350,14 +349,14 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.registerForm.getRawValue();
     this.isSaving = true;
     this.dataService
       .post(ServerApis.updateFamilyMemberByCitizen, {
-        familyCitizenId: this.family.familyCitizenId,
+        familyCitizenId: this.family?.familyCitizenId,
         familyRelation: formValue.familyRelation,
         nationCode: formValue.nationCode,
         gender: formValue.gender,
@@ -393,7 +392,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -402,7 +401,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.registerForm.markAllAsTouched();
-        return ;
+      return;
     }
   }
 
@@ -418,8 +417,8 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
         if (response) {
           this.baseEnums.educationLevel = response.educationLevel ? response.educationLevel : [];
 
-          var grade = [];
-          this.baseEnums.educationLevel.forEach((item:any, index) => {
+          var grade: any[] = [];
+          this.baseEnums.educationLevel.forEach((item: any) => {
             if (+item.key > 19) grade.push(item);
           });
           this.baseEnums.educationLevel = grade;
@@ -430,7 +429,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -449,14 +448,14 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
     );
   }
 
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 

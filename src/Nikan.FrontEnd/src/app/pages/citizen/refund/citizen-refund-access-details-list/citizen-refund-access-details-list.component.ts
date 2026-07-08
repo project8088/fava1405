@@ -32,7 +32,7 @@ export class CitizenRefundAccessDetailsListComponent
     'refundState',
     'operation',
   ];
-  importid: string ='';
+  importId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -57,10 +57,8 @@ export class CitizenRefundAccessDetailsListComponent
       refundState: [null],
     });
     this.route.params.subscribe((p) => {
-      if (p.importId) {
-        this.importId = p.importId;
-        this.getList();
-      }
+      this.importId = p['importId'];
+      this.getList();
     });
   }
 
@@ -100,7 +98,7 @@ export class CitizenRefundAccessDetailsListComponent
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -115,7 +113,7 @@ export class CitizenRefundAccessDetailsListComponent
     this.getList();
   }
 
-  openRefundInfoDialog(item:any) {
+  openRefundInfoDialog(item: any) {
     this.matDialog
       .open(CitizenRefundInfoDialogComponent, {
         panelClass: 'custom-dialog',

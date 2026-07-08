@@ -16,7 +16,7 @@ export class CitizenContactComponent extends AppBase implements OnInit {
   editMode: boolean = false;
   editModeWork: boolean = false;
 
-  isfahanCities: any[];
+  isfahanCities: any[] = [];
 
   homeForm: FormGroup;
   isSavingHome: boolean = false;
@@ -26,7 +26,8 @@ export class CitizenContactComponent extends AppBase implements OnInit {
   isSavingWork: boolean = false;
   loadingWork: boolean = false;
   states: any[] = [];
-  cities: Observable<[]>;
+  cities = new Observable<any[]>();
+  workCityText: string = '';
 
   constructor(private helperService: HelperService) {
     super();
@@ -161,7 +162,7 @@ export class CitizenContactComponent extends AppBase implements OnInit {
     this.saveAddress(form, 1);
   }
 
-  saveAddress(form, addressType) {
+  saveAddress(form: any, addressType: number) {
     if (addressType === 1) this.isSavingHome = true;
     else this.isSavingWork = true;
 
@@ -182,7 +183,7 @@ export class CitizenContactComponent extends AppBase implements OnInit {
           this.isSavingHome = false;
           this.isSavingWork = false;
         },
-        (error:any) => {
+        (error: any) => {
           this.isSavingHome = false;
           this.isSavingWork = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
@@ -204,7 +205,6 @@ export class CitizenContactComponent extends AppBase implements OnInit {
     }
   }
 
-  workCityText: string;
   getWorkCity() {
     return this.workCityText;
   }

@@ -32,7 +32,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   isfahanCities: any[]=[];
 
   lastModifiedOnDate?: string;
-  citizenInfo: KarjoGlobalInformationDto;
+  citizenInfo?: KarjoGlobalInformationDto;
 
   userStatus?: number;
 
@@ -42,7 +42,7 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
     private profileComponent: CitizenProfileComponent,
   ) {
     super();
-    this.route.parent.params.subscribe((p) => {
+    this.route.parent?.params.subscribe((p) => {
       this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getPersonalInfo();
     });

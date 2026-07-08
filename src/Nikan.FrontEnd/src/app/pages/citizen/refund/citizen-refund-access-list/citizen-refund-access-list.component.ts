@@ -6,8 +6,8 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
 import { switchMap, startWith, map, catchError } from 'rxjs/operators';
-import { AdminReportRefundDialogComponent } from '../../../admin/Refund/dialog/report-refund/report-refund.component';
 import { AppBase } from '@app/app.base';
+import { CitizenReportRefundDialogComponent } from '../../_dialogs/report-refund/report-refund.component';
 
 @Component({
   selector: 'app-citizen-refund-access-list',
@@ -83,7 +83,7 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -98,9 +98,9 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
     this.getList();
   }
 
-  openReportDialog(item:any) {
+  openReportDialog(item: any) {
     this.matDialog
-      .open(AdminReportRefundDialogComponent, {
+      .open(CitizenReportRefundDialogComponent, {
         panelClass: 'custom-dialog',
         data: {
           id: item.id,

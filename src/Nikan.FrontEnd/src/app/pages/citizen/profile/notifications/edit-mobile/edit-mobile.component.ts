@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { TimerComponent } from 'src/app/shared/timer/timer.component';
+import { TimerComponent } from '@app/shared/timer/timer.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -19,8 +19,6 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   confirmForm: FormGroup;
   loadingState: boolean=false;
 
-  emailForm: FormGroup;
-
   sendingSMS: boolean = false;
   showConfirmCode: boolean = false;
 
@@ -31,7 +29,7 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   isConfirm = false;
 
   oldMobileNumber = false;
-  @ViewChild('phoneTimer', { static: false }) phoneTimer: TimerComponent;
+  @ViewChild('phoneTimer', { static: false }) phoneTimer!: TimerComponent;
 
   constructor() {
     super();

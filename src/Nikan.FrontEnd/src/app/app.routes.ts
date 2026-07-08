@@ -13,11 +13,11 @@ export const routes: Routes = [
       import('./pages/redirect/redirect.component').then((c) => c.RedirectComponent),
   },
 
-  // {
-  //   path: 'citizen',
-  //   loadChildren: () => import('./pages/citizen/citizen.module').then((m) => m.CitizenModule),
-  //   // canActivate: [AuthGuard],
-  // },
+  {
+    path: 'citizen',
+    loadChildren: () => import('./pages/citizen/citizen.module').then((m) => m.CitizenModule),
+    // canActivate: [AuthGuard],
+  },
 
   {
     path: 'account',

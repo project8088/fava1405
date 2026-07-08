@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
-import { TimerComponent } from 'src/app/shared/timer/timer.component';
+import { TimerComponent } from '@app/shared/timer/timer.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -18,18 +18,16 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
 
   confirmForm: FormGroup;
   loadingState: boolean=false;
-  codeSent: boolean;
-
-  emailForm: FormGroup;
+  codeSent: boolean = false;
 
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
   timerCounterString='';
   resendTimerInterval: any;
-  editMode: boolean;
+  editMode: boolean = false;
   formIsShowing: boolean = false;
 
-  @ViewChild('timer', { static: false }) timer: TimerComponent;
+  @ViewChild('timer', { static: false }) timer!: TimerComponent;
 
   constructor() {
     super();

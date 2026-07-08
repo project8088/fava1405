@@ -25,7 +25,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
 
   constructor(private profileComponent: CitizenProfileComponent) {
     super();
-    this.route.parent.params.subscribe((p) => {
+    this.route.parent?.params.subscribe((p) => {
       this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getFamilyList();
     });
@@ -47,7 +47,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -67,7 +67,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
         row.loading = true;
         this.dataService
           .get(ServerApis.removeFamilyByCitizen, {
-            id: +row.id,
+            id: +row.id!,
           })
           .subscribe(
             (response) => {
@@ -87,7 +87,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
             },
@@ -96,7 +96,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
     });
   }
 
-  openFamilyDialog(family) {
+  openFamilyDialog(family: any) {
     this.matDialog
       .open(CitizenFamilyDialogComponent, {
         data: family,
@@ -132,7 +132,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

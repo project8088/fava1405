@@ -11,13 +11,13 @@ import { AppBase } from '@app/app.base';
   styleUrls: ['./report-refund.component.scss'],
   standalone: false,
 })
-export class AdminReportRefundDialogComponent extends AppBase implements OnInit {
+export class CitizenReportRefundDialogComponent extends AppBase implements OnInit {
   isSaving=false; 
   loading: boolean = true;
   importId: string ='';
   infoReport: any;
   constructor(
-    private matDialogRef: MatDialogRef<AdminReportRefundDialogComponent>,
+    private matDialogRef: MatDialogRef<CitizenReportRefundDialogComponent>,
     @Inject(MAT_DIALOG_DATA)   _data: any, 
   ) {
     super();

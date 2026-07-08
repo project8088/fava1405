@@ -14,7 +14,8 @@
   },
   "include": [
     "./src/main.ts",
-    "./src/app/pages/card/**/*.ts"
+    "./src/app/pages/card/**/*.ts",
+    "./src/app/pages/citizen/**/*.ts"
     // "src/**/*.ts"
   ],
   "exclude": ["src/**/*.spec.ts"]

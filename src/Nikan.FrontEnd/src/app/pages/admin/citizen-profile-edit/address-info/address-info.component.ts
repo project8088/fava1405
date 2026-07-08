@@ -27,7 +27,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
   isSavingWork: boolean = false;
   loadingWork: boolean = false;
   states: any[] = [];
-  cities: Observable<[]>;
+  cities=new Observable<any[]>();
 
   constructor(private helperService: HelperService) {
     super();

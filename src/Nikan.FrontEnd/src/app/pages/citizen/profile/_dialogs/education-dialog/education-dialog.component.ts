@@ -15,19 +15,19 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenEducationDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   educationForm: FormGroup;
-  id: string ='';
+  id: string = '';
   userId?: string;
   loading: boolean = true;
 
   loadingEnums: boolean = true;
   baseEnums: any = {};
 
-  education: karjoEducationDto;
+  education?: karjoEducationDto;
 
-  loadingFieldStudies: boolean;
-  filteredFieldStudies=new Observable<any[]>();
+  loadingFieldStudies: boolean = false;
+  filteredFieldStudies = new Observable<any[]>();
   selectedFieldStudies: any[] = [];
 
   constructor(
@@ -91,8 +91,8 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
         if (response) {
           this.baseEnums.educationLevel = response.educationLevel ? response.educationLevel : [];
 
-          var grade = [];
-          this.baseEnums.educationLevel.forEach((item:any, index) => {
+          var grade: any[] = [];
+          this.baseEnums.educationLevel.forEach((item: any) => {
             if (+item.key > 19) grade.push(item);
           });
           this.baseEnums.educationLevel = grade;
@@ -103,7 +103,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -138,7 +138,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingFieldStudies = false;
           },
@@ -146,7 +146,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
       );
   }
 
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -167,7 +167,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
     if (this.educationForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.educationForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.educationForm.value;
@@ -186,7 +186,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
           : '',
         dateOfEnd: formValue.dateOfEnd ? this.dataService.formatDate(formValue.dateOfEnd) : '',
         userId: this.userId,
-        id: this.education ? +this.education.id : null,
+        id: this.education ? +this.education?.id! : null,
       })
       .subscribe(
         (response) => {
@@ -199,7 +199,7 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

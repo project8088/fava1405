@@ -34,7 +34,7 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
     'refundState',
     'operation',
   ];
-  importid: string ='';
+  importId: string ='';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();

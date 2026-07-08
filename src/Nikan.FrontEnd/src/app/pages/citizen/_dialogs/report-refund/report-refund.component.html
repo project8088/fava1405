@@ -1,0 +1,50 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title">گزارش استرداد</h5>
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <div class="box-info-dash">
+    <div class="row">
+      <div class="col-sm-6">
+        <span> تعداد : </span><strong>{{ infoReport.countRow }}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span> جمع کل: </span
+        ><strong>
+          {{ infoReport.totalAmount | number }}
+
+          ریال
+        </strong>
+      </div>
+      <div class="text-success col-sm-6">
+        <span>مبلغ برگشت داده شده: </span
+        ><strong>{{ infoReport.amountRefund | number }}ریال</strong>
+      </div>
+      <div class="text-success col-sm-6">
+        <span> تعداد برگشت داده شده: </span><strong>{{ infoReport.countRefund }}</strong>
+      </div>
+
+      <div class="text-danger col-sm-6">
+        <span>مبلغ برگشت داده نشده: </span
+        ><strong>{{ infoReport.amountRemaining | number }}ریال</strong>
+      </div>
+      <div class="text-danger col-sm-6">
+        <span> تعداد برگشت داده نشده: </span><strong>{{ infoReport.countRemaining }}</strong>
+      </div>
+
+      <div class="text-info col-sm-6">
+        <span>مبلغ ثبت شماره کارت: </span
+        ><strong>{{ infoReport.amountRefundCardNumber | number }}ریال</strong>
+      </div>
+      <div class="text-info col-sm-6">
+        <span> تعداد ثبت شماره کارت: </span><strong>{{ infoReport.countRefundCardNumber }}</strong>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+</mat-dialog-actions>

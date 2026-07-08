@@ -30,7 +30,7 @@ interface ICardDetails {
   attachmentGroup: string;
   buyCardDescription: string;
   cardCost: number;
-  cardInfoid: string ='';
+  cardInfoid: string;
   cardIsActive: boolean;
   cardType: string;
   cardTypeId: number;
@@ -52,16 +52,16 @@ interface ICardDetails {
   standalone: false,
 })
 export class BuyCardDialogComponent extends AppBase implements OnInit {
-  citizenId: number;
-  states;
+  citizenId!: number;
+  states: any[] = [];
   loading: boolean = true;
   card: ICard;
 
-  isSaving=false;
+  isSaving = false;
   groupList: any[] = [];
   form: FormGroup;
-  cardDetails: ICardDetails;
-  cities;
+  cardDetails?: ICardDetails;
+  cities: any[] = [];
   addressForm: FormGroup = new FormGroup({
     phoneNumber: new FormControl(null, [Validators.required]),
     region: new FormControl(null),
@@ -75,9 +75,9 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     postalCode: new FormControl(null, [Validators.required]),
   });
 
-  homeAddress;
-  workAddress;
-  orderDetails;
+  homeAddress: any;
+  workAddress: any;
+  orderDetails: any;
 
   constructor(
     private matDialogRef: MatDialogRef<BuyCardDialogComponent>,
@@ -112,7 +112,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
           this.loading = false;
           this.cardDetails = response.data ? response.data : [];
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -130,7 +130,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
           this.loading = false;
           this.cardDetails = response.data ? response.data : [];
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -140,7 +140,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.form.value;
@@ -162,7 +162,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );
@@ -179,7 +179,6 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     });
   }
   loadHomeAddress() {
-    this.homeAddress;
     if (this.homeAddress) {
       this.addressForm.patchValue({
         id: this.homeAddress.id,
@@ -248,7 +247,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
           }
           this.isSaving = false;
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

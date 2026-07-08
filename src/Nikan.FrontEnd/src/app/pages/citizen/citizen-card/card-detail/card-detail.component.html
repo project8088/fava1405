@@ -60,7 +60,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> استان </mat-label>
-                  <mat-select disabled value="400" formControlName="stateId">
+                  <mat-select  [disabled]="true" value="400" formControlName="stateId">
                     <mat-option value="400"> اصفهان </mat-option>
                   </mat-select>
                   @if (addressForm.get('stateId')?.hasError('required')) {
@@ -69,7 +69,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-md-4">
                   <mat-label> شهر </mat-label>
-                  <mat-select disabled value="403" formControlName="stateId">
+                  <mat-select  [disabled]="true" value="403" formControlName="stateId">
                     <mat-option value="400"> اصفهان </mat-option>
                   </mat-select>
                   @if (addressForm.get('stateId')?.hasError('required')) {

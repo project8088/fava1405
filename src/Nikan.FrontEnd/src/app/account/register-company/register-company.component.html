@@ -156,8 +156,7 @@
 
       @if (loadingCaptcha) {
         <mat-spinner diameter="20" color="default"></mat-spinner>
-      }
-      @if (!loadingCaptcha) {
+      }@else {
         <button type="button" mat-icon-button color="default" (click)="getCaptcha()">
           <i class="fa fa-sync"></i>
         </button>

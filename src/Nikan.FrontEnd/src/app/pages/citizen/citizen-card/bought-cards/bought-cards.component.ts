@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class BoughtCardsComponent extends AppBase implements OnInit {
   loading: boolean = true;
-  cards;
+  cards: any[] = [];
 
   displayedColumns: string[] = [
     'cardTitle',
@@ -36,14 +36,14 @@ export class BoughtCardsComponent extends AppBase implements OnInit {
         this.loading = false;
         this.cards = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
   }
 
-  openCardAddress(info) {
+  openCardAddress(info: any) {
     this.matDialog
       .open(ChangeCardAddressDialogComponent, {
         panelClass: 'custom-dialog',

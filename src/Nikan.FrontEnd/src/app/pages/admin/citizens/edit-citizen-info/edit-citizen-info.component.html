@@ -404,7 +404,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['shStateId'].errors && form.submitted) {
+                @if (form.controls['shStateId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['shStateId'].errors['required']) {
                       <span> استان محل صدور شناسنامه شهروند را انتخاب کنید </span>
@@ -421,7 +421,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['shCityId'].errors && form.submitted) {
+                @if (form.controls['shCityId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['shCityId'].errors['required']) {
                       <span> شهر محل صدور شناسنامه شهروند را انتخاب کنید </span>
@@ -448,7 +448,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['birthStateId'].errors && form.submitted) {
+                @if (form.controls['birthStateId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['birthStateId'].errors['required']) {
                       <span> استان محل تولد شهروند را انتخاب کنید </span>
@@ -465,7 +465,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['cityOfBirthId'].errors && form.submitted) {
+                @if (form.controls['cityOfBirthId'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['cityOfBirthId'].errors['required']) {
                       <span> شهر محل تولد شهروند را انتخاب کنید </span>
@@ -563,7 +563,7 @@
                     </mat-option>
                   }
                 </mat-select>
-                @if (form.controls['educationStatues'].errors && form.submitted) {
+                @if (form.controls['educationStatues'].errors) {
                   <mat-hint class="text-danger">
                     @if (form.controls['educationStatues'].errors['required']) {
                       <span> وضعیت تحصیل شهروند را انتخاب کنید </span>

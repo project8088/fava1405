@@ -15,7 +15,6 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   isSaving: boolean = false;
   hasFiles: boolean = false;
   userId?: string;
-  cardForm: FormGroup;
   loadingState: boolean=false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
@@ -100,7 +99,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
     });
   }
 
-  getImage(ev) {
+  getImage(ev:any) {
     this.imageUrl = ev.uploadUrl;
   }
 }

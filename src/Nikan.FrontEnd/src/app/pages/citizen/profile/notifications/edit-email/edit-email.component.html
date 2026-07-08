@@ -21,19 +21,14 @@
       <form [formGroup]="cardForm" class="mx-4 mt-4">
         <div>
           <span class="px-3">{{ cardForm.get('email')?.value }}</span>
-          @if (!isConfirm) {
-            <span class="text-danger mx-2">(تایید نشده)</span>
-          }
-          @if (isConfirm) {
-            <span class="text-success mx-2">(تایید شدده)</span>
-          }
+       
           @if (!editMode) {
             <button mat-raised-button color="default" (click)="toggleEditMode()">ویرایش</button>
           }
         </div>
         @if (editMode) {
           <div>
-            <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-form-field class="col-sm-6 col-md-4">
               <mat-label> ایمیل </mat-label>
               <input matInput formControlName="email" class="text-left" minlength="10" />
               @if (cardForm.get('email')?.hasError('required')) {
@@ -60,7 +55,7 @@
     }
     @if (codeSent) {
       <form [formGroup]="confirmForm" class="mx-4">
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label>کد تایید دریافتی </mat-label>
           <input
             matInput

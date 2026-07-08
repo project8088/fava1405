@@ -8,4 +8,8 @@ export interface RegisterServiceModel {
   icon: null;
   haveTerms: boolean;
   terms: string;
+  cardType: string;
 }
+
+
+

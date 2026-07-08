@@ -24,7 +24,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
 
   constructor(private profileComponent: CitizenProfileComponent) {
     super();
-    this.route.parent.params.subscribe((p) => {
+    this.route.parent?.params.subscribe((p) => {
       this.userId = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getEducationList();
     });
@@ -64,7 +64,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
         row.loading = true;
         this.dataService
           .delete(ServerApis.deleteCitizenEducation, {
-            id: +row.id,
+            id: +row.id!,
           })
           .subscribe(
             (response) => {

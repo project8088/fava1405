@@ -7,15 +7,14 @@ import { HelperService } from '@core/services/helper.service';
 import { AppBase } from '@app/app.base';
 
 @Component({
-  selector: 'adm-change-card-address-dialog',
   templateUrl: './change-card-address.component.html',
   styleUrls: ['./change-card-address.component.scss'],
   standalone: false,
 })
 export class ChangeCardAddressDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
-  id: string ='';
-  isfahanCities: any[];
+  isSaving = false;
+  id: string = '';
+  isfahanCities: any[] = [];
   homeForm: FormGroup;
   loading: boolean = true;
   info: any;
@@ -55,7 +54,7 @@ export class ChangeCardAddressDialogComponent extends AppBase implements OnInit 
     if (this.homeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.homeForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -82,7 +81,7 @@ export class ChangeCardAddressDialogComponent extends AppBase implements OnInit 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

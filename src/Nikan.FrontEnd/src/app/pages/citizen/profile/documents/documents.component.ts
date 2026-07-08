@@ -15,13 +15,13 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
   isSaving: boolean = false;
   userId?: string;
   cardForm: FormGroup;
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   data: any;
   uploadUrl: string = ServerApis.uploadDocGroupAttachment;
 
-  baseDocuments: any[]=[];
+  baseDocuments: any[] = [];
   displayedColumns: string[] = ['documentGroup', 'description', 'attachedOnDate', 'id'];
 
   constructor() {
@@ -42,7 +42,7 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
       this.baseDocuments = data.data;
     });
   }
-  removeDocument(id, title) {
+  removeDocument(id: number, title: string) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + title + '" اطمینان دارید؟',
@@ -77,14 +77,14 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
   }
 
-  getImage(ev) {
+  getImage(ev: any) {
     this.getDocGroupsBaseList();
     this.imageUrl = ev.uploadUrl;
   }

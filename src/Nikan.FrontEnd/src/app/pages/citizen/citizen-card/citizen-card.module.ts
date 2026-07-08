@@ -10,6 +10,7 @@ import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material/material.module';
 import { NgModule } from '@angular/core';
 import { SharedModule } from '@app/shared/shared.module';
+import { CitizenReportRefundDialogComponent } from '../_dialogs/report-refund/report-refund.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { SharedModule } from '@app/shared/shared.module';
     CitizenCardComponent,
     BoughtCardsComponent,
     CardDetailComponent,
+    CitizenReportRefundDialogComponent,
   ],
   imports: [
     CommonModule,

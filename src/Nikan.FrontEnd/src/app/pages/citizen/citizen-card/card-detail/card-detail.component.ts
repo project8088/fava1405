@@ -9,7 +9,7 @@ interface ICard {
   attachmentGroup: string;
   buyCardDescription: string;
   cardCost: number;
-  cardInfoid: string ='';
+  cardInfoid: string;
   cardIsActive: boolean;
   cardType: number;
   cardTypeId: number;
@@ -26,7 +26,7 @@ interface ICard {
 }
 
 interface ICardDetails {
-  cardInfoid: string ='';
+  cardInfoid: string;
   cardTypeId: number;
   cardType: string;
   buyCardDescription: string;
@@ -36,12 +36,14 @@ interface ICardDetails {
   cardCost: number;
   doubleCardCost: number;
   vatForCardCost: number;
+  cardTotalAmount: number;
   vatForPost: number;
+  postTotalAmount: number;
   //تخفیفات
   postageDiscountAmount: number;
   cardDiscountAmount: number;
   totalDiscountAmount: number;
-
+  totalStr: string;
   expirationDate: string;
   operation: string;
   operationId: number;
@@ -58,19 +60,19 @@ interface ICardDetails {
   standalone: false,
 })
 export class CardDetailComponent extends AppBase implements OnInit {
-  citizenId: number;
-  addressId: number;
+  citizenId!: number;
+  addressId!: number;
 
-  states;
+  states: any[] = [];
   loading: boolean = true;
-  cardInfoId: ICard;
-  Refid: string ='';
+  cardInfoId?: ICard;
+  RefId: string = '';
   waitForRedirectToBank: boolean = false;
-  isSaving=false;
+  isSaving = false;
   groupList: any[] = [];
-  form: FormGroup;
-  cardDetails: ICardDetails;
-  cities;
+  form?: FormGroup;
+  cardDetails?: ICardDetails;
+  cities: any[] = [];
   addressForm: FormGroup = new FormGroup({
     phone: new FormControl(null, [Validators.required]),
     region: new FormControl(null),
@@ -84,9 +86,9 @@ export class CardDetailComponent extends AppBase implements OnInit {
     postalCode: new FormControl(null, [Validators.required]),
   });
 
-  homeAddress;
-  workAddress;
-  orderDetails;
+  homeAddress: any;
+  workAddress: any;
+  orderDetails: any;
 
   constructor(private helperService: HelperService) {
     super();
@@ -117,7 +119,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
           this.loading = false;
           this.cardDetails = response.data ? response.data : [];
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -135,7 +137,6 @@ export class CardDetailComponent extends AppBase implements OnInit {
     });
   }
   loadHomeAddress() {
-    this.homeAddress;
     if (this.homeAddress) {
       this.addressForm.patchValue({
         id: this.homeAddress.id,
@@ -209,7 +210,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
           }
           this.isSaving = false;
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -246,7 +247,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );

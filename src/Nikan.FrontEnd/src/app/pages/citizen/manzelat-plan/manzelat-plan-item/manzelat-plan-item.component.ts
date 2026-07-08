@@ -167,7 +167,7 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
     );
   }
 
-  getImage(ev) {
+  getImage(ev:any) {
     this.imageUrl = ev.uploadUrl;
   }
 }

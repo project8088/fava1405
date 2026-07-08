@@ -1,11 +1,10 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
@@ -16,8 +15,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
-    loading?: boolean;
-  isSaving=false;
+  loading?: boolean;
+  isSaving = false;
 
   displayedColumns: string[] = [
     'row',
@@ -32,8 +31,8 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
     'isValidRow',
     'description',
   ];
-  showAddPanel: boolean;
-  importid: string ='';
+  showAddPanel: boolean = false;
+  importId: string = '';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -42,9 +41,8 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
-  frm: FormGroup;
   events: any[] = [];
-  constructor(private customValidator: CustomFormValidators) {
+  constructor(private fb: FormBuilder) {
     super();
     this.searchForm = this.fb.group({
       isValidRow: [null],
@@ -91,7 +89,7 @@ export class AdminCitizenExcelBatchFileDetailsComponent extends AppBase implemen
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

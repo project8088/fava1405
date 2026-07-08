@@ -10,8 +10,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenDashboardComponent extends AppBase implements OnInit {
-    loading?: boolean;
-  registerTypes;
+  loading?: boolean;
+  registerTypes: RegisterServiceModel[] = [];
   loadingData?: boolean;
   citizen: any = {};
   baseUrl: string = ServerApis.baseUrl;
@@ -26,7 +26,7 @@ export class CitizenDashboardComponent extends AppBase implements OnInit {
         const registerTypes: RegisterServiceModel[] = response.data ? response.data : [];
         this.registerTypes = registerTypes;
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -47,7 +47,7 @@ export class CitizenDashboardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

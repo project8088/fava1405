@@ -72,7 +72,7 @@
               @if (isSaving) {
                 <span>منتظر بمانید...</span>
               }
-              @if (!isSaving) {
+              @else {
                 <span>افزودن</span>
               }
               <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

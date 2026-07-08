@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 
 import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '@core/server-apis';
-import { UploadUserAvatarDialogComponent } from 'src/app/shared/_dialog/upload-avatar/upload-avatar.component';
+import { UploadUserAvatarDialogComponent } from '@app/shared/_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -16,10 +16,10 @@ export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
   personalPictureIsUploaded: boolean = false;
-  personalPicture_Confirmed: number = null;
+  personalPicture_Confirmed: number | null = null;
   userId?: string;
   cardForm: FormGroup;
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   data: any;
@@ -49,7 +49,7 @@ export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
     });
   }
 
-  getImage(ev) {
+  getImage(ev: any) {
     this.imageUrl = ev.uploadUrl;
     window.location.reload();
   }

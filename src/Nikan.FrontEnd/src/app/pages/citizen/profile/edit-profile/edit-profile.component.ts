@@ -28,13 +28,13 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   filteredState=new Observable<any[]>();
 
   lastModifiedOnDate?: string;
-  citizenInfo: KarjoGlobalInformationDto;
+  citizenInfo?: KarjoGlobalInformationDto;
   constructor(
     private customValidator: CustomFormValidators,
     private profileComponent: CitizenProfileComponent,
   ) {
     super();
-    this.route.parent.params.subscribe((p) => {
+    this.route.parent?.params.subscribe((p) => {
       this.userCode = p['id'] && p['id'] != '0' ? p['id'] : '';
       this.getPersonalInfo();
     });
@@ -196,7 +196,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
         FirstName: formValue.firstName,
         LastName: formValue.lastName,
         FatherName: formValue.fatherName,
-        NationalCode: this.citizenInfo.nationalCode,
+        NationalCode: this.citizenInfo?.nationalCode,
         MobileNumber: formValue.mobile,
         Email: formValue.email,
 

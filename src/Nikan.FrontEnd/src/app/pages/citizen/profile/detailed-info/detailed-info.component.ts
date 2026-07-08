@@ -34,7 +34,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   shCities = new Observable<any>();
 
   lastModifiedOnDate?: string;
-  citizenInfo: KarjoGlobalInformationDto;
+  citizenInfo?: KarjoGlobalInformationDto;
   constructor(
     private helperService: HelperService,
     private customValidator: CustomFormValidators,

@@ -13,10 +13,10 @@ import { AppBase } from '@app/app.base';
 export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
   isSaving=false;
   frm: FormGroup;
-  showSaveCardNumberPanel: boolean;
+  showSaveCardNumberPanel: boolean =false;
   loadingData?: boolean;
   info: any;
-  refundid: string ='';
+  refundId: string ='';
   matDialogRef: any;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -25,9 +25,8 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
       ownerBankCardNumber: [''],
     });
     this.route.params.subscribe((p) => {
-      if (p.refundId) {
-        this.refundId = p.refundId;
-      }
+        this.refundId = p['refundId'];
+      
     });
   }
 

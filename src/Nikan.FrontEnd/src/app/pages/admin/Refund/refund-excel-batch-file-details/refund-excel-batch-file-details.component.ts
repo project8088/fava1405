@@ -16,8 +16,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
-    loading?: boolean;
-  isSaving=false;
+  loading?: boolean;
+  isSaving = false;
 
   displayedColumns: string[] = [
     'row',
@@ -29,8 +29,8 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     'totalRefundAmount',
     'refundCardNumber',
   ];
-  showAddPanel: boolean;
-  importid: string ='';
+  showAddPanel: boolean = false;
+  importId: string = '';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -86,7 +86,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -126,7 +126,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
@@ -136,7 +136,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.frm.get('importId')?.setValue(+this.importId);
@@ -158,7 +158,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
@@ -188,7 +188,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
             },
           );
@@ -196,7 +196,7 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     });
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

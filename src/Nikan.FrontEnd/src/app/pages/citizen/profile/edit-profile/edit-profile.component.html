@@ -10,7 +10,7 @@
     @if (!loading) {
       <form [formGroup]="personalForm" class="p-4">
         <div class="custom-alert">
-          تاریخ آخرین ویرایش اطلاعات: {{ lastModifiedOnDate | luxonFormat}}
+          تاریخ آخرین ویرایش اطلاعات: {{ lastModifiedOnDate | luxonFormat }}
         </div>
         <div class="row">
           <mat-form-field class="col-sm-6 col-md-4">
@@ -19,7 +19,7 @@
               matInput
               formControlName="nationalCode"
               readonly
-              disabled
+              [disabled]="true"
               maxlength="10"
               numbersOnly
             />

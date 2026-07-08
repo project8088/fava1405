@@ -23,7 +23,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
   info: any;
 
   lastModifiedOnDate?: string;
-  citizenInfo: KarjoGlobalInformationDto;
+  citizenInfo?: KarjoGlobalInformationDto;
 
   userStatus?: number;
 
@@ -106,7 +106,7 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
         identityId: formValue.identityId,
         lastName: formValue.lastName,
         fatherName: formValue.fatherName,
-        nationalCode: this.citizenInfo.nationalCode,
+        nationalCode: this.citizenInfo?.nationalCode,
         birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
       })
       .subscribe(
