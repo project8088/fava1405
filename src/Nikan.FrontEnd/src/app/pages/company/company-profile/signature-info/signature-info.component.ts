@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanySignatureInfoComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   companyId: string = '';
 
   baseUrl: string = ServerApis.baseUrl;
@@ -54,13 +54,13 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
   }
 
-  getSignature(ev) {
+  getSignature(ev: any) {
     this.imageSignatureUrl = ev.signatureUrl;
   }
 }

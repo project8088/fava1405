@@ -40,11 +40,11 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/webuser/webuser.module').then((m) => m.WebUserModule),
   },
 
-  // {
-  //   path: 'company',
-  //   canActivate: [AuthGuard],
-  //   loadChildren: () => import('./pages/company/company.module').then((m) => m.CompanyModule),
-  // },
+  {
+    path: 'company',
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./pages/company/company.module').then((m) => m.CompanyModule),
+  },
 
   {
     path: 'card',

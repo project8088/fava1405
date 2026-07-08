@@ -15,7 +15,8 @@
   "include": [
     "./src/main.ts",
     "./src/app/pages/card/**/*.ts",
-    "./src/app/pages/citizen/**/*.ts"
+    "./src/app/pages/citizen/**/*.ts",
+    "./src/app/pages/company/**/*.ts"
     // "src/**/*.ts"
   ],
   "exclude": ["src/**/*.spec.ts"]
