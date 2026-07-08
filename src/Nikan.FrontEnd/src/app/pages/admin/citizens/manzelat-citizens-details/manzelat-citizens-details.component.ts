@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AdminCitizenManzelatReviewComponent } from '../../_dialogs/citizen-manzelat-review/citizen-manzelat-review.component';
 import { ServerApis } from '@core/server-apis';
 import { ShowImageDialogComponent } from '@app/shared/_dialog/show-image/show-image.component';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
-import { AdminUpdateCitizenMobileNumberDialogComponent } from '../dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
-import { AdminUpdateCitizenSabtStateDialogComponent } from '../dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
+import { AdminUpdateCitizenMobileNumberDialogComponent } from '../_dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
+import { AdminUpdateCitizenSabtStateDialogComponent } from '../_dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
 import { AppBase } from '@app/app.base';
+import { AdminCitizenManzelatReviewComponent } from '../_dialog/citizen-manzelat-review/citizen-manzelat-review.component';
 
 @Component({
   selector: 'app-manzelat-citizens-details',

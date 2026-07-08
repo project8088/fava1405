@@ -18,24 +18,24 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   userForm: FormGroup;
   userId?: string;
   loading: boolean = true;
   bankEnums: any[] = [];
   loadingEnums: boolean = true;
 
-  loadinProvince: boolean;
+  loadinProvince: boolean = false;
   provinceList: BaseDataModel[] = [];
-  filteredProvince=new Observable<any[]>();
+  filteredProvince = new Observable<any[]>();
 
-  loadinState: boolean;
+  loadinState: boolean = false;
   stateList: BaseDataModel[] = [];
-  filteredState=new Observable<any[]>();
+  filteredState = new Observable<any[]>();
 
-  loadinPlacement: boolean;
+  loadinPlacement: boolean = false;
   placementList: BaseDataModel[] = [];
-  filteredPlacement=new Observable<any[]>();
+  filteredPlacement = new Observable<any[]>();
 
   selectedOffices: any[] = [];
 
@@ -43,7 +43,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   periorityList: any[] = [];
-  loadingUnit: boolean=false;
+  loadingUnit: boolean = false;
   loadingData: boolean = true;
   constructor(
     private matDialogRef: MatDialogRef<AdminUpdateUserDialogComponent>,
@@ -110,14 +110,14 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
           this.matDialogRef.close(false);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.matDialogRef.close(false);
       },
     );
   }
 
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -125,7 +125,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.userForm.value;
@@ -154,7 +154,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );
@@ -200,7 +200,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
    */
   selectedAutoChip(
     list: any[],
-    formControl:string,
+    formControl: string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,
@@ -229,7 +229,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -251,7 +251,7 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );

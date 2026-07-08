@@ -31,7 +31,7 @@ export class AdminCitizensInGroupsComponent extends AppBase implements AfterView
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  groupid: string ='';
+  groupId: string ='';
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;

@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
-import { AdminImportCitizenExcelDialogComponent } from '../dialog/citizen-import-excel/import-citizen-excel.component';
+import { AdminImportCitizenExcelDialogComponent } from '../_dialog/citizen-import-excel/import-citizen-excel.component';
 import { AppBase } from '@app/app.base';
 
 @Component({

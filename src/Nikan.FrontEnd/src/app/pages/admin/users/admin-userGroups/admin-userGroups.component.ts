@@ -4,8 +4,8 @@ import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { AppBase } from '@app/app.base';
-import { userGroupsDto } from '@core/models/users/usergroups';
+import { AppBase } from '@app/app.base'; 
+import { userGroupsDto } from '@core/models/users/userGroups';
 
 @Component({
   selector: 'adm-admin-userGroup',

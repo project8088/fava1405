@@ -7,8 +7,8 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
-import { AdminUpdateCitizenMobileNumberDialogComponent } from './dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
-import { AdminUpdateCitizenSabtStateDialogComponent } from './dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
+import { AdminUpdateCitizenMobileNumberDialogComponent } from './_dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
+import { AdminUpdateCitizenSabtStateDialogComponent } from './_dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
 import { AppBase } from '@app/app.base';
 import { AdminChangePasswordDialogComponent } from '@app/shared/_dialog/change-user-password/change-user-password.component';
 

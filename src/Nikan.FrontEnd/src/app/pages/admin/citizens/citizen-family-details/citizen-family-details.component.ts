@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AdminCitizenRejectFamilyComponent } from '../../_dialogs/citizen-reject-family/citizen-reject-family.component';
 import { ServerApis } from '@core/server-apis';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
+import { AdminCitizenRejectFamilyComponent } from '../_dialog/citizen-reject-family/citizen-reject-family.component';
 
 @Component({
   selector: 'app-citizen-family-details',

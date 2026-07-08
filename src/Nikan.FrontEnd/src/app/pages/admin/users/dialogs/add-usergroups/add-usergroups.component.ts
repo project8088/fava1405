@@ -3,8 +3,8 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
-import { userGroupsDto } from '@core/models/users/usergroups';
 import { AppBase } from '@app/app.base';
+import { userGroupsDto } from '@core/models/users/userGroups';
 
 @Component({
   selector: 'app-adm-add-usergroups-dialog',
@@ -13,12 +13,12 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
-  isUpdate=false;
+  isSaving = false;
+  isUpdate = false;
   userGroupsForm: FormGroup;
-  id: string ='';
+  id: string = '';
   loading: boolean = true;
-  userGroups: userGroupsDto;
+  userGroups?: userGroupsDto;
 
   constructor(
     private matDialogRef: MatDialogRef<AdminAddUserGrousDialogComponent>,
@@ -51,7 +51,7 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
     if (this.userGroupsForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userGroupsForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.userGroupsForm.value;
@@ -68,7 +68,7 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

@@ -20,6 +20,10 @@ import { AdminUserPermissionsComponent } from './user-permissions/user-permissio
 import { AdminUsersComponent } from './admin-users/admin-users.component';
 import { AdminTreePermissionComponent } from './user-permissions/tree-permission/tree-permission.component';
 import { UsersRoutingModule } from './users-routing-module';
+import { MaterialModule } from '@core/material/material.module';
+import { CoreModule } from '@core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -42,6 +46,14 @@ import { UsersRoutingModule } from './users-routing-module';
     AdminUserAccessGroupPermissionsComponent,
     AdminUserAccessIpComponent,
   ],
-  imports: [CommonModule, UsersRoutingModule],
+  imports: [
+    CommonModule,
+    UsersRoutingModule,
+    MaterialModule,
+    CoreModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+  ],
 })
 export class UsersModule {}
