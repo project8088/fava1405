@@ -1,0 +1,195 @@
+<div class="content-header">
+  <span>اطلاعیه ها</span>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+    <button mat-raised-button color="default" routerLink="/admin/addupdate-notification/0">
+      <i class="fa fa-plus mr-2"></i>
+      <span>ثبت اطلاعیه جدید</span>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>عنوان اطلاعیه</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>از تاریخ</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="fromDate"
+            [max]="searchForm.get('toDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          @if (searchForm.get('fromDate')?.hasError('required')) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('fromDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>تا تاریخ</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="toDate"
+            [min]="searchForm.get('fromDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          @if (searchForm.get('toDate')?.hasError('required')) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('toDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
+
+      <div class="datatable-table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="imageUrl">
+            <th mat-header-cell *matHeaderCellDef>تصویر</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.imageUrl) {
+                <img [src]="baseUrl + row.imageUrl" class="img-thumbnail thumb-64" />
+              }
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="title">
+            <th mat-header-cell *matHeaderCellDef>عنوان</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.title }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="description">
+            <th mat-header-cell *matHeaderCellDef>توضیحات</th>
+            <td mat-cell *matCellDef="let row">{{ row.description }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="onDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ ثبت</th>
+            <td mat-cell *matCellDef="let row">{{ row.onDate | luxonFormat}}</td>
+          </ng-container>
+          <ng-container matColumnDef="publishDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ انتشار</th>
+            <td mat-cell *matCellDef="let row">{{ row.publishDate | luxonFormat}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="isActive">
+            <th mat-header-cell *matHeaderCellDef>وضعیت</th>
+            <td mat-cell *matCellDef="let row">
+              @if (!row.isActive) {
+                <span class="text-danger">غیر فعال</span>
+              }
+              @if (row.isActive) {
+                <span class="text-success">فعال</span>
+              }
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="operation">
+            <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
+            <td mat-cell *matCellDef="let row">
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item routerLink="/admin/addupdate-notification/{{ row.id }}">
+                  <i class="fa fa-pencil mr-2"></i>
+                  <span>ویرایش اطلاعیه</span>
+                </button>
+                <button mat-menu-item routerLink="/admin/citizen-notifications/{{ row.id }}">
+                  <i class="fa fa-eye mr-2"></i>
+                  <span>دریافت کنندگان اطلاعیه</span>
+                </button>
+
+                <button mat-menu-item (click)="manageAttachment(row)">
+                  <i class="fa fa-paperclip mr-2"></i>
+                  <span>مدیریت پیوست ها</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

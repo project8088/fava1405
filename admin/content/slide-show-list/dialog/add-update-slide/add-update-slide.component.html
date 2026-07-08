@@ -1,0 +1,75 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  @if (!isUpdate) {
+    <h5 cdkDragHandle class="title">ثبت اسلاید شو</h5>
+  }
+  @if (isUpdate) {
+    <h5 cdkDragHandle class="title">ویرایش اسلاید شو</h5>
+  }
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <form [formGroup]="form">
+    <div class="row">
+      <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-label> عنوان </mat-label>
+        <input matInput formControlName="caption" autocomplete="doNotAutoComplete" maxlength="50" />
+        @if (form.get('caption')?.hasError('required')) {
+          <mat-error> عنوان را وارد کنید. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-label>آدرس </mat-label>
+        <input matInput formControlName="url" autocomplete="doNotAutoComplete" maxlength="50" />
+        @if (form.get('url')?.hasError('required')) {
+          <mat-error> آدرس را وارد کنید. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-label>ترتیب نمایش </mat-label>
+        <input
+          matInput
+          formControlName="indexOrder"
+          autocomplete="doNotAutoComplete"
+          maxlength="50"
+        />
+        @if (form.get('indexOrder')?.hasError('required')) {
+          <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field  class="col-sm-12">
+        <mat-label> توضیحات</mat-label>
+        <input matInput formControlName="description" autocomplete="doNotAutoComplete" />
+        @if (form.get('description')?.hasError('required')) {
+          <mat-error> توضیحات را وارد کنید. </mat-error>
+        }
+      </mat-form-field>
+    </div>
+    <p>
+      <mat-checkbox color="default" formControlName="isActive">فعال / غیر فعال</mat-checkbox>
+    </p>
+
+    <app-uploader
+      (attachmentId)="getAttachmentId($event)"
+      [autoUpload]="true"
+      [btnTitle]="'انتخاب تصویر'"
+    >
+    </app-uploader>
+
+    @if (imageUrl) {
+      <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" />
+    }
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <span>ذخیره </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+</mat-dialog-actions>

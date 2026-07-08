@@ -1,0 +1,54 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title">ویرایش شماره موبایل</h5>
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <div class="box-info-dash">
+    <div class="row">
+      <div class="col-sm-6">
+        <span> کد ملی: </span><strong>{{ info.nationCode }}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span> نام : </span><strong>{{ info.firstName }}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span> نام خانوادگی: </span><strong>{{ info.lastName }}</strong>
+      </div>
+      <div class="col-sm-6">
+        <span>شماره موبایل: </span><strong>{{ info.mobileNumber }}</strong>
+      </div>
+    </div>
+  </div>
+
+  @if (loading) {
+    <div class="d-flex align-items-center justify-content-center p-5">
+      <mat-spinner diameter="50" color="default"></mat-spinner>
+    </div>
+  }
+  @else {
+    <form [formGroup]="userForm">
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>شماره موبایل</mat-label>
+          <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
+          @if (userForm.get('mobileNumber')?.hasError('required')) {
+            <mat-error> شماره موبایل را وارد کنید. </mat-error>
+          }
+          @if (userForm.get('mobileNumber')?.hasError('invalid')) {
+            <mat-error> شماره موبایل صحیح نیست. </mat-error>
+          }
+        </mat-form-field>
+      </div>
+    </form>
+  }
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+  <button mat-raised-button color="default" [disabled]="isSaving || loading" (click)="saveInfo()">
+    <span>ثبت شماره موبایل جدید </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+</mat-dialog-actions>

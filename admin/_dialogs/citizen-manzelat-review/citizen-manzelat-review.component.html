@@ -1,0 +1,42 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title py-0">
+    {{ data.title }}
+  </h5>
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <h3 class="col-12">
+    {{ data.title }} <b>{{ data.citizenName }}</b>
+  </h3>
+  <form [formGroup]="form" class="mx-3">
+    <div class="row my-2">
+      @if (data.command !== 'Remove') {
+        <mat-form-field  class="h-100 textarea-field col-12">
+          <mat-label>نتیجه برسی</mat-label>
+          <mat-select formControlName="formResult">
+            <mat-option [value]="true">تایید</mat-option>
+            <mat-option [value]="false">عدم تایید</mat-option>
+          </mat-select>
+        </mat-form-field>
+      }
+      <mat-form-field  class="h-100 textarea-field col-12">
+        <mat-label>توضیحات</mat-label>
+        <textarea matInput formControlName="formResultDescription"></textarea>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="sendSms" class="col-12" color="default">
+        پیامک ارسال شود؟
+      </mat-checkbox>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
+    <span>ذخیره </span>
+    <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+  </button>
+  <button mat-raised-button mat-dialog-close>انصراف</button>
+</mat-dialog-actions>

@@ -1,0 +1,143 @@
+<div class="content-header">
+  @if (!isUpdate) {
+    <span>ثبت راهنمای جدید</span>
+  }
+  @if (isUpdate) {
+    <span>ویرایش راهنما</span>
+  }
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
+  <mat-card-content>
+    @if (loading) {
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
+
+    @if (!loading) {
+      <form [formGroup]="newsForm">
+        <div class="row">
+          <mat-form-field class="col-sm-12">
+            <mat-label>عنوان راهنما</mat-label>
+            <input matInput formControlName="title" type="text" maxlength="500" />
+            @if (newsForm.get('title')?.hasError('required')) {
+              <mat-error>عنوان خبر را وارد کنید.</mat-error>
+            }
+            @if (newsForm.get('title')?.hasError('maxlength')) {
+              <mat-error>حداکثر 500 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-12">
+            <mat-label>توضیحات</mat-label>
+            <textarea matInput formControlName="description" rows="3" maxlength="2000"></textarea>
+            @if (newsForm.get('description')?.hasError('required')) {
+              <mat-error>توضیحات را وارد کنید.</mat-error>
+            }
+            @if (newsForm.get('description')?.hasError('maxlength')) {
+              <mat-error>حداکثر 2000 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-12">
+            <mat-label>توضیحات سئو</mat-label>
+            <textarea
+              matInput
+              formControlName="seoDescription"
+              rows="3"
+              maxlength="2000"
+            ></textarea>
+            @if (newsForm.get('seoDescription')?.hasError('required')) {
+              <mat-error>توضیحات سئو را وارد کنید.</mat-error>
+            }
+            @if (newsForm.get('seoDescription')?.hasError('maxlength')) {
+              <mat-error>حداکثر 2000 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <!-- todo:chips -->
+          <!-- <mat-form-field class="col-sm-12">
+            <mat-chip-listbox #chipList aria-label="seoTags" formControlName="seoTags">
+              @for (item of seoTags; track $index) {
+                <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
+                  {{ item }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              }
+              <input
+                placeholder="تگ های سئو"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-listbox>
+          </mat-form-field> -->
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>گروه </mat-label>
+            <mat-select formControlName="newsGroupId" [compareWith]="compareFn">
+              @for (item of groupList; track $index) {
+                <mat-option [value]="item.key">{{ item.text }}</mat-option>
+              }
+            </mat-select>
+            @if (newsForm.get('newsGroupId')?.hasError('required')) {
+              <mat-error>گروه خبری را انتخاب کنید.</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label> تاریخ انتشار</mat-label>
+            <input matInput [matDatepicker]="dpS" formControlName="publishDate" />
+            <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+            <mat-datepicker #dpS></mat-datepicker>
+            @if (newsForm.get('publishDate')?.hasError('required')) {
+              <mat-error> تاریخ انتشار را مشخص کنید. </mat-error>
+            }
+            @if (newsForm.get('publishDate')?.hasError('matDatepickerParse')) {
+              <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>ترتیب نمایش</mat-label>
+            <input matInput formControlName="indexOrder" maxlength="3" numbersOnly />
+            @if (newsForm.get('indexOrder')?.hasError('required')) {
+              <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <!--<p>
+                    <mat-checkbox color="default" formControlName="commentIsActive">امکان ثبت نظر برای خبر وجود داشته باشد</mat-checkbox>
+                  </p>-->
+        <!--<p>
+                  <mat-checkbox color="default" formControlName="isSpecial">خبر ویژه</mat-checkbox>
+                </p>-->
+        <p>
+          <mat-checkbox color="default" formControlName="isActive">انتشار داده شود</mat-checkbox>
+        </p>
+        <html-editor formControlName="body"></html-editor>
+
+        <app-uploader
+          (attachmentId)="getAttachmentId($event)"
+          [autoUpload]="true"
+          [btnTitle]="'انتخاب تصویر'"
+        ></app-uploader>
+        @if (imageUrl) {
+          <img [src]="baseUrl + imageUrl" class="img-thumbnail thumb-128" />
+        }
+      </form>
+    }
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-3">
+      @if (!loading) {
+        <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
+          @if (isSaving) {
+            <span>منتظر بمانید...</span>
+          }
+          @else {
+            <span>ذخیره</span>
+          }
+          <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+        </button>
+      }
+    </div>
+  </mat-card-footer>
+</mat-card>

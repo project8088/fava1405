@@ -1,0 +1,137 @@
+<div class="content-header">
+  <span> جزئیات بررسی وضعیت حیات شهروندان </span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
+    <div class="bread-crumb-item" routerLink="/admin/sabtAhval-list">لیست ثبت احوال</div>
+    <div class="bread-crumb-item active">جزئیات بررسی وضعیت حیات شهروندان</div>
+  </div>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+        <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-label>جستجو</mat-label>
+          <input matInput formControlName="title" maxlength="30" />
+        </mat-form-field>
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
+
+      <div class="datatable-table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+        >
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>نام</th>
+            <td mat-cell *matCellDef="let row">
+              <a (click)="checkIsDead(row)">
+                {{ row.firstName }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>نام خانوادگی</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.lastName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fatherName">
+            <th mat-header-cell *matHeaderCellDef>نام پدر</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.fatherName }}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
+            <td mat-cell *matCellDef="let row">
+              <a (click)="openCitizenProfile(row)">
+                {{ row.nationCode }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="birthDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ تولد</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.birthDate | luxonFormat}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="verifyDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ استعلام</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.verifyDate | luxonFormat }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sabtStatus">
+            <th mat-header-cell *matHeaderCellDef>وضعیت</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.sabtStatus != 2) {
+                <span class="text-success">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+              @if (row.sabtStatus == 2) {
+                <span class="text-danger">
+                  {{ row.sabtStatus | enumString: 'sabtStatus' }}
+                </span>
+              }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

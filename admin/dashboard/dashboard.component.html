@@ -1,0 +1,174 @@
+<div class="content-header">
+  <span>پیشخوان مدیریت</span>
+</div>
+
+<div class="container">
+  <div class="image-buttons">
+    @if (authService.checkPermission('citizens')) {
+      <div class="img-btn" routerLink="/admin/search-citizen">
+        <i class="fa fa-users"></i>
+        <span> شهروندان </span>
+      </div>
+    }
+    @if (authService.checkPermission('companymanagement')) {
+      <div class="img-btn" routerLink="/admin/companies">
+        <i class="fa fa-building"></i>
+        <span> اشخاص حقوقی </span>
+      </div>
+    }
+
+    <div class="img-btn" routerLink="/webuser/dashboard">
+      <i class="fa fa-newspaper"></i>
+      <span>راهنمای توسعه دهندگان</span>
+    </div>
+
+    <div class="img-btn" routerLink="/citizen/dashboard">
+      <i class="fa fa-user-graduate"></i>
+      <span>پروفایل شهروندی</span>
+    </div>
+  </div>
+
+  <!--<div class="row">
+  <div class="col-md-12">
+    <adm-citizen-register-report-chart></adm-citizen-register-report-chart>
+  </div>
+</div>-->
+
+  <div class="row">
+    <div class="col-sm-6">
+      <mat-card class="custom-card">
+        <mat-card-header> آمار سامانه </mat-card-header>
+        <mat-card-content>
+          @if (!loading) {
+            <div class="list-container row">
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong> کل شهروندان </strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.allCitizenCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>شهروندان تایید شده</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.allAcceptCitizenCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>شهروندان فوتی</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.deathCitizen }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>کل تیکت ها</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.allTicketCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>تیکت های بسته شده</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.closedTicketCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>تیکت های جدید</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.newTicketCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong> ثبت نام های امروز </strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.citizenTodayCount }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>گروههای شهروندی</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.citizenGroupCount | number }}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-4">
+                <div class="list-item">
+                  <div>
+                    <strong>میزان اعتبار پیامک</strong>
+                  </div>
+                  <div>
+                    <span class="num">{{ statisticalInfo?.smsCredit | number }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+
+          <!--<div class="no-any-items" *ngIf="statisticalInfo?.length==0 && !loading">
+        <i class="fa fa-info-circle"></i>
+        اطلاعاتی ثبت نشده است
+      </div>-->
+          @if (loading) {
+            <div class="p-5 d-flex align-items-center justify-content-center">
+              <mat-spinner diameter="50" color="default"></mat-spinner>
+            </div>
+          }
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <!------------------------------------------------------------------------------------->
+
+    <div class="col-sm-6">
+      <mat-card class="custom-card">
+        <mat-card-header> آخرین رویدادها </mat-card-header>
+        <mat-card-content>
+          <mat-list>
+            @for (message of events; track message) {
+              <mat-list-item matTooltip="{{ message.description }}">
+                <div (click)="openevents(message)" matLine>
+                  <p style="float: left">{{ message.eventSection }}</p>
+                  <p style="float: right">
+                    {{ message.createDate | luxonFormat }}
+                    <strong> | </strong>
+                    {{ message.user }}
+                  </p>
+                </div>
+              </mat-list-item>
+            }
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

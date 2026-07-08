@@ -1,0 +1,22 @@
+<div class="content-header">
+  <span> دسترسی کاربران</span>
+  <div class="bread-crumbs">
+    <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
+    <div class="bread-crumb-item active">دسترسی گروه کاربری</div>
+  </div>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
+  <mat-card-content>
+    <adm-tree-permission [permissionItems]="data"></adm-tree-permission>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="p-5">
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="savePermissions()">
+        <span>ذخیره</span>
+        <mat-spinner color="default" diameter="20" [hidden]="!isSaving"></mat-spinner>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

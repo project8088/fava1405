@@ -1,0 +1,135 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title">
+    @if (!isUpdate) {
+      <span>اضافه کردن منو جدید</span>
+    }
+    @if (isUpdate) {
+      <span>ویرایش منو</span>
+    }
+  </h5>
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  @if (loadingData) {
+    <div class="p-5">
+      <mat-spinner color="default"></mat-spinner>
+    </div>
+  }
+
+  @if (!loadingData) {
+    <form [formGroup]="menuForm">
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>منو والد</mat-label>
+          <mat-select formControlName="parentId">
+            <mat-option [value]="0">ریشه اصلی</mat-option>
+            @for (item of parentMenus; track $index) {
+              <mat-option [value]="item.id">{{ item.menuName }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>نوع منو</mat-label>
+          <mat-select formControlName="isSystem" (selectionChange)="changeMenuType()">
+            <mat-option [value]="true">لینک به صفحات داخلی سایت</mat-option>
+            <mat-option [value]="false">لینک به آدرسی خارج از سایت</mat-option>
+          </mat-select>
+          @if (menuForm.get('isSystem')?.hasError('required')) {
+            <mat-error> نوع منو را مشخص کنید. </mat-error>
+          }
+        </mat-form-field>
+        @if (menuForm.get('isSystem')?.value == true) {
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>صفحات داخلی سایت</mat-label>
+            <mat-select formControlName="innerMenu" (selectionChange)="setInnerSite()">
+              @for (item of innerMenuItems; track $index) {
+                <mat-option [value]="item">{{ item.menuName }}</mat-option>
+              }
+            </mat-select>
+            @if (menuForm.get('innerMenu')?.hasError('required')) {
+              <mat-error> نوع منو را مشخص کنید. </mat-error>
+            }
+          </mat-form-field>
+        }
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>عنوان منو</mat-label>
+          <input matInput type="text" formControlName="menuName" autocomplete="doNotAutoComplete" />
+          @if (menuForm.get('menuName')?.hasError('required')) {
+            <mat-error> عنوان منو را وارد کنید. </mat-error>
+          }
+          @if (menuForm.get('menuName')?.hasError('maxlength')) {
+            <mat-error> حداکثر 50 کاراکتر </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>کلاس آیکن</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="iconFile"
+            autocomplete="doNotAutoComplete"
+            placeholder="مثلا: fa fa-home"
+          />
+          @if (menuForm.get('iconFile')?.hasError('required')) {
+            <mat-error> آدرس صفحه را وارد کنید. </mat-error>
+          }
+          <i class="{{ menuForm.get('iconFile')?.value }}" matSuffix></i>
+        </mat-form-field>
+        @if (menuForm.get('isSystem')?.value == false) {
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>آدرس صفحه</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="menuPath"
+              autocomplete="doNotAutoComplete"
+            />
+            @if (menuForm.get('menuPath')?.hasError('required')) {
+              <mat-error> آدرس صفحه را وارد کنید. </mat-error>
+            }
+          </mat-form-field>
+        }
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>ترتیب نمایش</mat-label>
+          <input
+            matInput
+            type="text"
+            formControlName="tabOrder"
+            numbersOnly
+            autocomplete="doNotAutoComplete"
+          />
+          @if (menuForm.get('tabOrder')?.hasError('required')) {
+            <mat-error> ترتیب نمایش را وارد کنید. </mat-error>
+          }
+        </mat-form-field>
+      </div>
+      <p>
+        <mat-checkbox formControlName="isVisible" color="default">
+          منو نمایش داده شود
+        </mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="openInNewPage" color="default">
+          صفحه در تب جدید باز شود
+        </mat-checkbox>
+      </p>
+      <p>
+        <mat-checkbox formControlName="disableLink" color="default">
+          لینک منو غیر فعال باشد
+        </mat-checkbox>
+      </p>
+    </form>
+  }
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>بستن</button>
+
+  @if (!loadingData) {
+    <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveInfo()">
+      <span>ذخیره </span>
+      <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+    </button>
+  }
+</mat-dialog-actions>

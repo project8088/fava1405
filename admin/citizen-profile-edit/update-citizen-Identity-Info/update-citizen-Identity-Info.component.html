@@ -1,0 +1,100 @@
+<mat-card class="m-3">
+  <mat-card-header class="card-header mt-n3 mx-n3">اطلاعات شناسنامه ایی</mat-card-header>
+  <mat-card-content>
+    @if (loading) {
+      <div class="p-5 d-flex align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
+
+    @if (info.sabtStatus === 0) {
+      <div class="alert alert-danger m-3">
+        اطلاعات شهروند مورد تایید ثبت احوال قرار نگرفت، کد ملی با تاریخ تولد شهروند تطابق ندارد .
+      </div>
+    }
+
+    @if (info.sabtStatus === 4) {
+      <div class="alert alert-info m-3">اطلاعات شهروند در دست بررسی می باشد .</div>
+    }
+
+    @if (!loading) {
+      <form [formGroup]="personalForm" class="p-4">
+        <div class="row">
+          <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-label>کد ملی (نام کاربری)</mat-label>
+            <input
+              matInput
+              [readonly]="true"
+              formControlName="nationalCode"
+              maxlength="10"
+              numbersOnly
+            />
+            @if (personalForm.get('nationalCode')?.hasError('required')) {
+              <mat-error> کد ملی خود را وارد کنید. </mat-error>
+            }
+            @if (personalForm.get('nationalCode')?.hasError('invalid')) {
+              <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-label>جنسیت</mat-label>
+            <mat-select formControlName="gender">
+              <mat-option [value]="true">آقا هستم</mat-option>
+              <mat-option [value]="false">خانم هستم</mat-option>
+            </mat-select>
+            @if (personalForm.get('gender')?.hasError('required')) {
+              <mat-error> جنسیت را مشخص کنید. </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-label>نام</mat-label>
+            <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
+            @if (personalForm.get('firstName')?.hasError('required')) {
+              <mat-error> نام را وارد کنید. </mat-error>
+            }
+            @if (personalForm.get('firstName')?.hasError('pattern')) {
+              <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-label> نام خانوادگی</mat-label>
+            <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
+            @if (personalForm.get('lastName')?.hasError('required')) {
+              <mat-error> نام خانوادگی را وارد کنید. </mat-error>
+            }
+            @if (personalForm.get('lastName')?.hasError('pattern')) {
+              <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field  class="col-sm-6 col-md-4">
+            <mat-label>نام پدر </mat-label>
+            <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete" />
+            @if (personalForm.get('fatherName')?.hasError('required')) {
+              <mat-error> نام پدر را وارد کنید. </mat-error>
+            }
+            @if (personalForm.get('fatherName')?.hasError('pattern')) {
+              <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
+            }
+          </mat-form-field>
+          <simple-jalali-datepicker class="col-sm-6 col-md-4" formControlName="birthDate">
+          </simple-jalali-datepicker>
+        </div>
+      </form>
+    }
+  </mat-card-content>
+  @if (userStatus !== 2) {
+    <mat-card-footer class="p-3 d-flex justify-content-end">
+      @if (!loading) {
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="isSaving"
+          (click)="savePersonalInfo()"
+        >
+          <span>ثبت اطلاعات شناسنامه ایی </span>
+          <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
+        </button>
+      }
+    </mat-card-footer>
+  }
+</mat-card>

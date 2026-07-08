@@ -1,0 +1,35 @@
+<div cdkDrag cdkDragRootElement=".cdk-overlay-pane" mat-dialog-title>
+  <h5 cdkDragHandle class="title">آپلود فایل اکسل</h5>
+
+  <button type="button" class="close-btn" aria-label="Close" mat-dialog-close mat-icon-button>
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<mat-dialog-content>
+  <div class="alert alert-info">
+    <p class="text-justify">در ستون اول کد ملی شهروندان را وارد نمایید.</p>
+  </div>
+
+  <div class="field-set">
+    <label class="field-set-title">افزودن فایل اکسل</label>
+    <strong>شناسه گروه : </strong>
+    <span>
+      {{ data.groupId }}
+    </span>
+    <app-uploader
+      (attachmentId)="completeUpload($event)"
+      [removeAfterUpload]="true"
+      [data]="data"
+      [btnTitle]="'افزودن فایل اکسل'"
+      [url]="uploadUrl"
+      [autoUpload]="true"
+      [accept]="[
+        'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        'application/vnd.ms-excel',
+      ]"
+    ></app-uploader>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close>بستن</button>
+</mat-dialog-actions>

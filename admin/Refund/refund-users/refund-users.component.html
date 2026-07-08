@@ -1,0 +1,134 @@
+<div class="content-header">
+  <span> کاربران برگشت هزینه </span>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end">
+    <button mat-raised-button color="default" (click)="openAddRefundUserDialog()">
+      <i class="fa fa-plus mr-2"></i>
+      <span>ثبت دسترسی جدید</span>
+    </button>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="row">
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label>کد ملی </mat-label>
+          <input matInput formControlName="nationCode" maxlength="15" />
+        </mat-form-field>
+
+        <mat-form-field class="col-sm-6 col-md-4">
+          <mat-label> نام یا نام خانوادگی</mat-label>
+          <input matInput formControlName="name" maxlength="100" />
+        </mat-form-field>
+      </div>
+      <div class="d-flex justify-content-end mb-4">
+        <button mat-raised-button color="default" (click)="applyFilter()">
+          <i class="fa fa-search"></i>
+          جستجو
+        </button>
+      </div>
+    </form>
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <button
+        mat-raised-button
+        color="default"
+        (click)="exporter.exportTable('xlsx', { fileName: 'excel' })"
+      >
+        <i class="fa fa-file-excel mr-2"></i>
+        خروجی اکسل
+      </button>
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
+
+      <div class="datatable-table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="citizen">
+            <th mat-header-cell *matHeaderCellDef>شهروند</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.citizen }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.nationCode }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="addByUser">
+            <th mat-header-cell *matHeaderCellDef>دسترسی توسط</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.addByUser }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ دسترسی</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.creationDate | luxonFormat}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="operation">
+            <th mat-header-cell *matHeaderCellDef width="40">عملیات</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.loading) {
+                <mat-spinner diameter="25" color="default"></mat-spinner>
+              }
+              @if (!row.loading) {
+                <button mat-icon-button [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              }
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="delete(row)">
+                  <i class="fa fa-trash mr-2"></i>
+                  <span>حذف</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 50, 100, 250, 500, 1000, 2000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

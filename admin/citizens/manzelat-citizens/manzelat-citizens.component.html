@@ -1,0 +1,370 @@
+<div class="content-header">
+  <span>شهروندان ثبت نامی در طرح منزلت</span>
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-content>
+    <form [formGroup]="searchForm">
+      <div class="row my-4">
+        <mat-form-field class="col-md-3">
+          <mat-label>نام شهروند</mat-label>
+          <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label>کد ملی</mat-label>
+          <input matInput formControlName="nationCode" />
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>جنسیت</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option [value]="null"> همه </mat-option>
+            <mat-option [value]="true"> آقا </mat-option>
+            <mat-option [value]="false">خانم </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>وضعیت تاهل</mat-label>
+          <mat-select formControlName="mariageStatus">
+            <mat-option [value]="null">همه </mat-option>
+            <mat-option [value]="0"> مجرد </mat-option>
+            <mat-option [value]="1">متاهل </mat-option>
+            <mat-option [value]="2">همسر فوت شده </mat-option>
+            <mat-option [value]="5"> سایر </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>از تاریخ تولد</mat-label>
+          <input
+            matInput
+            [matDatepicker]="bdS"
+            formControlName="birthDateFromDate"
+            [max]="searchForm.get('birthDateToDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="bdS"></mat-datepicker-toggle>
+          <mat-datepicker #bdS></mat-datepicker>
+          @if (searchForm.get('birthDateFromDate')?.hasError('required')) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('birthDateFromDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('birthDateFromDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('birthDateFromDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label>تا تاریخ تولد</mat-label>
+          <input
+            matInput
+            [matDatepicker]="bdE"
+            formControlName="birthDateToDate"
+            [min]="searchForm.get('birthDateFromDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="bdE"></mat-datepicker-toggle>
+          <mat-datepicker #bdE></mat-datepicker>
+          @if (searchForm.get('birthDateToDate')?.hasError('required')) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('birthDateToDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('birthDateToDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('birthDateToDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>از تاریخ ثبت نام</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpS"
+            formControlName="fromDate"
+            [max]="searchForm.get('toDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpS"></mat-datepicker-toggle>
+          <mat-datepicker #dpS></mat-datepicker>
+          @if (searchForm.get('fromDate')?.hasError('required')) {
+            <mat-error> تاریخ شروع را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('fromDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('fromDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('fromDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+        <mat-form-field class="col-md-3">
+          <mat-label>تا تاریخ ثبت نام</mat-label>
+          <input
+            matInput
+            [matDatepicker]="dpE"
+            formControlName="toDate"
+            [min]="searchForm.get('fromDate')?.value"
+          />
+          <mat-datepicker-toggle matSuffix [for]="dpE"></mat-datepicker-toggle>
+          <mat-datepicker #dpE></mat-datepicker>
+          @if (searchForm.get('toDate')?.hasError('required')) {
+            <mat-error> تاریخ پایان را مشخص کنید. </mat-error>
+          }
+          @if (
+            searchForm.get('toDate')?.hasError('matDatepickerMin') ||
+            searchForm.get('toDate')?.hasError('matDatepickerMax')
+          ) {
+            <mat-error> تاریخ شروع نباید از تاریخ پایان بزرگتر باشد! </mat-error>
+          }
+          @if (searchForm.get('toDate')?.hasError('matDatepickerParse')) {
+            <mat-error> فرمت تاریخ صحیح نیست </mat-error>
+          }
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>وضعیت ثبت احوال</mat-label>
+          <mat-select formControlName="sabtStatus">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="0">عدم تایید</mat-option>
+            <mat-option [value]="1">تایید شده</mat-option>
+            <mat-option [value]="2">فوتی</mat-option>
+            <mat-option [value]="3">در حال استعلام</mat-option>
+            <mat-option [value]="4">استعلام نشده</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>وضعیت فرم منزلت </mat-label>
+          <mat-select matInput formControlName="formStatuse">
+            <mat-option [value]="null">همه</mat-option>
+
+            @for (item of manzalatFormStatuse; track $index) {
+              <mat-option [value]="item.key">{{ item.text }}</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label> ثبت نام در طرح </mat-label>
+          <mat-select formControlName="manzalatFormType">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="0"> جانبازان</mat-option>
+            <mat-option [value]="1"> معلولین</mat-option>
+            <mat-option [value]="2">زنان سرپرست خانواده</mat-option>
+            <mat-option [value]="3">بازنشسته</mat-option>
+            <mat-option [value]="4">سالمند</mat-option>
+            <mat-option [value]="5">بیماران خاص</mat-option>
+            <mat-option [value]="6">مادران دارای سه فرزند </mat-option>
+
+            <mat-option [value]="15">خانواده شهدا</mat-option>
+            <mat-option [value]="10">خانواده جانبازان </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label> وضعیت عضویت منزلت </mat-label>
+          <mat-select formControlName="inManzalatGroups">
+            <mat-option [value]="null">همه</mat-option>
+            <mat-option [value]="true"> عضویت</mat-option>
+            <mat-option [value]="false"> عدم عضویت</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-3">
+          <mat-label>دارای کارت</mat-label>
+          <mat-select formControlName="hasCard">
+            <mat-option [value]="null"> همه </mat-option>
+            <mat-option [value]="true"> کارت دارد </mat-option>
+            <mat-option [value]="false">کارت ندارد</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <div class="col d-flex align-items-center justify-content-end">
+          <button mat-raised-button color="default" (click)="applyFilter()">
+            <i class="fa fa-search mr-2"></i>
+            <span>جستجو</span>
+          </button>
+        </div>
+      </div>
+    </form>
+
+    <div class="d-flex align-items-center justify-content-end mb-3">
+      <div class="d-flex align-items-center justify-content-end mb-3">
+        <button mat-raised-button color="default" (click)="exportExcel()">
+          <i class="fa fa-file-excel mr-2"></i>
+          خروجی اکسل (65k)
+        </button>
+        @if (isDownloadExcel) {
+          <mat-spinner color="default"></mat-spinner>
+        }
+      </div>
+
+      @if (!sendingSms) {
+        <button mat-raised-button color="accent" (click)="sendSms()" class="mx-2">
+          <i class="fa fa-envelope mr-2"></i>
+          ارسال پیامک
+        </button>
+      }
+      @if (sendingSms) {
+        <div class="d-flex align-items-center px-3">
+          <mat-spinner diameter="20" color="default"></mat-spinner>
+          <span>در حال ارسال پیامک</span>
+        </div>
+      }
+    </div>
+    <div class="datatable-container mat-elevation-z8">
+      @if (isLoadingResults) {
+        <div class="datatable-loading-shade">
+          @if (isLoadingResults) {
+            <mat-spinner color="default"></mat-spinner>
+          }
+        </div>
+      }
+      @if (isLoadingResults == false && listCount == 0) {
+        <div class="datatable-loading-shade">
+          <strong>اطلاعاتی وجود ندارد!</strong>
+        </div>
+      }
+
+      <div class="datatable-table-container">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="datatable-table"
+          #exporter="matTableExporter"
+          matTableExporter
+          [hiddenColumns]="[displayedColumns.length - 1]"
+        >
+          <ng-container matColumnDef="row">
+            <th mat-header-cell *matHeaderCellDef width="40">#</th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              {{ paginator.pageIndex * paginator.pageSize + i + 1 }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="checkbox">
+            <th mat-header-cell *matHeaderCellDef width="40">
+              <mat-checkbox color="default" (change)="selectUnselectAll()" [(ngModel)]="selectAll">
+              </mat-checkbox>
+            </th>
+            <td mat-cell *matCellDef="let row; let i = index">
+              @if (row.sabtStatus == 0) {
+                <span>
+                  <mat-checkbox color="default" [(ngModel)]="row.selected"></mat-checkbox>
+                </span>
+              }
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="nationCode">
+            <th mat-header-cell *matHeaderCellDef>کد ملی</th>
+            <td mat-cell *matCellDef="let row">
+              <a routerLink="/admin/citizen-manzelat-details/{{ row.userCode }}">
+                {{ row.nationCode }}
+              </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="firstName">
+            <th mat-header-cell *matHeaderCellDef>نام</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.firstName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="mobile">
+            <th mat-header-cell *matHeaderCellDef>موبایل</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.mobile }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastName">
+            <th mat-header-cell *matHeaderCellDef>نام خانوادگی</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.lastName }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="fatherName">
+            <th mat-header-cell *matHeaderCellDef>نام پدر</th>
+            <td mat-cell *matCellDef="let row">{{ row.fatherName }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="creationDate">
+            <th mat-header-cell *matHeaderCellDef>تاریخ ثبت نام</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.creationDate | luxonFormat}}
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="age">
+            <th mat-header-cell *matHeaderCellDef>سن</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.age }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="formTitle">
+            <th mat-header-cell *matHeaderCellDef>ثبت نام</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.formTitle }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="sabtStatus">
+            <th mat-header-cell *matHeaderCellDef>ثبت احوال</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.sabtStatus | enumString: 'sabtStatus' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="formStatuse">
+            <th mat-header-cell *matHeaderCellDef>وضعیت</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.formStatuse == 0) {
+                <span class="text-info"> در حال بررسی </span>
+              }
+              @if (row.formStatuse == 1) {
+                <span class="text-success"> تایید </span>
+              }
+              @if (row.formStatuse == 2) {
+                <span class="text-danger"> عدم تایید </span>
+              }
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="documentUploaded">
+            <th mat-header-cell *matHeaderCellDef>بارگذاری مدارک</th>
+            <td mat-cell *matCellDef="let row">
+              @if (row.documentUploaded == true) {
+                <span class="text-success"> انجام شده </span>
+              }
+              @if (row.documentUploaded == false) {
+                <span class="text-danger"> عدم بارگذاری مدارک </span>
+              }
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+        </table>
+      </div>
+      <mat-paginator
+        [length]="listCount"
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50, 100, 500, 1000, 5000, 50000, 100000]"
+        showFirstLastButtons
+        (page)="pageEvent($event)"
+      ></mat-paginator>
+    </div>
+  </mat-card-content>
+  <mat-card-footer></mat-card-footer>
+</mat-card>

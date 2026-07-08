@@ -1,0 +1,84 @@
+<div class="content-header">
+  @if (!isUpdate) {
+    <span>ثبت پرسش و پاسخ جدید</span>
+  }
+  @if (isUpdate) {
+    <span>ویرایش پرسش و پاسخ</span>
+  }
+</div>
+
+<mat-card class="custom-card">
+  <mat-card-header class="d-flex align-items-center justify-content-end"> </mat-card-header>
+  <mat-card-content>
+    @if (loading) {
+      <div class="d-flex my-5 p-5 align-items-center justify-content-center">
+        <mat-spinner diameter="50" color="default"></mat-spinner>
+      </div>
+    }
+
+    @if (!loading) {
+      <form [formGroup]="faqForm">
+        <div class="row">
+          <mat-form-field class="col-sm-12">
+            <mat-label>عنوان پرسش </mat-label>
+            <input matInput formControlName="title" type="text" maxlength="500" />
+            @if (faqForm.get('title')?.hasError('required')) {
+              <mat-error>عنوان پرسش را وارد کنید.</mat-error>
+            }
+            @if (faqForm.get('title')?.hasError('maxlength')) {
+              <mat-error>حداکثر 500 کاراکتر</mat-error>
+            }
+          </mat-form-field>
+          <mat-form-field class="col-sm-12">
+            <!-- todo:chips -->
+            <!-- <mat-chip-listbox #chipList aria-label="tagNames" formControlName="tagNames">
+              @for (item of tagNames; track $index) {
+                <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
+                  {{ item }}
+                  <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+              }
+              <input
+                placeholder="تگ های سئو"
+                [matChipInputFor]="chipList"
+                [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                [matChipInputAddOnBlur]="true"
+                (matChipInputTokenEnd)="add($event)"
+              />
+            </mat-chip-listbox> -->
+          </mat-form-field>
+          <mat-form-field class="col-sm-6 col-md-4">
+            <mat-label>گروه پرسش و پاسخی</mat-label>
+            <mat-select formControlName="questionGroupTypeId" [compareWith]="compareFn">
+              @for (item of groupList; track $index) {
+                <mat-option [value]="item.key">{{ item.text }}</mat-option>
+              }
+            </mat-select>
+            @if (faqForm.get('questionGroupTypeId')?.hasError('required')) {
+              <mat-error>گروه پرسش و پاسخ را انتخاب کنید.</mat-error>
+            }
+          </mat-form-field>
+        </div>
+        <p>
+          <mat-checkbox color="default" formControlName="isActive">فعال</mat-checkbox>
+        </p>
+        <br />
+                   <html-editor  formControlName="description"></html-editor>
+
+      </form>
+    }
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="d-flex align-items-center justify-content-end p-3">
+      <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving || loading">
+        @if (isSaving) {
+          <span>منتظر بمانید...</span>
+        }
+        @if (!isSaving) {
+          <span>ذخیره</span>
+        }
+        <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>
