@@ -39,19 +39,12 @@ import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.
 import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
-import { AdminRefundExcelBatchFileDetailsComponent } from './Refund/refund-excel-batch-file-details/refund-excel-batch-file-details.component';
-import { AdminRefundExcelBatchFileListComponent } from './Refund/refund-excel-batch-file/refund-excel-batch-file.component';
-import { AdminRefundAccessListComponent } from './Refund/refund-access-list/refund-access-list.component';
-import { AdminRefundAccessDetailsListComponent } from './Refund/refund-access-details-list/refund-access-details-list.component';
-import { AdminGroupQueueCitizensListComponent } from './groups/group-queue-citizens-list/group-queue-citizens-list.component';
-import { AdminRefundAccessSearchListComponent } from './Refund/refund-access-search-list/refund-access-search-list.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './content/citizens-notification/citizens-notification.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
 import { AdminManzalatBaseFromListComponent } from './manzalat-base-form/manzalat-base-list/manzalat-base-list.component';
 import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/update-manzalat-base-form/update-manzalat-base-form.component';
-import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.component';
 import { AdminConfigComponent } from './config/config.component';
 
 const routes: Routes = [
@@ -101,7 +94,6 @@ const routes: Routes = [
       { path: 'group-list', component: AdminGroupListComponent },
       { path: 'add-update-group/:id', component: AdminAddOrUpdateGroupsComponent },
 
-      { path: 'group-queue-citizens-list/:id', component: AdminGroupQueueCitizensListComponent },
 
       { path: 'contact-us', component: AdminContactUsListComponent },
       { path: 'setting', component: AdminSettingComponent },
@@ -137,17 +129,7 @@ const routes: Routes = [
     
 
       //refund
-      { path: 'refund-file-list', component: AdminRefundExcelBatchFileListComponent },
-      {
-        path: 'refund-file-details/:importId',
-        component: AdminRefundExcelBatchFileDetailsComponent,
-      },
-      { path: 'refund-access-list', component: AdminRefundAccessListComponent },
-      { path: 'refund-access-details/:importId', component: AdminRefundAccessDetailsListComponent },
-      { path: 'search-refund', component: AdminRefundAccessSearchListComponent },
-
-      { path: 'refund-users', component: AdminRefundUsersComponent },
-
+   
       //citizens
      
     ],

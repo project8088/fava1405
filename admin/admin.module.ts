@@ -44,19 +44,9 @@ import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/e
 import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-details/event-details.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
-import { AdminRefundExcelBatchFileDetailsComponent } from './Refund/refund-excel-batch-file-details/refund-excel-batch-file-details.component';
-import { AdminRefundExcelBatchFileListComponent } from './Refund/refund-excel-batch-file/refund-excel-batch-file.component';
-import { AdminImportRefundExcelDialogComponent } from './Refund/dialog/refund-import-excel/import-refund-excel.component';
-import { AdminRefundAccessListComponent } from './Refund/refund-access-list/refund-access-list.component';
-import { AdminRefundAccessDetailsListComponent } from './Refund/refund-access-details-list/refund-access-details-list.component';
-import { AdminChangeRefundAccessDialogComponent } from './Refund/dialog/change-refund-access/change-refund-access.component';
-import { AdminChangeRefundDialogComponent } from './Refund/dialog/change-refund/change-refund.component';
-import { AdminReportRefundDialogComponent } from './Refund/dialog/report-refund/report-refund.component';
 import { AdminImportNationCodeGroupsExcelDialogComponent } from './import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 import { AdminGroupQueueCitizensListComponent } from './groups/group-queue-citizens-list/group-queue-citizens-list.component';
-import { AdminRefundAccessSearchListComponent } from './Refund/refund-access-search-list/refund-access-search-list.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
-import { AdminAddRefundTransactionDialogComponent } from './Refund/dialog/add-refund-transaction/add-refund-transaction.component';
 import { AdminGroupTransferDialogComponent } from './groups/_dialogs/group-transfer/group-transfer.component';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './content/citizens-notification/citizens-notification.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
@@ -64,8 +54,6 @@ import { AdminDashboardCitizenRegisterReportChartComponent } from './dashboard/c
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
 import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/update-manzalat-base-form/update-manzalat-base-form.component';
 import { AdminManzalatBaseFromListComponent } from './manzalat-base-form/manzalat-base-list/manzalat-base-list.component';
-import { AdminRefundUsersComponent } from './Refund/refund-users/refund-users.component';
-import { AdminAddRefundUserDialogComponent } from './Refund/dialog/add-refund-user/add-refund-user.component';
 import { AdminConfigComponent } from './config/config.component';
 
 @NgModule({
@@ -116,27 +104,15 @@ import { AdminConfigComponent } from './config/config.component';
     AdminViewEventDetailsComponent,
     AdminViewEventDetailsDialogComponent,
  
-    AdminRefundExcelBatchFileDetailsComponent,
-    AdminRefundExcelBatchFileListComponent,
-    AdminImportRefundExcelDialogComponent,
-    AdminRefundAccessListComponent,
-    AdminRefundAccessDetailsListComponent,
-    AdminChangeRefundAccessDialogComponent,
-    AdminChangeRefundDialogComponent,
-    AdminReportRefundDialogComponent,
     AdminImportNationCodeGroupsExcelDialogComponent,
     AdminGroupQueueCitizensListComponent,
-    AdminRefundAccessSearchListComponent,
     ManzalatSettingComponent,
-    AdminAddRefundTransactionDialogComponent,
     AdminGroupTransferDialogComponent,
     AdminAddOrUpdateCitizensNotificationComponent,
     AdminOrganizationUnitGroupsComponent,
     AdminDashboardCitizenRegisterReportChartComponent,
     AdminUpdateManzalatBaseFormComponent,
     AdminManzalatBaseFromListComponent,
-    AdminRefundUsersComponent,
-    AdminAddRefundUserDialogComponent,
     AdminConfigComponent,
   ],
 
