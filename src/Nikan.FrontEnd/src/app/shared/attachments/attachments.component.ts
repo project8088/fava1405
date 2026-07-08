@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 declare var $: any;
 
@@ -11,7 +12,7 @@ declare var $: any;
   standalone: false,
 })
 export class AttachmentListComponent extends AppBase implements OnInit {
-  @Input('guid') guid: string ='';
+  @Input('guid') guid: string = '';
   attachments: any[] = [];
 
   loadingData?: boolean;
@@ -26,8 +27,15 @@ export class AttachmentListComponent extends AppBase implements OnInit {
     if (!this.guid) return;
 
     this.loadingData = true;
-    this.dataService.get(ServerApis.getAttachmentsForUser, { guid: this.guid }).subscribe(
-      (response) => {
+    this.dataService
+      .get(ServerApis.getAttachmentsForUser, { guid: this.guid })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.loadingData = false;
         if (response.isSuccess) {
           this.attachments = response.data ? response.data : [];
@@ -43,7 +51,7 @@ export class AttachmentListComponent extends AppBase implements OnInit {
           });
 
           setTimeout(() => {
-            $('.lightGallery').lightGallery({
+            (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
               selector: 'a',
               thumbnail: false,
             });
@@ -52,10 +60,6 @@ export class AttachmentListComponent extends AppBase implements OnInit {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error:any) => {
-        this.loadingData = false;
-      },
-    );
+      });
   }
 }

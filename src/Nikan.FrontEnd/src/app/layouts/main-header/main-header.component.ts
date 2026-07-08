@@ -5,6 +5,8 @@ import { RegisterServiceModel } from '@core/models/register-service.model';
 import { ServerApis } from '@core/server-apis';
 import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
+import { DateTime } from 'luxon';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-main-header',
@@ -55,9 +57,15 @@ export class MainHeaderComponent extends AppBase implements OnInit {
       }
     });
 
-    this.dataService.get(ServerApis.getMainMenuItems).subscribe(
-      (response) => {
-        this.loadingMenu = false;
+    this.dataService
+      .get(ServerApis.getMainMenuItems)
+      .pipe(
+        finalize(() => {
+          this.loadingMenu = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response.isSuccess) {
           var data = response.data ? response.data : [];
           data.sort((a: any, b: any) => {
@@ -66,37 +74,38 @@ export class MainHeaderComponent extends AppBase implements OnInit {
             else return 0;
           });
           this.menuItems = this.getNestedChildren(data);
-          //console.log(this.menuItems);
+          console.log(this.menuItems);
         } else {
           var msg = response.messages
             ? response.messages
             : 'دریافت متوی اصلی با خطا مواجه شده است.';
           this.toastrService.error(msg);
         }
-      },
-      (error:any) => {
-        this.loadingMenu = false;
-      },
-    );
+      });
 
-    this.dataService.get(ServerApis.getAppRegisterListForMainPage).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getAppRegisterListForMainPage)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         const registerTypes: RegisterServiceModel[] = response.data ? response.data : [];
         this.registerTypes = registerTypes.map((el) => {
           return { value: String(el.serviceId), text: el.serviceName, ...el };
         });
-      },
-      (error:any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+      });
   }
   ngOnInit(): void {
-    this.dataService.get(ServerApis.getCurrentShorDate, {}).subscribe((response) => {
-      if (response.data) this.datetime = response.data;
-    });
+    this.dataService
+      .get(ServerApis.getCurrentShorDate, {})
+      .pipe(finalize(() => this.chdr.detectChanges()))
+      .subscribe((response) => {
+        this.datetime = response.data ? new Date(response.data) : DateTime.now();
+        // console.log(response.data, this.datetime);
+      });
   }
 
   dashboard() {

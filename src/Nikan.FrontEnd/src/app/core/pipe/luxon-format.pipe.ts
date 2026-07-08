@@ -20,7 +20,7 @@ export class LuxonFormatPipe implements PipeTransform {
     // let userTimeZone = DateTime.local().zoneName;
     let userTimeZone = 'asia/tehran';
     if (typeof value === 'string') {
-      value = DateTime.fromSQL(value as any);
+      value = DateTime.fromISO(value as any);
     }
     if (value instanceof Date) {
       value = DateTime.fromJSDate(value as any);

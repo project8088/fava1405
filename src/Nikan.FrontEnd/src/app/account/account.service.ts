@@ -7,10 +7,10 @@ import { LocalStorageService } from '@core/services/localstorage.service';
   providedIn: 'root',
 })
 export class AccountService {
-  private UserPreRegisterData: BehaviorSubject<{
+  private UserPreRegisterData = new BehaviorSubject<{
     mobileNumber: string;
     nationCode: string;
-  }> = new BehaviorSubject(null);
+  } | null>(null);
   constructor(
     private dataService: DataService,
     private localStorageService: LocalStorageService,

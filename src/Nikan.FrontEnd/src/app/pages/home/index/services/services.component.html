@@ -9,23 +9,29 @@
         }
       </div>
     }
-    <div id="owl-Service3" class="owl-carousel">
+
+    <owl-carousel-o [options]="owlOptions">
       @for (row of data; track row) {
-        <div class="card mx-1">
-          <div class="card-body">
-            <a class="d-flex align-items-center text-center justify-content-center">
-              <img class="rounded-circle" [src]="baseUrl + row.imageUrl" alt="" />
-              <i class="fa fa-building fa-3x mb-3"></i>
-            </a>
-            <h6>{{ row.serviceName }}</h6>
-            <p>
-              {{ row.descriptions }}
-            </p>
-            <!-- <a routerLink="/home/sale/+{{row.id}}" class="btn btn-grad px-5 text-white mt-3 rad25">مشاهده</a> -->
+        <ng-template carouselSlide>
+          <div class="card mx-1">
+            <div
+              class="card-body flex-column d-flex align-items-center text-center justify-content-center"
+            >
+              <span>
+                <img class="rounded-circle" [src]="baseUrl + row.imageUrl" alt="" />
+                <i class="fa fa-building fa-3x mb-3"></i>
+              </span>
+              <h6>{{ row.serviceName }}</h6>
+              <p>
+                {{ row.descriptions }}
+              </p>
+              <!-- <a routerLink="/home/sale/+{{row.id}}" class="btn btn-grad px-5 text-white mt-3 rad25">مشاهده</a> -->
+            </div>
           </div>
-        </div>
+        </ng-template>
       }
-    </div>
+    </owl-carousel-o>
+
     <!--<div class="text-center mb-5">
     <a class="btn btn-grad px-5 text-white mt-3 rad25" routerLink="/home/unit-sales">
       مشاهده بیشتر

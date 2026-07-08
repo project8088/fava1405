@@ -8,13 +8,10 @@
 @use '../public/theme/Style.css';
 @use '../public/theme/animate.css';
 @use '../public/theme/sina-nav.min.css';
-@use '../public/theme/owl.carousel.min.css';
 
 @use './scss/kartable.scss';
 
 @use './scss/print.scss';
-
-
 
 // Include theming for Angular Material with `mat.theme()`.
 // This Sass mixin will define CSS variables that are used for styling Angular Material
@@ -32,15 +29,22 @@ html {
         primary: mat.$azure-palette,
         tertiary: mat.$blue-palette,
       ),
-      typography: Roboto,
-      density: 0,
+      typography: (
+        brand-family: 'iranSans',
+        plain-family: 'iranSans',
+        bold-weight: 500,
+        medium-weight: 400,
+        regular-weight: 200,
+        label-text-size: 0.8rem,
+      ),
+      density: -3,
     )
   );
 }
 
 body {
   --bs-body-font-family: 'iranSans';
-  --mat-sys-body-medium:400 0.875rem / 1.25rem iranSans;
+  --mat-sys-body-medium: 400 0.875rem / 1.25rem iranSans;
   color-scheme: light;
   font-family: 'iranSans', 'Arial';
   font-size: 12px;
@@ -48,7 +52,7 @@ body {
   background-color: var(--mat-sys-surface);
   color: var(--mat-sys-on-surface);
   font: var(--mat-sys-body-medium);
- 
+
   // Reset the user agent margin.
   margin: 0;
   height: 100%;
@@ -378,4 +382,19 @@ body {
 input[type='number']::-webkit-outer-spin-button,
 input[type='number']::-webkit-inner-spin-button {
   opacity: 1;
+}
+
+.owl-prev,
+.owl-next {
+  box-shadow: 0 7px 13px 0 rgba(0, 0, 0, 0.11) !important;
+  border-radius: 50% !important;
+  width: 40px !important;
+  height: 40px !important;
+  background: #fff !important;
+  color: #000 !important;
+  font-size: 30px !important;
+}
+
+.dropdown-menu {
+  text-align: start !important;
 }

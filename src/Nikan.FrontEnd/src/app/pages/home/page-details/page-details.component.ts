@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainPageDetailsComponent extends AppBase implements OnInit {
-  slug: string='';
+  slug: string = '';
   user?: AuthUser | null;
   loadingData?: boolean;
   page: any;
@@ -53,8 +53,9 @@ export class MainPageDetailsComponent extends AppBase implements OnInit {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
+        this.chdr.detectChanges();
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );

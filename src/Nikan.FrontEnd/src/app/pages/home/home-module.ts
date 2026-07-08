@@ -29,6 +29,7 @@ import { SharedModule } from '@app/shared/shared.module';
 import { CoreModule } from '@core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LayoutsModule } from '@app/layouts/layouts.module';
+import { CarouselModule } from 'ngx-owl-carousel-o';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { LayoutsModule } from '@app/layouts/layouts.module';
     SharedModule,
     CoreModule,
     LayoutsModule,
+    CarouselModule,
   ],
 })
 export class HomeModule {}

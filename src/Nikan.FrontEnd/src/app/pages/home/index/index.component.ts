@@ -3,6 +3,8 @@ import { NewsDto } from '@core/models/news';
 import { ServerApis } from '@core/server-apis';
 import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs/operators';
+import { OWL_OPTIONS } from '../owal.config';
 
 @Component({
   selector: 'app-index',
@@ -17,6 +19,7 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
 
   setting: SiteSettingViewModel | null = null;
 
+  owlOptions = OWL_OPTIONS;
   constructor() {
     super();
   }
@@ -28,67 +31,26 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
       this.setting = response;
     });
   }
-  ngOnDestroy() {
-  }
+  ngOnDestroy() {}
 
   ngAfterViewInit() {}
 
   getLastNews() {
     this.loadingNews = true;
-    this.dataService.get(ServerApis.getLastNews, {}).subscribe(
-      (response) => {
+    this.dataService
+      .get(ServerApis.getLastNews, {})
+      .pipe(
+        finalize(() => {
+          this.loadingNews = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.loadingNews = false;
         this.lastNews = response.data ? response.data : [];
-        setTimeout(() => {
-          this.owltopnews();
-        }, 200);
-      },
-      (error:any) => {
-        this.loadingNews = false;
-      },
-    );
+       
+      });
   }
 
-  //popular doctors_index_page
-  owltopnews() {
-    (this.doc.querySelector('#owl-topnews') as any)?.owlCarousel({
-      rtl: true,
-      loop: true,
-      nav: true,
-      autoplay: true,
-      autoplayHoverPause: true,
-      smartSpeed: 2000,
-      autoplayTimeout: 5000,
-      responsiveClass: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        510: {
-          items: 2,
-        },
-        830: {
-          items: 3,
-        },
-        //600: {
-        //    items: 5,
-        //},
-        //700: {
-        //    items: 6,
-        //},
-        //847: {
-        //    items: 7,
-        //},
-        //992: {
-        //    items: 5,
-        //},
-        1200: {
-          items: 4,
-        },
-        1367: {
-          items: 5,
-        },
-      },
-    });
-  }
+
 }

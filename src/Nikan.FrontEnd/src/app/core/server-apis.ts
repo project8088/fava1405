@@ -1,11 +1,11 @@
 export class BaseUrl {
-  public baseUrl = '';
+  public baseUrl = '/';
   public mainApi = '/api/';
 
   constructor() {
     let host = document.location.host;
     if (host.includes('localhost')) {
-      this.baseUrl = 'https://profile.isfahan.ir';
+      this.baseUrl = 'https://profile.isfahan.ir/';
       this.mainApi = 'https://profile.isfahan.ir/api/';
     }
   }

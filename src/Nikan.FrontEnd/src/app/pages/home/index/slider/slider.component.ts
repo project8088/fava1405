@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { OWL_OPTIONS } from '../../owal.config';
 
 @Component({
   selector: 'home-slider',
@@ -13,6 +14,7 @@ export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
   slideShow: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
+  owlOptions = OWL_OPTIONS;
   constructor() {
     super();
   }
@@ -20,17 +22,6 @@ export class SliderComponent extends AppBase implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.dataService.get(ServerApis.getAllMainPageSlideShow, {}).subscribe((response) => {
       if (response.data) this.slideShow = response.data ?? [];
-      setTimeout(() => {
-        (this.doc.querySelector('#owl-slider') as any)?.owlCarousel({
-          items: 1,
-          loop: true,
-          autoplay: true,
-          nav: true,
-          smartSpeed: 2000,
-          autoplayTimeout: 3000,
-          animateOut: 'fadeOut',
-        });
-      }, 100);
     });
   }
 

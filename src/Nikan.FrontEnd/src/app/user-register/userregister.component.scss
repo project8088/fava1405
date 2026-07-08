@@ -1,11 +1,14 @@
 .page {
-  background: url('/images/bg.jpg') !important;
+  background-image: url(/images/bg.jpg) !important;
   background-color: #e4edf2;
+  background-size: cover;
+  background-repeat: no-repeat;
 
   ::ng-deep.right {
     background-color: #03254a;
   }
 }
+
 ::ng-deep {
   .mat-form-field-wrapper {
   }

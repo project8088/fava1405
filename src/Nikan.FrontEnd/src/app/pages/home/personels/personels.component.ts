@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { OWL_OPTIONS } from '../owal.config';
 
 @Component({
   selector: 'home-personels',
@@ -13,6 +14,7 @@ export class HomePersonelsListComponent extends AppBase implements OnInit {
   managerList: any[] = [];
   baseUrl: string = ServerApis.baseUrl;
 
+  owlOptions = OWL_OPTIONS;
   constructor() {
     super();
   }
@@ -27,9 +29,7 @@ export class HomePersonelsListComponent extends AppBase implements OnInit {
       (response) => {
         this.loadingManagers = false;
         this.managerList = response.data ? response.data : [];
-        setTimeout(() => {
-          this.owlService();
-        }, 200);
+     
       },
       (error:any) => {
         this.loadingManagers = false;
@@ -37,45 +37,5 @@ export class HomePersonelsListComponent extends AppBase implements OnInit {
     );
   }
 
-  owlService() {
-    (this.doc.querySelector('#owl-Service2') as any)?.owlCarousel({
-      rtl: true,
-      loop: true,
-      nav: true,
-      autoplay: true,
-      autoplayHoverPause: true,
-      smartSpeed: 1000,
-      autoplayTimeout: 8000,
-      responsiveClass: true,
-      responsive: {
-        0: {
-          items: 1,
-        },
-        480: {
-          items: 2,
-        },
-        768: {
-          items: 3,
-        },
-        //600: {
-        //    items: 5,
-        //},
-        //700: {
-        //    items: 6,
-        //},
-        //847: {
-        //    items: 7,
-        //},
-        //992: {
-        //    items: 5,
-        //},
-        1200: {
-          items: 5,
-        },
-        1367: {
-          items: 5,
-        },
-      },
-    });
-  }
+  
 }

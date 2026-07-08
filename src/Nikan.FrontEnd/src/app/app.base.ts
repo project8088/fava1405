@@ -1,4 +1,4 @@
-import { DOCUMENT, inject } from '@angular/core';
+import { ChangeDetectorRef, DOCUMENT, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataService } from '@core/services/data-service.service';
 import { ToastrService } from 'ngx-toastr';
@@ -19,4 +19,6 @@ export class AppBase {
 
   protected mainSpinnerService = inject(MainSpinnerService);
   protected doc = inject(DOCUMENT);
+
+  protected chdr = inject(ChangeDetectorRef);
 }

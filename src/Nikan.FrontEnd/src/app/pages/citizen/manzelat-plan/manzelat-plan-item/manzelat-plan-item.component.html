@@ -28,7 +28,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_JesmiHarekati_NoWheelChair'].value"
                   formControlName="typ_Janbazan_JesmiHarekati_NoWheelChair"
                 >
-                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track type) {
+                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -62,7 +62,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_JesmiHarekati_WheelChair'].value"
                   formControlName="typ_Janbazan_JesmiHarekati_WheelChair"
                 >
-                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track type) {
+                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -96,7 +96,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_Zehni'].value"
                   formControlName="typ_Janbazan_Zehni"
                 >
-                  @for (type of baseEnums.typ_Zehni; track type) {
+                  @for (type of baseEnums.typ_Zehni; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -125,7 +125,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_AsabRavan'].value"
                   formControlName="typ_Janbazan_AsabRavan"
                 >
-                  @for (type of baseEnums.typ_AsabRavan; track type) {
+                  @for (type of baseEnums.typ_AsabRavan; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -154,7 +154,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_Binaei'].value"
                   formControlName="typ_Janbazan_Binaei"
                 >
-                  @for (type of baseEnums.typ_Binaei; track type) {
+                  @for (type of baseEnums.typ_Binaei; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -183,7 +183,7 @@
                   [disabled]="!theForm.controls['chk_Janbazan_Shenavaei'].value"
                   formControlName="typ_Janbazan_Shenavaei"
                 >
-                  @for (type of baseEnums.typ_Shenavaei; track type) {
+                  @for (type of baseEnums.typ_Shenavaei; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -250,7 +250,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_JesmiHarekati_NoWheelChair'].value"
                   formControlName="typ_Maloulin_JesmiHarekati_NoWheelChair"
                 >
-                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track type) {
+                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -284,7 +284,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_JesmiHarekati_WheelChair'].value"
                   formControlName="typ_Maloulin_JesmiHarekati_WheelChair"
                 >
-                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track type) {
+                  @for (type of baseEnums.typ_JesmiHarekati_WheelChair; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -318,7 +318,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_Zehni'].value"
                   formControlName="typ_Maloulin_Zehni"
                 >
-                  @for (type of baseEnums.typ_Zehni; track type) {
+                  @for (type of baseEnums.typ_Zehni; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -347,7 +347,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_AsabRavan'].value"
                   formControlName="typ_Maloulin_AsabRavan"
                 >
-                  @for (type of baseEnums.typ_AsabRavan; track type) {
+                  @for (type of baseEnums.typ_AsabRavan; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -376,7 +376,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_Binaei'].value"
                   formControlName="typ_Maloulin_Binaei"
                 >
-                  @for (type of baseEnums.typ_Binaei; track type) {
+                  @for (type of baseEnums.typ_Binaei; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -405,7 +405,7 @@
                   [disabled]="!theForm.controls['chk_Maloulin_Shenavaei'].value"
                   formControlName="typ_Maloulin_Shenavaei"
                 >
-                  @for (type of baseEnums.typ_Shenavaei; track type) {
+                  @for (type of baseEnums.typ_Shenavaei; track $index) {
                     <mat-option [value]="type.key">
                       {{ type.text }}
                     </mat-option>
@@ -454,7 +454,7 @@
           <mat-form-field class="col-12 col-md-6 mt-2 mr-2">
             <mat-label> نوع سرپرستی </mat-label>
             <mat-select formControlName="typ_ZananSarparast">
-              @for (type of baseEnums.typ_ZananSarparast; track type) {
+              @for (type of baseEnums.typ_ZananSarparast; track $index) {
                 <mat-option [value]="type.key">
                   {{ type.text }}
                 </mat-option>
@@ -536,7 +536,7 @@
           <mat-form-field class="col-12 col-md-6 mt-2 mr-2">
             <mat-label> نوع بیماری خاص را انتخاب کنید </mat-label>
             <mat-select formControlName="typ_SpecialDiseases">
-              @for (type of baseEnums.typ_SpecialDiseases; track type) {
+              @for (type of baseEnums.typ_SpecialDiseases; track $index) {
                 <mat-option [value]="type.key">
                   {{ type.text }}
                 </mat-option>

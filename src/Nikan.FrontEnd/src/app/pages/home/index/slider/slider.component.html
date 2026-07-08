@@ -4,24 +4,16 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-6 mb-3">
-            <a href="/home/contact-us"
-              ><img src="/images/menu2.jpg" class="img-fluid rad12"
-            /></a>
+            <a href="/home/contact-us"><img src="/images/menu2.jpg" class="img-fluid rad12" /></a>
           </div>
           <div class="col-lg-12 col-6 mb-3">
-            <a href="/home/contact-us"
-              ><img src="/images/menu2.jpg" class="img-fluid rad12"
-            /></a>
+            <a href="/home/contact-us"><img src="/images/menu2.jpg" class="img-fluid rad12" /></a>
           </div>
           <div class="col-lg-12 col-6 mb-3">
-            <a href="/home/contact-us"
-              ><img src="/images/menu2.jpg" class="img-fluid rad12"
-            /></a>
+            <a href="/home/contact-us"><img src="/images/menu2.jpg" class="img-fluid rad12" /></a>
           </div>
           <div class="col-lg-12 col-6 mb-3">
-            <a href="/home/news-list"
-              ><img src="/images/menu3.jpg" class="img-fluid rad12"
-            /></a>
+            <a href="/home/news-list"><img src="/images/menu3.jpg" class="img-fluid rad12" /></a>
           </div>
           <div class="col-lg-12 col-6 mb-2">
             <a href="/home/contact-us"
@@ -33,23 +25,25 @@
       </div>
     </div>
     <div class="col-lg-9 mb-lg-0 mb-3 order-lg-2 order-1">
-      <div id="owl-slider" class="owl-carousel">
-        @for (item of slideShow; track item; let i = $index) {
-          <div class="item">
-            <a href="{{ item.url }}" target="_blank">
-              <img [src]="baseUrl + item.imageUrl" [alt]="item.caption" class="img-fluid" />
-              <div class="caption">
-                <!-- <p>
+      <owl-carousel-o>
+        @for (item of slideShow; track $index) {
+          <ng-template carouselSlide>
+            <div class="item">
+              <a href="{{ item.url }}" target="_blank">
+                <img [src]="baseUrl + item.imageUrl" [alt]="item.caption" class="img-fluid" />
+                <div class="caption">
+                  <!-- <p>
                 {{item.caption}}
               </p> -->
-                <p>
-                  {{ item.description }}
-                </p>
-              </div>
-            </a>
-          </div>
+                  <p>
+                    {{ item.description }}
+                  </p>
+                </div>
+              </a>
+            </div>
+          </ng-template>
         }
-      </div>
+      </owl-carousel-o>
     </div>
   </div>
 </section>

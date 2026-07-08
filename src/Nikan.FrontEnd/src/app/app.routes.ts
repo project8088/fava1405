@@ -28,11 +28,11 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./user-register/userregister.module').then((m) => m.UserRegisterModule),
   },
-  {
-    path: 'admin',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
-  },
+  // {
+  //   path: 'admin',
+  //   canActivate: [AuthGuard],
+  //   loadChildren: () => import('./pages/admin/admin.module').then((m) => m.AdminModule),
+  // },
 
   {
     path: 'webuser',

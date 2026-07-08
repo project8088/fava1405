@@ -1,12 +1,12 @@
 export class KarjoLanguageDto {
   public id?: number;
-  public languageTitle: string;
+  public languageTitle!: string;
 
-  public languageTitleId: number;
+  public languageTitleId!: number;
 
-  public languageLevel: string;
+  public languageLevel!: string;
 
-  public languageLevelId: number;
+  public languageLevelId!: number;
 
   public userId?: string;
 

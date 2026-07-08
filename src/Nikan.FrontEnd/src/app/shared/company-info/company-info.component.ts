@@ -40,7 +40,7 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
             this.companyInfo = response.data;
 
             setTimeout(() => {
-              $('.lightGallery').lightGallery({
+              (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
                 selector: 'a',
                 thumbnail: false,
               });
@@ -50,7 +50,7 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
