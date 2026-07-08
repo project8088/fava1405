@@ -1,0 +1,25 @@
+ul.tree-permission {
+  list-style: none;
+  padding-right: 30px;
+  margin: 0;
+  max-width: 600px;
+
+  .permission-item {
+    display: flex;
+    padding: 3px 15px;
+    background: #fff;
+    border: 1px #ededed solid;
+    border-radius: 3px;
+    transition: all 500ms;
+    margin: 2px;
+    align-items: center;
+    min-height: 40px;
+    i {
+      margin-left: 5px;
+    }
+    &:hover {
+      background: #b1e0f8;
+      cursor: pointer;
+    }
+  }
+}
