@@ -1,4 +1,3 @@
-import { BreakpointObserver } from '@angular/cdk/layout';
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { ShortKarjoProfile } from '@core/models/citizen/global-information';

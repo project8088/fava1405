@@ -1,17 +1,20 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "rootDir": ".",
     "outDir": "./out-tsc/app",
     "types": [],
-    "paths": {
-      "@core/*": ["./src/app/core/*"],
-      "@app/*": ["./src/app/*"]
-    }
   },
-  "angularCompilerOptions": {
-    "strictTemplates": true
-  },
-  "include": ["src/**/*.ts"],
+  "include": [
+    // // "./src/main.ts",
+    // "src/app/pages/admin/*.ts",
+    // "src/app/pages/admin/users/**/*.ts",
+    // // "src/app/pages/admin/_dialogs/**/*.ts",
+    // "src/app/pages/admin/company-list/**/*.ts",
+    // "src/app/shared/**/*.ts",
+    // "src/app/pages/card",
+    // "src/app/core/**/*.ts",
+    // "src/app/account/**/*.ts"
+      "src/**/*.ts"
+  ],
   "exclude": ["src/**/*.spec.ts"]
 }

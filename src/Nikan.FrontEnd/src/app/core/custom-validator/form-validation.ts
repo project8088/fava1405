@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractControl, ValidatorFn, FormGroup } from '@angular/forms';
+import { AbstractControl, FormGroup } from '@angular/forms';
 
 @Injectable()
 export class CustomFormValidators {

@@ -1,4 +1,4 @@
-import { Component, DOCUMENT, inject, signal } from '@angular/core';
+import { Component, DOCUMENT, inject } from '@angular/core';
 import {
   NavigationCancel,
   NavigationEnd,
