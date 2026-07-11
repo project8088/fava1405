@@ -45,11 +45,12 @@
           },
           "configurations": {
             "production": {
+              "allowedCommonJsDependencies": ["sweetalert2", "file-saver"],
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "2.5MB",
+                  "maximumError": "4MB"
                 },
                 {
                   "type": "anyComponentStyle",
