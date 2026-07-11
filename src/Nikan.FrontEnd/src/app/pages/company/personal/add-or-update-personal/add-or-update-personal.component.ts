@@ -13,10 +13,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
-  companyId: string ='';
-  isSaving=false;
+  isUpdate = false;
+  id: string = '';
+  companyId: string = '';
+  isSaving = false;
   userForm: FormGroup;
   loading: boolean = true;
   imageUrl: string = '';
@@ -109,8 +109,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
     });
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   getUserInfo() {
     this.loading = true;
@@ -120,22 +119,20 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         if (response && response.isSuccess) {
           this.userForm.patchValue(response.data);
           this.imageUrl = response.data.imageUrl;
-       
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
-          if (this.user?.isAdmin)
-            this.router.navigate(['/company/personal/' + this.companyId]);
+          if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
   }
 
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -143,7 +140,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.userForm.value;
 
@@ -183,15 +180,14 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         this.isSaving = false;
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          if (this.user?.isAdmin)
-            this.router.navigate(['/company/personal/' + this.companyId]);
+          if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
           else this.router.navigate(['/company/personal/0']);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -208,6 +204,4 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
       this.userForm.get('descriptionDisease')?.setValue('');
     }
   }
-
-  
 }

@@ -12,11 +12,11 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   userForm: FormGroup;
   userId?: string;
   loading: boolean = true;
-  companyId: string ='';
+  companyId: string = '';
 
   userAccountStateList: any[] = [];
   constructor(
@@ -61,14 +61,14 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
           this.matDialogRef.close(false);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.matDialogRef.close(false);
       },
     );
   }
 
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
 
@@ -76,7 +76,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.userForm.value;
@@ -103,7 +103,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

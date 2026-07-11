@@ -10,8 +10,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CaptchaComponent extends AppBase implements OnInit {
-  @Input() styleName: string=''; // backward compatible
-  @Input() captchaStyleName: string='';
+  @Input() styleName: string = ''; // backward compatible
+  @Input() captchaStyleName: string = '';
 
   constructor(
     private elementRef: ElementRef,

@@ -11,12 +11,12 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
-  showSaveCardNumberPanel: boolean =false;
+  showSaveCardNumberPanel: boolean = false;
   loadingData?: boolean;
   info: any;
-  refundId: string ='';
+  refundId: string = '';
   matDialogRef: any;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -25,8 +25,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
       ownerBankCardNumber: [''],
     });
     this.route.params.subscribe((p) => {
-        this.refundId = p['refundId'];
-      
+      this.refundId = p['refundId'];
     });
   }
 
@@ -45,7 +44,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -56,7 +55,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -76,7 +75,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

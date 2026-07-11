@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCancellationCitizenCardDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
   centerList: any[] = [];
   baseInfo: any = {};
@@ -47,7 +47,7 @@ export class AdminCancellationCitizenCardDialogComponent extends AppBase impleme
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -70,7 +70,7 @@ export class AdminCancellationCitizenCardDialogComponent extends AppBase impleme
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

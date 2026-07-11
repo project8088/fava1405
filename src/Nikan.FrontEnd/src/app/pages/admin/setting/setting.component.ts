@@ -11,11 +11,11 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
-  isSaving=false;
-    loading?: boolean;
+  isSaving = false;
+  loading?: boolean;
 
   baseUrl: string = ServerApis.baseUrl;
-  logoUrl: string='';
+  logoUrl: string = '';
   uploadUrl: string = ServerApis.uploadSiteLogo;
 
   constructor() {
@@ -64,7 +64,7 @@ export class AdminSettingComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
@@ -74,7 +74,7 @@ export class AdminSettingComponent extends AppBase implements OnInit {
     if (this.settingForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.settingForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -90,7 +90,7 @@ export class AdminSettingComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

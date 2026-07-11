@@ -48,9 +48,6 @@ export class IndexComponent extends AppBase implements OnInit, AfterViewInit, On
       .subscribe((response) => {
         this.loadingNews = false;
         this.lastNews = response.data ? response.data : [];
-       
       });
   }
-
-
 }

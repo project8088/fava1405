@@ -86,7 +86,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -101,7 +101,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     this.getList();
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -127,13 +127,13 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  openDialog(item:any) {
+  openDialog(item: any) {
     this.matDialog
       .open(AdminAddSabtAhvalDialogComponent, {
         panelClass: 'custom-dialog',
@@ -148,7 +148,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
       });
   }
 
-  openCitizenProfile(userCode:string) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -159,7 +159,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  send(item:any) {
+  send(item: any) {
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',
@@ -187,7 +187,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               item.loading = false;
             },
           );
@@ -195,7 +195,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  sendChekStateLife(item:any) {
+  sendChekStateLife(item: any) {
     Swal.fire({
       title: 'آیا برای ارسال اطلاعات به صف بررسی موافق هستید ؟',
       text: 'این عملیات ممکن است زمان زیادی برای بررسی لازم داشته باشد',
@@ -223,7 +223,7 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               item.loading = false;
             },
           );

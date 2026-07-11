@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardDiscountListComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'discountTitle',
@@ -32,7 +32,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
   ];
 
   baseUrl: string = ServerApis.baseUrl;
-  cardTypeId: string ='';
+  cardTypeId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -87,7 +87,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -101,7 +101,7 @@ export class CardDiscountListComponent extends AppBase implements OnInit, AfterV
     this.getList();
   }
 
-  openDialog(item:any) {
+  openDialog(item: any) {
     this.matDialog
       .open(CardAddCardDiscountDialogComponent, {
         panelClass: 'custom-dialog',

@@ -18,17 +18,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
-  isUpdate=false;
+  isUpdate = false;
 
-  courseId: string ='';
-  loadingServices: boolean=false;
-  filteredServices=new Observable<any[]>();
+  courseId: string = '';
+  loadingServices: boolean = false;
+  filteredServices = new Observable<any[]>();
   selectedServices: any[] = [];
 
   loadingData?: boolean;
-  id: string ='';
+  id: string = '';
   constructor(
     private matDialogRef: MatDialogRef<CardAddOrUpadateQueueDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -84,7 +84,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
           this.matDialogRef.close();
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -94,7 +94,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -130,7 +130,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
@@ -164,7 +164,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingServices = false;
           },
@@ -193,7 +193,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
    */
   selectedAutoChip(
     list: any[],
-    formControl:string,
+    formControl: string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,

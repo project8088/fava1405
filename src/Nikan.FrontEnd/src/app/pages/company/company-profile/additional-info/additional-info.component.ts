@@ -11,10 +11,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   companyId: string = '';
   form: FormGroup;
-  isSaving=false;
+  isSaving = false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();
@@ -64,7 +64,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -74,7 +74,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
     var form = this.form.value;
     if (form.contractOnDate) form.contractOnDate = this.dataService.formatDate(form.contractOnDate);
@@ -96,7 +96,7 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

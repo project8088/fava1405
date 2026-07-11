@@ -29,7 +29,7 @@
             <span>تعداد کارتهای موجود : </span><strong>{{ info.cardCount }}</strong>
           </div>
           <div class="col-sm-6">
-            <span> تاریخ ایجاد: </span><strong>{{ info.onDate | luxonFormat}}</strong>
+            <span> تاریخ ایجاد: </span><strong>{{ info.onDate | luxonFormat }}</strong>
           </div>
         </div>
       </div>
@@ -155,7 +155,7 @@
           <ng-container matColumnDef="queueOnDate">
             <th mat-header-cell *matHeaderCellDef>ارسال به صف</th>
             <td mat-cell *matCellDef="let row">
-              {{ row.queueOnDate | luxonFormat}}
+              {{ row.queueOnDate | luxonFormat }}
             </td>
           </ng-container>
           <ng-container matColumnDef="deliverType">

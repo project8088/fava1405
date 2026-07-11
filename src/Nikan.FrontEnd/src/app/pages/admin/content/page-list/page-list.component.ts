@@ -79,7 +79,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -94,7 +94,7 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
     this.getList();
   }
 
-  deletePage(row:any) {
+  deletePage(row: any) {
     var text = 'آیا برای حذف کردن صفحه "' + row.title + '" اطمینان دارید؟';
 
     Swal.fire({
@@ -122,13 +122,13 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  manageAttachment(item:any) {
+  manageAttachment(item: any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

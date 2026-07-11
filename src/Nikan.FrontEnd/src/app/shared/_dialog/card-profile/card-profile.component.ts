@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardProfileDialogComponent extends AppBase implements OnInit {
-  id: string ='';
+  id: string = '';
 
   constructor(
     private matDialogRef: MatDialogRef<CardProfileDialogComponent>,
@@ -24,7 +24,7 @@ export class CardProfileDialogComponent extends AppBase implements OnInit {
 
   ngOnInit(): void {}
 
-  closeDialog(result:boolean) {
+  closeDialog(result: boolean) {
     this.matDialogRef.close(result);
   }
 }

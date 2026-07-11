@@ -133,9 +133,7 @@
       <button mat-raised-button mat-dialog-close>انصراف</button>
       @if (!loading) {
         <div class="text-right mx-2">
-          <button mat-raised-button color="primary" (click)="saveFamilyDetails()">
-            ذخیره
-          </button>
+          <button mat-raised-button color="primary" (click)="saveFamilyDetails()">ذخیره</button>
         </div>
       }
     </mat-dialog-actions>
@@ -284,7 +282,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (registerForm.controls['cityId'].errors ) {
+          @if (registerForm.controls['cityId'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['cityId'].errors['required']) {
                 <span> شهر محل سکونت عضو خانواده را انتخاب کنید </span>
@@ -298,7 +296,7 @@
         <mat-form-field class="w-100 mt-3">
           <mat-label>منطقه</mat-label>
           <input numbersOnly formControlName="region" matInput />
-          @if (registerForm.controls['region'].errors ) {
+          @if (registerForm.controls['region'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['region'].errors['required']) {
                 <span> منطقه محل سکونت عضو خانواده را انتخاب کنید </span>
@@ -312,7 +310,7 @@
         <mat-form-field class="w-100 mt-3">
           <mat-label>خیابان</mat-label>
           <input formControlName="street" matInput />
-          @if (registerForm.controls['street'].errors ) {
+          @if (registerForm.controls['street'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['street'].errors['required']) {
                 <span> خیابان محل سکونت عضو خانواده را انتخاب کنید </span>
@@ -326,7 +324,7 @@
         <mat-form-field class="w-100 mt-3">
           <mat-label>کوچه</mat-label>
           <input formControlName="alley" matInput />
-          @if (registerForm.controls['alley'].errors ) {
+          @if (registerForm.controls['alley'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['alley'].errors['required']) {
                 <span> کوچه محل سکونت عضو خانواده را انتخاب کنید </span>
@@ -340,7 +338,7 @@
         <mat-form-field class="w-100 mt-3">
           <mat-label>پلاک</mat-label>
           <input numbersOnly formControlName="plaque" matInput />
-          @if (registerForm.controls['plaque'].errors ) {
+          @if (registerForm.controls['plaque'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['plaque'].errors['required']) {
                 <span> پلاک محل سکونت عضو خانواده را انتخاب کنید </span>
@@ -359,7 +357,7 @@
             numbersOnly
             placeholder="کد پستی  عضو خانواده را وارد کنید"
           />
-          @if (registerForm.controls['postalCode'].errors ) {
+          @if (registerForm.controls['postalCode'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['postalCode'].errors['required']) {
                 <span> کد پستی عضو خانواده را وارد کنید </span>
@@ -427,7 +425,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (registerForm.controls['educationStatues'].errors ) {
+          @if (registerForm.controls['educationStatues'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['educationStatues'].errors['required']) {
                 <span> وضعیت تحصیل خود را انتخاب کنید </span>
@@ -448,7 +446,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (registerForm.controls['educationStatues'].errors ) {
+            @if (registerForm.controls['educationStatues'].errors) {
               <mat-hint class="text-danger">
                 @if (registerForm.controls['educationStatues'].errors['required']) {
                   <span> گروه تحصیلی خود را انتخاب کنید </span>
@@ -470,7 +468,7 @@
                 </mat-option>
               }
             </mat-select>
-            @if (registerForm.controls['educationLevel'].errors ) {
+            @if (registerForm.controls['educationLevel'].errors) {
               <mat-hint class="text-danger">
                 @if (registerForm.controls['educationLevel'].errors['required']) {
                   <span> سطح تحصیلات خود را انتخاب کنید </span>
@@ -486,7 +484,7 @@
           <mat-form-field class="w-100 mt-3">
             <mat-label>رشته تحصیلی</mat-label>
             <input formControlName="educationTitle" matInput placeholder="رشته تحصیلی (اختیاری)" />
-            @if (registerForm.controls['educationTitle'].errors ) {
+            @if (registerForm.controls['educationTitle'].errors) {
               <mat-hint class="text-danger">
                 @if (registerForm.controls['educationTitle'].errors['required']) {
                   <span> رشته تحصیلی خود را وارد کنید </span>
@@ -508,7 +506,7 @@
               </mat-option>
             }
           </mat-select>
-          @if (registerForm.controls['jobGroup'].errors ) {
+          @if (registerForm.controls['jobGroup'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['jobGroup'].errors['required']) {
                 <span> وضعیت شغل عضو خانواده را انتخاب کنید </span>
@@ -521,7 +519,7 @@
         <mat-form-field class="w-100">
           <mat-label>عنوان شغل</mat-label>
           <input formControlName="jobTitle" matInput placeholder="عنوان شغل (اختیاری)" />
-          @if (registerForm.controls['jobTitle'].errors ) {
+          @if (registerForm.controls['jobTitle'].errors) {
             <mat-hint class="text-danger">
               @if (registerForm.controls['jobTitle'].errors['required']) {
                 <span> عنوان شغل عضو خانواده را وارد کنید </span>

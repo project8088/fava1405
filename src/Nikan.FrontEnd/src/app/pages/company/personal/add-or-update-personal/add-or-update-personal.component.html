@@ -135,7 +135,8 @@
           <mat-error> کد پستی را وارد کنید. </mat-error>
         }
         @if (
-          userForm.get('zipCode')?.hasError('maxlength') || userForm.get('zipCode')?.hasError('minlength')
+          userForm.get('zipCode')?.hasError('maxlength') ||
+          userForm.get('zipCode')?.hasError('minlength')
         ) {
           <mat-error> کد پستی ده رقم می باشد </mat-error>
         }

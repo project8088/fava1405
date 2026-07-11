@@ -37,7 +37,7 @@
                     <div class="col-md-6">
                       <strong> تاریخ ثبت نام: </strong>
                       <span>
-                        {{ citizen.creationDate | luxonFormat}}
+                        {{ citizen.creationDate | luxonFormat }}
                         <small>
                           {{ citizen.creationDate | luxonFormat: 'HH:mm' }}
                         </small>
@@ -69,7 +69,7 @@
                   </div>
                   <div class="col-sm-6 col-md-4">
                     <strong> تاریخ تولد: </strong>
-                    <span>{{ citizen.birthDate | luxonFormat}}</span>
+                    <span>{{ citizen.birthDate | luxonFormat }}</span>
                   </div>
                   <div class="col-sm-6 col-md-4">
                     <strong> وضعیت پایان خدمت: </strong>
@@ -129,7 +129,7 @@
                   <div class="col-sm-6 col-md-4">
                     <strong>آخرین بروزرسانی اطلاعات: </strong>
                     <span>
-                      {{ citizen.lastUpdateOnDate | luxonFormat}}
+                      {{ citizen.lastUpdateOnDate | luxonFormat }}
                       <small>
                         {{ citizen.lastUpdateOnDate | luxonFormat: 'HH:mm' }}
                       </small>
@@ -190,7 +190,7 @@
                 <div class="row">
                   <mat-chip-listbox aria-label="citizen groups">
                     @for (item of citizen.groups; track $index) {
-                      <mat-chip>{{ item.group }} ({{ item.creationDate | luxonFormat}})</mat-chip>
+                      <mat-chip>{{ item.group }} ({{ item.creationDate | luxonFormat }})</mat-chip>
                     }
                   </mat-chip-listbox>
                 </div>

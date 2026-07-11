@@ -57,7 +57,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -76,7 +76,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -99,7 +99,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );
@@ -137,7 +137,7 @@ export class ContactUsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

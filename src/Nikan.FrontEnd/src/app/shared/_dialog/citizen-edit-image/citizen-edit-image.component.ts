@@ -13,7 +13,7 @@ import { CropperComponent } from '@app/shared/cropper/cropper.component';
 export class AdminCitizenEditImageDialogComponent extends AppBase implements OnInit {
   citizen: any;
   baseUrl = ServerApis.baseUrl;
-  isSaving=false;
+  isSaving = false;
   uploadUrl: string = ServerApis.uploadPersonalPictureByAdmin;
 
   @ViewChild('cropper') cropper!: CropperComponent;

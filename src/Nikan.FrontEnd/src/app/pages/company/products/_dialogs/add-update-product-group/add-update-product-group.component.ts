@@ -11,8 +11,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddUpdateProductGroupDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
-  isUpdate=false;
+  isSaving = false;
+  isUpdate = false;
   form: FormGroup;
   parentProductList: any[] = [];
 
@@ -50,7 +50,7 @@ export class CompanyAddUpdateProductGroupDialogComponent extends AppBase impleme
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.form.value;
@@ -66,7 +66,7 @@ export class CompanyAddUpdateProductGroupDialogComponent extends AppBase impleme
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

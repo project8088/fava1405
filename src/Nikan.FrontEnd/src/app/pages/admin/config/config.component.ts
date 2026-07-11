@@ -9,10 +9,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminConfigComponent extends AppBase implements OnInit {
-  id: string ='';
+  id: string = '';
 
-  isSaving=false;
-    loading?: boolean;
+  isSaving = false;
+  loading?: boolean;
 
   configList: any[] = [];
 

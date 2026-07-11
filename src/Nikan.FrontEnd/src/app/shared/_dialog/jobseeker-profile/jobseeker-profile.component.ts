@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class JobseekerProfileDialogComponent extends AppBase implements OnInit {
-  id: string='';
+  id: string = '';
 
   constructor(
     private matDialogRef: MatDialogRef<JobseekerProfileDialogComponent>,
@@ -23,7 +23,7 @@ export class JobseekerProfileDialogComponent extends AppBase implements OnInit {
 
   ngOnInit(): void {}
 
-  closeDialog(result:any) {
+  closeDialog(result: any) {
     this.matDialogRef.close(result);
   }
 }

@@ -80,7 +80,7 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -95,7 +95,7 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
     this.getList();
   }
 
-  newJob(row:any) {
+  newJob(row: any) {
     this.router.navigate(['/placement/new-job'], {
       queryParams: {
         id: '',

@@ -80,7 +80,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -108,7 +108,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
       });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.citizen + '" را حذف کنید؟',
@@ -130,7 +130,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input,  Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators,  FormControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable } from 'rxjs';
 import { ServerApis } from '../../server-apis';
@@ -94,7 +94,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
       this.List = [];
       this.init();
     }
-    if (!parent) return ;
+    if (!parent) return;
     this.loading = true;
     this.dataService.get(ServerApis.getCitesByParent, { parentId: parent }).subscribe(
       (response) => {
@@ -109,7 +109,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
 
         this.init();
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

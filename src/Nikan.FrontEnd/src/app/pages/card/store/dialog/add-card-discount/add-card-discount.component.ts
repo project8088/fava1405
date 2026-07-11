@@ -94,7 +94,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
           this.matDialogRef.close();
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -146,7 +146,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

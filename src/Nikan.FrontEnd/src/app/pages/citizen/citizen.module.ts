@@ -70,7 +70,7 @@ import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notifi
     CitizenUploadManzalatDocumentsComponent,
     CitizenManzelatPlanItemComponent,
     PlansListComponent,
-    AdminAddOrUpdateCitizensNotificationComponent
+    AdminAddOrUpdateCitizensNotificationComponent,
   ],
   imports: [
     CommonModule,

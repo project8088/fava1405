@@ -50,13 +50,13 @@ export class AdminCompanyContractDialogComponent extends AppBase implements OnIn
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
   }
 
-  getContract(ev:any) {
+  getContract(ev: any) {
     this.imageContractUrl = ev.contractUrl;
   }
 }

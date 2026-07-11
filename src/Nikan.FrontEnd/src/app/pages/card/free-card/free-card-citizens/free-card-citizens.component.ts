@@ -16,11 +16,11 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardFreeCardCitizensComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = ['row', 'imageUrl', 'citizen', 'nationCode', 'sabtStatus'];
 
   baseUrl: string = ServerApis.baseUrl;
-  requestId: string ='';
+  requestId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -48,7 +48,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -91,7 +91,7 @@ export class CardFreeCardCitizensComponent extends AppBase implements OnInit, Af
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {

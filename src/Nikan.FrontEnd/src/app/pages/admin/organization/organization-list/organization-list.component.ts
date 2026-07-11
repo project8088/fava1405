@@ -35,8 +35,8 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean=false;
-  isSaving=false;
+  showAddOrUpdatePanel: boolean = false;
+  isSaving = false;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -76,7 +76,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -94,7 +94,7 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     this.dataService.post(ServerApis.addOrUpdateOrganization, this.frm.value).subscribe(
@@ -113,13 +113,13 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.organizationName + '" اطمینان دارید؟',
@@ -145,13 +145,13 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  update(row:any) {
+  update(row: any) {
     this.frm.setValue({
       id: row.id,
       organizationName: row.organizationName,

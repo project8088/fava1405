@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
 export class TimerComponent extends AppBase implements OnInit {
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
-  timerCounterString='';
+  timerCounterString = '';
   resendTimerInterval: any;
   @Output() onEnd = new EventEmitter();
 
@@ -41,7 +41,7 @@ export class TimerComponent extends AppBase implements OnInit {
    * convert 300s to 5:00
    * @param {any} given_seconds
    */
-  convertSecondstoTime(given_seconds:number) {
+  convertSecondstoTime(given_seconds: number) {
     var dateObj = new Date(given_seconds * 1000);
     var hours = dateObj.getUTCHours();
     var minutes = dateObj.getUTCMinutes();

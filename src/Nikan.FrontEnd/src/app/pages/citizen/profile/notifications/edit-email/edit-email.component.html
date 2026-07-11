@@ -21,7 +21,7 @@
       <form [formGroup]="cardForm" class="mx-4 mt-4">
         <div>
           <span class="px-3">{{ cardForm.get('email')?.value }}</span>
-       
+
           @if (!editMode) {
             <button mat-raised-button color="default" (click)="toggleEditMode()">ویرایش</button>
           }

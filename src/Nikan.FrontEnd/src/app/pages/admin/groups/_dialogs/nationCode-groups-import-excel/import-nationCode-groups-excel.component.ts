@@ -30,12 +30,12 @@ export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase imp
 
   ngOnInit() {}
 
-  attachmentId(ev:any) {
+  attachmentId(ev: any) {
     if (ev.importId) this.router.navigate(['/admin/citizen-in-group/' + ev.importId]);
     this.matDialogRef.close();
   }
 
-  completeUpload(ev:any) {
+  completeUpload(ev: any) {
     this.data.groupId = 0;
     this.ngOnInit();
   }

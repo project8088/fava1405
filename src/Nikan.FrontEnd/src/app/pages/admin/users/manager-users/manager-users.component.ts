@@ -92,7 +92,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -107,7 +107,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
     this.getList();
   }
 
-  removePersonal(row:any) {
+  removePersonal(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.firstName + ' ' + row.lastName + '" اطمینان دارید؟',
@@ -129,7 +129,7 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             row.loading = false;
           },
         );

@@ -17,7 +17,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
   editModeWork: boolean = false;
   loading?: boolean;
 
-  isfahanCities: any[]=[];
+  isfahanCities: any[] = [];
   userCode: string = '';
   homeForm: FormGroup;
   isSavingHome: boolean = false;

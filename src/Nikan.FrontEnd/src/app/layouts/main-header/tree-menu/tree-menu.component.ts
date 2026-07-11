@@ -8,7 +8,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainTreeMenuComponent extends AppBase implements OnInit {
-  @Input('menuItems') menuItems: any[]=[];
+  @Input('menuItems') menuItems: any[] = [];
   @Input('hasChild') hasChild: boolean = false;
 
   constructor() {

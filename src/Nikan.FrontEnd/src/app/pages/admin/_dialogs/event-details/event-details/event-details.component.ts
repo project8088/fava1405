@@ -33,7 +33,7 @@ export class AdminViewEventDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );

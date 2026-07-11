@@ -18,14 +18,14 @@ import { AppBase } from '@app/app.base';
 export class CitizenEditProfileComponent extends AppBase implements OnInit {
   loading: boolean = true;
   isSaving: boolean = false;
-  userCode: string='';
+  userCode: string = '';
   personalForm: FormGroup;
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
-  filteredState=new Observable<any[]>();
+  filteredState = new Observable<any[]>();
 
   lastModifiedOnDate?: string;
   citizenInfo?: KarjoGlobalInformationDto;
@@ -97,7 +97,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
               }
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingState = false;
           },
@@ -119,7 +119,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
           this.baseEnums.maritalStatus = response.maritalStatus;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -170,7 +170,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -181,7 +181,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.personalForm.value;
 
@@ -220,7 +220,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -231,7 +231,7 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
   /**

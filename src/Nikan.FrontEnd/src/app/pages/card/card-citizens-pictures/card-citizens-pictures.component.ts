@@ -4,7 +4,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
-import { AppBase } from '@app/app.base'; 
+import { AppBase } from '@app/app.base';
 import { AdminCitizenSmsListDialogComponent } from '@app/shared/_dialog/citizen-sms-list/citizen-sms-list.component';
 import { AdminCitizenImageDialogComponent } from '@app/shared/_dialog/citizen-image/citizen-image.component';
 import { AdminCitizenEditImageDialogComponent } from '@app/shared/_dialog/citizen-edit-image/citizen-edit-image.component';

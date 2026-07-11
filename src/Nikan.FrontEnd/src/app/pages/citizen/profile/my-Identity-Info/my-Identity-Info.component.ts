@@ -35,7 +35,7 @@ export class CitizenMyIdentityInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

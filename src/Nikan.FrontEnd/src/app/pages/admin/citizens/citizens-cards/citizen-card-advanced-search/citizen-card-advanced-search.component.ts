@@ -41,7 +41,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities:any[]=[];
+  isfahanCities: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -98,7 +98,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
           this.baseEnums.groupIds = response.groupIds;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -109,7 +109,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -120,7 +120,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -157,7 +157,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -172,7 +172,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -183,7 +183,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -194,7 +194,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
     });
   }
 
-  openBackCard(item:any) {
+  openBackCard(item: any) {
     this.matDialog
       .open(AdminBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -209,7 +209,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       });
   }
 
-  openDeliveredCard(item:any) {
+  openDeliveredCard(item: any) {
     this.matDialog
       .open(AdminDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -224,7 +224,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       });
   }
 
-  openCancellationCard(item:any) {
+  openCancellationCard(item: any) {
     this.matDialog
       .open(AdminCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -244,7 +244,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.discountList = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

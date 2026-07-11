@@ -42,7 +42,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities:any[]=[];
+  isfahanCities: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -96,7 +96,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
           this.baseEnums.groupIds = response.groupIds;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -107,7 +107,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -118,7 +118,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.discountList = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -155,7 +155,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -187,7 +187,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -198,7 +198,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -209,7 +209,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
     });
   }
 
-  openBackCard(item:any) {
+  openBackCard(item: any) {
     this.matDialog
       .open(CardBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -224,7 +224,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       });
   }
 
-  openDeliveredCard(item:any) {
+  openDeliveredCard(item: any) {
     this.matDialog
       .open(CardDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -239,7 +239,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       });
   }
 
-  openCancellationCard(item:any) {
+  openCancellationCard(item: any) {
     this.matDialog
       .open(CardCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',

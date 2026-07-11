@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class OrderCardListComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'cardType',
@@ -87,7 +87,7 @@ export class OrderCardListComponent extends AppBase implements OnInit, AfterView
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {

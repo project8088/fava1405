@@ -9,8 +9,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class FaqListComponent extends AppBase implements OnInit {
-  loadingGroup: boolean=false;
-  loadingList: boolean=false;
+  loadingGroup: boolean = false;
+  loadingList: boolean = false;
 
   faqGroups: any[] = [];
   selectedFaq: any;
@@ -39,14 +39,14 @@ export class FaqListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingGroup = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
   }
 
-  getFaqList(item:any) {
+  getFaqList(item: any) {
     this.selectedFaqGroupId = item.key;
 
     this.faqList = [];
@@ -63,7 +63,7 @@ export class FaqListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingList = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -73,10 +73,10 @@ export class FaqListComponent extends AppBase implements OnInit {
   getDetails(item: any) {
     if (item.showDetails === true) {
       item.showDetails = false;
-        return ;
+      return;
     } else if (item.showDetails === false) {
       item.showDetails = true;
-      return ;
+      return;
     } else {
       item.showDetails = true;
       item.loading = true;
@@ -90,7 +90,7 @@ export class FaqListComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           item.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

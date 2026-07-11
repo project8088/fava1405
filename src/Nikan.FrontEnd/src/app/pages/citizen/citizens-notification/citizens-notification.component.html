@@ -36,7 +36,7 @@
 
       <div class="col-sm-4">
         <strong>تاریخ انتشار:</strong>
-        <span>{{ notification.publishDate | luxonFormat}}</span>
+        <span>{{ notification.publishDate | luxonFormat }}</span>
       </div>
     </div>
 
@@ -71,8 +71,7 @@
             >
               @if (isSaving) {
                 <span>منتظر بمانید...</span>
-              }
-              @else {
+              } @else {
                 <span>افزودن</span>
               }
               <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>
@@ -97,7 +96,7 @@
             <tr>
               <td>{{ item.citizen }}</td>
               <td>{{ item.group }}</td>
-              <td>{{ item.onDate | luxonFormat}}</td>
+              <td>{{ item.onDate | luxonFormat }}</td>
               <td>
                 @if (item.loading) {
                   <mat-spinner diameter="25" color="default"></mat-spinner>

@@ -85,7 +85,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -100,7 +100,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
     this.getList();
   }
 
-  openCompanyContractDialog(item:any) {
+  openCompanyContractDialog(item: any) {
     this.matDialog.open(AdminCompanyContractDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -110,7 +110,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
     });
   }
 
-  openCompanyChangeStatusDialog(item:any) {
+  openCompanyChangeStatusDialog(item: any) {
     this.matDialog
       .open(AdminCompanyChangeStatusDialogComponent, {
         panelClass: 'custom-dialog',
@@ -125,7 +125,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
       });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.companyName + '" را حذف کنید؟',
@@ -147,7 +147,7 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

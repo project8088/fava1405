@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implements AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'gender',
@@ -28,7 +28,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
     'address',
   ];
 
-  importId: string ='';
+  importId: string = '';
   info: any = {};
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -74,7 +74,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isLoadingResults = false;
         },
       );
@@ -114,7 +114,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
@@ -142,7 +142,7 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

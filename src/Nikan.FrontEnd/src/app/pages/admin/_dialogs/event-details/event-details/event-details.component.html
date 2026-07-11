@@ -2,15 +2,14 @@
   <div class="d-flex align-items-center justify-content-center">
     <mat-spinner diameter="50" color="default"></mat-spinner>
   </div>
-}
-@else {
+} @else {
   <div class="event-details">
     <div class="d-flex align-items-center justify-content-between">
       <div>
         <strong>شماره رویداد: </strong><span> {{ event.id }}</span>
       </div>
       <div>
-        <i class="fa fa-calendar-day mr-2"></i><span> {{ event.createDate | luxonFormat}}</span>
+        <i class="fa fa-calendar-day mr-2"></i><span> {{ event.createDate | luxonFormat }}</span>
       </div>
     </div>
     <mat-list>

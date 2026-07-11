@@ -10,8 +10,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class StoreDetailsComponent extends AppBase implements OnInit {
-  id: string ='';
-    loading?: boolean;
+  id: string = '';
+  loading?: boolean;
   info: any;
   user?: AuthUser | null;
 
@@ -38,7 +38,7 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );

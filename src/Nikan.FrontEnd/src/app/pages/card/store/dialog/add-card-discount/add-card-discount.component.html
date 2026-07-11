@@ -20,14 +20,14 @@
   @if (!loadingData) {
     <form [formGroup]="frm">
       <div class="row">
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label> عنوان تخفیف </mat-label>
           <input type="text" matInput formControlName="discountTitle" maxlength="40" />
           @if (frm.get('discountTitle')?.hasError('required')) {
             <mat-error> عنوان تخفیف را وارد نمایید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label>تاریخ شروع تخفیف</mat-label>
           <input matInput [matDatepicker]="sdpicker" formControlName="startDate" />
           <mat-datepicker-toggle matSuffix [for]="sdpicker"></mat-datepicker-toggle>
@@ -39,7 +39,7 @@
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label>تاریخ پایان تخفیف</mat-label>
           <input matInput [matDatepicker]="edpicker" formControlName="endDate" />
           <mat-datepicker-toggle matSuffix [for]="edpicker"></mat-datepicker-toggle>
@@ -51,7 +51,7 @@
             <mat-error> فرمت تاریخ صحیح نیست </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label> توضیحات تخفیف </mat-label>
           <input type="text" matInput formControlName="description" maxlength="200" />
           @if (frm.get('description')?.hasError('required')) {
@@ -60,7 +60,7 @@
         </mat-form-field>
       </div>
       <div class="row">
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label>درصد تخفیف</mat-label>
           <input
             matInput
@@ -73,7 +73,7 @@
             <mat-error> درصد تخفیف را وارد کنید. </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label>درصد تخفیف ارسال پستی</mat-label>
           <input
             matInput
@@ -99,9 +99,9 @@
         </mat-checkbox>
       </p>
       <div class="row">
-        <mat-form-field  class="col-sm-12">
+        <mat-form-field class="col-sm-12">
           <mat-label>گروههای تخفیف</mat-label>
-           <!--<mat-chip-listbox #skillChipList>
+          <!--<mat-chip-listbox #skillChipList>
             @for (item of selectedGroups; track $index) {
               <mat-chip
                 [selectable]="true"
@@ -112,8 +112,8 @@
                 <mat-icon matChipRemove>cancel</mat-icon>
               </mat-chip>
             } -->
-            <!-- TODO:chips -->
-            <!-- <input
+          <!-- TODO:chips -->
+          <!-- <input
               matInput
               formControlName="groups"
               [matAutocomplete]="autoSkills"
@@ -135,7 +135,9 @@
               </mat-option>
             }
           </mat-autocomplete>-->
-          @if (frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')) {
+          @if (
+            frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')
+          ) {
             <mat-error> گروههای تخفیف را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingGroups"></mat-spinner>

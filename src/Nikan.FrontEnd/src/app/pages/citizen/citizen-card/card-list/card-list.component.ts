@@ -41,7 +41,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
         const cards: RegisterServiceModel[] = response.data ? response.data : [];
         this.cards = cards;
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -56,7 +56,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
         const cards: RegisterServiceModel[] = response.data ? response.data : [];
         this.availableCards = cards;
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -75,7 +75,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
           });
         } else this.toastrService.error(response.messages);
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

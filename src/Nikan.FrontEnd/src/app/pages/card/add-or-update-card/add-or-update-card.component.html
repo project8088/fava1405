@@ -66,7 +66,8 @@
               <mat-error>درصد مالیات هزینه پستی را وارد کنید.</mat-error>
             }
             @if (
-              storeForm.get('vatForPost')?.hasError('max') || storeForm.get('vatForPost')?.hasError('min')
+              storeForm.get('vatForPost')?.hasError('max') ||
+              storeForm.get('vatForPost')?.hasError('min')
             ) {
               <mat-error>بین 0 تا 100</mat-error>
             }
@@ -76,8 +77,7 @@
           <mat-checkbox color="default" formControlName="cardIsActive">فعال/غیرفعال</mat-checkbox>
         </p>
         <p>توضیحات خرید کارت را در این قسمت وارد نمایید</p>
-            <html-editor  formControlName="buyCardDescription"></html-editor>
-
+        <html-editor formControlName="buyCardDescription"></html-editor>
       </form>
     }
   </mat-card-content>
@@ -87,8 +87,7 @@
         <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
           @if (isSaving) {
             <span>منتظر بمانید...</span>
-          }
-          @else {
+          } @else {
             <span>ذخیره</span>
           }
           <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

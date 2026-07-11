@@ -10,10 +10,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUserPermissionsComponent extends AppBase implements OnInit {
-  groupId: string ='';
+  groupId: string = '';
   data: any[] = [];
   isLoadingResults: boolean = true;
-  isSaving=false;
+  isSaving = false;
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
@@ -41,7 +41,7 @@ export class AdminUserPermissionsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isLoadingResults = false;
         },
       );
@@ -70,7 +70,7 @@ export class AdminUserPermissionsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

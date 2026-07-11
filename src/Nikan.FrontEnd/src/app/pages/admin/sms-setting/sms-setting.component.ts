@@ -11,8 +11,8 @@ import { AppBase } from '@app/app.base';
 })
 export class SmsSettingComponent extends AppBase implements OnInit {
   settingForm: FormGroup;
-  isSaving=false;
-    loading?: boolean;
+  isSaving = false;
+  loading?: boolean;
 
   constructor() {
     super();
@@ -41,7 +41,7 @@ export class SmsSettingComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
@@ -51,7 +51,7 @@ export class SmsSettingComponent extends AppBase implements OnInit {
     if (this.settingForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.settingForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -66,7 +66,7 @@ export class SmsSettingComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

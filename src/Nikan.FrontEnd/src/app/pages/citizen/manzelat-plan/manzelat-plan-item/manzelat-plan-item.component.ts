@@ -14,7 +14,7 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
   isSaving: boolean = false;
   userId?: string;
   theForm: FormGroup;
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   baseEnums: any = {};
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
@@ -136,7 +136,7 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -161,13 +161,13 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
           this.baseEnums.typ_SpecialDiseases = response.typ_SpecialDiseases;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
   }
 
-  getImage(ev:any) {
+  getImage(ev: any) {
     this.imageUrl = ev.uploadUrl;
   }
 }

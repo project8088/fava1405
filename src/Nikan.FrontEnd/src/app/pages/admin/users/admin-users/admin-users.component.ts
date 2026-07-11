@@ -94,7 +94,7 @@ export class AdminUsersComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -121,7 +121,7 @@ export class AdminUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(row:any) {
+  openUpdateUserDialog(row: any) {
     this.matDialog
       .open(AdminUpdateUserDialogComponent, {
         panelClass: 'custom-dialog',
@@ -135,7 +135,7 @@ export class AdminUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  openChangePasswordDialog(row:any) {
+  openChangePasswordDialog(row: any) {
     this.matDialog.open(AdminChangePasswordDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

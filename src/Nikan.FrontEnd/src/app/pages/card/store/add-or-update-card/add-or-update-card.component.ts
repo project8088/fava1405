@@ -10,15 +10,15 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving=false;
+  isSaving = false;
 
-    loading?: boolean;
-  cardTypeId: string ='';
+  loading?: boolean;
+  cardTypeId: string = '';
   cardTypeList: any[] = [];
 
   constructor() {
@@ -55,8 +55,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
     });
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   getStoreInfo() {
     this.loading = true;
@@ -71,14 +70,12 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
           if (response.isSuccess && response.data) {
             response.data.cardTypeId = response.data.cardTypeId.toString();
             this.storeForm.patchValue(response.data);
-
-         
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -88,7 +85,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
     if (this.storeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.storeForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     let form = this.storeForm.value;
@@ -107,7 +104,7 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
@@ -119,6 +116,4 @@ export class OrderAddOrUpdateCardComponent extends AppBase implements OnInit, Af
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
-
-
 }

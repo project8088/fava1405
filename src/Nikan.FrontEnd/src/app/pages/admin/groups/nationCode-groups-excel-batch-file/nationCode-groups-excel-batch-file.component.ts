@@ -18,7 +18,7 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
   extends AppBase
   implements AfterViewInit
 {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'importId',
@@ -67,7 +67,7 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -81,7 +81,7 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.importId + '" را حذف کنید؟',
@@ -103,7 +103,7 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

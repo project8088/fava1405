@@ -14,14 +14,14 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
   isSaving: boolean = false;
   hasFiles: boolean = false;
   userId?: string;
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   baseUrl: string = ServerApis.baseUrl;
   imageUrl: string = '';
   data: any;
   baseInfo: any;
   uploadInfo: any;
   uploadUrl: string = ServerApis.uploadManzalatAttachment;
-  id: string ='';
+  id: string = '';
 
   constructor() {
     super();
@@ -45,7 +45,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
         } else {
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
@@ -65,7 +65,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
           } else {
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -98,7 +98,7 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
     });
   }
 
-  getImage(ev:any) {
+  getImage(ev: any) {
     this.imageUrl = ev.uploadUrl;
   }
 }

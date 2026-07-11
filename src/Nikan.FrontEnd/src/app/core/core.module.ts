@@ -41,7 +41,7 @@ import { ExportToExcelDirective } from './directive/export-to-excel.directive';
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
-    ExportToExcelDirective
+    ExportToExcelDirective,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [
@@ -67,7 +67,7 @@ import { ExportToExcelDirective } from './directive/export-to-excel.directive';
     SimpleJalaliDatepickerComponent,
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
-    ExportToExcelDirective
+    ExportToExcelDirective,
   ],
 })
 export class CoreModule {}

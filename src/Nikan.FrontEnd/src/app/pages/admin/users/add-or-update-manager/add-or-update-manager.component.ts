@@ -12,9 +12,9 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
-  isSaving=false;
+  isUpdate = false;
+  id: string = '';
+  isSaving = false;
   userForm: FormGroup;
   loading: boolean = true;
   imageUrl: string = '';
@@ -90,8 +90,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
     this.getBaseData();
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
   getBaseData() {
     this.loadingData = true;
     forkJoin(
@@ -115,20 +114,19 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.userForm.patchValue(response.data);
 
           this.imageUrl = response.data.imageUrl;
-         
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
           this.router.navigate(['/admin/manager-users']);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
   }
 
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -136,7 +134,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.userForm.value;
 
@@ -184,7 +182,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
@@ -200,6 +198,4 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
       this.userForm.get('descriptionDisease')?.setValue('');
     }
   }
-
- 
 }

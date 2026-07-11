@@ -10,13 +10,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminReportRefundDialogComponent extends AppBase implements OnInit {
-  isSaving=false; 
+  isSaving = false;
   loading: boolean = true;
-  importId: string ='';
+  importId: string = '';
   infoReport: any;
   constructor(
     private matDialogRef: MatDialogRef<AdminReportRefundDialogComponent>,
-    @Inject(MAT_DIALOG_DATA)   _data: any, 
+    @Inject(MAT_DIALOG_DATA) _data: any,
   ) {
     super();
     if (_data) {
@@ -43,7 +43,7 @@ export class AdminReportRefundDialogComponent extends AppBase implements OnInit 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );

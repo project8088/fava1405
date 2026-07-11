@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyCitizenExcelBatchFileListComponent extends AppBase implements AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'exportFileName',
@@ -64,7 +64,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -78,7 +78,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.id + '" را حذف کنید؟',
@@ -100,7 +100,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

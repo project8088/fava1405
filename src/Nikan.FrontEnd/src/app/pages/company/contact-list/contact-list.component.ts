@@ -80,7 +80,7 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -95,7 +95,7 @@ export class CompanyContactUsListComponent extends AppBase implements AfterViewI
     this.getList();
   }
 
-  viewMessage(row:any) {
+  viewMessage(row: any) {
     this.matDialog.open(ViewMessageDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

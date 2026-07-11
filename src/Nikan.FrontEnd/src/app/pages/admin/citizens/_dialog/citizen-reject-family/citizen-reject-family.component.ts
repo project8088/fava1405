@@ -17,10 +17,10 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
     sendSms: new FormControl(false),
   });
 
-  isSaving=false;
+  isSaving = false;
   citizen: any;
 
-  rejectCitizenPictureList: any[]=[];
+  rejectCitizenPictureList: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -55,7 +55,7 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {},
+        (error: any) => {},
       );
   }
 }

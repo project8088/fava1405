@@ -21,6 +21,6 @@ import { WebUserHelpServiceDetailsComponent } from './help-service/help-service.
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
-  ]
+  ],
 })
 export class WebUserModule {}

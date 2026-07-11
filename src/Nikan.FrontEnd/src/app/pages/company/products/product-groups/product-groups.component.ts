@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyProductGroupsListComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = ['row', 'name', 'parent', 'createdBy', 'isActive', 'operation'];
 
   data: any[] = [];
@@ -56,7 +56,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -70,7 +70,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.name + '" را حذف کنید؟',
@@ -92,7 +92,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
@@ -100,7 +100,7 @@ export class CompanyProductGroupsListComponent extends AppBase implements OnInit
     });
   }
 
-  openProductGroupDialog(row:any) {
+  openProductGroupDialog(row: any) {
     this.matDialog
       .open(CompanyAddUpdateProductGroupDialogComponent, {
         panelClass: 'custom-dialog',

@@ -84,7 +84,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -99,7 +99,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
     this.getList();
   }
 
-  openCitizenEditMobileNumber(userCode:string) {
+  openCitizenEditMobileNumber(userCode: string) {
     this.matDialog
       .open(AdminUpdateCitizenMobileNumberDialogComponent, {
         panelClass: 'custom-dialog',
@@ -116,7 +116,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
       });
   }
 
-  openChangePasswordDialog(row:any) {
+  openChangePasswordDialog(row: any) {
     this.matDialog.open(AdminChangePasswordDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -127,7 +127,7 @@ export class AdminCitizensComponent extends AppBase implements AfterViewInit {
     });
   }
 
-  openUpdateCitizenSabtStateDialog(userCode:string) {
+  openUpdateCitizenSabtStateDialog(userCode: string) {
     this.matDialog
       .open(AdminUpdateCitizenSabtStateDialogComponent, {
         panelClass: 'custom-dialog',

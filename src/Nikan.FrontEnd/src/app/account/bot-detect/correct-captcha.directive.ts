@@ -17,7 +17,7 @@ import { CaptchaService } from './captcha.service';
 })
 export class CorrectCaptchaDirective implements Validator {
   // cached captcha input control.
-  control: AbstractControl|null=null;
+  control: AbstractControl | null = null;
 
   constructor(private captchaService: CaptchaService) {}
 

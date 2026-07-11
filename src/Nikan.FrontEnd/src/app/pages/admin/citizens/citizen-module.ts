@@ -81,7 +81,7 @@ import { AdminGroupQueueCitizensListComponent } from './group-queue-citizens-lis
     AdminUpdateCitizenIdentityInfoComponent,
     AdminCitizenRejectFamilyComponent,
     AdminCitizenManzelatReviewComponent,
-    AdminGroupQueueCitizensListComponent
+    AdminGroupQueueCitizensListComponent,
   ],
   imports: [
     CommonModule,

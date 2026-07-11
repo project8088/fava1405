@@ -12,13 +12,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyChangePasswordDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   changePasswordForm: FormGroup;
   userId?: string;
 
   loading: boolean = true;
 
-  companyId: string ='';
+  companyId: string = '';
 
   constructor(
     private matDialogRef: MatDialogRef<CompanyChangePasswordDialogComponent>,
@@ -67,7 +67,7 @@ export class CompanyChangePasswordDialogComponent extends AppBase implements OnI
     if (this.changePasswordForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.changePasswordForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.changePasswordForm.value;
@@ -91,7 +91,7 @@ export class CompanyChangePasswordDialogComponent extends AppBase implements OnI
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

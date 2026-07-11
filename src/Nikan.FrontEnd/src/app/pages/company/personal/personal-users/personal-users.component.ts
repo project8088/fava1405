@@ -72,7 +72,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -113,7 +113,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -128,7 +128,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     this.getList();
   }
 
-  removePersonal(row:any) {
+  removePersonal(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.firstName + ' ' + row.lastName + '" اطمینان دارید؟',
@@ -150,7 +150,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             row.loading = false;
           },
         );

@@ -72,7 +72,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -82,7 +82,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  checkIsDead(item:any) {
+  checkIsDead(item: any) {
     item.loading = true;
     this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
       (response) => {
@@ -95,13 +95,13 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         item.loading = false;
       },
     );
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

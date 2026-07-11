@@ -87,7 +87,7 @@ export class CardUsersComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -114,7 +114,7 @@ export class CardUsersComponent extends AppBase implements OnInit {
       });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.displayName + '" را حذف کنید؟',
@@ -136,7 +136,7 @@ export class CardUsersComponent extends AppBase implements OnInit {
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

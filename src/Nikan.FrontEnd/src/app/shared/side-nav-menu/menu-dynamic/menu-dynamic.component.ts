@@ -9,7 +9,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MenuDynamicComponent extends AppBase implements OnInit, OnDestroy {
-  @Input('menu') menuItems: SideNavMenuItem[]=[];
+  @Input('menu') menuItems: SideNavMenuItem[] = [];
 
   constructor() {
     super();

@@ -9,7 +9,7 @@ export const OWL_OPTIONS: OwlOptions = {
   smartSpeed: 1000,
   autoplayTimeout: 8000,
   autoWidth: true,
-  navText: [ '&#8250;','&#8249'],
+  navText: ['&#8250;', '&#8249'],
   responsive: {
     0: {
       items: 1,

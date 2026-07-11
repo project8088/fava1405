@@ -17,12 +17,12 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
   cardForm: FormGroup;
 
   confirmForm: FormGroup;
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   codeSent: boolean = false;
 
   timerCounter: number = 120;
   lastTimerCounter: number = 120;
-  timerCounterString='';
+  timerCounterString = '';
   resendTimerInterval: any;
   editMode: boolean = false;
   formIsShowing: boolean = false;
@@ -60,7 +60,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           email: data.data.email,
         });
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
@@ -86,7 +86,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -107,7 +107,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -132,7 +132,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
    * convert 300s to 5:00
    * @param {any} given_seconds
    */
-  convertSecondstoTime(given_seconds:number) {
+  convertSecondstoTime(given_seconds: number) {
     var dateObj = new Date(given_seconds * 1000);
     var hours = dateObj.getUTCHours();
     var minutes = dateObj.getUTCMinutes();

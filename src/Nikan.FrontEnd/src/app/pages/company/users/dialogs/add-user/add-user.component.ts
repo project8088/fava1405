@@ -12,10 +12,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   userForm: FormGroup;
   loading: boolean = true;
-  companyId: string ='';
+  companyId: string = '';
   constructor(
     private matDialogRef: MatDialogRef<CompanyAddUserDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -59,7 +59,7 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.userForm.value;
 
@@ -85,7 +85,7 @@ export class CompanyAddUserDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

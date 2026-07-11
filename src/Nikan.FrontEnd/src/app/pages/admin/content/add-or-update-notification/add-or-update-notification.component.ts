@@ -13,13 +13,13 @@ export class AdminAddOrUpdateNotificationComponent
   extends AppBase
   implements OnInit, AfterViewInit
 {
-  isUpdate=false;
-  notificationId: string ='';
+  isUpdate = false;
+  notificationId: string = '';
   notyForm: FormGroup;
 
-  isSaving=false;
+  isSaving = false;
   imageUrl: string = '';
-    loading?: boolean;
+  loading?: boolean;
   baseUrl = ServerApis.baseUrl;
 
   constructor() {
@@ -50,9 +50,7 @@ export class AdminAddOrUpdateNotificationComponent
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-   
-  }
+  ngAfterViewInit() {}
 
   getNotificationInfo() {
     this.loading = true;
@@ -79,13 +77,12 @@ export class AdminAddOrUpdateNotificationComponent
                 : '',
             });
             this.imageUrl = response.data.imageUrl;
-          
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -99,9 +96,7 @@ export class AdminAddOrUpdateNotificationComponent
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
- 
-
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -109,9 +104,9 @@ export class AdminAddOrUpdateNotificationComponent
     if (this.notyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.notyForm.markAllAsTouched();
-      return ;
+      return;
     }
-    
+
     let form = this.notyForm.value;
     let params: any = {
       id: this.notificationId ? +this.notificationId : '',
@@ -137,7 +132,7 @@ export class AdminAddOrUpdateNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

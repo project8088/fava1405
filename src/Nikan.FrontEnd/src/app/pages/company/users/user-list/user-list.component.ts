@@ -81,7 +81,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -109,7 +109,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(row:any) {
+  openUpdateUserDialog(row: any) {
     this.matDialog
       .open(CompanyUpdateUserDialogComponent, {
         panelClass: 'custom-dialog',
@@ -124,7 +124,7 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
       });
   }
 
-  openChangePasswordDialog(row:any) {
+  openChangePasswordDialog(row: any) {
     this.matDialog.open(CompanyChangePasswordDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

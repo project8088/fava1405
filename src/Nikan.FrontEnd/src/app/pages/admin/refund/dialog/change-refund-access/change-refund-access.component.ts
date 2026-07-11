@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminChangeRefundAccessDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
   loading: boolean = true;
   info: any;
@@ -42,7 +42,7 @@ export class AdminChangeRefundAccessDialogComponent extends AppBase implements O
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -66,7 +66,7 @@ export class AdminChangeRefundAccessDialogComponent extends AppBase implements O
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },

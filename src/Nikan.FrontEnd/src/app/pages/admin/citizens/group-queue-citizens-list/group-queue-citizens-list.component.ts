@@ -24,7 +24,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
     'addByUser',
     'operation',
   ];
-  groupId: string ='';
+  groupId: string = '';
   searchForm: FormGroup;
 
   data: any[] = [];
@@ -55,7 +55,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
     this.getList();
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.nationCode + '" را حذف کنید؟',
@@ -77,7 +77,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
@@ -119,7 +119,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

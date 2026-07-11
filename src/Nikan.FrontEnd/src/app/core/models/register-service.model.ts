@@ -10,6 +10,3 @@ export interface RegisterServiceModel {
   terms: string;
   cardType: string;
 }
-
-
-

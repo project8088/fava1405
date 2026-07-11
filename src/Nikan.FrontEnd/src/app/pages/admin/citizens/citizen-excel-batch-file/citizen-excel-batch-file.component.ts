@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenExcelBatchFileListComponent extends AppBase implements AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'importId',
@@ -65,7 +65,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -79,7 +79,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.importId + '" را حذف کنید؟',
@@ -103,7 +103,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
             },
           );
@@ -118,7 +118,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
     });
   }
 
-  confirm(item:any) {
+  confirm(item: any) {
     Swal.fire({
       title: 'آیا برای تائید ثبت نام دسته ایی دارید؟',
       text: ' تایید دسته ایی ثبت نام ',
@@ -146,7 +146,7 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               item.loading = false;
             },
           );

@@ -3,7 +3,7 @@
 
   <form [formGroup]="registerForm">
     <div class="row">
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>عنوان شرکت (فارسی)</mat-label>
         <input
           matInput
@@ -19,7 +19,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>عنوان شرکت (لاتین)</mat-label>
         <input matInput formControlName="englishName" autocomplete="doNotAutoComplete" />
         @if (registerForm.get('englishName')?.hasError('required')) {
@@ -33,7 +33,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label> نام نماینده شرکت</mat-label>
         <input
           matInput
@@ -52,7 +52,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>سال تاسیس </mat-label>
         <input
           matInput
@@ -73,7 +73,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره موبایل</mat-label>
         <input matInput formControlName="mobileNumber" maxlength="11" numbersOnly />
         @if (registerForm.get('mobileNumber')?.hasError('required')) {
@@ -84,14 +84,14 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کد اقتصادی شرکت</mat-label>
         <input matInput formControlName="txtTinNo" maxlength="20" numbersOnly />
         @if (registerForm.get('txtTinNo')?.hasError('required')) {
           <mat-error> کد اقتصادی شرکت را وارد کنید. </mat-error>
         }
       </mat-form-field>
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>شماره ثبت شرکت</mat-label>
         <input matInput formControlName="txtRegNO" maxlength="20" numbersOnly />
         @if (registerForm.get('txtRegNO')?.hasError('required')) {
@@ -100,7 +100,7 @@
       </mat-form-field>
     </div>
     <div class="row">
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>نام کاربری</mat-label>
         <input matInput type="text" formControlName="userName" autocomplete="doNotAutoComplete" />
         @if (registerForm.get('userName')?.hasError('required')) {
@@ -111,7 +111,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>کلمه عبور</mat-label>
         <input matInput type="password" formControlName="password" autocomplete="new-password" />
         @if (registerForm.get('password')?.hasError('required')) {
@@ -124,7 +124,7 @@
         }
       </mat-form-field>
 
-      <mat-form-field  class="col-sm-6 col-md-4">
+      <mat-form-field class="col-sm-6 col-md-4">
         <mat-label>تکرار کلمه عبور</mat-label>
         <input matInput type="password" formControlName="confirmPassword" autocomplete="off" />
         @if (registerForm.get('confirmPassword')?.hasError('required')) {
@@ -147,7 +147,7 @@
     <!-- <mat-checkbox formControlName="approveTermsCondition" color="default">قوانین و شرایط سایت را می پذیرم</mat-checkbox> -->
 
     <div class="my-2 d-flex align-items-center justify-content-between captcha-container">
-      <mat-form-field >
+      <mat-form-field>
         <mat-label> عبارت تصویر روبرو</mat-label>
         <input matInput formControlName="captchaCode" autocomplete="no-autocomplete" />
       </mat-form-field>
@@ -156,7 +156,7 @@
 
       @if (loadingCaptcha) {
         <mat-spinner diameter="20" color="default"></mat-spinner>
-      }@else {
+      } @else {
         <button type="button" mat-icon-button color="default" (click)="getCaptcha()">
           <i class="fa fa-sync"></i>
         </button>

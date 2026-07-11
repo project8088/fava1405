@@ -29,13 +29,10 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
       (response) => {
         this.loadingManagers = false;
         this.managerList = response.data ? response.data : [];
-    
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingManagers = false;
       },
     );
   }
-
-
 }

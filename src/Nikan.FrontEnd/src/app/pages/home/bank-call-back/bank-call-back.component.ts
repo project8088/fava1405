@@ -9,8 +9,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class BankCallBackComponent extends AppBase implements OnInit {
-    loading?: boolean;
-  id: string ='';
+  loading?: boolean;
+  id: string = '';
 
   response: any;
 
@@ -40,7 +40,7 @@ export class BankCallBackComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );

@@ -17,10 +17,10 @@ export class AdminCitizenRejectImageDialogComponent extends AppBase implements O
     sendSms: new FormControl(false),
   });
 
-  isSaving=false;
+  isSaving = false;
   citizen: any;
 
-  rejectCitizenPictureList: any[]=[];
+  rejectCitizenPictureList: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,

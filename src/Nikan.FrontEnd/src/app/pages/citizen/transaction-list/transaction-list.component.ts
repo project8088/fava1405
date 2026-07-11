@@ -91,7 +91,7 @@ export class CitizenTransactionListComponent extends AppBase implements AfterVie
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

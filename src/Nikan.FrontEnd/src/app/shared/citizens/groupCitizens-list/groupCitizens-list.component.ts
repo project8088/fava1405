@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AppGroupCitizensListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['row', 'group', 'citizen', 'creationDate', 'addByUser'];
-  userCode: string='';
+  userCode: string = '';
   searchForm: FormGroup;
 
   data: any[] = [];
@@ -72,7 +72,7 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

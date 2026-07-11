@@ -24,12 +24,14 @@
               }
               @if (item.dateOfStart) {
                 <div class="col-sm-6">
-                  <strong>تاریخ شروع تحصیل: </strong><span> {{ item.dateOfStart | luxonFormat}}</span>
+                  <strong>تاریخ شروع تحصیل: </strong
+                  ><span> {{ item.dateOfStart | luxonFormat }}</span>
                 </div>
               }
               @if (item.dateOfEnd) {
                 <div class="col-sm-6">
-                  <strong>تاریخ پایان تحصیل: </strong><span> {{ item.dateOfEnd | luxonFormat}}</span>
+                  <strong>تاریخ پایان تحصیل: </strong
+                  ><span> {{ item.dateOfEnd | luxonFormat }}</span>
                 </div>
               }
               @if (item.university) {

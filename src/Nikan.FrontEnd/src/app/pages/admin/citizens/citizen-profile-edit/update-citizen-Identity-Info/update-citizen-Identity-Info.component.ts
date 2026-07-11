@@ -24,9 +24,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
   userCode: string = '';
   userStatus?: number;
 
-  constructor(
-    private customValidator: CustomFormValidators,
-  ) {
+  constructor(private customValidator: CustomFormValidators) {
     super();
     this.personalForm = this.fb.group({
       gender: [null, [Validators.required]],
@@ -82,7 +80,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -93,7 +91,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     if (this.personalForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.personalForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.personalForm.value;
 
@@ -120,7 +118,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -131,7 +129,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -142,8 +140,8 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options:{key:number,text:string}[]){
-    return options.map((el:{key:number,text:string}) => {
+  getListOptions(options: { key: number; text: string }[]) {
+    return options.map((el: { key: number; text: string }) => {
       return { value: String(el.key), text: el.text };
     });
   }

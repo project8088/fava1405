@@ -21,7 +21,7 @@ export class AdminImportCitizenExcelDialogComponent extends AppBase implements O
 
   ngOnInit() {}
 
-  attachmentId(ev:any) {
+  attachmentId(ev: any) {
     if (ev.importId) this.router.navigate(['/admin/citizen-register-file-details//' + ev.importId]);
     this.matDialogRef.close();
   }

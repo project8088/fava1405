@@ -10,7 +10,7 @@ import { AppBase } from '@app/app.base';
 })
 export class CardDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
-    loading?: boolean;
+  loading?: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
@@ -34,7 +34,7 @@ export class CardDashboardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );

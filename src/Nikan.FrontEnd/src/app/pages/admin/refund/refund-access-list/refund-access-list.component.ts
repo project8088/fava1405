@@ -94,7 +94,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -109,7 +109,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
     this.getList();
   }
 
-  openCitizenProfile(userCode:string) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -120,7 +120,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
     });
   }
 
-  openChangeRefundAccessDialog(item:any) {
+  openChangeRefundAccessDialog(item: any) {
     this.matDialog
       .open(AdminChangeRefundAccessDialogComponent, {
         panelClass: 'custom-dialog',
@@ -135,7 +135,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       });
   }
 
-  getCardNumbers(item:any) {
+  getCardNumbers(item: any) {
     item.loading = true;
     this.dataService.get(ServerApis.getCardsNumber, { importId: item.id }).subscribe(
       (response) => {
@@ -148,13 +148,13 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         item.loading = false;
       },
     );
   }
 
-  openReportDialog(item:any) {
+  openReportDialog(item: any) {
     this.matDialog
       .open(AdminReportRefundDialogComponent, {
         panelClass: 'custom-dialog',
@@ -169,7 +169,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.letterNumber + '" را حذف کنید؟',
@@ -191,7 +191,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

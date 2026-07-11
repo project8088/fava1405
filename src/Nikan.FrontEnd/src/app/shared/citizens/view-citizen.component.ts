@@ -45,7 +45,7 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );

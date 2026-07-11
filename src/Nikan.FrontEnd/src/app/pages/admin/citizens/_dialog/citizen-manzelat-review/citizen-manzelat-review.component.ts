@@ -17,10 +17,10 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
     sendSms: new FormControl(false),
   });
 
-  isSaving=false;
+  isSaving = false;
   data: any;
 
-  rejectCitizenPictureList: any[]=[];
+  rejectCitizenPictureList: any[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -59,7 +59,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {},
+          (error: any) => {},
         );
     } else {
       this.dataService
@@ -80,7 +80,7 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {},
+          (error: any) => {},
         );
     }
   }

@@ -10,8 +10,8 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class PersonalBiographyComponent extends AppBase implements OnInit {
-  id: string ='';
-    loading?: boolean;
+  id: string = '';
+  loading?: boolean;
   userInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
@@ -50,7 +50,7 @@ export class PersonalBiographyComponent extends AppBase implements OnInit {
           this.router.navigate(['/home']);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );

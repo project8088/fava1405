@@ -38,7 +38,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportId: string ='';
+  exportId: string = '';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 
@@ -97,7 +97,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -128,7 +128,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -139,7 +139,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -150,7 +150,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
     });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -178,7 +178,7 @@ export class CardCitizenCardExportDetailsComponent extends AppBase implements Af
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
             },
           );

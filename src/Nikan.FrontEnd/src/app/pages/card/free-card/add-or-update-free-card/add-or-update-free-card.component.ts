@@ -10,15 +10,15 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
   baseEnums: any = {};
 
-  isSaving=false;
+  isSaving = false;
 
-    loading?: boolean;
+  loading?: boolean;
 
   cardTypeList: any[] = [];
 
@@ -66,7 +66,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           debugger;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
       },
     );
@@ -81,7 +81,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -116,7 +116,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -126,7 +126,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
     if (this.storeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.storeForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     let form = this.storeForm.value;
@@ -145,7 +145,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

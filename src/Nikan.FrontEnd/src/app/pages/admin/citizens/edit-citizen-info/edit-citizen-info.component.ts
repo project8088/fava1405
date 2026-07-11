@@ -198,7 +198,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -283,7 +283,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.baseEnums.jobGroup = response.jobGroup;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -298,7 +298,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -357,7 +357,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -410,7 +410,7 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

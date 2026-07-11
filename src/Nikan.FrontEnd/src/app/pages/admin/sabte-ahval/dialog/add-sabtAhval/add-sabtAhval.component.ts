@@ -12,13 +12,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
   baseEnums: any = {};
-  isUpdate=false;
+  isUpdate = false;
   calcChargeTypeList: any = ([] = []);
   loadingData?: boolean;
-  id: string ='';
+  id: string = '';
   constructor(
     private matDialogRef: MatDialogRef<AdminAddSabtAhvalDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -42,7 +42,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -52,7 +52,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -75,7 +75,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

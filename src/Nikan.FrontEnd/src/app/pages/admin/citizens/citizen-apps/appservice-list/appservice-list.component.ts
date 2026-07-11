@@ -77,7 +77,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -91,7 +91,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
     this.getList();
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.serviceName + '" را حذف کنید؟',
@@ -113,7 +113,7 @@ export class AdminAppserviceListComponent extends AppBase implements AfterViewIn
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

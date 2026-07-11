@@ -76,7 +76,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -91,7 +91,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
     this.getList();
   }
 
-  openProductByParent(item:any) {
+  openProductByParent(item: any) {
     if (this.paginator) {
       this.paginator.firstPage();
     }

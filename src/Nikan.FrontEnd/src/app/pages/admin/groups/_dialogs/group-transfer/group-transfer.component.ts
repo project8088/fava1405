@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminGroupTransferDialogComponent extends AppBase implements OnInit {
   sourceGroupId: number;
-  isSaving=false;
+  isSaving = false;
   groupList: any[] = [];
   form: FormGroup;
 
@@ -40,7 +40,7 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
       (response) => {
         this.groupList = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -50,7 +50,7 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.form.value;
@@ -74,7 +74,7 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

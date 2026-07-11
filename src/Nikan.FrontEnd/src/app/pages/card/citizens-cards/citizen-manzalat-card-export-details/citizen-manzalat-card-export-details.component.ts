@@ -46,7 +46,7 @@ export class CardManzalatCitizenCardExportDetailsComponent
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportId: string ='';
+  exportId: string = '';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
 
@@ -108,7 +108,7 @@ export class CardManzalatCitizenCardExportDetailsComponent
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -123,7 +123,7 @@ export class CardManzalatCitizenCardExportDetailsComponent
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -134,7 +134,7 @@ export class CardManzalatCitizenCardExportDetailsComponent
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

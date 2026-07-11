@@ -23,7 +23,7 @@ export class LoginComponent extends AppBase implements OnInit {
   constructor() {
     super();
     this.route.queryParams.subscribe((p) => {
-       this.returnUrl = p['returnUrl']??'';
+      this.returnUrl = p['returnUrl'] ?? '';
     });
 
     this.authService.currentUser.subscribe((u) => {
@@ -58,12 +58,12 @@ export class LoginComponent extends AppBase implements OnInit {
     if (!this.loginForm.get('username')?.value || !this.loginForm.get('password')?.value) {
       this.loginForm.markAllAsTouched();
       this.toastrService.warning('نام کاربری و کلمه عبور خود را وارد کنید.');
-        return ;
+      return;
     }
 
     if (!this.loginForm.get('userEnteredCaptchaCode')?.value) {
       this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-        return ;
+      return;
     }
 
     var param: any = this.loginForm.value;
@@ -92,7 +92,7 @@ export class LoginComponent extends AppBase implements OnInit {
           this.captchaComponent.reloadImage();
         }
       },
-      (error:any) => {
+      (error: any) => {
         if (error.status == '401') this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
         else this.toastrService.error('خطا در ارتباط با سرور!');
         this.loading = false;

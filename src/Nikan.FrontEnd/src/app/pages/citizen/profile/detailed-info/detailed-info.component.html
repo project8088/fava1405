@@ -6,7 +6,7 @@
         <mat-tab-group>
           <mat-tab label="اطلاعات تکمیلی">
             <div class="mt-3">
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>کد پرسنلی</mat-label>
                 <input matInput formControlName="personnelCode" maxlength="10" numbersOnly />
                 @if (form.get('personnelCode')?.hasError('required')) {
@@ -18,7 +18,7 @@
               </mat-form-field>
               <!-------------------------------identity--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>شماره شناسنامه</mat-label>
                 <input
                   matInput
@@ -30,14 +30,14 @@
                   <mat-error> شماره شناسنامه را وارد کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label> سریال شناسنامه</mat-label>
                 <input matInput formControlName="shSerial" autocomplete="doNotAutoComplete" />
                 @if (form.get('shSerial')?.hasError('required')) {
                   <mat-error> سریال شناسنامه خود را وارد کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>تاریخ صدور شناسنامه</mat-label>
                 <input matInput [matDatepicker]="dpicker_shDate" formControlName="shDate" />
                 <mat-datepicker-toggle matSuffix [for]="dpicker_shDate"></mat-datepicker-toggle>
@@ -64,17 +64,17 @@
                 [parentId]="form.get('shStateId')?.value?.key"
                 [required]="true"
               ></input-auto-complete>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>بخش</mat-label>
                 <input matInput formControlName="shCitySection" />
               </mat-form-field>
-              <mat-form-field  class="col-12">
+              <mat-form-field class="col-12">
                 <mat-label>ملاحظات شناسنامه، در صورتی وجود ملاحظات وارد نمایید</mat-label>
                 <input matInput formControlName="shNote" />
               </mat-form-field>
               <!--------------------------------birth--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>استان محل تولد</mat-label>
                 <mat-select formControlName="birthStateId">
                   @for (item of states; track $index) {
@@ -91,7 +91,7 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>شهر محل تولد</mat-label>
                 <mat-select formControlName="cityOfBirthId">
                   @for (item of birthCities | async; track $index) {
@@ -108,15 +108,15 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>بخش /روستا/دهستان محل تولد</mat-label>
                 <input matInput formControlName="villageOfBirth" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>بخش محل تولد</mat-label>
                 <input matInput formControlName="birthCitySection" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>دین</mat-label>
                 <mat-select formControlName="religion">
                   @for (item of baseEnums.religion; track $index) {
@@ -128,7 +128,7 @@
               </mat-form-field>
               <!-------------------------------mariage--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>تاریخ ازدواج</mat-label>
                 <input
                   matInput
@@ -149,7 +149,7 @@
               </mat-form-field>
               <!-------------------------------Soldier--------------------------------->
               <mat-divider [inset]="true" class="mb-2"></mat-divider>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>وضعیت خدمت سربازی</mat-label>
                 <mat-select formControlName="soldierState">
                   @for (item of baseEnums.soldierState; track $index) {
@@ -162,7 +162,7 @@
                   <mat-error> وضعیت خدمت سربازی خود را مشخص کنید. </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>تاریخ پایان خدمت</mat-label>
                 <input
                   matInput
@@ -189,7 +189,7 @@
           <!----------------------------------------------------------------->
           <mat-tab label="اطلاعات شغلی و تحصیلی">
             <div class="mt-3">
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>وضعیت تحصیل</mat-label>
                 <mat-select formControlName="educationStatues">
                   @for (item of baseEnums.educationStatues; track $index) {
@@ -206,19 +206,19 @@
                   </mat-hint>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>پایه تحصیلی</mat-label>
                 <input matInput formControlName="baseEducation" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>معدل </mat-label>
                 <input matInput formControlName="academicGrade" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label> نام دانشگاه محل تحصیل /دریافت مدرک</mat-label>
                 <input matInput formControlName="universityName" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>تاریخ پایان تحصیل</mat-label>
                 <input
                   matInput
@@ -237,15 +237,15 @@
                   <mat-error> فرمت تاریخ صحیح نیست </mat-error>
                 }
               </mat-form-field>
-              <mat-form-field  class="col-12">
+              <mat-form-field class="col-12">
                 <mat-label> توضیحات اضافه</mat-label>
                 <input matInput formControlName="academicNote" />
               </mat-form-field>
-              <mat-form-field  class="col-12">
+              <mat-form-field class="col-12">
                 <mat-label> شماره بیمه</mat-label>
                 <input matInput formControlName="insuranceNumber" />
               </mat-form-field>
-              <mat-form-field  class="col-sm-6 col-md-4">
+              <mat-form-field class="col-sm-6 col-md-4">
                 <mat-label>تاریخ استخدام</mat-label>
                 <input
                   matInput

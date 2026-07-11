@@ -66,13 +66,13 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
   }
 
-  completeUpload(ev:any) {
+  completeUpload(ev: any) {
     this.data.caption = '';
     this.ngOnInit();
   }
@@ -85,7 +85,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
     });
   }
 
-  deleteAttachment(row:any) {
+  deleteAttachment(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف فایل اطمینان دارید؟',
@@ -107,7 +107,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             row.loading = false;
           },
         );

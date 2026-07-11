@@ -148,8 +148,7 @@
         <button mat-raised-button color="default" (click)="save()" [disabled]="isSaving">
           @if (isSaving) {
             <span>منتظر بمانید...</span>
-          }
-          @else {
+          } @else {
             <span>ذخیره</span>
           }
           <mat-spinner [hidden]="!isSaving" diameter="20" color="default"></mat-spinner>

@@ -12,12 +12,12 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUserAccessIpComponent extends AppBase implements OnInit {
-    loading?: boolean;
+  loading?: boolean;
   userAppAccessList: any[] = [];
   appList: any[] = [];
   userId: string = '';
   form: FormGroup;
-  isSaving=false;
+  isSaving = false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();
@@ -50,7 +50,7 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -60,7 +60,7 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
     var form = this.form.value;
     this.isSaving = true;
@@ -81,13 +81,13 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -112,7 +112,7 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
             },
           );

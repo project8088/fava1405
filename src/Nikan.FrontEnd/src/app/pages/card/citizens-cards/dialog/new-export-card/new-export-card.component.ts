@@ -18,16 +18,16 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardNewExportCardDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   frm: FormGroup;
-  isUpdate=false;
+  isUpdate = false;
 
-  loadingServices: boolean=false;
-  filteredServices=new Observable<any[]>();
+  loadingServices: boolean = false;
+  filteredServices = new Observable<any[]>();
   selectedGroups: any[] = [];
 
   loadingData?: boolean;
-  id: string ='';
+  id: string = '';
   constructor(
     private matDialogRef: MatDialogRef<CardNewExportCardDialogComponent>,
     @Inject(MAT_DIALOG_DATA) private _data: any,
@@ -60,7 +60,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
 
     this.isSaving = true;
@@ -93,7 +93,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
@@ -127,7 +127,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('خطا در ارتباط با سرور!');
             this.loadingServices = false;
           },
@@ -156,7 +156,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
    */
   selectedAutoChip(
     list: any[],
-    formControl:string,
+    formControl: string,
     input: any,
     event: MatAutocompleteSelectedEvent,
     Trigger: MatAutocompleteTrigger,

@@ -4,7 +4,7 @@ import { AdminAddUserGrousDialogComponent } from '../dialogs/add-usergroups/add-
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
-import { AppBase } from '@app/app.base'; 
+import { AppBase } from '@app/app.base';
 import { userGroupsDto } from '@core/models/users/userGroups';
 
 @Component({
@@ -43,7 +43,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -62,7 +62,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
       });
   }
 
-  openUpdateUserDialog(item:any) {
+  openUpdateUserDialog(item: any) {
     this.matDialog
       .open(AdminAddUserGrousDialogComponent, {
         panelClass: 'custom-dialog',
@@ -76,7 +76,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
       });
   }
 
-  deleteUserGroup(row:any) {
+  deleteUserGroup(row: any) {
     Swal.fire({
       title: 'حذف گروه کاربری',
       text: 'آیا برای حذف گروه اطمینان دارید؟',
@@ -102,7 +102,7 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });

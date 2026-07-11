@@ -82,7 +82,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -97,7 +97,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
     this.getList();
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.groupName + '" را حذف کنید؟',
@@ -119,7 +119,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
@@ -127,7 +127,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
     });
   }
 
-  manageAttachment(item:any) {
+  manageAttachment(item: any) {
     this.matDialog
       .open(AdminImportNationCodeGroupsExcelDialogComponent, {
         data: {
@@ -142,7 +142,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
       });
   }
 
-  transfergroups(item:any) {
+  transfergroups(item: any) {
     this.matDialog
       .open(AdminGroupTransferDialogComponent, {
         data: {
@@ -157,7 +157,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
       });
   }
 
-  reviewgroups(item:any) {
+  reviewgroups(item: any) {
     item.loading = true;
     this.dataService.get(ServerApis.reviewGroups, { id: item.id }).subscribe(
       (response) => {
@@ -170,7 +170,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         item.loading = false;
       },
     );

@@ -39,7 +39,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities:any[]=[];
+  isfahanCities: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -68,7 +68,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -102,7 +102,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -117,7 +117,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -128,7 +128,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

@@ -74,7 +74,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -84,7 +84,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  sendcitizenForAuthentication(citizenId:string) {
+  sendcitizenForAuthentication(citizenId: string) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
       .subscribe(
@@ -96,7 +96,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {},
+        (error: any) => {},
       );
   }
 
@@ -107,7 +107,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
   }
 
   sendSms() {
-    var selectedIds:any[] = [];
+    var selectedIds: any[] = [];
     for (var i = 0; i < this.data.length; i++) {
       if (this.data[i].selected && this.data[i].sabtStatus == 0)
         selectedIds.push(this.data[i].citizenId);
@@ -154,7 +154,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               this.sendingSms = false;
               this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
             },
@@ -163,7 +163,7 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
     });
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

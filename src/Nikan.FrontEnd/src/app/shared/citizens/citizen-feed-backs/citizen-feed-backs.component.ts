@@ -58,7 +58,7 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingfeedback = false;
       },
     );
@@ -89,7 +89,7 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSavingfeedback = false;
         },
       );

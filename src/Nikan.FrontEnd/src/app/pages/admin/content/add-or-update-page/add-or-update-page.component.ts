@@ -13,16 +13,16 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   form: FormGroup;
 
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  isSaving=false;
-    loading?: boolean;
-  siteName: string='';
+  isSaving = false;
+  loading?: boolean;
+  siteName: string = '';
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
@@ -51,9 +51,7 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
     this.siteName = window.location.origin;
   }
 
-  ngAfterViewInit() {
-  
-  }
+  ngAfterViewInit() {}
 
   getWebPage() {
     this.loading = true;
@@ -77,13 +75,12 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
             });
 
             this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
-          
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -100,7 +97,7 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
     }
   }
 
-  remove(item:any): void {
+  remove(item: any): void {
     const index = this.seoTags.indexOf(item);
 
     if (index >= 0) {
@@ -115,8 +112,6 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
   compareFn(c1: any, c2: any): boolean {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
-
- 
 
   save() {
     if (this.form.invalid) {
@@ -146,7 +141,7 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

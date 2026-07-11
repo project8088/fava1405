@@ -12,10 +12,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AppCitizenManzalatRegistrationComponent extends AppBase implements AfterViewInit {
-  userCode: string='';
+  userCode: string = '';
   baseUrl: string = ServerApis.baseUrl;
 
-    loading?: boolean;
+  loading?: boolean;
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -49,7 +49,7 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
             this.data = response.data ? response.data.manzaltForms : {};
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );

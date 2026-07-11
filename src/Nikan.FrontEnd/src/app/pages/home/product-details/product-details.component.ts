@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class MainProductDetailsComponent extends AppBase implements OnInit {
-  id: string ='';
+  id: string = '';
   user?: AuthUser | null;
   loadingData?: boolean;
   product: any;
@@ -21,7 +21,7 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
   baseUrl: string = ServerApis.baseUrl;
   waitForRedirectToBank: boolean = false;
   RefId: string = '';
-  loadingPay: boolean= false;
+  loadingPay: boolean = false;
 
   constructor(
     private customValidator: CustomFormValidators,
@@ -60,7 +60,7 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -87,7 +87,7 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingPay = false;
         },
       );

@@ -37,10 +37,10 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  queueId: string ='';
+  queueId: string = '';
   baseEnums: any = {};
   loadingData: boolean = true;
-  courseId: string ='';
+  courseId: string = '';
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
@@ -82,7 +82,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -118,7 +118,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -133,7 +133,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -144,7 +144,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -154,7 +154,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
       maxWidth: '1800px',
     });
   }
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.cardNumber + '" را حذف کنید؟',
@@ -176,7 +176,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );

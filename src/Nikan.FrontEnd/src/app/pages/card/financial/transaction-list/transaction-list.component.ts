@@ -93,7 +93,7 @@ export class CardTransactionListComponent extends AppBase implements AfterViewIn
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

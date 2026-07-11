@@ -13,17 +13,17 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  newsId: string ='';
+  isUpdate = false;
+  newsId: string = '';
   newsForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  isSaving=false;
+  isSaving = false;
   imageUrl: string = '';
-    loading?: boolean;
+  loading?: boolean;
 
   groupList: any[] = [];
   constructor() {
@@ -61,9 +61,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
     });
   }
 
-  ngAfterViewInit() {
- 
-  }
+  ngAfterViewInit() {}
 
   getNewsInfo() {
     this.loading = true;
@@ -93,13 +91,12 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
             this.imageUrl = response.data.imageUrl;
 
             this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
-           
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -116,7 +113,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
     }
   }
 
-  remove(item:any): void {
+  remove(item: any): void {
     const index = this.seoTags.indexOf(item);
 
     if (index >= 0) {
@@ -132,9 +129,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  
-
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -142,7 +137,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
     if (this.newsForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.newsForm.markAllAsTouched();
-      return ;
+      return;
     }
     let form = this.newsForm.value;
     let params: NewsDto = {
@@ -172,7 +167,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

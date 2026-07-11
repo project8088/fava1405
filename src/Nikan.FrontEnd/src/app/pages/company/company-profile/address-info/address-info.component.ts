@@ -11,11 +11,11 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyAddressInfoComponent extends AppBase implements OnInit {
-    loading?: boolean;
+  loading?: boolean;
   provinceList: any[] = [];
   companyId: string = '';
   addressForm: FormGroup;
-  isSaving=false;
+  isSaving = false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();
@@ -63,7 +63,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
       (response) => {
         this.provinceList = response.data ? response.data : [];
       },
-      (error:any) => {},
+      (error: any) => {},
     );
   }
 
@@ -105,7 +105,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -115,7 +115,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
     if (this.addressForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.addressForm.markAllAsTouched();
-        return ;
+      return;
     }
     var form = this.addressForm.value;
     this.isSaving = true;
@@ -150,7 +150,7 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

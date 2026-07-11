@@ -37,7 +37,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
   isLoadingResults: boolean = true;
 
   baseEnums: any = {};
-  isfahanCities:any[]=[];
+  isfahanCities: any[] = [];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -88,7 +88,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -103,7 +103,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -114,7 +114,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
     });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -142,7 +142,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
             },
           );
@@ -150,7 +150,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
     });
   }
 
-  closeCourses(row:any) {
+  closeCourses(row: any) {
     Swal.fire({
       title: 'بستن دوره',
       text: 'آیا برای بستن دوره اطمینان دارید؟',
@@ -178,7 +178,7 @@ export class CardCitizenCardDistributeCourseListComponent extends AppBase implem
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
             },
           );

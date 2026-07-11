@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUnitListComponent extends AppBase implements AfterViewInit {
-  organizationId: string ='';
+  organizationId: string = '';
   displayedColumns: string[] = ['row', 'name', 'description', 'isActive', 'operation'];
 
   data: any[] = [];
@@ -28,8 +28,8 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean=false;
-  isSaving=false;
+  showAddOrUpdatePanel: boolean = false;
+  isSaving = false;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -72,7 +72,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -90,7 +90,7 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     this.frm.get('organizationId')?.setValue(this.organizationId);
@@ -110,13 +110,13 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.name + '" اطمینان دارید؟',
@@ -142,13 +142,13 @@ export class AdminUnitListComponent extends AppBase implements AfterViewInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  update(row:any) {
+  update(row: any) {
     this.frm.setValue({
       id: row.id,
       name: row.name,

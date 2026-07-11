@@ -24,9 +24,9 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   baseEnums: any = {};
   loadingEnums: boolean = true;
 
-  loadingState: boolean=false;
+  loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
-  filteredState=new Observable<any[]>();
+  filteredState = new Observable<any[]>();
   states: any[] = [];
   provinceList: any[] = [];
 
@@ -103,7 +103,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
       (response) => {
         this.provinceList = response.data ? response.data : [];
       },
-      (error:any) => {},
+      (error: any) => {},
     );
   }
 
@@ -122,7 +122,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.baseEnums.religion = response.religion;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -137,7 +137,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -207,7 +207,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
@@ -218,7 +218,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.form.value;
 
@@ -238,7 +238,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -249,7 +249,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
    * for bind object in autocomplete
    * @param item
    */
-  displayFn(item:any): string {
+  displayFn(item: any): string {
     return item && item.text ? item.text : '';
   }
   /**
@@ -260,9 +260,9 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
     return c1 && c2 ? c1.key === c2.key : c1 === c2;
   }
 
-  getListOptions(options:{key:number,text:string}[]){
+  getListOptions(options: { key: number; text: string }[]) {
     debugger;
-    return options.map((el:{key:number,text:string}) => {
+    return options.map((el: { key: number; text: string }) => {
       return { value: +el.key, text: el.text };
     });
   }

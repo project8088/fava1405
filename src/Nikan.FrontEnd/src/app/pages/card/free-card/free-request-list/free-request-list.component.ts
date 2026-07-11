@@ -16,7 +16,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CardFreeRequestCardListComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'discountTitle',
@@ -31,7 +31,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
   ];
 
   baseUrl: string = ServerApis.baseUrl;
-  cardTypeId: string ='';
+  cardTypeId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -86,7 +86,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   pageEvent(event: PageEvent) {
@@ -100,7 +100,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
     this.getList();
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.discountTitle + '" را حذف کنید؟',
@@ -122,7 +122,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
@@ -130,7 +130,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
     });
   }
 
-  acceptedRequest(item:any) {
+  acceptedRequest(item: any) {
     Swal.fire({
       title: 'آیا برای تائید و صدور کارت رایگان اطمینان دارید؟',
       text: 'در صورت تائید صدور، دیگر امکان ویرایش و حذف وجود نخواهد داشت. و کارت ها برای شهروندان این درخواست صادر  خواهد شد. ',
@@ -158,7 +158,7 @@ export class CardFreeRequestCardListComponent extends AppBase implements OnInit,
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               item.loading = false;
             },
           );

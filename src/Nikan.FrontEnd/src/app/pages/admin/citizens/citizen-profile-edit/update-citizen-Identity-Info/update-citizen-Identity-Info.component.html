@@ -20,7 +20,7 @@
     @if (!loading) {
       <form [formGroup]="personalForm" class="p-4">
         <div class="row">
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>کد ملی (نام کاربری)</mat-label>
             <input
               matInput
@@ -36,7 +36,7 @@
               <mat-error> کد ملی وارد شده صحیح نیست </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>جنسیت</mat-label>
             <mat-select formControlName="gender">
               <mat-option [value]="true">آقا هستم</mat-option>
@@ -46,7 +46,7 @@
               <mat-error> جنسیت را مشخص کنید. </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>نام</mat-label>
             <input matInput formControlName="firstName" autocomplete="doNotAutoComplete" />
             @if (personalForm.get('firstName')?.hasError('required')) {
@@ -56,7 +56,7 @@
               <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label> نام خانوادگی</mat-label>
             <input matInput formControlName="lastName" autocomplete="doNotAutoComplete" />
             @if (personalForm.get('lastName')?.hasError('required')) {
@@ -66,7 +66,7 @@
               <mat-error> فقط از حروف فارسی استفاده کنید. </mat-error>
             }
           </mat-form-field>
-          <mat-form-field  class="col-sm-6 col-md-4">
+          <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>نام پدر </mat-label>
             <input matInput formControlName="fatherName" autocomplete="doNotAutoComplete" />
             @if (personalForm.get('fatherName')?.hasError('required')) {

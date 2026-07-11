@@ -20,35 +20,35 @@
         <div class="alert alert-info">
           <strong> تنظیمات کاربری پیامک </strong>
         </div>
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> نام کاربری </mat-label>
           <input type="text" matInput formControlName="smsUserName" />
           @if (settingForm.get('smsUserName')?.hasError('required')) {
             <mat-error> نام کاربری را وارد کنید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> کلمه عبور </mat-label>
           <input type="text" matInput formControlName="smsPassword" />
           @if (settingForm.get('smsPassword')?.hasError('required')) {
             <mat-error> کلمه عبور را وارد کنید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> نام دامنه </mat-label>
           <input type="text" matInput formControlName="domainName" />
           @if (settingForm.get('domainName')?.hasError('required')) {
             <mat-error> نام دامنه را وارد کنید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> شماره ارسال کننده </mat-label>
           <input type="text" matInput formControlName="senderNumber" numbersOnly />
           @if (settingForm.get('senderNumber')?.hasError('required')) {
             <mat-error> شماره ارسال کننده را وارد کنید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-sm-6 col-md-6">
+        <mat-form-field class="col-sm-6 col-md-6">
           <mat-label> توکن </mat-label>
           <input type="text" matInput formControlName="smsToken" />
           @if (settingForm.get('smsToken')?.hasError('required')) {

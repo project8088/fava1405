@@ -80,7 +80,7 @@ export class AdminContactUsListComponent extends AppBase implements AfterViewIni
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

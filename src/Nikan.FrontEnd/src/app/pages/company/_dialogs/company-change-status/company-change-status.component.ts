@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminCompanyChangeStatusDialogComponent extends AppBase implements OnInit {
   companyInfo: any = {};
-  isSaving=false;
+  isSaving = false;
 
   form: FormGroup;
   userCompanyAccountStatus: any[] = [];
@@ -51,7 +51,7 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.form.value;
@@ -74,7 +74,7 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

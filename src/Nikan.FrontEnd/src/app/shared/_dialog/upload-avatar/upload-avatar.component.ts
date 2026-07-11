@@ -96,7 +96,7 @@ export class UploadUserAvatarDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.saving = false;
       },
     );

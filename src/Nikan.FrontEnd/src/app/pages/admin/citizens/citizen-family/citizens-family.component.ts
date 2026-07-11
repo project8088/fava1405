@@ -90,7 +90,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
   getGroups() {
@@ -98,7 +98,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -114,7 +114,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
     this.getList();
   }
 
-  openfamilyCitizenProfile(row:any) {
+  openfamilyCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {

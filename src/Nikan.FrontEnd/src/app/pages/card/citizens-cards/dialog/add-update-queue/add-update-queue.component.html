@@ -20,14 +20,14 @@
   @if (!loadingData) {
     <form [formGroup]="frm">
       <div class="row">
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> عنوان صف </mat-label>
           <input type="text" matInput formControlName="name" maxlength="40" />
           @if (frm.get('name')?.hasError('required')) {
             <mat-error> عنوان صف را وارد نمایید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-md-3">
+        <mat-form-field class="col-md-3">
           <mat-label>اولویت صف</mat-label>
           <input
             matInput
@@ -54,7 +54,7 @@
             <mat-error> رنگ پیش فرض را وارد نمایید </mat-error>
           }
         </mat-form-field>
-        <mat-form-field  class="col-sm-6 col-md-4">
+        <mat-form-field class="col-sm-6 col-md-4">
           <mat-label> توضیحات </mat-label>
           <input type="text" matInput formControlName="description" maxlength="400" />
           @if (frm.get('description')?.hasError('required')) {
@@ -66,7 +66,7 @@
         <mat-checkbox formControlName="isLock"> قفل است ؟ </mat-checkbox>
       </p>
       <div class="row">
-        <mat-form-field  class="col-sm-12">
+        <mat-form-field class="col-sm-12">
           <mat-label>گروههای شهروندی</mat-label>
           <!-- todo:chips -->
 
@@ -103,7 +103,9 @@
               </mat-option>
             }
           </mat-autocomplete> -->
-          @if (frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')) {
+          @if (
+            frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')
+          ) {
             <mat-error> گروههای شهروندی را از لیست انتخاب کنید </mat-error>
           }
           <mat-spinner matSuffix diameter="20" [hidden]="!loadingServices"></mat-spinner>

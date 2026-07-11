@@ -13,14 +13,14 @@ export class AdminAddOrUpdateCitizensNotificationComponent
   extends AppBase
   implements OnInit, AfterViewInit
 {
-  notificationId: string ='';
+  notificationId: string = '';
   notyForm: FormGroup;
 
   notification: any = {};
   companyList: any[] = [];
   baseEnums: any = {};
-  isSaving=false;
-    loading?: boolean;
+  isSaving = false;
+  loading?: boolean;
 
   constructor() {
     super();
@@ -50,7 +50,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -72,7 +72,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -94,7 +94,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -112,7 +112,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
     if (this.notyForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.notyForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     let form = this.notyForm.value;
@@ -137,13 +137,13 @@ export class AdminAddOrUpdateCitizensNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
 
-  delete(item:any) {
+  delete(item: any) {
     item.loading = true;
     this.dataService.get(ServerApis.removeCitizensNotifactions, { id: item.id }).subscribe(
       (response) => {
@@ -156,7 +156,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         item.loading = false;
       },
     );

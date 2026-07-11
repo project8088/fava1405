@@ -8,7 +8,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class WebUserDashboardComponent extends AppBase implements OnInit {
-    loading?: boolean;
+  loading?: boolean;
   activeWaterMeter: any;
   errorMessage: string = '';
   loadingActiveWaterMeter: boolean = false;
@@ -34,7 +34,7 @@ export class WebUserDashboardComponent extends AppBase implements OnInit {
           this.errorMessage = msg;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );

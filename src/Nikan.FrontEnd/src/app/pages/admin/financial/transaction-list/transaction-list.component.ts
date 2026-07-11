@@ -93,7 +93,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -108,7 +108,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
     this.getList();
   }
 
-  checkTransaction(row:any) {
+  checkTransaction(row: any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -134,13 +134,13 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  createCardForCitizen(row:any) {
+  createCardForCitizen(row: any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای بازبینی تراکنش بابت صدور کارت مطمئن هستید؟',
@@ -166,7 +166,7 @@ export class AdminTransactionListComponent extends AppBase implements AfterViewI
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });

@@ -82,7 +82,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
     //if (!this.forgotForm.get('userEnteredCaptchaCode')?.value) {
     //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
     //    return ;
-   // }
+    // }
 
     if (this.forgotForm.get('mobile')?.invalid) {
       this.toastrService.warning('شماره موبایل خود را وارد کنید.');
@@ -114,7 +114,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.sendingSMS = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -189,7 +189,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.checkingCode = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -235,7 +235,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

@@ -86,7 +86,7 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -101,7 +101,7 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
     this.getList();
   }
 
-  manageAttachment(item:any) {
+  manageAttachment(item: any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

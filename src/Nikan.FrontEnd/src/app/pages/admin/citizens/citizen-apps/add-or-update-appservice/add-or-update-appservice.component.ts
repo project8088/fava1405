@@ -10,15 +10,14 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
+  isUpdate = false;
   serviceId?: string;
   storeForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving=false;
+  isSaving = false;
   imageUrl: string = '';
-    loading?: boolean;
-
+  loading?: boolean;
 
   constructor() {
     super();
@@ -59,8 +58,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
 
   getStoreInfo() {
     this.loading = true;
@@ -75,13 +73,12 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
           if (response.isSuccess && response.data) {
             this.storeForm.patchValue(response.data);
             this.imageUrl = response.data.imageUrl;
-       
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -95,7 +92,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -103,7 +100,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
     if (this.storeForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.storeForm.markAllAsTouched();
-      return ;
+      return;
     }
 
     let form = this.storeForm.value;
@@ -121,7 +118,7 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

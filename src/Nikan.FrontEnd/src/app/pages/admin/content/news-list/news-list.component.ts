@@ -92,7 +92,7 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -107,7 +107,7 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
     this.getList();
   }
 
-  manageAttachment(item:any) {
+  manageAttachment(item: any) {
     this.matDialog
       .open(ManageAttachmentDialogComponent, {
         data: {

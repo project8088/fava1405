@@ -54,7 +54,7 @@ export class WebUserComponent extends AppBase implements OnInit, OnDestroy {
           url: '/webuser/change-password',
         });
       },
-      (error:any) => {
+      (error: any) => {
         alert('error');
       },
     );

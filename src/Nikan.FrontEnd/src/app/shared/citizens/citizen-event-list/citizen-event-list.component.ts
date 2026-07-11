@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 export class AppCitizenEventListComponent extends AppBase implements OnInit {
   search: string = '';
   paging: any = {};
-  userCode: string='';
+  userCode: string = '';
   events: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -39,7 +39,7 @@ export class AppCitizenEventListComponent extends AppBase implements OnInit {
           this.events = response.data ? response.data : [];
         }
       },
-      (error:any) => {},
+      (error: any) => {},
     );
   }
 }

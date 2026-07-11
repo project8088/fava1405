@@ -42,7 +42,7 @@
                     </p>
                   </blockquote>
                   <div [innerHtml]="news?.body | safeHtml"></div>
-                  <app-attachments [guid]="news?.attachmentFileGroup??''"></app-attachments>
+                  <app-attachments [guid]="news?.attachmentFileGroup ?? ''"></app-attachments>
                 </div>
                 <div class="tm-blog-tags">
                   <span class="tm-blog-tags-title">

@@ -42,7 +42,7 @@ import { ManageAttachmentDialogComponent } from './_dialogs/manage-attachment/ma
     AdminTreeMenuComponent,
     AdminSlideShowListComponent,
     AdminAddOrUpdateSlideShowDialogComponent,
-    ManageAttachmentDialogComponent
+    ManageAttachmentDialogComponent,
   ],
   imports: [
     CommonModule,

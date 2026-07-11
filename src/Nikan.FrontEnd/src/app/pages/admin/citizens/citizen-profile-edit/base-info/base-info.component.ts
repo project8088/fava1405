@@ -11,11 +11,11 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
-    loading?: boolean;
+  loading?: boolean;
   provinceList: any[] = [];
   userCode: string = '';
   form: FormGroup;
-  isSaving=false;
+  isSaving = false;
   baseInfo: any = {};
   loadingEnums: boolean = true;
   baseEnums: any = {};
@@ -64,7 +64,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
           this.baseEnums.jobGroup = response.jobGroup;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -80,7 +80,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
           this.baseEnums.educationGroups = response;
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('خطا در ارتباط با سرور!');
         this.loadingEnums = false;
       },
@@ -119,7 +119,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
@@ -130,7 +130,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
     var form = this.form.value;
     this.isSaving = true;
@@ -164,7 +164,7 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

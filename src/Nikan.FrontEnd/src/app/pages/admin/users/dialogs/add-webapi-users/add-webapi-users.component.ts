@@ -12,7 +12,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit {
-  isSaving=false;
+  isSaving = false;
   userForm: FormGroup;
   loading: boolean = true;
   appList: any[] = [];
@@ -20,7 +20,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   periorityList: any[] = [];
-  loadingUnit: boolean=false;
+  loadingUnit: boolean = false;
   loadingData: boolean = true;
   constructor(
     private matDialogRef: MatDialogRef<AdminAddWebApiUserDialogComponent>,
@@ -69,7 +69,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
     if (this.userForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.userForm.markAllAsTouched();
-        return ;
+      return;
     }
     var formValue = this.userForm.value;
     this.isSaving = true;
@@ -94,7 +94,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );
@@ -113,7 +113,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -135,7 +135,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );
@@ -145,7 +145,7 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );

@@ -14,13 +14,13 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
-  isSaving=false;
+  isSaving = false;
   loadingData: boolean = true;
   periorityList: any[] = [];
 
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
-  loadingUnit: boolean=false;
+  loadingUnit: boolean = false;
   user?: AuthUser | null;
   constructor(private customValidator: CustomFormValidators) {
     super();
@@ -52,7 +52,7 @@ export class TicketComponent extends AppBase implements OnInit {
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -71,7 +71,7 @@ export class TicketComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -94,7 +94,7 @@ export class TicketComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );
@@ -104,7 +104,7 @@ export class TicketComponent extends AppBase implements OnInit {
     if (this.ticketForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.ticketForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     let formData = this.ticketForm.value;
@@ -137,7 +137,7 @@ export class TicketComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

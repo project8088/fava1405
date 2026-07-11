@@ -13,9 +13,9 @@ import { AppBase } from '@app/app.base';
 })
 export class TicketCommentsComponent extends AppBase implements OnInit {
   frm: FormGroup;
-  isSaving=false;
+  isSaving = false;
   id: string = '';
-    loading?: boolean;
+  loading?: boolean;
   list: any[] = [];
   user?: AuthUser | null;
   constructor() {
@@ -48,13 +48,13 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.commentText + '" اطمینان دارید؟',
@@ -80,7 +80,7 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
@@ -90,7 +90,7 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     var form = this.frm.value;
@@ -113,7 +113,7 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );

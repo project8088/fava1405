@@ -11,11 +11,10 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   companyId: string = '';
   mainForm: FormGroup;
-  isSaving=false;
-
+  isSaving = false;
 
   constructor(private customValidators: CustomFormValidators) {
     super();
@@ -40,8 +39,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     });
   }
 
-  ngAfterViewInit(): void {
-  }
+  ngAfterViewInit(): void {}
 
   ngOnInit(): void {}
 
@@ -71,7 +69,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -81,7 +79,7 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
     if (this.mainForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.mainForm.markAllAsTouched();
-        return ;
+      return;
     }
     var form = this.mainForm.value;
     this.isSaving = true;
@@ -104,10 +102,9 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
-
 }

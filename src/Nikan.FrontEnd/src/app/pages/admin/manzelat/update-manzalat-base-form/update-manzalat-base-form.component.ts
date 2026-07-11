@@ -12,16 +12,16 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   form: FormGroup;
 
   readonly separatorKeysCodes: number[] = [ENTER];
   seoTags: any[] = [];
 
-  isSaving=false;
-    loading?: boolean;
-  siteName: string='';
+  isSaving = false;
+  loading?: boolean;
+  siteName: string = '';
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {
@@ -69,19 +69,17 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
   }
 
-  
-
   save() {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-      return ;
+      return;
     }
     let form = this.form.value;
     let params: any = {
@@ -107,7 +105,7 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );

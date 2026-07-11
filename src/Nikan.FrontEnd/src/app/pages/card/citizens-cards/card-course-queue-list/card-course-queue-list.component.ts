@@ -39,7 +39,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  courseId: string ='';
+  courseId: string = '';
   baseEnums: any = {};
   baseUrl = ServerApis.baseUrl;
   printUrl: string = ServerApis.prinQueueForPost;
@@ -96,7 +96,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -111,7 +111,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -122,7 +122,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
     });
   }
 
-  openAddCardQueueDialog(item:any) {
+  openAddCardQueueDialog(item: any) {
     this.matDialog
       .open(CardAddOrUpadateQueueDialogComponent, {
         panelClass: 'custom-dialog',
@@ -140,7 +140,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
       });
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف اطمینان دارید؟',
@@ -168,7 +168,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {
+            (error: any) => {
               row.loading = false;
             },
           );
@@ -176,7 +176,7 @@ export class CardCardCourseQueuelistComponent extends AppBase implements AfterVi
     });
   }
 
-  cardDeliveryQueueOperator(item:any) {
+  cardDeliveryQueueOperator(item: any) {
     this.matDialog
       .open(CardDeliveryQueueOperatorDialogComponent, {
         panelClass: 'custom-dialog',

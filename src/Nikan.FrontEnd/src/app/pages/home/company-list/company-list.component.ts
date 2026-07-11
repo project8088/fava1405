@@ -78,7 +78,7 @@ export class HomeCompaniesListComponent extends AppBase implements AfterViewInit
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 

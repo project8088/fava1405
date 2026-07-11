@@ -37,7 +37,7 @@ export class AdminRefundAccessDetailsListComponent
     'refundState',
     'operation',
   ];
-  importId: string ='';
+  importId: string = '';
 
   data: any[] = [];
   dataSource = new MatTableDataSource();
@@ -62,9 +62,8 @@ export class AdminRefundAccessDetailsListComponent
       refundState: [null],
     });
     this.route.params.subscribe((p) => {
-        this.importId = p['importId'];
-        this.getList();
-      
+      this.importId = p['importId'];
+      this.getList();
     });
   }
 
@@ -104,7 +103,7 @@ export class AdminRefundAccessDetailsListComponent
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -119,7 +118,7 @@ export class AdminRefundAccessDetailsListComponent
     this.getList();
   }
 
-  openCitizenProfile(userCode:string) {
+  openCitizenProfile(userCode: string) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -144,7 +143,7 @@ export class AdminRefundAccessDetailsListComponent
         if (result) this.getList();
       });
   }
-  openChangeRefundDialog(item:any) {
+  openChangeRefundDialog(item: any) {
     this.matDialog
       .open(AdminChangeRefundDialogComponent, {
         panelClass: 'custom-dialog',
@@ -172,7 +171,7 @@ export class AdminRefundAccessDetailsListComponent
         if (result) this.getList();
       });
   }
-  getCardNumber(row:any) {
+  getCardNumber(row: any) {
     Swal.fire({
       title: 'تائید',
       text: 'آیا برای استعلام اطمینان دارید؟',
@@ -198,13 +197,13 @@ export class AdminRefundAccessDetailsListComponent
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  openRefundInfoDialog(item:any) {
+  openRefundInfoDialog(item: any) {
     this.matDialog
       .open(CitizenRefundInfoDialogComponent, {
         panelClass: 'custom-dialog',

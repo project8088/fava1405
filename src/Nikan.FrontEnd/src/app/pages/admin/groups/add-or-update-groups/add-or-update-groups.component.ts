@@ -10,14 +10,14 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  id: string ='';
+  isUpdate = false;
+  id: string = '';
   groupForm: FormGroup;
   baseUrl = ServerApis.baseUrl;
 
-  isSaving=false;
+  isSaving = false;
   imageUrl: string = '';
-    loading?: boolean;
+  loading?: boolean;
   parentGroups: any[] = [];
 
   constructor() {
@@ -75,7 +75,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -86,7 +86,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
       (response) => {
         this.parentGroups = response.data;
       },
-      (error:any) => {
+      (error: any) => {
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
       },
     );
@@ -100,7 +100,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
     return c1 && c2 ? +c1.key === c2.key : c1 === c2;
   }
 
-  getAttachmentId(ev:{uploadUrl:string}) {
+  getAttachmentId(ev: { uploadUrl: string }) {
     this.imageUrl = ev.uploadUrl;
   }
 
@@ -108,7 +108,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
     if (this.groupForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.groupForm.markAllAsTouched();
-        return ;
+      return;
     }
 
     let form = this.groupForm.value;
@@ -126,10 +126,9 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
 }
-

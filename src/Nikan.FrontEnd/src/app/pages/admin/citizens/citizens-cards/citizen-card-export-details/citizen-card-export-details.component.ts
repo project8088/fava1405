@@ -39,7 +39,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
   dataSource = new MatTableDataSource();
   listCount: number = 0;
   isLoadingResults: boolean = true;
-  exportId: string ='';
+  exportId: string = '';
   baseEnums: any = {};
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -97,7 +97,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
         }),
       )
       .subscribe((data) => {
-       this.dataSource.data = data;
+        this.dataSource.data = data;
       });
   }
 
@@ -112,7 +112,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     this.getList();
   }
 
-  openCitizenProfile(row:any) {
+  openCitizenProfile(row: any) {
     this.matDialog.open(CitizenProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -123,7 +123,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     });
   }
 
-  openCardProfile(row:any) {
+  openCardProfile(row: any) {
     this.matDialog.open(CardProfileDialogComponent, {
       panelClass: 'custom-dialog',
       data: {
@@ -134,7 +134,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
     });
   }
 
-  openBackCard(item:any) {
+  openBackCard(item: any) {
     this.matDialog
       .open(AdminBackCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -149,7 +149,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
       });
   }
 
-  openDeliveredCard(item:any) {
+  openDeliveredCard(item: any) {
     this.matDialog
       .open(AdminDeliveredCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',
@@ -164,7 +164,7 @@ export class AdminCitizenCardExportDetailsComponent extends AppBase implements A
       });
   }
 
-  openCancellationCard(item:any) {
+  openCancellationCard(item: any) {
     this.matDialog
       .open(AdminCancellationCitizenCardDialogComponent, {
         panelClass: 'custom-dialog',

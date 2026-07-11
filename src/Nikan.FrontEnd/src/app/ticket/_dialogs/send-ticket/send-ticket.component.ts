@@ -13,13 +13,13 @@ import { AppBase } from '@app/app.base';
 })
 export class SendTicketDialogComponent extends AppBase implements OnInit {
   ticketForm: FormGroup;
-  isSaving=false;
+  isSaving = false;
   loadingData: boolean = true;
   loadingSubject: boolean = false;
   organizationList: any = ([] = []);
   unitList: any = ([] = []);
   periorityList: any[] = [];
-  loadingUnit: boolean=false;
+  loadingUnit: boolean = false;
 
   user?: AuthUser | null;
   constructor(
@@ -49,7 +49,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
           this.matDialogRef.close();
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.matDialogRef.close();
       },
     );
@@ -68,7 +68,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -91,7 +91,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );
@@ -101,7 +101,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
     if (this.ticketForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.ticketForm.markAllAsTouched();
-        return ;
+      return;
     }
     this.isSaving = true;
     let formData = this.ticketForm.value;
@@ -133,7 +133,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

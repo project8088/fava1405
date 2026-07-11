@@ -14,7 +14,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class CompanyProductListComponent extends AppBase implements OnInit, AfterViewInit {
-    loading?: boolean;
+  loading?: boolean;
   displayedColumns: string[] = [
     'row',
     'imageUrl',
@@ -66,7 +66,7 @@ export class CompanyProductListComponent extends AppBase implements OnInit, Afte
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -80,7 +80,7 @@ export class CompanyProductListComponent extends AppBase implements OnInit, Afte
     this.dataSource.filter = this.searchForm.get('title')?.value;
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا می خواهید "' + row.title + '" را حذف کنید؟',
@@ -102,7 +102,7 @@ export class CompanyProductListComponent extends AppBase implements OnInit, Afte
               this.toastrService.error(msg);
             }
           },
-          (error:any) => {
+          (error: any) => {
             this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
           },
         );
