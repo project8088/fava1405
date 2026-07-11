@@ -16,15 +16,9 @@ import { MaterialModule } from '@core/material/material.module';
 import { MenuDynamicComponent } from './side-nav-menu/menu-dynamic/menu-dynamic.component';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { RouterModule } from '@angular/router';
-import { SendTicketDialogComponent } from './ticket/_dialogs/send-ticket/send-ticket.component';
 import { ShowImageDialogComponent } from './_dialog/show-image/show-image.component';
 import { SideNavMenuComponent } from './side-nav-menu/side-nav-menu.component';
 import { StoreDetailsComponent } from './store-details/store-details.component';
-import { TicketActivityComponent } from './ticket/view-ticket/tabs/ticket-activity/ticket-activity.component';
-import { TicketCommentsComponent } from './ticket/view-ticket/tabs/ticket-comments/ticket-comments.component';
-import { TicketDetailsComponent } from './ticket/view-ticket/ticket-details.component';
-import { TicketListComponent } from './ticket/ticket-list/ticket-list.component';
-import { TicketResponseComponent } from './ticket/view-ticket/tabs/ticket-response/ticket-response.component';
 import { TimerComponent } from './timer/timer.component';
 import { UploadUserAvatarDialogComponent } from './_dialog/upload-avatar/upload-avatar.component';
 import { UploaderComponent } from './uploader/uploader.component';
@@ -55,12 +49,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     SideNavMenuComponent,
     MenuDynamicComponent,
     UploaderComponent,
-    SendTicketDialogComponent,
-    TicketListComponent,
-    TicketDetailsComponent,
-    TicketResponseComponent,
-    TicketActivityComponent,
-    TicketCommentsComponent,
     ViewJobDetailsDialogComponent,
     ViewJobDetailsComponent,
     JobseekerProfileDialogComponent,
@@ -112,12 +100,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     ImageCropperComponent,
     SideNavMenuComponent,
     UploaderComponent,
-    SendTicketDialogComponent,
-    TicketListComponent,
-    TicketDetailsComponent,
-    TicketResponseComponent,
-    TicketActivityComponent,
-    TicketCommentsComponent,
     ViewJobDetailsDialogComponent,
     ViewJobDetailsComponent,
     JobseekerProfileDialogComponent,

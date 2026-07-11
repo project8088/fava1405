@@ -16,8 +16,6 @@ import { CitizenProfileComponent } from './profile/profile.component';
 import { CitizenTransactionListComponent } from './transaction-list/transaction-list.component';
 import { CreditcardComponent } from './profile/creditcard/creditcard.component';
 import { NgModule } from '@angular/core';
-import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
-import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
 import { CitizenRefundStatusComponent } from './refund/citizen-refund-status.component';
 import { CitizenRefundAccessDetailsListComponent } from './refund/citizen-refund-access-details-list/citizen-refund-access-details-list.component';
 import { CitizenRefundFullInfoComponent } from './refund/citizen-refund-info/citizen-refund-info.component';
@@ -74,7 +72,6 @@ const routes: Routes = [
         loadChildren: () =>
           import('./citizen-card/citizen-card.module').then((m) => m.CitizenCardModule),
       },
-      { path: 'tickets', component: TicketListComponent },
 
       { path: 'transaction-list', component: CitizenTransactionListComponent },
       {
@@ -83,7 +80,6 @@ const routes: Routes = [
       },
       { path: 'citizen-refund-info/:refundId', component: CitizenRefundFullInfoComponent },
 
-      { path: 'ticket-details/:id', component: TicketDetailsComponent },
       {
         path: 'change-password',
         component: ChangeCurrentUserPasswordComponent,

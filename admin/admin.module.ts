@@ -13,7 +13,6 @@ import { AdminSabtAhvalCitizensListComponent } from './sabtAhval/get-sabtAhval-c
 import { AdminSabtAhvalListComponent } from './sabtAhval/sabtAhval-list/sabtAhval-list.component';
 import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
-import { AdminTicketSubjectsComponent } from './base-data/ticket-subjects/ticket-subjects.component';
 import { AdminUnitListComponent } from './organization/unit-list/unit-list.component';
 
 
@@ -41,7 +40,6 @@ import { AdminConfigComponent } from './config/config.component';
     AdminSettingComponent,
     SmsSettingComponent,
     AdminContactUsListComponent,
-    AdminTicketSubjectsComponent,
     AdminCardListComponent,
     AdminAddOrUpdateCardComponent,
     AdminSmsListComponent,

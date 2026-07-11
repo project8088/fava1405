@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
-import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
-import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
 import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 import { CardCitizenCardAdvancedSearchComponent } from './citizens-cards/citizen-card-advanced-search/citizen-card-advanced-search.component';
@@ -36,11 +34,9 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: CardDashboardComponent },
-      { path: 'tickets', component: TicketListComponent },
       { path: 'advanced-search-card-citizen', component: CardCitizenCardAdvancedSearchComponent },
       { path: 'transaction-list', component: CardTransactionListComponent },
       { path: 'card-users', component: CardUsersComponent },
-      { path: 'ticket-details/:id', component: TicketDetailsComponent },
       { path: 'card-citizens-pictures', component: CardCitizensPicturesComponent },
       { path: 'export-card-citizen', component: CardCitizenCardExportSearchComponent },
       { path: 'export-details-citizen-card/:id', component: CardCitizenCardExportDetailsComponent },

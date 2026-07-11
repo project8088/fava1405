@@ -23,7 +23,6 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     'operation',
   ];
 
-
   data: any[] = [];
   dataSource = new MatTableDataSource();
   listCount: number = 0;
@@ -34,15 +33,15 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   searchForm: FormGroup;
 
   frm: FormGroup;
-  showAddOrUpdatePanel: boolean;
-  isSaving=false;
-  loadingUnit: boolean=false;
+  showAddOrUpdatePanel: boolean = false;
+  isSaving = false;
+  loadingUnit: boolean = false;
   loadingData?: boolean;
   organizationList: any[] = [];
   unitList: any[] = [];
   constructor() {
     super();
-    this.frm = fb.group({
+    this.frm = this.fb.group({
       id: [null],
       title: [null, [Validators.required]],
       organizationId: [null, [Validators.required]],
@@ -89,7 +88,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -108,7 +107,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loadingData = false;
       },
     );
@@ -131,7 +130,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loadingUnit = false;
         },
       );
@@ -150,7 +149,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     window.scrollTo(0, 0);
   }
 
-  delete(row:any) {
+  delete(row: any) {
     Swal.fire({
       title: 'حذف',
       text: 'آیا برای حذف "' + row.title + '" اطمینان دارید؟',
@@ -176,13 +175,13 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
                 this.toastrService.error(msg);
               }
             },
-            (error:any) => {},
+            (error: any) => {},
           );
       }
     });
   }
 
-  update(row:any) {
+  update(row: any) {
     this.frm.setValue({
       id: row.id,
       title: row.title,
@@ -199,7 +198,7 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     if (this.frm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.frm.markAllAsTouched();
-      return ;
+      return;
     }
     this.isSaving = true;
     var params = this.frm.value;
@@ -218,11 +217,9 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
       },
     );
   }
-
-  
 }

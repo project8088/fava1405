@@ -11,7 +11,6 @@ import { AdminSabtAhvalCitizensListComponent } from './sabtAhval/get-sabtAhval-c
 import { AdminSabtAhvalListComponent } from './sabtAhval/sabtAhval-list/sabtAhval-list.component';
 import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
-import { AdminTicketSubjectsComponent } from './base-data/ticket-subjects/ticket-subjects.component';
 import { AdminUnitListComponent } from './organization/unit-list/unit-list.component';
 
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
@@ -34,7 +33,6 @@ const routes: Routes = [
    
   
 
-      { path: 'ticket-subjects', component: AdminTicketSubjectsComponent },
 
       { path: 'manzalat-form-list', component: AdminManzalatBaseFromListComponent },
       { path: 'update-manzalat-form/:id', component: AdminUpdateManzalatBaseFormComponent },
