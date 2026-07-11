@@ -22,6 +22,10 @@ const routes: Routes = [
     path: 'content',
     loadChildren: () => import('./content/content-module').then((m) => m.ContentModule),
   },
+  {
+    path: 'groups',
+    loadChildren: () => import('./groups/groups-module').then((m) => m.GroupsModule),
+  },
 ];
 
 @NgModule({

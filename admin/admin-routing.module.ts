@@ -1,9 +1,7 @@
 
-import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/add-or-update-groups.component';
 import { AdminComponent } from './admin.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
 import { AdminDashboardComponent } from './dashboard/dashboard.component';
-import { AdminGroupListComponent } from './groups/groups-list/groups-list.component';
 import { AdminOrganizationListComponent } from './organization/organization-list/organization-list.component';
 import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
 import { AdminPayTestComponent } from './pay-test/pay-test.component';
@@ -44,9 +42,7 @@ const routes: Routes = [
       { path: 'organization-unit-groups/:id', component: AdminOrganizationUnitGroupsComponent },
 
       //Group
-      { path: 'group-list', component: AdminGroupListComponent },
-      { path: 'add-update-group/:id', component: AdminAddOrUpdateGroupsComponent },
-
+   
 
       { path: 'contact-us', component: AdminContactUsListComponent },
       { path: 'setting', component: AdminSettingComponent },

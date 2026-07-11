@@ -8,9 +8,9 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AdminImportNationCodeGroupsExcelDialogComponent } from '../../import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 import { AdminGroupTransferDialogComponent } from '../_dialogs/group-transfer/group-transfer.component';
 import { AppBase } from '@app/app.base';
+import { AdminImportNationCodeGroupsExcelDialogComponent } from '../_dialogs/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 
 @Component({
   selector: 'app-groups-list',
