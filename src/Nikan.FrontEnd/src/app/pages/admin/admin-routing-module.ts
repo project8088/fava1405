@@ -14,6 +14,10 @@ const routes: Routes = [
     path: 'refund',
     loadChildren: () => import('./refund/refund-module').then((m) => m.RefundModule),
   },
+  {
+    path: 'financial',
+    loadChildren: () => import('./financial/financial-module').then((m) => m.FinancialModule),
+  },
 ];
 
 @NgModule({

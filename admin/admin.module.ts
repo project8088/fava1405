@@ -7,8 +7,6 @@ import { AdminAddOrUpdateNotificationComponent } from './content/add-or-update-n
 import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './content/slide-show-list/dialog/add-update-slide/add-update-slide.component';
 import { AdminAddSabtAhvalDialogComponent } from './sabtAhval/dialog/add-sabtAhval/add-sabtAhval.component';
-import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-change-status/company-change-status.component';
-import { AdminCompanyContractDialogComponent } from './_dialogs/company-contract/company-contract.component';
 import { AdminComponent } from './admin.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
 import { AdminDashboardComponent } from './dashboard/dashboard.component';
@@ -31,7 +29,6 @@ import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSlideShowListComponent } from './content/slide-show-list/slide-show-list.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { AdminTicketSubjectsComponent } from './base-data/ticket-subjects/ticket-subjects.component';
-import { AdminTransactionListComponent } from './financial/transaction-list/transaction-list.component';
 import { AdminTreeMenuComponent } from './content/menu-management/tree-menu/tree-menu.component';
 import { AdminUnitListComponent } from './organization/unit-list/unit-list.component';
 
@@ -45,7 +42,6 @@ import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or
 import { AdminImportNationCodeGroupsExcelDialogComponent } from './import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
 import { AdminGroupTransferDialogComponent } from './groups/_dialogs/group-transfer/group-transfer.component';
-import { AdminAddOrUpdateCitizensNotificationComponent } from './content/citizens-notification/citizens-notification.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
 import { AdminDashboardCitizenRegisterReportChartComponent } from './dashboard/citizen-register-report-chart/citizen-register-report-chart.component';
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
@@ -80,11 +76,8 @@ import { AdminConfigComponent } from './config/config.component';
     AdminCardListComponent,
     AdminAddOrUpdateCardComponent,
     AdminTreeMenuComponent,
-    AdminCompanyContractDialogComponent,
     AdminSmsListComponent,
-    AdminCompanyChangeStatusDialogComponent,
     AdminPayTestComponent,
-    AdminTransactionListComponent,
     AdminPaySettingComponent,
 
     AdminSlideShowListComponent,
@@ -102,7 +95,6 @@ import { AdminConfigComponent } from './config/config.component';
     AdminImportNationCodeGroupsExcelDialogComponent,
     ManzalatSettingComponent,
     AdminGroupTransferDialogComponent,
-    AdminAddOrUpdateCitizensNotificationComponent,
     AdminOrganizationUnitGroupsComponent,
     AdminDashboardCitizenRegisterReportChartComponent,
     AdminUpdateManzalatBaseFormComponent,

@@ -23,7 +23,6 @@ import { CompanyProductListComponent } from './products/product-list/product-lis
 import { CompanyAddOrUpdateProductComponent } from './products/add-or-update-product/add-or-update-product.component';
 
 import { CompanyTransactionListComponent } from './transaction-list/transaction-list.component';
-import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CompanyCitizenExcelBatchFileListComponent } from './citizen-excel-batch-file/citizen-excel-batch-file.component';
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
 import { AdminRegisterCompanyComponent } from './register-company/register-company.component';
@@ -56,7 +55,6 @@ const routes: Routes = [
       { path: 'addupdate-product/:id', component: CompanyAddOrUpdateProductComponent },
       { path: 'transaction-list', component: CompanyTransactionListComponent },
       { path: 'citizenExcelBatchFile-list', component: CompanyCitizenExcelBatchFileListComponent },
-      { path: 'transaction-details/:id', component: TransactionDetailsComponent },
       {
         path: 'citizen-excel-files-details/:id',
         component: CompanyCitizenExcelBatchFileDetailsComponent,

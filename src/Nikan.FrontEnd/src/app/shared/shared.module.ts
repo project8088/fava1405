@@ -26,7 +26,6 @@ import { TicketDetailsComponent } from './ticket/view-ticket/ticket-details.comp
 import { TicketListComponent } from './ticket/ticket-list/ticket-list.component';
 import { TicketResponseComponent } from './ticket/view-ticket/tabs/ticket-response/ticket-response.component';
 import { TimerComponent } from './timer/timer.component';
-import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
 import { UploadUserAvatarDialogComponent } from './_dialog/upload-avatar/upload-avatar.component';
 import { UploaderComponent } from './uploader/uploader.component';
 import { ViewJobDetailsComponent } from './_dialog/job-details/view-job-details/view-job-details.component';
@@ -74,7 +73,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     AttachmentListComponent,
     UploadUserAvatarDialogComponent,
     StoreDetailsComponent,
-    TransactionDetailsComponent,
     CaptchaComponent,
     ViewCitizenComponent,
     CitizenProfileDialogComponent,
@@ -136,7 +134,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     ViewNotificationDetailsDialogComponent,
     UploadUserAvatarDialogComponent,
     StoreDetailsComponent,
-    TransactionDetailsComponent,
     // MatTableExporterModule,
     AttachmentListComponent,
     CaptchaComponent,

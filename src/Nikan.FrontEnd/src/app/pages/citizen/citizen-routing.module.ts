@@ -18,13 +18,13 @@ import { CreditcardComponent } from './profile/creditcard/creditcard.component';
 import { NgModule } from '@angular/core';
 import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
 import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
-import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CitizenRefundStatusComponent } from './refund/citizen-refund-status.component';
 import { CitizenRefundAccessDetailsListComponent } from './refund/citizen-refund-access-details-list/citizen-refund-access-details-list.component';
 import { CitizenRefundFullInfoComponent } from './refund/citizen-refund-info/citizen-refund-info.component';
 import { CitizenUploadManzalatDocumentsComponent } from './manzelat-plan/upload-manzalat-file/upload-manzalat-file.component';
 import { CitizenManzelatPlanItemComponent } from './manzelat-plan/manzelat-plan-item/manzelat-plan-item.component';
 import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.component';
+import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
 
 const routes: Routes = [
   {
@@ -32,6 +32,10 @@ const routes: Routes = [
     component: CitizenComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      {
+        path: 'citizen-notifications/:id',
+        component: AdminAddOrUpdateCitizensNotificationComponent,
+      },
       { path: 'dashboard', component: CitizenDashboardComponent },
       { path: 'upload-manzalat-form/:id', component: CitizenUploadManzalatDocumentsComponent },
       { path: 'manzelat-plan-item/:id', component: CitizenManzelatPlanItemComponent },
@@ -73,7 +77,6 @@ const routes: Routes = [
       { path: 'tickets', component: TicketListComponent },
 
       { path: 'transaction-list', component: CitizenTransactionListComponent },
-      { path: 'transaction-details/:id', component: TransactionDetailsComponent },
       {
         path: 'refundAccess-details/:importId',
         component: CitizenRefundAccessDetailsListComponent,

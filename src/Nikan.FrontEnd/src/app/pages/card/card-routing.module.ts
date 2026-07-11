@@ -8,7 +8,6 @@ import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 import { CardCitizenCardAdvancedSearchComponent } from './citizens-cards/citizen-card-advanced-search/citizen-card-advanced-search.component';
 import { CardTransactionListComponent } from './financial/transaction-list/transaction-list.component';
-import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CardCitizenCardExportSearchComponent } from './citizens-cards/citizen-card-export-search/citizen-card-export-search.component';
 import { CardCitizenCardExportDetailsComponent } from './citizens-cards/citizen-card-export-details/citizen-card-export-details.component';
 import { CardUsersComponent } from './users/card-users/card-users.component';
@@ -41,7 +40,6 @@ const routes: Routes = [
       { path: 'advanced-search-card-citizen', component: CardCitizenCardAdvancedSearchComponent },
       { path: 'transaction-list', component: CardTransactionListComponent },
       { path: 'card-users', component: CardUsersComponent },
-      { path: 'transaction-details/:id', component: TransactionDetailsComponent },
       { path: 'ticket-details/:id', component: TicketDetailsComponent },
       { path: 'card-citizens-pictures', component: CardCitizensPicturesComponent },
       { path: 'export-card-citizen', component: CardCitizenCardExportSearchComponent },

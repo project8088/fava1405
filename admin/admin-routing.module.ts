@@ -1,4 +1,3 @@
-import { RouterModule, Routes } from '@angular/router';
 
 import { AdminAddOrUpdateFaqComponent } from './content/add-or-update-faq/add-or-update-faq.component';
 import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/add-or-update-groups.component';
@@ -29,16 +28,10 @@ import { AdminTicketSubjectsComponent } from './base-data/ticket-subjects/ticket
 import { AdminTransactionListComponent } from './financial/transaction-list/transaction-list.component';
 import { AdminUnitListComponent } from './organization/unit-list/unit-list.component';
 
-import { CompanyInfoComponent } from '@app/shared/company-info/company-info.component';
-import { NgModule } from '@angular/core';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
-import { TicketDetailsComponent } from '@app/shared/ticket/view-ticket/ticket-details.component';
-import { TicketListComponent } from '@app/shared/ticket/ticket-list/ticket-list.component';
-import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
-import { AdminAddOrUpdateCitizensNotificationComponent } from './content/citizens-notification/citizens-notification.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
 import { AdminManzalatBaseFromListComponent } from './manzalat-base-form/manzalat-base-list/manzalat-base-list.component';
@@ -63,15 +56,9 @@ const routes: Routes = [
 
       { path: 'notifications', component: AdminNotificationListComponent },
       { path: 'addupdate-notification/:id', component: AdminAddOrUpdateNotificationComponent },
-      {
-        path: 'citizen-notifications/:id',
-        component: AdminAddOrUpdateCitizensNotificationComponent,
-      },
+  
 
       { path: 'ticket-subjects', component: AdminTicketSubjectsComponent },
-
-      { path: 'tickets', component: TicketListComponent },
-      { path: 'ticket-details/:id', component: TicketDetailsComponent },
 
       { path: 'manzalat-form-list', component: AdminManzalatBaseFromListComponent },
       { path: 'update-manzalat-form/:id', component: AdminUpdateManzalatBaseFormComponent },
@@ -85,7 +72,6 @@ const routes: Routes = [
       { path: 'units/:id', component: AdminUnitListComponent },
       { path: 'organization-unit-groups/:id', component: AdminOrganizationUnitGroupsComponent },
 
-      { path: 'company-info/:id', component: CompanyInfoComponent },
       //Group
       { path: 'group-list', component: AdminGroupListComponent },
       { path: 'add-update-group/:id', component: AdminAddOrUpdateGroupsComponent },
@@ -115,8 +101,6 @@ const routes: Routes = [
 
       //financial
 
-      { path: 'transaction-list', component: AdminTransactionListComponent },
-      { path: 'transaction-details/:id', component: TransactionDetailsComponent },
 
       { path: 'sms-list', component: AdminSmsListComponent },
 
