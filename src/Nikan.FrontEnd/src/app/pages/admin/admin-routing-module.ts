@@ -18,6 +18,10 @@ const routes: Routes = [
     path: 'financial',
     loadChildren: () => import('./financial/financial-module').then((m) => m.FinancialModule),
   },
+  {
+    path: 'content',
+    loadChildren: () => import('./content/content-module').then((m) => m.ContentModule),
+  },
 ];
 
 @NgModule({

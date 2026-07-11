@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
@@ -7,24 +7,23 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
+import Swal from 'sweetalert2';
+import { ManageAttachmentDialogComponent } from '../_dialogs/manage-attachment/manage-attachment.component';
 import { AppBase } from '@app/app.base';
 
 @Component({
-  selector: 'adm-news-list',
-  templateUrl: './news-list.component.html',
-  styleUrls: ['./news-list.component.scss'],
+  selector: 'app-page-list',
+  templateUrl: './page-list.component.html',
+  styleUrls: ['./page-list.component.scss'],
   standalone: false,
 })
-export class AdminNewsListComponent extends AppBase implements AfterViewInit, OnInit {
+export class AdminPageListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
     'row',
-    'imageUrl',
     'title',
     'description',
-    'onDate',
+    'createdOnDate',
     'clicks',
-    'isActive',
     'operation',
   ];
 
@@ -36,23 +35,12 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
-
-  groupList: any[] = [];
-  baseUrl = ServerApis.baseUrl;
-
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.searchForm = this.fb.group({
-      groupId: [null],
       fromDate: [null],
       toDate: [null],
       title: [''],
-    });
-  }
-
-  ngOnInit() {
-    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe((response) => {
-      if (response.isSuccess) this.groupList = response.data ? response.data : [];
     });
   }
 
@@ -72,14 +60,13 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
         startWith(param),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.dataService.get(ServerApis.getPagedNewsItems, param);
+          return this.dataService.get(ServerApis.getPagedWebPageItems, param);
         }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
-            var items = response.data.news ? response.data.news : [];
+            var items = response.data.webPages ? response.data.webPages : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger;
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
@@ -105,6 +92,40 @@ export class AdminNewsListComponent extends AppBase implements AfterViewInit, On
       this.paginator.firstPage();
     }
     this.getList();
+  }
+
+  deletePage(row:any) {
+    var text = 'آیا برای حذف کردن صفحه "' + row.title + '" اطمینان دارید؟';
+
+    Swal.fire({
+      title: 'حذف صفحه',
+      text: text,
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'بله',
+      cancelButtonText: 'خیر',
+    }).then((result) => {
+      if (result.value) {
+        this.dataService
+          .get(ServerApis.removeWebPage, {
+            id: row.id,
+          })
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('حذف با موفقیت انجام شد.');
+                this.getList();
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error:any) => {},
+          );
+      }
+    });
   }
 
   manageAttachment(item:any) {

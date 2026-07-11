@@ -15,7 +15,7 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminNewsCommentsComponent extends AppBase implements OnInit {
-  newsId: string ='';
+  newsId: string = '';
 
   displayedColumns: string[] = [
     'row',
@@ -49,7 +49,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
         this.newsId = p['id'];
         this.getCommentList();
       } else {
-        toastrService.error('خبر یافت نشد.');
+        this.toastrService.error('خبر یافت نشد.');
         this.router.navigate(['/admin/news-list']);
       }
     });
@@ -74,7 +74,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isLoadingResults = false;
       },
     );
@@ -88,7 +88,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     this.dataSource.filter = this.searchForm.get('query')?.value;
   }
 
-  newJob(row:any) {
+  newJob(row: any) {
     this.router.navigate(['/placement/new-job'], {
       queryParams: {
         id: '',
@@ -98,7 +98,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     });
   }
 
-  publishComment(row:any) {
+  publishComment(row: any) {
     Swal.fire({
       title: 'تغییر وضعیت',
       html:
@@ -116,7 +116,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
     });
   }
 
-  publish(row, IsPublish) {
+  publish(row: any, IsPublish: Boolean) {
     this.dataService
       .post(ServerApis.publishComment, {
         commentId: row.id,
@@ -132,7 +132,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {},
+        (error: any) => {},
       );
   }
 }

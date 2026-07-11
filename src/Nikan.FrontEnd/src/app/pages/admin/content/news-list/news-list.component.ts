@@ -7,23 +7,23 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
 import { AppBase } from '@app/app.base';
+import { ManageAttachmentDialogComponent } from '../_dialogs/manage-attachment/manage-attachment.component';
 
 @Component({
-  selector: 'adm-notification-list',
-  templateUrl: './notification-list.component.html',
-  styleUrls: ['./notification-list.component.scss'],
+  selector: 'adm-news-list',
+  templateUrl: './news-list.component.html',
+  styleUrls: ['./news-list.component.scss'],
   standalone: false,
 })
-export class AdminNotificationListComponent extends AppBase implements AfterViewInit, OnInit {
+export class AdminNewsListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
     'imageUrl',
     'title',
     'description',
     'onDate',
-    'publishDate',
+    'clicks',
     'isActive',
     'operation',
   ];
@@ -37,18 +37,24 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
 
+  groupList: any[] = [];
   baseUrl = ServerApis.baseUrl;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.searchForm = this.fb.group({
+      groupId: [null],
       fromDate: [null],
       toDate: [null],
       title: [''],
     });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.dataService.get(ServerApis.getListNewsGroups, {}).subscribe((response) => {
+      if (response.isSuccess) this.groupList = response.data ? response.data : [];
+    });
+  }
 
   ngAfterViewInit() {
     this.getList();
@@ -66,7 +72,7 @@ export class AdminNotificationListComponent extends AppBase implements AfterView
         startWith(param),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.dataService.get(ServerApis.getPagedNotificationsItems, param);
+          return this.dataService.get(ServerApis.getPagedNewsItems, param);
         }),
         map((response) => {
           this.isLoadingResults = false;

@@ -22,7 +22,7 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
 
   isSaving=false;
     loading?: boolean;
-  siteName: string;
+  siteName: string='';
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.route.params.subscribe((p) => {

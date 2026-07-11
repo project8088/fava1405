@@ -12,13 +12,13 @@ import { AppBase } from '@app/app.base';
   standalone: false,
 })
 export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, AfterViewInit {
-  isUpdate=false;
-  faqid: string ='';
+  isUpdate = false;
+  faqId: string = '';
   faqForm: FormGroup;
 
-  isSaving=false;
+  isSaving = false;
   attachmentId: string = '';
-    loading?: boolean;
+  loading?: boolean;
 
   groupList: any[] = [];
 
@@ -38,8 +38,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
     });
   }
 
-  ngAfterViewInit() {
-  }
+  ngAfterViewInit() {}
   ngOnInit(): void {
     this.getGroups();
     this.route.params.subscribe((p) => {
@@ -83,13 +82,12 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
               isActive: response.data.isActive,
             });
             this.tagNames = response.data.tagNames ? response.data.tagNames.split(',') : [];
-         
           } else {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
         },
       );
@@ -106,7 +104,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
     }
   }
 
-  remove(item:any): void {
+  remove(item: any): void {
     const index = this.tagNames.indexOf(item);
 
     if (index >= 0) {
@@ -122,19 +120,13 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
     return c1 && c2 ? c1.id == c2.id : c1 == c2;
   }
 
-
-  getAttachmentId(ev:{uploadUrl:string}) {
-    this.attachmentId = ev;
-  }
-
   save() {
     if (this.faqForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.faqForm.markAllAsTouched();
-      return ;
+      return;
     }
 
-  
     let form = this.faqForm.value;
     let data = {
       id: this.faqId ? this.faqId : '',
@@ -156,7 +148,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.isSaving = false;
         this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
       },

@@ -59,7 +59,7 @@ export class AdminTreeMenuComponent extends AppBase implements OnInit {
     });
   }
 
-  openMenuDialog(menu) {
+  openMenuDialog(menu:any) {
     this.matDialog
       .open(AdminAddOrUpdateMenuDialogComponent, {
         data: menu,

@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
@@ -7,23 +7,24 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import Swal from 'sweetalert2';
-import { ManageAttachmentDialogComponent } from '../../_dialogs/manage-attachment/manage-attachment.component';
 import { AppBase } from '@app/app.base';
+import { ManageAttachmentDialogComponent } from '../_dialogs/manage-attachment/manage-attachment.component';
 
 @Component({
-  selector: 'app-page-list',
-  templateUrl: './page-list.component.html',
-  styleUrls: ['./page-list.component.scss'],
+  selector: 'adm-notification-list',
+  templateUrl: './notification-list.component.html',
+  styleUrls: ['./notification-list.component.scss'],
   standalone: false,
 })
-export class AdminPageListComponent extends AppBase implements AfterViewInit {
+export class AdminNotificationListComponent extends AppBase implements AfterViewInit, OnInit {
   displayedColumns: string[] = [
     'row',
+    'imageUrl',
     'title',
     'description',
-    'createdOnDate',
-    'clicks',
+    'onDate',
+    'publishDate',
+    'isActive',
     'operation',
   ];
 
@@ -35,6 +36,9 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   searchForm: FormGroup;
+
+  baseUrl = ServerApis.baseUrl;
+
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.searchForm = this.fb.group({
@@ -43,6 +47,8 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
       title: [''],
     });
   }
+
+  ngOnInit() {}
 
   ngAfterViewInit() {
     this.getList();
@@ -60,13 +66,14 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
         startWith(param),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.dataService.get(ServerApis.getPagedWebPageItems, param);
+          return this.dataService.get(ServerApis.getPagedNotificationsItems, param);
         }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {
-            var items = response.data.webPages ? response.data.webPages : [];
+            var items = response.data.news ? response.data.news : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+            // debugger;
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
@@ -92,40 +99,6 @@ export class AdminPageListComponent extends AppBase implements AfterViewInit {
       this.paginator.firstPage();
     }
     this.getList();
-  }
-
-  deletePage(row:any) {
-    var text = 'آیا برای حذف کردن صفحه "' + row.title + '" اطمینان دارید؟';
-
-    Swal.fire({
-      title: 'حذف صفحه',
-      text: text,
-      showConfirmButton: true,
-      showCancelButton: true,
-      confirmButtonText: 'بله',
-      cancelButtonText: 'خیر',
-    }).then((result) => {
-      if (result.value) {
-        this.dataService
-          .get(ServerApis.removeWebPage, {
-            id: row.id,
-          })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('حذف با موفقیت انجام شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error:any) => {},
-          );
-      }
-    });
   }
 
   manageAttachment(item:any) {
