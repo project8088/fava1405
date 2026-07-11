@@ -19,7 +19,6 @@ import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/e
 import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-details/event-details.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
-import { AdminImportNationCodeGroupsExcelDialogComponent } from './import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
 import { AdminDashboardCitizenRegisterReportChartComponent } from './dashboard/citizen-register-report-chart/citizen-register-report-chart.component';
@@ -51,7 +50,6 @@ import { AdminConfigComponent } from './config/config.component';
     AdminViewEventDetailsComponent,
     AdminViewEventDetailsDialogComponent,
  
-    AdminImportNationCodeGroupsExcelDialogComponent,
     ManzalatSettingComponent,
     AdminOrganizationUnitGroupsComponent,
     AdminDashboardCitizenRegisterReportChartComponent,
