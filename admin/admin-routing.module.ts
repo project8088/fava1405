@@ -1,7 +1,6 @@
 
 import { AdminComponent } from './admin.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
-import { AdminDashboardComponent } from './dashboard/dashboard.component';
 import { AdminOrganizationListComponent } from './organization/organization-list/organization-list.component';
 import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
 import { AdminPayTestComponent } from './pay-test/pay-test.component';
@@ -26,8 +25,6 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', component: AdminDashboardComponent },
    
   
 

@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AdminDashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+  { path: 'dashboard', component: AdminDashboardComponent },
+
   {
     path: 'user',
     loadChildren: () => import('./users/users-module').then((m) => m.UsersModule),

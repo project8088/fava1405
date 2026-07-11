@@ -2,7 +2,6 @@ import { AdminAddFeedBackDialogComponent } from './_dialogs/add-feedback/add-fee
 import { AdminAddSabtAhvalDialogComponent } from './sabtAhval/dialog/add-sabtAhval/add-sabtAhval.component';
 import { AdminComponent } from './admin.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
-import { AdminDashboardComponent } from './dashboard/dashboard.component';
 import { AdminOrganizationListComponent } from './organization/organization-list/organization-list.component';
 import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
 import { AdminPayTestComponent } from './pay-test/pay-test.component';
@@ -15,13 +14,10 @@ import { AdminUnitListComponent } from './organization/unit-list/unit-list.compo
 
 
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
-import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/event-details.component';
-import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-details/event-details.component';
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
 import { AdminOrganizationUnitGroupsComponent } from './organization/organization-unit-groups/organization-unit-groups.component';
-import { AdminDashboardCitizenRegisterReportChartComponent } from './dashboard/citizen-register-report-chart/citizen-register-report-chart.component';
 import { AdminCheckStateLifeListComponent } from './sabtAhval/chek-state-life-list/check-state-life-list.component';
 import { AdminUpdateManzalatBaseFormComponent } from './manzalat-base-form/update-manzalat-base-form/update-manzalat-base-form.component';
 import { AdminManzalatBaseFromListComponent } from './manzalat-base-form/manzalat-base-list/manzalat-base-list.component';
@@ -30,7 +26,6 @@ import { AdminConfigComponent } from './config/config.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminDashboardComponent,
     AdminOrganizationListComponent,
     AdminUnitListComponent,
     AdminSettingComponent,
@@ -47,12 +42,9 @@ import { AdminConfigComponent } from './config/config.component';
     AdminSabtAhvalListComponent,
     AdminSabtAhvalCitizensListComponent,
     AdminCheckStateLifeListComponent,
-    AdminViewEventDetailsComponent,
-    AdminViewEventDetailsDialogComponent,
  
     ManzalatSettingComponent,
     AdminOrganizationUnitGroupsComponent,
-    AdminDashboardCitizenRegisterReportChartComponent,
     AdminUpdateManzalatBaseFormComponent,
     AdminManzalatBaseFromListComponent,
     AdminConfigComponent,

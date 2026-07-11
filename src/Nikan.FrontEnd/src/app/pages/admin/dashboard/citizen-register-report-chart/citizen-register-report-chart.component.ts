@@ -15,9 +15,9 @@ export class AdminDashboardCitizenRegisterReportChartComponent
   extends AppBase
   implements OnInit, OnDestroy
 {
-    loading?: boolean;
+  loading?: boolean;
   report: any = {};
-  subscribeReport: Subscription;
+  subscribeReport?: Subscription;
 
   chart: Chart = new Chart();
 
@@ -58,7 +58,7 @@ export class AdminDashboardCitizenRegisterReportChartComponent
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.loading = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },

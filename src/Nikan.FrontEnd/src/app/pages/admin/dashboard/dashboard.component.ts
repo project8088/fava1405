@@ -11,7 +11,7 @@ import { AppBase } from '@app/app.base';
 })
 export class AdminDashboardComponent extends AppBase implements OnInit {
   events: any[] = [];
-    loading?: boolean;
+  loading?: boolean;
   statisticalInfo: any;
   baseUrl: string = ServerApis.baseUrl;
 
@@ -36,7 +36,7 @@ export class AdminDashboardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {
+      (error: any) => {
         this.loading = false;
       },
     );
@@ -52,11 +52,11 @@ export class AdminDashboardComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error:any) => {},
+      (error: any) => {},
     );
   }
 
-  openevents(message) {
+  openevents(message: any) {
     console.log('id ', message.id);
     this.matDialog.open(AdminViewEventDetailsDialogComponent, {
       data: {
