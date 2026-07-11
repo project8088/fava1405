@@ -31,6 +31,19 @@ const routes: Routes = [
     path: 'groups',
     loadChildren: () => import('./groups/groups-module').then((m) => m.GroupsModule),
   },
+  {
+    path: 'organization',
+    loadChildren: () =>
+      import('./organization/organization-module').then((m) => m.OrganizationModule),
+  },
+  {
+    path: 'sabte-ahval',
+    loadChildren: () => import('./sabte-ahval/sabte-ahval-module').then((m) => m.SabteAhvalModule),
+  },
+  {
+    path: 'manzelat',
+    loadChildren: () => import('./manzelat/manzelat-module').then((m) => m.ManzelatModule),
+  },
 ];
 
 @NgModule({

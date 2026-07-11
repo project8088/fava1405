@@ -43,6 +43,8 @@ import { CardFreeRequestCardListComponent } from './free-card/free-request-list/
 import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free-card/add-or-update-free-card.component';
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';
 import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update-citizen-sabt-state-by-card/update-citizen-sabt-state-by-card.component';
+import { AdminAddOrUpdateCardComponent } from './add-or-update-card/add-or-update-card.component';
+import { AdminCardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { CardUpdateCitizenSabtStateByCardDialogComponent } from './dialog/update
     CardAddOrUpdateFreeCardComponent,
     CardFreeCardCitizensComponent,
     CardUpdateCitizenSabtStateByCardDialogComponent,
+    AdminCardListComponent,
+    AdminAddOrUpdateCardComponent,
   ],
   imports: [
     CoreModule,

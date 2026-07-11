@@ -26,6 +26,8 @@ import { AppShowCitizenComponent } from '@app/shared/citizens/show-citizens/show
 import { CardFreeRequestCardListComponent } from './free-card/free-request-list/free-request-list.component';
 import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free-card/add-or-update-free-card.component';
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';
+import { AdminAddOrUpdateCardComponent } from './add-or-update-card/add-or-update-card.component';
+import { AdminCardListComponent } from './card-list/card-list.component';
 
 const routes: Routes = [
   {
@@ -72,6 +74,9 @@ const routes: Routes = [
       { path: 'free-request-citizens/:id', component: CardFreeCardCitizensComponent },
 
       { path: 'card-permissions/:id', component: CardUserPermissionsComponent },
+
+      { path: 'card-list', component: AdminCardListComponent },
+      { path: 'addupdate-card/:cardTypeId/:id', component: AdminAddOrUpdateCardComponent },
     ],
   },
 ];
