@@ -7,7 +7,6 @@ import { AdminAddOrUpdateNotificationComponent } from './content/add-or-update-n
 import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './content/slide-show-list/dialog/add-update-slide/add-update-slide.component';
 import { AdminAddSabtAhvalDialogComponent } from './sabtAhval/dialog/add-sabtAhval/add-sabtAhval.component';
-import { AdminCompaniesListComponent } from './company-list/company-list.component';
 import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-change-status/company-change-status.component';
 import { AdminCompanyContractDialogComponent } from './_dialogs/company-contract/company-contract.component';
 import { AdminComponent } from './admin.component';
@@ -25,7 +24,6 @@ import { AdminOrganizationListComponent } from './organization/organization-list
 import { AdminPageListComponent } from './content/page-list/page-list.component';
 import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
 import { AdminPayTestComponent } from './pay-test/pay-test.component';
-import { AdminRegisterCompanyComponent } from './company-list/register-company/register-company.component';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminSabtAhvalCitizensListComponent } from './sabtAhval/get-sabtAhval-citizen-list/get-sabtAhval-citizen-list.component';
 import { AdminSabtAhvalListComponent } from './sabtAhval/sabtAhval-list/sabtAhval-list.component';
@@ -45,7 +43,6 @@ import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-d
 import { AdminCardListComponent } from './store/card-list/card-list.component';
 import { AdminAddOrUpdateCardComponent } from './store/add-or-update-card/add-or-update-card.component';
 import { AdminImportNationCodeGroupsExcelDialogComponent } from './import-Excel-Import/dialog/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
-import { AdminGroupQueueCitizensListComponent } from './groups/group-queue-citizens-list/group-queue-citizens-list.component';
 import { ManzalatSettingComponent } from './manzalat-setting/manzalat-setting.component';
 import { AdminGroupTransferDialogComponent } from './groups/_dialogs/group-transfer/group-transfer.component';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './content/citizens-notification/citizens-notification.component';
@@ -59,7 +56,6 @@ import { AdminConfigComponent } from './config/config.component';
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminCompaniesListComponent,
     AdminNewsListComponent,
     AdminAddOrUpdateNewsComponent,
     AdminNewsGroupsComponent,
@@ -76,7 +72,6 @@ import { AdminConfigComponent } from './config/config.component';
     AdminPageListComponent,
     AdminAddOrUpdatePageComponent,
     AdminTicketSubjectsComponent,
-    AdminRegisterCompanyComponent,
     AdminNotificationListComponent,
     AdminAddOrUpdateNotificationComponent,
     ManageAttachmentDialogComponent,
@@ -105,7 +100,6 @@ import { AdminConfigComponent } from './config/config.component';
     AdminViewEventDetailsDialogComponent,
  
     AdminImportNationCodeGroupsExcelDialogComponent,
-    AdminGroupQueueCitizensListComponent,
     ManzalatSettingComponent,
     AdminGroupTransferDialogComponent,
     AdminAddOrUpdateCitizensNotificationComponent,

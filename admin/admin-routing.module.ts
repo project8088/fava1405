@@ -5,7 +5,6 @@ import { AdminAddOrUpdateGroupsComponent } from './groups/add-or-update-groups/a
 import { AdminAddOrUpdateNewsComponent } from './content/add-or-update-news/add-or-update-news.component';
 import { AdminAddOrUpdateNotificationComponent } from './content/add-or-update-notification/add-or-update-notification.component';
 import { AdminAddOrUpdatePageComponent } from './content/add-or-update-page/add-or-update-page.component';
-import { AdminCompaniesListComponent } from './company-list/company-list.component';
 import { AdminComponent } from './admin.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
 import { AdminDashboardComponent } from './dashboard/dashboard.component';
@@ -21,7 +20,6 @@ import { AdminOrganizationListComponent } from './organization/organization-list
 import { AdminPageListComponent } from './content/page-list/page-list.component';
 import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
 import { AdminPayTestComponent } from './pay-test/pay-test.component';
-import { AdminRegisterCompanyComponent } from './company-list/register-company/register-company.component';
 import { AdminSabtAhvalCitizensListComponent } from './sabtAhval/get-sabtAhval-citizen-list/get-sabtAhval-citizen-list.component';
 import { AdminSabtAhvalListComponent } from './sabtAhval/sabtAhval-list/sabtAhval-list.component';
 import { AdminSettingComponent } from './setting/setting.component';
@@ -54,9 +52,7 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: AdminDashboardComponent },
-      { path: 'register-company', component: AdminRegisterCompanyComponent },
-      { path: 'companies', component: AdminCompaniesListComponent },
-
+   
       { path: 'news-list', component: AdminNewsListComponent },
       { path: 'addupdate-news/:id', component: AdminAddOrUpdateNewsComponent },
       { path: 'news-comments/:id', component: AdminNewsCommentsComponent },
