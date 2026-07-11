@@ -26,6 +26,8 @@ import { CompanyTransactionListComponent } from './transaction-list/transaction-
 import { TransactionDetailsComponent } from '@app/shared/transaction-details/transaction-details.component';
 import { CompanyCitizenExcelBatchFileListComponent } from './citizen-excel-batch-file/citizen-excel-batch-file.component';
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
+import { AdminRegisterCompanyComponent } from './register-company/register-company.component';
+import { AdminCompaniesListComponent } from './company-list/company-list.component';
 
 const routes: Routes = [
   {
@@ -34,6 +36,9 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'register-company', component: AdminRegisterCompanyComponent },
+      { path: 'companies', component: AdminCompaniesListComponent },
+
       { path: 'dashboard', component: CompnayDashboardComponent },
       { path: 'company-profile/:id', component: CompanyProfileComponent },
       { path: 'company-info/:id', component: CompanyInfoComponent },
