@@ -9,9 +9,16 @@ import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material/material.module';
 import { AdminTransactionListComponent } from './transaction-list/transaction-list.component';
 import { TransactionDetailsComponent } from './transaction-details/transaction-details.component';
+import { AdminPaySettingComponent } from './pay-setting/pay-setting.component';
+import { AdminPayTestComponent } from './pay-test/pay-test.component';
 
 @NgModule({
-  declarations: [AdminTransactionListComponent, TransactionDetailsComponent],
+  declarations: [
+    AdminTransactionListComponent,
+    TransactionDetailsComponent,
+    AdminPayTestComponent,
+    AdminPaySettingComponent,
+  ],
   imports: [
     CommonModule,
     FinancialRoutingModule,

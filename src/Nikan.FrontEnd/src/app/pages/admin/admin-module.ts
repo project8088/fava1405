@@ -9,13 +9,29 @@ import { MaterialModule } from '@core/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-details/event-details.component';
 import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/event-details.component';
+import { AdminComponent } from './admin.component';
+import { SharedModule } from '@app/shared/shared.module';
+import { AdminConfigComponent } from './config/config.component';
+import { AdminContactUsListComponent } from './contact-list/contact-list.component';
+import { AdminSettingComponent } from './setting/setting.component';
+import { AdminSmsListComponent } from './sms-list/sms-list.component';
+import { SmsSettingComponent } from './sms-setting/sms-setting.component';
+import { AdminAddFeedBackDialogComponent } from './_dialogs/add-feedback/add-feedback.component';
 
 @NgModule({
   declarations: [
+    AdminComponent,
     AdminDashboardComponent,
     AdminDashboardCitizenRegisterReportChartComponent,
     AdminViewEventDetailsComponent,
     AdminViewEventDetailsDialogComponent,
+    AdminAddFeedBackDialogComponent,
+    AdminSettingComponent,
+    SmsSettingComponent,
+    AdminContactUsListComponent,
+    AdminSmsListComponent,
+
+    AdminConfigComponent,
   ],
   imports: [
     CommonModule,
@@ -24,6 +40,7 @@ import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/e
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
   ],
 })
 export class AdminModule {}

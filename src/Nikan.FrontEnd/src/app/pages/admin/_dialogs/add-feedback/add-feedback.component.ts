@@ -13,7 +13,7 @@ import { AppBase } from '@app/app.base';
 export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
   userCode: string = '';
 
-  isSaving=false;
+  isSaving = false;
   groupList: any[] = [];
   form: FormGroup;
 
@@ -47,7 +47,7 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
     if (this.form.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
       this.form.markAllAsTouched();
-        return ;
+      return;
     }
 
     var formValue = this.form.value;
@@ -69,7 +69,7 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error:any) => {
+        (error: any) => {
           this.isSaving = false;
         },
       );
