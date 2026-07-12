@@ -34,11 +34,8 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.managerList = response.data ? response.data : [];
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        this.managerList = response.data ? response.data : [];
+      });
   }
 }

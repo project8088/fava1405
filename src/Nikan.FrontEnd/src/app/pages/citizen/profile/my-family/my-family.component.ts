@@ -46,17 +46,14 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.familyList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.familyList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   deleteEducation(row: citizenFamilyModel) {
@@ -127,16 +124,13 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   }
 
   getAllCitizenFamilyByFamily() {
-    this.dataService.get(ServerApis.getAllCitizenFamilyByFamily).subscribe(
-      (response) => {
-        if (response && response.isSuccess) {
-          this.familyByfamilyList = response.data ? response.data.familyList : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getAllCitizenFamilyByFamily).subscribe((response) => {
+      if (response && response.isSuccess) {
+        this.familyByfamilyList = response.data ? response.data.familyList : [];
+      } else {
+        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+        this.toastrService.error(msg);
+      }
+    });
   }
 }

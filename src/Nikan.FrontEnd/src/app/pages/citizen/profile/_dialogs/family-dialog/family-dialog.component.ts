@@ -235,19 +235,16 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.familyIsRegister = response.data.isRegister;
-            stepper.next();
-            this.setNationCodeInfamilyForm();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.familyIsRegister = response.data.isRegister;
+          stepper.next();
+          this.setNationCodeInfamilyForm();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   saveFamilyDetails() {
@@ -295,23 +292,20 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.familyForm.patchValue({
-              familyRelation: formValue.familyRelation,
-            });
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success(response.messages);
+          this.familyForm.patchValue({
+            familyRelation: formValue.familyRelation,
+          });
 
-            // stepper.next();
-            // this.matDialogRef.close(response.data);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          // stepper.next();
+          // this.matDialogRef.close(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   registerFamily(stepper: MatStepper) {
@@ -337,23 +331,20 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.familyForm.patchValue({
-              familyRelation: formValue.familyRelation,
-            });
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success(response.messages);
+          this.familyForm.patchValue({
+            familyRelation: formValue.familyRelation,
+          });
 
-            // stepper.next();
-            this.matDialogRef.close(response.data);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          // stepper.next();
+          this.matDialogRef.close(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   updateFamilyDetails() {
@@ -398,18 +389,15 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(response.data);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.matDialogRef.close(response.data);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
 
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');

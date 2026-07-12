@@ -80,22 +80,19 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.info = response.data;
-            this.data = response.data.refundList ? response.data.refundList : [];
-            this.dataSource.data = this.data;
-            this.listCount = this.data.length;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.info = response.data;
+          this.data = response.data.refundList ? response.data.refundList : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {
@@ -120,20 +117,17 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           .get(ServerApis.getCardsNumber, {
             importId: this.importId,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت استعلام شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت استعلام شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }
@@ -159,20 +153,17 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.showAddPanel = false;
-            this.frm.reset();
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.showAddPanel = false;
+          this.frm.reset();
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   delete() {

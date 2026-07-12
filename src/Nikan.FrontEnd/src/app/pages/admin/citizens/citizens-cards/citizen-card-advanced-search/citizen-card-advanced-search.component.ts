@@ -105,21 +105,15 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
   }
 
   getAppRegisterList() {
-    this.dataService.get(ServerApis.getAppRegisterList).subscribe(
-      (response) => {
-        this.baseEnums.registerTypes = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getAppRegisterList).subscribe((response) => {
+      this.baseEnums.registerTypes = response.data;
+    });
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.baseEnums.citizenGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.baseEnums.citizenGroups = response.data;
+    });
   }
 
   getList() {
@@ -236,12 +230,9 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
   }
 
   getDisCountGroupBaseList() {
-    this.dataService.get(ServerApis.getDisCountGroupBaseList).subscribe(
-      (response) => {
-        this.baseEnums.discountList = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getDisCountGroupBaseList).subscribe((response) => {
+      this.baseEnums.discountList = response.data;
+    });
   }
 
   exportExcel() {

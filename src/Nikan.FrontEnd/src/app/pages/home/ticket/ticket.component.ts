@@ -45,15 +45,12 @@ export class TicketComponent extends AppBase implements OnInit {
 
     this.getOrganizations();
 
-    this.dataService.getEnums().subscribe(
-      (response) => {
-        if (response) {
-          this.periorityList = response.ticketPriority ? response.ticketPriority : [];
-        } else {
-        }
-      },
-      (error: any) => {},
-    );
+    this.dataService.getEnums().subscribe((response) => {
+      if (response) {
+        this.periorityList = response.ticketPriority ? response.ticketPriority : [];
+      } else {
+      }
+    });
   }
 
   getOrganizations() {
@@ -67,17 +64,14 @@ export class TicketComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.organizationList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getUnitsOfOrganization() {
@@ -93,17 +87,14 @@ export class TicketComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.unitList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   saveInfo() {
@@ -131,24 +122,21 @@ export class TicketComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
-            Swal.fire({
-              showConfirmButton: true,
-              showCancelButton: false,
-              title: 'پیام شما با موفقیت ارسال شد',
-              text: 'کد رهگیری: ' + response.data.code,
-              confirmButtonText: 'تائید',
-            });
-            this.ticketForm.reset();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+          Swal.fire({
+            showConfirmButton: true,
+            showCancelButton: false,
+            title: 'پیام شما با موفقیت ارسال شد',
+            text: 'کد رهگیری: ' + response.data.code,
+            confirmButtonText: 'تائید',
+          });
+          this.ticketForm.reset();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

@@ -57,17 +57,14 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.listfeedback = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.listfeedback = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
   savefeedback() {
     if (this.feedbackfrm.invalid) {
@@ -90,18 +87,15 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.getListFeedbacks();
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.getListFeedbacks();
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
   getBaseListFeedbacke() {
     this.dataService.get(ServerApis.getBaseListFeedbacke).subscribe((response) => {

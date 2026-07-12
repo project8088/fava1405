@@ -72,26 +72,20 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.groupForm.patchValue(response.data);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.groupForm.patchValue(response.data);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.parentGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.parentGroups = response.data;
+    });
   }
 
   /**
@@ -125,17 +119,14 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.router.navigate(['/admin/group-list']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.router.navigate(['/admin/group-list']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

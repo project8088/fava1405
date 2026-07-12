@@ -69,21 +69,18 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.data = response.data ? response.data : [];
-            this.dataSource.data = this.data;
-            this.listCount = this.data.length;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {
@@ -128,17 +125,14 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
         commentId: row.id,
         IsPublish: IsPublish,
       })
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('تغییر وضعیت با موفقیت انجام شد.');
-            this.getCommentList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('تغییر وضعیت با موفقیت انجام شد.');
+          this.getCommentList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

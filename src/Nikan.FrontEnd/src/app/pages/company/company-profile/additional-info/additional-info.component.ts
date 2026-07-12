@@ -59,19 +59,16 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyId = response.data.companyId;
 
-            this.form.patchValue(response.data);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.form.patchValue(response.data);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -98,16 +95,13 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

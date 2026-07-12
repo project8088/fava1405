@@ -78,12 +78,9 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getFreeCardGroups).subscribe(
-      (response) => {
-        this.baseEnums.citizenGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getFreeCardGroups).subscribe((response) => {
+      this.baseEnums.citizenGroups = response.data;
+    });
   }
   getcenterList() {
     this.dataService.get(ServerApis.getAllCardDeliveryCenters).subscribe((response) => {
@@ -108,20 +105,17 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            response.data.cardTypeId = response.data.cardTypeId.toString();
-            this.storeForm.patchValue(response.data);
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          response.data.cardTypeId = response.data.cardTypeId.toString();
+          this.storeForm.patchValue(response.data);
 
-            setTimeout(() => {}, 1000);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          setTimeout(() => {}, 1000);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -144,18 +138,15 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.router.navigate(['/card/free-request-card-list']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.router.navigate(['/card/free-request-card-list']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
   /**
    * for bind object in select

@@ -140,17 +140,14 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('ذخیره اطلاعات با موفقیت انجام شد.');
-            this.matDialogRef.close(this.menuForm.value);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('ذخیره اطلاعات با موفقیت انجام شد.');
+          this.matDialogRef.close(this.menuForm.value);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

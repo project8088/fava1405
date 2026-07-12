@@ -64,12 +64,9 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
   }
 
   getAppRegisterList() {
-    this.dataService.get(ServerApis.getAppRegisterList).subscribe(
-      (response) => {
-        this.baseEnums.registerTypes = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getAppRegisterList).subscribe((response) => {
+      this.baseEnums.registerTypes = response.data;
+    });
   }
   getList() {
     var param: any = this.searchForm.value;

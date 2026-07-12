@@ -37,24 +37,21 @@ export class AdminTreeMenuComponent extends AppBase implements OnInit {
           .get(ServerApis.removeMenu, {
             id: row.id,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت حذف شد.');
-                //this.menuItems.forEach((item:any, index) => {
-                //  if (item.id == row.id)
-                //    this.menuItems.splice(index, 1);
-                //});
-                this.onUpdate.emit(true);
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت حذف شد.');
+              //this.menuItems.forEach((item:any, index) => {
+              //  if (item.id == row.id)
+              //    this.menuItems.splice(index, 1);
+              //});
+              this.onUpdate.emit(true);
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }

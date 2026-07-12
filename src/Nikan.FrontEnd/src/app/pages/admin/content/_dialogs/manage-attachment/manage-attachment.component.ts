@@ -49,33 +49,30 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.attachments = response.data ? response.data : [];
-            this.attachments.forEach((item) => {
-              var t = item.filePath.split('.');
-              item.fileExtension = t[t.length - 1];
-              item.isImage =
-                ['jpg', 'jpeg', 'png', 'gif', 'tif', 'bmp'].indexOf(
-                  item.fileExtension.toLowerCase(),
-                ) > -1
-                  ? true
-                  : false;
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.attachments = response.data ? response.data : [];
+          this.attachments.forEach((item) => {
+            var t = item.filePath.split('.');
+            item.fileExtension = t[t.length - 1];
+            item.isImage =
+              ['jpg', 'jpeg', 'png', 'gif', 'tif', 'bmp'].indexOf(
+                item.fileExtension.toLowerCase(),
+              ) > -1
+                ? true
+                : false;
+          });
+          setTimeout(() => {
+            $('.lightGallery').lightGallery({
+              selector: 'a',
+              thumbnail: false,
             });
-            setTimeout(() => {
-              $('.lightGallery').lightGallery({
-                selector: 'a',
-                thumbnail: false,
-              });
-            }, 1000);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          }, 1000);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   completeUpload(ev: any) {

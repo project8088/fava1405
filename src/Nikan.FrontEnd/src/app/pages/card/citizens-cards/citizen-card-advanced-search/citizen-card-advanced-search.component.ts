@@ -103,21 +103,15 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
   }
 
   getAppRegisterList() {
-    this.dataService.get(ServerApis.getAppRegisterList).subscribe(
-      (response) => {
-        this.baseEnums.registerTypes = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getAppRegisterList).subscribe((response) => {
+      this.baseEnums.registerTypes = response.data;
+    });
   }
 
   getDisCountGroupBaseList() {
-    this.dataService.get(ServerApis.getDisCountGroupBaseList).subscribe(
-      (response) => {
-        this.baseEnums.discountList = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getDisCountGroupBaseList).subscribe((response) => {
+      this.baseEnums.discountList = response.data;
+    });
   }
 
   getList() {

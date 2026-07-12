@@ -107,21 +107,15 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
   }
 
   getAppRegisterList() {
-    this.dataService.get(ServerApis.getAppRegisterList).subscribe(
-      (response) => {
-        this.baseEnums.registerTypes = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getAppRegisterList).subscribe((response) => {
+      this.baseEnums.registerTypes = response.data;
+    });
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.baseEnums.citizenGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.baseEnums.citizenGroups = response.data;
+    });
   }
 
   getList() {

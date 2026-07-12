@@ -66,22 +66,19 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.info = response.data;
-            this.data = response.data.personnelInfo ? response.data.personnelInfo : [];
-            this.dataSource.data = this.data;
-            this.listCount = this.data.length;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.info = response.data;
+          this.data = response.data.personnelInfo ? response.data.personnelInfo : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {
@@ -106,20 +103,17 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
           .get(ServerApis.confirmCitizenFile, {
             importId: this.importId,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت تائید شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت تائید شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }

@@ -42,15 +42,12 @@ export class RedirectComponent extends AppBase implements OnInit {
           '&returnUrl=' +
           this.returnUrl,
       )
-      .subscribe(
-        (data: ApiResult<any>) => {
-          if (data.isSuccess) {
-            this.url = data.data;
-            if (data.data.indexOf('http') > -1) window.location.href = data.data;
-            else this.router.navigate([data.data]);
-          } else this.toastrService.error(data.messages);
-        },
-        (error: any) => {},
-      );
+      .subscribe((data: ApiResult<any>) => {
+        if (data.isSuccess) {
+          this.url = data.data;
+          if (data.data.indexOf('http') > -1) window.location.href = data.data;
+          else this.router.navigate([data.data]);
+        } else this.toastrService.error(data.messages);
+      });
   }
 }

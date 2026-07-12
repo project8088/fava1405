@@ -71,21 +71,18 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.data = response.data ? response.data : [];
-            this.dataSource.data = this.data;
-            this.listCount = this.data.length;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {
@@ -111,23 +108,20 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.showAddOrUpdatePanel = false;
-            this.frm.reset();
-            this.frm.get('isActive')?.setValue(false);
-            this.frm.get('cardDistributionCenters')?.setValue(false);
-            this.frm.get('supportCenters')?.setValue(false);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.showAddOrUpdatePanel = false;
+          this.frm.reset();
+          this.frm.get('isActive')?.setValue(false);
+          this.frm.get('cardDistributionCenters')?.setValue(false);
+          this.frm.get('supportCenters')?.setValue(false);
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   delete(row: any) {
@@ -144,20 +138,17 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
           .get(ServerApis.removeOrganization, {
             id: row.id,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت حذف شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت حذف شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }

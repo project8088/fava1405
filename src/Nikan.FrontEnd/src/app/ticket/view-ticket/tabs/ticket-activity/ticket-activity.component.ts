@@ -49,17 +49,14 @@ export class TicketActivityComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.list = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.list = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   delete(row: any) {
@@ -76,20 +73,17 @@ export class TicketActivityComponent extends AppBase implements OnInit {
           .get(ServerApis.removeTicketActivity, {
             id: row.id,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت حذف شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت حذف شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }
@@ -117,18 +111,15 @@ export class TicketActivityComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.frm.reset({ commentText: '', isSubtractFromContract: true });
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.frm.reset({ commentText: '', isSubtractFromContract: true });
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

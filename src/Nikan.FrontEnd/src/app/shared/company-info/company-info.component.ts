@@ -40,24 +40,21 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyInfo = response.data;
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyInfo = response.data;
 
-            setTimeout(() => {
-              (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
-                selector: 'a',
-                thumbnail: false,
-              });
-            }, 1000);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          setTimeout(() => {
+            (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
+              selector: 'a',
+              thumbnail: false,
+            });
+          }, 1000);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   back() {

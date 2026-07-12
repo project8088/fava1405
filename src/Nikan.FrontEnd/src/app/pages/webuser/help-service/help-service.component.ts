@@ -55,25 +55,22 @@ export class WebUserHelpServiceDetailsComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.news = response.data ?? new NewsDto();
-            this.tags = this.news.seoTags.split(',');
-            if (this.news.seoTags) {
-              this.titleService.setTitle(this.news.title);
-              this.metaService.addTags([
-                { name: 'keywords', content: this.news.seoTags },
-                { name: 'description', content: this.news.seoDescription },
-                { name: 'robots', content: 'index, follow' },
-              ]);
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.news = response.data ?? new NewsDto();
+          this.tags = this.news.seoTags.split(',');
+          if (this.news.seoTags) {
+            this.titleService.setTitle(this.news.title);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.news.seoTags },
+              { name: 'description', content: this.news.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

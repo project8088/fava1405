@@ -45,16 +45,13 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.loading = false;
-            this.baseInfo = response.data;
-          } else {
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.loading = false;
+          this.baseInfo = response.data;
+        } else {
+        }
+      });
   }
 
   getCitizenRegisterManzalatForm() {
@@ -67,17 +64,14 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.loading = false;
-            this.uploadInfo = response.data;
-            this.hasFiles = response.data.hasFiles;
-          } else {
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.loading = false;
+          this.uploadInfo = response.data;
+          this.hasFiles = response.data.hasFiles;
+        } else {
+        }
+      });
   }
 
   removeDocument() {

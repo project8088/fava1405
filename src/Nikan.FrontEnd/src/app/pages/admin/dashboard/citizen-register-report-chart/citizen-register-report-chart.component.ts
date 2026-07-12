@@ -53,18 +53,15 @@ export class AdminDashboardCitizenRegisterReportChartComponent
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.report = response.data ? response.data : [];
-            this.chart = this.createCharts(this.report.data, this.report.categories);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.report = response.data ? response.data : [];
+          this.chart = this.createCharts(this.report.data, this.report.categories);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   ngAfterViewInit() {}

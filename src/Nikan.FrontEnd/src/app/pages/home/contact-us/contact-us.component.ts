@@ -50,15 +50,12 @@ export class ContactUsComponent extends AppBase implements OnInit {
 
     this.getOrganizations();
 
-    this.dataService.getEnums().subscribe(
-      (response) => {
-        if (response) {
-          this.periorityList = response.ticketPriority ? response.ticketPriority : [];
-        } else {
-        }
-      },
-      (error: any) => {},
-    );
+    this.dataService.getEnums().subscribe((response) => {
+      if (response) {
+        this.periorityList = response.ticketPriority ? response.ticketPriority : [];
+      } else {
+      }
+    });
   }
 
   getOrganizations() {
@@ -72,17 +69,14 @@ export class ContactUsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.organizationList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getUnitsOfOrganization() {
@@ -98,17 +92,14 @@ export class ContactUsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.unitList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   saveInfo() {
@@ -137,18 +128,15 @@ export class ContactUsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-            this.contactForm.reset();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.contactForm.reset();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

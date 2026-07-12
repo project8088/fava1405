@@ -69,19 +69,16 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.data = response.data.items ? response.data.items : [];
-            this.dataSource.data = this.data;
-            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.data = response.data.items ? response.data.items : [];
+          this.dataSource.data = this.data;
+          this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   applyFilter() {

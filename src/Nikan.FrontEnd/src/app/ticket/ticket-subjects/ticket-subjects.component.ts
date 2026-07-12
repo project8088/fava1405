@@ -75,29 +75,26 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.data = response.data ? response.data : [];
-            for (var i of this.data) {
-              if (i.description) {
-                let d = document.createElement('div');
-                d.innerHTML = i.description;
-                i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
-              }
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.data = response.data ? response.data : [];
+          for (var i of this.data) {
+            if (i.description) {
+              let d = document.createElement('div');
+              d.innerHTML = i.description;
+              i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
             }
-
-            this.dataSource.data = this.data;
-            this.listCount = this.data.length;
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
           }
-        },
-        (error: any) => {},
-      );
+
+          this.dataSource.data = this.data;
+          this.listCount = this.data.length;
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getOrganizations() {
@@ -111,17 +108,14 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.organizationList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.organizationList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getUnitsOfOrganization() {
@@ -137,17 +131,14 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.unitList = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {
@@ -177,20 +168,17 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           .get(ServerApis.removeTicketSubject, {
             id: row.id,
           })
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('با موفقیت حذف شد.');
-                this.getList();
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {},
-          );
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت حذف شد.');
+              this.getList();
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }
@@ -225,20 +213,17 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.showAddOrUpdatePanel = false;
-            this.frm.reset();
-            this.frm.get('isActive')?.setValue(true);
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.showAddOrUpdatePanel = false;
+          this.frm.reset();
+          this.frm.get('isActive')?.setValue(true);
+          this.getList();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

@@ -37,12 +37,9 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.groupList = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.groupList = response.data;
+    });
   }
 
   saveInfo() {
@@ -68,18 +65,15 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.matDialogRef.close(true);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success(response.messages);
+          this.matDialogRef.close(true);
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**

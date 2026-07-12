@@ -33,24 +33,21 @@ export class AdminMenuManagementComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            var data = response.data ? response.data : [];
-            data.sort((a: any, b: any) => {
-              if (a.tabOrder > b.tabOrder) return 1;
-              else if (a.tabOrder < b.tabOrder) return -1;
-              else return 0;
-            });
-            this.data = this.getNestedChildren(data);
-            //  console.log(this.data);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          var data = response.data ? response.data : [];
+          data.sort((a: any, b: any) => {
+            if (a.tabOrder > b.tabOrder) return 1;
+            else if (a.tabOrder < b.tabOrder) return -1;
+            else return 0;
+          });
+          this.data = this.getNestedChildren(data);
+          //  console.log(this.data);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getNestedChildren(arr: any[], parentId = null) {

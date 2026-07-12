@@ -50,18 +50,15 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            //this.companyId = response.data.companyId;
-            this.imageSignatureUrl = response.data.signatureUrl;
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          //this.companyId = response.data.companyId;
+          this.imageSignatureUrl = response.data.signatureUrl;
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getSignature(ev: any) {

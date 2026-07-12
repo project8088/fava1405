@@ -52,12 +52,9 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.baseEnums.citizenGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.baseEnums.citizenGroups = response.data;
+    });
   }
 
   getList() {

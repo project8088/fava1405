@@ -68,17 +68,14 @@ export class AdminCancellationCitizenCardDialogComponent extends AppBase impleme
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.matDialogRef.close(true);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

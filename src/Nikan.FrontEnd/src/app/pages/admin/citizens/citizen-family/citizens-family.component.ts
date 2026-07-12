@@ -94,12 +94,9 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
       });
   }
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe(
-      (response) => {
-        this.baseEnums.citizenGroups = response.data;
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
+      this.baseEnums.citizenGroups = response.data;
+    });
   }
   pageEvent(event: PageEvent) {
     this.getList();

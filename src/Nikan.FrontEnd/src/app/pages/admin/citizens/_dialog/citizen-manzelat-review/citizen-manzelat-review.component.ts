@@ -47,20 +47,15 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
         .get(ServerApis.removeManzalatForm, {
           id: this.data.manzelatForm.manzalatRegisterId,
         })
-        .subscribe(
-          (response) => {
-            if (response.isSuccess) {
-              this.toastrService.success(response.messages);
-              this.matDialogRef.close(true);
-            } else {
-              let msg = response.messages
-                ? response.messages
-                : 'متاسفانه خطایی در سرور رخ داده است!';
-              this.toastrService.error(msg);
-            }
-          },
-          (error: any) => {},
-        );
+        .subscribe((response) => {
+          if (response.isSuccess) {
+            this.toastrService.success(response.messages);
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        });
     } else {
       this.dataService
         .post(ServerApis.confirmManzaltByAdmin, {
@@ -68,20 +63,15 @@ export class AdminCitizenManzelatReviewComponent extends AppBase implements OnIn
           manzalatFormType: this.data.manzelatForm.manzalatFormType,
           ...formValues,
         })
-        .subscribe(
-          (response) => {
-            if (response.isSuccess) {
-              this.toastrService.success(response.message);
-              this.matDialogRef.close(true);
-            } else {
-              let msg = response.messages
-                ? response.messages
-                : 'متاسفانه خطایی در سرور رخ داده است!';
-              this.toastrService.error(msg);
-            }
-          },
-          (error: any) => {},
-        );
+        .subscribe((response) => {
+          if (response.isSuccess) {
+            this.toastrService.success(response.message);
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        });
     }
   }
 }

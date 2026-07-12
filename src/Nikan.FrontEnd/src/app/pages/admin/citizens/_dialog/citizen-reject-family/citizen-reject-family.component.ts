@@ -45,17 +45,14 @@ export class AdminCitizenRejectFamilyComponent extends AppBase implements OnInit
         famillyId: this.citizen.family.familyCitizenId,
         description: formValues.description,
       })
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success(response.messages);
+          this.matDialogRef.close(true);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

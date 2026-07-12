@@ -44,26 +44,23 @@ export class MainPageDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.page = response.data;
-            this.tags = this.page.seoTags.split(',');
-            if (this.page.seoTags) {
-              this.titleService.setTitle(this.page.title);
-              this.metaService.addTags([
-                { name: 'keywords', content: this.page.seoTags },
-                { name: 'description', content: this.page.seoDescription },
-                { name: 'robots', content: 'index, follow' },
-              ]);
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.page = response.data;
+          this.tags = this.page.seoTags.split(',');
+          if (this.page.seoTags) {
+            this.titleService.setTitle(this.page.title);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.page.seoTags },
+              { name: 'description', content: this.page.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
           }
-          this.chdr.detectChanges();
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+        this.chdr.detectChanges();
+      });
   }
 }

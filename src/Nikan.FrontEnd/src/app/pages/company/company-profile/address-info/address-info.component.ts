@@ -60,12 +60,9 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
    *دریافت لیست استان ها
    * */
   getProvinces() {
-    this.dataService.get(ServerApis.getProvinces).subscribe(
-      (response) => {
-        this.provinceList = response.data ? response.data : [];
-      },
-      (error: any) => {},
-    );
+    this.dataService.get(ServerApis.getProvinces).subscribe((response) => {
+      this.provinceList = response.data ? response.data : [];
+    });
   }
 
   getAddressInfo() {
@@ -80,39 +77,36 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
-            this.addressForm.setValue({
-              mobileNumber: response.data.mobileNumber,
-              mobileNumber2: response.data.mobileNumber2,
-              mobileNumber3: response.data.mobileNumber3,
-              cellNumber: response.data.cellNumber,
-              cellNumber2: response.data.cellNumber2,
-              cellNumber3: response.data.cellNumber3,
-              smsNumber: response.data.smsNumber,
-              fax: response.data.fax,
-              website: response.data.website,
-              email: response.data.email,
-              telegram: response.data.telegram,
-              province: response.data.province ? response.data.province : '',
-              city: {
-                key: response.data.cityId,
-                text: response.data.city,
-              },
-              zipCode: response.data.zipCode,
-              street: response.data.street,
-              fullAddress: response.data.fullAddress,
-              pelak: response.data.pelak,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyId = response.data.companyId;
+          this.addressForm.setValue({
+            mobileNumber: response.data.mobileNumber,
+            mobileNumber2: response.data.mobileNumber2,
+            mobileNumber3: response.data.mobileNumber3,
+            cellNumber: response.data.cellNumber,
+            cellNumber2: response.data.cellNumber2,
+            cellNumber3: response.data.cellNumber3,
+            smsNumber: response.data.smsNumber,
+            fax: response.data.fax,
+            website: response.data.website,
+            email: response.data.email,
+            telegram: response.data.telegram,
+            province: response.data.province ? response.data.province : '',
+            city: {
+              key: response.data.cityId,
+              text: response.data.city,
+            },
+            zipCode: response.data.zipCode,
+            street: response.data.street,
+            fullAddress: response.data.fullAddress,
+            pelak: response.data.pelak,
+          });
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -152,16 +146,13 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

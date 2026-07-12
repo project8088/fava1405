@@ -49,27 +49,24 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.product = response.data;
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.product = response.data;
 
-            if (this.product.seoTags) {
-              this.titleService.setTitle(this.product.seoTags.seoTitle);
-              this.metaService.addTags([
-                { name: 'keywords', content: this.product.seoTags.seokeywords },
-                { name: 'description', content: this.product.seoTags.seoDescription },
-                { name: 'robots', content: 'index, follow' },
-              ]);
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.router.navigate(['/home/products']);
-            this.toastrService.error(msg);
+          if (this.product.seoTags) {
+            this.titleService.setTitle(this.product.seoTags.seoTitle);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.product.seoTags.seokeywords },
+              { name: 'description', content: this.product.seoTags.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.router.navigate(['/home/products']);
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pay() {
@@ -84,21 +81,18 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.RefId = response.data.refId;
-            var form: any = document.getElementById('payFormMellat');
-            this.waitForRedirectToBank = true;
-            setTimeout(() => {
-              form.submit();
-            }, 1000);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.RefId = response.data.refId;
+          var form: any = document.getElementById('payFormMellat');
+          this.waitForRedirectToBank = true;
+          setTimeout(() => {
+            form.submit();
+          }, 1000);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

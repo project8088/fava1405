@@ -81,36 +81,33 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
-            this.form.setValue({
-              companyName: response.data.companyName,
-              englishName: response.data.englishName,
-              establishedYear: response.data.establishedYear,
-              txtTinNo: response.data.txtTinNo,
-              txtRegNO: response.data.txtRegNO,
-              companyOwnerType: response.data.companyOwnerType,
-              activityLicenseType: response.data.activityLicenseType,
-              activityLicense: response.data.activityLicense,
-              activityLicenseDate: response.data.activityLicenseDate,
-              earthCondition: response.data.earthCondition,
-              fieldOfActivity: response.data.fieldOfActivity,
-              managerNationCode: response.data.managerNationCode,
-              managerName: response.data.managerName,
-              unitArea: response.data.unitArea,
-              areaOfGreenSpace: response.data.areaOfGreenSpace,
-              buildingArea: response.data.buildingArea,
-              buildingLicenseArea: response.data.buildingLicenseArea,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyId = response.data.companyId;
+          this.form.setValue({
+            companyName: response.data.companyName,
+            englishName: response.data.englishName,
+            establishedYear: response.data.establishedYear,
+            txtTinNo: response.data.txtTinNo,
+            txtRegNO: response.data.txtRegNO,
+            companyOwnerType: response.data.companyOwnerType,
+            activityLicenseType: response.data.activityLicenseType,
+            activityLicense: response.data.activityLicense,
+            activityLicenseDate: response.data.activityLicenseDate,
+            earthCondition: response.data.earthCondition,
+            fieldOfActivity: response.data.fieldOfActivity,
+            managerNationCode: response.data.managerNationCode,
+            managerName: response.data.managerName,
+            unitArea: response.data.unitArea,
+            areaOfGreenSpace: response.data.areaOfGreenSpace,
+            buildingArea: response.data.buildingArea,
+            buildingLicenseArea: response.data.buildingLicenseArea,
+          });
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -151,16 +148,13 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

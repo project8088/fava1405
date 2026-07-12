@@ -33,13 +33,12 @@ export class AppCitizenEventListComponent extends AppBase implements OnInit {
   ngAfterViewInit() {}
 
   getListevents() {
-    this.dataService.get(ServerApis.getCitizenTopEvent, { userCode: this.userCode }).subscribe(
-      (response) => {
+    this.dataService
+      .get(ServerApis.getCitizenTopEvent, { userCode: this.userCode })
+      .subscribe((response) => {
         if (response.isSuccess) {
           this.events = response.data ? response.data : [];
         }
-      },
-      (error: any) => {},
-    );
+      });
   }
 }

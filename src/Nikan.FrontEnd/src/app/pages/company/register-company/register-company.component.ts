@@ -128,18 +128,15 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
-            this.router.navigate(['/admin/companies']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
+          this.router.navigate(['/admin/companies']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   compareFn(c1: any, c2: any): boolean {

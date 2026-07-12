@@ -121,20 +121,17 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.userForm.patchValue(response.data);
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.userForm.patchValue(response.data);
 
-            this.imageUrl = response.data.imageUrl;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-            this.router.navigate(['/admin/manager-users']);
-          }
-        },
-        (error: any) => {},
-      );
+          this.imageUrl = response.data.imageUrl;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+          this.router.navigate(['/admin/manager-users']);
+        }
+      });
   }
 
   getAttachmentId(ev: { uploadUrl: string }) {
@@ -190,18 +187,15 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.router.navigate(['/admin/manager-users']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.router.navigate(['/admin/manager-users']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   changeHasSpecificDisease() {

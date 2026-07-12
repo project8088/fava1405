@@ -56,27 +56,24 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyId = response.data.companyId;
 
-            this.mainForm.setValue({
-              slagUrl: response.data.slagUrl,
-              content: response.data.content,
-              insuranceNumber: response.data.insuranceNumber,
-              companyRepresentative: response.data.companyRepresentative,
-              numberOfEmployees: response.data.numberOfEmployees
-                ? response.data.numberOfEmployees
-                : 0,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.mainForm.setValue({
+            slagUrl: response.data.slagUrl,
+            content: response.data.content,
+            insuranceNumber: response.data.insuranceNumber,
+            companyRepresentative: response.data.companyRepresentative,
+            numberOfEmployees: response.data.numberOfEmployees
+              ? response.data.numberOfEmployees
+              : 0,
+          });
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -104,16 +101,13 @@ export class CompanyMainInfoComponent extends AppBase implements OnInit, AfterVi
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

@@ -202,50 +202,47 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-            (this, (this.citizenInfo = response.data));
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+          (this, (this.citizenInfo = response.data));
 
-            this.personalForm.patchValue({
-              date_SabtConfirm: response.data.date_SabtConfirm
-                ? new Date(response.data.date_SabtConfirm)
-                : '',
+          this.personalForm.patchValue({
+            date_SabtConfirm: response.data.date_SabtConfirm
+              ? new Date(response.data.date_SabtConfirm)
+              : '',
 
-              educationTitle: response.data.educationField,
-              educationGroup: String(response.data.educationGroupId),
-              educationGroupId: response.data.educationGroupId,
+            educationTitle: response.data.educationField,
+            educationGroup: String(response.data.educationGroupId),
+            educationGroupId: response.data.educationGroupId,
 
-              alley: response.data.alley,
-              region: response.data.region,
-              postalCode: response.data.postalCode,
+            alley: response.data.alley,
+            region: response.data.region,
+            postalCode: response.data.postalCode,
 
-              marital: response.data.mariageStatus,
-              educationStatues: response.data.educationStatues,
-              educationLevel: response.data.educationLevel,
-              jobGroup: response.data.jobGroupId,
+            marital: response.data.mariageStatus,
+            educationStatues: response.data.educationStatues,
+            educationLevel: response.data.educationLevel,
+            jobGroup: response.data.jobGroupId,
 
-              jobTitle: response.data.jobTitle,
-              stateId: response.data.city ? response.data.city.parentValue : null,
-              cityId: String(response.data.cityId),
-              plaque: response.data.plaque,
-              street: response.data.street,
-              phoneNumber: response.data.phone,
-              state: {
-                value: response.data.cityId,
-                text: response.data.city,
-              },
-            });
+            jobTitle: response.data.jobTitle,
+            stateId: response.data.city ? response.data.city.parentValue : null,
+            cityId: String(response.data.cityId),
+            plaque: response.data.plaque,
+            street: response.data.street,
+            phoneNumber: response.data.phone,
+            state: {
+              value: response.data.cityId,
+              text: response.data.city,
+            },
+          });
 
-            this.userStatus = response.data.sabtStatus;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.userStatus = response.data.sabtStatus;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   savePersonalInfo() {
@@ -282,18 +279,15 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.getPersonalInfo();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.getPersonalInfo();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**

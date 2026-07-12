@@ -121,17 +121,14 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
   sendcitizenForAuthentication(citizenId: string) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.toastrService.success(response.messages);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.toastrService.success(response.messages);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   openCitizenProfile(userCode: string) {

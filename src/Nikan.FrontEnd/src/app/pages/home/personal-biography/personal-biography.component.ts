@@ -39,26 +39,23 @@ export class PersonalBiographyComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.userInfo = response.data;
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.userInfo = response.data;
 
-            if (this.userInfo.seoTags) {
-              this.titleService.setTitle(this.userInfo.seoTags.seoTitle);
-              this.metaService.addTags([
-                { name: 'keywords', content: this.userInfo.seoTags.seokeywords },
-                { name: 'description', content: this.userInfo.seoTags.seoDescription },
-                { name: 'robots', content: 'index, follow' },
-              ]);
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-            this.router.navigate(['/home']);
+          if (this.userInfo.seoTags) {
+            this.titleService.setTitle(this.userInfo.seoTags.seoTitle);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.userInfo.seoTags.seokeywords },
+              { name: 'description', content: this.userInfo.seoTags.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+          this.router.navigate(['/home']);
+        }
+      });
   }
 }

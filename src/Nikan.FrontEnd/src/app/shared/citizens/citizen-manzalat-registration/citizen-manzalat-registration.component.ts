@@ -49,13 +49,10 @@ export class AppCitizenManzalatRegistrationComponent extends AppBase implements 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.data = response.data ? response.data.manzaltForms : {};
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.data = response.data ? response.data.manzaltForms : {};
+        }
+      });
   }
 }

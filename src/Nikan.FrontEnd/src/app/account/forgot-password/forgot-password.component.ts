@@ -105,24 +105,21 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.sendingSMS = false;
-          if (response.isSuccess) {
-            this.userId = response.data.userId;
-            this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
-            this.lastTimerCounter = this.lastTimerCounter + 60;
-            this.timerCounter = this.lastTimerCounter;
-            this.startTimer();
+      .subscribe((response) => {
+        this.sendingSMS = false;
+        if (response.isSuccess) {
+          this.userId = response.data.userId;
+          this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
+          this.lastTimerCounter = this.lastTimerCounter + 60;
+          this.timerCounter = this.lastTimerCounter;
+          this.startTimer();
 
-            this.showConfirmCode = true;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.showConfirmCode = true;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**
@@ -183,24 +180,21 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.checkingCode = false;
-          if (response.isSuccess) {
-            if (response.data.userId) {
-              this.toastrService.success('هم اکنون کلمه عبور جدید خود را وارد نمایید.');
-              this.showConfirmCode = false;
-              this.showChangePassword = true;
-            } else {
-              this.toastrService.error('کد تائید صحیح نیست!');
-            }
+      .subscribe((response) => {
+        this.checkingCode = false;
+        if (response.isSuccess) {
+          if (response.data.userId) {
+            this.toastrService.success('هم اکنون کلمه عبور جدید خود را وارد نمایید.');
+            this.showConfirmCode = false;
+            this.showChangePassword = true;
           } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
+            this.toastrService.error('کد تائید صحیح نیست!');
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**
@@ -230,25 +224,22 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('کلمه عبور شما با موفقیت تغییر یافت.');
+      .subscribe((response) => {
+        this.isSaving = false;
+        if (response.isSuccess) {
+          this.toastrService.success('کلمه عبور شما با موفقیت تغییر یافت.');
 
-            if (this.serviceId) {
-              this.router.navigate(['/account/login'], {
-                queryParams: { serviceId: this.serviceId },
-              });
-            } else {
-              this.router.navigate(['/account/login']);
-            }
+          if (this.serviceId) {
+            this.router.navigate(['/account/login'], {
+              queryParams: { serviceId: this.serviceId },
+            });
           } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
+            this.router.navigate(['/account/login']);
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

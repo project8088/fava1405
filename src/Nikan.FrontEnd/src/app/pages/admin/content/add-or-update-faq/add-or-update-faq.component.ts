@@ -76,25 +76,22 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.faqForm.setValue({
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              tagNames: response.data.tagNames,
-              questionGroupTypeId: +response.data.questionGroupTypeId,
-              isActive: response.data.isActive,
-            });
-            this.tagNames = response.data.tagNames ? response.data.tagNames.split(',') : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.faqForm.setValue({
+            id: response.data.id,
+            title: response.data.title,
+            description: response.data.description,
+            tagNames: response.data.tagNames,
+            questionGroupTypeId: +response.data.questionGroupTypeId,
+            isActive: response.data.isActive,
+          });
+          this.tagNames = response.data.tagNames ? response.data.tagNames.split(',') : [];
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   add(event: MatChipInputEvent): void {

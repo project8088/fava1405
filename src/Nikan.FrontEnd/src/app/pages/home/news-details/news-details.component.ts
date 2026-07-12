@@ -68,26 +68,23 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.news = response.data;
-            this.tags = this.news?.seoTags?.split(',') ?? [];
-            if (this.news?.seoTags) {
-              this.titleService.setTitle(this.news.title);
-              this.metaService.addTags([
-                { name: 'keywords', content: this.news.seoTags },
-                { name: 'description', content: this.news.seoDescription },
-                { name: 'robots', content: 'index, follow' },
-              ]);
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.news = response.data;
+          this.tags = this.news?.seoTags?.split(',') ?? [];
+          if (this.news?.seoTags) {
+            this.titleService.setTitle(this.news.title);
+            this.metaService.addTags([
+              { name: 'keywords', content: this.news.seoTags },
+              { name: 'description', content: this.news.seoDescription },
+              { name: 'robots', content: 'index, follow' },
+            ]);
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getComments() {
@@ -100,17 +97,14 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.comments = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.comments = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   sendComment() {
@@ -135,21 +129,18 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.frm.reset();
-            this.toastrService.success(
-              'با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.',
-              'پیام شما با موفقیت ارسال شد.',
-            );
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.frm.reset();
+          this.toastrService.success(
+            'با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.',
+            'پیام شما با موفقیت ارسال شد.',
+          );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getLastNews() {
@@ -162,14 +153,11 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.lastNewsList = response.data ? response.data : [];
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.lastNewsList = response.data ? response.data : [];
+        }
+      });
   }
 
   getMostVisitedNews() {
@@ -182,13 +170,10 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.mostVisitedList = response.data ? response.data : [];
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.mostVisitedList = response.data ? response.data : [];
+        }
+      });
   }
 }

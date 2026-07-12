@@ -58,27 +58,24 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.form.setValue({
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              minAge: response.data.minAge,
-              maxAge: response.data.maxAge,
-              isActive: response.data.isActive,
-              uploadDescription: response.data.uploadDescription,
-              orderIndex: response.data.orderIndex,
-              gender: response.data.gender,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.form.setValue({
+            id: response.data.id,
+            title: response.data.title,
+            description: response.data.description,
+            minAge: response.data.minAge,
+            maxAge: response.data.maxAge,
+            isActive: response.data.isActive,
+            uploadDescription: response.data.uploadDescription,
+            orderIndex: response.data.orderIndex,
+            gender: response.data.gender,
+          });
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -108,17 +105,14 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.router.navigate(['/admin/manzalat-form-list']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.router.navigate(['/admin/manzalat-form-list']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

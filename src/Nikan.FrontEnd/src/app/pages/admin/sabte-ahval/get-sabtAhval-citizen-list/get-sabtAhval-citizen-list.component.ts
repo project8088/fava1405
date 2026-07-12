@@ -71,19 +71,16 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.data = response.data.items ? response.data.items : [];
-            this.dataSource.data = this.data;
-            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.data = response.data.items ? response.data.items : [];
+          this.dataSource.data = this.data;
+          this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   applyFilter() {
@@ -93,17 +90,14 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
   sendcitizenForAuthentication(citizenId: string) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.toastrService.success(response.messages);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.toastrService.success(response.messages);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   selectUnselectAll() {

@@ -67,32 +67,29 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-            (this, (this.citizenInfo = response.data));
-            this.info = response.data;
-            this.personalForm.patchValue({
-              gender: response.data.gender,
-              nationalCode: response.data.nationCode,
-              firstName: response.data.firstName,
-              lastName: response.data.lastName,
-              fatherName: response.data.fatherName,
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+          (this, (this.citizenInfo = response.data));
+          this.info = response.data;
+          this.personalForm.patchValue({
+            gender: response.data.gender,
+            nationalCode: response.data.nationCode,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            fatherName: response.data.fatherName,
 
-              birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
+            birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
 
-              identityId: response.data.identityId,
-            });
+            identityId: response.data.identityId,
+          });
 
-            this.setDisabledFields();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.setDisabledFields();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   savePersonalInfo() {
@@ -120,18 +117,15 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.getIdentityInfo();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.getIdentityInfo();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**

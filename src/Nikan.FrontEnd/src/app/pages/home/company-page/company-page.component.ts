@@ -56,15 +56,12 @@ export class CompanyPageComponent extends AppBase implements OnInit {
       this.contactForm.get('name')?.setValue(this.user?.displayName);
     }
 
-    this.dataService.getEnums().subscribe(
-      (response) => {
-        if (response) {
-          this.periorityList = response.ticketPriority ? response.ticketPriority : [];
-        } else {
-        }
-      },
-      (error: any) => {},
-    );
+    this.dataService.getEnums().subscribe((response) => {
+      if (response) {
+        this.periorityList = response.ticketPriority ? response.ticketPriority : [];
+      } else {
+      }
+    });
   }
 
   getInfo() {
@@ -79,21 +76,18 @@ export class CompanyPageComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.companyInfo = response.data ? response.data : {};
-            if (this.companyInfo && this.companyInfo.lat && this.companyInfo.lng) {
-              this.lat = +this.companyInfo.lat;
-              this.lng = +this.companyInfo.lng;
-            }
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.companyInfo = response.data ? response.data : {};
+          if (this.companyInfo && this.companyInfo.lat && this.companyInfo.lng) {
+            this.lat = +this.companyInfo.lat;
+            this.lng = +this.companyInfo.lng;
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   saveInfo() {
@@ -122,22 +116,19 @@ export class CompanyPageComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.sendedMessages = response.messages
-              ? response.messages
-              : 'پیام شما با موفقیت ارسال شد.';
-            this.toastrService.success(this.sendedMessages);
-            this.messageIsSended = true;
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.sendedMessages = response.messages
+            ? response.messages
+            : 'پیام شما با موفقیت ارسال شد.';
+          this.toastrService.success(this.sendedMessages);
+          this.messageIsSended = true;
 
-            this.contactForm.reset();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.contactForm.reset();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

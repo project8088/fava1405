@@ -41,17 +41,14 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.info = response.data ? response.data : {};
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.info = response.data ? response.data : {};
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   back() {
@@ -61,16 +58,13 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
   sendcitizenForAuthentication(citizenId: number) {
     this.dataService
       .get(ServerApis.citizenForAuthenticationByCitizenId, { citizenId: citizenId })
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            this.toastrService.success(response.messages);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          this.toastrService.success(response.messages);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }

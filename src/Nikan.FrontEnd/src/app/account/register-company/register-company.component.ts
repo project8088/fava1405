@@ -115,35 +115,32 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
-            if (response.data.access_token && response.data.refresh_token) {
-              this.authService.storeToken(response.data.access_token, response.data.refresh_token);
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
+          if (response.data.access_token && response.data.refresh_token) {
+            this.authService.storeToken(response.data.access_token, response.data.refresh_token);
 
-              this.authService.goToDashboard();
-            } else {
-              Swal.fire({
-                title: 'ثبت نام شما با موفقیت انجام شد.',
-                text: 'اکنون می توانید وارد حساب کاربری خود شوید.',
-                confirmButtonText: 'ورود به حساب کاربری',
-                showConfirmButton: true,
-                showCancelButton: false,
-                allowEnterKey: true,
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-              }).then((result) => {
-                this.router.navigate(['/account/login']);
-              });
-            }
+            this.authService.goToDashboard();
           } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+            Swal.fire({
+              title: 'ثبت نام شما با موفقیت انجام شد.',
+              text: 'اکنون می توانید وارد حساب کاربری خود شوید.',
+              confirmButtonText: 'ورود به حساب کاربری',
+              showConfirmButton: true,
+              showCancelButton: false,
+              allowEnterKey: true,
+              allowEscapeKey: false,
+              allowOutsideClick: false,
+            }).then((result) => {
+              this.router.navigate(['/account/login']);
+            });
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   compareFn(c1: any, c2: any): boolean {

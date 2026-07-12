@@ -75,21 +75,18 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
-            this.lastTimerCounter = this.lastTimerCounter + 60;
-            this.timerCounter = this.lastTimerCounter;
-            this.startTimer();
-            this.showConfirmCode = true;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
+          this.lastTimerCounter = this.lastTimerCounter + 60;
+          this.timerCounter = this.lastTimerCounter;
+          this.startTimer();
+          this.showConfirmCode = true;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   saveForm() {
@@ -113,23 +110,20 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.showForm();
-            this.isSaving = false;
-            this.getCitizenMobileNumber();
-            this.showConfirmCode = false;
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.showForm();
+          this.isSaving = false;
+          this.getCitizenMobileNumber();
+          this.showConfirmCode = false;
 
-            this.toastrService.success(response.messages);
-          } else {
-            this.isSaving = false;
-            let msg = response.messages ? response.messages : 'شماره موبایل معتبر نیست';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.toastrService.success(response.messages);
+        } else {
+          this.isSaving = false;
+          let msg = response.messages ? response.messages : 'شماره موبایل معتبر نیست';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   toggleEditMode() {}

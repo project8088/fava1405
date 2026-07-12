@@ -67,28 +67,25 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.ticket = response.data ? response.data : {};
-            if (!this.ticket.responseTickets) {
-              this.ticket.responseTickets = [];
-            }
-            // this.ticket.responseTickets.unshift({
-            //   responseText:this.ticket.ticketMessage,
-            //   ownerDisplayName:this.ticket.fullName,
-            //   responseTextOnDate:this.ticket.createdOn,
-            //   ownerId:this.ticket.ownerId
-            // });
-
-            this.answerForm.get('resolved')?.setValue(this.ticket.isSolved);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.ticket = response.data ? response.data : {};
+          if (!this.ticket.responseTickets) {
+            this.ticket.responseTickets = [];
           }
-        },
-        (error: any) => {},
-      );
+          // this.ticket.responseTickets.unshift({
+          //   responseText:this.ticket.ticketMessage,
+          //   ownerDisplayName:this.ticket.fullName,
+          //   responseTextOnDate:this.ticket.createdOn,
+          //   ownerId:this.ticket.ownerId
+          // });
+
+          this.answerForm.get('resolved')?.setValue(this.ticket.isSolved);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   closeTicket(isClosed: boolean) {
@@ -115,25 +112,22 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
               this.chdr.detectChanges();
             }),
           )
-          .subscribe(
-            (response) => {
-              if (response.isSuccess) {
-                if (isClosed) {
-                  this.ticket.colsedById = this.currentUser?.userId;
-                  this.toastrService.success('تیکت با موفقیت بسته شد.');
-                } else {
-                  this.ticket.colsedById = null;
-                  this.toastrService.success('تیکت با موفقیت باز شد.');
-                }
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              if (isClosed) {
+                this.ticket.colsedById = this.currentUser?.userId;
+                this.toastrService.success('تیکت با موفقیت بسته شد.');
               } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
+                this.ticket.colsedById = null;
+                this.toastrService.success('تیکت با موفقیت باز شد.');
               }
-            },
-            (error: any) => {},
-          );
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
       }
     });
   }
@@ -181,25 +175,22 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-            this.answerForm.get('responseText')?.setValue('');
-            this.getTicketInfo();
-            if (this.attachmentGuid) {
-              this.uploader.removeAllFiles(this.uploader.uploaderInput);
-              this.uploader.files = [];
-              this.attachmentGuid = '';
-            }
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
+          this.answerForm.get('responseText')?.setValue('');
+          this.getTicketInfo();
+          if (this.attachmentGuid) {
+            this.uploader.removeAllFiles(this.uploader.uploaderInput);
+            this.uploader.files = [];
+            this.attachmentGuid = '';
           }
-        },
-        (error: any) => {},
-      );
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   newGuid() {

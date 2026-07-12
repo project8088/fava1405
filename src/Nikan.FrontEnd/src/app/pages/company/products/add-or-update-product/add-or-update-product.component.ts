@@ -72,17 +72,14 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.productGroupList = response.data ? response.data : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.productGroupList = response.data ? response.data : [];
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   ngAfterViewInit() {}
@@ -99,22 +96,19 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess && response.data) {
-            response.data.productGroupId = response.data.productGroupId.toString();
-            this.productForm.patchValue(response.data);
+      .subscribe((response) => {
+        if (response.isSuccess && response.data) {
+          response.data.productGroupId = response.data.productGroupId.toString();
+          this.productForm.patchValue(response.data);
 
-            if (response.data.productParentId) this.getProductByParent();
+          if (response.data.productParentId) this.getProductByParent();
 
-            this.imageUrl = response.data.imageUrl;
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+          this.imageUrl = response.data.imageUrl;
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**
@@ -148,17 +142,14 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.router.navigate(['/company/products']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {},
-      );
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+          this.router.navigate(['/company/products']);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }
