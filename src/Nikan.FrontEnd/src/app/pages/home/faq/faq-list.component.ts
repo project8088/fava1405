@@ -83,8 +83,14 @@ export class FaqListComponent extends AppBase implements OnInit {
     } else {
       item.showDetails = true;
       item.loading = true;
-      this.dataService.get(ServerApis.getFaq, { id: item.id }).subscribe(
-        (response) => {
+      this.dataService
+        .get(ServerApis.getFaq, { id: item.id })
+        .pipe(
+          finalize(() => {
+            this.chdr.detectChanges();
+          }),
+        )
+        .subscribe((response) => {
           item.loading = false;
           if (response && response.isSuccess) {
             item.details = response.data;
@@ -92,11 +98,7 @@ export class FaqListComponent extends AppBase implements OnInit {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
-        },
-        (error: any) => {
-          item.loading = false;
-        },
-      );
+        });
     }
   }
 }

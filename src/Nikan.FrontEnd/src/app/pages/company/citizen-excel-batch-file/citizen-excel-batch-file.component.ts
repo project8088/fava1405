@@ -91,8 +91,14 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeImportFile, { importId: row.id }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeImportFile, { importId: row.id })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -102,11 +108,7 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

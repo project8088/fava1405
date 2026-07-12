@@ -98,13 +98,20 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
       });
   }
   getBaseListFeedbacke() {
-    this.dataService.get(ServerApis.getBaseListFeedbacke).subscribe((response) => {
-      if (response.isSuccess) this.groupfeedbackList = response.data ? response.data : [];
-      else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    });
+    this.dataService
+      .get(ServerApis.getBaseListFeedbacke)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.groupfeedbackList = response.data ? response.data : [];
+        else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   pageEvent(event: PageEvent) {

@@ -51,13 +51,20 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   }
 
   ngOnInit(): void {
-    this.dataService.get(ServerApis.getProductParentGroups).subscribe((response) => {
-      if (response.isSuccess) this.parentProductList = response.data;
-      else {
-        var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-        this.toastrService.error(msg);
-      }
-    });
+    this.dataService
+      .get(ServerApis.getProductParentGroups)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.parentProductList = response.data;
+        else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   getProductByParent() {

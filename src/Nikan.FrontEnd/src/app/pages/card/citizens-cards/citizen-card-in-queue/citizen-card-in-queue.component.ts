@@ -166,8 +166,14 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeCardFromQueue, { id: row.printId }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeCardFromQueue, { id: row.printId })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -177,11 +183,7 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

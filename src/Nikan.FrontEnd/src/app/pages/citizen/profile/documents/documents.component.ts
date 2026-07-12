@@ -60,35 +60,47 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeUserDocument + '?id=' + id).subscribe((response) => {
-          if (response.isSuccess) {
-            this.toastrService.success('با موفقیت حذف شد.');
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
+        this.dataService
+          .get(ServerApis.removeUserDocument + '?id=' + id)
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
+            if (response.isSuccess) {
+              this.toastrService.success('با موفقیت حذف شد.');
+            } else {
+              let msg = response.messages
+                ? response.messages
+                : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
 
-          this.getDocGroupsBaseList();
-        });
+            this.getDocGroupsBaseList();
+          });
       }
     });
   }
 
   saveForm() {
     const form = this.cardForm.getRawValue();
-    this.dataService.post(ServerApis.uploadPersonalPicture, form).subscribe(
-      (response) => {
+    this.dataService
+      .post(ServerApis.uploadPersonalPicture, form)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+      });
   }
 
   getImage(ev: any) {

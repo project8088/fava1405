@@ -5,6 +5,7 @@ import { CitizenProfileComponent } from '../profile.component';
 import { ServerApis } from '@core/server-apis';
 import { UploadUserAvatarDialogComponent } from '@app/shared/_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-personnel-image',
@@ -41,12 +42,19 @@ export class CitizenPersonnelImageComponent extends AppBase implements OnInit {
   ngOnInit(): void {}
 
   getShortCitizenInfoByCitizen() {
-    this.dataService.get(ServerApis.getShortCitizenInfoByCitizen).subscribe((data) => {
-      this.loading = false;
-      this.imageUrl = data.data.personalPictureUrl;
-      this.personalPictureIsUploaded = data.data.personalPictureIsUploaded;
-      this.personalPicture_Confirmed = data.data.personalPicture_Confirmed || 0;
-    });
+    this.dataService
+      .get(ServerApis.getShortCitizenInfoByCitizen)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data) => {
+        this.imageUrl = data.data.personalPictureUrl;
+        this.personalPictureIsUploaded = data.data.personalPictureIsUploaded;
+        this.personalPicture_Confirmed = data.data.personalPicture_Confirmed || 0;
+      });
   }
 
   getImage(ev: any) {

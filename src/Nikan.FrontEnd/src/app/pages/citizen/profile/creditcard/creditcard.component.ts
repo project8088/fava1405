@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-creditcard',
@@ -40,18 +41,21 @@ export class CreditcardComponent extends AppBase implements OnInit {
 
   saveForm() {
     const form = this.cardForm.getRawValue();
-    this.dataService.post(ServerApis.updteCitizenBankCardNumber, form).subscribe(
-      (response) => {
+    this.dataService
+      .post(ServerApis.updteCitizenBankCardNumber, form)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+      });
   }
 }

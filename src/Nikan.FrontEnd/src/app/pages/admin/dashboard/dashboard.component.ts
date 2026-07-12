@@ -46,14 +46,21 @@ export class AdminDashboardComponent extends AppBase implements OnInit {
   }
 
   getListevents() {
-    this.dataService.get(ServerApis.getTopEvent).subscribe((response) => {
-      if (response.isSuccess) {
-        this.events = response.data ? response.data : [];
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    });
+    this.dataService
+      .get(ServerApis.getTopEvent)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) {
+          this.events = response.data ? response.data : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   openevents(message: any) {

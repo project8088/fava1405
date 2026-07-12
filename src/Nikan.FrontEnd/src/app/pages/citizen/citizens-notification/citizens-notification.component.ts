@@ -47,9 +47,16 @@ export class AdminAddOrUpdateCitizensNotificationComponent
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
-      this.baseEnums.citizenGroups = response.data;
-    });
+    this.dataService
+      .get(ServerApis.getGroups)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.baseEnums.citizenGroups = response.data;
+      });
   }
 
   getNotificationInfo() {
@@ -143,9 +150,15 @@ export class AdminAddOrUpdateCitizensNotificationComponent
 
   delete(item: any) {
     item.loading = true;
-    this.dataService.get(ServerApis.removeCitizensNotifactions, { id: item.id }).subscribe(
-      (response) => {
-        item.loading = false;
+    this.dataService
+      .get(ServerApis.removeCitizensNotifactions, { id: item.id })
+      .pipe(
+        finalize(() => {
+          item.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت حذف شد.');
           this.getCitizenNotifications();
@@ -153,10 +166,6 @@ export class AdminAddOrUpdateCitizensNotificationComponent
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        item.loading = false;
-      },
-    );
+      });
   }
 }

@@ -47,14 +47,21 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
   ngOnInit(): void {}
 
   getCitizenMobileNumber() {
-    this.dataService.get(ServerApis.getCitizenMobileNumber).subscribe((data) => {
-      this.loading = false;
-      this.oldMobileNumber = data.data.mobileNumber;
-      this.isConfirm = data.data.isConfirm;
-      this.editForm.patchValue({
-        citizenId: data.data.citizenId,
+    this.dataService
+      .get(ServerApis.getCitizenMobileNumber)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data) => {
+        this.oldMobileNumber = data.data.mobileNumber;
+        this.isConfirm = data.data.isConfirm;
+        this.editForm.patchValue({
+          citizenId: data.data.citizenId,
+        });
       });
-    });
   }
 
   sendCode() {

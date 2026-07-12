@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -65,8 +65,14 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeQueue, { id: row.id }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeQueue, { id: row.id })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -76,11 +82,7 @@ export class AdminGroupQueueCitizensListComponent extends AppBase implements Aft
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

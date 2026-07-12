@@ -83,9 +83,16 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
-      this.parentGroups = response.data;
-    });
+    this.dataService
+      .get(ServerApis.getGroups)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.parentGroups = response.data;
+      });
   }
 
   /**

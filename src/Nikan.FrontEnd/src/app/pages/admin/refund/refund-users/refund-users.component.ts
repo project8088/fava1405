@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import Swal from 'sweetalert2';
 import { AdminAddRefundUserDialogComponent } from '../dialog/add-refund-user/add-refund-user.component';
 import { AppBase } from '@app/app.base';
@@ -118,8 +118,14 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.deleteRefundUser, { userCode: row.userCode }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.deleteRefundUser, { userCode: row.userCode })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -129,11 +135,7 @@ export class AdminRefundUsersComponent extends AppBase implements AfterViewInit,
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

@@ -87,9 +87,15 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
 
   checkIsDead(item: any) {
     item.loading = true;
-    this.dataService.get(ServerApis.checkIsDead, { nationCode: item.nationCode }).subscribe(
-      (response) => {
-        item.loading = false;
+    this.dataService
+      .get(ServerApis.checkIsDead, { nationCode: item.nationCode })
+      .pipe(
+        finalize(() => {
+          item.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success(response.messages);
           this.getList();
@@ -97,11 +103,7 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        item.loading = false;
-      },
-    );
+      });
   }
 
   openCitizenProfile(row: any) {

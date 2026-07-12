@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
@@ -107,8 +107,14 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeGroup, { id: row.id }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeGroup, { id: row.id })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -118,11 +124,7 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }
@@ -159,9 +161,15 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
 
   reviewgroups(item: any) {
     item.loading = true;
-    this.dataService.get(ServerApis.reviewGroups, { id: item.id }).subscribe(
-      (response) => {
-        item.loading = false;
+    this.dataService
+      .get(ServerApis.reviewGroups, { id: item.id })
+      .pipe(
+        finalize(() => {
+          item.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success('بازبینی گروه با موفقیت انجام گردید.');
           this.getList();
@@ -169,10 +177,6 @@ export class AdminGroupListComponent extends AppBase implements AfterViewInit, O
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        item.loading = false;
-      },
-    );
+      });
   }
 }

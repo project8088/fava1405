@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
@@ -139,9 +139,15 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
     }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.removePersonel, { id: row.id }).subscribe(
-          (response) => {
-            row.loading = false;
+        this.dataService
+          .get(ServerApis.removePersonel, { id: row.id })
+          .pipe(
+            finalize(() => {
+              row.loading = false;
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -149,11 +155,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
               let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            row.loading = false;
-          },
-        );
+          });
       }
     });
   }

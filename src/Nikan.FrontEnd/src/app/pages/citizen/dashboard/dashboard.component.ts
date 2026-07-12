@@ -21,16 +21,18 @@ export class CitizenDashboardComponent extends AppBase implements OnInit {
     super();
   }
   ngOnInit(): void {
-    this.dataService.get(ServerApis.getAppDashbordList).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getAppDashbordList)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         const registerTypes: RegisterServiceModel[] = response.data ? response.data : [];
         this.registerTypes = registerTypes;
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+      });
 
     this.getCitizenInfo();
   }

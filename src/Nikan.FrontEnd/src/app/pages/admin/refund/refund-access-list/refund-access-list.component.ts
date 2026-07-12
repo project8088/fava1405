@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundAccessDialogComponent } from '../dialog/change-refund-access/change-refund-access.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
@@ -137,9 +137,15 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
 
   getCardNumbers(item: any) {
     item.loading = true;
-    this.dataService.get(ServerApis.getCardsNumber, { importId: item.id }).subscribe(
-      (response) => {
-        item.loading = false;
+    this.dataService
+      .get(ServerApis.getCardsNumber, { importId: item.id })
+      .pipe(
+        finalize(() => {
+          item.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success(' استعلام شماه کارت باموفقیت صورت گرفت.');
           this.router.navigate(['/admin/refund-access-details/' + item.id]);
@@ -147,11 +153,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        item.loading = false;
-      },
-    );
+      });
   }
 
   openReportDialog(item: any) {
@@ -179,8 +181,14 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeRefundAccess, { id: row.id }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeRefundAccess, { id: row.id })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -190,11 +198,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
@@ -55,9 +55,16 @@ export class AdminUsersComponent extends AppBase implements OnInit {
   }
 
   ngOnInit() {
-    this.dataService.get(ServerApis.getAllRols).subscribe((response) => {
-      this.roleList = response.data ? response.data : [];
-    });
+    this.dataService
+      .get(ServerApis.getAllRols)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.roleList = response.data ? response.data : [];
+      });
 
     this.getList();
   }

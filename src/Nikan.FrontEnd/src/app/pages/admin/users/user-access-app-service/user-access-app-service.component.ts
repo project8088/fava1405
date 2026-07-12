@@ -33,9 +33,16 @@ export class AdminUserAppAccessServiceComponent extends AppBase implements OnIni
   }
 
   ngOnInit(): void {
-    this.dataService.get(ServerApis.getBaseListAppService).subscribe((response) => {
-      this.appList = response.data ? response.data : [];
-    });
+    this.dataService
+      .get(ServerApis.getBaseListAppService)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.appList = response.data ? response.data : [];
+      });
   }
 
   getuserRoleList() {

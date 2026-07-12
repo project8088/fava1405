@@ -99,9 +99,15 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
     }).then((result) => {
       if (result.value) {
         row.loading = true;
-        this.dataService.get(ServerApis.removeAttachment, { id: row.id }).subscribe(
-          (response) => {
-            row.loading = false;
+        this.dataService
+          .get(ServerApis.removeAttachment, { id: row.id })
+          .pipe(
+            finalize(() => {
+              row.loading = false;
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف فایل با موفقیت انجام شد.');
               this.ngOnInit();
@@ -109,11 +115,7 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
               let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            row.loading = false;
-          },
-        );
+          });
       }
     });
   }

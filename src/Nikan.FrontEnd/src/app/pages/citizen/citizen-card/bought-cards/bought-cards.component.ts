@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { ChangeCardAddressDialogComponent } from '../../_dialogs/change-card-address/change-card-address.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-bought-cards',
@@ -31,15 +32,17 @@ export class BoughtCardsComponent extends AppBase implements OnInit {
   }
 
   getList() {
-    this.dataService.get(ServerApis.getCitizenCardInfo).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getCitizenCardInfo)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.cards = response.data;
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+      });
   }
 
   openCardAddress(info: any) {

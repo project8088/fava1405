@@ -37,9 +37,16 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
   }
 
   getGroups() {
-    this.dataService.get(ServerApis.getGroups).subscribe((response) => {
-      this.groupList = response.data;
-    });
+    this.dataService
+      .get(ServerApis.getGroups)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.groupList = response.data;
+      });
   }
 
   saveInfo() {

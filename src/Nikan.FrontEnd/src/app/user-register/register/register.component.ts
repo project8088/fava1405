@@ -115,16 +115,18 @@ export class RegisterComponent extends AppBase implements OnInit {
   }
 
   getEducationGroups() {
-    this.dataService.get(ServerApis.getEducationGroups).subscribe(
-      (response) => {
+    this.dataService
+      .get(ServerApis.getEducationGroups)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response) {
           this.educationGroups = response.data ?? [];
         }
-      },
-      (error: any) => {
-        this.toastrService.error('خطا در ارتباط با سرور!');
-      },
-    );
+      });
   }
 
   confirmPassValidator(predicate: any) {

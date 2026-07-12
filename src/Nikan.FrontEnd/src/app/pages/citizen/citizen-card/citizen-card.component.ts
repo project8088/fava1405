@@ -1,6 +1,6 @@
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Component, inject, OnInit } from '@angular/core';
-import { map, shareReplay } from 'rxjs/operators';
+import { finalize, map, shareReplay } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { RegisterServiceModel } from '@core/models/models';
 import { ServerApis } from '@core/server-apis';
@@ -31,30 +31,34 @@ export class CitizenCardComponent extends AppBase implements OnInit {
   }
 
   getCitizenCards() {
-    this.dataService.get(ServerApis.getCitizenCardInfo).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getCitizenCardInfo)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         const cards: RegisterServiceModel[] = response.data ? response.data : [];
         this.cards = cards;
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+      });
   }
 
   checkCanOrderCard(card: any) {
-    this.dataService.get(ServerApis.checkCanOrderCard, { cardInfoId: card.cardInfoId }).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.checkCanOrderCard, { cardInfoId: card.cardInfoId })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         const cards: RegisterServiceModel[] = response.data ? response.data : [];
         // if (response.isSuccess)
         //   this.router.navigateByUrl('./card-details');
         // else this.toastrService.error(response.message);
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+      });
   }
 }

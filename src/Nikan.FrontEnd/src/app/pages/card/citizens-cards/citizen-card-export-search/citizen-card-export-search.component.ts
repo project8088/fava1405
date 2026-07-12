@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
@@ -131,9 +131,15 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
 
   createZipFilePicture(item: any) {
     item.loading = true;
-    this.dataService.get(ServerApis.getExportCardPicture, { id: item.id }).subscribe(
-      (response) => {
-        item.loading = false;
+    this.dataService
+      .get(ServerApis.getExportCardPicture, { id: item.id })
+      .pipe(
+        finalize(() => {
+          item.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success('فایل زیپ تصاویر با موفقیت ایجاد شد.');
           this.router.navigate(['/card/export-details-citizen-card/' + item.id]);
@@ -141,11 +147,7 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        item.loading = false;
-      },
-    );
+      });
   }
 
   sendToPrint(item: any) {

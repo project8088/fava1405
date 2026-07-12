@@ -61,9 +61,16 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
 
   ngOnInit() {
     this.getOrganizations();
-    this.dataService.get(ServerApis.getBaseListAppService).subscribe((response) => {
-      this.appList = response.data ? response.data : [];
-    });
+    this.dataService
+      .get(ServerApis.getBaseListAppService)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.appList = response.data ? response.data : [];
+      });
   }
 
   saveInfo() {
@@ -144,8 +151,15 @@ export class AdminAddWebApiUserDialogComponent extends AppBase implements OnInit
       });
   }
   getAppRegisterList() {
-    this.dataService.get(ServerApis.getBaseListAppService).subscribe((response) => {
-      this.baseEnums.registerTypes = response.data;
-    });
+    this.dataService
+      .get(ServerApis.getBaseListAppService)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.baseEnums.registerTypes = response.data;
+      });
   }
 }

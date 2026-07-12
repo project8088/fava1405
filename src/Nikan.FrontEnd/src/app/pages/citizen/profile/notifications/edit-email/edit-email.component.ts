@@ -52,25 +52,33 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
   }
 
   getCardInfo() {
-    this.dataService.get(ServerApis.getCitizenEmail).subscribe(
-      (data) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getCitizenEmail)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data) => {
         this.formIsShowing = data.data.Email;
         this.cardForm.patchValue({
           citizenId: data.data.citizenId,
           email: data.data.email,
         });
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+      });
   }
 
   sendCode() {
     const form = this.cardForm.getRawValue();
-    this.dataService.post(ServerApis.checkValidMobileNumberForCitzenRegister, form).subscribe(
-      (response) => {
+    this.dataService
+      .post(ServerApis.checkValidMobileNumberForCitzenRegister, form)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.codeSent = true;
           this.timer.startTimer().then(() => {
@@ -94,11 +102,7 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
           let msg = response.messages ? response.messages : 'ایمیل معتبر نیست';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+      });
   }
 
   saveForm() {
@@ -106,19 +110,22 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
       ...this.confirmForm.getRawValue(),
       ...this.cardForm.getRawValue(),
     };
-    this.dataService.post(ServerApis.updteCitizenEmailAddress, form).subscribe(
-      (response) => {
+    this.dataService
+      .post(ServerApis.updteCitizenEmailAddress, form)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success(response.message);
         } else {
           let msg = response.messages ? response.messages : 'ایمیل معتبر نیست';
           this.toastrService.error(msg);
         }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+      });
   }
 
   /**

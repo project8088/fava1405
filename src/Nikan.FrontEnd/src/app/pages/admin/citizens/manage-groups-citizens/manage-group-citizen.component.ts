@@ -111,9 +111,15 @@ export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit
           CitizenId: row.citizenId,
         };
 
-        this.dataService.post(ServerApis.removeCitizenFromGroup, dataToPost).subscribe(
-          (response) => {
-            row.loading = false;
+        this.dataService
+          .post(ServerApis.removeCitizenFromGroup, dataToPost)
+          .pipe(
+            finalize(() => {
+              row.loading = false;
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getcitizengroupList();
@@ -121,11 +127,7 @@ export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit
               let msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            row.loading = false;
-          },
-        );
+          });
       }
     });
   }

@@ -94,8 +94,14 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
       cancelButtonText: 'خیر',
     }).then((result) => {
       if (result.value) {
-        this.dataService.get(ServerApis.removeImportFile, { importId: row.importId }).subscribe(
-          (response) => {
+        this.dataService
+          .get(ServerApis.removeImportFile, { importId: row.importId })
+          .pipe(
+            finalize(() => {
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
             if (response.isSuccess) {
               this.toastrService.success('حذف اطلاعات با موفقیت انجام شد.');
               this.getList();
@@ -105,11 +111,7 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
                 : 'متاسفانه خطایی در سرور رخ داده است!';
               this.toastrService.error(msg);
             }
-          },
-          (error: any) => {
-            this.toastrService.error('حذف اطلاعات با خطا مواجه شده است!');
-          },
-        );
+          });
       }
     });
   }

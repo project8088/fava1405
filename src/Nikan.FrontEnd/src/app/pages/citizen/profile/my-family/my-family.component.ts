@@ -124,13 +124,20 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
   }
 
   getAllCitizenFamilyByFamily() {
-    this.dataService.get(ServerApis.getAllCitizenFamilyByFamily).subscribe((response) => {
-      if (response && response.isSuccess) {
-        this.familyByfamilyList = response.data ? response.data.familyList : [];
-      } else {
-        let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    });
+    this.dataService
+      .get(ServerApis.getAllCitizenFamilyByFamily)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.familyByfamilyList = response.data ? response.data.familyList : [];
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 }
