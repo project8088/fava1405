@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 import { OWL_OPTIONS } from '../../owal.config';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'home-managers',
@@ -25,14 +26,16 @@ export class HomeManagersListComponent extends AppBase implements OnInit {
 
   getManagerList() {
     this.loadingManagers = true;
-    this.dataService.get(ServerApis.getManagersList, {}).subscribe(
-      (response) => {
-        this.loadingManagers = false;
-        this.managerList = response.data ? response.data : [];
-      },
-      (error: any) => {
-        this.loadingManagers = false;
-      },
-    );
+    this.dataService.get(ServerApis.getManagersList, {})
+      .pipe(
+        finalize(() => {
+          this.loadingManagers = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              this.managerList = response.data ? response.data : [];
+            }, (error: any) => {
+            });
   }
 }

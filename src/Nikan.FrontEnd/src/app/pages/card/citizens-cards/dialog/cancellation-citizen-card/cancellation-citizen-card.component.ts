@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'ard-cancellation-citizen-card-dialog',
@@ -59,21 +60,23 @@ export class CardCancellationCitizenCardDialogComponent extends AppBase implemen
     params.cardCancellationOnDate = params.cardCancellationOnDate;
     params.sendSms = params.sendSms;
 
-    this.dataService.post(url, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.matDialogRef.close(true);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.post(url, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.matDialogRef.close(true);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 }

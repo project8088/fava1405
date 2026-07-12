@@ -6,6 +6,7 @@ import { NewsDto, NewsCommentDto } from '@core/models/news';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { Meta, Title } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'home-news-details',
@@ -59,47 +60,51 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
 
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.news = response.data;
-          this.tags = this.news?.seoTags?.split(',') ?? [];
-          if (this.news?.seoTags) {
-            this.titleService.setTitle(this.news.title);
-            this.metaService.addTags([
-              { name: 'keywords', content: this.news.seoTags },
-              { name: 'description', content: this.news.seoDescription },
-              { name: 'robots', content: 'index, follow' },
-            ]);
-          }
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.news = response.data;
+                this.tags = this.news?.seoTags?.split(',') ?? [];
+                if (this.news?.seoTags) {
+                  this.titleService.setTitle(this.news.title);
+                  this.metaService.addTags([
+                    { name: 'keywords', content: this.news.seoTags },
+                    { name: 'description', content: this.news.seoDescription },
+                    { name: 'robots', content: 'index, follow' },
+                  ]);
+                }
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getComments() {
     this.loadingComments = true;
-    this.dataService.get(ServerApis.getNewsPublishComments, { id: this.newsId }).subscribe(
-      (response) => {
-        this.loadingComments = false;
-        if (response.isSuccess) {
-          this.comments = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingComments = false;
-      },
-    );
+    this.dataService.get(ServerApis.getNewsPublishComments, { id: this.newsId })
+      .pipe(
+        finalize(() => {
+          this.loadingComments = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.comments = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   sendComment() {
@@ -116,53 +121,59 @@ export class MainNewsDetailsComponent extends AppBase implements OnInit {
       newsItemId: +this.newsId,
     };
     this.sendingComment = true;
-    this.dataService.post(ServerApis.addNewsComments, param).subscribe(
-      (response) => {
-        this.sendingComment = false;
-        if (response.isSuccess) {
-          this.frm.reset();
-          this.toastrService.success(
-            'با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.',
-            'پیام شما با موفقیت ارسال شد.',
-          );
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.sendingComment = false;
-      },
-    );
+    this.dataService.post(ServerApis.addNewsComments, param)
+      .pipe(
+        finalize(() => {
+          this.sendingComment = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.frm.reset();
+                this.toastrService.success(
+                  'با تشکر، پیام شما بعد از بررسی منتشر خواهد شد.',
+                  'پیام شما با موفقیت ارسال شد.',
+                );
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getLastNews() {
     this.loadingLastNews = true;
-    this.dataService.get(ServerApis.getLastNews, { top: 10 }).subscribe(
-      (response) => {
-        this.loadingLastNews = false;
-        if (response.isSuccess) {
-          this.lastNewsList = response.data ? response.data : [];
-        }
-      },
-      (error: any) => {
-        this.loadingLastNews = false;
-      },
-    );
+    this.dataService.get(ServerApis.getLastNews, { top: 10 })
+      .pipe(
+        finalize(() => {
+          this.loadingLastNews = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.lastNewsList = response.data ? response.data : [];
+              }
+            }, (error: any) => {
+            });
   }
 
   getMostVisitedNews() {
     this.loadingVisited = true;
-    this.dataService.get(ServerApis.getMostVisitedNews, { top: 10 }).subscribe(
-      (response) => {
-        this.loadingVisited = false;
-        if (response.isSuccess) {
-          this.mostVisitedList = response.data ? response.data : [];
-        }
-      },
-      (error: any) => {
-        this.loadingVisited = false;
-      },
-    );
+    this.dataService.get(ServerApis.getMostVisitedNews, { top: 10 })
+      .pipe(
+        finalize(() => {
+          this.loadingVisited = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.mostVisitedList = response.data ? response.data : [];
+              }
+            }, (error: any) => {
+            });
   }
 }

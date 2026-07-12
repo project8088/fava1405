@@ -4,6 +4,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-ticket-activity',
@@ -40,20 +41,22 @@ export class TicketActivityComponent extends AppBase implements OnInit {
   getList() {
     this.loading = true;
     this.list = [];
-    this.dataService.get(ServerApis.getTicketActivity, { ticketId: this.id }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response.isSuccess) {
-          this.list = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+    this.dataService.get(ServerApis.getTicketActivity, { ticketId: this.id })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.list = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   delete(row: any) {
@@ -98,28 +101,29 @@ export class TicketActivityComponent extends AppBase implements OnInit {
     var form = this.frm.value;
 
     this.dataService
-      .post(ServerApis.addTicketActivity, {
-        TicketId: this.id,
-        description: form.description,
-        isSubtractFromContract: form.isSubtractFromContract ? form.isSubtractFromContract : false,
-        onDate: this.dataService.formatDate(form.onDate),
-        minute: form.minute,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.addTicketActivity, {
+              TicketId: this.id,
+              description: form.description,
+              isSubtractFromContract: form.isSubtractFromContract ? form.isSubtractFromContract : false,
+              onDate: this.dataService.formatDate(form.onDate),
+              minute: form.minute,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.frm.reset({ commentText: '', isSubtractFromContract: true });
-            this.getList();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                  this.frm.reset({ commentText: '', isSubtractFromContract: true });
+                  this.getList();
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

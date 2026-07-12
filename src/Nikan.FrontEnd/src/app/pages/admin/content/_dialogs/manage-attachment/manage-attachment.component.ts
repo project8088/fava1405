@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 declare var $: any;
 
@@ -40,36 +41,38 @@ export class ManageAttachmentDialogComponent extends AppBase implements OnInit {
 
   ngOnInit(): void {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getAttachmentsForAdmin, { guid: this.data.guid }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.attachments = response.data ? response.data : [];
-          this.attachments.forEach((item) => {
-            var t = item.filePath.split('.');
-            item.fileExtension = t[t.length - 1];
-            item.isImage =
-              ['jpg', 'jpeg', 'png', 'gif', 'tif', 'bmp'].indexOf(
-                item.fileExtension.toLowerCase(),
-              ) > -1
-                ? true
-                : false;
-          });
-          setTimeout(() => {
-            $('.lightGallery').lightGallery({
-              selector: 'a',
-              thumbnail: false,
+    this.dataService.get(ServerApis.getAttachmentsForAdmin, { guid: this.data.guid })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.attachments = response.data ? response.data : [];
+                this.attachments.forEach((item) => {
+                  var t = item.filePath.split('.');
+                  item.fileExtension = t[t.length - 1];
+                  item.isImage =
+                    ['jpg', 'jpeg', 'png', 'gif', 'tif', 'bmp'].indexOf(
+                      item.fileExtension.toLowerCase(),
+                    ) > -1
+                      ? true
+                      : false;
+                });
+                setTimeout(() => {
+                  $('.lightGallery').lightGallery({
+                    selector: 'a',
+                    thumbnail: false,
+                  });
+                }, 1000);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
             });
-          }, 1000);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
   }
 
   completeUpload(ev: any) {

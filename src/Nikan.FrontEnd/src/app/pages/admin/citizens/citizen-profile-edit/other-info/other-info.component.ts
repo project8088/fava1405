@@ -203,19 +203,21 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
       educationStatues: form.educationStatues,
       villageOfBirth: form.villageOfBirth,
     };
-    this.dataService.post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

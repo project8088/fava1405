@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
@@ -70,22 +70,24 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.queueId }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response && response.isSuccess) {
-          this.info = response.data;
-          this.courseId = response.data.courseId;
+    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.queueId })
+      .pipe(
+        finalize(() => {
           this.loadingData = false;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.info = response.data;
+                this.courseId = response.data.courseId;
+                this.loadingData = false;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getList() {

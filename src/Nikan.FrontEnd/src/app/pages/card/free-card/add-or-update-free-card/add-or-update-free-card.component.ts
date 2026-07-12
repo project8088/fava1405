@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'card-add-or-update-free-card',
@@ -99,27 +100,28 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
   getStoreInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCardInfo, {
-        cardInfoId: this.id,
-        forEdit: true,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCardInfo, {
+              cardInfoId: this.id,
+              forEdit: true,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            response.data.cardTypeId = response.data.cardTypeId.toString();
-            this.storeForm.patchValue(response.data);
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  response.data.cardTypeId = response.data.cardTypeId.toString();
+                  this.storeForm.patchValue(response.data);
 
-            setTimeout(() => {}, 1000);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+                  setTimeout(() => {}, 1000);
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -134,21 +136,23 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
     let params = form;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.addRequestFreeCard, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/card/free-request-card-list']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addRequestFreeCard, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.router.navigate(['/card/free-request-card-list']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
   /**
    * for bind object in select

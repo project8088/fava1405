@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-organization-list',
@@ -62,24 +63,26 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllOrganization).subscribe(
-      (response) => {
-        this.isLoadingResults = false;
-        if (response.isSuccess) {
-          this.data = response.data ? response.data : [];
-          this.dataSource.data = this.data;
-          this.listCount = this.data.length;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllOrganization)
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.data = response.data ? response.data : [];
+                this.dataSource.data = this.data;
+                this.listCount = this.data.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   pageEvent(event: PageEvent) {
@@ -97,26 +100,28 @@ export class AdminOrganizationListComponent extends AppBase implements AfterView
       return;
     }
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateOrganization, this.frm.value).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.showAddOrUpdatePanel = false;
-          this.frm.reset();
-          this.frm.get('isActive')?.setValue(false);
-          this.frm.get('cardDistributionCenters')?.setValue(false);
-          this.frm.get('supportCenters')?.setValue(false);
-          this.getList();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateOrganization, this.frm.value)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.showAddOrUpdatePanel = false;
+                this.frm.reset();
+                this.frm.get('isActive')?.setValue(false);
+                this.frm.get('cardDistributionCenters')?.setValue(false);
+                this.frm.get('supportCenters')?.setValue(false);
+                this.getList();
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   delete(row: any) {

@@ -74,18 +74,20 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
 
   getEducationGroups() {
     this.loadingEnums = true;
-    this.dataService.get(ServerApis.getEducationGroups).subscribe(
-      (response) => {
-        this.loadingEnums = false;
-        if (response) {
-          this.baseEnums.educationGroups = response;
-        }
-      },
-      (error: any) => {
-        this.toastrService.error('خطا در ارتباط با سرور!');
-        this.loadingEnums = false;
-      },
-    );
+    this.dataService.get(ServerApis.getEducationGroups)
+      .pipe(
+        finalize(() => {
+          this.loadingEnums = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response) {
+                this.baseEnums.educationGroups = response;
+              }
+            }, (error: any) => {
+              this.toastrService.error('خطا در ارتباط با سرور!');
+            });
   }
 
   getPersonalInfo() {
@@ -155,19 +157,21 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
       jobGroup: form.jobGroup,
       jobTitle: form.jobTitle,
     };
-    this.dataService.post(ServerApis.updteCitizenByAdmin, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.updteCitizenByAdmin, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

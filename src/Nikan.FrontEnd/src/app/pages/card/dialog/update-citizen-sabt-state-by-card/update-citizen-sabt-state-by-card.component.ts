@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-adm-update-citizen-sabt-state-by-card-dialog',
@@ -41,23 +42,24 @@ export class CardUpdateCitizenSabtStateByCardDialogComponent extends AppBase imp
     this.loading = true;
     //todo
     this.dataService
-      .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess) {
-            this.info = response.data;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-            this.matDialogRef.close(false);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-          this.matDialogRef.close(false);
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.info = response.data;
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                  this.matDialogRef.close(false);
+                }
+              }, (error: any) => {
+                this.matDialogRef.close(false);
+              });
   }
 
   displayFn(item: any): string {
@@ -75,24 +77,25 @@ export class CardUpdateCitizenSabtStateByCardDialogComponent extends AppBase imp
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.updateSabtStatusByCard, {
-        userCode: this.userCode,
-        sabtStatus: formValue.sabtStatus,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.updateSabtStatusByCard, {
+              userCode: this.userCode,
+              sabtStatus: formValue.sabtStatus,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(true);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

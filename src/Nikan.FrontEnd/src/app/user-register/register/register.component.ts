@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
 import { UserRegisterService } from '../userregister.service';
 import { AppBase } from '@app/app.base';
@@ -180,20 +180,23 @@ export class RegisterComponent extends AppBase implements OnInit {
 
     e.preventDefault();
     const userPreRegisterData = this.AccountService.getUserPreRegisterData();
-    this.dataService.post(ServerApis.reSendVerfiyCode, userPreRegisterData).subscribe(
-      (data: ApiResult<any>) => {
-        if (data.isSuccess) {
-          this.toastrService.success(data.messages);
-        } else {
-          this.toastrService.error(data.messages);
+    this.dataService.post(ServerApis.reSendVerfiyCode, userPreRegisterData)
+      .pipe(
+        finalize(() => {
           this.codeSent = false;
-        }
-      },
-      (error: any) => {
-        this.codeSent = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data: ApiResult<any>) => {
+              if (data.isSuccess) {
+                this.toastrService.success(data.messages);
+              } else {
+                this.toastrService.error(data.messages);
+                this.codeSent = false;
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   getListOptions(options: { key: number; text: string }[]) {

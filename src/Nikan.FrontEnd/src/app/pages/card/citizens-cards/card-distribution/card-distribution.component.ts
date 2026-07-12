@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -70,44 +70,50 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     var param: any = this.searchForm.value;
     this.searchForm.get('value')?.disable();
     merge()
+            .pipe(
+              startWith(param),
+              switchMap(() => {
+                return this.dataService.get(ServerApis.searchCardForQueue, param);
+              }),
+              map((response) => {
+                if (response.isSuccess && response.data) {
+                  this.card = response.data ? response.data : {};
+                  this.searchForm.get('value')?.enable();
+                  this.searchForm.get('value')?.setValue('');
+                  this.searchElement.nativeElement.focus();
+                  this.loading = false;
+                  if (param.autopost == true) {
+                    this.sendCardToQueue(
+                      response.data.citizenCardInfoId,
+                      response.data.citizenId,
+                      response.data.deliverType,
+                      response.data.cardTypeId,
+                      response.data.deliveringCenterId,
+                    );
+                  }
+                } else {
+                  this.card = null;
+                  this.loading = true;
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                  this.searchForm.get('value')?.enable();
+                  this.searchForm.get('value')?.setValue('');
+                  this.searchElement.nativeElement.focus();
+                  this.loading = false;
+                }
+              }),
+              catchError((err) => {
+                this.loading = false;
+                this.searchForm.get('value')?.enable();
+                this.searchForm.get('value')?.setValue('');
+                this.searchElement.nativeElement.focus();
+                return observableOf([]);
+              }),
+            )
       .pipe(
-        startWith(param),
-        switchMap(() => {
-          return this.dataService.get(ServerApis.searchCardForQueue, param);
-        }),
-        map((response) => {
-          if (response.isSuccess && response.data) {
-            this.card = response.data ? response.data : {};
-            this.searchForm.get('value')?.enable();
-            this.searchForm.get('value')?.setValue('');
-            this.searchElement.nativeElement.focus();
-            this.loading = false;
-            if (param.autopost == true) {
-              this.sendCardToQueue(
-                response.data.citizenCardInfoId,
-                response.data.citizenId,
-                response.data.deliverType,
-                response.data.cardTypeId,
-                response.data.deliveringCenterId,
-              );
-            }
-          } else {
-            this.card = null;
-            this.loading = true;
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-            this.searchForm.get('value')?.enable();
-            this.searchForm.get('value')?.setValue('');
-            this.searchElement.nativeElement.focus();
-            this.loading = false;
-          }
-        }),
-        catchError((err) => {
+        finalize(() => {
           this.loading = false;
-          this.searchForm.get('value')?.enable();
-          this.searchForm.get('value')?.setValue('');
-          this.searchElement.nativeElement.focus();
-          return observableOf([]);
+          this.chdr.detectChanges();
         }),
       )
       .subscribe((data) => {});
@@ -131,41 +137,45 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     params.cardTypeId = cardTypeId;
     params.deliveringCenterId = deliveringCenterId;
 
-    this.dataService.post(url, params).subscribe(
-      (response) => {
-        this.isSend = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success(response.messages);
-          this.queueId = response.data.queueId;
-          this.getQueueListInCourse();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSend = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.post(url, params)
+      .pipe(
+        finalize(() => {
+          this.isSend = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success(response.messages);
+                this.queueId = response.data.queueId;
+                this.getQueueListInCourse();
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   getQueueListInCourse() {
     this.loadingqueue = true;
-    this.dataService.get(ServerApis.getQueueListInCourse, { courseId: this.courseId }).subscribe(
-      (response) => {
-        this.loadingqueue = false;
-        if (response.isSuccess) {
-          this.queuelist = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingqueue = false;
-      },
-    );
+    this.dataService.get(ServerApis.getQueueListInCourse, { courseId: this.courseId })
+      .pipe(
+        finalize(() => {
+          this.loadingqueue = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.queuelist = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   openCitizenProfile(row: any) {

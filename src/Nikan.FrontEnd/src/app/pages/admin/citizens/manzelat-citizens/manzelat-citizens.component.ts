@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { MatSort } from '@angular/material/sort';
@@ -184,31 +184,32 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
       if (result.isConfirmed) {
         this.sendingSms = true;
         this.dataService
-          .post(ServerApis.sendSabtAhvalCitizensSms, {
-            ExportId: 0,
-            Ids: selectedIds,
-          })
-          .subscribe(
-            (response) => {
+                    .post(ServerApis.sendSabtAhvalCitizensSms, {
+                      ExportId: 0,
+                      Ids: selectedIds,
+                    })
+          .pipe(
+            finalize(() => {
               this.sendingSms = false;
-              if (response.isSuccess) {
-                Swal.fire({
-                  title: 'پیامک با موفقیت ارسال شد',
-                  text: response.messages,
-                });
-                this.toastrService.success('پیامک با موفقیت ارسال شد.');
-              } else {
-                let msg = response.messages
-                  ? response.messages
-                  : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            },
-            (error: any) => {
-              this.sendingSms = false;
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
-            },
-          );
+              this.chdr.detectChanges();
+            }),
+          )
+          .subscribe((response) => {
+                        if (response.isSuccess) {
+                          Swal.fire({
+                            title: 'پیامک با موفقیت ارسال شد',
+                            text: response.messages,
+                          });
+                          this.toastrService.success('پیامک با موفقیت ارسال شد.');
+                        } else {
+                          let msg = response.messages
+                            ? response.messages
+                            : 'متاسفانه خطایی در سرور رخ داده است!';
+                          this.toastrService.error(msg);
+                        }
+                      }, (error: any) => {
+                        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
+                      });
       }
     });
   }

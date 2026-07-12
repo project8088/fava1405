@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { ServerApis } from '@core/server-apis';
@@ -110,34 +110,35 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.companyRegisterAsync, {
-        CompanyName: formValue.companyName,
-        EnglishName: formValue.englishName,
-        CompanyRepresentative: formValue.companyRepresentative,
-        EstablishedYear: formValue.establishedYear,
-        TxtTinNo: formValue.txtTinNo,
-        TxtRegNO: formValue.txtRegNO,
-        MobileNumber: formValue.mobileNumber,
-        Email: formValue.email,
-        UserName: formValue.userName,
-        Password: formValue.password,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.companyRegisterAsync, {
+              CompanyName: formValue.companyName,
+              EnglishName: formValue.englishName,
+              CompanyRepresentative: formValue.companyRepresentative,
+              EstablishedYear: formValue.establishedYear,
+              TxtTinNo: formValue.txtTinNo,
+              TxtRegNO: formValue.txtRegNO,
+              MobileNumber: formValue.mobileNumber,
+              Email: formValue.email,
+              UserName: formValue.userName,
+              Password: formValue.password,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
-            this.router.navigate(['/admin/companies']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
+                  this.router.navigate(['/admin/companies']);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   compareFn(c1: any, c2: any): boolean {

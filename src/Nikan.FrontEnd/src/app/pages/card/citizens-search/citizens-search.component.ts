@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { MatSort } from '@angular/material/sort';
@@ -54,24 +54,30 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
     if (param.birthDate) param.birthDate = this.dataService.formatDate(param.birthDate);
 
     merge()
+            .pipe(
+              startWith(param),
+              switchMap(() => {
+                this.loading = false;
+                return this.dataService.get(ServerApis.searchCitizenByCardUser, param);
+              }),
+              map((response) => {
+                this.loading = false;
+                if (response.isSuccess && response.data) {
+                  this.citizen = response.data ? response.data : {};
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }),
+              catchError((err) => {
+                this.loading = false;
+                return observableOf([]);
+              }),
+            )
       .pipe(
-        startWith(param),
-        switchMap(() => {
+        finalize(() => {
           this.loading = false;
-          return this.dataService.get(ServerApis.searchCitizenByCardUser, param);
-        }),
-        map((response) => {
-          this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.citizen = response.data ? response.data : {};
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        }),
-        catchError((err) => {
-          this.loading = false;
-          return observableOf([]);
+          this.chdr.detectChanges();
         }),
       )
       .subscribe((data) => {});

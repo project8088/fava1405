@@ -3,6 +3,7 @@ import { ServerApis } from '@core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'change-current-user-password',
@@ -51,26 +52,27 @@ export class ChangeCurrentUserPasswordComponent extends AppBase implements OnIni
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.changeCurrentUserPassword, {
-        oldPassword: formValue.oldPassword,
-        NewPassword: formValue.password,
-        ConfirmPassword: formValue.confirmPassword,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.changeCurrentUserPassword, {
+              oldPassword: formValue.oldPassword,
+              NewPassword: formValue.password,
+              ConfirmPassword: formValue.confirmPassword,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.authService.logout(false);
-            this.router.navigate(['/account/login']);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.authService.logout(false);
+                  this.router.navigate(['/account/login']);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

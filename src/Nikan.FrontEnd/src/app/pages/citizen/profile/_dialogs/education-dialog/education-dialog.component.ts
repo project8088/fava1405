@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { startWith, map, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { karjoEducationDto } from '@core/models/citizen/education';
@@ -174,36 +174,37 @@ export class CitizenEducationDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.saveCitizenEducation, {
-        gradeId: +formValue.grade.key,
-        grade: formValue.grade.text,
-        major: formValue.major ? formValue.major.text : null,
-        majorId: formValue.major ? +formValue.major.key : null,
+            .post(ServerApis.saveCitizenEducation, {
+              gradeId: +formValue.grade.key,
+              grade: formValue.grade.text,
+              major: formValue.major ? formValue.major.text : null,
+              majorId: formValue.major ? +formValue.major.key : null,
 
-        university: formValue.university ? formValue.university : '',
-        dateOfStart: formValue.dateOfStart
-          ? this.dataService.formatDate(formValue.dateOfStart)
-          : '',
-        dateOfEnd: formValue.dateOfEnd ? this.dataService.formatDate(formValue.dateOfEnd) : '',
-        userId: this.userId,
-        id: this.education ? +this.education?.id! : null,
-      })
-      .subscribe(
-        (response) => {
+              university: formValue.university ? formValue.university : '',
+              dateOfStart: formValue.dateOfStart
+                ? this.dataService.formatDate(formValue.dateOfStart)
+                : '',
+              dateOfEnd: formValue.dateOfEnd ? this.dataService.formatDate(formValue.dateOfEnd) : '',
+              userId: this.userId,
+              id: this.education ? +this.education?.id! : null,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(response.data);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(response.data);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   compareFn(c1: any, c2: any): boolean {

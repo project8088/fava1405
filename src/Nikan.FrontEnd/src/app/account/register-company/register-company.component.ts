@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { BaseDataModel } from '@core/models/base-data-model';
@@ -109,9 +109,14 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
         UserName: formValue.userName,
         Password: formValue.password,
       })
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
-          this.isSaving = false;
           if (response && response.isSuccess) {
             this.toastrService.success('ثبت نام شما با موفقیت انجام شد.');
             if (response.data.access_token && response.data.refresh_token) {
@@ -138,7 +143,6 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
           }
         },
         (error: any) => {
-          this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
       );

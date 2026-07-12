@@ -6,7 +6,7 @@ import { CitizenProfileComponent } from '../profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '@core/models/citizen/global-information';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
@@ -173,69 +173,73 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
   }
   getEducationGroups() {
     this.loadingEnums = true;
-    this.dataService.get(ServerApis.getEducationGroups).subscribe(
-      (response) => {
-        this.loadingEnums = false;
-        if (response) {
-          this.baseEnums.educationGroups = response;
-        }
-      },
-      (error: any) => {
-        this.toastrService.error('خطا در ارتباط با سرور!');
-        this.loadingEnums = false;
-      },
-    );
+    this.dataService.get(ServerApis.getEducationGroups)
+      .pipe(
+        finalize(() => {
+          this.loadingEnums = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response) {
+                this.baseEnums.educationGroups = response;
+              }
+            }, (error: any) => {
+              this.toastrService.error('خطا در ارتباط با سرور!');
+            });
   }
   getPersonalInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getCitizenBaseInfoByCitizen).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-          (this, (this.citizenInfo = response.data));
+    this.dataService.get(ServerApis.getCitizenBaseInfoByCitizen)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+                (this, (this.citizenInfo = response.data));
 
-          this.personalForm.patchValue({
-            date_SabtConfirm: response.data.date_SabtConfirm
-              ? new Date(response.data.date_SabtConfirm)
-              : '',
+                this.personalForm.patchValue({
+                  date_SabtConfirm: response.data.date_SabtConfirm
+                    ? new Date(response.data.date_SabtConfirm)
+                    : '',
 
-            educationTitle: response.data.educationField,
-            educationGroup: String(response.data.educationGroupId),
-            educationGroupId: response.data.educationGroupId,
+                  educationTitle: response.data.educationField,
+                  educationGroup: String(response.data.educationGroupId),
+                  educationGroupId: response.data.educationGroupId,
 
-            alley: response.data.alley,
-            region: response.data.region,
-            postalCode: response.data.postalCode,
+                  alley: response.data.alley,
+                  region: response.data.region,
+                  postalCode: response.data.postalCode,
 
-            marital: response.data.mariageStatus,
-            educationStatues: response.data.educationStatues,
-            educationLevel: response.data.educationLevel,
-            jobGroup: response.data.jobGroupId,
+                  marital: response.data.mariageStatus,
+                  educationStatues: response.data.educationStatues,
+                  educationLevel: response.data.educationLevel,
+                  jobGroup: response.data.jobGroupId,
 
-            jobTitle: response.data.jobTitle,
-            stateId: response.data.city ? response.data.city.parentValue : null,
-            cityId: String(response.data.cityId),
-            plaque: response.data.plaque,
-            street: response.data.street,
-            phoneNumber: response.data.phone,
-            state: {
-              value: response.data.cityId,
-              text: response.data.city,
-            },
-          });
+                  jobTitle: response.data.jobTitle,
+                  stateId: response.data.city ? response.data.city.parentValue : null,
+                  cityId: String(response.data.cityId),
+                  plaque: response.data.plaque,
+                  street: response.data.street,
+                  phoneNumber: response.data.phone,
+                  state: {
+                    value: response.data.cityId,
+                    text: response.data.city,
+                  },
+                });
 
-          this.userStatus = response.data.sabtStatus;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+                this.userStatus = response.data.sabtStatus;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   savePersonalInfo() {
@@ -248,40 +252,41 @@ export class CitizenPersonalInfoComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.updteOtherBaseInfoByCitizen, {
-        mariageStatus: formValue.marital,
+            .post(ServerApis.updteOtherBaseInfoByCitizen, {
+              mariageStatus: formValue.marital,
 
-        educationStatues: formValue.educationStatues,
-        educationGroup: +formValue.educationGroup,
-        educationTitle: formValue.educationTitle,
+              educationStatues: formValue.educationStatues,
+              educationGroup: +formValue.educationGroup,
+              educationTitle: formValue.educationTitle,
 
-        jobTitle: formValue.jobTitle,
-        jobGroup: formValue.jobGroup,
-        educationLevel: formValue.educationLevel,
-        phoneNumber: formValue.phoneNumber,
-        postalCode: String(formValue.postalCode),
-        alley: formValue.alley || '',
-        plaque: formValue.plaque || '',
-        street: formValue.street || '',
-        region: formValue.region || '',
-        cityId: Number(formValue.cityId) || 0,
-      })
-      .subscribe(
-        (response) => {
+              jobTitle: formValue.jobTitle,
+              jobGroup: formValue.jobGroup,
+              educationLevel: formValue.educationLevel,
+              phoneNumber: formValue.phoneNumber,
+              postalCode: String(formValue.postalCode),
+              alley: formValue.alley || '',
+              plaque: formValue.plaque || '',
+              street: formValue.street || '',
+              region: formValue.region || '',
+              cityId: Number(formValue.cityId) || 0,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.getPersonalInfo();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.getPersonalInfo();
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   /**

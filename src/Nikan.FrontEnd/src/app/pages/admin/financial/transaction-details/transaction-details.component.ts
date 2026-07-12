@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-transaction-details',
@@ -31,20 +32,22 @@ export class TransactionDetailsComponent extends AppBase implements OnInit, Afte
 
   getInfo() {
     this.isLoadingResults = true;
-    return this.dataService.get(ServerApis.getTransaction, { id: this.id }).subscribe(
-      (response) => {
+    return this.dataService.get(ServerApis.getTransaction, { id: this.id })
+    .pipe(
+      finalize(() => {
         this.isLoadingResults = false;
-        if (response.isSuccess && response.data) {
-          this.transactionInfo = response.data ? response.data : {};
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+        this.chdr.detectChanges();
+      }),
+    )
+    .subscribe((response) => {
+            if (response.isSuccess && response.data) {
+              this.transactionInfo = response.data ? response.data : {};
+            } else {
+              let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          }, (error: any) => {
+          });
   }
 
   back() {

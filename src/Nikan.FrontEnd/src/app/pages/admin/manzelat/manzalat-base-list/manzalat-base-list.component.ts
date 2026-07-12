@@ -3,6 +3,7 @@ import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-manzalat-base-list',
@@ -30,20 +31,22 @@ export class AdminManzalatBaseFromListComponent extends AppBase implements OnIni
 
   getList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getManzalatBaseForms, {}).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.userGroupList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.get(ServerApis.getManzalatBaseForms, {})
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.userGroupList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 }

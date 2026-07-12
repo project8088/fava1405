@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-update-user-dialog',
@@ -50,22 +51,24 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
   getUserInfo() {
     this.loading = true;
     //todo
-    this.dataService.get(ServerApis.getUserAccountInfo, { userId: this.userId }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response.isSuccess) {
-          this.userForm.patchValue(response.data);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-          this.matDialogRef.close(false);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.matDialogRef.close(false);
-      },
-    );
+    this.dataService.get(ServerApis.getUserAccountInfo, { userId: this.userId })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.userForm.patchValue(response.data);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+                this.matDialogRef.close(false);
+              }
+            }, (error: any) => {
+              this.matDialogRef.close(false);
+            });
   }
 
   displayFn(item: any): string {
@@ -83,30 +86,31 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.updateCompanyUserAccount, {
-        CompanyId: this.companyId && this.companyId != '0' ? +this.companyId : null,
-        UserId: this.userId,
-        DisplayName: formValue.displayName,
-        // UserName: formValue.username,
-        MobileNumber: formValue.mobileNumber,
-        Email: formValue.emailAddress,
-        UserAccountState: formValue.userAccountState,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.updateCompanyUserAccount, {
+              CompanyId: this.companyId && this.companyId != '0' ? +this.companyId : null,
+              UserId: this.userId,
+              DisplayName: formValue.displayName,
+              // UserName: formValue.username,
+              MobileNumber: formValue.mobileNumber,
+              Email: formValue.emailAddress,
+              UserAccountState: formValue.userAccountState,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(true);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   compareFn(c1: any, c2: any): boolean {

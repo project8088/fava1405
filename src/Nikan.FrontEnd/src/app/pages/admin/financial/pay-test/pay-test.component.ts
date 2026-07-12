@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-pay-test',
@@ -34,28 +35,29 @@ export class AdminPayTestComponent extends AppBase implements OnInit {
     this.loading = true;
     var formValue = this.form.value;
     this.dataService
-      .post(ServerApis.testPay, {
-        OrderId: +formValue.orderId,
-        Amount: +formValue.amount,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.testPay, {
+              OrderId: +formValue.orderId,
+              Amount: +formValue.amount,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess) {
-            this.RefId = response.data.refId;
-            var form: any = document.getElementById('payFormMellat');
-            this.waitForRedirectToBank = true;
-            setTimeout(() => {
-              form.submit();
-            }, 1000);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.RefId = response.data.refId;
+                  var form: any = document.getElementById('payFormMellat');
+                  this.waitForRedirectToBank = true;
+                  setTimeout(() => {
+                    form.submit();
+                  }, 1000);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-terms',
@@ -28,23 +29,24 @@ export class TermsComponent extends AppBase implements OnInit {
   getServiceInfo() {
     this.loadingData = true;
     this.dataService
-      .get(ServerApis.getAppInfo, {
-        id: this.serviceId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAppInfo, {
+              id: this.serviceId,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingData = false;
-          if (response.isSuccess) {
-            debugger;
-            this.service = response.data;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingData = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  debugger;
+                  this.service = response.data;
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

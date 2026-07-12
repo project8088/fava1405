@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
-import { forkJoin } from 'rxjs';
+import { forkJoin, finalize } from 'rxjs';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -94,36 +94,44 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
   getBaseData() {
     this.loadingData = true;
     forkJoin(
-      this.dataService.get(ServerApis.getProvinces),
-      this.dataService.getEnums(),
-      this.dataService.get(ServerApis.getPositionList),
-    ).subscribe(([provinces, enums, positions]) => {
-      this.loadingData = false;
-      this.provinceList = provinces.data ? provinces.data : [];
-      this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
-      this.organizationalPositionList = positions.data ? positions.data : [];
-    });
+            this.dataService.get(ServerApis.getProvinces),
+            this.dataService.getEnums(),
+            this.dataService.get(ServerApis.getPositionList),
+          )
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(([provinces, enums, positions]) => {
+            this.provinceList = provinces.data ? provinces.data : [];
+            this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
+            this.organizationalPositionList = positions.data ? positions.data : [];
+          });
   }
 
   getUserInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.userForm.patchValue(response.data);
+    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.userForm.patchValue(response.data);
 
-          this.imageUrl = response.data.imageUrl;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-          this.router.navigate(['/admin/manager-users']);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+                this.imageUrl = response.data.imageUrl;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+                this.router.navigate(['/admin/manager-users']);
+              }
+            }, (error: any) => {
+            });
   }
 
   getAttachmentId(ev: { uploadUrl: string }) {
@@ -171,21 +179,23 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
       DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : '',
     };
 
-    this.dataService.post(ServerApis.addOrUpdatePersonelByAdmin, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.router.navigate(['/admin/manager-users']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdatePersonelByAdmin, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.router.navigate(['/admin/manager-users']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   changeHasSpecificDisease() {

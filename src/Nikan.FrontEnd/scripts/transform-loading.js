@@ -87,9 +87,74 @@ function processFile(filePath) {
 
         if (!loadingAssignment) continue;
 
+        // پیدا کردن loading
         const loadingProp = loadingAssignment.getLeft().getText();
 
-        // فقط متن را قبل از replace بگیر
+        // <-- اینجا کد حذف loading=false از error callback را بگذار
+        const args = call.getArguments();
+
+        if (args.length >= 2) {
+          const errorCallback = args[1];
+
+          if (
+            errorCallback.isKind(SyntaxKind.ArrowFunction) ||
+            errorCallback.isKind(SyntaxKind.FunctionExpression)
+          ) {
+            const body = errorCallback.getBody();
+
+            if (body.isKind(SyntaxKind.Block)) {
+              const statements = [...body.getStatements()];
+
+              for (const stmt of statements) {
+                if (!stmt.isKind(SyntaxKind.ExpressionStatement)) continue;
+
+                const expr = stmt.getExpression();
+
+                if (!expr.isKind(SyntaxKind.BinaryExpression)) continue;
+
+                if (expr.getOperatorToken().getKind() !== SyntaxKind.EqualsToken) continue;
+
+                if (
+                  expr.getLeft().getText() === loadingProp &&
+                  expr.getRight().getKind() === SyntaxKind.FalseKeyword
+                ) {
+                  stmt.remove();
+                }
+              }
+            }
+          }
+        }
+
+        const successCallback = args[0];
+
+        if (
+          successCallback &&
+          (successCallback.isKind(SyntaxKind.ArrowFunction) ||
+            successCallback.isKind(SyntaxKind.FunctionExpression))
+        ) {
+          const body = successCallback.getBody();
+
+          if (body.isKind(SyntaxKind.Block)) {
+            for (const stmt of [...body.getStatements()]) {
+              if (!stmt.isKind(SyntaxKind.ExpressionStatement)) continue;
+
+              const expr = stmt.getExpression();
+
+              if (!expr.isKind(SyntaxKind.BinaryExpression)) continue;
+
+              if (expr.getOperatorToken().getKind() !== SyntaxKind.EqualsToken) continue;
+
+              if (
+                expr.getLeft().getText() === loadingProp &&
+                expr.getRight().getKind() === SyntaxKind.FalseKeyword
+              ) {
+                stmt.remove();
+              }
+            }
+          }
+        }
+
+        // از اینجا به بعد متن جدید را بساز
         const serviceText = serviceChain.getText();
         const subscribeArgs = call
           .getArguments()

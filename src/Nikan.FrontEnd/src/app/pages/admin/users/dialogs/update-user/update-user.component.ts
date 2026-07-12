@@ -6,7 +6,7 @@ import {
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
 import { BaseDataModel } from '@core/models/base-data-model';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
@@ -81,40 +81,42 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   getUserInfo() {
     this.loading = true;
     //todo
-    this.dataService.get(ServerApis.getUserAccountInfo, { userId: this.userId }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response.isSuccess) {
-          this.userForm.setValue({
-            id: response.data.userId,
-            displayName: response.data.displayName,
-            username: response.data.userName,
-            mobile: response.data.mobileNumber,
-            email: response.data.emailAddress,
-            userState: response.data.userAccountState,
-            deactivationDate: response.data.deactivationDate,
-            userStateDescriptionForUser: response.data.userStateDescriptionForUser
-              ? response.data.userStateDescriptionForUser
-              : '',
-            userStateDescriptionForAdmin: response.data.userStateDescriptionForAdmin
-              ? response.data.userStateDescriptionForAdmin
-              : '',
-            organization: response.data.organization,
-            organizationalUnit: response.data.organizationalUnit,
-          });
+    this.dataService.get(ServerApis.getUserAccountInfo, { userId: this.userId })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.userForm.setValue({
+                  id: response.data.userId,
+                  displayName: response.data.displayName,
+                  username: response.data.userName,
+                  mobile: response.data.mobileNumber,
+                  email: response.data.emailAddress,
+                  userState: response.data.userAccountState,
+                  deactivationDate: response.data.deactivationDate,
+                  userStateDescriptionForUser: response.data.userStateDescriptionForUser
+                    ? response.data.userStateDescriptionForUser
+                    : '',
+                  userStateDescriptionForAdmin: response.data.userStateDescriptionForAdmin
+                    ? response.data.userStateDescriptionForAdmin
+                    : '',
+                  organization: response.data.organization,
+                  organizationalUnit: response.data.organizationalUnit,
+                });
 
-          this.getUnitsOfOrganization();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-          this.matDialogRef.close(false);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.matDialogRef.close(false);
-      },
-    );
+                this.getUnitsOfOrganization();
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+                this.matDialogRef.close(false);
+              }
+            }, (error: any) => {
+              this.matDialogRef.close(false);
+            });
   }
 
   displayFn(item: any): string {
@@ -132,32 +134,33 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.updateAccount, {
-        UserId: this.userId,
-        DisplayName: formValue.displayName,
-        deactivationDate: formValue.deactivationDate,
-        MobileNumber: formValue.mobile,
-        Email: formValue.email,
-        UserAccountState: formValue.userState,
-        OrganizationalUnitId: formValue.organizationalUnit.key,
-        userStateDescriptionForUser: formValue.userStateDescriptionForUser,
-        userStateDescriptionForAdmin: formValue.userStateDescriptionForAdmin,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.updateAccount, {
+              UserId: this.userId,
+              DisplayName: formValue.displayName,
+              deactivationDate: formValue.deactivationDate,
+              MobileNumber: formValue.mobile,
+              Email: formValue.email,
+              UserAccountState: formValue.userState,
+              OrganizationalUnitId: formValue.organizationalUnit.key,
+              userStateDescriptionForUser: formValue.userStateDescriptionForUser,
+              userStateDescriptionForAdmin: formValue.userStateDescriptionForAdmin,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(true);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   changeUserState() {
@@ -219,41 +222,44 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.organizationList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllOrganizational, {})
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.organizationList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
     this.dataService
-      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.userForm.get('organization')?.value.key,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+              organId: this.userForm.get('organization')?.value.key,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingUnit = false;
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingUnit = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.unitList = response.data ? response.data : [];
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-card-user-permissions',
@@ -28,23 +29,24 @@ export class CardUserPermissionsComponent extends AppBase implements OnInit {
     this.isLoadingResults = true;
     this.data = [];
     this.dataService
-      .get(ServerApis.getCardPermissionList, {
-        userId: this.userId,
-      })
-      .subscribe(
-        (response: any) => {
+            .get(ServerApis.getCardPermissionList, {
+              userId: this.userId,
+            })
+      .pipe(
+        finalize(() => {
           this.isLoadingResults = false;
-          if (response) {
-            this.data = response;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isLoadingResults = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response: any) => {
+                if (response) {
+                  this.data = response;
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   savePermissions() {
@@ -56,23 +58,24 @@ export class CardUserPermissionsComponent extends AppBase implements OnInit {
       }
     }
     this.dataService
-      .post(ServerApis.addCardUserPermissions, {
-        userId: this.userId,
-        Permissions: selectedPermissions,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.addCardUserPermissions, {
+              userId: this.userId,
+              Permissions: selectedPermissions,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

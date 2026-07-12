@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import {
   map,
   startWith,
@@ -82,22 +82,24 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getCardDiscountInfo, { id: this.id }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response && response.isSuccess) {
-          this.frm.patchValue(response.data);
-          this.selectedGroups = response.data.groups ? response.data.groups : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-          this.matDialogRef.close();
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getCardDiscountInfo, { id: this.id })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.frm.patchValue(response.data);
+                this.selectedGroups = response.data.groups ? response.data.groups : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+                this.matDialogRef.close();
+              }
+            }, (error: any) => {
+            });
   }
 
   saveInfo() {
@@ -135,21 +137,23 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
 
     params.groupIds = groupIds;
 
-    this.dataService.post(url, this.frm.value).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.matDialogRef.close(true);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(url, this.frm.value)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.matDialogRef.close(true);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   changePenaltyForPeriodDebt() {

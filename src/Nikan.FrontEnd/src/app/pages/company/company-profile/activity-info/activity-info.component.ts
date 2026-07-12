@@ -4,6 +4,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-activity-info',
@@ -40,23 +41,24 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
   getActivityInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCompanyActivity, {
-        companyId: this.companyId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCompanyActivity, {
+              companyId: this.companyId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.companyActivityList = response.data ? response.data : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.companyActivityList = response.data ? response.data : [];
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -71,22 +73,24 @@ export class CompanyActivityInfoComponent extends AppBase implements OnInit {
       ActivityId: form.activityId,
       UserCompanyId: this.companyId,
     };
-    this.dataService.post(ServerApis.addCompanyActivity, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.form.reset();
-          this.getActivityInfo();
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addCompanyActivity, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.form.reset();
+                this.getActivityInfo();
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   delete(row: any) {

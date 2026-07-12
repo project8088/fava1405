@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-config',
@@ -24,15 +25,22 @@ export class AdminConfigComponent extends AppBase implements OnInit {
 
   config(): void {
     this.isSaving = true;
-    this.dataService.get(ServerApis.configPortal).subscribe((response) => {
-      if (response.isSuccess) {
-        this.isSaving = false;
-        this.configList = response.data ? response.data : [];
-      } else {
-        this.isSaving = false;
-        const msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-        this.toastrService.error(msg);
-      }
-    });
+    this.dataService.get(ServerApis.configPortal)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+            if (response.isSuccess) {
+              this.isSaving = false;
+              this.configList = response.data ? response.data : [];
+            } else {
+              this.isSaving = false;
+              const msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          });
   }
 }

@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { map, startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import {
   MatAutocompleteSelectedEvent,
@@ -82,21 +82,23 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
 
     params.groupIds = groupIds;
 
-    this.dataService.post(url, this.frm.value).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.matDialogRef.close(true);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(url, this.frm.value)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.matDialogRef.close(true);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   /**

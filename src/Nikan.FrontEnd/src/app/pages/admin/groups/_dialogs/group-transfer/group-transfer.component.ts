@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-group-transfer-dialog',
@@ -56,28 +57,29 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
     var formValue = this.form.value;
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.groupTransfer, {
-        sourceGroupId: +this.sourceGroupId,
-        destinationGroupId: formValue.destinationGroupId,
-        isTransfer: formValue.isTransfer,
-        isHasQueue: formValue.isHasQueue,
-        isTransferQueue: formValue.isTransferQueue,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.groupTransfer, {
+              sourceGroupId: +this.sourceGroupId,
+              destinationGroupId: formValue.destinationGroupId,
+              isTransfer: formValue.isTransfer,
+              isHasQueue: formValue.isHasQueue,
+              isTransferQueue: formValue.isTransferQueue,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success(response.messages);
-            this.matDialogRef.close(true);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success(response.messages);
+                  this.matDialogRef.close(true);
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   /**

@@ -4,6 +4,7 @@ import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '@core/server-apis';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-forgot-password',
@@ -98,6 +99,12 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
         MobileNumber: this.forgotForm.get('mobile')?.value,
         //CaptchaId : this.captchaComponent.captchaId
       })
+      .pipe(
+        finalize(() => {
+          this.sendingSMS = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.sendingSMS = false;
@@ -115,7 +122,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           }
         },
         (error: any) => {
-          this.sendingSMS = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
       );
@@ -173,6 +179,12 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
         MobileNumber: this.forgotForm.get('mobile')?.value,
         UserId: this.userId,
       })
+      .pipe(
+        finalize(() => {
+          this.checkingCode = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.checkingCode = false;
@@ -190,7 +202,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           }
         },
         (error: any) => {
-          this.checkingCode = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
       );
@@ -217,6 +228,12 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
         Password: this.forgotForm.get('password')?.value,
         userId: this.userId,
       })
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.isSaving = false;
@@ -236,7 +253,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
           }
         },
         (error: any) => {
-          this.isSaving = false;
           this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
         },
       );

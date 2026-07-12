@@ -4,6 +4,7 @@ import { ServerApis } from '@core/server-apis';
 import { NewsDto, NewsCommentDto } from '@core/models/news';
 import { Meta, Title } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'home-help-service',
@@ -46,28 +47,30 @@ export class WebUserHelpServiceDetailsComponent extends AppBase implements OnIni
 
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.news = response.data ?? new NewsDto();
-          this.tags = this.news.seoTags.split(',');
-          if (this.news.seoTags) {
-            this.titleService.setTitle(this.news.title);
-            this.metaService.addTags([
-              { name: 'keywords', content: this.news.seoTags },
-              { name: 'description', content: this.news.seoDescription },
-              { name: 'robots', content: 'index, follow' },
-            ]);
-          }
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getNews, { id: this.newsId, forEdit: false })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.news = response.data ?? new NewsDto();
+                this.tags = this.news.seoTags.split(',');
+                if (this.news.seoTags) {
+                  this.titleService.setTitle(this.news.title);
+                  this.metaService.addTags([
+                    { name: 'keywords', content: this.news.seoTags },
+                    { name: 'description', content: this.news.seoDescription },
+                    { name: 'robots', content: 'index, follow' },
+                  ]);
+                }
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

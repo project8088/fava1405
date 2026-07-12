@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
@@ -72,36 +72,42 @@ export class AdminCitizensPicturesComponent extends AppBase implements OnInit {
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
-      .pipe(
-        startWith(param),
-        switchMap(() => {
-          this.isLoadingResults = true;
-          return this.dataService.get(ServerApis.searchImageCitizens, param);
-        }),
-        map((response) => {
-          this.isLoadingResults = false;
-          if (response.isSuccess && response.data) {
-            var items = response.data.citizens ? response.data.citizens : [];
-            this.list = items;
+            .pipe(
+              startWith(param),
+              switchMap(() => {
+                this.isLoadingResults = true;
+                return this.dataService.get(ServerApis.searchImageCitizens, param);
+              }),
+              map((response) => {
+                this.isLoadingResults = false;
+                if (response.isSuccess && response.data) {
+                  var items = response.data.citizens ? response.data.citizens : [];
+                  this.list = items;
 
-            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            this.loadingData = false;
-            return items;
-          } else {
-            this.loadingData = false;
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        }),
-        catchError((err) => {
+                  this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+                  this.loadingData = false;
+                  return items;
+                } else {
+                  this.loadingData = false;
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }),
+              catchError((err) => {
+                this.loadingData = false;
+                this.isLoadingResults = false;
+                return observableOf([]);
+              }),
+            )
+      .pipe(
+        finalize(() => {
           this.loadingData = false;
-          this.isLoadingResults = false;
-          return observableOf([]);
+          this.chdr.detectChanges();
         }),
       )
       .subscribe((data) => {
-        this.data = data;
-      });
+              this.data = data;
+            });
   }
   getEnums() {}
 

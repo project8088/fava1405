@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 declare var $: any;
 
@@ -30,30 +31,31 @@ export class CompanyInfoComponent extends AppBase implements OnInit {
   getInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getFullCompanyInfo, {
-        companyId: this.companyId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getFullCompanyInfo, {
+              companyId: this.companyId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.companyInfo = response.data;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.companyInfo = response.data;
 
-            setTimeout(() => {
-              (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
-                selector: 'a',
-                thumbnail: false,
+                  setTimeout(() => {
+                    (this.doc.querySelector('.lightGallery') as any)?.lightGallery({
+                      selector: 'a',
+                      thumbnail: false,
+                    });
+                  }, 1000);
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
               });
-            }, 1000);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
   }
 
   back() {

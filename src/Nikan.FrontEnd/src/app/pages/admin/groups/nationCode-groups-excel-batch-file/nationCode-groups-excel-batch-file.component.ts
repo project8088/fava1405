@@ -7,6 +7,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
 import { AdminImportNationCodeGroupsExcelDialogComponent } from '../_dialogs/nationCode-groups-import-excel/import-nationCode-groups-excel.component';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-nationCode-groups-excel-batch-file',
@@ -53,24 +54,26 @@ export class AdminNationCodeGroupsExcelBatchFileListComponent
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllGroupImportList, {}).subscribe(
-      (response) => {
-        this.isLoadingResults = false;
-        if (response.isSuccess) {
-          this.data = response.data ? response.data : [];
-          this.dataSource.data = this.data;
-          this.listCount = this.data.length;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllGroupImportList, {})
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.data = response.data ? response.data : [];
+                this.dataSource.data = this.data;
+                this.listCount = this.data.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   pageEvent(event: PageEvent) {

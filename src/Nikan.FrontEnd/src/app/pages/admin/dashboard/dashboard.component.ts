@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AdminViewEventDetailsDialogComponent } from '../_dialogs/event-details/event-details.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-dashboard',
@@ -26,20 +27,22 @@ export class AdminDashboardComponent extends AppBase implements OnInit {
   }
   getStatisticalReport() {
     this.loading = true;
-    this.dataService.get(ServerApis.getStatisticalReport, {}).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.statisticalInfo = response.data ? response.data : {};
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+    this.dataService.get(ServerApis.getStatisticalReport, {})
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.statisticalInfo = response.data ? response.data : {};
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getListevents() {

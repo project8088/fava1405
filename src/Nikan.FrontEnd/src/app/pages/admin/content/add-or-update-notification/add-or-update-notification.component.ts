@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-add-or-update-notification',
@@ -55,37 +56,38 @@ export class AdminAddOrUpdateNotificationComponent
   getNotificationInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getNotification, {
-        id: this.notificationId,
-        forEdit: true,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getNotification, {
+              id: this.notificationId,
+              forEdit: true,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.notyForm.setValue({
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              body: response.data.body,
-              isActive: response.data.isActive,
-              isPrivate: response.data.isPrivate,
-              publishDate: response.data.publishDate ? new Date(response.data.publishDate) : null,
-              endDate: response.data.endDate ? new Date(response.data.endDate) : null,
-              notificationNumber: response.data.notificationNumber
-                ? response.data.notificationNumber
-                : '',
-            });
-            this.imageUrl = response.data.imageUrl;
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.notyForm.setValue({
+                    id: response.data.id,
+                    title: response.data.title,
+                    description: response.data.description,
+                    body: response.data.body,
+                    isActive: response.data.isActive,
+                    isPrivate: response.data.isPrivate,
+                    publishDate: response.data.publishDate ? new Date(response.data.publishDate) : null,
+                    endDate: response.data.endDate ? new Date(response.data.endDate) : null,
+                    notificationNumber: response.data.notificationNumber
+                      ? response.data.notificationNumber
+                      : '',
+                  });
+                  this.imageUrl = response.data.imageUrl;
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   /**
@@ -121,20 +123,22 @@ export class AdminAddOrUpdateNotificationComponent
       notificationNumber: form.notificationNumber,
     };
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateNotifications, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/admin/notifications']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateNotifications, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.router.navigate(['/admin/notifications']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

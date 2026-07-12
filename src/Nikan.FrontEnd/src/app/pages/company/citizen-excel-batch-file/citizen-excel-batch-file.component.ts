@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { CompanyImportExcelDialogComponent } from '../_dialogs/importPersonel-excel/importPersonel-excel.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-excel-batch-file',
@@ -50,24 +51,26 @@ export class CompanyCitizenExcelBatchFileListComponent extends AppBase implement
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.personnelImportFileList, {}).subscribe(
-      (response) => {
-        this.isLoadingResults = false;
-        if (response.isSuccess) {
-          this.data = response.data ? response.data : [];
-          this.dataSource.data = this.data;
-          this.listCount = this.data.length;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+    this.dataService.get(ServerApis.personnelImportFileList, {})
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.data = response.data ? response.data : [];
+                this.dataSource.data = this.data;
+                this.listCount = this.data.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   pageEvent(event: PageEvent) {

@@ -4,6 +4,7 @@ import { MatChipInputEvent } from '@angular/material/chips';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-add-or-update-faq',
@@ -66,31 +67,32 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
   getFaqInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getFaq, {
-        id: this.faqId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getFaq, {
+              id: this.faqId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.faqForm.setValue({
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              tagNames: response.data.tagNames,
-              questionGroupTypeId: +response.data.questionGroupTypeId,
-              isActive: response.data.isActive,
-            });
-            this.tagNames = response.data.tagNames ? response.data.tagNames.split(',') : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.faqForm.setValue({
+                    id: response.data.id,
+                    title: response.data.title,
+                    description: response.data.description,
+                    tagNames: response.data.tagNames,
+                    questionGroupTypeId: +response.data.questionGroupTypeId,
+                    isActive: response.data.isActive,
+                  });
+                  this.tagNames = response.data.tagNames ? response.data.tagNames.split(',') : [];
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   add(event: MatChipInputEvent): void {
@@ -137,21 +139,23 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
       isActive: form.isActive,
     };
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateFaq, data).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/admin/faq-list']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateFaq, data)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.router.navigate(['/admin/faq-list']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
+            });
   }
 }

@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-address-info',
@@ -70,45 +71,46 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
   getAddressInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCompanyAddressInfo, {
-        companyId: this.companyId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCompanyAddressInfo, {
+              companyId: this.companyId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
-            this.addressForm.setValue({
-              mobileNumber: response.data.mobileNumber,
-              mobileNumber2: response.data.mobileNumber2,
-              mobileNumber3: response.data.mobileNumber3,
-              cellNumber: response.data.cellNumber,
-              cellNumber2: response.data.cellNumber2,
-              cellNumber3: response.data.cellNumber3,
-              smsNumber: response.data.smsNumber,
-              fax: response.data.fax,
-              website: response.data.website,
-              email: response.data.email,
-              telegram: response.data.telegram,
-              province: response.data.province ? response.data.province : '',
-              city: {
-                key: response.data.cityId,
-                text: response.data.city,
-              },
-              zipCode: response.data.zipCode,
-              street: response.data.street,
-              fullAddress: response.data.fullAddress,
-              pelak: response.data.pelak,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.companyId = response.data.companyId;
+                  this.addressForm.setValue({
+                    mobileNumber: response.data.mobileNumber,
+                    mobileNumber2: response.data.mobileNumber2,
+                    mobileNumber3: response.data.mobileNumber3,
+                    cellNumber: response.data.cellNumber,
+                    cellNumber2: response.data.cellNumber2,
+                    cellNumber3: response.data.cellNumber3,
+                    smsNumber: response.data.smsNumber,
+                    fax: response.data.fax,
+                    website: response.data.website,
+                    email: response.data.email,
+                    telegram: response.data.telegram,
+                    province: response.data.province ? response.data.province : '',
+                    city: {
+                      key: response.data.cityId,
+                      text: response.data.city,
+                    },
+                    zipCode: response.data.zipCode,
+                    street: response.data.street,
+                    fullAddress: response.data.fullAddress,
+                    pelak: response.data.pelak,
+                  });
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -140,19 +142,21 @@ export class CompanyAddressInfoComponent extends AppBase implements OnInit {
       fullAddress: form.fullAddress,
       pelak: form.pelak,
     };
-    this.dataService.post(ServerApis.updateCompanyAddressInfo, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.updateCompanyAddressInfo, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

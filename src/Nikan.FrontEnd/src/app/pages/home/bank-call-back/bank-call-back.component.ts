@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'home-bank-call-back',
@@ -30,19 +31,21 @@ export class BankCallBackComponent extends AppBase implements OnInit {
 
   payVerify() {
     this.loading = true;
-    this.dataService.post(ServerApis.showPayResult, { id: this.id }).subscribe(
-      (response) => {
-        this.loading = false;
-        this.response = response;
-        if (response.isSuccess) {
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+    this.dataService.post(ServerApis.showPayResult, { id: this.id })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              this.response = response;
+              if (response.isSuccess) {
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

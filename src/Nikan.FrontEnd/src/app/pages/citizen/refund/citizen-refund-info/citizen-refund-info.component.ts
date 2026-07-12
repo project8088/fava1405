@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-refund-info',
@@ -34,21 +35,23 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
   }
   getRefundInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getRefundInfoDetailsByAdmin, { id: this.refundId }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.info = response.data ? response.data : {};
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.get(ServerApis.getRefundInfoDetailsByAdmin, { id: this.refundId })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.info = response.data ? response.data : {};
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   saveInfo() {
@@ -64,21 +67,23 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
     params.refundId = this.info.refundId;
     params.ownerBankCardNumber = params.ownerBankCardNumber;
 
-    this.dataService.post(url, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.matDialogRef.close(true);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.post(url, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.matDialogRef.close(true);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 }

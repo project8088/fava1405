@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from '@app/shared/timer/timer.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-edit-email',
@@ -76,11 +77,18 @@ export class CitizenEditEmailComponent extends AppBase implements OnInit {
             this.codeSent = false;
           });
 
-          this.dataService.post(ServerApis.getVerfiCodeByCitizen, form).subscribe((res) => {
-            if (res.isSuccess) {
-              this.toastrService.success('کد تایید به ایمیل شما ارسال شد');
-            }
-          });
+          this.dataService.post(ServerApis.getVerfiCodeByCitizen, form)
+            .pipe(
+              finalize(() => {
+                this.codeSent = false;
+                this.chdr.detectChanges();
+              }),
+            )
+            .subscribe((res) => {
+                        if (res.isSuccess) {
+                          this.toastrService.success('کد تایید به ایمیل شما ارسال شد');
+                        }
+                      });
         } else {
           let msg = response.messages ? response.messages : 'ایمیل معتبر نیست';
           this.toastrService.error(msg);

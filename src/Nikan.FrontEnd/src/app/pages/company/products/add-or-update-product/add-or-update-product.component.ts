@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-add-or-update-product',
@@ -62,23 +63,24 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   getProductByParent() {
     this.loadingProductGroup = true;
     this.dataService
-      .get(ServerApis.getProductGroupsByParentId, {
-        parentId: this.productForm.get('productParentId')?.value,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getProductGroupsByParentId, {
+              parentId: this.productForm.get('productParentId')?.value,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingProductGroup = false;
-          if (response.isSuccess) {
-            this.productGroupList = response.data ? response.data : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingProductGroup = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.productGroupList = response.data ? response.data : [];
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   ngAfterViewInit() {}
@@ -86,28 +88,29 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
   getInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCompanyProduct, {
-        id: this.id,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCompanyProduct, {
+              id: this.id,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            response.data.productGroupId = response.data.productGroupId.toString();
-            this.productForm.patchValue(response.data);
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  response.data.productGroupId = response.data.productGroupId.toString();
+                  this.productForm.patchValue(response.data);
 
-            if (response.data.productParentId) this.getProductByParent();
+                  if (response.data.productParentId) this.getProductByParent();
 
-            this.imageUrl = response.data.imageUrl;
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+                  this.imageUrl = response.data.imageUrl;
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   /**
@@ -133,20 +136,22 @@ export class CompanyAddOrUpdateProductComponent extends AppBase implements OnIni
     form.imageUrl = this.imageUrl;
     let params = form;
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateCompnayProduct, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/company/products']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateCompnayProduct, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.router.navigate(['/company/products']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

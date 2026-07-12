@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-store-details',
@@ -28,20 +29,22 @@ export class StoreDetailsComponent extends AppBase implements OnInit {
 
   getInfo() {
     this.loading = true;
-    return this.dataService.get(ServerApis.getStoreSaleItems, { id: this.id }).subscribe(
-      (response) => {
+    return this.dataService.get(ServerApis.getStoreSaleItems, { id: this.id })
+    .pipe(
+      finalize(() => {
         this.loading = false;
-        if (response.isSuccess && response.data) {
-          this.info = response.data ? response.data : {};
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+        this.chdr.detectChanges();
+      }),
+    )
+    .subscribe((response) => {
+            if (response.isSuccess && response.data) {
+              this.info = response.data ? response.data : {};
+            } else {
+              let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+              this.toastrService.error(msg);
+            }
+          }, (error: any) => {
+          });
   }
 
   buy() {

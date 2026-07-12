@@ -4,6 +4,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'user-access-ip',
@@ -37,23 +38,24 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
   getWebUserAccessRangeIp() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getWebUserAccessRangeIp, {
-        userId: this.userId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getWebUserAccessRangeIp, {
+              userId: this.userId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.userAppAccessList = response.data ? response.data : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.userAppAccessList = response.data ? response.data : [];
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -69,22 +71,24 @@ export class AdminUserAccessIpComponent extends AppBase implements OnInit {
       end: form.end,
       UserId: this.userId,
     };
-    this.dataService.post(ServerApis.addWebUserAccessRangeIp, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.form.reset();
-          this.getWebUserAccessRangeIp();
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addWebUserAccessRangeIp, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.form.reset();
+                this.getWebUserAccessRangeIp();
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   delete(row: any) {

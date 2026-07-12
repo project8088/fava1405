@@ -6,6 +6,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-ticket-subjects',
@@ -66,74 +67,79 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllTicketSubject, {}).subscribe(
-      (response) => {
-        this.isLoadingResults = false;
-        if (response.isSuccess) {
-          this.data = response.data ? response.data : [];
-          for (var i of this.data) {
-            if (i.description) {
-              let d = document.createElement('div');
-              d.innerHTML = i.description;
-              i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
-            }
-          }
+    this.dataService.get(ServerApis.getAllTicketSubject, {})
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.data = response.data ? response.data : [];
+                for (var i of this.data) {
+                  if (i.description) {
+                    let d = document.createElement('div');
+                    d.innerHTML = i.description;
+                    i.textDescription = d.innerText ? d.innerText.substring(0, 100) : '';
+                  }
+                }
 
-          this.dataSource.data = this.data;
-          this.listCount = this.data.length;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+                this.dataSource.data = this.data;
+                this.listCount = this.data.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.organizationList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllOrganizational, {})
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.organizationList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
     this.dataService
-      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.frm.get('organizationId')?.value,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+              organId: this.frm.get('organizationId')?.value,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingUnit = false;
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingUnit = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.unitList = response.data ? response.data : [];
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   pageEvent(event: PageEvent) {
@@ -203,23 +209,25 @@ export class AdminTicketSubjectsComponent extends AppBase implements AfterViewIn
     this.isSaving = true;
     var params = this.frm.value;
 
-    this.dataService.post(ServerApis.addOrUpdateTicketSubject, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.showAddOrUpdatePanel = false;
-          this.frm.reset();
-          this.frm.get('isActive')?.setValue(true);
-          this.getList();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateTicketSubject, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.showAddOrUpdatePanel = false;
+                this.frm.reset();
+                this.frm.get('isActive')?.setValue(true);
+                this.getList();
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

@@ -5,6 +5,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { ServerApis } from '@core/server-apis';
 import { NewsDto } from '@core/models/news';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-add-or-update-news',
@@ -66,40 +67,41 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
   getNewsInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getNews, {
-        id: this.newsId,
-        forEdit: true,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getNews, {
+              id: this.newsId,
+              forEdit: true,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.newsForm.setValue({
-              id: response.data.id,
-              title: response.data.title,
-              description: response.data.description,
-              body: response.data.body,
-              indexOrder: response.data.indexOrder,
-              seoDescription: response.data.seoDescription,
-              seoTags: response.data.seoTags,
-              commentIsActive: response.data.commentIsActive,
-              newsGroupId: response.data.newsGroupId,
-              isSpecial: response.data.isSpecial,
-              isActive: response.data.isActive,
-              publishDate: response.data.publishDate ? new Date(response.data.publishDate) : null,
-            });
-            this.imageUrl = response.data.imageUrl;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.newsForm.setValue({
+                    id: response.data.id,
+                    title: response.data.title,
+                    description: response.data.description,
+                    body: response.data.body,
+                    indexOrder: response.data.indexOrder,
+                    seoDescription: response.data.seoDescription,
+                    seoTags: response.data.seoTags,
+                    commentIsActive: response.data.commentIsActive,
+                    newsGroupId: response.data.newsGroupId,
+                    isSpecial: response.data.isSpecial,
+                    isActive: response.data.isActive,
+                    publishDate: response.data.publishDate ? new Date(response.data.publishDate) : null,
+                  });
+                  this.imageUrl = response.data.imageUrl;
 
-            this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+                  this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   add(event: MatChipInputEvent): void {
@@ -156,20 +158,22 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
       imageUrl: this.imageUrl,
     };
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateNews, params).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/admin/news-list']);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateNews, params)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.router.navigate(['/admin/news-list']);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-company-change-status-dialog',
@@ -57,26 +58,27 @@ export class AdminCompanyChangeStatusDialogComponent extends AppBase implements 
     var formValue = this.form.value;
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.changeCompanyAccount, {
-        CompanyId: this.companyInfo.companyId,
-        RejectDesription: formValue.rejectDesription ? formValue.rejectDesription : '',
-        UserCompanyAccountStatus: formValue.userCompanyAccountStatus,
-        SendSms: formValue.sendSms ? formValue.sendSms : false,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.changeCompanyAccount, {
+              CompanyId: this.companyInfo.companyId,
+              RejectDesription: formValue.rejectDesription ? formValue.rejectDesription : '',
+              UserCompanyAccountStatus: formValue.userCompanyAccountStatus,
+              SendSms: formValue.sendSms ? formValue.sendSms : false,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(true);
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

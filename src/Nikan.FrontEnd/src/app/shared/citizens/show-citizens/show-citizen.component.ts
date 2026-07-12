@@ -1,6 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-show-citizen',
@@ -31,23 +32,24 @@ export class AppShowCitizenComponent extends AppBase implements AfterViewInit {
   getInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCitizenFullInfo, {
-        userCode: this.userCode,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCitizenFullInfo, {
+              userCode: this.userCode,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess) {
-            this.info = response.data ? response.data : {};
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.info = response.data ? response.data : {};
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   back() {

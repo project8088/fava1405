@@ -5,6 +5,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 
 import { Title, Meta } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'home-product-details',
@@ -40,56 +41,59 @@ export class MainProductDetailsComponent extends AppBase implements OnInit {
 
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getCompanyProduct, { id: this.id }).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.product = response.data;
+    this.dataService.get(ServerApis.getCompanyProduct, { id: this.id })
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.product = response.data;
 
-          if (this.product.seoTags) {
-            this.titleService.setTitle(this.product.seoTags.seoTitle);
-            this.metaService.addTags([
-              { name: 'keywords', content: this.product.seoTags.seokeywords },
-              { name: 'description', content: this.product.seoTags.seoDescription },
-              { name: 'robots', content: 'index, follow' },
-            ]);
-          }
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.router.navigate(['/home/products']);
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+                if (this.product.seoTags) {
+                  this.titleService.setTitle(this.product.seoTags.seoTitle);
+                  this.metaService.addTags([
+                    { name: 'keywords', content: this.product.seoTags.seokeywords },
+                    { name: 'description', content: this.product.seoTags.seoDescription },
+                    { name: 'robots', content: 'index, follow' },
+                  ]);
+                }
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.router.navigate(['/home/products']);
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   pay() {
     this.loadingPay = true;
     this.dataService
-      .get(ServerApis.buyProduct, {
-        productId: +this.id,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.buyProduct, {
+              productId: +this.id,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingPay = false;
-          if (response.isSuccess) {
-            this.RefId = response.data.refId;
-            var form: any = document.getElementById('payFormMellat');
-            this.waitForRedirectToBank = true;
-            setTimeout(() => {
-              form.submit();
-            }, 1000);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingPay = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.RefId = response.data.refId;
+                  var form: any = document.getElementById('payFormMellat');
+                  this.waitForRedirectToBank = true;
+                  setTimeout(() => {
+                    form.submit();
+                  }, 1000);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

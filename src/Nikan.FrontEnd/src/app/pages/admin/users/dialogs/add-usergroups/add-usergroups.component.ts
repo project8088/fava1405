@@ -5,6 +5,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 import { userGroupsDto } from '@core/models/users/userGroups';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-adm-add-usergroups-dialog',
@@ -57,22 +58,24 @@ export class AdminAddUserGrousDialogComponent extends AppBase implements OnInit 
     var formValue = this.userGroupsForm.value;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateUserGroups, formValue).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response && response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.matDialogRef.close(response.data);
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.post(ServerApis.addOrUpdateUserGroups, formValue)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                this.matDialogRef.close(response.data);
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   compareFn(c1: any, c2: any): boolean {

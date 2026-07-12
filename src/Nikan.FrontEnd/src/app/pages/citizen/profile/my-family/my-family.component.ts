@@ -5,6 +5,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-my-family',
@@ -37,21 +38,23 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
 
   getFamilyList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getAllCitizenFamily).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.familyList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService.get(ServerApis.getAllCitizenFamily)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response && response.isSuccess) {
+                this.familyList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+            });
   }
 
   deleteEducation(row: citizenFamilyModel) {

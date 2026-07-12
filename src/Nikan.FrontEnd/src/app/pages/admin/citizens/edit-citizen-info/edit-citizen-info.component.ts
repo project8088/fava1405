@@ -185,24 +185,25 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.addOrUpdateCitizenProfile, {
-        ...formValue,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.addOrUpdateCitizenProfile, {
+              ...formValue,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   /**
@@ -291,18 +292,20 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   }
   getEducationGroups() {
     this.loadingEnums = true;
-    this.dataService.get(ServerApis.getEducationGroups).subscribe(
-      (response) => {
-        this.loadingEnums = false;
-        if (response) {
-          this.baseEnums.educationGroups = response;
-        }
-      },
-      (error: any) => {
-        this.toastrService.error('خطا در ارتباط با سرور!');
-        this.loadingEnums = false;
-      },
-    );
+    this.dataService.get(ServerApis.getEducationGroups)
+      .pipe(
+        finalize(() => {
+          this.loadingEnums = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response) {
+                this.baseEnums.educationGroups = response;
+              }
+            }, (error: any) => {
+              this.toastrService.error('خطا در ارتباط با سرور!');
+            });
   }
   getPersonalInfo() {
     this.loading = true;
@@ -378,47 +381,48 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.addOrUpdateCitizenProfileByAdmin, {
-        gender: formValue.gender,
-        firstName: formValue.firstName,
-        lastName: formValue.lastName,
-        fatherName: formValue.fatherName,
-        nationalCode: this.citizenInfo?.nationalCode,
-        mobile: formValue.mobile,
-        eMail: formValue.email || '',
-        birthDate: formValue.dateOfBirth ? formValue.dateOfBirth : '',
-        mariageStatus: formValue.marital,
+            .post(ServerApis.addOrUpdateCitizenProfileByAdmin, {
+              gender: formValue.gender,
+              firstName: formValue.firstName,
+              lastName: formValue.lastName,
+              fatherName: formValue.fatherName,
+              nationalCode: this.citizenInfo?.nationalCode,
+              mobile: formValue.mobile,
+              eMail: formValue.email || '',
+              birthDate: formValue.dateOfBirth ? formValue.dateOfBirth : '',
+              mariageStatus: formValue.marital,
 
-        educationStatues: formValue.educationStatues,
-        educationGroup: formValue.educationGroup,
-        educationTitle: formValue.educationTitle,
+              educationStatues: formValue.educationStatues,
+              educationGroup: formValue.educationGroup,
+              educationTitle: formValue.educationTitle,
 
-        jobTitle: formValue.jobTitle,
-        jobGroup: formValue.jobGroup,
+              jobTitle: formValue.jobTitle,
+              jobGroup: formValue.jobGroup,
 
-        phoneNumber: formValue.phoneNumber,
-        postalCode: String(formValue.postalCode),
-        alley: formValue.alley || '',
-        plaque: formValue.plaque || '',
-        street: formValue.street || '',
-        region: formValue.region || '',
-        cityId: Number(formValue.cityId) || 0,
-      })
-      .subscribe(
-        (response) => {
+              phoneNumber: formValue.phoneNumber,
+              postalCode: String(formValue.postalCode),
+              alley: formValue.alley || '',
+              plaque: formValue.plaque || '',
+              street: formValue.street || '',
+              region: formValue.region || '',
+              cityId: Number(formValue.cityId) || 0,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   setDisabledFields() {

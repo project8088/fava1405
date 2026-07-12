@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'adm-refund-excel-batch-file-details',
@@ -71,25 +72,27 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.refundImportFileDetails, { importId: this.importId }).subscribe(
-      (response) => {
-        this.isLoadingResults = false;
-        if (response.isSuccess && response.data) {
-          this.info = response.data;
-          this.data = response.data.refundList ? response.data.refundList : [];
-          this.dataSource.data = this.data;
-          this.listCount = this.data.length;
-          this.dataSource.paginator = this.paginator;
-          this.dataSource.sort = this.sort;
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isLoadingResults = false;
-      },
-    );
+    this.dataService.get(ServerApis.refundImportFileDetails, { importId: this.importId })
+      .pipe(
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess && response.data) {
+                this.info = response.data;
+                this.data = response.data.refundList ? response.data.refundList : [];
+                this.dataSource.data = this.data;
+                this.listCount = this.data.length;
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   pageEvent(event: PageEvent) {
@@ -145,23 +148,25 @@ export class AdminRefundExcelBatchFileDetailsComponent extends AppBase implement
     form.citizenId = +form.citizenId.key;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.addRefundAccess, form).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.showAddPanel = false;
-          this.frm.reset();
-          this.getList();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.addRefundAccess, form)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+                this.showAddPanel = false;
+                this.frm.reset();
+                this.getList();
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   delete() {

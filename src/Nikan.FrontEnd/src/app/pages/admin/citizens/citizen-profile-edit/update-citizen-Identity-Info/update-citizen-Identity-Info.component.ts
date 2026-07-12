@@ -100,32 +100,33 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.updteIdentityInformationByAdmin, {
-        gender: formValue.gender,
-        firstName: formValue.firstName,
-        identityId: formValue.identityId,
-        lastName: formValue.lastName,
-        fatherName: formValue.fatherName,
-        nationalCode: '',
-        userCode: this.userCode,
-        birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.updteIdentityInformationByAdmin, {
+              gender: formValue.gender,
+              firstName: formValue.firstName,
+              identityId: formValue.identityId,
+              lastName: formValue.lastName,
+              fatherName: formValue.fatherName,
+              nationalCode: '',
+              userCode: this.userCode,
+              birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.getIdentityInfo();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.getIdentityInfo();
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   /**

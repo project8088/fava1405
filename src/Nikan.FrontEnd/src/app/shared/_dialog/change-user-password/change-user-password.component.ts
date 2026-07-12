@@ -8,6 +8,7 @@ import {
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-adm-change-user-password-dialog',
@@ -74,26 +75,27 @@ export class AdminChangePasswordDialogComponent extends AppBase implements OnIni
 
     this.isSaving = true;
     this.dataService
-      .post(ServerApis.changeUserPassword, {
-        UserId: this.userId,
-        NewPassword: formValue.password,
-        ConfirmPassword: formValue.confirmPassword,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.changeUserPassword, {
+              UserId: this.userId,
+              NewPassword: formValue.password,
+              ConfirmPassword: formValue.confirmPassword,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.matDialogRef.close(true);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+                  this.matDialogRef.close(true);
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   compareFn(c1: any, c2: any): boolean {

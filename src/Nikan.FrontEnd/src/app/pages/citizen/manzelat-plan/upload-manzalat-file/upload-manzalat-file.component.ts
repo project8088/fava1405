@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-upload-manzalat-file',
@@ -36,39 +37,42 @@ export class CitizenUploadManzalatDocumentsComponent extends AppBase implements 
 
   baseFormInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getManzalatBaseForm, { id: this.id }).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response.isSuccess && response.data) {
+    this.dataService.get(ServerApis.getManzalatBaseForm, { id: this.id })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          this.baseInfo = response.data;
-        } else {
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-      },
-    );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess && response.data) {
+                this.loading = false;
+                this.baseInfo = response.data;
+              } else {
+              }
+            }, (error: any) => {
+            });
   }
 
   getCitizenRegisterManzalatForm() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCitizenRegisterManzalatForm, { formBaseId: this.id })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCitizenRegisterManzalatForm, { formBaseId: this.id })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.loading = false;
-            this.uploadInfo = response.data;
-            this.hasFiles = response.data.hasFiles;
-          } else {
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.loading = false;
+                  this.uploadInfo = response.data;
+                  this.hasFiles = response.data.hasFiles;
+                } else {
+                }
+              }, (error: any) => {
+              });
   }
 
   removeDocument() {

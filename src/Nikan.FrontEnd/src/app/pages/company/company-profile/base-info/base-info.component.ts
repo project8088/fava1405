@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-base-info',
@@ -71,42 +72,43 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
   getAddressInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getCompanyBaseInfo, {
-        companyId: this.companyId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getCompanyBaseInfo, {
+              companyId: this.companyId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
-            this.form.setValue({
-              companyName: response.data.companyName,
-              englishName: response.data.englishName,
-              establishedYear: response.data.establishedYear,
-              txtTinNo: response.data.txtTinNo,
-              txtRegNO: response.data.txtRegNO,
-              companyOwnerType: response.data.companyOwnerType,
-              activityLicenseType: response.data.activityLicenseType,
-              activityLicense: response.data.activityLicense,
-              activityLicenseDate: response.data.activityLicenseDate,
-              earthCondition: response.data.earthCondition,
-              fieldOfActivity: response.data.fieldOfActivity,
-              managerNationCode: response.data.managerNationCode,
-              managerName: response.data.managerName,
-              unitArea: response.data.unitArea,
-              areaOfGreenSpace: response.data.areaOfGreenSpace,
-              buildingArea: response.data.buildingArea,
-              buildingLicenseArea: response.data.buildingLicenseArea,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.companyId = response.data.companyId;
+                  this.form.setValue({
+                    companyName: response.data.companyName,
+                    englishName: response.data.englishName,
+                    establishedYear: response.data.establishedYear,
+                    txtTinNo: response.data.txtTinNo,
+                    txtRegNO: response.data.txtRegNO,
+                    companyOwnerType: response.data.companyOwnerType,
+                    activityLicenseType: response.data.activityLicenseType,
+                    activityLicense: response.data.activityLicense,
+                    activityLicenseDate: response.data.activityLicenseDate,
+                    earthCondition: response.data.earthCondition,
+                    fieldOfActivity: response.data.fieldOfActivity,
+                    managerNationCode: response.data.managerNationCode,
+                    managerName: response.data.managerName,
+                    unitArea: response.data.unitArea,
+                    areaOfGreenSpace: response.data.areaOfGreenSpace,
+                    buildingArea: response.data.buildingArea,
+                    buildingLicenseArea: response.data.buildingLicenseArea,
+                  });
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -139,19 +141,21 @@ export class CompanyBaseInfoComponent extends AppBase implements OnInit {
       buildingArea: +form.buildingArea,
       buildingLicenseArea: +form.buildingLicenseArea,
     };
-    this.dataService.post(ServerApis.updateCompnayBaseInfo, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.updateCompnayBaseInfo, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

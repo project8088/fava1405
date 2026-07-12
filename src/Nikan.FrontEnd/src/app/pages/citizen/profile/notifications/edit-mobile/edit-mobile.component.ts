@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { TimerComponent } from '@app/shared/timer/timer.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-edit-mobile',
@@ -65,28 +66,29 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
 
     this.sendingSMS = true;
     this.dataService
-      .post(ServerApis.checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber, {
-        NewMobileNumber: this.editForm.get('newmobileNumber')?.value,
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.checkValidMobileNumberAndGetVerfiyCodeForChangeMobileNumber, {
+              NewMobileNumber: this.editForm.get('newmobileNumber')?.value,
+            })
+      .pipe(
+        finalize(() => {
           this.sendingSMS = false;
-          if (response.isSuccess) {
-            this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
-            this.lastTimerCounter = this.lastTimerCounter + 60;
-            this.timerCounter = this.lastTimerCounter;
-            this.startTimer();
-            this.showConfirmCode = true;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.sendingSMS = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('کد تائید شماره موبایل با موفقیت ارسال شد.');
+                  this.lastTimerCounter = this.lastTimerCounter + 60;
+                  this.timerCounter = this.lastTimerCounter;
+                  this.startTimer();
+                  this.showConfirmCode = true;
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   saveForm() {
@@ -100,30 +102,32 @@ export class CitizenEditMobileComponent extends AppBase implements OnInit {
     var formValue = this.editForm.value;
     var confirmFormValue = this.confirmForm.value;
     this.dataService
-      .post(ServerApis.updteCitizenMobileNumber, {
-        MobileNumber: formValue.newmobileNumber,
-        SmsActiveCode: confirmFormValue.smsActiveCode,
-      })
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.showForm();
-            this.isSaving = false;
-            this.getCitizenMobileNumber();
-            this.showConfirmCode = false;
-
-            this.toastrService.success(response.messages);
-          } else {
-            this.isSaving = false;
-            let msg = response.messages ? response.messages : 'شماره موبایل معتبر نیست';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
+            .post(ServerApis.updteCitizenMobileNumber, {
+              MobileNumber: formValue.newmobileNumber,
+              SmsActiveCode: confirmFormValue.smsActiveCode,
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response && response.isSuccess) {
+                  this.showForm();
+                  this.isSaving = false;
+                  this.getCitizenMobileNumber();
+                  this.showConfirmCode = false;
+
+                  this.toastrService.success(response.messages);
+                } else {
+                  this.isSaving = false;
+                  let msg = response.messages ? response.messages : 'شماره موبایل معتبر نیست';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 
   toggleEditMode() {}

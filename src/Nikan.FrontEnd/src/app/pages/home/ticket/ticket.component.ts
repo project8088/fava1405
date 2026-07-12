@@ -5,6 +5,7 @@ import Swal from 'sweetalert2';
 import { AuthUser } from '@core/authentication/user.model';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-ticket',
@@ -61,43 +62,46 @@ export class TicketComponent extends AppBase implements OnInit {
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllSupportCenter, {}).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.organizationList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllSupportCenter, {})
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.organizationList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
     this.dataService
-      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.ticketForm.get('organizationId')?.value,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+              organId: this.ticketForm.get('organizationId')?.value,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingUnit = false;
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingUnit = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.unitList = response.data ? response.data : [];
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   saveInfo() {
@@ -109,38 +113,39 @@ export class TicketComponent extends AppBase implements OnInit {
     this.isSaving = true;
     let formData = this.ticketForm.value;
     this.dataService
-      .post(ServerApis.sendUserTicket, {
-        Id: '',
-        Subject: formData.subject,
-        TicketMessage: formData.ticketMessage,
-        organizationalUnitId: formData.organizationalUnitId,
-        name: formData.name ? formData.name : '',
-        mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
-        nationCode: formData.nationCode ? formData.nationCode : '',
-        UserId: this.user ? this.user.userId : '',
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.sendUserTicket, {
+              Id: '',
+              Subject: formData.subject,
+              TicketMessage: formData.ticketMessage,
+              organizationalUnitId: formData.organizationalUnitId,
+              name: formData.name ? formData.name : '',
+              mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
+              nationCode: formData.nationCode ? formData.nationCode : '',
+              UserId: this.user ? this.user.userId : '',
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
-            Swal.fire({
-              showConfirmButton: true,
-              showCancelButton: false,
-              title: 'پیام شما با موفقیت ارسال شد',
-              text: 'کد رهگیری: ' + response.data.code,
-              confirmButtonText: 'تائید',
-            });
-            this.ticketForm.reset();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+                  Swal.fire({
+                    showConfirmButton: true,
+                    showCancelButton: false,
+                    title: 'پیام شما با موفقیت ارسال شد',
+                    text: 'کد رهگیری: ' + response.data.code,
+                    confirmButtonText: 'تائید',
+                  });
+                  this.ticketForm.reset();
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              });
   }
 }

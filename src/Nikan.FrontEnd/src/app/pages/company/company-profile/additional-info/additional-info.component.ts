@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'company-additional-info',
@@ -49,25 +50,26 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
   getAdditionalInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.getAdditionalInfo, {
-        companyId: this.companyId,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAdditionalInfo, {
+              companyId: this.companyId,
+            })
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.companyId = response.data.companyId;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess && response.data) {
+                  this.companyId = response.data.companyId;
 
-            this.form.patchValue(response.data);
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+                  this.form.patchValue(response.data);
+                } else {
+                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   save() {
@@ -86,19 +88,21 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
     this.isSaving = true;
 
     let dataToPost = form;
-    this.dataService.post(ServerApis.updateAdditionalInfo, dataToPost).subscribe(
-      (response) => {
-        this.isSaving = false;
-        if (response.isSuccess) {
-          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-        } else {
-          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.isSaving = false;
-      },
-    );
+    this.dataService.post(ServerApis.updateAdditionalInfo, dataToPost)
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+              } else {
+                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 }

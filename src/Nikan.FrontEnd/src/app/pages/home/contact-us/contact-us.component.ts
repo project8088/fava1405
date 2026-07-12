@@ -5,6 +5,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AuthUser } from '@core/authentication/user.model';
 import { SiteSettingViewModel } from '@core/models/setting';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-contact-us',
@@ -66,43 +67,46 @@ export class ContactUsComponent extends AppBase implements OnInit {
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {}).subscribe(
-      (response) => {
-        this.loadingData = false;
-        if (response.isSuccess) {
-          this.organizationList = response.data ? response.data : [];
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loadingData = false;
-      },
-    );
+    this.dataService.get(ServerApis.getAllOrganizational, {})
+      .pipe(
+        finalize(() => {
+          this.loadingData = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+              if (response.isSuccess) {
+                this.organizationList = response.data ? response.data : [];
+              } else {
+                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            }, (error: any) => {
+            });
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
     this.dataService
-      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-        organId: this.contactForm.get('organizationId')?.value,
-      })
-      .subscribe(
-        (response) => {
+            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+              organId: this.contactForm.get('organizationId')?.value,
+            })
+      .pipe(
+        finalize(() => {
           this.loadingUnit = false;
-          if (response.isSuccess) {
-            this.unitList = response.data ? response.data : [];
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loadingUnit = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.unitList = response.data ? response.data : [];
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 
   saveInfo() {
@@ -114,32 +118,33 @@ export class ContactUsComponent extends AppBase implements OnInit {
     this.isSaving = true;
     let formData = this.contactForm.value;
     this.dataService
-      .post(ServerApis.addContact, {
-        Id: '',
-        Subject: formData.subject,
-        Message: formData.message,
-        organizationalUnitId: formData.organizationalUnitId,
-        name: formData.name ? formData.name : '',
-        mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
-        email: formData.email ? formData.email : '',
-        CompanyId: '',
-        UserId: this.user ? this.user.userId : '',
-      })
-      .subscribe(
-        (response) => {
+            .post(ServerApis.addContact, {
+              Id: '',
+              Subject: formData.subject,
+              Message: formData.message,
+              organizationalUnitId: formData.organizationalUnitId,
+              name: formData.name ? formData.name : '',
+              mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
+              email: formData.email ? formData.email : '',
+              CompanyId: '',
+              UserId: this.user ? this.user.userId : '',
+            })
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-          if (response.isSuccess) {
-            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+                if (response.isSuccess) {
+                  this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-            this.contactForm.reset();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.isSaving = false;
-        },
-      );
+                  this.contactForm.reset();
+                } else {
+                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+                  this.toastrService.error(msg);
+                }
+              }, (error: any) => {
+              });
   }
 }

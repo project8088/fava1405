@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
+import { finalize } from "rxjs";
 
 @Component({
   selector: 'app-citizen-documents',
@@ -37,10 +38,16 @@ export class CitizenDocumentsComponent extends AppBase implements OnInit {
 
   getDocGroupsBaseList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getAllDocGrpupsAndUserDocuments).subscribe((data) => {
-      this.loading = false;
-      this.baseDocuments = data.data;
-    });
+    this.dataService.get(ServerApis.getAllDocGrpupsAndUserDocuments)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data) => {
+            this.baseDocuments = data.data;
+          });
   }
   removeDocument(id: number, title: string) {
     Swal.fire({
