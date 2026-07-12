@@ -46,88 +46,72 @@ function processFile(filePath) {
 
   sourceFile.getClasses().forEach((classDecl) => {
     classDecl.getMethods().forEach((method) => {
-      // پیدا کردن تمام فراخوانی‌های subscribe
-      method.getDescendantsOfKind(SyntaxKind.CallExpression).forEach((call) => {
+      // اول لیست را بگیر
+      const calls = [...method.getDescendantsOfKind(SyntaxKind.CallExpression)];
+
+      for (const call of calls) {
         const expression = call.getExpression();
-        if (expression.getKind() !== SyntaxKind.PropertyAccessExpression) return;
 
-        const propertyAccess = expression.asKind(SyntaxKind.PropertyAccessExpression);
-        if (propertyAccess.getName() !== 'subscribe') return;
+        if (!expression.isKind(SyntaxKind.PropertyAccessExpression)) continue;
 
-        // ۱. پیدا کردن زنجیره سرویس (مثلاً this.dataService.post(...))
+        const propertyAccess = expression;
+
+        if (propertyAccess.getName() !== 'subscribe') continue;
+
         const serviceChain = propertyAccess.getExpression();
-        const chainText = serviceChain.getText().replace(/\s+/g, ' ');
 
-        const isTargetService = /dataService\.(get|post|put|delete|patch)/.test(chainText);
+        const chainText = serviceChain.getText();
 
-        if (isTargetService) {
-          // ۲. پیدا کردن متغیر loading (isSaving = true)
-          const assignments = method.getDescendantsOfKind(SyntaxKind.AssignmentExpression);
-          const loadingAssignment = assignments.find((a) => {
-            const leftText = a.getLeft().getText();
-            const rightText = a.getRight().getText().trim(); // trim برای حذف \r یا \n
+        if (
+          !/this\.dataService\s*\.\s*(get|post|put|delete|patch)\s*\(/.test(
+            chainText.replace(/\s+/g, ' '),
+          )
+        ) {
+          continue;
+        }
+
+        // اگر قبلا finalize اضافه شده رد کن
+        if (chainText.includes('finalize(')) continue;
+
+        // پیدا کردن loading=true
+        const loadingAssignment = method
+          .getDescendantsOfKind(SyntaxKind.BinaryExpression)
+          .find((expr) => {
             return (
-              leftText.startsWith('this.') && rightText === 'true' && a.getStart() < call.getStart()
+              expr.getOperatorToken().getKind() === SyntaxKind.EqualsToken &&
+              expr.getLeft().getText().startsWith('this.') &&
+              expr.getRight().getKind() === SyntaxKind.TrueKeyword &&
+              expr.getStart() < call.getStart()
             );
           });
 
-          if (loadingAssignment) {
-            const loadingProp = loadingAssignment.getLeft().getText();
+        if (!loadingAssignment) continue;
 
-            // جلوگیری از تکرار
-            if (method.getText().includes('finalize')) return;
+        const loadingProp = loadingAssignment.getLeft().getText();
 
-            // ۳. استراتژی جایگزینی هوشمند:
-            // ما باید کل عبارت serviceChain.subscribe(...) را بگیریم
-            // و آن را به serviceChain.pipe(finalize(...)).subscribe(...) تبدیل کنیم.
+        // فقط متن را قبل از replace بگیر
+        const serviceText = serviceChain.getText();
+        const subscribeArgs = call
+          .getArguments()
+          .map((a) => a.getText())
+          .join(', ');
 
-            // برای اینکه در subscribe فعلی (با تمام آرگومان‌هایش) دست نبردیم:
-            // از متد replaceWithText روی خودِ 'call' (یعنی همان subscribe) استفاده می‌کنیم
+        const newText = `${serviceText}
+.pipe(
+  finalize(() => {
+    ${loadingProp} = false;
+    this.chdr.detectChanges();
+  }),
+)
+.subscribe(${subscribeArgs})`;
 
-            // اول متنِ قبل از subscribe را می‌گیریم (یعنی serviceChain)
-            const servicePartText = serviceChain.getText();
+        call.replaceWithText(newText);
 
-            // متنِ کلِ فراخوانی subscribe را می‌گیریم (شامل پرانتزها و callback ها)
-            const subscribePartText = call.getText();
+        changed = true;
 
-            // حالا یک جراحی می‌کنیم:
-            // باید پیدا کنیم subscribe از کجا شروع شده و کل عبارت را با pipe جدید بسازیم
-            // اما ساده‌ترین راه این است که کل 'call' را جایگزین کنیم
-            // با استفاده از متد realize:
-
-            const newExpression = `${servicePartText}.pipe(finalize(() => { ${loadingProp} = false; this.chdr.detectChanges(); })).subscribe(arguments_here)`;
-
-            // اما چون آرگومان‌ها (callback ها) پیچیده‌اند، نباید از رشته استفاده کنیم.
-            // راه درست این است که خودِ subscribe را به یک زنجیره جدید تبدیل کنیم:
-
-            // پیدا کردن شروعِ پرانتزِ subscribe
-            const openParenthesis = call.getArguments()[0]
-              ? call.getArguments()[0].getStart()
-              : call.getStart();
-            // در ts-morph، CallExpression خودش شامل پرانتزهاست.
-
-            // بهترین راه: ایجاد یک CallExpression جدید برای pipe و سپس اتصال آن به subscribe فعلی
-            // اما چون ts-morph در ایجاد زنجیره پیچیده سخت است، از این ترفند استفاده می‌کنیم:
-
-            const fullCallText = call.getText(); // تمام عبارت: .subscribe((data)=>..., (err)=>...)
-            // پیدا کردن نقطه شروع subscribe در متن اصلی
-            const subscribeIndex = fullCallText.indexOf('.subscribe');
-
-            // جدا کردن بخش قبل از subscribe و بخش خود subscribe
-            // در واقع ما می‌خواهیم قبل از .subscribe، عبارت .pipe(...) را تزریق کنیم
-
-            // برای جلوگیری از پیچیدگی، از روش String Manipulation روی خودِ call استفاده می‌کنیم
-            // که بسیار امن‌تر از روش قبلی است:
-            const updatedCallText = fullCallText.replace(
-              '.subscribe',
-              `.pipe(finalize(() => { ${loadingProp} = false; this.chdr.detectChanges(); })).subscribe`,
-            );
-
-            call.replaceWithText(updatedCallText);
-            changed = true;
-          }
-        }
-      });
+        // مهم
+        break;
+      }
     });
   });
 
