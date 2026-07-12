@@ -241,6 +241,12 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
               addressId: response.data.id,
               cardIfoId: this.card.cardInfoId,
             })
+            .pipe(
+              finalize(() => {
+                this.isSaving = false;
+                this.chdr.detectChanges();
+              }),
+            )
             .subscribe((response) => {
               this.orderDetails = response.data;
             });

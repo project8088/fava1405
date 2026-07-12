@@ -205,6 +205,12 @@ export class CardDetailComponent extends AppBase implements OnInit {
               addressId: response.data.id,
               CardInfoId: this.cardInfoId,
             })
+            .pipe(
+              finalize(() => {
+                this.isSaving = false;
+                this.chdr.detectChanges();
+              }),
+            )
             .subscribe((response) => {
               this.orderDetails = response.data;
             });
