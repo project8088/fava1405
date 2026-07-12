@@ -100,7 +100,7 @@ export class AdminCitizenAuthenticationSearchComponent extends AppBase implement
         this.baseEnums.registerTypes = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
@@ -111,7 +111,7 @@ export class AdminCitizenAuthenticationSearchComponent extends AppBase implement
         this.baseEnums.citizenGroups = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

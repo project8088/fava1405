@@ -50,7 +50,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 
@@ -89,7 +89,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
             },
             (error: any) => {
               row.loading = false;
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             },
           );
       }

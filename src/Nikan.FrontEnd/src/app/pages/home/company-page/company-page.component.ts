@@ -61,11 +61,11 @@ export class CompanyPageComponent extends AppBase implements OnInit {
         if (response) {
           this.periorityList = response.ticketPriority ? response.ticketPriority : [];
         } else {
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+          
         }
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

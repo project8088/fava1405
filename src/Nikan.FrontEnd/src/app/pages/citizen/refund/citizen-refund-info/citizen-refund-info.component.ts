@@ -50,7 +50,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 
@@ -83,7 +83,7 @@ export class CitizenRefundFullInfoComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 }

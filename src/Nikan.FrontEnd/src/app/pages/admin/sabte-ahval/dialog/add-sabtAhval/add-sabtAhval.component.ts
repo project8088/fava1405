@@ -44,7 +44,7 @@ export class AdminAddSabtAhvalDialogComponent extends AppBase implements OnInit 
         this.baseEnums.citizenGroups = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

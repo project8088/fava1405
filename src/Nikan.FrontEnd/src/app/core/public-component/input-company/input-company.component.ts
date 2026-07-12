@@ -86,26 +86,19 @@ export class InputCompanyAutoCompleteComponent
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          this.List = response.data ? response.data : [];
-          this.filteredList = this.myControl.valueChanges.pipe(
-            startWith(''),
-            map((value) => {
-              if (value === null || value === undefined) return '';
-              else if (typeof value === 'string') return value;
-              else if (value.text) return value.text;
-              else return '';
-            }),
-            map((value) => (value ? this._filter(value, this.List) : this.List)),
-          );
-        },
-        (error: any) => {
-          this.loading = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+      .subscribe((response) => {
+        this.List = response.data ? response.data : [];
+        this.filteredList = this.myControl.valueChanges.pipe(
+          startWith(''),
+          map((value) => {
+            if (value === null || value === undefined) return '';
+            else if (typeof value === 'string') return value;
+            else if (value.text) return value.text;
+            else return '';
+          }),
+          map((value) => (value ? this._filter(value, this.List) : this.List)),
+        );
+      });
   }
 
   /**

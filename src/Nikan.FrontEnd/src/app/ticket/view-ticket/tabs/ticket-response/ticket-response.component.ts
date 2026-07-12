@@ -128,7 +128,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
                           this.toastrService.error(msg);
                         }
                       }, (error: any) => {
-                        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+                        
                       });
       }
     });
@@ -193,7 +193,7 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
                   this.toastrService.error(msg);
                 }
               }, (error: any) => {
-                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+                
               });
   }
 

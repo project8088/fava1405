@@ -143,7 +143,7 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
           }
         },
         (error: any) => {
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+          
         },
       );
   }

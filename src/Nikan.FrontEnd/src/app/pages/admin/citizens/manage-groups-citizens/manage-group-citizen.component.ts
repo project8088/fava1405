@@ -4,7 +4,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'manage-group-citizen',
@@ -40,30 +40,26 @@ export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit
   }
 
   getcitizengroupList() {
-
-          this.loading = true;
-          this.dataService
-            .get(ServerApis.getGroupsCitizensInfo, {
-              userCode: this.userCode,
-            })
-              .pipe(
+    this.loading = true;
+    this.dataService
+      .get(ServerApis.getGroupsCitizensInfo, {
+        userCode: this.userCode,
+      })
+      .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
-      )ّ
-            .subscribe(
-              (response) => {
-                this.loading = false;
-                if (response.isSuccess && response.data) {
-                  this.citizengroupList = response.data ? response.data : [];
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              },
-            );
-        
+      )
+      .subscribe((response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.citizengroupList = response.data ? response.data : [];
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {
@@ -79,24 +75,27 @@ export class AdminManageGroupsCitizenComponent extends AppBase implements OnInit
       userCode: this.userCode,
       expireDate: form.expireDate,
     };
-    this.dataService.post(ServerApis.addCitizenToGroup, dataToPost)
+    this.dataService
+      .post(ServerApis.addCitizenToGroup, dataToPost)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.form.reset();
-                this.getcitizengroupList();
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.form.reset();
+            this.getcitizengroupList();
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   delete(row: any) {

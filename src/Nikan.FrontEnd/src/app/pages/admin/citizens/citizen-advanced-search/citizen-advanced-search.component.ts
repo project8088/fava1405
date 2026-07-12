@@ -111,9 +111,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
+      (error: any) => {},
     );
   }
 
@@ -122,9 +120,7 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
+      (error: any) => {},
     );
   }
 

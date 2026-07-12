@@ -69,7 +69,7 @@ export class CardCitizenCardSearchInQueueComponent extends AppBase implements Af
         this.baseEnums.registerTypes = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

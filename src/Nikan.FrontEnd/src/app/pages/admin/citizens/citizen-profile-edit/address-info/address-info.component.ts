@@ -213,7 +213,7 @@ export class AdminCitizenAddressInfoComponent extends AppBase implements OnInit 
               this.isSavingWork = false;
             }, (error: any) => {
               this.isSavingWork = false;
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 

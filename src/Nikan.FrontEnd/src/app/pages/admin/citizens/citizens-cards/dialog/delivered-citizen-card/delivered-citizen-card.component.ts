@@ -66,7 +66,7 @@ export class AdminDeliveredCitizenCardDialogComponent extends AppBase implements
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 }

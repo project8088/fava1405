@@ -53,7 +53,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 
@@ -92,7 +92,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
             },
             (error: any) => {
               row.loading = false;
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             },
           );
       }
@@ -136,7 +136,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
         }
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

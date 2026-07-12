@@ -46,7 +46,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
         if (response) {
           this.periorityList = response.ticketPriority ? response.ticketPriority : [];
         } else {
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+          
           this.matDialogRef.close();
         }
       },
@@ -141,7 +141,7 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
                   this.toastrService.error(msg);
                 }
               }, (error: any) => {
-                this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+                
               });
   }
 }

@@ -51,7 +51,7 @@ export class CreditcardComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.isSaving = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

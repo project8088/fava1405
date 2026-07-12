@@ -42,7 +42,7 @@ export class AdminGroupTransferDialogComponent extends AppBase implements OnInit
         this.groupList = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

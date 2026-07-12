@@ -43,7 +43,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
@@ -58,7 +58,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
@@ -77,7 +77,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

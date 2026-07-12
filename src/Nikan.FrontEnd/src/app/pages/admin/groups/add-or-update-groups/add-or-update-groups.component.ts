@@ -89,7 +89,7 @@ export class AdminAddOrUpdateGroupsComponent extends AppBase implements OnInit, 
         this.parentGroups = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

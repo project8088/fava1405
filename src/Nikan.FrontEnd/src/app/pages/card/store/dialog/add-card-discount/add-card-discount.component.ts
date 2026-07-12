@@ -3,7 +3,6 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
-import { Observable, finalize } from 'rxjs';
 import {
   map,
   startWith,
@@ -17,6 +16,7 @@ import {
   MatAutocompleteTrigger,
 } from '@angular/material/autocomplete';
 import { AppBase } from '@app/app.base';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'adm-add-card-discount-dialog',

@@ -200,7 +200,7 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
                 this.toastrService.error(msg);
               }
             }, (error: any) => {
-              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+              
             });
   }
 

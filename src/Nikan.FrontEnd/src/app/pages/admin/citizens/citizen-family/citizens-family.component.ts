@@ -99,7 +99,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
         this.baseEnums.citizenGroups = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }

@@ -51,7 +51,7 @@ export class RedirectComponent extends AppBase implements OnInit {
           } else this.toastrService.error(data.messages);
         },
         (error: any) => {
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+          
         },
       );
   }

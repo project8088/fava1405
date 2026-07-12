@@ -110,7 +110,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
         this.baseEnums.registerTypes = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
@@ -121,7 +121,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
         this.baseEnums.citizenGroups = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
@@ -245,7 +245,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
         this.baseEnums.discountList = response.data;
       },
       (error: any) => {
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        
       },
     );
   }
