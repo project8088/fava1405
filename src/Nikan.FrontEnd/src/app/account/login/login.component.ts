@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -71,32 +72,38 @@ export class LoginComponent extends AppBase implements OnInit {
     param.CaptchaId = this.captchaComponent.captchaId;
 
     this.loading = true;
-    this.authService.login(this.loginForm.value).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response.isSuccess == true) {
-          this.toastrService.success('احراز هویت با موفقیت انجام شد.');
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe({
+        next: (response) => {
+          if (response.isSuccess == true) {
+            this.toastrService.success('احراز هویت با موفقیت انجام شد.');
 
-          const user = this.authService.currentUserValue;
-          if (user && user.isCitizen && this.serviceId) {
-            this.router.navigateByUrl(
-              '/redirect?serviceId=' + this.serviceId + '&returnUrl=' + this.returnUrl,
-            );
+            const user = this.authService.currentUserValue;
+            if (user && user.isCitizen && this.serviceId) {
+              this.router.navigateByUrl(
+                '/redirect?serviceId=' + this.serviceId + '&returnUrl=' + this.returnUrl,
+              );
+            } else {
+              if (this.returnUrl) this.router.navigate([this.returnUrl]);
+              else this.authService.goToDashboard();
+            }
           } else {
-            if (this.returnUrl) this.router.navigate([this.returnUrl]);
-            else this.authService.goToDashboard();
+            var msg = response.messages ? response.messages : 'نام کاربری یا کلمه عبور صحیح نیست!';
+            this.toastrService.error(msg);
+            this.captchaComponent.reloadImage();
           }
-        } else {
-          var msg = response.messages ? response.messages : 'نام کاربری یا کلمه عبور صحیح نیست!';
-          this.toastrService.error(msg);
-          this.captchaComponent.reloadImage();
-        }
-      },
-      (error: any) => {
-        if (error.status == '401') this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
-        else this.toastrService.error('خطا در ارتباط با سرور!');
-        this.loading = false;
-      },
-    );
+        },
+        error: (error) => {
+          if (error.status == '401') this.toastrService.error('نام کاربری یا کلمه عبور صحیح نیست!');
+          else this.toastrService.error('خطا در ارتباط با سرور!');
+        },
+      });
   }
 }

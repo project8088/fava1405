@@ -5,7 +5,7 @@ import { BaseDataModel } from '@core/models/base-data-model';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '@core/models/citizen/global-information';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
@@ -306,62 +306,66 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   }
   getPersonalInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getCitizenBaseInfoByAdmin).subscribe(
-      (response) => {
-        this.loading = false;
-        if (response && response.isSuccess) {
-          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-          (this, (this.citizenInfo = response.data));
+    this.dataService
+      .get(ServerApis.getCitizenBaseInfoByAdmin)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          if (response && response.isSuccess) {
+            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+            (this, (this.citizenInfo = response.data));
 
-          this.personalForm.patchValue({
-            gender: response.data.gender,
-            mobile: response.data.mobile,
-            email: response.data.eMail || null,
-            nationalCode: response.data.nationCode,
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            fatherName: response.data.fatherName,
-            date_SabtConfirm: response.data.date_SabtConfirm
-              ? new Date(response.data.date_SabtConfirm)
-              : '',
-            birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
+            this.personalForm.patchValue({
+              gender: response.data.gender,
+              mobile: response.data.mobile,
+              email: response.data.eMail || null,
+              nationalCode: response.data.nationCode,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              fatherName: response.data.fatherName,
+              date_SabtConfirm: response.data.date_SabtConfirm
+                ? new Date(response.data.date_SabtConfirm)
+                : '',
+              birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
 
-            educationTitle: response.data.educationField,
-            educationGroup: String(response.data.educationGroupId),
-            educationGroupId: response.data.educationGroupId,
+              educationTitle: response.data.educationField,
+              educationGroup: String(response.data.educationGroupId),
+              educationGroupId: response.data.educationGroupId,
 
-            alley: response.data.alley,
-            region: response.data.region,
-            postalCode: response.data.postalCode,
-            dateOfBirth: response.data.birthDate,
-            marital: response.data.mariageStatus,
-            educationStatues: response.data.educationStatues,
-            educationLevel: response.data.educationLevel,
-            jobGroup: response.data.jobGroupId,
-            jobTitle: response.data.jobTitle,
-            stateId: response.data.city ? response.data.city.parentValue : null,
-            cityId: String(response.data.cityId),
-            plaque: response.data.plaque,
+              alley: response.data.alley,
+              region: response.data.region,
+              postalCode: response.data.postalCode,
+              dateOfBirth: response.data.birthDate,
+              marital: response.data.mariageStatus,
+              educationStatues: response.data.educationStatues,
+              educationLevel: response.data.educationLevel,
+              jobGroup: response.data.jobGroupId,
+              jobTitle: response.data.jobTitle,
+              stateId: response.data.city ? response.data.city.parentValue : null,
+              cityId: String(response.data.cityId),
+              plaque: response.data.plaque,
 
-            phoneNumber: response.data.phone,
-            state: {
-              value: response.data.cityId,
-              text: response.data.city,
-            },
-          });
+              phoneNumber: response.data.phone,
+              state: {
+                value: response.data.cityId,
+                text: response.data.city,
+              },
+            });
 
-          this.userStatus = response.data.sabtStatus;
-          this.setDisabledFields();
-        } else {
-          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-          this.toastrService.error(msg);
-        }
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+            this.userStatus = response.data.sabtStatus;
+            this.setDisabledFields();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+      );
   }
 
   savePersonalInfo() {

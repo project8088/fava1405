@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
@@ -78,26 +78,34 @@ export class InputCompanyAutoCompleteComponent
     }
 
     this.loading = true;
-    this.dataService.get(ServerApis.getListCompany, {}).subscribe(
-      (response) => {
-        this.loading = false;
-        this.List = response.data ? response.data : [];
-        this.filteredList = this.myControl.valueChanges.pipe(
-          startWith(''),
-          map((value) => {
-            if (value === null || value === undefined) return '';
-            else if (typeof value === 'string') return value;
-            else if (value.text) return value.text;
-            else return '';
-          }),
-          map((value) => (value ? this._filter(value, this.List) : this.List)),
-        );
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+    this.dataService
+      .get(ServerApis.getListCompany, {})
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          this.loading = false;
+          this.List = response.data ? response.data : [];
+          this.filteredList = this.myControl.valueChanges.pipe(
+            startWith(''),
+            map((value) => {
+              if (value === null || value === undefined) return '';
+              else if (typeof value === 'string') return value;
+              else if (value.text) return value.text;
+              else return '';
+            }),
+            map((value) => (value ? this._filter(value, this.List) : this.List)),
+          );
+        },
+        (error: any) => {
+          this.loading = false;
+          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
+        },
+      );
   }
 
   /**

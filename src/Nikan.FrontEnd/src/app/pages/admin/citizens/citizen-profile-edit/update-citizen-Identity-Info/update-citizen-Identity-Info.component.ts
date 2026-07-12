@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-update-citizen-Identity-Info',
@@ -57,6 +58,12 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
     this.loading = true;
     this.dataService
       .get(ServerApis.getIdentityInformationByAdmin, { userCode: this.userCode })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.loading = false;
@@ -79,11 +86,7 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);
           }
-        },
-        (error: any) => {
-          this.loading = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
+        }
       );
   }
 

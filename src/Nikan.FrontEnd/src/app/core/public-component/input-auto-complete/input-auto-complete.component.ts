@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
@@ -96,8 +96,15 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
     }
     if (!parent) return;
     this.loading = true;
-    this.dataService.get(ServerApis.getCitesByParent, { parentId: parent }).subscribe(
-      (response) => {
+    this.dataService
+      .get(ServerApis.getCitesByParent, { parentId: parent })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.loading = false;
         this.List = response.data ? response.data : [];
         var previewValue = this.myControl.value;
@@ -108,12 +115,7 @@ export class InputAutoCompleteComponent extends AppBase implements ControlValueA
         }
 
         this.init();
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+      });
   }
 
   /**

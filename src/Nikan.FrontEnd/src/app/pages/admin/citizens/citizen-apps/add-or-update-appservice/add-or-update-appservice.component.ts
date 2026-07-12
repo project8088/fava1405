@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-add-or-update-appservice',
@@ -67,21 +68,22 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
         id: this.serviceId,
         forEdit: true,
       })
-      .subscribe(
-        (response) => {
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.storeForm.patchValue(response.data);
-            this.imageUrl = response.data.imageUrl;
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.storeForm.patchValue(response.data);
+          this.imageUrl = response.data.imageUrl;
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**

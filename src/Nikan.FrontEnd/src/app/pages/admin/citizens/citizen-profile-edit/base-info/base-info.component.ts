@@ -3,6 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'citizen-base-info',
@@ -91,39 +92,39 @@ export class AdminCitizenBaseInfoComponent extends AppBase implements OnInit {
     this.loading = true;
     this.dataService
       .get(ServerApis.getCitizenBaseInfoByAdmin, { userCode: this.userCode })
-      .subscribe(
-        (response) => {
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response && response.isSuccess) {
-            this.form.patchValue({
-              gender: response.data.gender,
-              nationalCode: response.data.nationCode,
-              firstName: response.data.firstName,
-              lastName: response.data.lastName,
-              fatherName: response.data.fatherName,
-              educationTitle: response.data.educationField,
-              educationGroup: String(response.data.educationGroupId),
-              educationGroupId: response.data.educationGroupId,
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.form.patchValue({
+            gender: response.data.gender,
+            nationalCode: response.data.nationCode,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            fatherName: response.data.fatherName,
+            educationTitle: response.data.educationField,
+            educationGroup: String(response.data.educationGroupId),
+            educationGroupId: response.data.educationGroupId,
 
-              birthDate: response.data.birthDate,
-              mariageStatus: response.data.mariageStatus,
-              educationStatues: response.data.educationStatues,
-              educationLevel: response.data.educationLevel,
-              jobGroup: response.data.jobGroupId,
-              jobTitle: response.data.jobTitle,
-              mobileNumber: response.data.mobileNumber,
-            });
-            this.userStatus = response.data.sabtStatus;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-          this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-        },
-      );
+            birthDate: response.data.birthDate,
+            mariageStatus: response.data.mariageStatus,
+            educationStatues: response.data.educationStatues,
+            educationLevel: response.data.educationLevel,
+            jobGroup: response.data.jobGroupId,
+            jobTitle: response.data.jobTitle,
+            mobileNumber: response.data.mobileNumber,
+          });
+          this.userStatus = response.data.sabtStatus;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   save() {

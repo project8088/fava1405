@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-adm-update-citizen-mobile-number-dialog',
@@ -42,9 +43,14 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
     //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByAdmin, { userCode: this.userCode })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
-          this.loading = false;
           if (response.isSuccess) {
             this.info = response.data;
           } else {
@@ -54,7 +60,6 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
           }
         },
         (error: any) => {
-          this.loading = false;
           this.matDialogRef.close(false);
         },
       );

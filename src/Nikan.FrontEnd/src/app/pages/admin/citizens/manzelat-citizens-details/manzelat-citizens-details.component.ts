@@ -7,6 +7,7 @@ import { AdminUpdateCitizenMobileNumberDialogComponent } from '../_dialog/update
 import { AdminUpdateCitizenSabtStateDialogComponent } from '../_dialog/update-citizen-sabt-state/update-citizen-sabt-state.component';
 import { AppBase } from '@app/app.base';
 import { AdminCitizenManzelatReviewComponent } from '../_dialog/citizen-manzelat-review/citizen-manzelat-review.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-manzelat-citizens-details',
@@ -41,21 +42,22 @@ export class AdminManzelatCitizensDetailsComponent extends AppBase implements On
       .get(ServerApis.getCitizenInfoAndManzaltForm, {
         userCode: this.userCode,
       })
-      .subscribe(
-        (response) => {
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess) {
-            this.data = response.data ? response.data.manzaltForms : {};
-            this.citizen = response.data ? response.data.citizen : {};
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.loading = false;
+        if (response.isSuccess) {
+          this.data = response.data ? response.data.manzaltForms : {};
+          this.citizen = response.data ? response.data.citizen : {};
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   openReviewDialog(manzelatForm: any, command: any) {

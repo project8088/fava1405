@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { BaseDataModel } from '@core/models/base-data-model';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { HelperService } from '@core/services/helper.service';
 import { AppBase } from '@app/app.base';
 
@@ -112,6 +112,12 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
       .get(ServerApis.geCitizenProfileByAdmin, {
         userCode: this.userCode,
       })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.loading = false;
@@ -156,10 +162,7 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
             var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
             this.toastrService.error(msg);
           }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
+        }
       );
   }
 

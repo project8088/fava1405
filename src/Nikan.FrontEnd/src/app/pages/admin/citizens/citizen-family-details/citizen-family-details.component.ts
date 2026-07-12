@@ -4,6 +4,7 @@ import { ServerApis } from '@core/server-apis';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
 import { AdminCitizenRejectFamilyComponent } from '../_dialog/citizen-reject-family/citizen-reject-family.component';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-citizen-family-details',
@@ -39,21 +40,22 @@ export class AdminCitizenFamilyDetailsComponent extends AppBase implements OnIni
       .get(ServerApis.getAllCitizenFamilyByAdmin, {
         userCode: this.userCode,
       })
-      .subscribe(
-        (response) => {
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          if (response.isSuccess) {
-            this.familyList = response.data ? response.data.familyList : {};
-            this.citizen = response.data ? response.data.citizen : {};
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.loading = false;
+        if (response.isSuccess) {
+          this.familyList = response.data ? response.data.familyList : {};
+          this.citizen = response.data ? response.data.citizen : {};
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   openRejectFamilyeDialog(family: any) {

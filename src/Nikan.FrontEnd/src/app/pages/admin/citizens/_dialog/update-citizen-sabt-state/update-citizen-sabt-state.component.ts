@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-adm-update-citizen-sabt-state-dialog',
@@ -42,6 +43,12 @@ export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implemen
     //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByAdmin, { userCode: this.userCode })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
       .subscribe(
         (response) => {
           this.loading = false;
@@ -54,7 +61,6 @@ export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implemen
           }
         },
         (error: any) => {
-          this.loading = false;
           this.matDialogRef.close(false);
         },
       );

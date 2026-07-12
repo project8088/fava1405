@@ -1,5 +1,5 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { merge, of as observableOf } from 'rxjs';
+import { merge, of as observableOf, finalize } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
-import { Observable } from 'rxjs';
+import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '../../server-apis';
 import { startWith, map } from 'rxjs/operators';
 import { MatAutocompleteTrigger, MatAutocomplete } from '@angular/material/autocomplete';
@@ -78,9 +78,15 @@ export class InputRefundUsersAutoCompleteComponent
     }
 
     this.loading = true;
-    this.dataService.get(ServerApis.getAllRefunAccessUsers, {}).subscribe(
-      (response) => {
-        this.loading = false;
+    this.dataService
+      .get(ServerApis.getAllRefunAccessUsers, {})
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.List = response.data ? response.data : [];
         this.filteredList = this.myControl.valueChanges.pipe(
           startWith(''),
@@ -92,12 +98,7 @@ export class InputRefundUsersAutoCompleteComponent
           }),
           map((value) => (value ? this._filter(value, this.List) : this.List)),
         );
-      },
-      (error: any) => {
-        this.loading = false;
-        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است.');
-      },
-    );
+      });
   }
 
   /**
