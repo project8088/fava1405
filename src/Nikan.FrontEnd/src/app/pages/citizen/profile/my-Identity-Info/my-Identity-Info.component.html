@@ -3,12 +3,12 @@
   <mat-card-content>
     <div class="box-info-dash">
       <div class="row">
-        @if (info.sabtStatus === 1) {
+        @if (info?.sabtStatus === 1) {
           <div class="col-sm-6 alert alert-success m-3">
             اطلاعات شناسنامه ایی شما تایید شده است .
           </div>
         }
-        @if (info.sabtStatus === 0) {
+        @if (info?.sabtStatus === 0) {
           <div class="col-sm-6 alert alert-danger m-3">
             اطلاعات شما مورد تایید ثبت احوال قرار نگرفت، لطفا اطلاعات صحیح خود را وارد کنید .
           </div>
@@ -18,35 +18,35 @@
       <div class="row">
         <div class="col-sm-6">
           <span> جنسیت : </span>
-          @if (info.gender) {
+          @if (info?.gender) {
             <strong> آقا</strong>
           }
-          @if (!info.gender) {
+          @if (!info?.gender) {
             <strong> خانم</strong>
           }
         </div>
         <div class="col-sm-6">
-          <span> کد ملی: </span><strong>{{ info.nationCode }}</strong>
+          <span> کد ملی: </span><strong>{{ info?.nationCode }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> شماره شناسنامه: </span><strong>{{ info.identityId }}</strong>
+          <span> شماره شناسنامه: </span><strong>{{ info?.identityId }}</strong>
         </div>
         <div class="col-sm-6">
-          <span>نام: </span><strong>{{ info.firstName }}</strong>
+          <span>نام: </span><strong>{{ info?.firstName }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> نام خانوادگی: </span><strong>{{ info.lastName }}</strong>
+          <span> نام خانوادگی: </span><strong>{{ info?.lastName }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> نام پدر: </span><strong>{{ info.fatherName }}</strong>
-        </div>
-
-        <div class="col-sm-6">
-          <span> تاریخ تولد: </span><strong>{{ info.birthDate | luxonFormat }}</strong>
+          <span> نام پدر: </span><strong>{{ info?.fatherName }}</strong>
         </div>
 
         <div class="col-sm-6">
-          <span> آخرین ویرایش: </span><strong>{{ info.lastUpdateOnDate | luxonFormat }}</strong>
+          <span> تاریخ تولد: </span><strong>{{ info?.birthDate | luxonFormat }}</strong>
+        </div>
+
+        <div class="col-sm-6">
+          <span> آخرین ویرایش: </span><strong>{{ info?.lastUpdateOnDate | luxonFormat }}</strong>
         </div>
       </div>
     </div>

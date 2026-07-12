@@ -7,13 +7,13 @@
       </div>
     }
 
-    @if (info.sabtStatus === 0) {
+    @if (info?.sabtStatus === 0) {
       <div class="alert alert-danger m-3">
         اطلاعات شهروند مورد تایید ثبت احوال قرار نگرفت، کد ملی با تاریخ تولد شهروند تطابق ندارد .
       </div>
     }
 
-    @if (info.sabtStatus === 4) {
+    @if (info?.sabtStatus === 4) {
       <div class="alert alert-info m-3">اطلاعات شهروند در دست بررسی می باشد .</div>
     }
 

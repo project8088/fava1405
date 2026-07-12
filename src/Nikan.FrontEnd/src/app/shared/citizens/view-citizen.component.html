@@ -22,79 +22,79 @@
         <div class="row">
           <div class="col-sm-6 col-md-4">
             <span>کدملی : </span>
-            <strong>{{ info.nationCode }}</strong>
+            <strong>{{ info?.nationCode }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>نام : </span>
-            <strong>{{ info.firstName }}</strong>
+            <strong>{{ info?.firstName }}</strong>
             &nbsp;
-            <strong>{{ info.lastName }}</strong>
+            <strong>{{ info?.lastName }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>نام پدر: </span>
-            <strong>{{ info.fatherName }}</strong>
+            <strong>{{ info?.fatherName }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span> ثبت نام از طریق خدمت : </span>
-            <strong>{{ info.registerByService }}</strong>
+            <strong>{{ info?.registerByService }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>وضعیت تاهل: </span>
-            <strong>{{ info.mariageStatus | enumString: 'mariageStatus' }}</strong>
+            <strong>{{ info?.mariageStatus | enumString: 'mariageStatus' }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>تاریخ تولد: </span>
-            <strong>{{ info.birthDate | luxonFormat }}</strong>
+            <strong>{{ info?.birthDate | luxonFormat }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>شماره موبایل: </span>
-            <strong>{{ info.mobileNumber }}</strong>
+            <strong>{{ info?.mobileNumber }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>سطج تحصبلات: </span>
-            <strong>{{ info.educationLevel | enumString: 'educationLevel' }}</strong>
+            <strong>{{ info?.educationLevel | enumString: 'educationLevel' }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>گروه تحصیلی: </span>
-            <strong>{{ info.educationGroup }}</strong>
+            <strong>{{ info?.educationGroup }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>وضعیت تحصیلی: </span>
             <strong>
-              {{ info.educationStatues | enumString: 'educationStatues' }}
+              {{ info?.educationStatues | enumString: 'educationStatues' }}
             </strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>رشته تحصیلی: </span>
-            <strong>{{ info.educationField }}</strong>
+            <strong>{{ info?.educationField }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>گروه شغلی: </span>
-            <strong>{{ info.jobGroup }}</strong>
+            <strong>{{ info?.jobGroup }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>عنوان شغل: </span>
-            <strong>{{ info.jobTitle }}</strong>
+            <strong>{{ info?.jobTitle }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>آدرس ایمیل: </span>
-            <strong>{{ info.eMail }}</strong>
+            <strong>{{ info?.eMail }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>تاریخ ثبت نام: </span>
-            <strong>{{ info.creationDate | luxonFormat }}</strong>
+            <strong>{{ info?.creationDate | luxonFormat }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>وضعیت ثبت احوال: </span>
-            <strong>{{ info.sabtStatus | enumString: 'sabtStatus' }}</strong>
+            <strong>{{ info?.sabtStatus | enumString: 'sabtStatus' }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>وضعیت تصویر پرسنلی: </span>
-            <strong>{{ info.personalPicture_Confirmed | enumString: 'personalPicture' }}</strong>
+            <strong>{{ info?.personalPicture_Confirmed | enumString: 'personalPicture' }}</strong>
           </div>
           <div class="col-sm-6 col-md-4">
             <span>آخرین برورسانی اطلاعات: </span>
-            <strong>{{ info.lastUpdateOnDate | luxonFormat }}</strong>
+            <strong>{{ info?.lastUpdateOnDate | luxonFormat }}</strong>
           </div>
         </div>
       </div>

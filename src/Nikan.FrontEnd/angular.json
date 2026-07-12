@@ -39,7 +39,12 @@
               "./node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.green.min.css",
               "./node_modules/leaflet/dist/leaflet.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "src/styles.scss"
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/styles.scss",
+              "src/scss/kartable.scss",
+              "src/scss/public.scss",
+              "src/scss/data-table.scss",
+              "src/scss/default-dialog.scss"
             ],
             "scripts": ["./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"]
           },

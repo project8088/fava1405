@@ -12,29 +12,29 @@
         <div class="col-sm-6">
           <span> جنسیت: </span>
           <strong>
-            @if (!info.gender) {
+            @if (!info?.gender) {
               <span> خانم </span>
             }
-            @if (info.gender) {
+            @if (info?.gender) {
               <span> آقا </span>
             }
           </strong>
         </div>
         <div class="col-sm-6">
-          <span> کد ملی: </span><strong>{{ info.nationCode }}</strong>
+          <span> کد ملی: </span><strong>{{ info?.nationCode }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> نام : </span><strong>{{ info.firstName }}</strong>
+          <span> نام : </span><strong>{{ info?.firstName }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> نام خانوادگی: </span><strong>{{ info.lastName }}</strong>
+          <span> نام خانوادگی: </span><strong>{{ info?.lastName }}</strong>
         </div>
         <div class="col-sm-6">
-          <span> تاریخ تولد: </span><strong> {{ info.birthDate | luxonFormat }}</strong>
+          <span> تاریخ تولد: </span><strong> {{ info?.birthDate | luxonFormat }}</strong>
         </div>
         <div class="col-sm-6">
           <span>وضعیت ثبت احوال: </span
-          ><strong>{{ info.sabtStatus | enumString: 'sabtStatus' }} </strong>
+          ><strong>{{ info?.sabtStatus | enumString: 'sabtStatus' }} </strong>
         </div>
       </div>
     </div>
