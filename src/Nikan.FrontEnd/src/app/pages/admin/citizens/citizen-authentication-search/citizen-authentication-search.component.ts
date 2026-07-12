@@ -99,9 +99,7 @@ export class AdminCitizenAuthenticationSearchComponent extends AppBase implement
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
@@ -110,9 +108,7 @@ export class AdminCitizenAuthenticationSearchComponent extends AppBase implement
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 

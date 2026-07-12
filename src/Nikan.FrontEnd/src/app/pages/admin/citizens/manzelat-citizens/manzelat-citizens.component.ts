@@ -184,32 +184,35 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
       if (result.isConfirmed) {
         this.sendingSms = true;
         this.dataService
-                    .post(ServerApis.sendSabtAhvalCitizensSms, {
-                      ExportId: 0,
-                      Ids: selectedIds,
-                    })
+          .post(ServerApis.sendSabtAhvalCitizensSms, {
+            ExportId: 0,
+            Ids: selectedIds,
+          })
           .pipe(
             finalize(() => {
               this.sendingSms = false;
               this.chdr.detectChanges();
             }),
           )
-          .subscribe((response) => {
-                        if (response.isSuccess) {
-                          Swal.fire({
-                            title: 'پیامک با موفقیت ارسال شد',
-                            text: response.messages,
-                          });
-                          this.toastrService.success('پیامک با موفقیت ارسال شد.');
-                        } else {
-                          let msg = response.messages
-                            ? response.messages
-                            : 'متاسفانه خطایی در سرور رخ داده است!';
-                          this.toastrService.error(msg);
-                        }
-                      }, (error: any) => {
-                        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
-                      });
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                Swal.fire({
+                  title: 'پیامک با موفقیت ارسال شد',
+                  text: response.messages,
+                });
+                this.toastrService.success('پیامک با موفقیت ارسال شد.');
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
+            },
+          );
       }
     });
   }

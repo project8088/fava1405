@@ -43,27 +43,28 @@ export class AdminDashboardCitizenRegisterReportChartComponent
     var formValue = this.reportForm.value;
     this.loading = true;
     this.subscribeReport = this.dataService
-          .post(ServerApis.getCitizenRegisterChartReport, {
-            StartDate: formValue.startDate ? this.dataService.formatDate(formValue.startDate) : '',
-            EndDate: formValue.endDate ? this.dataService.formatDate(formValue.endDate) : '',
-          })
-    .pipe(
-      finalize(() => {
-        this.loading = false;
-        this.chdr.detectChanges();
-      }),
-    )
-    .subscribe((response) => {
-              if (response.isSuccess) {
-                this.report = response.data ? response.data : [];
-                this.chart = this.createCharts(this.report.data, this.report.categories);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .post(ServerApis.getCitizenRegisterChartReport, {
+        StartDate: formValue.startDate ? this.dataService.formatDate(formValue.startDate) : '',
+        EndDate: formValue.endDate ? this.dataService.formatDate(formValue.endDate) : '',
+      })
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.report = response.data ? response.data : [];
+            this.chart = this.createCharts(this.report.data, this.report.categories);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   ngAfterViewInit() {}

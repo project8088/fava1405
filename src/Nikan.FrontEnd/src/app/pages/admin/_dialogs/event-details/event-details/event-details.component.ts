@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'admin-view-event-details',
@@ -24,21 +24,24 @@ export class AdminViewEventDetailsComponent extends AppBase implements OnInit {
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getEvent, { id: this.id })
+    this.dataService
+      .get(ServerApis.getEvent, { id: this.id })
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.event = response.data ? response.data : {};
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.event = response.data ? response.data : {};
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

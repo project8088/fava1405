@@ -72,24 +72,27 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.id })
+    this.dataService
+      .get(ServerApis.getDistributionQueueInfo, { id: this.id })
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.frm.patchValue(response.data);
-                this.selectedServices = response.data.groups ? response.data.groups : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-                this.matDialogRef.close();
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.frm.patchValue(response.data);
+            this.selectedServices = response.data.groups ? response.data.groups : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+            this.matDialogRef.close();
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   saveInfo() {
@@ -121,23 +124,26 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
 
     params.groupIds = serviceIds;
 
-    this.dataService.post(url, this.frm.value)
+    this.dataService
+      .post(url, this.frm.value)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.matDialogRef.close(true);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**

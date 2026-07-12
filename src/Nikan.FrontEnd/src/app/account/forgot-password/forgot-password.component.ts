@@ -121,9 +121,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error: any) => {
-          
-        },
+        (error: any) => {},
       );
   }
 
@@ -201,9 +199,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error: any) => {
-          
-        },
+        (error: any) => {},
       );
   }
 
@@ -252,9 +248,7 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
             this.toastrService.error(msg);
           }
         },
-        (error: any) => {
-          
-        },
+        (error: any) => {},
       );
   }
 }

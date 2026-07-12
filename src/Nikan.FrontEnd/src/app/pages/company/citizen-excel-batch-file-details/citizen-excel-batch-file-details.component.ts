@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-citizen-excel-batch-file-details',
@@ -59,27 +59,29 @@ export class CompanyCitizenExcelBatchFileDetailsComponent extends AppBase implem
     this.isLoadingResults = true;
     this.data = [];
     this.dataService
-            .get(ServerApis.personnelImportFileDetails, { importId: this.importId })
+      .get(ServerApis.personnelImportFileDetails, { importId: this.importId })
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.info = response.data;
-                  this.data = response.data.personnelInfo ? response.data.personnelInfo : [];
-                  this.dataSource.data = this.data;
-                  this.listCount = this.data.length;
-                  this.dataSource.paginator = this.paginator;
-                  this.dataSource.sort = this.sort;
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.info = response.data;
+            this.data = response.data.personnelInfo ? response.data.personnelInfo : [];
+            this.dataSource.data = this.data;
+            this.listCount = this.data.length;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   pageEvent(event: PageEvent) {

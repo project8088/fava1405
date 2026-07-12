@@ -4,7 +4,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-comments',
@@ -39,22 +39,25 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
   getList() {
     this.loading = true;
     this.list = [];
-    this.dataService.get(ServerApis.getTicketComments, { ticketId: this.id })
+    this.dataService
+      .get(ServerApis.getTicketComments, { ticketId: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.list = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.list = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   delete(row: any) {
@@ -99,27 +102,29 @@ export class TicketCommentsComponent extends AppBase implements OnInit {
     var form = this.frm.value;
 
     this.dataService
-            .post(ServerApis.addTicketComments, {
-              TicketId: this.id,
-              CommentText: form.commentText,
-              IsPrivate: form.isPrivate ? form.isPrivate : false,
-            })
+      .post(ServerApis.addTicketComments, {
+        TicketId: this.id,
+        CommentText: form.commentText,
+        IsPrivate: form.isPrivate ? form.isPrivate : false,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-                  this.frm.reset({ commentText: '', isPrivate: true });
-                  this.getList();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+            this.frm.reset({ commentText: '', isPrivate: true });
+            this.getList();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

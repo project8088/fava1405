@@ -6,7 +6,7 @@ import { HelperService } from '@core/services/helper.service';
 import { KarjoGlobalInformationDto } from '@core/models/citizen/global-information';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-update-Identity-Info',
@@ -59,38 +59,40 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
 
   getIdentityInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getIdentityInformationByCitizen)
+    this.dataService
+      .get(ServerApis.getIdentityInformationByCitizen)
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-                (this, (this.citizenInfo = response.data));
-                this.info = response.data;
-                this.personalForm.patchValue({
-                  gender: response.data.gender,
-                  nationalCode: response.data.nationCode,
-                  firstName: response.data.firstName,
-                  lastName: response.data.lastName,
-                  fatherName: response.data.fatherName,
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+            (this, (this.citizenInfo = response.data));
+            this.info = response.data;
+            this.personalForm.patchValue({
+              gender: response.data.gender,
+              nationalCode: response.data.nationCode,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              fatherName: response.data.fatherName,
 
-                  birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
+              birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
 
-                  identityId: response.data.identityId,
-                });
-
-                this.setDisabledFields();
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
+              identityId: response.data.identityId,
             });
+
+            this.setDisabledFields();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   savePersonalInfo() {
@@ -103,32 +105,33 @@ export class CitizenUpdateIdentityInfoComponent extends AppBase implements OnIni
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updteIdentityInformationByCitizen, {
-              gender: formValue.gender,
-              firstName: formValue.firstName,
-              identityId: formValue.identityId,
-              lastName: formValue.lastName,
-              fatherName: formValue.fatherName,
-              nationalCode: this.citizenInfo?.nationalCode,
-              birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
-            })
+      .post(ServerApis.updteIdentityInformationByCitizen, {
+        gender: formValue.gender,
+        firstName: formValue.firstName,
+        identityId: formValue.identityId,
+        lastName: formValue.lastName,
+        fatherName: formValue.fatherName,
+        nationalCode: this.citizenInfo?.nationalCode,
+        birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.getIdentityInfo();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.getIdentityInfo();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**

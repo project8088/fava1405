@@ -166,9 +166,7 @@ export class RegisterComponent extends AppBase implements OnInit {
           this.router.navigateByUrl('/redirect?serviceId=' + this.serviceId);
         } else this.toastrService.error(data.messages);
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
@@ -180,23 +178,25 @@ export class RegisterComponent extends AppBase implements OnInit {
 
     e.preventDefault();
     const userPreRegisterData = this.AccountService.getUserPreRegisterData();
-    this.dataService.post(ServerApis.reSendVerfiyCode, userPreRegisterData)
+    this.dataService
+      .post(ServerApis.reSendVerfiyCode, userPreRegisterData)
       .pipe(
         finalize(() => {
           this.codeSent = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((data: ApiResult<any>) => {
-              if (data.isSuccess) {
-                this.toastrService.success(data.messages);
-              } else {
-                this.toastrService.error(data.messages);
-                this.codeSent = false;
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (data: ApiResult<any>) => {
+          if (data.isSuccess) {
+            this.toastrService.success(data.messages);
+          } else {
+            this.toastrService.error(data.messages);
+            this.codeSent = false;
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getListOptions(options: { key: number; text: string }[]) {

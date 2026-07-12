@@ -98,10 +98,10 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
   getBaseData() {
     this.loadingData = true;
     forkJoin(
-            this.dataService.get(ServerApis.getProvinces),
-            this.dataService.getEnums(),
-            this.dataService.get(ServerApis.getPositionList),
-          )
+      this.dataService.get(ServerApis.getProvinces),
+      this.dataService.getEnums(),
+      this.dataService.get(ServerApis.getPositionList),
+    )
       .pipe(
         finalize(() => {
           this.loadingData = false;
@@ -109,35 +109,38 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
         }),
       )
       .subscribe(([provinces, enums, positions]) => {
-            this.provinceList = provinces.data ? provinces.data : [];
-            this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
-            this.organizationalPositionList = positions.data ? positions.data : [];
-          });
+        this.provinceList = provinces.data ? provinces.data : [];
+        this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
+        this.organizationalPositionList = positions.data ? positions.data : [];
+      });
   }
 
   ngAfterViewInit() {}
 
   getUserInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id })
+    this.dataService
+      .get(ServerApis.getPersonelInfo, { id: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.userForm.patchValue(response.data);
-                this.imageUrl = response.data.imageUrl;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-                if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
-                else this.router.navigate(['/company/personal/0']);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.userForm.patchValue(response.data);
+            this.imageUrl = response.data.imageUrl;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+            if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
+            else this.router.navigate(['/company/personal/0']);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getAttachmentId(ev: { uploadUrl: string }) {
@@ -183,25 +186,27 @@ export class CompanyAddOrUpdatePersonalComponent extends AppBase implements OnIn
       DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : '',
     };
 
-    this.dataService.post(ServerApis.addOrUpdatePersonel, params)
+    this.dataService
+      .post(ServerApis.addOrUpdatePersonel, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
-                else this.router.navigate(['/company/personal/0']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            if (this.user?.isAdmin) this.router.navigate(['/company/personal/' + this.companyId]);
+            else this.router.navigate(['/company/personal/0']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   changeHasSpecificDisease() {

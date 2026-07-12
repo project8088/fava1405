@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-add-feedback-dialog',
@@ -54,27 +54,29 @@ export class AdminAddFeedBackDialogComponent extends AppBase implements OnInit {
     var formValue = this.form.value;
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addFeedbacke, {
-              userCode: this.userCode,
-              feedbackId: formValue.feedbackId,
-              feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
-            })
+      .post(ServerApis.addFeedbacke, {
+        userCode: this.userCode,
+        feedbackId: formValue.feedbackId,
+        feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**

@@ -64,30 +64,28 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          if (response && response.isSuccess) {
-            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+      .subscribe((response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
 
-            this.info = response.data;
-            this.personalForm.patchValue({
-              gender: response.data.gender,
-              nationalCode: response.data.nationCode,
-              firstName: response.data.firstName,
-              lastName: response.data.lastName,
-              fatherName: response.data.fatherName,
+          this.info = response.data;
+          this.personalForm.patchValue({
+            gender: response.data.gender,
+            nationalCode: response.data.nationCode,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            fatherName: response.data.fatherName,
 
-              birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
+            birthDate: response.data.birthDate ? new Date(response.data.birthDate) : '',
 
-              identityId: response.data.identityId,
-            });
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
+            identityId: response.data.identityId,
+          });
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-      );
+      });
   }
 
   savePersonalInfo() {
@@ -100,33 +98,34 @@ export class AdminUpdateCitizenIdentityInfoComponent extends AppBase implements 
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updteIdentityInformationByAdmin, {
-              gender: formValue.gender,
-              firstName: formValue.firstName,
-              identityId: formValue.identityId,
-              lastName: formValue.lastName,
-              fatherName: formValue.fatherName,
-              nationalCode: '',
-              userCode: this.userCode,
-              birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
-            })
+      .post(ServerApis.updteIdentityInformationByAdmin, {
+        gender: formValue.gender,
+        firstName: formValue.firstName,
+        identityId: formValue.identityId,
+        lastName: formValue.lastName,
+        fatherName: formValue.fatherName,
+        nationalCode: '',
+        userCode: this.userCode,
+        birthDate: formValue.birthDate ? this.dataService.formatDate(formValue.birthDate) : null,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.getIdentityInfo();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.getIdentityInfo();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**

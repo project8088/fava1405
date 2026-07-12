@@ -51,7 +51,6 @@ export class CreditcardComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.isSaving = false;
-        
       },
     );
   }

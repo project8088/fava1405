@@ -118,52 +118,50 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          if (response.isSuccess && response.data) {
-            this.userCode = response.data.userCode;
-            this.form.setValue({
-              provinceCityOfBirth: response.data.provinceCityOfBirth
-                ? response.data.provinceCityOfBirth
-                : '',
-              cityOfBirth: {
-                key: response.data.cityOfBirthId,
-                text: response.data.cityOfBirth,
-              },
-              provinceShCity: response.data.provinceShCity ? response.data.provinceShCity : '',
-              shCity: {
-                key: response.data.shCityId,
-                text: response.data.shCity,
-              },
-              villageOfBirth: response.data.villageOfBirth,
-              birthCitySection: response.data.birthCitySection,
-              dateOfMarriage: response.data.dateOfMarriage,
-              insuranceNumber: response.data.insuranceNumber,
-              dateOfEmployeement: response.data.dateOfEmployeement,
-              personnelCode: response.data.personnelCode,
-              shCode: response.data.shCode,
-              shSerial: response.data.shSerial,
-              shDate: response.data.shDate,
-              shCitySection: response.data.shCitySection,
-              shNote: response.data.shNote,
-              militaryStatus: response.data.militaryStatus,
-              endOfMilitary: response.data.endOfMilitary,
-              religion: response.data.religion,
+      .subscribe((response) => {
+        this.loading = false;
+        if (response.isSuccess && response.data) {
+          this.userCode = response.data.userCode;
+          this.form.setValue({
+            provinceCityOfBirth: response.data.provinceCityOfBirth
+              ? response.data.provinceCityOfBirth
+              : '',
+            cityOfBirth: {
+              key: response.data.cityOfBirthId,
+              text: response.data.cityOfBirth,
+            },
+            provinceShCity: response.data.provinceShCity ? response.data.provinceShCity : '',
+            shCity: {
+              key: response.data.shCityId,
+              text: response.data.shCity,
+            },
+            villageOfBirth: response.data.villageOfBirth,
+            birthCitySection: response.data.birthCitySection,
+            dateOfMarriage: response.data.dateOfMarriage,
+            insuranceNumber: response.data.insuranceNumber,
+            dateOfEmployeement: response.data.dateOfEmployeement,
+            personnelCode: response.data.personnelCode,
+            shCode: response.data.shCode,
+            shSerial: response.data.shSerial,
+            shDate: response.data.shDate,
+            shCitySection: response.data.shCitySection,
+            shNote: response.data.shNote,
+            militaryStatus: response.data.militaryStatus,
+            endOfMilitary: response.data.endOfMilitary,
+            religion: response.data.religion,
 
-              educationStatues: response.data.educationStatues,
-              baseEducation: response.data.baseEducation,
-              universityName: response.data.universityName,
-              academicGrade: response.data.academicGrade,
-              academicNote: response.data.academicNote,
-              endOfEducation: response.data.endOfEducation,
-            });
-          } else {
-            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-            this.toastrService.error(msg);
-          }
+            educationStatues: response.data.educationStatues,
+            baseEducation: response.data.baseEducation,
+            universityName: response.data.universityName,
+            academicGrade: response.data.academicGrade,
+            academicNote: response.data.academicNote,
+            endOfEducation: response.data.endOfEducation,
+          });
+        } else {
+          var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+          this.toastrService.error(msg);
         }
-      );
+      });
   }
 
   save() {
@@ -203,21 +201,24 @@ export class AdminCitizenOtherInfoComponent extends AppBase implements OnInit {
       educationStatues: form.educationStatues,
       villageOfBirth: form.villageOfBirth,
     };
-    this.dataService.post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost)
+    this.dataService
+      .post(ServerApis.addOrUpdateCitizenProfileByAdmin, dataToPost)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

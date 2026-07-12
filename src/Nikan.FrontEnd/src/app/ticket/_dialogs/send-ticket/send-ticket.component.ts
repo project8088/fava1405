@@ -4,7 +4,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-send-ticket-dialog',
@@ -46,7 +46,6 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
         if (response) {
           this.periorityList = response.ticketPriority ? response.ticketPriority : [];
         } else {
-          
           this.matDialogRef.close();
         }
       },
@@ -59,46 +58,51 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllSupportCenter, {})
+    this.dataService
+      .get(ServerApis.getAllSupportCenter, {})
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.organizationList = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.organizationList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
     this.dataService
-            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-              organId: this.ticketForm.get('organizationId')?.value,
-            })
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.ticketForm.get('organizationId')?.value,
+      })
       .pipe(
         finalize(() => {
           this.loadingUnit = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.unitList = response.data ? response.data : [];
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   saveInfo() {
@@ -110,38 +114,39 @@ export class SendTicketDialogComponent extends AppBase implements OnInit {
     this.isSaving = true;
     let formData = this.ticketForm.value;
     this.dataService
-            .post(ServerApis.sendUserTicket, {
-              Id: '',
-              Subject: formData.subject,
-              TicketMessage: formData.ticketMessage,
-              Priority: formData.priority,
-              organizationalUnitId: formData.organizationalUnitId,
-              fileUrl: '',
-              name: this.user?.displayName,
-              email: null,
-              mobileNumber: null,
-            })
+      .post(ServerApis.sendUserTicket, {
+        Id: '',
+        Subject: formData.subject,
+        TicketMessage: formData.ticketMessage,
+        Priority: formData.priority,
+        organizationalUnitId: formData.organizationalUnitId,
+        fileUrl: '',
+        name: this.user?.displayName,
+        email: null,
+        mobileNumber: null,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('پیام شما با موفقیت ارسال شد.');
-                  if (this.authService.currentUserValue)
-                    this.router.navigate([
-                      '/' + this.user?.rootModule + '/ticket-details/' + response.data.ticketId,
-                    ]);
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+            if (this.authService.currentUserValue)
+              this.router.navigate([
+                '/' + this.user?.rootModule + '/ticket-details/' + response.data.ticketId,
+              ]);
 
-                  this.matDialogRef.close(true);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

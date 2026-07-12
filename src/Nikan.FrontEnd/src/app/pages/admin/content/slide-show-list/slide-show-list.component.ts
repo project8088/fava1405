@@ -7,7 +7,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './dialog/add-update-slide/add-update-slide.component';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-slide-show-list',
@@ -52,26 +52,29 @@ export class AdminSlideShowListComponent extends AppBase implements OnInit, Afte
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getAllSlideShow, {})
+    this.dataService
+      .get(ServerApis.getAllSlideShow, {})
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.data = response.data ? response.data : [];
-                this.dataSource.data = this.data;
-                this.listCount = this.data.length;
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.data = response.data ? response.data : [];
+            this.dataSource.data = this.data;
+            this.listCount = this.data.length;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   pageEvent(event: PageEvent) {

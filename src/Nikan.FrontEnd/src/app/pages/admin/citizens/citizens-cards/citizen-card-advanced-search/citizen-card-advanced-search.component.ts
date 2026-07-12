@@ -109,9 +109,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
@@ -120,9 +118,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
@@ -244,9 +240,7 @@ export class AdminCitizenCardAdvancedSearchComponent extends AppBase implements 
       (response) => {
         this.baseEnums.discountList = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 

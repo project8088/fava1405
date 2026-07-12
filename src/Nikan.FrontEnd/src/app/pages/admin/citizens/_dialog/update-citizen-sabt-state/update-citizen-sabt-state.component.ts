@@ -81,25 +81,27 @@ export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implemen
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updateSabtStatus, {
-              userCode: this.userCode,
-              sabtStatus: formValue.sabtStatus,
-            })
+      .post(ServerApis.updateSabtStatus, {
+        userCode: this.userCode,
+        sabtStatus: formValue.sabtStatus,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

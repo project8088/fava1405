@@ -3,7 +3,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-add-update-slide-dialog',
@@ -46,23 +46,26 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
 
   getInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getSlideShow, { id: this.id })
+    this.dataService
+      .get(ServerApis.getSlideShow, { id: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.form.patchValue(response.data);
-                this.imageUrl = response.data.imageUrl;
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.form.patchValue(response.data);
+            this.imageUrl = response.data.imageUrl;
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getAttachmentId(ev: { uploadUrl: string }) {
@@ -89,22 +92,25 @@ export class AdminAddOrUpdateSlideShowDialogComponent extends AppBase implements
       isActive: formValue.isActive,
     };
 
-    this.dataService.post(ServerApis.addOrUpdateSlideShow, params)
+    this.dataService
+      .post(ServerApis.addOrUpdateSlideShow, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.matDialogRef.close(true);
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

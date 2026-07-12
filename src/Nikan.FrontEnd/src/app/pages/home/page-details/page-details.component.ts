@@ -3,7 +3,7 @@ import { AuthUser } from '@core/authentication/user.model';
 import { ServerApis } from '@core/server-apis';
 import { Meta, Title } from '@angular/platform-browser';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'home-page-details',
@@ -36,31 +36,34 @@ export class MainPageDetailsComponent extends AppBase implements OnInit {
 
   getDetailsInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getPageWithSlug + this.slug)
+    this.dataService
+      .get(ServerApis.getPageWithSlug + this.slug)
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.page = response.data;
-                this.tags = this.page.seoTags.split(',');
-                if (this.page.seoTags) {
-                  this.titleService.setTitle(this.page.title);
-                  this.metaService.addTags([
-                    { name: 'keywords', content: this.page.seoTags },
-                    { name: 'description', content: this.page.seoDescription },
-                    { name: 'robots', content: 'index, follow' },
-                  ]);
-                }
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-              this.chdr.detectChanges();
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.page = response.data;
+            this.tags = this.page.seoTags.split(',');
+            if (this.page.seoTags) {
+              this.titleService.setTitle(this.page.title);
+              this.metaService.addTags([
+                { name: 'keywords', content: this.page.seoTags },
+                { name: 'description', content: this.page.seoDescription },
+                { name: 'robots', content: 'index, follow' },
+              ]);
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+          this.chdr.detectChanges();
+        },
+        (error: any) => {},
+      );
   }
 }

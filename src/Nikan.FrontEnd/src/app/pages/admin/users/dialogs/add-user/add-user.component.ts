@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-adm-add-user-dialog',
@@ -76,75 +76,82 @@ export class AdminAddUserDialogComponent extends AppBase implements OnInit {
     this.isSaving = true;
 
     this.dataService
-            .post(ServerApis.adminRegisterUser, {
-              DisplayName: formValue.displayName,
-              Email: formValue.email,
-              MobileNumber: formValue.mobile,
-              UserName: formValue.username,
-              Password: formValue.password,
-              IsGuardRole: formValue.isGuardRole,
-              OrganizationalUnitId: formValue.organizationalUnit.key,
-            })
+      .post(ServerApis.adminRegisterUser, {
+        DisplayName: formValue.displayName,
+        Email: formValue.email,
+        MobileNumber: formValue.mobile,
+        UserName: formValue.username,
+        Password: formValue.password,
+        IsGuardRole: formValue.isGuardRole,
+        OrganizationalUnitId: formValue.organizationalUnit.key,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getOrganizations() {
     this.loadingData = true;
 
-    this.dataService.get(ServerApis.getAllOrganizational, {})
+    this.dataService
+      .get(ServerApis.getAllOrganizational, {})
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.organizationList = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.organizationList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getUnitsOfOrganization() {
     this.loadingUnit = true;
 
     this.dataService
-            .get(ServerApis.getAllOrganizationalUnitByOrganId, {
-              organId: this.userForm.get('organization')?.value.key,
-            })
+      .get(ServerApis.getAllOrganizationalUnitByOrganId, {
+        organId: this.userForm.get('organization')?.value.key,
+      })
       .pipe(
         finalize(() => {
           this.loadingUnit = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.unitList = response.data ? response.data : [];
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.unitList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

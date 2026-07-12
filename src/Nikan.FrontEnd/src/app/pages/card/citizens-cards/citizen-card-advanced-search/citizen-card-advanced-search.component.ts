@@ -107,9 +107,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.registerTypes = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
@@ -118,9 +116,7 @@ export class CardCitizenCardAdvancedSearchComponent extends AppBase implements A
       (response) => {
         this.baseEnums.discountList = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 

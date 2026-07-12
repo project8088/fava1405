@@ -54,26 +54,26 @@ export class CardCitizenSearchComponent extends AppBase implements AfterViewInit
     if (param.birthDate) param.birthDate = this.dataService.formatDate(param.birthDate);
 
     merge()
-            .pipe(
-              startWith(param),
-              switchMap(() => {
-                this.loading = false;
-                return this.dataService.get(ServerApis.searchCitizenByCardUser, param);
-              }),
-              map((response) => {
-                this.loading = false;
-                if (response.isSuccess && response.data) {
-                  this.citizen = response.data ? response.data : {};
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }),
-              catchError((err) => {
-                this.loading = false;
-                return observableOf([]);
-              }),
-            )
+      .pipe(
+        startWith(param),
+        switchMap(() => {
+          this.loading = false;
+          return this.dataService.get(ServerApis.searchCitizenByCardUser, param);
+        }),
+        map((response) => {
+          this.loading = false;
+          if (response.isSuccess && response.data) {
+            this.citizen = response.data ? response.data : {};
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        }),
+        catchError((err) => {
+          this.loading = false;
+          return observableOf([]);
+        }),
+      )
       .pipe(
         finalize(() => {
           this.loading = false;

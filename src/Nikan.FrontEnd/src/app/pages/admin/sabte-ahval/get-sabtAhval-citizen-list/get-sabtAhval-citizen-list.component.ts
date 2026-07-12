@@ -6,7 +6,7 @@ import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-sabtAhval-citizen-list',
@@ -63,24 +63,27 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
     };
 
     this.data = [];
-    this.dataService.get(ServerApis.getAllCitizenExported, param)
+    this.dataService
+      .get(ServerApis.getAllCitizenExported, param)
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess && response.data) {
-                this.data = response.data.items ? response.data.items : [];
-                this.dataSource.data = this.data;
-                this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.data = response.data.items ? response.data.items : [];
+            this.dataSource.data = this.data;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   applyFilter() {
@@ -137,32 +140,35 @@ export class AdminSabtAhvalCitizensListComponent extends AppBase implements Afte
       if (result.isConfirmed) {
         this.sendingSms = true;
         this.dataService
-                    .post(ServerApis.sendSabtAhvalCitizensSms, {
-                      ExportId: +this.id,
-                      Ids: selectedIds,
-                    })
+          .post(ServerApis.sendSabtAhvalCitizensSms, {
+            ExportId: +this.id,
+            Ids: selectedIds,
+          })
           .pipe(
             finalize(() => {
               this.sendingSms = false;
               this.chdr.detectChanges();
             }),
           )
-          .subscribe((response) => {
-                        if (response.isSuccess) {
-                          Swal.fire({
-                            title: 'پیامک با موفقیت ارسال شد',
-                            text: response.messages,
-                          });
-                          this.toastrService.success('پیامک با موفقیت ارسال شد.');
-                        } else {
-                          let msg = response.messages
-                            ? response.messages
-                            : 'متاسفانه خطایی در سرور رخ داده است!';
-                          this.toastrService.error(msg);
-                        }
-                      }, (error: any) => {
-                        this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
-                      });
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                Swal.fire({
+                  title: 'پیامک با موفقیت ارسال شد',
+                  text: response.messages,
+                });
+                this.toastrService.success('پیامک با موفقیت ارسال شد.');
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error: any) => {
+              this.toastrService.error('متاسفانه خطایی در سرور رخ داده است!');
+            },
+          );
       }
     });
   }

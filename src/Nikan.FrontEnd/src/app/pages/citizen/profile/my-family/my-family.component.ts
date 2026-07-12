@@ -5,7 +5,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { citizenFamilyModel } from '@core/models/citizen/family.model';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-citizen-my-family',
@@ -38,23 +38,25 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
 
   getFamilyList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getAllCitizenFamily)
+    this.dataService
+      .get(ServerApis.getAllCitizenFamily)
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.familyList = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.familyList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   deleteEducation(row: citizenFamilyModel) {
@@ -92,7 +94,6 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
             },
             (error: any) => {
               row.loading = false;
-              
             },
           );
       }
@@ -135,9 +136,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
           this.toastrService.error(msg);
         }
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 }

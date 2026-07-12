@@ -64,33 +64,33 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
     if (param.toDate) param.toDate = this.dataService.formatDate(param.toDate);
 
     merge()
-            .pipe(
-              startWith(param),
-              switchMap(() => {
-                this.isLoadingResults = true;
-                return this.dataService.get(ServerApis.searchImageCardCitizens, param);
-              }),
-              map((response) => {
-                this.isLoadingResults = false;
-                if (response.isSuccess && response.data) {
-                  var items = response.data.citizens ? response.data.citizens : [];
-                  this.list = items;
+      .pipe(
+        startWith(param),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.dataService.get(ServerApis.searchImageCardCitizens, param);
+        }),
+        map((response) => {
+          this.isLoadingResults = false;
+          if (response.isSuccess && response.data) {
+            var items = response.data.citizens ? response.data.citizens : [];
+            this.list = items;
 
-                  this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-                  this.loadingData = false;
-                  return items;
-                } else {
-                  this.loadingData = false;
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }),
-              catchError((err) => {
-                this.loadingData = false;
-                this.isLoadingResults = false;
-                return observableOf([]);
-              }),
-            )
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+            this.loadingData = false;
+            return items;
+          } else {
+            this.loadingData = false;
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        }),
+        catchError((err) => {
+          this.loadingData = false;
+          this.isLoadingResults = false;
+          return observableOf([]);
+        }),
+      )
       .pipe(
         finalize(() => {
           this.loadingData = false;
@@ -98,8 +98,8 @@ export class CardCitizensPicturesComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-              this.data = data;
-            });
+        this.data = data;
+      });
   }
   getEnums() {}
 

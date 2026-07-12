@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-web-api-user-permissions',
@@ -29,24 +29,26 @@ export class AdminWebApiUserPermissionsComponent extends AppBase implements OnIn
     this.isLoadingResults = true;
     this.data = [];
     this.dataService
-            .get(ServerApis.getWebApiPermissionList, {
-              userId: this.userId,
-            })
+      .get(ServerApis.getWebApiPermissionList, {
+        userId: this.userId,
+      })
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response: any) => {
-                if (response) {
-                  this.data = response;
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response: any) => {
+          if (response) {
+            this.data = response;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   savePermissions() {
@@ -58,24 +60,26 @@ export class AdminWebApiUserPermissionsComponent extends AppBase implements OnIn
       }
     }
     this.dataService
-            .post(ServerApis.addWebApiUserPermissions, {
-              userId: this.userId,
-              Permissions: selectedPermissions,
-            })
+      .post(ServerApis.addWebApiUserPermissions, {
+        userId: this.userId,
+        Permissions: selectedPermissions,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

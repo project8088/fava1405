@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-news-comments',
@@ -61,26 +61,29 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
   getCommentList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.getNewsComments, { id: this.newsId })
+    this.dataService
+      .get(ServerApis.getNewsComments, { id: this.newsId })
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.data = response.data ? response.data : [];
-                this.dataSource.data = this.data;
-                this.listCount = this.data.length;
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.data = response.data ? response.data : [];
+            this.dataSource.data = this.data;
+            this.listCount = this.data.length;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   pageEvent(event: PageEvent) {

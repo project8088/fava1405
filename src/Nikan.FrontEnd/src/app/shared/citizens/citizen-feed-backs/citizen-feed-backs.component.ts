@@ -5,7 +5,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-citizen-feed-back-list',
@@ -49,22 +49,25 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
   getListFeedbacks() {
     this.loadingfeedback = true;
     this.listfeedback = [];
-    this.dataService.get(ServerApis.getAllCitizenFeedbacks, { userCode: this.userCode })
+    this.dataService
+      .get(ServerApis.getAllCitizenFeedbacks, { userCode: this.userCode })
       .pipe(
         finalize(() => {
           this.loadingfeedback = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.listfeedback = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.listfeedback = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
   savefeedback() {
     if (this.feedbackfrm.invalid) {
@@ -76,27 +79,29 @@ export class AppCitizenFeedBackListComponent extends AppBase implements AfterVie
     var formValue = this.feedbackfrm.value;
     this.isSavingfeedback = true;
     this.dataService
-            .post(ServerApis.addFeedbacke, {
-              userCode: this.userCode,
-              feedbackId: formValue.feedbackId,
-              feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
-            })
+      .post(ServerApis.addFeedbacke, {
+        userCode: this.userCode,
+        feedbackId: formValue.feedbackId,
+        feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
+      })
       .pipe(
         finalize(() => {
           this.isSavingfeedback = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.getListFeedbacks();
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.getListFeedbacks();
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
   getBaseListFeedbacke() {
     this.dataService.get(ServerApis.getBaseListFeedbacke).subscribe((response) => {

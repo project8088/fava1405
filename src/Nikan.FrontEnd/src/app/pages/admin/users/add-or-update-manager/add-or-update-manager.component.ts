@@ -94,10 +94,10 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
   getBaseData() {
     this.loadingData = true;
     forkJoin(
-            this.dataService.get(ServerApis.getProvinces),
-            this.dataService.getEnums(),
-            this.dataService.get(ServerApis.getPositionList),
-          )
+      this.dataService.get(ServerApis.getProvinces),
+      this.dataService.getEnums(),
+      this.dataService.get(ServerApis.getPositionList),
+    )
       .pipe(
         finalize(() => {
           this.loadingData = false;
@@ -105,33 +105,36 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
         }),
       )
       .subscribe(([provinces, enums, positions]) => {
-            this.provinceList = provinces.data ? provinces.data : [];
-            this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
-            this.organizationalPositionList = positions.data ? positions.data : [];
-          });
+        this.provinceList = provinces.data ? provinces.data : [];
+        this.namePrefixList = enums.namePrefix ? enums.namePrefix : [];
+        this.organizationalPositionList = positions.data ? positions.data : [];
+      });
   }
 
   getUserInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getPersonelInfo, { id: this.id })
+    this.dataService
+      .get(ServerApis.getPersonelInfo, { id: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.userForm.patchValue(response.data);
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.userForm.patchValue(response.data);
 
-                this.imageUrl = response.data.imageUrl;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-                this.router.navigate(['/admin/manager-users']);
-              }
-            }, (error: any) => {
-            });
+            this.imageUrl = response.data.imageUrl;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+            this.router.navigate(['/admin/manager-users']);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getAttachmentId(ev: { uploadUrl: string }) {
@@ -179,23 +182,26 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
       DescriptionDisease: formValue.descriptionDisease ? formValue.descriptionDisease : '',
     };
 
-    this.dataService.post(ServerApis.addOrUpdatePersonelByAdmin, params)
+    this.dataService
+      .post(ServerApis.addOrUpdatePersonelByAdmin, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.router.navigate(['/admin/manager-users']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.router.navigate(['/admin/manager-users']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   changeHasSpecificDisease() {

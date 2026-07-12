@@ -3,7 +3,7 @@ import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 import { CardUpdateCitizenMobileNumberDialogComponent } from '@app/pages/card/dialog/update-citizen-mobile-number/update-citizen-mobile-number.component';
 import { AdminChangePasswordDialogComponent } from '../_dialog/change-user-password/change-user-password.component';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-view-citizen',
@@ -33,24 +33,26 @@ export class ViewCitizenComponent extends AppBase implements AfterViewInit {
   getInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getCitizenFullInfo, {
-              id: this.citizenId,
-            })
+      .get(ServerApis.getCitizenFullInfo, {
+        id: this.citizenId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.info = response.data ? response.data : {};
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.info = response.data ? response.data : {};
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   openChangePasswordDialog(row: any) {

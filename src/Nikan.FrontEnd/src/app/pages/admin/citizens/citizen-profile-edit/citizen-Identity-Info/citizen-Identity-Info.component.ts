@@ -38,16 +38,14 @@ export class AdminCitizenIdentityInfoComponent extends AppBase implements OnInit
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          if (response && response.isSuccess) {
-            this.info = response.data;
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
+      .subscribe((response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.info = response.data;
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
         }
-      );
+      });
   }
 }

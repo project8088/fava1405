@@ -70,46 +70,46 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     var param: any = this.searchForm.value;
     this.searchForm.get('value')?.disable();
     merge()
-            .pipe(
-              startWith(param),
-              switchMap(() => {
-                return this.dataService.get(ServerApis.searchCardForQueue, param);
-              }),
-              map((response) => {
-                if (response.isSuccess && response.data) {
-                  this.card = response.data ? response.data : {};
-                  this.searchForm.get('value')?.enable();
-                  this.searchForm.get('value')?.setValue('');
-                  this.searchElement.nativeElement.focus();
-                  this.loading = false;
-                  if (param.autopost == true) {
-                    this.sendCardToQueue(
-                      response.data.citizenCardInfoId,
-                      response.data.citizenId,
-                      response.data.deliverType,
-                      response.data.cardTypeId,
-                      response.data.deliveringCenterId,
-                    );
-                  }
-                } else {
-                  this.card = null;
-                  this.loading = true;
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                  this.searchForm.get('value')?.enable();
-                  this.searchForm.get('value')?.setValue('');
-                  this.searchElement.nativeElement.focus();
-                  this.loading = false;
-                }
-              }),
-              catchError((err) => {
-                this.loading = false;
-                this.searchForm.get('value')?.enable();
-                this.searchForm.get('value')?.setValue('');
-                this.searchElement.nativeElement.focus();
-                return observableOf([]);
-              }),
-            )
+      .pipe(
+        startWith(param),
+        switchMap(() => {
+          return this.dataService.get(ServerApis.searchCardForQueue, param);
+        }),
+        map((response) => {
+          if (response.isSuccess && response.data) {
+            this.card = response.data ? response.data : {};
+            this.searchForm.get('value')?.enable();
+            this.searchForm.get('value')?.setValue('');
+            this.searchElement.nativeElement.focus();
+            this.loading = false;
+            if (param.autopost == true) {
+              this.sendCardToQueue(
+                response.data.citizenCardInfoId,
+                response.data.citizenId,
+                response.data.deliverType,
+                response.data.cardTypeId,
+                response.data.deliveringCenterId,
+              );
+            }
+          } else {
+            this.card = null;
+            this.loading = true;
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+            this.searchForm.get('value')?.enable();
+            this.searchForm.get('value')?.setValue('');
+            this.searchElement.nativeElement.focus();
+            this.loading = false;
+          }
+        }),
+        catchError((err) => {
+          this.loading = false;
+          this.searchForm.get('value')?.enable();
+          this.searchForm.get('value')?.setValue('');
+          this.searchElement.nativeElement.focus();
+          return observableOf([]);
+        }),
+      )
       .pipe(
         finalize(() => {
           this.loading = false;
@@ -137,45 +137,50 @@ export class CardCarddistributionComponent extends AppBase implements AfterViewI
     params.cardTypeId = cardTypeId;
     params.deliveringCenterId = deliveringCenterId;
 
-    this.dataService.post(url, params)
+    this.dataService
+      .post(url, params)
       .pipe(
         finalize(() => {
           this.isSend = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success(response.messages);
-                this.queueId = response.data.queueId;
-                this.getQueueListInCourse();
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success(response.messages);
+            this.queueId = response.data.queueId;
+            this.getQueueListInCourse();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getQueueListInCourse() {
     this.loadingqueue = true;
-    this.dataService.get(ServerApis.getQueueListInCourse, { courseId: this.courseId })
+    this.dataService
+      .get(ServerApis.getQueueListInCourse, { courseId: this.courseId })
       .pipe(
         finalize(() => {
           this.loadingqueue = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.queuelist = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.queuelist = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   openCitizenProfile(row: any) {

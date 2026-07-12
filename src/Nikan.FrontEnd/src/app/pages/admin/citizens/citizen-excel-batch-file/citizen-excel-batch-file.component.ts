@@ -7,7 +7,7 @@ import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AdminImportCitizenExcelDialogComponent } from '../_dialog/citizen-import-excel/import-citizen-excel.component';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-citizen-excel-batch-file',
@@ -52,26 +52,29 @@ export class AdminCitizenExcelBatchFileListComponent extends AppBase implements 
   getList() {
     this.isLoadingResults = true;
     this.data = [];
-    this.dataService.get(ServerApis.citizenImportFileList, {})
+    this.dataService
+      .get(ServerApis.citizenImportFileList, {})
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.data = response.data ? response.data : [];
-                this.dataSource.data = this.data;
-                this.listCount = this.data.length;
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.data = response.data ? response.data : [];
+            this.dataSource.data = this.data;
+            this.listCount = this.data.length;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   pageEvent(event: PageEvent) {

@@ -6,7 +6,7 @@ import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 import { UploaderComponent } from '@app/shared/uploader/uploader.component';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-response',
@@ -59,33 +59,36 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
 
   getTicketInfo() {
     this.loading = true;
-    this.dataService.get(ServerApis.getTicketById, { id: this.id })
+    this.dataService
+      .get(ServerApis.getTicketById, { id: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.ticket = response.data ? response.data : {};
-                if (!this.ticket.responseTickets) {
-                  this.ticket.responseTickets = [];
-                }
-                // this.ticket.responseTickets.unshift({
-                //   responseText:this.ticket.ticketMessage,
-                //   ownerDisplayName:this.ticket.fullName,
-                //   responseTextOnDate:this.ticket.createdOn,
-                //   ownerId:this.ticket.ownerId
-                // });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.ticket = response.data ? response.data : {};
+            if (!this.ticket.responseTickets) {
+              this.ticket.responseTickets = [];
+            }
+            // this.ticket.responseTickets.unshift({
+            //   responseText:this.ticket.ticketMessage,
+            //   ownerDisplayName:this.ticket.fullName,
+            //   responseTextOnDate:this.ticket.createdOn,
+            //   ownerId:this.ticket.ownerId
+            // });
 
-                this.answerForm.get('resolved')?.setValue(this.ticket.isSolved);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+            this.answerForm.get('resolved')?.setValue(this.ticket.isSolved);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   closeTicket(isClosed: boolean) {
@@ -102,34 +105,35 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
       if (result.value) {
         this.loading = true;
         this.dataService
-                    .post(ServerApis.updateTicketsStatues, {
-                      TicketId: this.id,
-                      isClosed: isClosed,
-                    })
+          .post(ServerApis.updateTicketsStatues, {
+            TicketId: this.id,
+            isClosed: isClosed,
+          })
           .pipe(
             finalize(() => {
               this.loading = false;
               this.chdr.detectChanges();
             }),
           )
-          .subscribe((response) => {
-                        if (response.isSuccess) {
-                          if (isClosed) {
-                            this.ticket.colsedById = this.currentUser?.userId;
-                            this.toastrService.success('تیکت با موفقیت بسته شد.');
-                          } else {
-                            this.ticket.colsedById = null;
-                            this.toastrService.success('تیکت با موفقیت باز شد.');
-                          }
-                        } else {
-                          let msg = response.messages
-                            ? response.messages
-                            : 'متاسفانه خطایی در سرور رخ داده است!';
-                          this.toastrService.error(msg);
-                        }
-                      }, (error: any) => {
-                        
-                      });
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                if (isClosed) {
+                  this.ticket.colsedById = this.currentUser?.userId;
+                  this.toastrService.success('تیکت با موفقیت بسته شد.');
+                } else {
+                  this.ticket.colsedById = null;
+                  this.toastrService.success('تیکت با موفقیت باز شد.');
+                }
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error: any) => {},
+          );
       }
     });
   }
@@ -161,40 +165,41 @@ export class TicketResponseComponent extends AppBase implements OnInit, AfterVie
     }
     this.isSending = true;
     this.dataService
-            .post(ServerApis.sendAnswerTicket, {
-              TicketId: this.id,
-              ResponseText: this.answerForm.get('responseText')?.value,
-              mobileNumber: this.ticket.mobileNumber,
-              Description: '',
-              SendSms: this.answerForm.get('sendSms')?.value,
-              Review: this.answerForm.get('review')?.value,
-              Solved: this.answerForm.get('resolved')?.value,
-              AttachmentGuid: this.attachmentGuid ? this.attachmentGuid : '',
-            })
+      .post(ServerApis.sendAnswerTicket, {
+        TicketId: this.id,
+        ResponseText: this.answerForm.get('responseText')?.value,
+        mobileNumber: this.ticket.mobileNumber,
+        Description: '',
+        SendSms: this.answerForm.get('sendSms')?.value,
+        Review: this.answerForm.get('review')?.value,
+        Solved: this.answerForm.get('resolved')?.value,
+        AttachmentGuid: this.attachmentGuid ? this.attachmentGuid : '',
+      })
       .pipe(
         finalize(() => {
           this.isSending = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('پیام شما با موفقیت ارسال شد.');
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('پیام شما با موفقیت ارسال شد.');
 
-                  this.answerForm.get('responseText')?.setValue('');
-                  this.getTicketInfo();
-                  if (this.attachmentGuid) {
-                    this.uploader.removeAllFiles(this.uploader.uploaderInput);
-                    this.uploader.files = [];
-                    this.attachmentGuid = '';
-                  }
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+            this.answerForm.get('responseText')?.setValue('');
+            this.getTicketInfo();
+            if (this.attachmentGuid) {
+              this.uploader.removeAllFiles(this.uploader.uploaderInput);
+              this.uploader.files = [];
+              this.attachmentGuid = '';
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   newGuid() {

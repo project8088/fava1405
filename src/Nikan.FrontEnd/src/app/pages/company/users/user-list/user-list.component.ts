@@ -10,7 +10,7 @@ import { CompanyChangePasswordDialogComponent } from '../dialogs/change-user-pas
 import { CompanyAddUserDialogComponent } from '../dialogs/add-user/add-user.component';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'company-user-list',
@@ -68,26 +68,29 @@ export class CompanyUserListComponent extends AppBase implements OnInit {
     if (this.companyId && this.companyId != '0') param.companyId = this.companyId;
     else param.companyId = null;
 
-    this.dataService.get(ServerApis.getCompanyUsers, param)
+    this.dataService
+      .get(ServerApis.getCompanyUsers, param)
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.data = response.data ? response.data : [];
-                this.dataSource.data = this.data;
-                this.listCount = this.data.length;
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.data = response.data ? response.data : [];
+            this.dataSource.data = this.data;
+            this.listCount = this.data.length;
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   pageEvent(event: PageEvent) {

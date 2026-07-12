@@ -7,7 +7,7 @@ import { ServerApis } from '@core/server-apis';
 import { UserRegisterService } from '../userregister.service';
 import { AppBase } from '@app/app.base';
 import { CaptchaComponent } from '@app/account/bot-detect/captcha.component';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-preregister',
@@ -72,43 +72,45 @@ export class PreregisterComponent extends AppBase implements OnInit {
       this.isSaving = true;
       const form = this.form.getRawValue();
       this.dataService
-                .post(ServerApis.checkCitzenRegister, {
-                  captchaCode: form.captchaCode,
-                  mobileNumber: form.mobileNumber,
-                  nationCode: form.nationCode,
-                  nationality: form.nationality,
-                  userEnteredCaptchaCode: form.userEnteredCaptchaCode,
-                  CaptchaId: this.captchaComponent.captchaId,
-                  serviceId: form.serviceId,
-                })
+        .post(ServerApis.checkCitzenRegister, {
+          captchaCode: form.captchaCode,
+          mobileNumber: form.mobileNumber,
+          nationCode: form.nationCode,
+          nationality: form.nationality,
+          userEnteredCaptchaCode: form.userEnteredCaptchaCode,
+          CaptchaId: this.captchaComponent.captchaId,
+          serviceId: form.serviceId,
+        })
         .pipe(
           finalize(() => {
             this.isSaving = false;
             this.chdr.detectChanges();
           }),
         )
-        .subscribe((data: ApiResult<any>) => {
-                    if (data.isSuccess) {
-                      this.accounService.setUserPreRegisterData({
-                        mobileNumber: form.mobileNumber,
-                        nationCode: form.nationCode,
-                        nationality: form.nationality,
-                      });
-                      this.toastrService.success(data.messages);
-                      this.toastrService.success('در حال انتقال به مراحل ثبت نام شهروند...');
+        .subscribe(
+          (data: ApiResult<any>) => {
+            if (data.isSuccess) {
+              this.accounService.setUserPreRegisterData({
+                mobileNumber: form.mobileNumber,
+                nationCode: form.nationCode,
+                nationality: form.nationality,
+              });
+              this.toastrService.success(data.messages);
+              this.toastrService.success('در حال انتقال به مراحل ثبت نام شهروند...');
 
-                      this.router.navigate(['/userregister/register'], {
-                        queryParams: { serviceId: this.form.value.serviceId },
-                      });
-                    } else {
-                      this.toastrService.error(data.messages);
-                      this.isSaving = false;
-                      this.captchaComponent.reloadImage();
-                    }
-                  }, (error: any) => {
-                    this.captchaComponent.reloadImage();
-                    
-                  });
+              this.router.navigate(['/userregister/register'], {
+                queryParams: { serviceId: this.form.value.serviceId },
+              });
+            } else {
+              this.toastrService.error(data.messages);
+              this.isSaving = false;
+              this.captchaComponent.reloadImage();
+            }
+          },
+          (error: any) => {
+            this.captchaComponent.reloadImage();
+          },
+        );
     }
   }
 

@@ -5,7 +5,7 @@ import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-check-state-life-list',
@@ -61,24 +61,27 @@ export class AdminCheckStateLifeListComponent extends AppBase implements AfterVi
     };
 
     this.data = [];
-    this.dataService.get(ServerApis.getAllCitizenExported, param)
+    this.dataService
+      .get(ServerApis.getAllCitizenExported, param)
       .pipe(
         finalize(() => {
           this.isLoadingResults = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess && response.data) {
-                this.data = response.data.items ? response.data.items : [];
-                this.dataSource.data = this.data;
-                this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.data = response.data.items ? response.data.items : [];
+            this.dataSource.data = this.data;
+            this.listCount = response.data.totalItems ? response.data.totalItems : 0;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   applyFilter() {

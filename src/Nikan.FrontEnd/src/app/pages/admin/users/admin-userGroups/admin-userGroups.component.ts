@@ -6,7 +6,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
 import { userGroupsDto } from '@core/models/users/userGroups';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-admin-userGroup',
@@ -34,23 +34,25 @@ export class AdminUserGroupsComponent extends AppBase implements OnInit {
 
   getList() {
     this.loading = true;
-    this.dataService.get(ServerApis.getAllUserGroups, {})
+    this.dataService
+      .get(ServerApis.getAllUserGroups, {})
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.userGroupList = response.data ? response.data : [];
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.userGroupList = response.data ? response.data : [];
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   openAddUserDialog() {

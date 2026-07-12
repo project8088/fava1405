@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-adm-update-citizen-mobile-number-dialog',
@@ -42,24 +42,27 @@ export class CardUpdateCitizenMobileNumberDialogComponent extends AppBase implem
     this.loading = true;
     //todo
     this.dataService
-            .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
+      .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.info = response.data;
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                  this.matDialogRef.close(false);
-                }
-              }, (error: any) => {
-                this.matDialogRef.close(false);
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.info = response.data;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+            this.matDialogRef.close(false);
+          }
+        },
+        (error: any) => {
+          this.matDialogRef.close(false);
+        },
+      );
   }
 
   displayFn(item: any): string {
@@ -77,25 +80,27 @@ export class CardUpdateCitizenMobileNumberDialogComponent extends AppBase implem
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updateCitizenMobileNumberByCard, {
-              userCode: this.userCode,
-              MobileNumber: formValue.mobileNumber,
-            })
+      .post(ServerApis.updateCitizenMobileNumberByCard, {
+        userCode: this.userCode,
+        MobileNumber: formValue.mobileNumber,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

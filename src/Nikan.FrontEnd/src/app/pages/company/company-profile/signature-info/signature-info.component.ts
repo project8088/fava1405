@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'company-signature-info',
@@ -41,25 +41,27 @@ export class CompanySignatureInfoComponent extends AppBase implements OnInit, Af
   getInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getCompanySignature, {
-              companyId: this.companyId,
-            })
+      .get(ServerApis.getCompanySignature, {
+        companyId: this.companyId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  //this.companyId = response.data.companyId;
-                  this.imageSignatureUrl = response.data.signatureUrl;
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            //this.companyId = response.data.companyId;
+            this.imageSignatureUrl = response.data.signatureUrl;
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getSignature(ev: any) {

@@ -5,7 +5,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-refund-info-dialog',
@@ -52,24 +52,26 @@ export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit 
     params.ownerBankCardNumber = params.ownerBankCardNumber;
     params.adminDescription = params.adminDescription;
 
-    this.dataService.post(url, params)
+    this.dataService
+      .post(url, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.matDialogRef.close(true);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   commitRefundByAdmin(refundId: number) {
@@ -84,27 +86,29 @@ export class CitizenRefundInfoDialogComponent extends AppBase implements OnInit 
       if (result.value) {
         this.refundloading = true;
         this.dataService
-                    .get(ServerApis.commitRefundByAdmin, {
-                      refundId: refundId,
-                    })
+          .get(ServerApis.commitRefundByAdmin, {
+            refundId: refundId,
+          })
           .pipe(
             finalize(() => {
               this.refundloading = false;
               this.chdr.detectChanges();
             }),
           )
-          .subscribe((response) => {
-                        if (response.isSuccess) {
-                          this.toastrService.success('با موفقیت برگشت داده شد.');
-                          this.matDialogRef.close(true);
-                        } else {
-                          let msg = response.messages
-                            ? response.messages
-                            : 'متاسفانه خطایی در سرور رخ داده است!';
-                          this.toastrService.error(msg);
-                        }
-                      }, (error: any) => {
-                      });
+          .subscribe(
+            (response) => {
+              if (response.isSuccess) {
+                this.toastrService.success('با موفقیت برگشت داده شد.');
+                this.matDialogRef.close(true);
+              } else {
+                let msg = response.messages
+                  ? response.messages
+                  : 'متاسفانه خطایی در سرور رخ داده است!';
+                this.toastrService.error(msg);
+              }
+            },
+            (error: any) => {},
+          );
       }
     });
   }

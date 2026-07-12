@@ -85,7 +85,8 @@ export class CitizenContactComponent extends AppBase implements OnInit {
 
   loadHomeData() {
     this.loadingHome = true;
-    this.dataService.get(ServerApis.getCitizenHomeAddress)
+    this.dataService
+      .get(ServerApis.getCitizenHomeAddress)
       .pipe(
         finalize(() => {
           this.loadingHome = false;
@@ -93,19 +94,19 @@ export class CitizenContactComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-            if (data.data) {
-              this.homeForm.patchValue({
-                id: data.data.id,
-                region: data.data.region,
-                phone: data.data.phone,
-                street: data.data.street,
-                alley: data.data.alley,
-                plaque: data.data.plaque,
-                cityId: String(data.data.cityId),
-                postalCode: data.data.postalCode,
-              });
-            }
+        if (data.data) {
+          this.homeForm.patchValue({
+            id: data.data.id,
+            region: data.data.region,
+            phone: data.data.phone,
+            street: data.data.street,
+            alley: data.data.alley,
+            plaque: data.data.plaque,
+            cityId: String(data.data.cityId),
+            postalCode: data.data.postalCode,
           });
+        }
+      });
   }
 
   loadWorkData() {
@@ -123,7 +124,8 @@ export class CitizenContactComponent extends AppBase implements OnInit {
     );
 
     this.loadingWork = true;
-    this.dataService.get(ServerApis.getCitizenOfficeAddress)
+    this.dataService
+      .get(ServerApis.getCitizenOfficeAddress)
       .pipe(
         finalize(() => {
           this.loadingWork = false;
@@ -131,37 +133,37 @@ export class CitizenContactComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-            if (data.data) {
-              this.workForm.patchValue({
-                id: data.data.id,
-                region: data.data.region,
-                phone: data.data.phone,
-                street: data.data.street,
-                alley: data.data.alley,
-                plaque: data.data.plaque,
-                cityId: String(data.data.cityId),
-                postalCode: data.data.postalCode,
-                stateId: data.data.city.parentValue,
-              });
-            }
-
-            this.cities = this.workForm.get('stateId')!.valueChanges.pipe(
-              startWith(data.data.city.parentValue),
-              debounceTime(400),
-              distinctUntilChanged(),
-              switchMap((value) => {
-                return this.helperService.getCitesByParent(value);
-              }),
-            );
-
-            this.cities.subscribe((data: any[]) => {
-              if (data.length) {
-                this.workCityText = data.find(
-                  (el: any) => el.key === this.workForm.controls['cityId'].value,
-                ).text;
-              }
-            });
+        if (data.data) {
+          this.workForm.patchValue({
+            id: data.data.id,
+            region: data.data.region,
+            phone: data.data.phone,
+            street: data.data.street,
+            alley: data.data.alley,
+            plaque: data.data.plaque,
+            cityId: String(data.data.cityId),
+            postalCode: data.data.postalCode,
+            stateId: data.data.city.parentValue,
           });
+        }
+
+        this.cities = this.workForm.get('stateId')!.valueChanges.pipe(
+          startWith(data.data.city.parentValue),
+          debounceTime(400),
+          distinctUntilChanged(),
+          switchMap((value) => {
+            return this.helperService.getCitesByParent(value);
+          }),
+        );
+
+        this.cities.subscribe((data: any[]) => {
+          if (data.length) {
+            this.workCityText = data.find(
+              (el: any) => el.key === this.workForm.controls['cityId'].value,
+            ).text;
+          }
+        });
+      });
   }
 
   saveHomeAddress() {
@@ -178,29 +180,31 @@ export class CitizenContactComponent extends AppBase implements OnInit {
     else this.isSavingWork = true;
 
     return this.dataService
-          .post(ServerApis.addOrUpdteCitizenAddressByCitizen, {
-            ...form,
-            addressType,
-          })
-    .pipe(
-      finalize(() => {
-        this.isSavingHome = false;
-        this.chdr.detectChanges();
-      }),
-    )
-    .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.editMode = false;
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-              this.isSavingWork = false;
-            }, (error: any) => {
-              this.isSavingWork = false;
-              
-            });
+      .post(ServerApis.addOrUpdteCitizenAddressByCitizen, {
+        ...form,
+        addressType,
+      })
+      .pipe(
+        finalize(() => {
+          this.isSavingHome = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.editMode = false;
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+          this.isSavingWork = false;
+        },
+        (error: any) => {
+          this.isSavingWork = false;
+        },
+      );
   }
 
   getHomeCityText() {

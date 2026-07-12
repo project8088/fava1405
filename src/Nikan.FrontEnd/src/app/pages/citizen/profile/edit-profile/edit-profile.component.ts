@@ -129,53 +129,54 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
   getPersonalInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getCitizenBaseInfoByAdmin, { userCode: this.userCode })
+      .get(ServerApis.getCitizenBaseInfoByAdmin, { userCode: this.userCode })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-                  (this, (this.citizenInfo = response.data));
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+            (this, (this.citizenInfo = response.data));
 
-                  this.personalForm.setValue({
-                    gender: response.data.gender,
-                    mobile: response.data.mobile,
-                    email: response.data.eMail || null,
-                    nationalCode: response.data.nationCode,
-                    firstName: response.data.firstName,
-                    lastName: response.data.lastName,
-                    fatherName: response.data.fatherName,
-                    creationDate: response.data.creationDate ? new Date(response.data.creationDate) : '',
-                    date_SabtConfirm: response.data.date_SabtConfirm
-                      ? new Date(response.data.date_SabtConfirm)
-                      : '',
-                    birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
+            this.personalForm.setValue({
+              gender: response.data.gender,
+              mobile: response.data.mobile,
+              email: response.data.eMail || null,
+              nationalCode: response.data.nationCode,
+              firstName: response.data.firstName,
+              lastName: response.data.lastName,
+              fatherName: response.data.fatherName,
+              creationDate: response.data.creationDate ? new Date(response.data.creationDate) : '',
+              date_SabtConfirm: response.data.date_SabtConfirm
+                ? new Date(response.data.date_SabtConfirm)
+                : '',
+              birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
 
-                    educationField: response.data.educationField,
-                    educationGroup: response.data.educationGroup,
-                    educationGroupId: response.data.educationGroupId,
+              educationField: response.data.educationField,
+              educationGroup: response.data.educationGroup,
+              educationGroupId: response.data.educationGroupId,
 
-                    fullAddress: response.data.fullAddress,
-                    dateOfBirth: '',
-                    marital: 1,
-                    phoneNumber: '09139879696',
-                    state: {
-                      value: response.data.cityId,
-                      text: response.data.city,
-                    },
-                  });
-                  this.changeGender();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+              fullAddress: response.data.fullAddress,
+              dateOfBirth: '',
+              marital: 1,
+              phoneNumber: '09139879696',
+              state: {
+                value: response.data.cityId,
+                text: response.data.city,
+              },
+            });
+            this.changeGender();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   savePersonalInfo() {
@@ -189,44 +190,45 @@ export class CitizenEditProfileComponent extends AppBase implements OnInit {
     this.isSaving = true;
 
     this.dataService
-            .post(ServerApis.updateGlobalInformation, {
-              UserId: 0, // this.userId,
-              UserCode: '',
-              LastModifiedOnDate: '2020-10-08',
-              Gender: formValue.gender,
-              FirstName: formValue.firstName,
-              LastName: formValue.lastName,
-              FatherName: formValue.fatherName,
-              NationalCode: this.citizenInfo?.nationalCode,
-              MobileNumber: formValue.mobile,
-              Email: formValue.email,
+      .post(ServerApis.updateGlobalInformation, {
+        UserId: 0, // this.userId,
+        UserCode: '',
+        LastModifiedOnDate: '2020-10-08',
+        Gender: formValue.gender,
+        FirstName: formValue.firstName,
+        LastName: formValue.lastName,
+        FatherName: formValue.fatherName,
+        NationalCode: this.citizenInfo?.nationalCode,
+        MobileNumber: formValue.mobile,
+        Email: formValue.email,
 
-              DateOfBirth: formValue.dateOfBirth
-                ? this.dataService.formatDate(formValue.dateOfBirth)
-                : '',
-              Marital: formValue.marital,
+        DateOfBirth: formValue.dateOfBirth
+          ? this.dataService.formatDate(formValue.dateOfBirth)
+          : '',
+        Marital: formValue.marital,
 
-              Address: formValue.fullAddress,
-              City: formValue.state.text,
-              CityId: +formValue.state.key,
-            })
+        Address: formValue.fullAddress,
+        City: formValue.state.text,
+        CityId: +formValue.state.key,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.profileComponent.getPersonalInfo();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.profileComponent.getPersonalInfo();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**

@@ -66,39 +66,42 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
     this.parentMenus = [];
 
     forkJoin(
-            this.dataService.get(ServerApis.getAllMenuItems, {}),
-            this.dataService.get(ServerApis.getAllPagePath),
-          )
+      this.dataService.get(ServerApis.getAllMenuItems, {}),
+      this.dataService.get(ServerApis.getAllPagePath),
+    )
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(([menus, pages]) => {
-              if (menus.isSuccess) {
-                this.parentMenus = menus.data ? menus.data : [];
-              } else {
-                let msg = menus.messages ? menus.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
+      .subscribe(
+        ([menus, pages]) => {
+          if (menus.isSuccess) {
+            this.parentMenus = menus.data ? menus.data : [];
+          } else {
+            let msg = menus.messages ? menus.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
 
-              //pages
-              if (pages.isSuccess) {
-                var webPages = pages.data ? pages.data : [];
-                webPages.forEach((item: any) => {
-                  this.innerMenuItems.push({
-                    menuName: item.text,
-                    menuPath: '/home/page/' + item.description,
-                  });
-                });
-              } else {
-                let msg = pages.messages ? pages.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              this.matDialogRef.close(false);
+          //pages
+          if (pages.isSuccess) {
+            var webPages = pages.data ? pages.data : [];
+            webPages.forEach((item: any) => {
+              this.innerMenuItems.push({
+                menuName: item.text,
+                menuPath: '/home/page/' + item.description,
+              });
             });
+          } else {
+            let msg = pages.messages ? pages.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {
+          this.matDialogRef.close(false);
+        },
+      );
   }
 
   setInnerSite() {
@@ -129,22 +132,25 @@ export class AdminAddOrUpdateMenuDialogComponent extends AppBase implements OnIn
       return;
     }
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateMenuItem, this.menuForm.value)
+    this.dataService
+      .post(ServerApis.addOrUpdateMenuItem, this.menuForm.value)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('ذخیره اطلاعات با موفقیت انجام شد.');
-                this.matDialogRef.close(this.menuForm.value);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('ذخیره اطلاعات با موفقیت انجام شد.');
+            this.matDialogRef.close(this.menuForm.value);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

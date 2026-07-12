@@ -4,7 +4,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'users-role',
@@ -41,24 +41,26 @@ export class UserRoleListComponent extends AppBase implements OnInit {
   getuserRoleList() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getAllUserRoles, {
-              id: this.userId,
-            })
+      .get(ServerApis.getAllUserRoles, {
+        id: this.userId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.userRoleList = response.data ? response.data : [];
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.userRoleList = response.data ? response.data : [];
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   save() {
@@ -73,24 +75,27 @@ export class UserRoleListComponent extends AppBase implements OnInit {
       RoleId: form.roleId,
       UserId: this.userId,
     };
-    this.dataService.post(ServerApis.addUserRole, dataToPost)
+    this.dataService
+      .post(ServerApis.addUserRole, dataToPost)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.form.reset();
-                this.getuserRoleList();
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.form.reset();
+            this.getuserRoleList();
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   delete(row: any) {

@@ -39,7 +39,6 @@ export class CitizenCardComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        
       },
     );
   }
@@ -55,7 +54,6 @@ export class CitizenCardComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        
       },
     );
   }

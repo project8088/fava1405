@@ -80,25 +80,27 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updteCitizenMobileNumberByAdmin, {
-              userCode: this.userCode,
-              MobileNumber: formValue.mobileNumber,
-            })
+      .post(ServerApis.updteCitizenMobileNumberByAdmin, {
+        userCode: this.userCode,
+        MobileNumber: formValue.mobileNumber,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

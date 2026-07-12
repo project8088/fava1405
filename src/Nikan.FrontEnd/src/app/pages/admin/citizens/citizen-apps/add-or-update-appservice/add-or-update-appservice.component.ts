@@ -109,22 +109,25 @@ export class AdminAddOrUpdateAppserviceComponent extends AppBase implements OnIn
     form.imageUrl = this.imageUrl;
     let params = form;
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateAppService, params)
+    this.dataService
+      .post(ServerApis.addOrUpdateAppService, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-                this.router.navigate(['/admin/appService-list']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+            this.router.navigate(['/admin/appService-list']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

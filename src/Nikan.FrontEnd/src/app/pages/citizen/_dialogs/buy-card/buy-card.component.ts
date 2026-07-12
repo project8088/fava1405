@@ -5,7 +5,7 @@ import { ServerApis } from '@core/server-apis';
 import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 interface ICard {
   attachmentGroup: string;
@@ -115,7 +115,6 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
         },
         (error: any) => {
           this.loading = false;
-          
         },
       );
   }
@@ -133,7 +132,6 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
         },
         (error: any) => {
           this.loading = false;
-          
         },
       );
   }
@@ -147,27 +145,29 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
     var formValue = this.form.value;
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addFeedbacke, {
-              citizenId: +this.citizenId,
-              feedbackId: formValue.feedbackId,
-              feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
-            })
+      .post(ServerApis.addFeedbacke, {
+        citizenId: +this.citizenId,
+        feedbackId: formValue.feedbackId,
+        feedbackDescription: formValue.feedbackDescription ? formValue.feedbackDescription : '',
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(true);
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(true);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getAddresses() {
@@ -227,33 +227,34 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     return this.dataService
-          .post(ServerApis.addOrUpdteCitizenAddressByCitizen, {
-            ...form,
-          })
-    .pipe(
-      finalize(() => {
-        this.isSaving = false;
-        this.chdr.detectChanges();
-      }),
-    )
-    .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.dataService
-                  .post(ServerApis.cardPriceInfo, {
-                    addressId: response.data.id,
-                    cardIfoId: this.card.cardInfoId,
-                  })
-                  .subscribe((response) => {
-                    this.orderDetails = response.data;
-                  });
-                stepper.next();
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .post(ServerApis.addOrUpdteCitizenAddressByCitizen, {
+        ...form,
+      })
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.dataService
+              .post(ServerApis.cardPriceInfo, {
+                addressId: response.data.id,
+                cardIfoId: this.card.cardInfoId,
+              })
+              .subscribe((response) => {
+                this.orderDetails = response.data;
+              });
+            stepper.next();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-citizens-notification',
@@ -51,56 +51,58 @@ export class AdminAddOrUpdateCitizensNotificationComponent
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
   getNotificationInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getNotification, {
-              id: this.notificationId,
-            })
+      .get(ServerApis.getNotification, {
+        id: this.notificationId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.notification = response.data;
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.notification = response.data;
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getCitizenNotifications() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getCitizenNotifications, {
-              id: this.notificationId,
-            })
+      .get(ServerApis.getCitizenNotifications, {
+        id: this.notificationId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.companyList = response.data ? response.data : [];
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.companyList = response.data ? response.data : [];
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**
@@ -128,24 +130,27 @@ export class AdminAddOrUpdateCitizensNotificationComponent
     debugger;
 
     this.isSaving = true;
-    this.dataService.post(ServerApis.addCitizensNotifactions, params)
+    this.dataService
+      .post(ServerApis.addCitizensNotifactions, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-                this.getCitizenNotifications();
-                // this.router.navigate(['/admin/notifications']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+            this.getCitizenNotifications();
+            // this.router.navigate(['/admin/notifications']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   delete(item: any) {

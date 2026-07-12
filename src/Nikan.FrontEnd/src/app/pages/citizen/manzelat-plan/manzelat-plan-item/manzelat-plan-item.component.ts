@@ -138,7 +138,6 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
         },
         (error: any) => {
           this.isSaving = false;
-          
         },
       );
   }

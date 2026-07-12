@@ -4,7 +4,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-update-manzalat-base-form',
@@ -50,32 +50,35 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
 
   getItem() {
     this.loading = true;
-    this.dataService.get(ServerApis.getManzalatBaseForm, { id: this.id })
+    this.dataService
+      .get(ServerApis.getManzalatBaseForm, { id: this.id })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess && response.data) {
-                this.form.setValue({
-                  id: response.data.id,
-                  title: response.data.title,
-                  description: response.data.description,
-                  minAge: response.data.minAge,
-                  maxAge: response.data.maxAge,
-                  isActive: response.data.isActive,
-                  uploadDescription: response.data.uploadDescription,
-                  orderIndex: response.data.orderIndex,
-                  gender: response.data.gender,
-                });
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.form.setValue({
+              id: response.data.id,
+              title: response.data.title,
+              description: response.data.description,
+              minAge: response.data.minAge,
+              maxAge: response.data.maxAge,
+              isActive: response.data.isActive,
+              uploadDescription: response.data.uploadDescription,
+              orderIndex: response.data.orderIndex,
+              gender: response.data.gender,
             });
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   save() {
@@ -97,22 +100,25 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
       uploadDescription: form.uploadDescription,
     };
     this.isSaving = true;
-    this.dataService.post(ServerApis.updateManzalatBaseForm, params)
+    this.dataService
+      .post(ServerApis.updateManzalatBaseForm, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-                this.router.navigate(['/admin/manzalat-form-list']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+            this.router.navigate(['/admin/manzalat-form-list']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

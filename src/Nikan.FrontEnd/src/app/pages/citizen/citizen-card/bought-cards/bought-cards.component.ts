@@ -38,7 +38,6 @@ export class BoughtCardsComponent extends AppBase implements OnInit {
       },
       (error: any) => {
         this.loading = false;
-        
       },
     );
   }

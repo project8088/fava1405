@@ -4,7 +4,7 @@ import { HelperService } from '@core/services/helper.service';
 import { MatStepper } from '@angular/material/stepper';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 interface ICard {
   attachmentGroup: string;
@@ -122,7 +122,6 @@ export class CardDetailComponent extends AppBase implements OnInit {
         },
         (error: any) => {
           this.loading = false;
-          
         },
       );
   }
@@ -188,71 +187,74 @@ export class CardDetailComponent extends AppBase implements OnInit {
     debugger;
     this.isSaving = true;
     return this.dataService
-          .post(ServerApis.addOrUpdteCitizenAddressByCitizenForCardAddress, {
-            ...form,
-          })
-    .pipe(
-      finalize(() => {
-        this.isSaving = false;
-        this.chdr.detectChanges();
-      }),
-    )
-    .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                this.addressId = response.data.id;
-                this.dataService
-                  .post(ServerApis.cardPriceInfo, {
-                    addressId: response.data.id,
-                    CardInfoId: this.cardInfoId,
-                  })
-                  .subscribe((response) => {
-                    this.orderDetails = response.data;
-                  });
-                stepper.next();
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .post(ServerApis.addOrUpdteCitizenAddressByCitizenForCardAddress, {
+        ...form,
+      })
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.addressId = response.data.id;
+            this.dataService
+              .post(ServerApis.cardPriceInfo, {
+                addressId: response.data.id,
+                CardInfoId: this.cardInfoId,
+              })
+              .subscribe((response) => {
+                this.orderDetails = response.data;
+              });
+            stepper.next();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   ordercard() {
     this.loading = true;
     this.dataService
-            .post(ServerApis.buyCardByCitizens, {
-              CardInfoId: this.cardInfoId,
-              DeliveringAddressId: +this.addressId,
-            })
+      .post(ServerApis.buyCardByCitizens, {
+        CardInfoId: this.cardInfoId,
+        DeliveringAddressId: +this.addressId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  if (response.data.isfree) {
-                    this.toastrService.success(' ثبت درخواست کارت شما با موفقیت ثبت گردید.');
-                    setTimeout(() => {
-                      this.router.navigate(['/citizen/citizen-card']);
-                    }, 1000);
-                  } else {
-                    this.RefId = response.data.refId;
-                    console.log(document.getElementById('payformmellatbank'));
-                    var form: any = document.getElementById('payformmellatbank');
-                    this.waitForRedirectToBank = true;
-                    setTimeout(() => {
-                      form.submit();
-                    }, 1000);
-                  }
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            if (response.data.isfree) {
+              this.toastrService.success(' ثبت درخواست کارت شما با موفقیت ثبت گردید.');
+              setTimeout(() => {
+                this.router.navigate(['/citizen/citizen-card']);
+              }, 1000);
+            } else {
+              this.RefId = response.data.refId;
+              console.log(document.getElementById('payformmellatbank'));
+              var form: any = document.getElementById('payformmellatbank');
+              this.waitForRedirectToBank = true;
+              setTimeout(() => {
+                form.submit();
+              }, 1000);
+            }
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

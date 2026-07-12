@@ -98,9 +98,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
       (response) => {
         this.baseEnums.citizenGroups = response.data;
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
   pageEvent(event: PageEvent) {

@@ -165,7 +165,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       this.family = this._data;
       this.loading = true;
       this.dataService
-                .get(ServerApis.getMyFamilyBaseInfo + '?familyId=' + this.family?.familyCitizenId)
+        .get(ServerApis.getMyFamilyBaseInfo + '?familyId=' + this.family?.familyCitizenId)
         .pipe(
           finalize(() => {
             this.loading = false;
@@ -173,38 +173,38 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
           }),
         )
         .subscribe((data) => {
-                  const family = data.data;
-                  this.registerForm.patchValue({
-                    familyRelation: this.family?.familyRelation,
-                    nationCode: family.nationCode,
+          const family = data.data;
+          this.registerForm.patchValue({
+            familyRelation: this.family?.familyRelation,
+            nationCode: family.nationCode,
 
-                    firstName: family.firstName,
-                    lastName: family.lastName,
-                    mariageStatus: family.mariageStatus,
-                    fatherName: family.fatherName,
-                    birthDate: family.birthDate,
-                    gender: family.gender,
+            firstName: family.firstName,
+            lastName: family.lastName,
+            mariageStatus: family.mariageStatus,
+            fatherName: family.fatherName,
+            birthDate: family.birthDate,
+            gender: family.gender,
 
-                    phone: family.phone,
-                    mobile: family.mobile,
-                    region: family.region,
-                    stateId: family.stateId,
-                    cityId: family.cityId,
-                    street: family.street,
-                    alley: family.alley,
-                    plaque: family.plaque,
+            phone: family.phone,
+            mobile: family.mobile,
+            region: family.region,
+            stateId: family.stateId,
+            cityId: family.cityId,
+            street: family.street,
+            alley: family.alley,
+            plaque: family.plaque,
 
-                    postalCode: family.postalCode,
-                    eMail: family.eMail,
+            postalCode: family.postalCode,
+            eMail: family.eMail,
 
-                    educationStatues: family.educationStatues,
-                    educationTitle: family.educationTitle,
-                    educationGroup: String(family.educationGroupId),
-                    educationLevel: family.educationLevel,
-                    jobGroup: family.jobGroupId,
-                    jobTitle: family.jobTitle,
-                  });
-                });
+            educationStatues: family.educationStatues,
+            educationTitle: family.educationTitle,
+            educationGroup: String(family.educationGroupId),
+            educationLevel: family.educationLevel,
+            jobGroup: family.jobGroupId,
+            jobTitle: family.jobTitle,
+          });
+        });
     }
   }
 
@@ -225,28 +225,29 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.checkRegisterCitizenByNtionCode, {
-              formValue,
-              nationCode: this.firstFormGroup.value.nationCode,
-            })
+      .post(ServerApis.checkRegisterCitizenByNtionCode, {
+        formValue,
+        nationCode: this.firstFormGroup.value.nationCode,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.familyIsRegister = response.data.isRegister;
-                  stepper.next();
-                  this.setNationCodeInfamilyForm();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.familyIsRegister = response.data.isRegister;
+            stepper.next();
+            this.setNationCodeInfamilyForm();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   saveFamilyDetails() {
@@ -264,52 +265,53 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addFamilyMemberIfNotAny, {
-              familyRelation: formValue.familyRelation,
-              nationCode: this.firstFormGroup.value.nationCode,
-              gender: formValue.gender,
-              firstName: formValue.firstName,
-              lastName: formValue.lastName,
-              fatherName: formValue.fatherName,
-              birthDate: formValue.birthDate,
-              mobile: formValue.mobile,
-              mariageStatus: formValue.mariageStatus,
-              educationStatues: formValue.educationStatues,
-              educationGroup: formValue.educationGroup,
-              educationLevel: formValue.educationLevel,
-              jobTitle: formValue.jobTitle,
-              jobGroup: formValue.jobGroup,
-              educationTitle: formValue.educationTitle,
-              phone: formValue.phone,
-              cityId: Number(formValue.cityId),
-              region: Number(formValue.region),
-              plaque: formValue.plaque,
-              alley: formValue.alley,
-              postalCode: formValue.postalCode,
-              eMail: formValue.eMail,
-            })
+      .post(ServerApis.addFamilyMemberIfNotAny, {
+        familyRelation: formValue.familyRelation,
+        nationCode: this.firstFormGroup.value.nationCode,
+        gender: formValue.gender,
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        fatherName: formValue.fatherName,
+        birthDate: formValue.birthDate,
+        mobile: formValue.mobile,
+        mariageStatus: formValue.mariageStatus,
+        educationStatues: formValue.educationStatues,
+        educationGroup: formValue.educationGroup,
+        educationLevel: formValue.educationLevel,
+        jobTitle: formValue.jobTitle,
+        jobGroup: formValue.jobGroup,
+        educationTitle: formValue.educationTitle,
+        phone: formValue.phone,
+        cityId: Number(formValue.cityId),
+        region: Number(formValue.region),
+        plaque: formValue.plaque,
+        alley: formValue.alley,
+        postalCode: formValue.postalCode,
+        eMail: formValue.eMail,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success(response.messages);
-                  this.familyForm.patchValue({
-                    familyRelation: formValue.familyRelation,
-                  });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success(response.messages);
+            this.familyForm.patchValue({
+              familyRelation: formValue.familyRelation,
+            });
 
-                  // stepper.next();
-                  // this.matDialogRef.close(response.data);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+            // stepper.next();
+            // this.matDialogRef.close(response.data);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   registerFamily(stepper: MatStepper) {
@@ -324,33 +326,34 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addFamilyMemberIfAny, {
-              familyRelation: formValue.familyRelation,
-              nationCode: this.firstFormGroup.value.nationCode,
-              birthDate: formValue.birthDate,
-            })
+      .post(ServerApis.addFamilyMemberIfAny, {
+        familyRelation: formValue.familyRelation,
+        nationCode: this.firstFormGroup.value.nationCode,
+        birthDate: formValue.birthDate,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success(response.messages);
-                  this.familyForm.patchValue({
-                    familyRelation: formValue.familyRelation,
-                  });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success(response.messages);
+            this.familyForm.patchValue({
+              familyRelation: formValue.familyRelation,
+            });
 
-                  // stepper.next();
-                  this.matDialogRef.close(response.data);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+            // stepper.next();
+            this.matDialogRef.close(response.data);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   updateFamilyDetails() {
@@ -363,49 +366,50 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
     var formValue = this.registerForm.getRawValue();
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.updateFamilyMemberByCitizen, {
-              familyCitizenId: this.family?.familyCitizenId,
-              familyRelation: formValue.familyRelation,
-              nationCode: formValue.nationCode,
-              gender: formValue.gender,
-              firstName: formValue.firstName,
-              lastName: formValue.lastName,
-              fatherName: formValue.fatherName,
-              birthDate: formValue.birthDate,
-              mobile: formValue.mobile,
-              mariageStatus: formValue.mariageStatus,
-              educationStatues: formValue.educationStatues,
-              educationGroup: formValue.educationGroup,
-              educationLevel: formValue.educationLevel,
-              jobTitle: formValue.jobTitle,
-              jobGroup: formValue.jobGroup,
-              educationTitle: formValue.educationTitle,
-              phone: formValue.phone,
-              cityId: Number(formValue.cityId),
-              region: Number(formValue.region),
-              street: formValue.street,
-              alley: formValue.alley,
-              plaque: formValue.plaque,
-              postalCode: formValue.postalCode,
-              eMail: formValue.eMail,
-            })
+      .post(ServerApis.updateFamilyMemberByCitizen, {
+        familyCitizenId: this.family?.familyCitizenId,
+        familyRelation: formValue.familyRelation,
+        nationCode: formValue.nationCode,
+        gender: formValue.gender,
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        fatherName: formValue.fatherName,
+        birthDate: formValue.birthDate,
+        mobile: formValue.mobile,
+        mariageStatus: formValue.mariageStatus,
+        educationStatues: formValue.educationStatues,
+        educationGroup: formValue.educationGroup,
+        educationLevel: formValue.educationLevel,
+        jobTitle: formValue.jobTitle,
+        jobGroup: formValue.jobGroup,
+        educationTitle: formValue.educationTitle,
+        phone: formValue.phone,
+        cityId: Number(formValue.cityId),
+        region: Number(formValue.region),
+        street: formValue.street,
+        alley: formValue.alley,
+        plaque: formValue.plaque,
+        postalCode: formValue.postalCode,
+        eMail: formValue.eMail,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                  this.matDialogRef.close(response.data);
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+            this.matDialogRef.close(response.data);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
 
     if (this.registerForm.invalid) {
       this.toastrService.warning('اطلاعات فرم را تکمیل کنید.');
@@ -450,20 +454,24 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
   }
   getEducationGroups() {
     this.loadingEnums = true;
-    this.dataService.get(ServerApis.getEducationGroups)
+    this.dataService
+      .get(ServerApis.getEducationGroups)
       .pipe(
         finalize(() => {
           this.loadingEnums = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response) {
-                this.baseEnums.educationGroups = response;
-              }
-            }, (error: any) => {
-              this.toastrService.error('خطا در ارتباط با سرور!');
-            });
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.baseEnums.educationGroups = response;
+          }
+        },
+        (error: any) => {
+          this.toastrService.error('خطا در ارتباط با سرور!');
+        },
+      );
   }
 
   displayFn(item: any): string {

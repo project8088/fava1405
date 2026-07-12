@@ -5,7 +5,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-company-page',
@@ -61,40 +61,39 @@ export class CompanyPageComponent extends AppBase implements OnInit {
         if (response) {
           this.periorityList = response.ticketPriority ? response.ticketPriority : [];
         } else {
-          
         }
       },
-      (error: any) => {
-        
-      },
+      (error: any) => {},
     );
   }
 
   getInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.fullCompanyInfo, {
-              companyId: this.companyId,
-            })
+      .get(ServerApis.fullCompanyInfo, {
+        companyId: this.companyId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.companyInfo = response.data ? response.data : {};
-                  if (this.companyInfo && this.companyInfo.lat && this.companyInfo.lng) {
-                    this.lat = +this.companyInfo.lat;
-                    this.lng = +this.companyInfo.lng;
-                  }
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.companyInfo = response.data ? response.data : {};
+            if (this.companyInfo && this.companyInfo.lat && this.companyInfo.lng) {
+              this.lat = +this.companyInfo.lat;
+              this.lng = +this.companyInfo.lng;
+            }
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   saveInfo() {
@@ -106,37 +105,39 @@ export class CompanyPageComponent extends AppBase implements OnInit {
     this.isSaving = true;
     let formData = this.contactForm.value;
     this.dataService
-            .post(ServerApis.addContact, {
-              Id: '',
-              Subject: formData.subject,
-              Message: formData.message,
-              organizationalUnitId: null,
-              name: formData.name ? formData.name : '',
-              mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
-              email: formData.email ? formData.email : '',
-              CompanyId: this.companyId,
-              UserId: this.user ? this.user.userId : '',
-            })
+      .post(ServerApis.addContact, {
+        Id: '',
+        Subject: formData.subject,
+        Message: formData.message,
+        organizationalUnitId: null,
+        name: formData.name ? formData.name : '',
+        mobileNumber: formData.mobileNumber ? formData.mobileNumber : '',
+        email: formData.email ? formData.email : '',
+        CompanyId: this.companyId,
+        UserId: this.user ? this.user.userId : '',
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess) {
-                  this.sendedMessages = response.messages
-                    ? response.messages
-                    : 'پیام شما با موفقیت ارسال شد.';
-                  this.toastrService.success(this.sendedMessages);
-                  this.messageIsSended = true;
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.sendedMessages = response.messages
+              ? response.messages
+              : 'پیام شما با موفقیت ارسال شد.';
+            this.toastrService.success(this.sendedMessages);
+            this.messageIsSended = true;
 
-                  this.contactForm.reset();
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+            this.contactForm.reset();
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

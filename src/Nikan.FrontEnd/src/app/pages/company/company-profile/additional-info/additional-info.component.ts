@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'company-additional-info',
@@ -50,26 +50,28 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
   getAdditionalInfo() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getAdditionalInfo, {
-              companyId: this.companyId,
-            })
+      .get(ServerApis.getAdditionalInfo, {
+        companyId: this.companyId,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.companyId = response.data.companyId;
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.companyId = response.data.companyId;
 
-                  this.form.patchValue(response.data);
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+            this.form.patchValue(response.data);
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   save() {
@@ -88,21 +90,24 @@ export class CompanyAdditionalInfoComponent extends AppBase implements OnInit, A
     this.isSaving = true;
 
     let dataToPost = form;
-    this.dataService.post(ServerApis.updateAdditionalInfo, dataToPost)
+    this.dataService
+      .post(ServerApis.updateAdditionalInfo, dataToPost)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-              } else {
-                var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

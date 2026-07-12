@@ -185,25 +185,26 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addOrUpdateCitizenProfile, {
-              ...formValue,
-            })
+      .post(ServerApis.addOrUpdateCitizenProfile, {
+        ...formValue,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   /**
@@ -292,20 +293,24 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
   }
   getEducationGroups() {
     this.loadingEnums = true;
-    this.dataService.get(ServerApis.getEducationGroups)
+    this.dataService
+      .get(ServerApis.getEducationGroups)
       .pipe(
         finalize(() => {
           this.loadingEnums = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response) {
-                this.baseEnums.educationGroups = response;
-              }
-            }, (error: any) => {
-              this.toastrService.error('خطا در ارتباط با سرور!');
-            });
+      .subscribe(
+        (response) => {
+          if (response) {
+            this.baseEnums.educationGroups = response;
+          }
+        },
+        (error: any) => {
+          this.toastrService.error('خطا در ارتباط با سرور!');
+        },
+      );
   }
   getPersonalInfo() {
     this.loading = true;
@@ -317,58 +322,56 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          this.loading = false;
-          if (response && response.isSuccess) {
-            this.lastModifiedOnDate = response.data.lastModifiedOnDate;
-            (this, (this.citizenInfo = response.data));
+      .subscribe((response) => {
+        this.loading = false;
+        if (response && response.isSuccess) {
+          this.lastModifiedOnDate = response.data.lastModifiedOnDate;
+          (this, (this.citizenInfo = response.data));
 
-            this.personalForm.patchValue({
-              gender: response.data.gender,
-              mobile: response.data.mobile,
-              email: response.data.eMail || null,
-              nationalCode: response.data.nationCode,
-              firstName: response.data.firstName,
-              lastName: response.data.lastName,
-              fatherName: response.data.fatherName,
-              date_SabtConfirm: response.data.date_SabtConfirm
-                ? new Date(response.data.date_SabtConfirm)
-                : '',
-              birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
+          this.personalForm.patchValue({
+            gender: response.data.gender,
+            mobile: response.data.mobile,
+            email: response.data.eMail || null,
+            nationalCode: response.data.nationCode,
+            firstName: response.data.firstName,
+            lastName: response.data.lastName,
+            fatherName: response.data.fatherName,
+            date_SabtConfirm: response.data.date_SabtConfirm
+              ? new Date(response.data.date_SabtConfirm)
+              : '',
+            birthDate: response.data.date_SabtConfirm ? new Date(response.data.birthDate) : '',
 
-              educationTitle: response.data.educationField,
-              educationGroup: String(response.data.educationGroupId),
-              educationGroupId: response.data.educationGroupId,
+            educationTitle: response.data.educationField,
+            educationGroup: String(response.data.educationGroupId),
+            educationGroupId: response.data.educationGroupId,
 
-              alley: response.data.alley,
-              region: response.data.region,
-              postalCode: response.data.postalCode,
-              dateOfBirth: response.data.birthDate,
-              marital: response.data.mariageStatus,
-              educationStatues: response.data.educationStatues,
-              educationLevel: response.data.educationLevel,
-              jobGroup: response.data.jobGroupId,
-              jobTitle: response.data.jobTitle,
-              stateId: response.data.city ? response.data.city.parentValue : null,
-              cityId: String(response.data.cityId),
-              plaque: response.data.plaque,
+            alley: response.data.alley,
+            region: response.data.region,
+            postalCode: response.data.postalCode,
+            dateOfBirth: response.data.birthDate,
+            marital: response.data.mariageStatus,
+            educationStatues: response.data.educationStatues,
+            educationLevel: response.data.educationLevel,
+            jobGroup: response.data.jobGroupId,
+            jobTitle: response.data.jobTitle,
+            stateId: response.data.city ? response.data.city.parentValue : null,
+            cityId: String(response.data.cityId),
+            plaque: response.data.plaque,
 
-              phoneNumber: response.data.phone,
-              state: {
-                value: response.data.cityId,
-                text: response.data.city,
-              },
-            });
+            phoneNumber: response.data.phone,
+            state: {
+              value: response.data.cityId,
+              text: response.data.city,
+            },
+          });
 
-            this.userStatus = response.data.sabtStatus;
-            this.setDisabledFields();
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-      );
+          this.userStatus = response.data.sabtStatus;
+          this.setDisabledFields();
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   savePersonalInfo() {
@@ -381,48 +384,49 @@ export class AdminEditCitizenInfoComponent extends AppBase implements OnInit {
 
     this.isSaving = true;
     this.dataService
-            .post(ServerApis.addOrUpdateCitizenProfileByAdmin, {
-              gender: formValue.gender,
-              firstName: formValue.firstName,
-              lastName: formValue.lastName,
-              fatherName: formValue.fatherName,
-              nationalCode: this.citizenInfo?.nationalCode,
-              mobile: formValue.mobile,
-              eMail: formValue.email || '',
-              birthDate: formValue.dateOfBirth ? formValue.dateOfBirth : '',
-              mariageStatus: formValue.marital,
+      .post(ServerApis.addOrUpdateCitizenProfileByAdmin, {
+        gender: formValue.gender,
+        firstName: formValue.firstName,
+        lastName: formValue.lastName,
+        fatherName: formValue.fatherName,
+        nationalCode: this.citizenInfo?.nationalCode,
+        mobile: formValue.mobile,
+        eMail: formValue.email || '',
+        birthDate: formValue.dateOfBirth ? formValue.dateOfBirth : '',
+        mariageStatus: formValue.marital,
 
-              educationStatues: formValue.educationStatues,
-              educationGroup: formValue.educationGroup,
-              educationTitle: formValue.educationTitle,
+        educationStatues: formValue.educationStatues,
+        educationGroup: formValue.educationGroup,
+        educationTitle: formValue.educationTitle,
 
-              jobTitle: formValue.jobTitle,
-              jobGroup: formValue.jobGroup,
+        jobTitle: formValue.jobTitle,
+        jobGroup: formValue.jobGroup,
 
-              phoneNumber: formValue.phoneNumber,
-              postalCode: String(formValue.postalCode),
-              alley: formValue.alley || '',
-              plaque: formValue.plaque || '',
-              street: formValue.street || '',
-              region: formValue.region || '',
-              cityId: Number(formValue.cityId) || 0,
-            })
+        phoneNumber: formValue.phoneNumber,
+        postalCode: String(formValue.postalCode),
+        alley: formValue.alley || '',
+        plaque: formValue.plaque || '',
+        street: formValue.street || '',
+        region: formValue.region || '',
+        cityId: Number(formValue.cityId) || 0,
+      })
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response && response.isSuccess) {
-                  this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-                } else {
-                  let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-                
-              });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   setDisabledFields() {

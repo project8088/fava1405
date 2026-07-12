@@ -5,7 +5,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { HelperService } from '@core/services/helper.service';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   templateUrl: './change-card-address.component.html',
@@ -71,24 +71,26 @@ export class ChangeCardAddressDialogComponent extends AppBase implements OnInit 
     params.cityId = +params.cityId;
     params.postalCode = params.postalCode;
 
-    this.dataService.post(url, params)
+    this.dataService
+      .post(url, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.toastrService.success('آدرس جدید تحویل کارت با موفقیت ثبت شد');
-                this.matDialogRef.close(true);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-              
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.toastrService.success('آدرس جدید تحویل کارت با موفقیت ثبت شد');
+            this.matDialogRef.close(true);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   loadAddress() {

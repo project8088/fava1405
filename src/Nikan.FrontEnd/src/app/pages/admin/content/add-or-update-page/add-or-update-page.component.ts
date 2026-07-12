@@ -5,7 +5,7 @@ import { ENTER } from '@angular/cdk/keycodes';
 import { ServerApis } from '@core/server-apis';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
-import { finalize } from "rxjs";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'adm-add-or-update-page',
@@ -57,35 +57,37 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
   getWebPage() {
     this.loading = true;
     this.dataService
-            .get(ServerApis.getWebPage, {
-              id: this.id,
-              forEdit: true,
-            })
+      .get(ServerApis.getWebPage, {
+        id: this.id,
+        forEdit: true,
+      })
       .pipe(
         finalize(() => {
           this.loading = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-                if (response.isSuccess && response.data) {
-                  this.form.setValue({
-                    id: response.data.id,
-                    title: response.data.title,
-                    description: response.data.description,
-                    body: response.data.body,
-                    seoDescription: response.data.seoDescription,
-                    seoTags: response.data.seoTags,
-                    slug: response.data.slug,
-                  });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess && response.data) {
+            this.form.setValue({
+              id: response.data.id,
+              title: response.data.title,
+              description: response.data.description,
+              body: response.data.body,
+              seoDescription: response.data.seoDescription,
+              seoTags: response.data.seoTags,
+              slug: response.data.slug,
+            });
 
-                  this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
-                } else {
-                  var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
-                  this.toastrService.error(msg);
-                }
-              }, (error: any) => {
-              });
+            this.seoTags = response.data.seoTags ? response.data.seoTags.split(',') : [];
+          } else {
+            var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   add(event: MatChipInputEvent): void {
@@ -132,22 +134,25 @@ export class AdminAddOrUpdatePageComponent extends AppBase implements OnInit, Af
       slug: form.slug,
     };
     this.isSaving = true;
-    this.dataService.post(ServerApis.addOrUpdateWebPage, params)
+    this.dataService
+      .post(ServerApis.addOrUpdateWebPage, params)
       .pipe(
         finalize(() => {
           this.isSaving = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response.isSuccess) {
-                this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-                this.router.navigate(['/admin/pages']);
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response.isSuccess) {
+            this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
+            this.router.navigate(['/admin/pages']);
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 }

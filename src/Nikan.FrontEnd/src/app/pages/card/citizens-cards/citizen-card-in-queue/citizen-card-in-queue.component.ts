@@ -70,24 +70,27 @@ export class CardCitizenCardInQueueComponent extends AppBase implements AfterVie
 
   getInfo() {
     this.loadingData = true;
-    this.dataService.get(ServerApis.getDistributionQueueInfo, { id: this.queueId })
+    this.dataService
+      .get(ServerApis.getDistributionQueueInfo, { id: this.queueId })
       .pipe(
         finalize(() => {
           this.loadingData = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe((response) => {
-              if (response && response.isSuccess) {
-                this.info = response.data;
-                this.courseId = response.data.courseId;
-                this.loadingData = false;
-              } else {
-                let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-                this.toastrService.error(msg);
-              }
-            }, (error: any) => {
-            });
+      .subscribe(
+        (response) => {
+          if (response && response.isSuccess) {
+            this.info = response.data;
+            this.courseId = response.data.courseId;
+            this.loadingData = false;
+          } else {
+            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+            this.toastrService.error(msg);
+          }
+        },
+        (error: any) => {},
+      );
   }
 
   getList() {
