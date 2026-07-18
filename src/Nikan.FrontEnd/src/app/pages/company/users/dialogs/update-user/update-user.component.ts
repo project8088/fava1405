@@ -50,7 +50,6 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getUserAccountInfo, { userId: this.userId })
       .pipe(
@@ -94,7 +93,7 @@ export class CompanyUpdateUserDialogComponent extends AppBase implements OnInit 
         CompanyId: this.companyId && this.companyId != '0' ? +this.companyId : null,
         UserId: this.userId,
         DisplayName: formValue.displayName,
-        // UserName: formValue.username,
+        UserName: formValue.userName,
         MobileNumber: formValue.mobileNumber,
         Email: formValue.emailAddress,
         UserAccountState: formValue.userAccountState,

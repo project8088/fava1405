@@ -80,7 +80,6 @@ export class AdminUpdateUserDialogComponent extends AppBase implements OnInit {
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getUserAccountInfo, { userId: this.userId })
       .pipe(

@@ -54,14 +54,14 @@
               <mat-error>حداکثر 2000 کاراکتر</mat-error>
             }
           </mat-form-field>
-          <!-- todo:chips -->
-          <!-- <mat-form-field class="col-sm-12">
-            <mat-chip-listbox #chipList aria-label="seoTags" formControlName="seoTags">
+          
+          <mat-form-field class="col-sm-12">
+            <mat-chip-grid #chipList aria-label="seoTags" formControlName="seoTags">
               @for (item of seoTags; track $index) {
-                <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
+                <mat-chip-row [removable]="true" (removed)="remove(item)">
                   {{ item }}
                   <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
+                </mat-chip-row>
               }
               <input
                 placeholder="تگ های سئو"
@@ -70,8 +70,8 @@
                 [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="add($event)"
               />
-            </mat-chip-listbox>
-          </mat-form-field> -->
+            </mat-chip-grid>
+          </mat-form-field>
           <p class="col-sm-12 text-info">
             شما می توانید آدرسی دلخواه را برای این صفحه وارد نمائید.
           </p>

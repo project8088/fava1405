@@ -212,4 +212,7 @@ export class CardAddOrUpadateQueueDialogComponent extends AppBase implements OnI
       Trigger.openPanel();
     }, 100);
   }
+  displayFn(item: any): string {
+    return item && item.text ? item.text : '';
+  }
 }

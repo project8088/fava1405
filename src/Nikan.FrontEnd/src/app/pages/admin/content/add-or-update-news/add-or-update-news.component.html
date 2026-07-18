@@ -54,14 +54,13 @@
               <mat-error>حداکثر 2000 کاراکتر</mat-error>
             }
           </mat-form-field>
-          <!-- todo:chips -->
-          <!-- <mat-form-field class="col-sm-12">
-            <mat-chip-listbox #chipList aria-label="seoTags" formControlName="seoTags">
+          <mat-form-field class="col-sm-12">
+            <mat-chip-grid #chipList aria-label="seoTags" formControlName="seoTags">
               @for (item of seoTags; track $index) {
-                <mat-chip [selectable]="true" [removable]="true" (removed)="remove(item)">
+                <mat-chip-row [removable]="true" (removed)="remove(item)">
                   {{ item }}
                   <mat-icon matChipRemove>cancel</mat-icon>
-                </mat-chip>
+                </mat-chip-row>
               }
               <input
                 placeholder="تگ های سئو"
@@ -70,8 +69,8 @@
                 [matChipInputAddOnBlur]="true"
                 (matChipInputTokenEnd)="add($event)"
               />
-            </mat-chip-listbox>
-          </mat-form-field> -->
+            </mat-chip-grid>
+          </mat-form-field>
           <mat-form-field class="col-sm-6 col-md-4">
             <mat-label>گروه </mat-label>
             <mat-select formControlName="newsGroupId" [compareWith]="compareFn">

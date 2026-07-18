@@ -40,7 +40,6 @@ export class CardUpdateCitizenMobileNumberDialogComponent extends AppBase implem
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
       .pipe(

@@ -40,7 +40,6 @@ export class AdminUpdateCitizenSabtStateDialogComponent extends AppBase implemen
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByAdmin, { userCode: this.userCode })
       .pipe(

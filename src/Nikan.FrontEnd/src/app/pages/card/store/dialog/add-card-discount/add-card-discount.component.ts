@@ -232,4 +232,7 @@ export class CardAddCardDiscountDialogComponent extends AppBase implements OnIni
       Trigger.openPanel();
     }, 100);
   }
+  displayFn(item: any): string {
+    return item && item.text ? item.text : '';
+  }
 }

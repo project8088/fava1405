@@ -40,7 +40,6 @@ export class CardUpdateCitizenSabtStateByCardDialogComponent extends AppBase imp
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByCard, { userCode: this.userCode })
       .pipe(

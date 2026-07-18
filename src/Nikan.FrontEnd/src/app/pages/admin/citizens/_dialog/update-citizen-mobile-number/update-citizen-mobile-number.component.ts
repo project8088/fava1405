@@ -40,7 +40,6 @@ export class AdminUpdateCitizenMobileNumberDialogComponent extends AppBase imple
 
   getUserInfo() {
     this.loading = true;
-    //todo
     this.dataService
       .get(ServerApis.getShortCitizenInfoByAdmin, { userCode: this.userCode })
       .pipe(

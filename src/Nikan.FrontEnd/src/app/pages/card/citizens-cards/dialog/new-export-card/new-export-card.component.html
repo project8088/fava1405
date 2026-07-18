@@ -79,17 +79,12 @@
       <div class="row">
         <mat-form-field class="col-sm-12">
           <mat-label> گروههای شهروندی</mat-label>
-          <!-- todo:chips -->
-          <!-- <mat-chip-listbox #skillChipList>
+          <mat-chip-grid #skillChipList>
             @for (item of selectedGroups; track $index) {
-              <mat-chip
-                [selectable]="true"
-                [removable]="true"
-                (removed)="removeAutoChip(selectedGroups, item)"
-              >
+              <mat-chip-row [removable]="true" (removed)="removeAutoChip(selectedGroups, item)">
                 {{ item.text }}
                 <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
+              </mat-chip-row>
             }
             <input
               matInput
@@ -99,7 +94,7 @@
               #skillInput
               #skillTrigger="matAutocompleteTrigger"
             />
-          </mat-chip-listbox>
+          </mat-chip-grid>
           <mat-autocomplete
             #autoSkills="matAutocomplete"
             [displayWith]="displayFn"
@@ -112,7 +107,7 @@
                 {{ option.text }}
               </mat-option>
             }
-          </mat-autocomplete> -->
+          </mat-autocomplete>
           @if (
             frm.get('groupIds')?.hasError('incorrect') || frm.get('groupIds')?.hasError('required')
           ) {

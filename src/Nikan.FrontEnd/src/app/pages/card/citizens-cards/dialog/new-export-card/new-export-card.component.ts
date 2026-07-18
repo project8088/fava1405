@@ -173,4 +173,7 @@ export class CardNewExportCardDialogComponent extends AppBase implements OnInit 
       Trigger.openPanel();
     }, 100);
   }
+  displayFn(item: any): string {
+    return item && item.text ? item.text : '';
+  }
 }

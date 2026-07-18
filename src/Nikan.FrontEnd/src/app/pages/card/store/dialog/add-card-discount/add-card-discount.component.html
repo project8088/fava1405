@@ -101,19 +101,14 @@
       <div class="row">
         <mat-form-field class="col-sm-12">
           <mat-label>گروههای تخفیف</mat-label>
-          <!--<mat-chip-listbox #skillChipList>
+          <mat-chip-grid #skillChipList>
             @for (item of selectedGroups; track $index) {
-              <mat-chip
-                [selectable]="true"
-                [removable]="true"
-                (removed)="removeAutoChip(selectedGroups, item)"
-              >
+              <mat-chip-row [removable]="true" (removed)="removeAutoChip(selectedGroups, item)">
                 {{ item.text }}
                 <mat-icon matChipRemove>cancel</mat-icon>
-              </mat-chip>
-            } -->
-          <!-- TODO:chips -->
-          <!-- <input
+              </mat-chip-row>
+            }
+            <input
               matInput
               formControlName="groups"
               [matAutocomplete]="autoSkills"
@@ -121,20 +116,20 @@
               #skillInput
               #skillTrigger="matAutocompleteTrigger"
             />
-          </mat-chip-listbox>
+          </mat-chip-grid>
           <mat-autocomplete
             #autoSkills="matAutocomplete"
             [displayWith]="displayFn"
             (optionSelected)="
               selectedAutoChip(selectedGroups, 'groups', skillInput, $event, skillTrigger)
             "
-          > 
+          >
             @for (option of filteredGroups | async; track option) {
               <mat-option [value]="option">
                 {{ option.text }}
               </mat-option>
             }
-          </mat-autocomplete>-->
+          </mat-autocomplete>
           @if (
             frm.get('groups')?.hasError('incorrect') || frm.get('groups')?.hasError('required')
           ) {

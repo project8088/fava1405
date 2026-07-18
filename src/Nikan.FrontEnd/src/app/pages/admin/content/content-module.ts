@@ -23,6 +23,7 @@ import { AdminPageListComponent } from './page-list/page-list.component';
 import { AdminAddOrUpdateSlideShowDialogComponent } from './slide-show-list/dialog/add-update-slide/add-update-slide.component';
 import { AdminSlideShowListComponent } from './slide-show-list/slide-show-list.component';
 import { ManageAttachmentDialogComponent } from './_dialogs/manage-attachment/manage-attachment.component';
+import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor.module';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ManageAttachmentDialogComponent } from './_dialogs/manage-attachment/ma
     SharedModule,
     FormsModule,
     ReactiveFormsModule,
+    HtmlEditorModule,
   ],
 })
 export class ContentModule {}
