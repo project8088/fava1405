@@ -31,7 +31,7 @@ export class AdminImportNationCodeGroupsExcelDialogComponent extends AppBase imp
   ngOnInit() {}
 
   attachmentId(ev: any) {
-    if (ev.importId) this.router.navigate(['/admin/citizen-in-group/' + ev.importId]);
+    if (ev.importId) this.router.navigate(['/admin/citizen/citizen-in-group/' + ev.importId]);
     this.matDialogRef.close();
   }
 

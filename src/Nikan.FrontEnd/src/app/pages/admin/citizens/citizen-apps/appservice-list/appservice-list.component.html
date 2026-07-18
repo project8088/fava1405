@@ -6,7 +6,7 @@
   <mat-card-header> </mat-card-header>
   <mat-card-content>
     <div class="d-flex align-items-center justify-content-end">
-      <button mat-raised-button color="default" routerLink="/admin/addupdate-appService/0">
+      <button mat-raised-button color="default" routerLink="/admin/citizen/addupdate-appService/0">
         <i class="fa fa-plus mr-2"></i>
         <span>اضافه کردن خدمت جدید</span>
       </button>
@@ -131,7 +131,7 @@
                 @if (row.serviceId != 0) {
                   <button
                     mat-menu-item
-                    routerLink="/admin/addupdate-appService/{{ row.serviceId }}"
+                    routerLink="/admin/citizen/addupdate-appService/{{ row.serviceId }}"
                   >
                     <i class="fa fa-eye mr-2"></i>
                     <span>ویرایش</span>

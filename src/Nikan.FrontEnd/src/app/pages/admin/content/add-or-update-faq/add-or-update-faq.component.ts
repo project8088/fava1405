@@ -150,7 +150,7 @@ export class AdminAddOrUpdateFaqComponent extends AppBase implements OnInit, Aft
         (response) => {
           if (response.isSuccess) {
             this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-            this.router.navigate(['/admin/faq-list']);
+            this.router.navigate(['/admin/content/faq-list']);
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
             this.toastrService.error(msg);

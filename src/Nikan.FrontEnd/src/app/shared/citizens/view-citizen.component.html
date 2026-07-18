@@ -2,7 +2,7 @@
   <span>مدیریت شهروند</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
-    <div class="bread-crumb-item" routerLink="/admin/search-citizen">شهروندان ها</div>
+    <div class="bread-crumb-item" routerLink="/admin/citizen/search-citizen">شهروندان ها</div>
     <div class="bread-crumb-item active">مدیریت شهروند</div>
   </div>
 </div>
@@ -108,19 +108,19 @@
         <ng-template matTabContent>
           <div class="p-3 d-flex">
             <div class="image-buttons">
-              <div class="img-btn" routerLink="/admin/edit-profile/{{ citizenId }}">
+              <div class="img-btn" routerLink="/admin/citizen/edit-profile/{{ citizenId }}">
                 <i class="fa fa-pencil"></i>
                 <span>ویرایش شهروند</span>
               </div>
             </div>
             <div class="image-buttons">
-              <div class="img-btn" routerLink="/admin/citizen-family-details/{{ citizenId }}">
+              <div class="img-btn" routerLink="/admin/citizen/citizen-family-details/{{ citizenId }}">
                 <i class="fa fa-money-bill"></i>
                 <span>خانواده شهروند</span>
               </div>
             </div>
             <div class="image-buttons">
-              <div class="img-btn" routerLink="/admin/manage-citizen-groups/{{ citizenId }}">
+              <div class="img-btn" routerLink="/admin/citizen/manage-citizen-groups/{{ citizenId }}">
                 <i class="fa fa-money-bill"></i>
                 <span>گروههای شهروند</span>
               </div>

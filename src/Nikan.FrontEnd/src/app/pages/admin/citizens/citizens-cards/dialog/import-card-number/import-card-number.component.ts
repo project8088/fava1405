@@ -31,7 +31,7 @@ export class AdminImportCardNumberDialogComponent extends AppBase implements OnI
   ngOnInit() {}
 
   attachmentId(ev: any) {
-    if (ev.importId) this.router.navigate(['/admin/export-details-citizen-card/' + ev.importId]);
+    if (ev.importId) this.router.navigate(['/admin/citizen/export-details-citizen-card/' + ev.importId]);
     this.matDialogRef.close();
   }
 }

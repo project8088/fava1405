@@ -103,7 +103,7 @@
           <ng-container matColumnDef="nationCode">
             <th mat-header-cell *matHeaderCellDef>کد ملی</th>
             <td mat-cell *matCellDef="let row">
-              <a target="_blank" href="/admin/show-citizen/{{ row.userCode }}">
+              <a target="_blank" href="/admin/citizen/show-citizen/{{ row.userCode }}">
                 {{ row.nationCode }}
               </a>
             </td>
@@ -149,15 +149,15 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item routerLink="/admin/edit-profile/{{ row.userCode }}">
+                <button mat-menu-item routerLink="/admin/citizen/edit-profile/{{ row.userCode }}">
                   <i class="fa fa-pencil mr-2"></i>
                   <span> ویرایش شهروند </span>
                 </button>
-                <button mat-menu-item routerLink="/admin/citizen-family-details/{{ row.userCode }}">
+                <button mat-menu-item routerLink="/admin/citizen/citizen-family-details/{{ row.userCode }}">
                   <i class="fa fa-money-bill mr-2"></i>
                   <span> خانواده شهروند </span>
                 </button>
-                <button mat-menu-item routerLink="/admin/manage-citizen-groups/{{ row.userCode }}">
+                <button mat-menu-item routerLink="/admin/citizen/manage-citizen-groups/{{ row.userCode }}">
                   <i class="fa fa-money-bill mr-2"></i>
                   <span> گروههای شهروند </span>
                 </button>

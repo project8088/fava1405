@@ -129,7 +129,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
-          this.router.navigate(['/admin/manager-users']);
+          this.router.navigate(['/admin/users/manager-users']);
         }
       });
   }
@@ -190,7 +190,7 @@ export class AdminAddOrUpdateManagerComponent extends AppBase implements OnInit,
       .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          this.router.navigate(['/admin/manager-users']);
+          this.router.navigate(['/admin/users/manager-users']);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);

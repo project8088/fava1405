@@ -51,7 +51,7 @@ export class AdminNewsCommentsComponent extends AppBase implements OnInit {
         this.getCommentList();
       } else {
         this.toastrService.error('خبر یافت نشد.');
-        this.router.navigate(['/admin/news-list']);
+        this.router.navigate(['/admin/content/news-list']);
       }
     });
   }

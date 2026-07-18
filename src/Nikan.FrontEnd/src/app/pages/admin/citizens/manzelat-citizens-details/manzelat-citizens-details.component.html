@@ -2,7 +2,7 @@
   <span>مدیریت طرح منزلت شهروند</span>
   <div class="bread-crumbs">
     <div class="bread-crumb-item" routerLink="/admin/dashboard">داشبورد</div>
-    <div class="bread-crumb-item" routerLink="/admin/search-manzelat-citizens">شهروندان ها</div>
+    <div class="bread-crumb-item" routerLink="/admin/citizen/search-manzelat-citizens">شهروندان ها</div>
     <div class="bread-crumb-item active">مدیریت طرح منزلت شهروند</div>
   </div>
 </div>
@@ -30,7 +30,7 @@
                 <a
                   class="text-info"
                   target="_blank"
-                  href="/admin/show-citizen/{{ citizen.userCode }}"
+                  href="/admin/citizen/show-citizen/{{ citizen.userCode }}"
                 >
                   {{ citizen.nationCode }}
                   <i class="fa fa-eye mr-2"></i>

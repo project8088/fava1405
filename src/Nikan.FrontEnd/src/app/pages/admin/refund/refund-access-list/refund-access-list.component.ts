@@ -148,7 +148,7 @@ export class AdminRefundAccessListComponent extends AppBase implements AfterView
       .subscribe((response) => {
         if (response && response.isSuccess) {
           this.toastrService.success(' استعلام شماه کارت باموفقیت صورت گرفت.');
-          this.router.navigate(['/admin/refund-access-details/' + item.id]);
+          this.router.navigate(['/admin/refund/refund-access-details/' + item.id]);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);

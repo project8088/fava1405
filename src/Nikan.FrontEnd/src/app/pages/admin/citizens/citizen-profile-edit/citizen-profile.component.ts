@@ -18,6 +18,6 @@ export class AdminCitizenProfileComponent extends AppBase implements OnInit {
   ngOnInit(): void {}
 
   back() {
-    this.router.navigate(['/admin/search-citizen']);
+    this.router.navigate(['/admin/citizen/search-citizen']);
   }
 }

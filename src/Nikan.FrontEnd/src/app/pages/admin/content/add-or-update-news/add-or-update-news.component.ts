@@ -168,7 +168,7 @@ export class AdminAddOrUpdateNewsComponent extends AppBase implements OnInit, Af
       .subscribe((response) => {
         if (response.isSuccess) {
           this.toastrService.success('اطلاعات با موفقیت ثبت شد.');
-          this.router.navigate(['/admin/news-list']);
+          this.router.navigate(['/admin/content/news-list']);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);

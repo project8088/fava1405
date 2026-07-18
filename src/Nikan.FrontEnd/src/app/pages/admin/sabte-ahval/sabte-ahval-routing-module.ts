@@ -6,7 +6,7 @@ import { AdminSabtAhvalListComponent } from './sabtAhval-list/sabtAhval-list.com
 
 const routes: Routes = [
   { path: '', component: AdminSabtAhvalListComponent },
-  { path: 'sabtAhval-citizens/:id', component: AdminSabtAhvalCitizensListComponent },
+  { path: 'citizens/:id', component: AdminSabtAhvalCitizensListComponent },
   { path: 'check-state-life-list/:id', component: AdminCheckStateLifeListComponent },
 ];
 

@@ -133,7 +133,7 @@ export class AdminCitizenCardExportSearchComponent extends AppBase implements Af
         item.loading = false;
         if (response && response.isSuccess) {
           this.toastrService.success('فایل زیپ تصاویر با موفقیت ایجاد شد.');
-          this.router.navigate(['/admin/export-details-citizen-card/' + item.id]);
+          this.router.navigate(['/admin/citizen/export-details-citizen-card/' + item.id]);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);

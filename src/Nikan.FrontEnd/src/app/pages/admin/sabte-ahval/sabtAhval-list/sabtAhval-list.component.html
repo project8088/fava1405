@@ -207,14 +207,14 @@
               }
               <mat-menu #menu="matMenu">
                 @if (row.exportType == 0) {
-                  <button mat-menu-item routerLink="/admin/sabtAhval-citizens/{{ row.id }}">
+                  <button mat-menu-item routerLink="/admin/sabte-ahval/citizens/{{ row.id }}">
                     <i class="fa fa-eye mr-2"></i>
                     <span>مشاهده جزئیات</span>
                   </button>
                 }
 
                 @if (row.exportType == 1) {
-                  <button mat-menu-item routerLink="/admin/check-state-life-list/{{ row.id }}">
+                  <button mat-menu-item routerLink="/admin/sabte-ahval/check-state-life-list/{{ row.id }}">
                     <i class="fa fa-eye mr-2"></i>
                     <span>مشاهده جزئیات</span>
                   </button>

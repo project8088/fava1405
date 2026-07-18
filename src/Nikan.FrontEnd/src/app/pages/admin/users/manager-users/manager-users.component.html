@@ -4,7 +4,7 @@
 
 <mat-card class="custom-card">
   <mat-card-header class="d-flex align-items-center justify-content-end">
-    <button mat-raised-button color="default" routerLink="/admin/addupdate-manager/0">
+    <button mat-raised-button color="default" routerLink="/admin/users/addupdate-manager/0">
       <i class="fa fa-plus mr-2"></i>
       <span>ثبت پرسنل جدید</span>
     </button>
@@ -210,7 +210,7 @@
                 <mat-icon>more_vert</mat-icon>
               </button>
               <mat-menu #menu="matMenu">
-                <button mat-menu-item routerLink="/admin/addupdate-manager/{{ row.id }}">
+                <button mat-menu-item routerLink="/admin/users/addupdate-manager/{{ row.id }}">
                   <i class="fa fa-edit mr-2"></i>
                   <span>ویرایش اطلاعات</span>
                 </button>

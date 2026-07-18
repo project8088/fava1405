@@ -130,7 +130,7 @@
           <ng-container matColumnDef="letterNumber">
             <th mat-header-cell *matHeaderCellDef>شماره نامه</th>
             <td mat-cell *matCellDef="let row">
-              <a routerLink="/admin/refund-access-details/{{ row.id }}">
+              <a routerLink="/admin/refund/refund-access-details/{{ row.id }}">
                 {{ row.letterNumber }}
               </a>
             </td>
@@ -222,7 +222,7 @@
                   دریافت شماره کارت
                 </button>
 
-                <button mat-menu-item routerLink="/admin/refund-access-details/{{ row.id }}">
+                <button mat-menu-item routerLink="/admin/refund/refund-access-details/{{ row.id }}">
                   <i class="fa fa-eye mr-2"></i>
                   مشاهده جزئیات
                 </button>
