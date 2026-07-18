@@ -5,8 +5,10 @@ export class BaseUrl {
   constructor() {
     let host = document.location.host;
     if (host.includes('localhost')) {
-      this.baseUrl = 'https://profile.isfahan.ir/';
-      this.mainApi = 'https://profile.isfahan.ir/api/';
+      this.baseUrl = 'https://localhost:44381';
+      this.mainApi = 'https://localhost:44381/api/';
+      // this.baseUrl = 'https://profile.isfahan.ir/';
+      // this.mainApi = 'https://profile.isfahan.ir/api/';
     }
   }
 }

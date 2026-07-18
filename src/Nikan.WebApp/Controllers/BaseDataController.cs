@@ -426,7 +426,7 @@ namespace Nikan.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("GetCurrentDate")]
         public ApiResult<string> GetCurrentDate()
         {
             var current = DateTime.Now;
@@ -441,7 +441,7 @@ namespace Nikan.Controllers.Api
         /// </summary>
         /// <returns></returns>
         [AllowAnonymous]
-        [HttpGet]
+        [HttpGet("GetCurrentTime")]
         public ApiResult<string> GetCurrentTime()
         {
             var currentTime = DateTime.Now.ToString("HH:mm");

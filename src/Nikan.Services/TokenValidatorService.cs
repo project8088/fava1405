@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Nikan.Common;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Nikan.Services
 {
@@ -56,8 +57,8 @@ namespace Nikan.Services
                 context.Fail("This token is expired. Please login again.");
             }
 
-            if (!(context.SecurityToken is JwtSecurityToken accessToken) || string.IsNullOrWhiteSpace(accessToken.RawData) ||
-                !await _tokenStoreService.IsValidTokenAsync(accessToken.RawData, userId))
+            if (!(context.SecurityToken is JsonWebToken accessToken) || string.IsNullOrWhiteSpace(accessToken.EncodedToken) ||
+                !await _tokenStoreService.IsValidTokenAsync(accessToken.EncodedToken, userId))
             {
                 context.Fail("This token is not in our database.");
                 return;

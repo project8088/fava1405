@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.10.35004.147
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11801.241
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}"
 EndProject
@@ -18,27 +18,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nikan.IoCConfig", "src\Nikan.IoCConfig\Nikan.IoCConfig.csproj", "{9C3184B8-F3AC-4ED9-A352-C861AF264461}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nikan.ViewModel", "src\Nikan.ViewModel\Nikan.ViewModel.csproj", "{83BE1CF6-7332-40C5-BF46-024A079FDAFB}"
-EndProject
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Nikan.Angular", "src\Nikan.Angular\", "{AE3A1CB6-87BF-43FC-B470-BBC32960896E}"
-	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
-		Debug.AspNetCompiler.VirtualPath = "/localhost_59754"
-		Debug.AspNetCompiler.PhysicalPath = "src\Nikan.Angular\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59754\"
-		Debug.AspNetCompiler.Updateable = "true"
-		Debug.AspNetCompiler.ForceOverwrite = "true"
-		Debug.AspNetCompiler.FixedNames = "false"
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/localhost_59754"
-		Release.AspNetCompiler.PhysicalPath = "src\Nikan.Angular\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_59754\"
-		Release.AspNetCompiler.Updateable = "true"
-		Release.AspNetCompiler.ForceOverwrite = "true"
-		Release.AspNetCompiler.FixedNames = "false"
-		Release.AspNetCompiler.Debug = "False"
-		VWDPort = "59754"
-		SlnRelativePath = "src\Nikan.Angular\"
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Nikan.MellatApp", "src\Nikan.MellatApp\Nikan.MellatApp.csproj", "{7A0698FB-7994-47AE-972A-8A4341BE2963}"
 EndProject
@@ -136,17 +115,6 @@ Global
 		{83BE1CF6-7332-40C5-BF46-024A079FDAFB}.Release|x64.Build.0 = Release|Any CPU
 		{83BE1CF6-7332-40C5-BF46-024A079FDAFB}.Release|x86.ActiveCfg = Release|Any CPU
 		{83BE1CF6-7332-40C5-BF46-024A079FDAFB}.Release|x86.Build.0 = Release|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Debug|x64.Build.0 = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Debug|x86.Build.0 = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|Any CPU.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|Any CPU.Build.0 = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|x64.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|x64.Build.0 = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|x86.ActiveCfg = Debug|Any CPU
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E}.Release|x86.Build.0 = Debug|Any CPU
 		{7A0698FB-7994-47AE-972A-8A4341BE2963}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A0698FB-7994-47AE-972A-8A4341BE2963}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A0698FB-7994-47AE-972A-8A4341BE2963}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -171,7 +139,6 @@ Global
 		{34E2F813-5901-4069-9515-BFEB39DE3222} = {EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}
 		{9C3184B8-F3AC-4ED9-A352-C861AF264461} = {EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}
 		{83BE1CF6-7332-40C5-BF46-024A079FDAFB} = {EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}
-		{AE3A1CB6-87BF-43FC-B470-BBC32960896E} = {EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}
 		{7A0698FB-7994-47AE-972A-8A4341BE2963} = {EB31F3BE-2CB7-4C42-8E35-FF97075ECB4E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution

@@ -1,10 +1,10 @@
-using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using Nikan.DataLayer.Context;
-using Nikan.DomainClasses;
-using Nikan.Services;
+using cle.Services;
+using cle.Services.BaseEntity; 
+using cle.Services.Citizens;
+using cle.Services.CitizensGroups;
+using cle.Services.Faq;
+ 
+using cle.Services.UserCompanyServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,28 +12,29 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
- 
-using cle.Services.UserCompanyServices;
-using cle.Services;
-using cle.Services.Faq;
-using cle.Services.BaseEntity; 
+using Nikan.DataLayer.Context;
+using Nikan.DomainClasses;
+using Nikan.Services;
  
 using Nikan.Services.BaseEntity;
+using Nikan.Services.CitizenCards;
  
 using Nikan.Services.Citizens;
-using cle.Services.Citizens;
-using Nikan.Services.SlidShow;
-using Nikan.Services.CitizenCards;
-using cle.Services.CitizensGroups;
+using Nikan.Services.Events;
+using Nikan.Services.ExportCitizen;
+using Nikan.Services.ImportFile;
  
 using Nikan.Services.Permissions;
-using Nikan.Services.ImportFile;
-using Nikan.Services.UserDocuments;
-using Nikan.Services.ExportCitizen;
-using Nikan.Services.Events;
-using Nikan.Services.Refund;
 using Nikan.Services.RateLimiter;
+using Nikan.Services.Refund;
+using Nikan.Services.SlidShow;
+using Nikan.Services.UserDocuments;
+using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Nikan.IoCConfig
 {
@@ -54,7 +55,7 @@ namespace Nikan.IoCConfig
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder
-                        .WithOrigins("http://localhost:9600") //Note:  The URL must be specified without a trailing slash (/).
+                        .WithOrigins(["http://localhost:8989", "http://localhost:9600"]) //Note:  The URL must be specified without a trailing slash (/).
                         .AllowAnyMethod()
                         .AllowAnyHeader()
                         

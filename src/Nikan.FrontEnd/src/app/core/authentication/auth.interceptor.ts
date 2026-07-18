@@ -37,13 +37,13 @@ export class AuthInterceptor implements HttpInterceptor {
       req.url.toLowerCase().includes('login') ||
       req.url.toLowerCase().includes('refreshtoken') ||
       req.url.toLowerCase().includes('logout')
-    )
+    ) {
       return next.handle(req).pipe(
         catchError((error) => {
           return this.handleError(req, next, error);
         }),
       );
-
+    }
     return next.handle(this.addToken(req, accessToken)).pipe(
       catchError((error) => {
         return this.handleErrorWithToken(req, next, error);
@@ -179,13 +179,13 @@ export class AuthInterceptor implements HttpInterceptor {
       // If we get a 400 and the error message is 'invalid_grant', the token is no longer valid so logout.
       return this.logoutUser();
     }
-    return throwError(error);
+    return throwError(() => error);
   }
 
   logoutUser() {
     // Route to the login page (implementation up to you)
     this.authService.logout(false);
     this.router.navigate(['/account/login']);
-    return throwError('');
+    return throwError(() => '');
   }
 }

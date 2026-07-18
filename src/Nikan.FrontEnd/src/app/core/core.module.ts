@@ -1,5 +1,4 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { OnlyDecimalDirective, OnlyNumberDirective } from './directive/numbers-only';
 
@@ -44,12 +43,7 @@ import { ExportToExcelDirective } from './directive/export-to-excel.directive';
     ExportToExcelDirective,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
-  providers: [
-    CustomFormValidators,
-    CustomModelValidators,
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-  ],
+  providers: [CustomFormValidators, CustomModelValidators],
   exports: [
     LuxonFormatPipe,
     LuxonFromNowPipe,

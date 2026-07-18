@@ -44,7 +44,9 @@ export class AuthService {
 
     return this.http.post<ApiResult<any>>(ServerApis.login, credentials, httpOptions).pipe(
       map((resp) => {
-        if (resp.isSuccess) this.storeToken(resp.data.access_token, resp.data.refresh_token);
+        if (resp.isSuccess) {
+          this.storeToken(resp.data.access_token, resp.data.refresh_token);
+        }
         this.storePermissions(resp.data.permissions);
         return resp;
       }),
