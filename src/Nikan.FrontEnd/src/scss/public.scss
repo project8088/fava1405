@@ -8,18 +8,18 @@
 
 $default-color: #039ac2;
 
-.mat-datepicker-toggle-default-icon {
+.mat-mdc-datepicker-toggle-default-icon {
   font-size: 20px;
 }
 
 /*header of wizard*/
 
-.mat-stepper-horizontal {
+.mat-mdc-stepper-horizontal {
   padding-top: 2px;
 }
 
-.mat-horizontal-stepper-header-container {
-  background: #ebebeb;
+.mat-mdc-horizontal-stepper-header-container {
+  background: #ebebeb !important;
   border: 1px #a19f9f solid;
   position: relative;
   border-radius: 5px;
@@ -28,28 +28,28 @@ $default-color: #039ac2;
   margin: 3px 3px 30px 3px;
 }
 
-.mat-stepper-horizontal-line {
-  border-color: transparent;
+.mat-mdc-stepper-horizontal-line {
+  border-color: transparent !important;
   flex: unset !important;
 }
 
-.mat-step-header[aria-selected="true"] {
-  background-color: #16518d;
+.mat-mdc-step-header[aria-selected='true'] {
+  background-color: #16518d !important;
   overflow: visible;
 }
 
-.mat-step-header .mat-step-icon-selected {
-  background-color: #ffffff;
-  color: #16518d;
+.mat-mdc-step-header .mat-mdc-step-icon-selected {
+  background-color: #ffffff !important;
+  color: #16518d !important;
   font-weight: bold;
 }
 
-.mat-step-header[aria-selected="true"] .mat-step-label.mat-step-label-active {
-  color: #fff;
+.mat-mdc-step-header[aria-selected='true'] .mat-mdc-step-label.mat-mdc-step-label-active {
+  color: #fff !important;
 }
 
-.mat-step-header:after {
-  content: " ";
+.mat-mdc-step-header:after {
+  content: ' ';
   position: absolute;
   left: 10px;
   z-index: 0;
@@ -61,8 +61,8 @@ $default-color: #039ac2;
   border-top: none;
 }
 
-.mat-step-header[aria-selected="true"]:after {
-  content: " ";
+.mat-mdc-step-header[aria-selected='true']:after {
+  content: ' ';
   position: absolute;
   left: -36px;
   z-index: 0;
@@ -72,8 +72,8 @@ $default-color: #039ac2;
   transform: none;
 }
 
-.mat-step-header[aria-selected="true"]:before {
-  content: " ";
+.mat-mdc-step-header[aria-selected='true']:before {
+  content: ' ';
   border: 36px #16518d solid;
   position: absolute;
   border-right-color: transparent;
@@ -81,8 +81,8 @@ $default-color: #039ac2;
 }
 
 /* end of header of wizard*/
-.mat-tooltip {
-  background: #2b2e35;
+.mat-mdc-tooltip {
+  background: #2b2e35 !important;
   color: #fff !important;
   padding: 0px 5px !important;
   border: 1px #fff solid;
@@ -99,154 +99,154 @@ $default-color: #039ac2;
 /*
   colors
 */
-.mat-raised-button.mat-green {
-  background-color: #03c270;
-  color: #fff;
+.mat-mdc-raised-button.mat-green {
+  background-color: #03c270 !important;
+  color: #fff !important;
 }
 
-.mat-raised-button.mat-default,
-.mat-fab.mat-default,
-.mat-mini-fab.mat-default,
-.mat-icon-button.mat-default {
-  background-color: $default-color;
-  color: #fff;
+.mat-mdc-raised-button.mat-default,
+.mat-mdc-fab.mat-default,
+.mat-mdc-mini-fab.mat-default,
+.mat-mdc-icon-button.mat-default {
+  background-color: $default-color !important;
+  color: #fff !important;
 }
 
-.mat-stroked-button.mat-default {
-  color: $default-color;
-  border-color: $default-color;
+.mat-mdc-stroked-button.mat-default {
+  color: $default-color !important;
+  border-color: $default-color !important;
 }
 
-.mat-progress-spinner.mat-default circle,
-.mat-spinner.mat-default circle {
-  stroke: $default-color;
+.mat-mdc-progress-spinner.mat-default circle,
+.mat-mdc-spinner.mat-default circle {
+  stroke: $default-color !important;
 }
 
-.mat-accent .mat-pseudo-checkbox-checked,
-.mat-accent .mat-pseudo-checkbox-indeterminate,
-.mat-pseudo-checkbox-checked,
-.mat-pseudo-checkbox-indeterminate {
-  background: $default-color;
+.mat-accent .mat-mdc-pseudo-checkbox-checked,
+.mat-accent .mat-mdc-pseudo-checkbox-indeterminate,
+.mat-mdc-pseudo-checkbox-checked,
+.mat-mdc-pseudo-checkbox-indeterminate {
+  background: $default-color !important;
 }
 
 /**radio button***/
 
-.mat-radio-button .mat-radio-inner-circle {
+.mat-mdc-radio-button .mat-mdc-radio-inner-circle {
   background-color: $default-color !important;
 }
 
-.mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+.mat-mdc-radio-button.mat-accent.mat-mdc-radio-checked .mat-mdc-radio-outer-circle {
   border-color: $default-color !important;
 }
 
-.mat-checkbox.mat-default {
-  .mat-checkbox-frame {
-    border-color: $default-color;
+.mat-mdc-checkbox.mat-default {
+  .mat-mdc-checkbox-frame {
+    border-color: $default-color !important;
   }
 
-  .mat-checkbox-checkmark {
-    fill: $default-color;
+  .mat-mdc-checkbox-checkmark {
+    fill: $default-color !important;
   }
 
-  .mat-checkbox-checkmark-path {
+  .mat-mdc-checkbox-checkmark-path {
     stroke: $default-color !important;
   }
 }
 
-.mat-checkbox-disabled:not(.mat-checkbox-checked) .mat-checkbox-frame {
-  border-color: #b0b0b0;
+.mat-mdc-checkbox-disabled:not(.mat-mdc-checkbox-checked) .mat-mdc-checkbox-frame {
+  border-color: #b0b0b0 !important;
 }
 
-.mat-checkbox-label {
+.mat-mdc-checkbox-label {
   white-space: initial;
 }
 
-.mat-tab-group.mat-primary .mat-ink-bar,
-.mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: $default-color;
+.mat-mdc-tab-group.mat-primary .mat-ink-bar,
+.mat-mdc-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $default-color !important;
 }
 
 /*چک باکس سفید*/
-.mat-checkbox.mat-white {
-  .mat-checkbox-frame {
-    border-color: #fff;
+.mat-mdc-checkbox.mat-white {
+  .mat-mdc-checkbox-frame {
+    border-color: #fff !important;
   }
 }
 
-.mat-form-field.mat-white {
-  .mat-input-element {
-    color: #fff;
+.mat-mdc-form-field.mat-white {
+  .mat-mdc-input-element {
+    color: #fff !important;
   }
 
-  .mat-form-field-label {
-    color: rgba(255, 255, 255, 0.54);
+  .mat-mdc-form-field-label {
+    color: rgba(255, 255, 255, 0.54) !important;
   }
 
-  .mat-form-field-underline {
-    background-color: rgba(255, 255, 255, 0.42);
+  .mat-mdc-form-field-underline {
+    background-color: rgba(255, 255, 255, 0.42) !important;
   }
 
-  .mat-hint {
-    color: rgba(255, 255, 255, 0.54);
+  .mat-mdc-hint {
+    color: rgba(255, 255, 255, 0.54) !important;
   }
 
-  .mat-select-value,
-  .mat-select-arrow {
-    color: #fff;
+  .mat-mdc-select-value,
+  .mat-mdc-select-arrow {
+    color: #fff !important;
   }
 }
 
 /*اسلایدر سفید*/
 
-.mat-slider.white {
-  .mat-slider-track-background {
-    background-color: rgb(255, 255, 255);
+.mat-mdc-slider.white {
+  .mat-mdc-slider-track-background {
+    background-color: rgb(255, 255, 255) !important;
   }
 
-  .mat-slider-thumb {
-    background-color: rgba(255, 255, 255, 0.87);
+  .mat-mdc-slider-thumb {
+    background-color: rgba(255, 255, 255, 0.87) !important;
   }
 
-  .mat-slider-thumb,
-  .mat-slider-track-fill {
-    background-color: #00ffd0;
+  .mat-mdc-slider-thumb,
+  .mat-mdc-slider-track-fill {
+    background-color: #00ffd0 !important;
   }
 
-  .mat-slider-thumb-label {
-    background-color: #fff;
+  .mat-mdc-slider-thumb-label {
+    background-color: #fff !important;
   }
 
-  .mat-slider-thumb-label-text {
-    color: #000;
+  .mat-mdc-slider-thumb-label-text {
+    color: #000 !important;
   }
 }
 
-::ng-deep .mat-focused .mat-form-field-label {
+::ng-deep .mat-mdc-focused .mat-mdc-form-field-label {
   /*change color of label*/
   color: green !important;
 }
 
-::ng-deep.mat-form-field-underline {
+::ng-deep.mat-mdc-form-field-underline {
   /*change color of underline*/
   background-color: green !important;
 }
 
-::ng-deep.mat-form-field-ripple {
+::ng-deep.mat-mdc-form-field-ripple {
   /*change color of underline when focused*/
   background-color: green !important;
 }
 
 /**طلایی **/
 
-.mat-button.mat-gold,
-.mat-icon-button.mat-gold,
-.mat-stroked-button.mat-gold {
-  color: #ffa500;
+.mat-mdc-button.mat-gold,
+.mat-mdc-icon-button.mat-gold,
+.mat-mdc-stroked-button.mat-gold {
+  color: #ffa500 !important;
 }
 
-.mat-stroked-button.mat-white {
-  color: #fff;
-  border-color: #fff;
+.mat-mdc-stroked-button.mat-white {
+  color: #fff !important;
+  border-color: #fff !important;
 }
 
 /*
@@ -264,9 +264,9 @@ $default-color: #039ac2;
   line-height: 1.5 !important;
 }
 
-.mat-button,
-.mat-raised-button,
-.mat-stroked-button {
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-stroked-button {
   display: flex;
 
   mat-spinner {
@@ -299,7 +299,7 @@ $default-color: #039ac2;
     font-size: 18px;
     position: absolute;
     top: -12px;
-    background: #fff;
+    background: #fff !important;
     padding: 0 15px;
   }
 }
@@ -318,7 +318,7 @@ $default-color: #039ac2;
 }
 
 @media (max-width: 480px) {
-  .mat-step-label {
+  .mat-mdc-step-label {
     display: none !important;
   }
 }
@@ -326,7 +326,7 @@ $default-color: #039ac2;
 /*-----------------------------*/
 
 app-side-nav-menu {
-  background: #222d32;
+  background: #222d32 !important;
 }
 
 .custom-alert {
@@ -334,7 +334,7 @@ app-side-nav-menu {
   border: 1px #039ac2 solid;
   margin: 0 0 29px;
   border-radius: 5px;
-  background: #aaedff;
+  background: #aaedff !important;
   font-weight: bold;
 }
 
@@ -353,7 +353,7 @@ app-side-nav-menu {
   margin: 20px 0 !important;
 
   .field-set-title {
-    background: #fff;
+    background: #fff !important;
     position: absolute;
     top: -15px;
     right: 15px;
@@ -404,111 +404,110 @@ pre {
   max-width: 32px;
   max-height: 32px;
 }
-
 /*+++++++++++++++++++++++theme++++++++++++++++++++++++++++*/
 body.sunset {
-  .mat-raised-button.mat-default,
-  .mat-fab.mat-default,
-  .mat-mini-fab.mat-default,
-  .mat-icon-button.mat-default {
-    background-color: var(--sunset);
-    color: #fff;
-  }
-
-  .mat-stroked-button.mat-default {
-    color: var(--sunset);
-    border-color: var(--sunset);
-  }
-
-  .mat-progress-spinner.mat-default circle,
-  .mat-spinner.mat-default circle {
-    stroke: var(--sunset);
-  }
-
-  .mat-accent .mat-pseudo-checkbox-checked,
-  .mat-accent .mat-pseudo-checkbox-indeterminate,
-  .mat-pseudo-checkbox-checked,
-  .mat-pseudo-checkbox-indeterminate {
-    background: var(--sunset);
-  }
-  /**radio button***/
-  .mat-radio-button .mat-radio-inner-circle {
+  .mat-mdc-raised-button.mat-default,
+  .mat-mdc-fab.mat-default,
+  .mat-mdc-mini-fab.mat-default,
+  .mat-mdc-icon-button.mat-default {
     background-color: var(--sunset) !important;
+    color: #fff !important;
   }
 
-  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  .mat-mdc-stroked-button.mat-default {
+    color: var(--sunset) !important;
     border-color: var(--sunset) !important;
   }
 
-  .mat-tab-group.mat-primary .mat-ink-bar,
-  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  .mat-mdc-progress-spinner.mat-default circle,
+  .mat-mdc-spinner.mat-default circle {
+    stroke: var(--sunset) !important;
+  }
+
+  .mat-accent .mat-mdc-pseudo-checkbox-checked,
+  .mat-accent .mat-mdc-pseudo-checkbox-indeterminate,
+  .mat-mdc-pseudo-checkbox-checked,
+  .mat-mdc-pseudo-checkbox-indeterminate {
+    background: var(--sunset) !important;
+  }
+  /**radio button***/
+  .mat-mdc-radio-button .mat-mdc-radio-inner-circle {
     background-color: var(--sunset) !important;
   }
 
-  .mat-checkbox.mat-default {
-    .mat-checkbox-frame {
-      border-color: var(--sunset);
+  .mat-mdc-radio-button.mat-accent.mat-mdc-radio-checked .mat-mdc-radio-outer-circle {
+    border-color: var(--sunset) !important;
+  }
+
+  .mat-mdc-tab-group.mat-primary .mat-ink-bar,
+  .mat-mdc-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: var(--sunset) !important;
+  }
+
+  .mat-mdc-checkbox.mat-default {
+    .mat-mdc-checkbox-frame {
+      border-color: var(--sunset) !important;
     }
 
-    .mat-checkbox-checkmark {
-      fill: var(--sunset);
+    .mat-mdc-checkbox-checkmark {
+      fill: var(--sunset) !important;
     }
 
-    .mat-checkbox-checkmark-path {
+    .mat-mdc-checkbox-checkmark-path {
       stroke: var(--sunset) !important;
     }
   }
 }
 
 body.purple-love {
-  .mat-raised-button.mat-default,
-  .mat-fab.mat-default,
-  .mat-mini-fab.mat-default,
-  .mat-icon-button.mat-default {
-    background-color: var(--purple-love);
-    color: #fff;
-  }
-
-  .mat-stroked-button.mat-default {
-    color: var(--purple-love);
-    border-color: var(--purple-love);
-  }
-
-  .mat-progress-spinner.mat-default circle,
-  .mat-spinner.mat-default circle {
-    stroke: var(--purple-love);
-  }
-
-  .mat-accent .mat-pseudo-checkbox-checked,
-  .mat-accent .mat-pseudo-checkbox-indeterminate,
-  .mat-pseudo-checkbox-checked,
-  .mat-pseudo-checkbox-indeterminate {
-    background: var(--purple-love);
-  }
-  /**radio button***/
-  .mat-radio-button .mat-radio-inner-circle {
+  .mat-mdc-raised-button.mat-default,
+  .mat-mdc-fab.mat-default,
+  .mat-mdc-mini-fab.mat-default,
+  .mat-mdc-icon-button.mat-default {
     background-color: var(--purple-love) !important;
+    color: #fff !important;
   }
 
-  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+  .mat-mdc-stroked-button.mat-default {
+    color: var(--purple-love) !important;
     border-color: var(--purple-love) !important;
   }
 
-  .mat-tab-group.mat-primary .mat-ink-bar,
-  .mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  .mat-mdc-progress-spinner.mat-default circle,
+  .mat-mdc-spinner.mat-default circle {
+    stroke: var(--purple-love) !important;
+  }
+
+  .mat-accent .mat-mdc-pseudo-checkbox-checked,
+  .mat-accent .mat-mdc-pseudo-checkbox-indeterminate,
+  .mat-mdc-pseudo-checkbox-checked,
+  .mat-mdc-pseudo-checkbox-indeterminate {
+    background: var(--purple-love) !important;
+  }
+  /**radio button***/
+  .mat-mdc-radio-button .mat-mdc-radio-inner-circle {
     background-color: var(--purple-love) !important;
   }
 
-  .mat-checkbox.mat-default {
-    .mat-checkbox-frame {
-      border-color: var(--purple-love);
+  .mat-mdc-radio-button.mat-accent.mat-mdc-radio-checked .mat-mdc-radio-outer-circle {
+    border-color: var(--purple-love) !important;
+  }
+
+  .mat-mdc-tab-group.mat-primary .mat-ink-bar,
+  .mat-mdc-tab-nav-bar.mat-primary .mat-ink-bar {
+    background-color: var(--purple-love) !important;
+  }
+
+  .mat-mdc-checkbox.mat-default {
+    .mat-mdc-checkbox-frame {
+      border-color: var(--purple-love) !important;
     }
 
-    .mat-checkbox-checkmark {
-      fill: var(--purple-love);
+    .mat-mdc-checkbox-checkmark {
+      fill: var(--purple-love) !important;
     }
 
-    .mat-checkbox-checkmark-path {
+    .mat-mdc-checkbox-checkmark-path {
       stroke: var(--purple-love) !important;
     }
   }
@@ -555,7 +554,6 @@ body.purple-love {
 .font-7 {
   font-size: 1.7rem;
 }
-
 
 .text-overflow-ellipsis {
   text-overflow: ellipsis;

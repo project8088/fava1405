@@ -25,7 +25,7 @@ const routes: Routes = [
       { path: 'sms-list', component: AdminSmsListComponent },
 
       {
-        path: 'user',
+        path: 'users',
         loadChildren: () => import('./users/users-module').then((m) => m.UsersModule),
       },
       {

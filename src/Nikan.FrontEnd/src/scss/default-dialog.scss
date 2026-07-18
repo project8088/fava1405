@@ -2,11 +2,11 @@
   /* min-width: 480px; */
 }
 
-.custom-dialog .mat-dialog-container {
+.custom-dialog .mat-mdc-dialog-container {
   padding: 0;
 }
 
-.custom-dialog .mat-dialog-title {
+.custom-dialog .mat-mdc-dialog-title {
   background: #3c8dbc;
   padding: 0;
   margin: 0;
@@ -16,7 +16,7 @@
   display: flex;
 }
 
-.custom-dialog .mat-dialog-title .title {
+.custom-dialog .mat-mdc-dialog-title .title {
   flex: auto;
   height: inherit;
   margin: 0;
@@ -26,13 +26,13 @@
   color:#fff;
 }
 
-.custom-dialog .mat-dialog-content {
+.custom-dialog .mat-mdc-dialog-content {
   margin: 0px;
-  padding: 20px 20px 50px;
+  padding: 20px 20px 50px !important;
   font: inherit;
 }
 
-.custom-dialog .mat-dialog-actions {
+.custom-dialog .mat-mdc-dialog-actions {
   margin: 0px;
   padding: 0px 15px;
   background: #f1efef;
@@ -41,7 +41,7 @@
 }
 
 
-/*.mat-raised-button {
+/*.mat-mdc-raised-button {
     &[disabled] {
       background-color: #d7d7d7;
       color: #000000;
@@ -55,7 +55,7 @@
   font-size: 24px;
 }
 
-.orange-dialog .mat-dialog-container {
+.orange-dialog .mat-mdc-dialog-container {
   background: #f68124;
   color: #fff;
 }
@@ -68,13 +68,13 @@
 /*+++++++++++++++theme+++++++++++++++*/
 
 body.sunset {
-  .custom-dialog .mat-dialog-title {
+  .custom-dialog .mat-mdc-dialog-title {
     background: var(--sunset);
   }
 }
 
 body.purple-love {
-  .custom-dialog .mat-dialog-title {
+  .custom-dialog .mat-mdc-dialog-title {
     background: var(--purple-love);
   }
 }

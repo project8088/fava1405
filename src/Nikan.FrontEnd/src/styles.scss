@@ -4,11 +4,15 @@
 @use '../public/fonts.css';
 @use './scss/list.scss';
 
-
 //theme
 @use '../public/theme/Style.css';
 @use '../public/theme/animate.css';
 @use '../public/theme/sina-nav.min.css';
+
+@use './scss//public.scss';
+@use './scss/kartable.scss';
+@use './scss/data-table.scss';
+@use './scss/default-dialog.scss';
 
 @use './scss/print.scss';
 
@@ -26,6 +30,7 @@ html {
   --mat-sys-corner-large: 0px !important;
   --mat-button-protected-container-height: 40px !important;
   --mat-sys-corner-full: 10px !important;
+  --mat-sys-corner-extra-large: 5px !important;
   @include mat.theme(
     (
       color: (
@@ -135,7 +140,8 @@ a {
     -webkit-text-fill-color: rgb(255, 255, 255) !important;
   }
 }
-.mdc-button__label:has(mat-spinner),button:has(mat-spinner){
+.mdc-button__label:has(mat-spinner),
+button:has(mat-spinner) {
   display: flex;
   gap: 10px;
 }

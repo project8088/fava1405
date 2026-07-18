@@ -277,7 +277,7 @@
   </mat-card-content>
   <mat-card-footer class="p-3 d-flex justify-content-end">
     @if (!loading) {
-      <button mat-raised-button color="primary" [disabled]="isSaving" (click)="saveForm()">
+      <button mat-raised-button color="default" [disabled]="isSaving" (click)="saveForm()">
         <span>ذخیره </span>
         <mat-spinner diameter="20" color="default" [hidden]="!isSaving"></mat-spinner>
       </button>

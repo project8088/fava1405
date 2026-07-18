@@ -39,7 +39,7 @@
           <div class="row justify-content-end text-right mt-2">
             <button
               mat-raised-button
-              color="primary"
+              color="default"
               (click)="checkNationCode(stepper)"
               [disabled]="isSaving"
             >
@@ -52,7 +52,7 @@
           <mat-step [stepControl]="familyForm" label="ثبت اطلاعات عضو خانواده">
             <ng-template [ngTemplateOutlet]="familyDetailForm"></ng-template>
             <div class="text-right mt-2">
-              <button mat-raised-button color="primary" (click)="saveFamilyDetails()">
+              <button mat-raised-button color="default" (click)="saveFamilyDetails()">
                 ثبت عضو خانواده
               </button>
             </div>
@@ -99,7 +99,7 @@
               <div class="text-right mt-2">
                 <button
                   mat-raised-button
-                  color="primary"
+                  color="default"
                   [disabled]="isSaving"
                   (click)="registerFamily(stepper)"
                 >
@@ -133,7 +133,7 @@
       <button mat-raised-button mat-dialog-close>انصراف</button>
       @if (!loading) {
         <div class="text-right mx-2">
-          <button mat-raised-button color="primary" (click)="saveFamilyDetails()">ذخیره</button>
+          <button mat-raised-button color="default" (click)="saveFamilyDetails()">ذخیره</button>
         </div>
       }
     </mat-dialog-actions>

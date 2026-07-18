@@ -49,6 +49,7 @@ export class AdminCitizensFamilyComponent extends AppBase implements AfterViewIn
       toDate: [null],
       groupId: [null],
       familyRelation: [null],
+      acceptRelative: [null],
       name: [''],
       nationCode: [''],
     });
