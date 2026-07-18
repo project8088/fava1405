@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { BankCallBackComponent } from './bank-call-back/bank-call-back.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
-import { NotFoundComponent } from './error/not-found/not-found.component';
 import { FaqListComponent } from './faq/faq-list.component';
 import { IndexComponent } from './index/index.component';
 import { MainPageDetailsComponent } from './page-details/page-details.component';
@@ -17,15 +16,10 @@ const routes: Routes = [
     children: [
       { path: '', component: IndexComponent },
       { path: 'contact-us', component: ContactUsComponent },
-
-      { path: '404', component: NotFoundComponent },
-
       { path: 'page/:slug', component: MainPageDetailsComponent },
-
       { path: 'faq', component: FaqListComponent },
       { path: 'ticket', component: TicketComponent },
       { path: 'ticket-answer', component: TicketAnswerComponent },
-
       {
         path: 'bankcallback',
         component: BankCallBackComponent,

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { AppBase } from '@app/app.base';
 
 @Component({
   selector: 'app-not-found',
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.scss'],
-  standalone: false,
+  imports: [RouterLink],
 })
 export class NotFoundComponent extends AppBase implements OnInit {
   constructor() {

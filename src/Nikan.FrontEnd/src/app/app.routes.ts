@@ -57,9 +57,12 @@ export const routes: Routes = [
     loadChildren: () => import('./ticket/ticket-module').then((m) => m.TicketModule),
   },
 
-  { path: '**', redirectTo: '/home/404' },
   {
     path: 'user/account',
     loadChildren: () => import('./account/account.module').then((m) => m.AccountModule),
+  },
+  {
+    path: '**',
+    loadComponent: () => import('./not-found/not-found.component').then((c) => c.NotFoundComponent),
   },
 ];

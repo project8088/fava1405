@@ -17,7 +17,6 @@ import { MainNewsDetailsComponent } from './news-details/news-details.component'
 import { MainNewsListComponent } from './news-list/news-list.component';
 import { MainPageDetailsComponent } from './page-details/page-details.component';
 import { MainProductDetailsComponent } from './product-details/product-details.component';
-import { NotFoundComponent } from './error/not-found/not-found.component';
 import { PersonalBiographyComponent } from './personal-biography/personal-biography.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { SliderComponent } from './index/slider/slider.component';
@@ -40,7 +39,6 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
     HomeServicesListComponent,
     HomeTopCompaniesListComponent,
 
-    NotFoundComponent,
     MainNewsListComponent,
     MainNewsDetailsComponent,
     ContactUsComponent,
