@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AdminChangeRefundDialogComponent } from '../dialog/change-refund/change-refund.component';
 import { AdminReportRefundDialogComponent } from '../dialog/report-refund/report-refund.component';
@@ -81,6 +81,10 @@ export class AdminRefundAccessSearchListComponent extends AppBase implements Aft
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.allRefundAccessPagesList, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

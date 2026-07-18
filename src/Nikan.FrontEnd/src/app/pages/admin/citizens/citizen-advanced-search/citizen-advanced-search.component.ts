@@ -137,6 +137,10 @@ export class AdminCitizenAdvancedSearchComponent extends AppBase implements Afte
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.citizenAdvancedSearch, param);
         }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {

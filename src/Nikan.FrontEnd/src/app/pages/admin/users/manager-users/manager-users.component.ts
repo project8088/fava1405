@@ -74,6 +74,10 @@ export class AdminManagerUsersComponent extends AppBase implements OnInit, After
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchAdminPersonel, param);
         }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {

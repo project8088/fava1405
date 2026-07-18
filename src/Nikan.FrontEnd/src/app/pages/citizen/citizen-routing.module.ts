@@ -23,6 +23,7 @@ import { CitizenUploadManzalatDocumentsComponent } from './manzelat-plan/upload-
 import { CitizenManzelatPlanItemComponent } from './manzelat-plan/manzelat-plan-item/manzelat-plan-item.component';
 import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.component';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
+import { AuthGuard } from '@core/authentication/auth.guard';
 
 const routes: Routes = [
   {
@@ -30,6 +31,12 @@ const routes: Routes = [
     component: CitizenComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
+      {
+        path: 'tickets',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../../ticket/ticket-module').then((m) => m.TicketModule),
+      },
       {
         path: 'citizen-notifications/:id',
         component: AdminAddOrUpdateCitizensNotificationComponent,

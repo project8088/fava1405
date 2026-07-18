@@ -2,7 +2,7 @@ import { Component, AfterViewInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { FormGroup } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
@@ -63,6 +63,10 @@ export class AdminSmsListComponent extends AppBase implements AfterViewInit {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedSmsList, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

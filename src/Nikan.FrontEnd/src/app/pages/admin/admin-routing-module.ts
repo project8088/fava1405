@@ -7,6 +7,7 @@ import { AdminContactUsListComponent } from './contact-list/contact-list.compone
 import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
+import { AuthGuard } from '@core/authentication/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,12 +18,31 @@ const routes: Routes = [
 
       { path: 'dashboard', component: AdminDashboardComponent },
 
+      {
+        path: 'tickets',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../../ticket/ticket-module').then((m) => m.TicketModule),
+      },
       { path: 'contact-us', component: AdminContactUsListComponent },
       { path: 'setting', component: AdminSettingComponent },
       { path: 'sms-setting', component: SmsSettingComponent },
 
       { path: 'config', component: AdminConfigComponent },
       { path: 'sms-list', component: AdminSmsListComponent },
+      {
+        path: 'companies',
+        loadComponent: () =>
+          import('./company-list/company-list.component').then(
+            (c) => c.AdminCompaniesListComponent,
+          ),
+      },
+      {
+        path: 'register-company',
+        loadComponent: () =>
+          import('./register-company/register-company.component').then(
+            (c) => c.AdminRegisterCompanyComponent,
+          ),
+      },
 
       {
         path: 'users',

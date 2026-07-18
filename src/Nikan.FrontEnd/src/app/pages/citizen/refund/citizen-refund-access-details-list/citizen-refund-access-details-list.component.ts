@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import { AppBase } from '@app/app.base';
 import { CitizenRefundInfoDialogComponent } from '@app/shared/_dialog/refund-info/refund-info.component';
 
@@ -79,6 +79,10 @@ export class CitizenRefundAccessDetailsListComponent
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.refundAccessDetailsList, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

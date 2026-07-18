@@ -3,20 +3,34 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { merge, of as observableOf } from 'rxjs';
 import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import Swal from 'sweetalert2';
 import { ServerApis } from '@core/server-apis';
 import { MatTableDataSource } from '@angular/material/table';
-import { AdminCompanyContractDialogComponent } from '../_dialogs/company-contract/company-contract.component';
-import { AdminCompanyChangeStatusDialogComponent } from '../_dialogs/company-change-status/company-change-status.component';
 import { AppBase } from '@app/app.base';
+import { AdminCompanyChangeStatusDialogComponent } from '@app/pages/company/_dialogs/company-change-status/company-change-status.component';
+import { AdminCompanyContractDialogComponent } from '@app/pages/company/_dialogs/company-contract/company-contract.component';
+import { CommonModule } from '@angular/common';
+import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@core/core.module';
+import { MaterialModule } from '@core/material/material.module';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-company-list',
   templateUrl: './company-list.component.html',
   styleUrls: ['./company-list.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    CoreModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    RouterModule,
+  ],
 })
 export class AdminCompaniesListComponent extends AppBase implements AfterViewInit {
   displayedColumns: string[] = [
@@ -67,6 +81,10 @@ export class AdminCompaniesListComponent extends AppBase implements AfterViewIni
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchCompanies, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

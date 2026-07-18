@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { merge, of as observableOf } from 'rxjs';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -53,6 +53,10 @@ export class AppGroupCitizensListComponent extends AppBase implements AfterViewI
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedGroupsCitizensInfo, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

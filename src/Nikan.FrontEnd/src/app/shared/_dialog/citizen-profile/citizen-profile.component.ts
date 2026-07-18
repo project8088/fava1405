@@ -16,7 +16,6 @@ export class CitizenProfileDialogComponent extends AppBase implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
     super();
-    debugger;
     if (_data) {
       this.userCode = _data.userCode;
     }

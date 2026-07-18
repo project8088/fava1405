@@ -131,7 +131,7 @@ export class AdminComponent extends AppBase implements OnInit, OnDestroy {
       icon: 'fa fa-headphones',
       children: [
         { name: 'اطلاعیه ها', url: '/admin/content/notifications' },
-        { name: 'موضوع های تیکت', url: '/admin/ticket-subjects' },
+        { name: 'موضوع های تیکت', url: '/admin/tickets/ticket-subjects' },
         { name: 'تیکت ها', url: '/admin/tickets' },
         { name: 'پیام های تماس با ما', url: '/admin/contact-us' },
       ],

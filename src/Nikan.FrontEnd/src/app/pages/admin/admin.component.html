@@ -11,7 +11,7 @@
     [opened]="(isHandset$ | async) === false"
   >
     <div class="side-nav">
-      <mat-toolbar color="default">
+      <mat-toolbar color="teal">
         <button mat-icon-button (click)="miniSideBar = !miniSideBar">
           @if (miniSideBar) {
             <i class="fa fa-arrow-left"></i>
@@ -27,7 +27,7 @@
   </mat-sidenav>
 
   <mat-sidenav-content class="dashboard-content">
-    <mat-toolbar color="default" class="fixed-toolbar">
+    <mat-toolbar color="teal" class="fixed-toolbar">
       @if (isHandset$ | async) {
         <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()">
           <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>

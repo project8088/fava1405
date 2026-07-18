@@ -28,6 +28,7 @@ import { CardAddOrUpdateFreeCardComponent } from './free-card/add-or-update-free
 import { CardFreeCardCitizensComponent } from './free-card/free-card-citizens/free-card-citizens.component';
 import { AdminAddOrUpdateCardComponent } from './add-or-update-card/add-or-update-card.component';
 import { AdminCardListComponent } from './card-list/card-list.component';
+import { AuthGuard } from '@core/authentication/auth.guard';
 
 const routes: Routes = [
   {
@@ -36,6 +37,13 @@ const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: CardDashboardComponent },
+
+      {
+        path: 'tickets',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../../ticket/ticket-module').then((m) => m.TicketModule),
+      },
+
       { path: 'advanced-search-card-citizen', component: CardCitizenCardAdvancedSearchComponent },
       { path: 'transaction-list', component: CardTransactionListComponent },
       { path: 'card-users', component: CardUsersComponent },

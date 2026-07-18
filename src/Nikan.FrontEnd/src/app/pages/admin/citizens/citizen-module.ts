@@ -43,6 +43,7 @@ import { AdminAddOrUpdateAppserviceComponent } from './citizen-apps/add-or-updat
 import { AdminCitizenRejectFamilyComponent } from './_dialog/citizen-reject-family/citizen-reject-family.component';
 import { AdminCitizenManzelatReviewComponent } from './_dialog/citizen-manzelat-review/citizen-manzelat-review.component';
 import { AdminGroupQueueCitizensListComponent } from './group-queue-citizens-list/group-queue-citizens-list.component';
+import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor.module';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { AdminGroupQueueCitizensListComponent } from './group-queue-citizens-lis
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    HtmlEditorModule
   ],
 })
 export class CitizenModule {}

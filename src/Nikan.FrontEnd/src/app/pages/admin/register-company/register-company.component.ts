@@ -1,16 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Observable, finalize } from 'rxjs';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { BaseDataModel } from '@core/models/base-data-model';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { SharedModule } from '@app/shared/shared.module';
+import { CoreModule } from '@core/core.module';
+import { MaterialModule } from '@core/material/material.module';
 
 @Component({
   selector: 'admin-register-company',
   templateUrl: './register-company.component.html',
   styleUrls: ['./register-company.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [
+    CommonModule,
+    CoreModule,
+    MaterialModule,
+    FormsModule,
+    ReactiveFormsModule,
+    SharedModule,
+    RouterModule,
+  ],
 })
 export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
   isSaving = false;
@@ -69,9 +83,7 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
     return pass === confirmPassword ? null : { notSame: true };
   }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 
   displayFn(item: any): string {
     return item && item.text ? item.text : '';

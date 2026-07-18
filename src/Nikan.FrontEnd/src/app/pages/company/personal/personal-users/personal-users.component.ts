@@ -95,6 +95,10 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
           this.isLoadingResults = true;
           return this.dataService.get(url, param);
         }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {

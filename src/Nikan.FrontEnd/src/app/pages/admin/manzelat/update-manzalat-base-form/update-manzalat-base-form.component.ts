@@ -25,11 +25,6 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
   siteName: string = '';
   constructor(private customValidator: CustomFormValidators) {
     super();
-    this.route.params.subscribe((p) => {
-      this.id = p['id'];
-      this.getItem();
-    });
-
     this.form = this.fb.group({
       id: [null],
       title: [null, [Validators.required, Validators.maxLength(500)]],
@@ -41,6 +36,10 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
       description: ['', []],
       uploadDescription: ['', []],
       orderIndex: [null, []],
+    });
+    this.route.params.subscribe((p) => {
+      this.id = p['id'];
+      this.getItem();
     });
   }
 
@@ -71,6 +70,9 @@ export class AdminUpdateManzalatBaseFormComponent extends AppBase implements OnI
             orderIndex: response.data.orderIndex,
             gender: response.data.gender,
           });
+          setTimeout(() => {
+            this.chdr.detectChanges();
+          }, 10);
         } else {
           var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
           this.toastrService.error(msg);

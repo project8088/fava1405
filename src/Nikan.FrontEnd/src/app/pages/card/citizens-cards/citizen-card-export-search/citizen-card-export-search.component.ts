@@ -75,6 +75,10 @@ export class CardCitizenCardExportSearchComponent extends AppBase implements Aft
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getPagedCardInfoExport, param);
         }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
         map((response) => {
           this.isLoadingResults = false;
           if (response.isSuccess && response.data) {

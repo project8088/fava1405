@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import { AppBase } from '@app/app.base';
 import { CitizenReportRefundDialogComponent } from '../../_dialogs/report-refund/report-refund.component';
 
@@ -64,6 +64,10 @@ export class CitizenRefundAccessListComponent extends AppBase implements AfterVi
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getRefundCitizenAccessPageList, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

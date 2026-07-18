@@ -35,8 +35,6 @@ import { CompanyTransactionListComponent } from './transaction-list/transaction-
 import { CompanyCitizenExcelBatchFileListComponent } from './citizen-excel-batch-file/citizen-excel-batch-file.component';
 import { CompanyImportExcelDialogComponent } from './_dialogs/importPersonel-excel/importPersonel-excel.component';
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
-import { AdminCompaniesListComponent } from './company-list/company-list.component';
-import { AdminRegisterCompanyComponent } from './register-company/register-company.component';
 import { AdminCompanyContractDialogComponent } from './_dialogs/company-contract/company-contract.component';
 import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-change-status/company-change-status.component';
 
@@ -68,8 +66,6 @@ import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-chan
     CompanyCitizenExcelBatchFileListComponent,
     CompanyImportExcelDialogComponent,
     CompanyCitizenExcelBatchFileDetailsComponent,
-    AdminCompaniesListComponent,
-    AdminRegisterCompanyComponent,
     AdminCompanyChangeStatusDialogComponent,
     AdminCompanyContractDialogComponent,
   ],

@@ -17,8 +17,6 @@ import { CompanyAddOrUpdateProductComponent } from './products/add-or-update-pro
 import { CompanyTransactionListComponent } from './transaction-list/transaction-list.component';
 import { CompanyCitizenExcelBatchFileListComponent } from './citizen-excel-batch-file/citizen-excel-batch-file.component';
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
-import { AdminRegisterCompanyComponent } from './register-company/register-company.component';
-import { AdminCompaniesListComponent } from './company-list/company-list.component';
 
 const routes: Routes = [
   {
@@ -27,9 +25,12 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'register-company', component: AdminRegisterCompanyComponent },
-      { path: 'companies', component: AdminCompaniesListComponent },
 
+      {
+        path: 'tickets',
+        canActivate: [AuthGuard],
+        loadChildren: () => import('../../ticket/ticket-module').then((m) => m.TicketModule),
+      },
       { path: 'dashboard', component: CompnayDashboardComponent },
       { path: 'company-profile/:id', component: CompanyProfileComponent },
       { path: 'company-info/:id', component: CompanyInfoComponent },

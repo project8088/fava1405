@@ -165,7 +165,9 @@ $default-color: #039ac2;
 .mat-mdc-tab-nav-bar.mat-primary .mat-ink-bar {
   background-color: $default-color !important;
 }
-
+.mat-mdc-tab-body-content {
+  padding: 15px;
+}
 /*چک باکس سفید*/
 .mat-mdc-checkbox.mat-white {
   .mat-mdc-checkbox-frame {

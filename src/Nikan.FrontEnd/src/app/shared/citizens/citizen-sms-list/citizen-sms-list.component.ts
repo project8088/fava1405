@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
@@ -70,6 +70,10 @@ export class AppCitizenSmsListComponent extends AppBase implements OnInit {
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getCitizenPagedSmsList, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

@@ -83,8 +83,11 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchManzaltCitizens, param);
         }),
-        map((response) => {
+        finalize(() => {
           this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+        map((response) => {
           if (response.isSuccess && response.data) {
             var items = response.data.citizens ? response.data.citizens : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
@@ -95,7 +98,6 @@ export class AdminManzelatCitizensComponent extends AppBase implements AfterView
           }
         }),
         catchError((err) => {
-          this.isLoadingResults = false;
           return observableOf([]);
         }),
       )

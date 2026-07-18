@@ -51,11 +51,6 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     loadChildren: () => import('./pages/card/card.module').then((m) => m.CardModule),
   },
-  {
-    path: 'tickets',
-    canActivate: [AuthGuard],
-    loadChildren: () => import('./ticket/ticket-module').then((m) => m.TicketModule),
-  },
 
   {
     path: 'user/account',

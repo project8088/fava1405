@@ -6,7 +6,7 @@ import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import Swal from 'sweetalert2';
 import { merge, of as observableOf } from 'rxjs';
-import { switchMap, startWith, map, catchError } from 'rxjs/operators';
+import { switchMap, startWith, map, catchError, finalize } from 'rxjs/operators';
 import { AdminAddSabtAhvalDialogComponent } from '../dialog/add-sabtAhval/add-sabtAhval.component';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
 import { AppBase } from '@app/app.base';
@@ -68,6 +68,10 @@ export class AdminSabtAhvalListComponent extends AppBase implements AfterViewIni
         switchMap(() => {
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.getAllExportSabtAhval, param);
+        }),
+        finalize(() => {
+          this.isLoadingResults = false;
+          this.chdr.detectChanges();
         }),
         map((response) => {
           this.isLoadingResults = false;

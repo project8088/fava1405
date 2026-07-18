@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { merge, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { MatTableDataSource } from '@angular/material/table';
 import { ServerApis } from '@core/server-apis';
 import { CitizenProfileDialogComponent } from '@app/shared/_dialog/citizen-profile/citizen-profile.component';
@@ -64,8 +64,11 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
           this.isLoadingResults = true;
           return this.dataService.get(ServerApis.searchfeedbacks, param);
         }),
-        map((response) => {
+        finalize(() => {
           this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+        map((response) => {
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
@@ -77,7 +80,6 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
           }
         }),
         catchError((err) => {
-          this.isLoadingResults = false;
           return observableOf([]);
         }),
       )
