@@ -1,61 +1,30 @@
-.bot-detect-container {
-  display: flex;
-  gap: 10px;
-  padding: 15px 0;
-  align-items: center;
-
-  .form-control {
-    margin: 0;
-  }
-}
-
-@media (max-width: 500px) {
-  .bot-detect-container {
-    flex-direction: column-reverse;
-  }
-}
-
-.captcha {
-  width: 140px;
-}
-
 .custom-form {
-  max-width: 450px;
+  width: 500px;
+  max-width: 100%;
   margin: 0 auto;
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-
-.form-control {
-  border-radius: 0.25rem;
-}
-
-.custom-button.login {
-  margin: 5px auto;
-  display: block;
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 40px;
 }
 
 .custom-button {
   border: none;
   color: #fff;
-  text-decoration: none;
   background: #00bbda;
   cursor: pointer;
-  display: inline-block;
-  outline: none;
   box-shadow: none;
   text-shadow: none;
   position: relative;
   letter-spacing: 0;
-  -webkit-transition: all 0.3s ease 0s;
-  transition: all 0.3s ease 0s;
-  -webkit-transition: all 0.3s;
   transition: all 0.3s;
-  margin-top: 10px;
-  text-transform: uppercase;
   padding: 12px 33px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: 600;
+  border-radius: 8px;
 }
 
 .custom-button,

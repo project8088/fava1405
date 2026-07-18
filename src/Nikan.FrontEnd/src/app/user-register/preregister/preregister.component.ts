@@ -6,7 +6,6 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { ServerApis } from '@core/server-apis';
 import { UserRegisterService } from '../userregister.service';
 import { AppBase } from '@app/app.base';
-import { CaptchaComponent } from '@app/account/bot-detect/captcha.component';
 import { finalize } from 'rxjs';
 
 @Component({
@@ -21,7 +20,6 @@ export class PreregisterComponent extends AppBase implements OnInit {
   isSaving: boolean = false;
   nationalityList: any[] = [];
   serviceId?: number;
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor(
     private accounService: UserRegisterService,
@@ -37,8 +35,6 @@ export class PreregisterComponent extends AppBase implements OnInit {
       ],
       nationCode: [null, [Validators.required, this.customValidator.checkNationalCode]],
       isAgree: [null, [Validators.required]],
-      userEnteredCaptchaCode: [null, [Validators.required]],
-      captchaId: [''],
     });
 
     this.form.get('nationality')?.valueChanges.subscribe((value) => {
@@ -65,7 +61,6 @@ export class PreregisterComponent extends AppBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.captchaComponent!.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
   }
   submitForm(): void {
     if (this.form.valid) {
@@ -73,12 +68,9 @@ export class PreregisterComponent extends AppBase implements OnInit {
       const form = this.form.getRawValue();
       this.dataService
         .post(ServerApis.checkCitzenRegister, {
-          captchaCode: form.captchaCode,
           mobileNumber: form.mobileNumber,
           nationCode: form.nationCode,
           nationality: form.nationality,
-          userEnteredCaptchaCode: form.userEnteredCaptchaCode,
-          CaptchaId: this.captchaComponent.captchaId,
           serviceId: form.serviceId,
         })
         .pipe(
@@ -104,12 +96,8 @@ export class PreregisterComponent extends AppBase implements OnInit {
             } else {
               this.toastrService.error(data.messages);
               this.isSaving = false;
-              this.captchaComponent.reloadImage();
             }
-          },
-          (error: any) => {
-            this.captchaComponent.reloadImage();
-          },
+          }
         );
     }
   }

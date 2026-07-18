@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { AppBase } from '@app/app.base';
 
@@ -7,13 +7,13 @@ import { AppBase } from '@app/app.base';
   selector: 'car-license-plate',
   templateUrl: './car-license-plate.component.html',
   styleUrls: ['./car-license-plate.component.scss'],
-  //providers: [
-  //  {
-  //    provide: NG_VALUE_ACCESSOR,
-  //    useExisting: forwardRef(() => InputAutoCompleteComponent),
-  //    multi: true
-  //  }
-  //]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CarLicensePlateComponent),
+      multi: true,
+    },
+  ],
   standalone: false,
 })
 export class CarLicensePlateComponent extends AppBase implements ControlValueAccessor, OnInit {

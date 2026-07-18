@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '../../server-apis';
@@ -11,13 +11,13 @@ import { AppBase } from '@app/app.base';
   selector: 'input-company',
   templateUrl: './input-company.component.html',
   styleUrls: ['./input-company.component.scss'],
-  //providers: [
-  //  {
-  //    provide: NG_VALUE_ACCESSOR,
-  //    useExisting: forwardRef(() => InputAutoCompleteComponent),
-  //    multi: true
-  //  }
-  //]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputCompanyAutoCompleteComponent),
+      multi: true,
+    },
+  ],
   standalone: false,
 })
 export class InputCompanyAutoCompleteComponent

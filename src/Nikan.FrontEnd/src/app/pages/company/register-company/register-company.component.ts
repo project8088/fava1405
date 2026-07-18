@@ -18,9 +18,6 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
   id: string = '';
   loading: boolean = true;
 
-  captchaImage: any;
-  loadingCaptcha: boolean = true;
-
   loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
   filteredState = new Observable<any[]>();
@@ -73,27 +70,8 @@ export class AdminRegisterCompanyComponent extends AppBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCaptcha();
   }
 
-  getCaptcha() {
-    this.loadingCaptcha = true;
-
-    this.dataService.getCaptchaImage({}).subscribe(
-      (response) => {
-        this.loadingCaptcha = false;
-        let reader = new FileReader();
-        let photo = new File([response], 'captcha.png', { type: 'image/png' });
-        reader.readAsDataURL(photo);
-        reader.onload = (event: any) => {
-          this.captchaImage = event.target.result;
-        };
-      },
-      (error: any) => {
-        this.loadingCaptcha = false;
-      },
-    );
-  }
 
   displayFn(item: any): string {
     return item && item.text ? item.text : '';

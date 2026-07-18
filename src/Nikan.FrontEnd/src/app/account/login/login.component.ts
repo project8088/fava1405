@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 import { finalize } from 'rxjs';
@@ -14,12 +13,8 @@ import { finalize } from 'rxjs';
 export class LoginComponent extends AppBase implements OnInit {
   loginForm: FormGroup;
   loading: boolean = false;
-  captchaImage: any;
-  loadingCaptcha: boolean = true;
   returnUrl: string = '';
   serviceId: number = 0;
-
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor() {
     super();
@@ -38,14 +33,10 @@ export class LoginComponent extends AppBase implements OnInit {
       password: ['', [Validators.required]],
       rememberMe: [true, []],
       serviceId: [null],
-      userEnteredCaptchaCode: [null, [Validators.required]],
-      captchaId: [''],
     });
   }
 
   ngOnInit(): void {
-    this.captchaComponent.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
-
     this.matDialog.closeAll();
 
     this.route.queryParams.subscribe((params) => {
@@ -62,14 +53,8 @@ export class LoginComponent extends AppBase implements OnInit {
       return;
     }
 
-    if (!this.loginForm.get('userEnteredCaptchaCode')?.value) {
-      this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-      return;
-    }
-
     var param: any = this.loginForm.value;
     param.serviceId = this.serviceId;
-    param.CaptchaId = this.captchaComponent.captchaId;
 
     this.loading = true;
     this.authService
@@ -97,7 +82,6 @@ export class LoginComponent extends AppBase implements OnInit {
           } else {
             var msg = response.messages ? response.messages : 'نام کاربری یا کلمه عبور صحیح نیست!';
             this.toastrService.error(msg);
-            this.captchaComponent.reloadImage();
           }
         },
         error: (error) => {

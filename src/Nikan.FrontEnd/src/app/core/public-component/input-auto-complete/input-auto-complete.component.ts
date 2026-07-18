@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ControlValueAccessor, Validators, FormControl } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, forwardRef } from '@angular/core';
+import { ControlValueAccessor, Validators, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RequireMatch } from '../../custom-validator/requireMatch';
 import { Observable, finalize } from 'rxjs';
 import { ServerApis } from '../../server-apis';
@@ -11,13 +11,13 @@ import { AppBase } from '@app/app.base';
   selector: 'input-auto-complete',
   templateUrl: './input-auto-complete.component.html',
   styleUrls: ['./input-auto-complete.component.scss'],
-  //providers: [
-  //  {
-  //    provide: NG_VALUE_ACCESSOR,
-  //    useExisting: forwardRef(() => InputAutoCompleteComponent),
-  //    multi: true
-  //  }
-  //]
+  providers: [
+   {
+     provide: NG_VALUE_ACCESSOR,
+     useExisting: forwardRef(() => InputAutoCompleteComponent),
+     multi: true
+   }
+  ],
   standalone: false,
 })
 export class InputAutoCompleteComponent extends AppBase implements ControlValueAccessor, OnInit {

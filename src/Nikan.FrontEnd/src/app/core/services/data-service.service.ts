@@ -156,10 +156,6 @@ export class DataService {
     );
   }
 
-  getCaptchaImage(param: any): Observable<any> {
-    return this.http.get(ServerApis.captcha, { params: param, responseType: 'blob' });
-  }
-
   /**
    * تبدیل تاریخ به فرمت
    * YYYY/MM/DD

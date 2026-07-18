@@ -146,22 +146,6 @@
 
     <!-- <mat-checkbox formControlName="approveTermsCondition" color="default">قوانین و شرایط سایت را می پذیرم</mat-checkbox> -->
 
-    <div class="my-2 d-flex align-items-center justify-content-between captcha-container">
-      <mat-form-field>
-        <mat-label> عبارت تصویر روبرو</mat-label>
-        <input matInput formControlName="captchaCode" autocomplete="no-autocomplete" />
-      </mat-form-field>
-
-      <img class="captcha" [src]="captchaImage" />
-
-      @if (loadingCaptcha) {
-        <mat-spinner diameter="20" color="default"></mat-spinner>
-      } @else {
-        <button type="button" mat-icon-button color="default" (click)="getCaptcha()">
-          <i class="fa fa-sync"></i>
-        </button>
-      }
-    </div>
   </form>
   <div class="p-3 d-flex justify-content-end">
     <button class="btn btn btn-teal mb-3 text-white" [disabled]="isSaving" (click)="saveInfo()">

@@ -22,6 +22,8 @@ html {
   height: 100%;
   color-scheme: light;
   --mat-sys-corner-large: 0px !important;
+  --mat-button-protected-container-height: 40px !important;
+  --mat-sys-corner-full: 10px !important;
   @include mat.theme(
     (
       color: (
@@ -122,7 +124,19 @@ a {
   height: 66px;
   border-radius: 100%;
 }
-
+.white-form-field {
+  --mdc-outlined-text-field-container-color: white !important;
+  --mat-sys-on-surface-variant: #fff !important;
+  --mat-sys-on-surface: #fff !important;
+  .mat-mdc-input-element:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #121c5a inset !important;
+    -webkit-text-fill-color: rgb(255, 255, 255) !important;
+  }
+}
+.mdc-button__label:has(mat-spinner),button:has(mat-spinner){
+  display: flex;
+  gap: 10px;
+}
 /*++++++++++++++++++theme++++++++++++++++++++++++++*/
 /*kartable.scss,public.scss,custom-dialog.scss*/
 :root {
@@ -200,12 +214,9 @@ a {
   }
 }
 
-
-
 button:focus {
   outline: none !important;
 }
-
 
 /*Primary*/
 .btn-primary {

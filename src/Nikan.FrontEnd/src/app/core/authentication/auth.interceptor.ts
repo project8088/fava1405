@@ -101,16 +101,16 @@ export class AuthInterceptor implements HttpInterceptor {
 
   handleErrorAccessDenied(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     this.toastrService.error('لطفا وارد حساب کاربری خود شوید!', 'دسترسی ممنوع');
-    this.logoutUser();
+    // this.logoutUser();
     const eror = error.error?.message || error.statusText;
-    return throwError(eror);
+    return throwError(() => eror);
   }
 
   handle404Error(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
     this.toastrService.error('دسترسی به سرور امکان پذیر نیست!', '404');
 
     const eror = error.error?.message || error.statusText;
-    return throwError(eror);
+    return throwError(() => eror);
   }
 
   handle500Error(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
@@ -119,7 +119,7 @@ export class AuthInterceptor implements HttpInterceptor {
     //console.log(eror);
     //  this.startTimer();
     //return of(t as any);
-    return throwError(eror);
+    return throwError(() => eror);
   }
 
   handleReciveDataError(req: HttpRequest<any>, next: HttpHandler, error: HttpErrorResponse) {
@@ -128,7 +128,7 @@ export class AuthInterceptor implements HttpInterceptor {
     //console.log(eror);
     //  this.startTimer();
     //return of(t as any);
-    return throwError(eror);
+    return throwError(() => eror);
   }
 
   handle401Error(req: HttpRequest<any>, next: HttpHandler) {
@@ -184,8 +184,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
   logoutUser() {
     // Route to the login page (implementation up to you)
-    this.authService.logout(false);
-    this.router.navigate(['/account/login']);
+    // this.authService.logout(false);
+    // this.router.navigate(['/account/login']);
     return throwError(() => '');
   }
 }

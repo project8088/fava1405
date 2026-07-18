@@ -1,7 +1,6 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { AttachmentListComponent } from './attachments/attachments.component';
-import { CaptchaComponent } from './captcha/captcha.component';
 import { ChangeCurrentUserPasswordComponent } from './change-current-user-password/change-current-user-password.component';
 import { CitizenProfileDialogComponent } from './_dialog/citizen-profile/citizen-profile.component';
 import { CommonModule } from '@angular/common';
@@ -61,7 +60,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     AttachmentListComponent,
     UploadUserAvatarDialogComponent,
     StoreDetailsComponent,
-    CaptchaComponent,
     ViewCitizenComponent,
     CitizenProfileDialogComponent,
     AdminCitizenTransactionListComponent,
@@ -118,7 +116,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
     StoreDetailsComponent,
     // MatTableExporterModule,
     AttachmentListComponent,
-    CaptchaComponent,
     TimerComponent,
     CropperComponent,
     ShowImageDialogComponent,

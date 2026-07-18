@@ -19,8 +19,6 @@ export const ServerApis = {
   getCurrentDateTime: 'https://worldtimeapi.org/api/timezone/Asia/Tehran',
 
   baseUrl: base.baseUrl,
-  captcha: base.mainApi + 'account/captcha',
-  registercaptcha: base.mainApi + 'citzens/registercaptcha',
   //base data
   getProvinces: base.mainApi + 'BaseData/getProvinces',
   getCitesByParent: base.mainApi + 'BaseData/GetCitesByParent',

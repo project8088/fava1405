@@ -8,7 +8,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { LoginComponent } from './login/login.component';
 import { NgModule } from '@angular/core';
 import { RegisterCompanyComponent } from './register-company/register-company.component';
-import { BotDetectCaptchaModule } from './bot-detect/botdetect-captcha.module';
 import { MaterialModule } from '@core/material/material.module';
 
 @NgModule({
@@ -25,7 +24,6 @@ import { MaterialModule } from '@core/material/material.module';
     FormsModule,
     MaterialModule,
     CoreModule,
-    BotDetectCaptchaModule,
   ],
 })
 export class AccountModule {}

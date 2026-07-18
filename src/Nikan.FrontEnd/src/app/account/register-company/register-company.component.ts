@@ -19,8 +19,6 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
   id: string = '';
   loading: boolean = true;
 
-  captchaImage: any;
-  loadingCaptcha: boolean = true;
 
   loadingState: boolean = false;
   stateList: BaseDataModel[] = [];
@@ -40,7 +38,6 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
         userName: [null, [Validators.required]],
         password: [null, [Validators.required]],
         confirmPassword: [null, [Validators.required]],
-        captchaCode: [null, [Validators.required]],
       },
       { validator: this.checkPasswords },
     );
@@ -57,27 +54,8 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCaptcha();
   }
 
-  getCaptcha() {
-    this.loadingCaptcha = true;
-
-    this.dataService.getCaptchaImage({}).subscribe(
-      (response) => {
-        this.loadingCaptcha = false;
-        let reader = new FileReader();
-        let photo = new File([response], 'captcha.png', { type: 'image/png' });
-        reader.readAsDataURL(photo);
-        reader.onload = (event: any) => {
-          this.captchaImage = event.target.result;
-        };
-      },
-      (error: any) => {
-        this.loadingCaptcha = false;
-      },
-    );
-  }
 
   displayFn(item: any): string {
     return item && item.text ? item.text : '';
@@ -89,10 +67,6 @@ export class RegisterCompanyComponent extends AppBase implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
-    //if (!this.registerForm.get('captchaCode')?.value) {
-    //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-    //  //  return ;
-    //}
 
     var formValue = this.registerForm.value;
 

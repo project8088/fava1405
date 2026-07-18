@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, Validators } from '@angular/forms';
-import { CaptchaComponent } from '../bot-detect/captcha.component';
 import { ServerApis } from '@core/server-apis';
 import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AppBase } from '@app/app.base';
@@ -15,8 +14,6 @@ import { finalize } from 'rxjs';
 export class ForgotPasswordComponent extends AppBase implements OnInit {
   userId: string = '';
   serviceId: number = 0;
-  captchaImage: any;
-  loadingCaptcha: boolean = true;
 
   forgotForm: FormGroup;
   showChangePassword: boolean = false;
@@ -31,14 +28,11 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
   checkingCode: boolean = false;
   isSaving: boolean = false;
 
-  @ViewChild(CaptchaComponent, { static: true }) captchaComponent!: CaptchaComponent;
 
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.forgotForm = this.fb.group(
       {
-        userEnteredCaptchaCode: [null, [Validators.required]],
-        captchaId: [''],
         userName: [null, [Validators.required]],
         mobile: [null, [Validators.required, this.customValidator.checkMobileNumber]],
         verificationCode: [null, [Validators.required]],
@@ -56,7 +50,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.captchaComponent.captchaEndpoint = ServerApis.baseUrl + '/simple-captcha-endpoint.ashx';
   }
 
   /**
@@ -80,11 +73,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
       return;
     }
 
-    //if (!this.forgotForm.get('userEnteredCaptchaCode')?.value) {
-    //  this.toastrService.warning('عبارت موجود در تصویر را وارد کنید.');
-    //    return ;
-    // }
-
     if (this.forgotForm.get('mobile')?.invalid) {
       this.toastrService.warning('شماره موبایل خود را وارد کنید.');
       this.forgotForm.get('mobile')?.markAsTouched();
@@ -97,7 +85,6 @@ export class ForgotPasswordComponent extends AppBase implements OnInit {
       .post(ServerApis.sendSmsForgotPassword, {
         UserName: this.forgotForm.get('userName')?.value,
         MobileNumber: this.forgotForm.get('mobile')?.value,
-        //CaptchaId : this.captchaComponent.captchaId
       })
       .pipe(
         finalize(() => {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter, forwardRef } from '@angular/core';
 import {
   ControlValueAccessor,
   Validator,
@@ -6,6 +6,8 @@ import {
   ValidationErrors,
   Validators,
   FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
 } from '@angular/forms';
 import { DateTime } from 'luxon';
 import { AppBase } from '@app/app.base';
@@ -108,6 +110,18 @@ function getMaxDayInJalaliMonth(jy: number, jm: number): number {
   selector: 'simple-jalali-datepicker',
   templateUrl: './simple-datepicker.component.html',
   styleUrls: ['./simple-datepicker.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => SimpleJalaliDatepickerComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      multi: true,
+      useExisting: SimpleJalaliDatepickerComponent,
+    },
+  ],
   standalone: false,
 })
 export class SimpleJalaliDatepickerComponent
@@ -150,6 +164,7 @@ export class SimpleJalaliDatepickerComponent
     super();
 
     this.updateDayList();
+    debugger;
 
     // سال شمسی جاری برای yearList
     const today = DateTime.now().setZone('Asia/Tehran');
@@ -183,6 +198,7 @@ export class SimpleJalaliDatepickerComponent
   // ---------- ControlValueAccessor ----------
   writeValue(obj: any): void {
     if (obj) {
+      debugger;
       const dt = DateTime.fromFormat(obj, 'yyyy/MM/dd', { zone: 'utc' });
       if (dt.isValid) {
         const jDate = gregorianToJalaali(dt);
@@ -208,6 +224,10 @@ export class SimpleJalaliDatepickerComponent
 
   // ---------- وقتی کاربر مقداری انتخاب می‌کنه ----------
   onChange(): void {
+    if (this.year == 0 || this.month == 0 || this.day == 0) {
+      return;
+    }
+    debugger;
     this.isLeapYear = isLeapJalaaliYear(this.year);
     this.updateDayList();
 
