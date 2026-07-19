@@ -18,6 +18,7 @@ import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
 import { AdminAddFeedBackDialogComponent } from './_dialogs/add-feedback/add-feedback.component';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
+import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notifi
     AdminContactUsListComponent,
     AdminSmsListComponent,
     AdminConfigComponent,
-    AdminAddOrUpdateCitizensNotificationComponent
+    AdminAddOrUpdateCitizensNotificationComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +43,7 @@ import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notifi
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    ChartModule,
   ],
 })
 export class AdminModule {}

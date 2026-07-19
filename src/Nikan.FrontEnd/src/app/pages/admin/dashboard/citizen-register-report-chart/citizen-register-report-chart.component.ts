@@ -4,6 +4,7 @@ import { Chart } from 'angular-highcharts';
 import { ServerApis } from '@core/server-apis';
 import { FormGroup } from '@angular/forms';
 import { AppBase } from '@app/app.base';
+import { LuxonFormatPipe } from '@core/pipe/luxon-format.pipe';
 
 @Component({
   selector: 'adm-citizen-register-report-chart',
@@ -56,7 +57,15 @@ export class AdminDashboardCitizenRegisterReportChartComponent
       .subscribe((response) => {
         if (response.isSuccess) {
           this.report = response.data ? response.data : [];
-          this.chart = this.createCharts(this.report.data, this.report.categories);
+          let categories = [];
+          for (let item of this.report.categories ?? []) {
+            try {
+              categories.push(new LuxonFormatPipe().transform(new Date(item),'D'));
+            } catch (error) {
+              categories.push(item);
+            }
+          }
+          this.chart = this.createCharts(this.report.data, categories);
         } else {
           let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
           this.toastrService.error(msg);
