@@ -7,11 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { WebUserDashboardComponent } from './dashboard/dashboard.component';
 import { WebUserRoutingModule } from './webuser-routing.module';
-import { WebUserComponent } from './webuser.component';
 import { WebUserHelpServiceDetailsComponent } from './help-service/help-service.component';
 
 @NgModule({
-  declarations: [WebUserComponent, WebUserDashboardComponent, WebUserHelpServiceDetailsComponent],
+  declarations: [WebUserDashboardComponent, WebUserHelpServiceDetailsComponent],
   imports: [
     CoreModule,
     CommonModule,

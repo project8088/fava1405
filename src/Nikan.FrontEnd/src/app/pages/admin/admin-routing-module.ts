@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminDashboardComponent } from './dashboard/dashboard.component';
-import { AdminComponent } from './admin.component';
 import { AdminConfigComponent } from './config/config.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
 import { AdminSettingComponent } from './setting/setting.component';
@@ -14,7 +13,6 @@ import { CompanyInfoComponent } from '@app/shared/company-info/company-info.comp
 const routes: Routes = [
   {
     path: '',
-    component: AdminComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 

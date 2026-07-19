@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CompanyComponent } from './company.component';
 import { CompnayDashboardComponent } from './dashboard/dashboard.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
 import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
@@ -20,7 +19,6 @@ import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-ba
 const routes: Routes = [
   {
     path: '',
-    component: CompanyComponent,
     canActivateChild: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },

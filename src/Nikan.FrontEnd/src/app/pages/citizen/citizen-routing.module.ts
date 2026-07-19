@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 
 import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
-import { CitizenComponent } from './citizen.component';
 import { CitizenContactComponent } from './profile/contact/contact.component';
 import { CitizenDashboardComponent } from './dashboard/dashboard.component';
 import { CitizenDetailedInfoComponent } from './profile/detailed-info/detailed-info.component';
@@ -27,7 +26,6 @@ import { AuthGuard } from '@core/authentication/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: CitizenComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 

@@ -12,7 +12,6 @@ import { JobseekerProfileDialogComponent } from './_dialog/jobseeker-profile/job
 import { MatIconModule } from '@angular/material/icon';
 // import { MatTableExporterModule } from 'mat-table-exporter';
 import { MaterialModule } from '@core/material/material.module';
-import { MenuDynamicComponent } from './side-nav-menu/menu-dynamic/menu-dynamic.component';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { RouterModule } from '@angular/router';
 import { ShowImageDialogComponent } from './_dialog/show-image/show-image.component';
@@ -45,8 +44,6 @@ import { AdminChangePasswordDialogComponent } from './_dialog/change-user-passwo
 import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-info.component';
 @NgModule({
   declarations: [
-    SideNavMenuComponent,
-    MenuDynamicComponent,
     UploaderComponent,
     ViewJobDetailsDialogComponent,
     ViewJobDetailsComponent,
@@ -96,7 +93,6 @@ import { CitizenRefundInfoDialogComponent } from './_dialog/refund-info/refund-i
   ],
   exports: [
     ImageCropperComponent,
-    SideNavMenuComponent,
     UploaderComponent,
     ViewJobDetailsDialogComponent,
     ViewJobDetailsComponent,

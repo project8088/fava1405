@@ -9,7 +9,6 @@ import { MaterialModule } from '@core/material/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdminViewEventDetailsComponent } from './_dialogs/event-details/event-details/event-details.component';
 import { AdminViewEventDetailsDialogComponent } from './_dialogs/event-details/event-details.component';
-import { AdminComponent } from './admin.component';
 import { SharedModule } from '@app/shared/shared.module';
 import { AdminConfigComponent } from './config/config.component';
 import { AdminContactUsListComponent } from './contact-list/contact-list.component';
@@ -22,7 +21,6 @@ import { ChartModule } from 'angular-highcharts';
 
 @NgModule({
   declarations: [
-    AdminComponent,
     AdminDashboardComponent,
     AdminDashboardCitizenRegisterReportChartComponent,
     AdminViewEventDetailsComponent,

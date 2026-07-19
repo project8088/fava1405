@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 
 import { CoreModule } from '@core/core.module';
@@ -48,7 +47,6 @@ import { AdminCardListComponent } from './card-list/card-list.component';
 
 @NgModule({
   declarations: [
-    CardComponent,
     CardDashboardComponent,
     CardCitizenCardAdvancedSearchComponent,
     CardTransactionListComponent,

@@ -8,7 +8,7 @@ import { ServerApis } from '@core/server-apis';
 import { FormGroup } from '@angular/forms';
 
 import { merge, of } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
+import { catchError, finalize, map, startWith, switchMap } from 'rxjs/operators';
 import { AppBase } from '@app/app.base';
 
 @Component({
@@ -107,8 +107,11 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
           this.isLoadingResults = true;
           return this.dataService.get(ticketUrl, param);
         }),
-        map((response) => {
+        finalize(() => {
           this.isLoadingResults = false;
+          this.chdr.detectChanges();
+        }),
+        map((response) => {
           if (response.isSuccess && response.data) {
             var items = response.data.tickets ? response.data.tickets : [];
             this.resultsLength = response.data.totalItems ? response.data.totalItems : 0;
@@ -120,7 +123,6 @@ export class TicketListComponent extends AppBase implements OnInit, AfterViewIni
           }
         }),
         catchError((err) => {
-          this.isLoadingResults = false;
           this.toastrService.error('دريافت اطلاعات از سرور با خطا مواجه شده است!');
           return of([]);
         }),

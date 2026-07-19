@@ -30,15 +30,14 @@ export class AuthGuard implements CanActivate, CanActivateChild {
 
   chechGuard(rootUrl: string, state: RouterStateSnapshot) {
     var user = this.authService.getAuthUser();
-    if (!user) return false;
-    if (user?.isAdmin) {
-      return true;
+    if (!user) {
+      this.toastrService.error('شما اجازه دسترسی به این صفحه را ندارید!');
+      //// not logged in so redirect to login page with the return url
+      this.router.navigate(['/503'], { queryParams: { returnUrl: state.url } });
+      return false;
     }
 
-    this.toastrService.error('شما اجازه دسترسی به این صفحه را ندارید!');
-    //// not logged in so redirect to login page with the return url
-    this.router.navigate(['/503'], { queryParams: { returnUrl: state.url } });
-    return false;
+    return true;
   }
 
   chechGuardChild(state: RouterStateSnapshot, route: ActivatedRouteSnapshot) {

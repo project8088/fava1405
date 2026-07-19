@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CompanyComponent } from './company.component';
 import { CompanyRoutingModule } from './company-routing.module';
 import { CoreModule } from '@core/core.module';
 import { MaterialModule } from '@core/material/material.module';
@@ -41,7 +40,6 @@ import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor
 
 @NgModule({
   declarations: [
-    CompanyComponent,
     CompnayDashboardComponent,
     CompanyProfileComponent,
     CompanyAddressInfoComponent,

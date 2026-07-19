@@ -2,7 +2,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { BuyCardDialogComponent } from './_dialogs/buy-card/buy-card.component';
 import { CitizenCardModule } from './citizen-card/citizen-card.module';
-import { CitizenComponent } from './citizen.component';
 import { CitizenContactComponent } from './profile/contact/contact.component';
 import { CitizenDashboardComponent } from './dashboard/dashboard.component';
 import { CitizenDetailedInfoComponent } from './profile/detailed-info/detailed-info.component';
@@ -40,7 +39,6 @@ import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.compon
 
 @NgModule({
   declarations: [
-    CitizenComponent,
     CitizenDashboardComponent,
     CitizenProfileComponent,
     CitizenPersonalInfoComponent,

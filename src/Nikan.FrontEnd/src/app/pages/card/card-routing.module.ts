@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
-import { CardComponent } from './card.component';
 import { CardDashboardComponent } from './dashboard/dashboard.component';
 import { CardCitizenCardAdvancedSearchComponent } from './citizens-cards/citizen-card-advanced-search/citizen-card-advanced-search.component';
 import { CardTransactionListComponent } from './financial/transaction-list/transaction-list.component';
@@ -33,7 +32,6 @@ import { AuthGuard } from '@core/authentication/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    component: CardComponent,
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: CardDashboardComponent },

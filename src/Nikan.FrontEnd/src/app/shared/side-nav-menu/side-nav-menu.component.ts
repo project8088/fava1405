@@ -6,12 +6,14 @@ import { SideNavMenuItem } from '@core/models/menuItems';
 import { UploadUserAvatarDialogComponent } from '../_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from '@app/app.base';
 import { finalize } from 'rxjs/operators';
+import { MenuDynamicComponent } from './menu-dynamic/menu-dynamic.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'side-nav-menu',
   templateUrl: './side-nav-menu.component.html',
   styleUrls: ['./side-nav-menu.component.scss'],
-  standalone: false,
+  imports: [CommonModule, MenuDynamicComponent],
 })
 export class SideNavMenuComponent extends AppBase implements OnInit {
   @Input('menu') menuItems: SideNavMenuItem[] = [];
