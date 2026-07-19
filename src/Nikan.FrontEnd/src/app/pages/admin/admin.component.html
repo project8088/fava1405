@@ -36,9 +36,11 @@
       <!--<span>ادمین</span>-->
       <span class="spacer"></span>
 
-      <button class="btn" (click)="logout()" matTooltip="خروج از حساب کاربری">
-        <i class="fa fa-power-off mr-2"></i>
-        <span>خروج</span>
+      <button mat-button (click)="logout()" matTooltip="خروج از حساب کاربری">
+        <div class="d-flex align-items-center gap-2">
+          <i class="fa fa-power-off"></i>
+          <span>خروج</span>
+        </div>
       </button>
 
       <button mat-icon-button routerLink="/home" matTooltip="باز گشت به صفحه اصلی">
