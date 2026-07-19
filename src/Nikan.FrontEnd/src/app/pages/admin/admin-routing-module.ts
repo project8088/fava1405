@@ -8,6 +8,7 @@ import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
 import { AuthGuard } from '@core/authentication/auth.guard';
+import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
 
 const routes: Routes = [
   {
@@ -43,7 +44,10 @@ const routes: Routes = [
             (c) => c.AdminRegisterCompanyComponent,
           ),
       },
-
+      {
+        path: 'citizen-notifications/:id',
+        component: AdminAddOrUpdateCitizensNotificationComponent,
+      },
       {
         path: 'users',
         loadChildren: () => import('./users/users-module').then((m) => m.UsersModule),

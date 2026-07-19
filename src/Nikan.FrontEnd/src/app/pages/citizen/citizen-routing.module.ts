@@ -22,7 +22,6 @@ import { CitizenRefundFullInfoComponent } from './refund/citizen-refund-info/cit
 import { CitizenUploadManzalatDocumentsComponent } from './manzelat-plan/upload-manzalat-file/upload-manzalat-file.component';
 import { CitizenManzelatPlanItemComponent } from './manzelat-plan/manzelat-plan-item/manzelat-plan-item.component';
 import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.component';
-import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
 import { AuthGuard } from '@core/authentication/auth.guard';
 
 const routes: Routes = [
@@ -36,10 +35,6 @@ const routes: Routes = [
         path: 'tickets',
         canActivate: [AuthGuard],
         loadChildren: () => import('../../ticket/ticket-module').then((m) => m.TicketModule),
-      },
-      {
-        path: 'citizen-notifications/:id',
-        component: AdminAddOrUpdateCitizensNotificationComponent,
       },
       { path: 'dashboard', component: CitizenDashboardComponent },
       { path: 'upload-manzalat-form/:id', component: CitizenUploadManzalatDocumentsComponent },

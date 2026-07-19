@@ -17,7 +17,7 @@ import { AdminSettingComponent } from './setting/setting.component';
 import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
 import { AdminAddFeedBackDialogComponent } from './_dialogs/add-feedback/add-feedback.component';
-import { AdminCompaniesListComponent } from './company-list/company-list.component';
+import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +32,7 @@ import { AdminCompaniesListComponent } from './company-list/company-list.compone
     AdminContactUsListComponent,
     AdminSmsListComponent,
     AdminConfigComponent,
+    AdminAddOrUpdateCitizensNotificationComponent
   ],
   imports: [
     CommonModule,

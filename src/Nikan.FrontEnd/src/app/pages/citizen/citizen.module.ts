@@ -37,7 +37,6 @@ import { ChangeCardAddressDialogComponent } from './_dialogs/change-card-address
 import { CitizenUploadManzalatDocumentsComponent } from './manzelat-plan/upload-manzalat-file/upload-manzalat-file.component';
 import { CitizenManzelatPlanItemComponent } from './manzelat-plan/manzelat-plan-item/manzelat-plan-item.component';
 import { PlansListComponent } from './manzelat-plan/plans-list/plans-list.component';
-import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +69,6 @@ import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notifi
     CitizenUploadManzalatDocumentsComponent,
     CitizenManzelatPlanItemComponent,
     PlansListComponent,
-    AdminAddOrUpdateCitizensNotificationComponent,
   ],
   imports: [
     CommonModule,

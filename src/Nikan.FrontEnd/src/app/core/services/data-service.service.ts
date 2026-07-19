@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { ServerApis } from '../server-apis';
 import { SiteSettingViewModel } from '../models/setting';
 import { ToastrService } from 'ngx-toastr';
+import { DateTime } from 'luxon';
+import { GregorianJalaliHelper, JalaliDate } from '@core/jalali/jalali-date';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -160,16 +162,23 @@ export class DataService {
    * تبدیل تاریخ به فرمت
    * YYYY/MM/DD
    */
-  formatDate(date: string) {
-    var d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+  formatDate(date: any) {
+    debugger;
+    let d;
+    if (typeof date == 'string') {
+      d = DateTime.fromISO(date);
+    } else if (date instanceof JalaliDate) {
+      d = DateTime.fromJSDate(GregorianJalaliHelper.toGregorian(date));
+    } else if (date instanceof DateTime) {
+      d = date;
+    }
 
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
+    if (d instanceof DateTime) {
+      return d.toFormat('yyyy/MM/dd');
+    } else {
+      console.warn('invalid date:', date);
+      return date;
+    }
   }
 
   downloadPlacementRegisterRequestFile() {

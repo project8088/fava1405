@@ -110,7 +110,7 @@ export class AdminAddOrUpdateNotificationComponent
 
     let form = this.notyForm.value;
     let params: any = {
-      id: this.notificationId ? +this.notificationId : '',
+      id: this.notificationId ? +this.notificationId : null,
       title: form.title,
       body: form.body,
       description: form.description,
