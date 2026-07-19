@@ -293,17 +293,13 @@ namespace Nikan.ViewModel.Citizens
         /// </summary>
         public string MobileNumber { get; set; }
 
-        /// <summary>
-        /// کد کپچا
-        /// </summary>
-       
+        
         /// <summary>
         /// شناسه سرویس
         /// </summary>
         public int? ServiceId { get; set; }
 
-        public string CaptchaId { get; set; }
-        public string UserEnteredCaptchaCode { get; set; }
+        
 
 
 

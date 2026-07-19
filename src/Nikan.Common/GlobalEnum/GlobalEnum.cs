@@ -388,7 +388,7 @@ namespace Nikan.Common.GlobalEnum
         Important = 1,
         Necessary = 2,
     }
-
+     
     /// <summary>
     /// وضعیت درخواست کارت
     /// </summary>

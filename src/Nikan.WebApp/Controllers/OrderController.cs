@@ -25,7 +25,7 @@ namespace Nikan.WebApp.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [EnableCors("CorsPolicy")]
-    [ApiExplorerSettings(IgnoreApi = true)]
+    //[ApiExplorerSettings(IgnoreApi = true)]
     public class OrderController : Controller
     {
 
@@ -95,8 +95,7 @@ namespace Nikan.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "Citizen")]
-        // [AllowAnonymous]
+        [Authorize(Roles = "Citizen")] 
         [Route("ListAvailableCards")]
         public async Task<ApiResult<List<CardInfoViewModel>>> ListAvailableCards()
         { 
