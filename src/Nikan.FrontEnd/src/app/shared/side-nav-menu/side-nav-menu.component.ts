@@ -5,6 +5,7 @@ import { ServerApis } from '@core/server-apis';
 import { SideNavMenuItem } from '@core/models/menuItems';
 import { UploadUserAvatarDialogComponent } from '../_dialog/upload-avatar/upload-avatar.component';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'side-nav-menu',
@@ -90,24 +91,46 @@ export class SideNavMenuComponent extends AppBase implements OnInit {
       .subscribe((res) => {
         if (res) {
           this.userImage = res;
+          this.chdr.detectChanges();
         }
       });
   }
 
   getJobseekerImage() {
-    this.dataService.get(ServerApis.getKarjoImage).subscribe((response) => {
-      if (response.isSuccess) this.userImage = response.data.imageUrl;
-    });
+    this.dataService
+      .get(ServerApis.getKarjoImage)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.userImage = response.data.imageUrl;
+      });
   }
   getCompanyLogo() {
-    this.dataService.get(ServerApis.getCompanyLogo).subscribe((response) => {
-      if (response.isSuccess) this.userImage = response.data.imageUrl;
-    });
+    this.dataService
+      .get(ServerApis.getCompanyLogo)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.userImage = response.data.imageUrl;
+      });
   }
   getCitizenImage() {
-    this.dataService.get(ServerApis.getShortCitizenInfoByCitizen).subscribe((response) => {
-      if (response.isSuccess)
-        this.userImage = response.data.personalPictureUrl + '?v=' + Math.random() * 1000;
-    });
+    this.dataService
+      .get(ServerApis.getShortCitizenInfoByCitizen)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess)
+          this.userImage = response.data.personalPictureUrl + '?v=' + Math.random() * 1000;
+      });
   }
 }

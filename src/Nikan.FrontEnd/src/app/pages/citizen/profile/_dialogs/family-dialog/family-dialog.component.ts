@@ -156,7 +156,7 @@ export class CitizenFamilyDialogComponent extends AppBase implements OnInit {
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((value) => {
-        debugger;
+        
         return value;
       }),
     );

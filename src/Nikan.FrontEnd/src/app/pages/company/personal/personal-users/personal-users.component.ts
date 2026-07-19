@@ -104,7 +104,7 @@ export class CompanyPersonalUsersComponent extends AppBase implements OnInit, Af
           if (response.isSuccess && response.data) {
             var items = response.data.members ? response.data.members : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger;
+            
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

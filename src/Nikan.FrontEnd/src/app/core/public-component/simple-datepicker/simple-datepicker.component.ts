@@ -164,7 +164,6 @@ export class SimpleJalaliDatepickerComponent
     super();
 
     this.updateDayList();
-    debugger;
 
     // سال شمسی جاری برای yearList
     const today = DateTime.now().setZone('Asia/Tehran');
@@ -198,7 +197,6 @@ export class SimpleJalaliDatepickerComponent
   // ---------- ControlValueAccessor ----------
   writeValue(obj: any): void {
     if (obj) {
-      debugger;
       const dt = DateTime.fromFormat(obj, 'yyyy/MM/dd', { zone: 'utc' });
       if (dt.isValid) {
         const jDate = gregorianToJalaali(dt);
@@ -227,7 +225,7 @@ export class SimpleJalaliDatepickerComponent
     if (this.year == 0 || this.month == 0 || this.day == 0) {
       return;
     }
-    debugger;
+    
     this.isLeapYear = isLeapJalaaliYear(this.year);
     this.updateDayList();
 

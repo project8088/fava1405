@@ -102,7 +102,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
       .open(CitizenFamilyDialogComponent, {
         data: family,
         panelClass: 'custom-dialog',
-        width: '1000px',
+        width: '80%',
       })
       .afterClosed()
       .subscribe((result) => {
@@ -119,6 +119,7 @@ export class CitizenMyFamilyComponent extends AppBase implements OnInit {
             this.familyList.push(result);
             this.profileComponent.getPersonalInfo();
           }
+          this.chdr.detectChanges();
         }
       });
   }

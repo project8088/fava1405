@@ -186,25 +186,20 @@ export class CitizenContactComponent extends AppBase implements OnInit {
       })
       .pipe(
         finalize(() => {
-          this.isSavingHome = false;
+          this.isSavingWork = false;
           this.chdr.detectChanges();
         }),
       )
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.editMode = false;
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-          this.isSavingWork = false;
-        },
-        (error: any) => {
-          this.isSavingWork = false;
-        },
-      );
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.editMode = false;
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+        this.isSavingWork = false;
+      });
   }
 
   getHomeCityText() {

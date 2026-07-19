@@ -11,7 +11,7 @@ import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
 
 @Component({
-  selector: 'app-citizen-personal-info',
+  selector: 'detail-citizen-personal-info',
   templateUrl: './detailed-info.component.html',
   styleUrls: ['./detailed-info.component.scss'],
   standalone: false,
@@ -264,7 +264,7 @@ export class CitizenDetailedInfoComponent extends AppBase implements OnInit {
   }
 
   getListOptions(options: { key: number; text: string }[]) {
-    debugger;
+    
     return options.map((el: { key: number; text: string }) => {
       return { value: +el.key, text: el.text };
     });

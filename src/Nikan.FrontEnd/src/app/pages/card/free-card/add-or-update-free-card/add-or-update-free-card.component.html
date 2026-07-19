@@ -10,9 +10,7 @@
       <div class="d-flex my-5 p-5 align-items-center justify-content-center">
         <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
-    }
-
-    @if (!loading) {
+    } @else {
       <form [formGroup]="storeForm">
         <div class="row">
           <mat-form-field class="col-md-3">

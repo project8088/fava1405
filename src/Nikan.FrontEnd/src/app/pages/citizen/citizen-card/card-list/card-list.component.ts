@@ -76,7 +76,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
       .subscribe((response) => {
         const cards: RegisterServiceModel[] = response.data ? response.data : [];
         if (response.isSuccess) {
-          debugger;
+          
           this.router.navigate(['/citizen/citizen-card/card-details'], {
             queryParams: { id: card.cardInfoId },
           });
@@ -89,7 +89,7 @@ export class CitizenCardListComponent extends AppBase implements OnInit {
       .open(BuyCardDialogComponent, {
         data: { card },
         panelClass: 'custom-dialog',
-        width: '1000px',
+        width: '80%',
       })
       .afterClosed()
       .subscribe((result) => {});

@@ -62,7 +62,7 @@ export class ProductListComponent extends AppBase implements AfterViewInit, OnIn
           if (response.isSuccess && response.data) {
             var items = response.data.products ? response.data.products : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger;
+            
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

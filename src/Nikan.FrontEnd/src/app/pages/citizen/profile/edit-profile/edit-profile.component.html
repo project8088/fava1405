@@ -5,9 +5,7 @@
       <div class="p-5 d-flex align-items-center justify-content-center">
         <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
-    }
-
-    @if (!loading) {
+    } @else {
       <form [formGroup]="personalForm" class="p-4">
         <div class="custom-alert">
           تاریخ آخرین ویرایش اطلاعات: {{ lastModifiedOnDate | luxonFormat }}

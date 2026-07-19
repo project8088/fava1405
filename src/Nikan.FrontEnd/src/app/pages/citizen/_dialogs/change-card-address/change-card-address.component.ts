@@ -27,7 +27,7 @@ export class ChangeCardAddressDialogComponent extends AppBase implements OnInit 
   ) {
     super();
     this.info = _data.info;
-    debugger;
+    
 
     if (_data.info.id && _data.info.id != '0') {
       this.id = _data.info.id;

@@ -30,13 +30,21 @@ export class CreditcardComponent extends AppBase implements OnInit {
   ngOnInit(): void {}
 
   getCardInfo() {
-    this.dataService.get(ServerApis.getCitizenBankCardNumber).subscribe((data) => {
-      this.loading = false;
-      this.cardForm.patchValue({
-        cardNumber: data.data.cardNumber,
-        shabaNumber: data.data.shabaNumber,
+    this.dataService
+      .get(ServerApis.getCitizenBankCardNumber)
+      .pipe(
+        finalize(() => {
+          this.loading = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((data) => {
+        this.loading = false;
+        this.cardForm.patchValue({
+          cardNumber: data.data.cardNumber,
+          shabaNumber: data.data.shabaNumber,
+        });
       });
-    });
   }
 
   saveForm() {

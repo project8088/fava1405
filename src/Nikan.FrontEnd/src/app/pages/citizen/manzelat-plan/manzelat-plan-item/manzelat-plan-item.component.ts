@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ServerApis } from '@core/server-apis';
 import { AppBase } from '@app/app.base';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-manzelat-plan-item',
@@ -74,48 +75,62 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
   getCardInfo() {
     this.dataService
       .get(ServerApis.getCitizenManzalat, { formBaseId: this.id })
-      .subscribe((data) => {
+      .pipe(
+        finalize(() => {
+          this.isSaving = false;
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
         this.loading = false;
-
-        this.theForm.patchValue({
-          chk_Janbazan: data.data.chk_Janbazan,
-          chk_Janbazan_JesmiHarekati_NoWheelChair:
-            data.data.chk_Janbazan_JesmiHarekati_NoWheelChair,
-          typ_Janbazan_JesmiHarekati_NoWheelChair:
-            data.data.typ_Janbazan_JesmiHarekati_NoWheelChair,
-          chk_Janbazan_JesmiHarekati_WheelChair: data.data.chk_Janbazan_JesmiHarekati_WheelChair,
-          typ_Janbazan_JesmiHarekati_WheelChair: data.data.typ_Janbazan_JesmiHarekati_WheelChair,
-          chk_Janbazan_Zehni: data.data.chk_Janbazan_Zehni,
-          typ_Janbazan_Zehni: data.data.typ_Janbazan_Zehni,
-          chk_Janbazan_AsabRavan: data.data.chk_Janbazan_AsabRavan,
-          typ_Janbazan_AsabRavan: data.data.typ_Janbazan_AsabRavan,
-          chk_Janbazan_Binaei: data.data.chk_Janbazan_Binaei,
-          typ_Janbazan_Binaei: data.data.typ_Janbazan_Binaei,
-          chk_Janbazan_Shenavaei: data.data.chk_Janbazan_Shenavaei,
-          typ_Janbazan_Shenavaei: data.data.typ_Janbazan_Shenavaei,
-          chk_Janbazan_Sayer: data.data.chk_Janbazan_Sayer,
-          fu_Janbazan: data.data.fu_Janbazan,
-          //معلولین
-          chkMmaloulin: data.data.chkMmaloulin,
-          chk_Maloulin_JesmiHarekati_NoWheelChair:
-            data.data.chk_Maloulin_JesmiHarekati_NoWheelChair,
-          typ_Maloulin_JesmiHarekati_NoWheelChair:
-            data.data.typ_Maloulin_JesmiHarekati_NoWheelChair,
-          chk_Maloulin_JesmiHarekati_WheelChair: data.data.chk_Maloulin_JesmiHarekati_WheelChair,
-          typ_Maloulin_JesmiHarekati_WheelChair: data.data.typ_Maloulin_JesmiHarekati_WheelChair,
-          chk_Maloulin_Zehni: data.data.chk_Maloulin_Zehni,
-          typ_Maloulin_Zehni: data.data.typ_Maloulin_Zehni,
-          chk_Maloulin_AsabRavan: data.data.chk_Maloulin_AsabRavan,
-          typ_Maloulin_AsabRavan: data.data.typ_Maloulin_AsabRavan,
-          chk_Maloulin_Binaei: data.data.chk_Maloulin_Binaei,
-          typ_Maloulin_Binaei: data.data.typ_Maloulin_Binaei,
-          chk_Maloulin_Shenavaei: data.data.chk_Maloulin_Shenavaei,
-          typ_Maloulin_Shenavaei: data.data.typ_Maloulin_Shenavaei,
-          chk_Maloulin_Sayer: data.data.chk_Maloulin_Sayer,
-          fu_Maloulin: data.data.fu_Maloulin,
-          typ_ZananSarparast: data.data.typ_ZananSarparast,
-          typ_SpecialDiseases: data.data.typ_SpecialDiseases,
-        });
+        if (response.data && response.isSuccess) {
+          this.theForm.patchValue({
+            chk_Janbazan: response.data.chk_Janbazan,
+            chk_Janbazan_JesmiHarekati_NoWheelChair:
+              response.data.chk_Janbazan_JesmiHarekati_NoWheelChair,
+            typ_Janbazan_JesmiHarekati_NoWheelChair:
+              response.data.typ_Janbazan_JesmiHarekati_NoWheelChair,
+            chk_Janbazan_JesmiHarekati_WheelChair:
+              response.data.chk_Janbazan_JesmiHarekati_WheelChair,
+            typ_Janbazan_JesmiHarekati_WheelChair:
+              response.data.typ_Janbazan_JesmiHarekati_WheelChair,
+            chk_Janbazan_Zehni: response.data.chk_Janbazan_Zehni,
+            typ_Janbazan_Zehni: response.data.typ_Janbazan_Zehni,
+            chk_Janbazan_AsabRavan: response.data.chk_Janbazan_AsabRavan,
+            typ_Janbazan_AsabRavan: response.data.typ_Janbazan_AsabRavan,
+            chk_Janbazan_Binaei: response.data.chk_Janbazan_Binaei,
+            typ_Janbazan_Binaei: response.data.typ_Janbazan_Binaei,
+            chk_Janbazan_Shenavaei: response.data.chk_Janbazan_Shenavaei,
+            typ_Janbazan_Shenavaei: response.data.typ_Janbazan_Shenavaei,
+            chk_Janbazan_Sayer: response.data.chk_Janbazan_Sayer,
+            fu_Janbazan: response.data.fu_Janbazan,
+            //معلولین
+            chkMmaloulin: response.data.chkMmaloulin,
+            chk_Maloulin_JesmiHarekati_NoWheelChair:
+              response.data.chk_Maloulin_JesmiHarekati_NoWheelChair,
+            typ_Maloulin_JesmiHarekati_NoWheelChair:
+              response.data.typ_Maloulin_JesmiHarekati_NoWheelChair,
+            chk_Maloulin_JesmiHarekati_WheelChair:
+              response.data.chk_Maloulin_JesmiHarekati_WheelChair,
+            typ_Maloulin_JesmiHarekati_WheelChair:
+              response.data.typ_Maloulin_JesmiHarekati_WheelChair,
+            chk_Maloulin_Zehni: response.data.chk_Maloulin_Zehni,
+            typ_Maloulin_Zehni: response.data.typ_Maloulin_Zehni,
+            chk_Maloulin_AsabRavan: response.data.chk_Maloulin_AsabRavan,
+            typ_Maloulin_AsabRavan: response.data.typ_Maloulin_AsabRavan,
+            chk_Maloulin_Binaei: response.data.chk_Maloulin_Binaei,
+            typ_Maloulin_Binaei: response.data.typ_Maloulin_Binaei,
+            chk_Maloulin_Shenavaei: response.data.chk_Maloulin_Shenavaei,
+            typ_Maloulin_Shenavaei: response.data.typ_Maloulin_Shenavaei,
+            chk_Maloulin_Sayer: response.data.chk_Maloulin_Sayer,
+            fu_Maloulin: response.data.fu_Maloulin,
+            typ_ZananSarparast: response.data.typ_ZananSarparast,
+            typ_SpecialDiseases: response.data.typ_SpecialDiseases,
+          });
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
       });
   }
 
@@ -126,20 +141,21 @@ export class CitizenManzelatPlanItemComponent extends AppBase implements OnInit 
         ...form,
         manzalatBaseFormId: this.id,
       })
-      .subscribe(
-        (response) => {
-          if (response && response.isSuccess) {
-            this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
-            this.router.navigateByUrl('/citizen/upload-manzalat-form/' + this.id);
-          } else {
-            let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
-            this.toastrService.error(msg);
-          }
-        },
-        (error: any) => {
+      .pipe(
+        finalize(() => {
           this.isSaving = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response && response.isSuccess) {
+          this.toastrService.success('اطلاعات با موفقیت ذخیره شد.');
+          this.router.navigateByUrl('/citizen/upload-manzalat-form/' + this.id);
+        } else {
+          let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';
+          this.toastrService.error(msg);
+        }
+      });
   }
 
   /**

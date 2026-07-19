@@ -196,6 +196,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
         plaque: null,
         postalCode: null,
       });
+    this.chdr.detectChanges();
   }
   loadWorkAddress() {
     this.workAddress;
@@ -217,6 +218,7 @@ export class BuyCardDialogComponent extends AppBase implements OnInit {
         plaque: null,
         postalCode: null,
       });
+    this.chdr.detectChanges();
   }
 
   submitAddress(stepper: MatStepper) {

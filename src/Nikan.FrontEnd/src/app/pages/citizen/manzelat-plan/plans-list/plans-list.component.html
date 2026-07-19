@@ -18,9 +18,9 @@
         <div class="row col-md-12">
           <div class="row col-md-12 alert alert-success">
             ثبت نام شما در طرح منزلت مورد تایید قرار گرفته است . در صورتیکه
-            <a href="/citizen/citizen-card"> کارت منزلت </a>
+            <a routerLink="/citizen/citizen-card"> کارت منزلت </a>
             را خریداری نکرده اید از این قسمت برای خرید کارت اقدام نمائید
-            <a href="/citizen/citizen-card"> خرید کارت منزلت </a>
+            <a routerLink="/citizen/citizen-card"> خرید کارت منزلت </a>
           </div>
         </div>
       }
@@ -70,7 +70,7 @@
             <br />
             برای ثبت نام در فرم منزلت ابتدا آدرس محل سکونت خود را از قسمت زیر تکمیل نمایید
             <br />
-            <a href="/citizen/profile/0/contact"> تکمیل آدرس محل سکونت </a>
+            <a routerLink="/citizen/profile/0/contact"> تکمیل آدرس محل سکونت </a>
           </div>
         </div>
       }
@@ -98,7 +98,7 @@
                 <th mat-header-cell *matHeaderCellDef>تکمیل فرم</th>
                 <td mat-cell *matCellDef="let element">
                   @if (element.formResult !== true) {
-                    <a href="/citizen/manzelat-plan-item/{{ element.id }}">
+                    <a routerLink="/citizen/manzelat-plan-item/{{ element.id }}">
                       {{ element.citizenIsRegisterThisForm ? 'ویرایش درخواست' : 'ثبت درخواست' }}
                     </a>
                   }
@@ -108,7 +108,7 @@
                 <th mat-header-cell *matHeaderCellDef>ارسال مدارک</th>
                 <td mat-cell *matCellDef="let element">
                   @if (element.citizenIsRegisterThisForm) {
-                    <a href="/citizen/upload-manzalat-form/{{ element.id }}"> ارسال مدرک </a>
+                    <a routerLink="/citizen/upload-manzalat-form/{{ element.id }}"> ارسال مدرک </a>
                   }
                 </td>
               </ng-container>

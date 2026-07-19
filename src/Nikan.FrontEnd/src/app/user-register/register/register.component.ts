@@ -165,7 +165,7 @@ export class RegisterComponent extends AppBase implements OnInit {
           this.toastrService.success(data.messages);
 
           this.authService.storeToken(data.data.access_token, data.data.refresh_token);
-          debugger;
+          
           this.router.navigateByUrl('/redirect?serviceId=' + this.serviceId);
         } else this.toastrService.error(data.messages);
       });

@@ -16,7 +16,7 @@ export class CardProfileDialogComponent extends AppBase implements OnInit {
     @Inject(MAT_DIALOG_DATA) private _data: any,
   ) {
     super();
-    debugger;
+    
     if (_data) {
       this.id = _data.id;
     }

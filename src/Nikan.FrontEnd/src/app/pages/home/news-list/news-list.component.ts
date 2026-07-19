@@ -66,7 +66,7 @@ export class MainNewsListComponent extends AppBase implements AfterViewInit, OnI
           if (response.isSuccess && response.data) {
             var items = response.data.news ? response.data.news : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger;
+            
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

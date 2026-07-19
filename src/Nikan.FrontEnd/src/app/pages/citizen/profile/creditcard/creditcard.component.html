@@ -5,10 +5,8 @@
       <div class="p-5 d-flex align-items-center justify-content-center">
         <mat-spinner diameter="50" color="default"></mat-spinner>
       </div>
-    }
-
-    @if (!loading) {
-      <form [formGroup]="cardForm" class="p-4">
+    } @else {
+      <form [formGroup]="cardForm" class="p-4 row">
         <div class="col-md-12">
           <strong>
             ثبت اطلاعات بانکی برای شهروندان اختیاری می باشد و صرفا بابت برگشت هزینه کلاسهای آموزشی

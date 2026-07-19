@@ -32,6 +32,7 @@ html {
   --mat-icon-button-state-layer-size: 40px !important;
   --mat-sys-corner-full: 10px !important;
   --mat-sys-corner-extra-large: 5px !important;
+  --mat-dialog-container-max-width: 100% !important;
   @include mat.theme(
     (
       color: (
@@ -364,10 +365,6 @@ button:focus {
   object-fit: cover;
 }
 
-.mat-horizontal-stepper-header-container {
-  border: 1px solid #dbdbdb !important;
-  box-shadow: 1px 3px 5px #9c9c9c69;
-}
 body {
   text-align: right;
 }

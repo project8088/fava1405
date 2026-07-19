@@ -111,19 +111,20 @@ export class CardDetailComponent extends AppBase implements OnInit {
   }
   //getCardInfo
   getCardDetails() {
+    this.loading = true;
     this.dataService
       .get(ServerApis.getCitizenCardPriceInfo, {
         cardInfoId: this.cardInfoId,
       })
-      .subscribe(
-        (response) => {
+      .pipe(
+        finalize(() => {
           this.loading = false;
-          this.cardDetails = response.data ? response.data : [];
-        },
-        (error: any) => {
-          this.loading = false;
-        },
-      );
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        this.cardDetails = response.data ? response.data : [];
+      });
   }
 
   getAddresses() {
@@ -157,6 +158,7 @@ export class CardDetailComponent extends AppBase implements OnInit {
         plaque: null,
         postalCode: null,
       });
+    this.chdr.detectChanges();
   }
   loadWorkAddress() {
     this.workAddress;
@@ -180,11 +182,12 @@ export class CardDetailComponent extends AppBase implements OnInit {
         plaque: null,
         postalCode: null,
       });
+    this.chdr.detectChanges();
   }
 
   submitAddress(stepper: MatStepper) {
     const form = this.addressForm.getRawValue();
-    debugger;
+
     this.isSaving = true;
     return this.dataService
       .post(ServerApis.addOrUpdteCitizenAddressByCitizenForCardAddress, {

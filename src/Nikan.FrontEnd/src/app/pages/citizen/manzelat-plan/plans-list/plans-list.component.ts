@@ -38,7 +38,7 @@ export class PlansListComponent extends AppBase implements OnInit {
         }),
       )
       .subscribe((data) => {
-        debugger;
+        
         this.manzelatForms = data.data.forms;
         this.hasAddress = data.data.hasAddress;
         this.hasRegister = data.data.hasRegister;

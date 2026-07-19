@@ -72,7 +72,7 @@ export class AdminAllCitizensFeedBacksComponent extends AppBase implements OnIni
           if (response.isSuccess && response.data) {
             var items = response.data.items ? response.data.items : [];
             this.listCount = response.data.totalItems ? response.data.totalItems : 0;
-            // debugger;
+            
             return items;
           } else {
             let msg = response.messages ? response.messages : 'متاسفانه خطایی در سرور رخ داده است!';

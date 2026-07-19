@@ -125,7 +125,7 @@ export class AdminAddOrUpdateCitizensNotificationComponent
       groupId: form.groupId,
     };
 
-    debugger;
+    
 
     this.isSaving = true;
     this.dataService

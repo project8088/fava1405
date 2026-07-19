@@ -112,7 +112,7 @@ export class DataService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    debugger;
+    
     if (error.status === 0) {
       this.toastrService.error('عدم دسترسی');
     } else if (error.status === 405) {
@@ -130,7 +130,7 @@ export class DataService {
    * @param type - type of the document.
    */
   private downLoadFile(data: any, type: string, fileName: string) {
-    debugger;
+    
     this.toastrService.info('در حال دریافت فایل لطفا منتظر بمانید');
     let blob = new File([data], fileName, { type: type, endings: 'native' });
     let url = window.URL.createObjectURL(blob);
@@ -163,7 +163,7 @@ export class DataService {
    * YYYY/MM/DD
    */
   formatDate(date: any) {
-    debugger;
+    
     let d;
     if (typeof date == 'string') {
       d = DateTime.fromISO(date);

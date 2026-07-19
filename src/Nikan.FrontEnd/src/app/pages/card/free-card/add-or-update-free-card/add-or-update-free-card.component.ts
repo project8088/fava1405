@@ -64,7 +64,7 @@ export class CardAddOrUpdateFreeCardComponent extends AppBase implements OnInit,
           this.baseEnums.imagerReviewStatusFormFreeCard = response.imagerReviewStatusFormFreeCard;
           this.baseEnums.cardDeliverType = response.cardDeliverType;
 
-          debugger;
+          
         }
       },
       (error: any) => {

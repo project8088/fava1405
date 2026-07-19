@@ -17,7 +17,12 @@ $default-color: #039ac2;
 .mat-mdc-stepper-horizontal {
   padding-top: 2px;
 }
-
+.mat-horizontal-stepper-header-container {
+  border: 1px solid #dbdbdb !important;
+}
+.mat-horizontal-content-container {
+  padding: 15px !important;
+}
 .mat-mdc-horizontal-stepper-header-container {
   background: #ebebeb !important;
   border: 1px #a19f9f solid;

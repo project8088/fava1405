@@ -119,6 +119,7 @@ export class CitizenEducationComponent extends AppBase implements OnInit {
             this.educationList.push(result);
             this.profileComponent.getPersonalInfo();
           }
+          this.chdr.detectChanges();
         }
       });
   }
