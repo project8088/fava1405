@@ -490,7 +490,6 @@ export const ServerApis = {
   getCompanyBaseInfo: base.mainApi + 'companies/GetBaseInfo',
   updateCompnayBaseInfo: base.mainApi + 'companies/UpdateBaseInfo',
   getFullCompanyInfo: base.mainApi + 'companies/GetFullCompanyInfo',
-  fullCompanyInfo: base.mainApi + 'companies/FullCompanyInfo',
   addExitPermit: base.mainApi + 'companies/AddExitPermit',
   getAllExitPermit: base.mainApi + 'companies/GetAllExitPermit',
   getExitPermitForCompany: base.mainApi + 'companies/GetExitPermit',

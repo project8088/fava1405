@@ -8,6 +8,7 @@ import { IndexComponent } from './index/index.component';
 import { MainPageDetailsComponent } from './page-details/page-details.component';
 import { TicketAnswerComponent } from './ticket-answer/ticket-answer.component';
 import { TicketComponent } from './ticket/ticket.component';
+import { CompanyPageComponent } from './company-page/company-page.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'faq', component: FaqListComponent },
       { path: 'ticket', component: TicketComponent },
       { path: 'ticket-answer', component: TicketAnswerComponent },
+      { path: 'company/:id', component: CompanyPageComponent },
       {
         path: 'bankcallback',
         component: BankCallBackComponent,

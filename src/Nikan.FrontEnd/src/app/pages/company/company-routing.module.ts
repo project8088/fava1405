@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { CompanyComponent } from './company.component';
 import { CompnayDashboardComponent } from './dashboard/dashboard.component';
 import { CompanyProfileComponent } from './company-profile/company-profile.component';
-import { CompanyInfoComponent } from '@app/shared/company-info/company-info.component';
 import { ChangeCurrentUserPasswordComponent } from '@app/shared/change-current-user-password/change-current-user-password.component';
 import { CompanyContactUsListComponent } from './contact-list/contact-list.component';
 import { CompanyPersonalUsersComponent } from './personal/personal-users/personal-users.component';
@@ -33,7 +32,6 @@ const routes: Routes = [
       },
       { path: 'dashboard', component: CompnayDashboardComponent },
       { path: 'company-profile/:id', component: CompanyProfileComponent },
-      { path: 'company-info/:id', component: CompanyInfoComponent },
       { path: 'contact-us', component: CompanyContactUsListComponent },
       { path: 'personal/:id', component: CompanyPersonalUsersComponent },
       { path: 'addupdate-personal/:companyId/:id', component: CompanyAddOrUpdatePersonalComponent },

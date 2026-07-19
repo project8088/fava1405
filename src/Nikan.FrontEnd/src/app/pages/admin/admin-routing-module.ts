@@ -9,6 +9,7 @@ import { AdminSmsListComponent } from './sms-list/sms-list.component';
 import { SmsSettingComponent } from './sms-setting/sms-setting.component';
 import { AuthGuard } from '@core/authentication/auth.guard';
 import { AdminAddOrUpdateCitizensNotificationComponent } from './citizens-notification/citizens-notification.component';
+import { CompanyInfoComponent } from '@app/shared/company-info/company-info.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
           import('./company-list/company-list.component').then(
             (c) => c.AdminCompaniesListComponent,
           ),
+      },
+      {
+        path: 'company-info/:id',
+        component: CompanyInfoComponent,
       },
       {
         path: 'register-company',

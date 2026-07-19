@@ -12,20 +12,15 @@
   overflow: hidden;
 }
 
-agm-map {
-  height: 300px;
-  width: 100%;
-}
-
-::ng-deep .agm-info-window-content {
-  font-family: 'iranSans', 'Arial';
-  padding: 5px 25px;
-}
-
 .img-fluid,
 .img-thumbnail {
   height: 140px;
   width: 100%;
 
   display: block;
+}
+
+#map {
+  height: 500px;
+  font-family: 'iranSans', 'Arial';
 }

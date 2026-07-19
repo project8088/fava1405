@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, viewChild } from '@angular/core';
 import { CompanyInfoDto } from '@core/models/company/company-info';
 import { ServerApis } from '@core/server-apis';
 import { FormGroup, Validators } from '@angular/forms';
@@ -6,6 +6,7 @@ import { CustomFormValidators } from '@core/custom-validator/form-validation';
 import { AuthUser } from '@core/authentication/user.model';
 import { AppBase } from '@app/app.base';
 import { finalize } from 'rxjs';
+import * as LeafLet from 'leaflet';
 
 @Component({
   selector: 'app-company-page',
@@ -33,6 +34,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   lat = 0;
   lng = 0;
 
+  map = viewChild<ElementRef<HTMLDivElement>>('map');
   constructor(private customValidator: CustomFormValidators) {
     super();
     this.contactForm = this.fb.group({
@@ -67,7 +69,7 @@ export class CompanyPageComponent extends AppBase implements OnInit {
   getInfo() {
     this.loading = true;
     this.dataService
-      .get(ServerApis.fullCompanyInfo, {
+      .get(ServerApis.getFullCompanyInfo, {
         companyId: this.companyId,
       })
       .pipe(
@@ -83,11 +85,43 @@ export class CompanyPageComponent extends AppBase implements OnInit {
             this.lat = +this.companyInfo.lat;
             this.lng = +this.companyInfo.lng;
           }
+          this.initMap();
         } else {
           var msg = response.messages ? response.messages : 'خطایی در سرور رخ داده است.';
           this.toastrService.error(msg);
         }
       });
+  }
+
+  initMap() {
+    if (!this.map()?.nativeElement) return;
+    var map = LeafLet.map(this.map()!.nativeElement).setView(
+      LeafLet.latLng(this.lat, this.lng),
+      13,
+    );
+
+    LeafLet.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '',
+    }).addTo(map);
+    let markerIcon = new LeafLet.Icon({
+      iconSize: [38, 40],
+      iconAnchor: [18, 40],
+      popupAnchor: [0, -40],
+      iconUrl: 'images/mapmarker.png',
+    });
+    LeafLet.marker(LeafLet.latLng(this.lat, this.lng), {
+      icon: markerIcon,
+    })
+      .addTo(map)
+      .bindPopup(
+        `
+            <p>
+              <strong>${this.companyInfo?.companyName}</strong>
+            </p>
+            <p>${this.companyInfo?.fullAddress ?? ''}</p>
+        `,
+      )
+      .openPopup();
   }
 
   saveInfo() {

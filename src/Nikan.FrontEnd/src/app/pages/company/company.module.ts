@@ -37,6 +37,7 @@ import { CompanyImportExcelDialogComponent } from './_dialogs/importPersonel-exc
 import { CompanyCitizenExcelBatchFileDetailsComponent } from './citizen-excel-batch-file-details/citizen-excel-batch-file-details.component';
 import { AdminCompanyContractDialogComponent } from './_dialogs/company-contract/company-contract.component';
 import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-change-status/company-change-status.component';
+import { HtmlEditorModule } from '@core/public-component/html-editor/html-editor.module';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { AdminCompanyChangeStatusDialogComponent } from './_dialogs/company-chan
     FormsModule,
     ReactiveFormsModule,
     RouterModule,
+    HtmlEditorModule,
   ],
 })
 export class CompanyModule {}

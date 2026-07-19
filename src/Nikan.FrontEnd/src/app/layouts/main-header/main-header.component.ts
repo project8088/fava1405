@@ -74,7 +74,6 @@ export class MainHeaderComponent extends AppBase implements OnInit {
             else return 0;
           });
           this.menuItems = this.getNestedChildren(data);
-          console.log(this.menuItems);
         } else {
           var msg = response.messages
             ? response.messages
