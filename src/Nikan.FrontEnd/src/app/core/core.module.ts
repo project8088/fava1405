@@ -22,6 +22,7 @@ import { InputRefundUsersAutoCompleteComponent } from './public-component/input-
 import { LuxonFormatPipe } from './pipe/luxon-format.pipe';
 import { LuxonFromNowPipe } from './pipe/luxon-from-now.pipe';
 import { ExportToExcelDirective } from './directive/export-to-excel.directive';
+import { RoleTranslatePipe } from './pipe/role-translate.pipe';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ExportToExcelDirective } from './directive/export-to-excel.directive';
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
     ExportToExcelDirective,
+    RoleTranslatePipe,
   ],
   imports: [CommonModule, MaterialModule, FormsModule, ReactiveFormsModule],
   providers: [CustomFormValidators, CustomModelValidators],
@@ -62,6 +64,7 @@ import { ExportToExcelDirective } from './directive/export-to-excel.directive';
     InputCompanyAutoCompleteComponent,
     InputRefundUsersAutoCompleteComponent,
     ExportToExcelDirective,
+    RoleTranslatePipe,
   ],
 })
 export class CoreModule {}

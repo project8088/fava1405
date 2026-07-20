@@ -15,7 +15,6 @@ import { MaterialModule } from '@core/material/material.module';
 import { NgxUploaderModule } from 'ngx-uploader';
 import { RouterModule } from '@angular/router';
 import { ShowImageDialogComponent } from './_dialog/show-image/show-image.component';
-import { SideNavMenuComponent } from './side-nav-menu/side-nav-menu.component';
 import { StoreDetailsComponent } from './store-details/store-details.component';
 import { TimerComponent } from './timer/timer.component';
 import { UploadUserAvatarDialogComponent } from './_dialog/upload-avatar/upload-avatar.component';

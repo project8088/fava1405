@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { AppBase } from '@app/app.base';
 import { CommonModule } from '@angular/common';
 import { MaterialModule } from '@core/material/material.module';
-import { SideNavMenuComponent } from '@app/shared/side-nav-menu/side-nav-menu.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterModule } from '@angular/router';
 import { AuthUser } from '@core/authentication/user.model';
@@ -17,18 +16,34 @@ import { CARD_MENU } from './CARD_MENU';
 import { CITIZEN_MENU } from './CITIZEN_MENU';
 import { WEB_USER_MENU } from './WEB_USER_MENU';
 import { ServerApis } from '@core/server-apis';
+import { ROLES } from '@core/authentication/auth.service';
+import { CoreModule } from '../core/core.module';
+import { FormsModule } from '@angular/forms';
+import { UploadUserAvatarDialogComponent } from '@app/shared/_dialog/upload-avatar/upload-avatar.component';
+import { MenuDynamicComponent } from '@app/shared/menu-dynamic/menu-dynamic.component';
 
 @Component({
   selector: 'app-panel',
   templateUrl: './panel.component.html',
   styleUrls: ['./panel.component.scss'],
-  imports: [CommonModule, MaterialModule, MatSidenavModule, RouterModule, SideNavMenuComponent],
+  imports: [
+    CommonModule,
+    MaterialModule,
+    MatSidenavModule,
+    RouterModule,
+    CoreModule,
+    FormsModule,
+    MenuDynamicComponent,
+  ],
 })
 export class PanelComponent extends AppBase implements OnInit, OnDestroy {
   theme: string = 'default';
 
   miniSideBar: boolean = false;
-  menuItems: SideNavMenuItem[] = [];
+
+  selectedRole = '';
+  roleMenus = new Map<string, SideNavMenuItem[]>();
+  selectedRoleMenu: SideNavMenuItem[] = [];
   protected breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset).pipe(
@@ -36,28 +51,50 @@ export class PanelComponent extends AppBase implements OnInit, OnDestroy {
     shareReplay(),
   );
   user?: AuthUser | null;
+  baseUrl: string = ServerApis.baseUrl;
+  userImage: string = '';
   constructor() {
     super();
     this.authService.currentUser.subscribe((u) => {
       this.user = u;
+      this.roleMenus = new Map<string, SideNavMenuItem[]>();
+      this.selectedRoleMenu = [];
       if (!this.user) return;
-      this.menuItems = [];
-      if (this.user.isAdmin) {
-        this.menuItems = ADMIN_MENU;
-      } else if (this.user.isCompany) {
-        if (this.user.userCompanyStatus == 1) {
-          this.menuItems = COMPANY_MENU_STATE_1;
-        } else {
-          this.menuItems = COMPANY_MENU_STATE_2;
-        }
-      } else if (this.user.isCardUser) {
-        this.menuItems = CARD_MENU;
-      } else if (this.user.isCitizen) {
-        this.menuItems = CITIZEN_MENU;
-      } else if (this.user.isWebUser) {
-        this.menuItems = WEB_USER_MENU;
-        this.getLastApiHelp();
+
+      if (this.user?.isJobseeker) this.getJobseekerImage();
+      if (this.user?.isCompany) this.getCompanyLogo();
+      if (this.user?.isCitizen) this.getCitizenImage();
+
+      const roles = this.user.roles ?? [];
+      // admin
+      if (roles.indexOf(ROLES.admin) > -1) {
+        this.roleMenus.set(ROLES.admin, ADMIN_MENU);
       }
+      // company
+      if (roles.indexOf(ROLES.company) > -1) {
+        if (this.user.userCompanyStatus == 1) {
+          this.roleMenus.set(ROLES.company, COMPANY_MENU_STATE_1);
+        } else {
+          this.roleMenus.set(ROLES.company, COMPANY_MENU_STATE_2);
+        }
+      }
+      // card
+      if (roles.indexOf(ROLES.card) > -1) {
+        this.roleMenus.set(ROLES.card, CARD_MENU);
+      }
+      // web api user
+      if (roles.indexOf(ROLES.webapiuser) > -1) {
+        this.getLastApiHelp((list) => {
+          this.roleMenus.set(ROLES.webapiuser, [...WEB_USER_MENU, ...list]);
+        });
+      }
+      // citizen
+      if (roles.indexOf(ROLES.citizen) > -1) {
+        this.roleMenus.set(ROLES.citizen, CITIZEN_MENU);
+      }
+
+      this.selectedRole = this.roleMenus.entries().next().value?.[0] ?? '';
+      this.selectedRoleMenu = this.roleMenus.get(this.selectedRole) ?? [];
     });
   }
 
@@ -68,11 +105,7 @@ export class PanelComponent extends AppBase implements OnInit, OnDestroy {
     document.body.classList.remove(this.theme);
   }
 
-  logout() {
-    this.authService.logout();
-  }
-
-  getLastApiHelp() {
+  getLastApiHelp(callback: (list: SideNavMenuItem[]) => void) {
     this.dataService
       .get(ServerApis.getLastNews, {})
       .pipe(
@@ -82,19 +115,86 @@ export class PanelComponent extends AppBase implements OnInit, OnDestroy {
       )
       .subscribe((response) => {
         var arr = response.data ? response.data : [];
+        let list: SideNavMenuItem[] = [];
         for (var i in arr) {
-          this.menuItems.push({
+          list.push({
             name: arr[i].title,
             icon: 'fa fa-barcode',
             url: '/webuser/help-details/' + arr[i].id,
           });
         }
-
-        this.menuItems.push({
+        list.push({
           name: 'تغییر کلمه عبور',
           icon: 'fa fa-key',
           url: '/webuser/change-password',
         });
+
+        callback(list);
       });
+  }
+
+  logout() {
+    this.authService.logout(true);
+  }
+
+  openUploadDialog() {
+    if (!this.user?.isCompany && !this.user?.isJobseeker && !this.user?.isCitizen) return;
+
+    this.matDialog
+      .open(UploadUserAvatarDialogComponent, {
+        data: { imageUrl: this.userImage },
+        panelClass: 'custom-dialog',
+        width: '85%',
+        height: '90%',
+      })
+      .afterClosed()
+      .subscribe((res) => {
+        if (res) {
+          this.userImage = res;
+          this.chdr.detectChanges();
+        }
+      });
+  }
+
+  getJobseekerImage() {
+    this.dataService
+      .get(ServerApis.getKarjoImage)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.userImage = response.data.imageUrl;
+      });
+  }
+  getCompanyLogo() {
+    this.dataService
+      .get(ServerApis.getCompanyLogo)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess) this.userImage = response.data.imageUrl;
+      });
+  }
+  getCitizenImage() {
+    this.dataService
+      .get(ServerApis.getShortCitizenInfoByCitizen)
+      .pipe(
+        finalize(() => {
+          this.chdr.detectChanges();
+        }),
+      )
+      .subscribe((response) => {
+        if (response.isSuccess)
+          this.userImage = response.data.personalPictureUrl + '?v=' + Math.random() * 1000;
+      });
+  }
+  onChangeRole() {
+    this.selectedRoleMenu = this.roleMenus.get(this.selectedRole) ?? [];
+    this.chdr.detectChanges();
   }
 }

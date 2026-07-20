@@ -10,6 +10,15 @@ import { Router } from '@angular/router';
 import { ServerApis } from '../server-apis';
 import * as jwt_decode from 'jwt-decode';
 
+export enum ROLES {
+  admin = 'admin',
+  user = 'user',
+  company = 'company',
+  card = 'card',
+  webapiuser = 'webapiuser',
+  citizen = 'citizen',
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -141,19 +150,19 @@ export class AuthService {
     let card = false;
     let webuser = false;
 
-    if (roles.indexOf('admin') > -1) {
+    if (roles.indexOf(ROLES.admin) > -1) {
       rootModule = 'admin';
       admin = true;
-    } else if (roles.indexOf('company') > -1) {
+    } else if (roles.indexOf(ROLES.company) > -1) {
       rootModule = 'company';
       company = true;
-    } else if (roles.indexOf('card') > -1) {
+    } else if (roles.indexOf(ROLES.card) > -1) {
       rootModule = 'card';
       card = true;
-    } else if (roles.indexOf('webapiuser') > -1) {
+    } else if (roles.indexOf(ROLES.webapiuser) > -1) {
       rootModule = 'webuser';
       webuser = true;
-    } else if (roles.indexOf('citizen') > -1) {
+    } else if (roles.indexOf(ROLES.citizen) > -1) {
       rootModule = 'citizen';
       citizen = true;
     }

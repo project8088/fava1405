@@ -184,25 +184,7 @@
               <mat-chip-listbox aria-label="Fish selection">
                 @for (item of row.roles; track $index) {
                   <mat-chip>
-                    @if (item.toLowerCase() == 'admin') {
-                      <span>ادمین</span>
-                    }
-                    @if (item.toLowerCase() == 'user') {
-                      <span>کاربر</span>
-                    }
-                    @if (item.toLowerCase() == 'company') {
-                      <span>شرکت</span>
-                    }
-                    @if (item.toLowerCase() == 'citizen') {
-                      <span>شهروندی</span>
-                    }
-                    @if (item.toLowerCase() == 'card') {
-                      <span>مدیریت کارت</span>
-                    }
-                    @if (item.toLowerCase() == 'webapiuser') {
-                      <span>توسعه دهنده</span>
-                    }
-                    {{ item }}
+                    {{ item | roleTranslate }}
                   </mat-chip>
                 }
               </mat-chip-listbox>
