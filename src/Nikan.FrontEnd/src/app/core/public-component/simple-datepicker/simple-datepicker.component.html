@@ -1,49 +1,54 @@
 <div>
   <mat-form-field class="day-form-field">
     <mat-label>روز {{ label }}</mat-label>
+
     <mat-select
-      [required]="required"
       [(ngModel)]="day"
-      name="day-picker"
+      [ngModelOptions]="{ standalone: true }"
+      [required]="required"
+      [disabled]="disabled"
       (selectionChange)="onChange()"
+      (closed)="onTouched()"
     >
-      @for (item of dayList; track $index) {
+      @for (item of dayList; track item) {
         <mat-option [value]="item">
           {{ item }}
         </mat-option>
       }
-      @if (isLeapYear || month < 12) {
-        <mat-option [value]="30"> 30 </mat-option>
-      }
-      @if (month <= 6) {
-        <mat-option [value]="31"> 31 </mat-option>
-      }
     </mat-select>
   </mat-form-field>
+
   <mat-form-field class="month-form-field">
     <mat-label>ماه {{ label }}</mat-label>
+
     <mat-select
-      [required]="required"
       [(ngModel)]="month"
-      name="month-picker"
+      [ngModelOptions]="{ standalone: true }"
+      [required]="required"
+      [disabled]="disabled"
       (selectionChange)="onChange()"
+      (closed)="onTouched()"
     >
-      @for (item of monthList; track $index) {
+      @for (item of monthList; track item.id) {
         <mat-option [value]="item.id">
           {{ item.title }}
         </mat-option>
       }
     </mat-select>
   </mat-form-field>
+
   <mat-form-field class="year-form-field">
     <mat-label>سال {{ label }}</mat-label>
+
     <mat-select
-      [required]="required"
       [(ngModel)]="year"
-      name="year-picker"
+      [ngModelOptions]="{ standalone: true }"
+      [required]="required"
+      [disabled]="disabled"
       (selectionChange)="onChange()"
+      (closed)="onTouched()"
     >
-      @for (item of yearList; track $index) {
+      @for (item of yearList; track item) {
         <mat-option [value]="item">
           {{ item }}
         </mat-option>
@@ -51,9 +56,11 @@
     </mat-select>
   </mat-form-field>
 </div>
-@if (myControl?.hasError('required')) {
+
+@if (showRequiredError) {
   <small>تاریخ {{ label }} را وارد کنید</small>
 }
-@if (myControl?.hasError('invalid')) {
+
+@if (showInvalidError) {
   <small>فرمت تاریخ صحیح نیست</small>
 }
